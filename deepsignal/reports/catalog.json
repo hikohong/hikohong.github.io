@@ -1,6 +1,6 @@
 {
   "version": "2.0.0",
-  "generated_utc": "2026-05-23T18:11:45.481226",
+  "generated_utc": "2026-05-23T18:53:42.656504",
   "pipeline_metadata": {
     "n_observations": 21,
     "n_targets": 10,
@@ -15,7 +15,7 @@
     "n_xray": 12,
     "n_anomalies": 80,
     "n_candidates": 80,
-    "run_date": "2026-05-23T18:11:45Z",
+    "run_date": "2026-05-23T18:53:42Z",
     "pipeline_config_version": "2.1.0"
   },
   "candidates": [
