@@ -119,24 +119,8 @@
       transform: translateY(-2px);
     }
     .tile-media {
-      display: grid;
-      grid-template-columns: minmax(120px, 28%) 1fr;
       min-height: 230px;
       background: #071321;
-    }
-    .tile-icon {
-      display: grid;
-      place-items: center;
-      padding: 18px;
-      border-right: 1px solid rgba(219,234,254,0.12);
-    }
-    .tile-icon img {
-      width: min(148px, 100%);
-      aspect-ratio: 1;
-      object-fit: cover;
-      border-radius: 18px;
-      display: block;
-      box-shadow: 0 18px 42px rgba(0,0,0,0.34);
     }
     .tile-footprint img {
       width: 100%;
@@ -164,9 +148,7 @@
       .actions { flex-direction: column; }
       .button { width: 100%; }
       .shell { gap: 28px; }
-      .tile-media { grid-template-columns: 1fr; min-height: 0; }
-      .tile-icon { border-right: 0; border-bottom: 1px solid rgba(219,234,254,0.12); }
-      .tile-icon img { width: min(160px, 52vw); }
+      .tile-media { min-height: 0; }
       .tile-footprint img { min-height: 190px; }
     }
   </style>
@@ -195,9 +177,6 @@
       <section class="portal" aria-label="Project portals">
         <a class="tile" href="deepsignal/">
           <div class="tile-media">
-            <div class="tile-icon">
-              <img src="assets/deepsignal-web-icon.jpg" alt="DeepSignal web icon">
-            </div>
             <div class="tile-footprint">
               <img src="assets/deepsignal-footprint.jpg" alt="DeepSignal page footprint">
             </div>
