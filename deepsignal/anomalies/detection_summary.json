@@ -1,0 +1,20 @@
+{
+  "total": 342,
+  "by_method": {
+    "zscore": 5,
+    "narrowband": 0,
+    "doppler": 282,
+    "iforest": 16,
+    "mathstruct": 8,
+    "frb_rep": 6,
+    "frb_dm": 6,
+    "optical": 6,
+    "tess": 8,
+    "ir": 0,
+    "jwst": 3,
+    "interstellar": 4,
+    "fermi": 12,
+    "gaia": 5,
+    "xray": 10
+  }
+}

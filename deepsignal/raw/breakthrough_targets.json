@@ -1,0 +1,72 @@
+[
+  {
+    "name": "Proxima Centauri",
+    "ra": 217.4288,
+    "dec": -62.6793,
+    "dist_ly": 4.24,
+    "type": "M5.5Ve"
+  },
+  {
+    "name": "Tau Ceti",
+    "ra": 26.017,
+    "dec": -15.9375,
+    "dist_ly": 11.9,
+    "type": "G8.5V"
+  },
+  {
+    "name": "Epsilon Eridani",
+    "ra": 53.2327,
+    "dec": -9.4582,
+    "dist_ly": 10.5,
+    "type": "K2V"
+  },
+  {
+    "name": "Gliese 667C",
+    "ra": 259.7488,
+    "dec": -34.9977,
+    "dist_ly": 22.7,
+    "type": "M1.5"
+  },
+  {
+    "name": "HD 40307",
+    "ra": 89.336,
+    "dec": -60.0161,
+    "dist_ly": 41.8,
+    "type": "K2.5V"
+  },
+  {
+    "name": "Vega",
+    "ra": 279.2347,
+    "dec": 38.7837,
+    "dist_ly": 25.0,
+    "type": "A0Va"
+  },
+  {
+    "name": "61 Cygni A",
+    "ra": 316.7282,
+    "dec": 38.7488,
+    "dist_ly": 11.4,
+    "type": "K5V"
+  },
+  {
+    "name": "Epsilon Indi A",
+    "ra": 330.84,
+    "dec": -56.7867,
+    "dist_ly": 11.8,
+    "type": "K4Ve"
+  },
+  {
+    "name": "Fomalhaut",
+    "ra": 344.4127,
+    "dec": -29.6223,
+    "dist_ly": 25.1,
+    "type": "A3V"
+  },
+  {
+    "name": "Ross 128",
+    "ra": 176.9351,
+    "dec": 0.8048,
+    "dist_ly": 11.0,
+    "type": "M4V"
+  }
+]
