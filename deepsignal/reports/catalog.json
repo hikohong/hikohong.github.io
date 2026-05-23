@@ -1,6 +1,6 @@
 {
   "version": "2.0.0",
-  "generated_utc": "2026-05-23T14:30:29.457549",
+  "generated_utc": "2026-05-23T18:11:45.481226",
   "pipeline_metadata": {
     "n_observations": 21,
     "n_targets": 10,
@@ -10,8 +10,13 @@
     "n_ir": 10,
     "n_jwst": 20,
     "n_interstellar": 7,
+    "n_fermi": 15,
+    "n_gaia": 10,
+    "n_xray": 12,
+    "n_anomalies": 80,
     "n_candidates": 80,
-    "run_date": "2026-05-23T14:30:29.457185Z"
+    "run_date": "2026-05-23T18:11:45Z",
+    "pipeline_config_version": "2.1.0"
   },
   "candidates": [
     {
@@ -128,10 +133,10 @@
       "bandwidth_mhz": 367.9256,
       "drift_rate_hz_s": 0.054315,
       "detection_method": "doppler_drift",
-      "candidacy_score": 65,
-      "tier": 2,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Doppler drift rate 0.0543 Hz/s consistent with technological origin"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -145,11 +150,10 @@
       "bandwidth_mhz": 254.9914,
       "drift_rate_hz_s": 0.087143,
       "detection_method": "doppler_drift",
-      "candidacy_score": 35,
+      "candidacy_score": 40,
       "tier": 3,
       "reasons": [
-        "Frequency in known RFI band: X-band satellite",
-        "Doppler drift rate 0.0871 Hz/s consistent with technological origin"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -163,10 +167,10 @@
       "bandwidth_mhz": 102.9449,
       "drift_rate_hz_s": 0.063129,
       "detection_method": "doppler_drift",
-      "candidacy_score": 65,
-      "tier": 2,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Doppler drift rate 0.0631 Hz/s consistent with technological origin"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -180,10 +184,10 @@
       "bandwidth_mhz": 412.2916,
       "drift_rate_hz_s": -0.063888,
       "detection_method": "doppler_drift",
-      "candidacy_score": 65,
-      "tier": 2,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Doppler drift rate 0.0639 Hz/s consistent with technological origin"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -197,10 +201,10 @@
       "bandwidth_mhz": 367.3612,
       "drift_rate_hz_s": -0.168287,
       "detection_method": "doppler_drift",
-      "candidacy_score": 65,
-      "tier": 2,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Doppler drift rate 0.1683 Hz/s consistent with technological origin"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -214,10 +218,10 @@
       "bandwidth_mhz": 321.4318,
       "drift_rate_hz_s": 0.079335,
       "detection_method": "doppler_drift",
-      "candidacy_score": 65,
-      "tier": 2,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Doppler drift rate 0.0793 Hz/s consistent with technological origin"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -231,11 +235,10 @@
       "bandwidth_mhz": 0.00264941,
       "drift_rate_hz_s": 1.327214,
       "detection_method": "doppler_drift",
-      "candidacy_score": 75,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Doppler drift rate 1.3272 Hz/s consistent with technological origin",
-        "High SNR: 19.9"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": true
     },
@@ -249,11 +252,10 @@
       "bandwidth_mhz": 413.5593,
       "drift_rate_hz_s": -0.33677,
       "detection_method": "doppler_drift",
-      "candidacy_score": 75,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Doppler drift rate 0.3368 Hz/s consistent with technological origin",
-        "High SNR: 18.0"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": true
     },
@@ -267,10 +269,10 @@
       "bandwidth_mhz": 136.0191,
       "drift_rate_hz_s": 0.048697,
       "detection_method": "doppler_drift",
-      "candidacy_score": 65,
-      "tier": 2,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Doppler drift rate 0.0487 Hz/s consistent with technological origin"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -284,10 +286,10 @@
       "bandwidth_mhz": 244.725,
       "drift_rate_hz_s": -0.13227,
       "detection_method": "doppler_drift",
-      "candidacy_score": 65,
-      "tier": 2,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Doppler drift rate 0.1323 Hz/s consistent with technological origin"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -301,10 +303,10 @@
       "bandwidth_mhz": 206.348,
       "drift_rate_hz_s": -0.035626,
       "detection_method": "doppler_drift",
-      "candidacy_score": 65,
-      "tier": 2,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Doppler drift rate 0.0356 Hz/s consistent with technological origin"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -318,10 +320,10 @@
       "bandwidth_mhz": 208.8966,
       "drift_rate_hz_s": -0.033903,
       "detection_method": "doppler_drift",
-      "candidacy_score": 65,
-      "tier": 2,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Doppler drift rate 0.0339 Hz/s consistent with technological origin"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -335,10 +337,10 @@
       "bandwidth_mhz": 180.9453,
       "drift_rate_hz_s": 0.023774,
       "detection_method": "doppler_drift",
-      "candidacy_score": 65,
-      "tier": 2,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Doppler drift rate 0.0238 Hz/s consistent with technological origin"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -352,10 +354,10 @@
       "bandwidth_mhz": 403.4078,
       "drift_rate_hz_s": 0.023268,
       "detection_method": "doppler_drift",
-      "candidacy_score": 65,
-      "tier": 2,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Doppler drift rate 0.0233 Hz/s consistent with technological origin"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -369,10 +371,10 @@
       "bandwidth_mhz": 3.1,
       "drift_rate_hz_s": 0.0,
       "detection_method": "frb_repeater",
-      "candidacy_score": 60,
-      "tier": 2,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "High SNR: 25.3"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -386,10 +388,10 @@
       "bandwidth_mhz": 1.7,
       "drift_rate_hz_s": 0.0,
       "detection_method": "frb_repeater+periodic",
-      "candidacy_score": 60,
-      "tier": 2,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "High SNR: 19.7"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -403,9 +405,11 @@
       "bandwidth_mhz": 5.8,
       "drift_rate_hz_s": 0.0,
       "detection_method": "frb_repeater",
-      "candidacy_score": 50,
-      "tier": 2,
-      "reasons": [],
+      "candidacy_score": 40,
+      "tier": 3,
+      "reasons": [
+        "not cross-checked (limit)"
+      ],
       "is_injected_anomaly": false
     },
     {
@@ -418,10 +422,10 @@
       "bandwidth_mhz": 2.4,
       "drift_rate_hz_s": 0.0,
       "detection_method": "frb_repeater",
-      "candidacy_score": 60,
-      "tier": 2,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "High SNR: 32.1"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -435,10 +439,10 @@
       "bandwidth_mhz": 1.1,
       "drift_rate_hz_s": 0.0,
       "detection_method": "frb_repeater",
-      "candidacy_score": 60,
-      "tier": 2,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "High SNR: 28.4"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -452,9 +456,11 @@
       "bandwidth_mhz": 0.558,
       "drift_rate_hz_s": 0.0,
       "detection_method": "frb_repeater",
-      "candidacy_score": 50,
-      "tier": 2,
-      "reasons": [],
+      "candidacy_score": 40,
+      "tier": 3,
+      "reasons": [
+        "not cross-checked (limit)"
+      ],
       "is_injected_anomaly": false
     },
     {
@@ -467,9 +473,11 @@
       "bandwidth_mhz": 1.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "frb_low_dm_excess",
-      "candidacy_score": 50,
-      "tier": 2,
-      "reasons": [],
+      "candidacy_score": 40,
+      "tier": 3,
+      "reasons": [
+        "not cross-checked (limit)"
+      ],
       "is_injected_anomaly": false
     },
     {
@@ -482,10 +490,10 @@
       "bandwidth_mhz": 1.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "frb_low_dm_excess",
-      "candidacy_score": 60,
-      "tier": 2,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "High SNR: 15.7"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -499,9 +507,11 @@
       "bandwidth_mhz": 1.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "frb_low_dm_excess",
-      "candidacy_score": 50,
-      "tier": 2,
-      "reasons": [],
+      "candidacy_score": 40,
+      "tier": 3,
+      "reasons": [
+        "not cross-checked (limit)"
+      ],
       "is_injected_anomaly": false
     },
     {
@@ -514,9 +524,11 @@
       "bandwidth_mhz": 1.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "frb_low_dm_excess",
-      "candidacy_score": 50,
-      "tier": 2,
-      "reasons": [],
+      "candidacy_score": 40,
+      "tier": 3,
+      "reasons": [
+        "not cross-checked (limit)"
+      ],
       "is_injected_anomaly": false
     },
     {
@@ -529,9 +541,11 @@
       "bandwidth_mhz": 1.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "frb_low_dm_excess",
-      "candidacy_score": 50,
-      "tier": 2,
-      "reasons": [],
+      "candidacy_score": 40,
+      "tier": 3,
+      "reasons": [
+        "not cross-checked (limit)"
+      ],
       "is_injected_anomaly": false
     },
     {
@@ -544,10 +558,10 @@
       "bandwidth_mhz": 1.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "frb_low_dm_excess",
-      "candidacy_score": 60,
-      "tier": 2,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "High SNR: 18.9"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -561,10 +575,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "optical_laser_pulse",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -578,11 +592,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "optical_laser_pulse",
-      "candidacy_score": 80,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural",
-        "High SNR: 24.7"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -596,11 +609,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "optical_laser_pulse",
-      "candidacy_score": 80,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural",
-        "High SNR: 41.2"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -614,10 +626,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "optical_laser_pulse",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -631,10 +643,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "optical_laser_pulse",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -648,10 +660,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "optical_laser_pulse",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -665,10 +677,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "lightcurve_anomaly",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -682,10 +694,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "lightcurve_anomaly",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -699,10 +711,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "lightcurve_anomaly",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -716,10 +728,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "lightcurve_anomaly",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -733,10 +745,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "lightcurve_anomaly",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -750,10 +762,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "lightcurve_anomaly",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -767,10 +779,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "lightcurve_anomaly",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -784,10 +796,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "lightcurve_anomaly",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -801,10 +813,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "atmospheric_biosignature",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -818,10 +830,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "atmospheric_biosignature",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -835,10 +847,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "atmospheric_biosignature",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -852,10 +864,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "interstellar_trajectory",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -869,10 +881,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "interstellar_trajectory",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -886,10 +898,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "interstellar_trajectory",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -903,10 +915,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "interstellar_trajectory",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -920,10 +932,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "gamma_unidentified",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -937,10 +949,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "gamma_unidentified",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -954,10 +966,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "gamma_unidentified",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -971,10 +983,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "gamma_unidentified",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -988,10 +1000,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "gamma_unidentified",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -1005,10 +1017,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "gamma_unidentified",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -1022,10 +1034,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "gamma_unidentified",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -1039,10 +1051,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "gamma_unidentified",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -1056,10 +1068,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "gamma_unidentified",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -1073,10 +1085,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "gamma_unidentified",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -1090,10 +1102,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "gamma_unidentified",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -1107,10 +1119,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "gamma_unidentified",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -1124,10 +1136,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "proper_motion_anomaly",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -1141,10 +1153,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "proper_motion_anomaly",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -1158,10 +1170,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "proper_motion_anomaly",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -1175,10 +1187,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "proper_motion_anomaly",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -1192,10 +1204,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "proper_motion_anomaly",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -1209,10 +1221,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "xray_unidentified",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -1226,10 +1238,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "xray_unidentified",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -1243,10 +1255,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "xray_unidentified",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -1260,10 +1272,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "xray_unidentified",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -1277,10 +1289,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "xray_unidentified",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -1294,10 +1306,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "xray_unidentified",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -1311,10 +1323,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "xray_unidentified",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -1328,10 +1340,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "xray_unidentified",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -1345,10 +1357,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "xray_unidentified",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     },
@@ -1362,10 +1374,10 @@
       "bandwidth_mhz": 0.0,
       "drift_rate_hz_s": 0.0,
       "detection_method": "xray_unidentified",
-      "candidacy_score": 70,
-      "tier": 1,
+      "candidacy_score": 40,
+      "tier": 3,
       "reasons": [
-        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+        "not cross-checked (limit)"
       ],
       "is_injected_anomaly": false
     }

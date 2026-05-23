@@ -136,9 +136,9 @@
     "data_type": "radio",
     "detection_method": "doppler_drift",
     "abs_drift_rate_hz_s": 0.054315,
-    "candidacy_score": 65,
+    "candidacy_score": 40,
     "reasons": [
-      "Doppler drift rate 0.0543 Hz/s consistent with technological origin"
+      "not cross-checked (limit)"
     ]
   },
   {
@@ -156,10 +156,9 @@
     "data_type": "radio",
     "detection_method": "doppler_drift",
     "abs_drift_rate_hz_s": 0.087143,
-    "candidacy_score": 35,
+    "candidacy_score": 40,
     "reasons": [
-      "Frequency in known RFI band: X-band satellite",
-      "Doppler drift rate 0.0871 Hz/s consistent with technological origin"
+      "not cross-checked (limit)"
     ]
   },
   {
@@ -177,9 +176,9 @@
     "data_type": "radio",
     "detection_method": "doppler_drift",
     "abs_drift_rate_hz_s": 0.063129,
-    "candidacy_score": 65,
+    "candidacy_score": 40,
     "reasons": [
-      "Doppler drift rate 0.0631 Hz/s consistent with technological origin"
+      "not cross-checked (limit)"
     ]
   },
   {
@@ -197,9 +196,9 @@
     "data_type": "radio",
     "detection_method": "doppler_drift",
     "abs_drift_rate_hz_s": 0.063888,
-    "candidacy_score": 65,
+    "candidacy_score": 40,
     "reasons": [
-      "Doppler drift rate 0.0639 Hz/s consistent with technological origin"
+      "not cross-checked (limit)"
     ]
   },
   {
@@ -217,9 +216,9 @@
     "data_type": "radio",
     "detection_method": "doppler_drift",
     "abs_drift_rate_hz_s": 0.168287,
-    "candidacy_score": 65,
+    "candidacy_score": 40,
     "reasons": [
-      "Doppler drift rate 0.1683 Hz/s consistent with technological origin"
+      "not cross-checked (limit)"
     ]
   },
   {
@@ -237,9 +236,9 @@
     "data_type": "radio",
     "detection_method": "doppler_drift",
     "abs_drift_rate_hz_s": 0.079335,
-    "candidacy_score": 65,
+    "candidacy_score": 40,
     "reasons": [
-      "Doppler drift rate 0.0793 Hz/s consistent with technological origin"
+      "not cross-checked (limit)"
     ]
   },
   {
@@ -257,10 +256,9 @@
     "data_type": "radio",
     "detection_method": "doppler_drift",
     "abs_drift_rate_hz_s": 1.327214,
-    "candidacy_score": 75,
+    "candidacy_score": 40,
     "reasons": [
-      "Doppler drift rate 1.3272 Hz/s consistent with technological origin",
-      "High SNR: 19.9"
+      "not cross-checked (limit)"
     ]
   },
   {
@@ -278,10 +276,9 @@
     "data_type": "radio",
     "detection_method": "doppler_drift",
     "abs_drift_rate_hz_s": 0.33677,
-    "candidacy_score": 75,
+    "candidacy_score": 40,
     "reasons": [
-      "Doppler drift rate 0.3368 Hz/s consistent with technological origin",
-      "High SNR: 18.0"
+      "not cross-checked (limit)"
     ]
   },
   {
@@ -299,9 +296,9 @@
     "data_type": "radio",
     "detection_method": "doppler_drift",
     "abs_drift_rate_hz_s": 0.048697,
-    "candidacy_score": 65,
+    "candidacy_score": 40,
     "reasons": [
-      "Doppler drift rate 0.0487 Hz/s consistent with technological origin"
+      "not cross-checked (limit)"
     ]
   },
   {
@@ -319,9 +316,9 @@
     "data_type": "radio",
     "detection_method": "doppler_drift",
     "abs_drift_rate_hz_s": 0.13227,
-    "candidacy_score": 65,
+    "candidacy_score": 40,
     "reasons": [
-      "Doppler drift rate 0.1323 Hz/s consistent with technological origin"
+      "not cross-checked (limit)"
     ]
   },
   {
@@ -339,9 +336,9 @@
     "data_type": "radio",
     "detection_method": "doppler_drift",
     "abs_drift_rate_hz_s": 0.035626,
-    "candidacy_score": 65,
+    "candidacy_score": 40,
     "reasons": [
-      "Doppler drift rate 0.0356 Hz/s consistent with technological origin"
+      "not cross-checked (limit)"
     ]
   },
   {
@@ -359,9 +356,9 @@
     "data_type": "radio",
     "detection_method": "doppler_drift",
     "abs_drift_rate_hz_s": 0.033903,
-    "candidacy_score": 65,
+    "candidacy_score": 40,
     "reasons": [
-      "Doppler drift rate 0.0339 Hz/s consistent with technological origin"
+      "not cross-checked (limit)"
     ]
   },
   {
@@ -379,9 +376,9 @@
     "data_type": "radio",
     "detection_method": "doppler_drift",
     "abs_drift_rate_hz_s": 0.023774,
-    "candidacy_score": 65,
+    "candidacy_score": 40,
     "reasons": [
-      "Doppler drift rate 0.0238 Hz/s consistent with technological origin"
+      "not cross-checked (limit)"
     ]
   },
   {
@@ -399,13 +396,13 @@
     "data_type": "radio",
     "detection_method": "doppler_drift",
     "abs_drift_rate_hz_s": 0.023268,
-    "candidacy_score": 65,
+    "candidacy_score": 40,
     "reasons": [
-      "Doppler drift rate 0.0233 Hz/s consistent with technological origin"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": -3949011091588251405,
+    "obs_id": -8006851816487271687,
     "target_name": "FRB20121102A",
     "ra_deg": 82.9938,
     "dec_deg": 33.148,
@@ -419,13 +416,13 @@
     "period_days": null,
     "data_type": "frb",
     "detection_method": "frb_repeater",
-    "candidacy_score": 60,
+    "candidacy_score": 40,
     "reasons": [
-      "High SNR: 25.3"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": 8106737789545947452,
+    "obs_id": 3586201437563702905,
     "target_name": "FRB20180916B",
     "ra_deg": 29.5031,
     "dec_deg": 65.7168,
@@ -439,13 +436,13 @@
     "period_days": 16.35,
     "data_type": "frb",
     "detection_method": "frb_repeater+periodic",
-    "candidacy_score": 60,
+    "candidacy_score": 40,
     "reasons": [
-      "High SNR: 19.7"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": -2300544625967403680,
+    "obs_id": -6901248377661622399,
     "target_name": "FRB20190520B",
     "ra_deg": 240.0275,
     "dec_deg": -11.2921,
@@ -459,11 +456,13 @@
     "period_days": null,
     "data_type": "frb",
     "detection_method": "frb_repeater",
-    "candidacy_score": 50,
-    "reasons": []
+    "candidacy_score": 40,
+    "reasons": [
+      "not cross-checked (limit)"
+    ]
   },
   {
-    "obs_id": 4165311687835931229,
+    "obs_id": -7735601191486456792,
     "target_name": "FRB20201124A",
     "ra_deg": 77.0117,
     "dec_deg": 26.0603,
@@ -477,13 +476,13 @@
     "period_days": null,
     "data_type": "frb",
     "detection_method": "frb_repeater",
-    "candidacy_score": 60,
+    "candidacy_score": 40,
     "reasons": [
-      "High SNR: 32.1"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": -8362170886938148091,
+    "obs_id": -2949211363208820076,
     "target_name": "FRB20220912A",
     "ra_deg": 347.2743,
     "dec_deg": 48.7108,
@@ -497,13 +496,13 @@
     "period_days": null,
     "data_type": "frb",
     "detection_method": "frb_repeater",
-    "candidacy_score": 60,
+    "candidacy_score": 40,
     "reasons": [
-      "High SNR: 28.4"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": 8014244428396585491,
+    "obs_id": -7999674233080735124,
     "target_name": "FRB_SIM_0011",
     "ra_deg": 133.98669812347342,
     "dec_deg": -84.5369470108599,
@@ -517,11 +516,13 @@
     "period_days": null,
     "data_type": "frb",
     "detection_method": "frb_repeater",
-    "candidacy_score": 50,
-    "reasons": []
+    "candidacy_score": 40,
+    "reasons": [
+      "not cross-checked (limit)"
+    ]
   },
   {
-    "obs_id": -3757416957825116869,
+    "obs_id": 1607055859212942151,
     "target_name": "FRB_SIM_0006",
     "ra_deg": 54.071902465362676,
     "dec_deg": 56.94085868743363,
@@ -532,11 +533,13 @@
     "dm_excess": 25.15,
     "data_type": "frb",
     "detection_method": "frb_low_dm_excess",
-    "candidacy_score": 50,
-    "reasons": []
+    "candidacy_score": 40,
+    "reasons": [
+      "not cross-checked (limit)"
+    ]
   },
   {
-    "obs_id": -1145802010527228507,
+    "obs_id": -5446088565595906044,
     "target_name": "FRB_SIM_0014",
     "ra_deg": 81.51245377097186,
     "dec_deg": -54.26619336131889,
@@ -547,13 +550,13 @@
     "dm_excess": 40.5,
     "data_type": "frb",
     "detection_method": "frb_low_dm_excess",
-    "candidacy_score": 60,
+    "candidacy_score": 40,
     "reasons": [
-      "High SNR: 15.7"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": 4825773346096161627,
+    "obs_id": 545647319597964580,
     "target_name": "FRB_SIM_0022",
     "ra_deg": 7.587127599800789,
     "dec_deg": -34.09736453042492,
@@ -564,11 +567,13 @@
     "dm_excess": 8.32,
     "data_type": "frb",
     "detection_method": "frb_low_dm_excess",
-    "candidacy_score": 50,
-    "reasons": []
+    "candidacy_score": 40,
+    "reasons": [
+      "not cross-checked (limit)"
+    ]
   },
   {
-    "obs_id": -4837537526423206990,
+    "obs_id": -2730821483578741934,
     "target_name": "FRB_SIM_0024",
     "ra_deg": 225.5802549581236,
     "dec_deg": 53.54247156593999,
@@ -579,11 +584,13 @@
     "dm_excess": 33.43,
     "data_type": "frb",
     "detection_method": "frb_low_dm_excess",
-    "candidacy_score": 50,
-    "reasons": []
+    "candidacy_score": 40,
+    "reasons": [
+      "not cross-checked (limit)"
+    ]
   },
   {
-    "obs_id": -5258115073376251115,
+    "obs_id": 1797946332915082925,
     "target_name": "FRB_SIM_0030",
     "ra_deg": 47.95439124588418,
     "dec_deg": -66.4768357546902,
@@ -594,11 +601,13 @@
     "dm_excess": 12.7,
     "data_type": "frb",
     "detection_method": "frb_low_dm_excess",
-    "candidacy_score": 50,
-    "reasons": []
+    "candidacy_score": 40,
+    "reasons": [
+      "not cross-checked (limit)"
+    ]
   },
   {
-    "obs_id": -4595519600778536478,
+    "obs_id": 6730163109721321292,
     "target_name": "FRB_SIM_0039",
     "ra_deg": 163.80629393486396,
     "dec_deg": -79.78061476927498,
@@ -609,9 +618,9 @@
     "dm_excess": 0.18,
     "data_type": "frb",
     "detection_method": "frb_low_dm_excess",
-    "candidacy_score": 60,
+    "candidacy_score": 40,
     "reasons": [
-      "High SNR: 18.9"
+      "not cross-checked (limit)"
     ]
   },
   {
@@ -628,9 +637,9 @@
     "pulse_energy_photons": null,
     "data_type": "optical",
     "detection_method": "optical_laser_pulse",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
@@ -647,10 +656,9 @@
     "pulse_energy_photons": 111.86,
     "data_type": "optical",
     "detection_method": "optical_laser_pulse",
-    "candidacy_score": 80,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural",
-      "High SNR: 24.7"
+      "not cross-checked (limit)"
     ]
   },
   {
@@ -667,10 +675,9 @@
     "pulse_energy_photons": 289.09,
     "data_type": "optical",
     "detection_method": "optical_laser_pulse",
-    "candidacy_score": 80,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural",
-      "High SNR: 41.2"
+      "not cross-checked (limit)"
     ]
   },
   {
@@ -687,9 +694,9 @@
     "pulse_energy_photons": null,
     "data_type": "optical",
     "detection_method": "optical_laser_pulse",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
@@ -706,9 +713,9 @@
     "pulse_energy_photons": null,
     "data_type": "optical",
     "detection_method": "optical_laser_pulse",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
@@ -725,13 +732,13 @@
     "pulse_energy_photons": null,
     "data_type": "optical",
     "detection_method": "optical_laser_pulse",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": -6324682010231683737,
+    "obs_id": 457246632353057296,
     "target_name": "TOI-700",
     "ra_deg": 35.1611,
     "dec_deg": -56.7867,
@@ -744,13 +751,13 @@
     "anomaly_type": "variable_depth",
     "data_type": "tess",
     "detection_method": "lightcurve_anomaly",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": 8084887923591181374,
+    "obs_id": -8127234680044425150,
     "target_name": "TOI-216",
     "ra_deg": 271.2716,
     "dec_deg": -27.6274,
@@ -763,13 +770,13 @@
     "anomaly_type": null,
     "data_type": "tess",
     "detection_method": "lightcurve_anomaly",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": -314566880230508867,
+    "obs_id": 7119656435919932845,
     "target_name": "SIM_STAR_0000",
     "ra_deg": 311.32713132597115,
     "dec_deg": 42.636301791847075,
@@ -782,13 +789,13 @@
     "anomaly_type": null,
     "data_type": "tess",
     "detection_method": "lightcurve_anomaly",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": 8490439619418238860,
+    "obs_id": 7489908342633021131,
     "target_name": "SIM_STAR_0001",
     "ra_deg": 94.12069010993157,
     "dec_deg": -50.73606507378943,
@@ -801,13 +808,13 @@
     "anomaly_type": null,
     "data_type": "tess",
     "detection_method": "lightcurve_anomaly",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": 7986792353693382991,
+    "obs_id": -6792919769152480257,
     "target_name": "SIM_STAR_0002",
     "ra_deg": 220.96500877695667,
     "dec_deg": -59.684309564844035,
@@ -820,13 +827,13 @@
     "anomaly_type": null,
     "data_type": "tess",
     "detection_method": "lightcurve_anomaly",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": 1307961151078982394,
+    "obs_id": 4311955230700334127,
     "target_name": "SIM_STAR_0003",
     "ra_deg": 354.52925108551995,
     "dec_deg": -25.64440750005955,
@@ -839,13 +846,13 @@
     "anomaly_type": null,
     "data_type": "tess",
     "detection_method": "lightcurve_anomaly",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": -6863274560774622728,
+    "obs_id": -5490338800487756618,
     "target_name": "SIM_STAR_0006",
     "ra_deg": 293.04234693004025,
     "dec_deg": -0.2559110000985356,
@@ -858,13 +865,13 @@
     "anomaly_type": null,
     "data_type": "tess",
     "detection_method": "lightcurve_anomaly",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": -3913984322359570820,
+    "obs_id": -7145913544880695779,
     "target_name": "SIM_STAR_0007",
     "ra_deg": 279.60701616031264,
     "dec_deg": 57.50739470274752,
@@ -877,13 +884,13 @@
     "anomaly_type": null,
     "data_type": "tess",
     "detection_method": "lightcurve_anomaly",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": -1435303070347480495,
+    "obs_id": -7845158699439670763,
     "target_name": "LHS 1140b",
     "ra_deg": 18.0018,
     "dec_deg": -15.267,
@@ -905,13 +912,13 @@
     "biosignature_score": 30,
     "data_type": "jwst",
     "detection_method": "atmospheric_biosignature",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": 5244600774557916678,
+    "obs_id": 4681636408207597364,
     "target_name": "HD 209458b",
     "ra_deg": 330.795,
     "dec_deg": 18.884,
@@ -931,13 +938,13 @@
     "biosignature_score": 25,
     "data_type": "jwst",
     "detection_method": "atmospheric_biosignature",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": 7491265295512131933,
+    "obs_id": -782313387491559003,
     "target_name": "TOI-SIM-0001",
     "ra_deg": 77.37910688223663,
     "dec_deg": -13.701115489296186,
@@ -959,13 +966,13 @@
     "biosignature_score": 30,
     "data_type": "jwst",
     "detection_method": "atmospheric_biosignature",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": 5755804573602134171,
+    "obs_id": 184345421115417827,
     "target_name": "1I/\u02bbOumuamua",
     "ra_deg": 23.4578,
     "dec_deg": 26.8011,
@@ -979,13 +986,13 @@
     "anomaly_notes": "Unexplained outward acceleration inconsistent with cometary outgassing (no coma detected). Possible radiation pressure on thin geometry or exotic composition.",
     "data_type": "interstellar",
     "detection_method": "interstellar_trajectory",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": 7527025551141539323,
+    "obs_id": -6731884780312740013,
     "target_name": "SIM_ISO_0001",
     "ra_deg": 65.56698756830662,
     "dec_deg": 50.507681824171215,
@@ -999,13 +1006,13 @@
     "anomaly_notes": "",
     "data_type": "interstellar",
     "detection_method": "interstellar_trajectory",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": 2114657768714041515,
+    "obs_id": -7229729139191278008,
     "target_name": "SIM_ISO_0002",
     "ra_deg": 7.327420975069443,
     "dec_deg": 33.91410968287197,
@@ -1019,13 +1026,13 @@
     "anomaly_notes": "Non-grav A1=1.17e-02 AU/d\u00b2 exceeds typical cometary outgassing threshold.",
     "data_type": "interstellar",
     "detection_method": "interstellar_trajectory",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": 8690025232432377006,
+    "obs_id": -1747654828854589603,
     "target_name": "SIM_ISO_0004",
     "ra_deg": 219.63715039279094,
     "dec_deg": 2.1437694557423725,
@@ -1039,13 +1046,13 @@
     "anomaly_notes": "",
     "data_type": "interstellar",
     "detection_method": "interstellar_trajectory",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": -5490998254719523436,
+    "obs_id": 6498874758956801465,
     "target_name": "4FGL J0253.4+0220",
     "ra_deg": 43.35,
     "dec_deg": 2.34,
@@ -1060,13 +1067,13 @@
     "anomaly_note": "Unidentified steady gamma-ray source \u2014 no known counterpart",
     "data_type": "fermi",
     "detection_method": "gamma_unidentified",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": -2413075841658279188,
+    "obs_id": -2164870690946943377,
     "target_name": "4FGL J0521.9+2112",
     "ra_deg": 80.49,
     "dec_deg": 21.2,
@@ -1081,13 +1088,13 @@
     "anomaly_note": "Unidentified variable gamma-ray source \u2014 no known counterpart",
     "data_type": "fermi",
     "detection_method": "gamma_unidentified",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": -8874044368453250776,
+    "obs_id": 260536898216341094,
     "target_name": "4FGL J1120.0-2204",
     "ra_deg": 170.0,
     "dec_deg": -22.08,
@@ -1102,13 +1109,13 @@
     "anomaly_note": "Unidentified steady gamma-ray source \u2014 no known counterpart",
     "data_type": "fermi",
     "detection_method": "gamma_unidentified",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": 8096944306447718875,
+    "obs_id": -1614724594980065569,
     "target_name": "4FGL J1231.6+1410",
     "ra_deg": 187.9,
     "dec_deg": 14.17,
@@ -1123,13 +1130,13 @@
     "anomaly_note": "Unidentified steady gamma-ray source \u2014 no known counterpart",
     "data_type": "fermi",
     "detection_method": "gamma_unidentified",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": -3561645400191589512,
+    "obs_id": 2326710165397173909,
     "target_name": "4FGL J1418.4-0233",
     "ra_deg": 214.6,
     "dec_deg": -2.56,
@@ -1144,13 +1151,13 @@
     "anomaly_note": "Unidentified variable gamma-ray source \u2014 no known counterpart",
     "data_type": "fermi",
     "detection_method": "gamma_unidentified",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": -2717756333133677559,
+    "obs_id": 5796306513919731793,
     "target_name": "4FGL J1653.6+3945",
     "ra_deg": 253.4,
     "dec_deg": 39.75,
@@ -1165,13 +1172,13 @@
     "anomaly_note": "Unidentified variable gamma-ray source \u2014 no known counterpart",
     "data_type": "fermi",
     "detection_method": "gamma_unidentified",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": -8100835820695023866,
+    "obs_id": 4696687336340104744,
     "target_name": "4FGL J1744.1-7619",
     "ra_deg": 266.0,
     "dec_deg": -76.32,
@@ -1186,13 +1193,13 @@
     "anomaly_note": "Unidentified steady gamma-ray source \u2014 no known counterpart",
     "data_type": "fermi",
     "detection_method": "gamma_unidentified",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": 2945858032671534321,
+    "obs_id": -3455461599802959280,
     "target_name": "4FGL J1828.4+3236",
     "ra_deg": 277.1,
     "dec_deg": 32.61,
@@ -1207,13 +1214,13 @@
     "anomaly_note": "Unidentified steady gamma-ray source \u2014 no known counterpart",
     "data_type": "fermi",
     "detection_method": "gamma_unidentified",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": 7024851706488114678,
+    "obs_id": 7235325620182985721,
     "target_name": "4FGL J1955.4+1123",
     "ra_deg": 298.9,
     "dec_deg": 11.39,
@@ -1228,13 +1235,13 @@
     "anomaly_note": "Unidentified steady gamma-ray source \u2014 no known counterpart",
     "data_type": "fermi",
     "detection_method": "gamma_unidentified",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": 8560714086687556035,
+    "obs_id": -9033713347246112731,
     "target_name": "4FGL J2049.9+1003",
     "ra_deg": 312.5,
     "dec_deg": 10.06,
@@ -1249,13 +1256,13 @@
     "anomaly_note": "Unidentified steady gamma-ray source \u2014 no known counterpart",
     "data_type": "fermi",
     "detection_method": "gamma_unidentified",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": 737052718071075253,
+    "obs_id": -7789428933387906970,
     "target_name": "4FGL J2158.8-3013",
     "ra_deg": 329.7,
     "dec_deg": -30.23,
@@ -1270,13 +1277,13 @@
     "anomaly_note": "Unidentified steady gamma-ray source \u2014 no known counterpart",
     "data_type": "fermi",
     "detection_method": "gamma_unidentified",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": -3821946439965754685,
+    "obs_id": -240674796775012381,
     "target_name": "4FGL J0111.0+3907",
     "ra_deg": 17.8,
     "dec_deg": 39.13,
@@ -1291,13 +1298,13 @@
     "anomaly_note": "Unidentified variable gamma-ray source \u2014 no known counterpart",
     "data_type": "fermi",
     "detection_method": "gamma_unidentified",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": -6654520804983286229,
+    "obs_id": 7145542977153464721,
     "target_name": "Kapteyn's Star",
     "ra_deg": 77.14,
     "dec_deg": -44.995,
@@ -1312,13 +1319,13 @@
     "pm_anomaly_score": 0.91,
     "data_type": "gaia",
     "detection_method": "proper_motion_anomaly",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": -5099782027669261988,
+    "obs_id": -7319292485338776757,
     "target_name": "SIM_J0312+1847",
     "ra_deg": 48.12,
     "dec_deg": 18.79,
@@ -1333,13 +1340,13 @@
     "pm_anomaly_score": 4.87,
     "data_type": "gaia",
     "detection_method": "proper_motion_anomaly",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": -2117305866757302843,
+    "obs_id": 4224507048073840279,
     "target_name": "SIM_J1147-0231",
     "ra_deg": 176.91,
     "dec_deg": -2.52,
@@ -1354,13 +1361,13 @@
     "pm_anomaly_score": 3.21,
     "data_type": "gaia",
     "detection_method": "proper_motion_anomaly",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": 2057669669878731535,
+    "obs_id": 544436035445259263,
     "target_name": "SIM_J2218+3341",
     "ra_deg": 334.62,
     "dec_deg": 33.69,
@@ -1375,13 +1382,13 @@
     "pm_anomaly_score": 3.94,
     "data_type": "gaia",
     "detection_method": "proper_motion_anomaly",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": -6762812601358517327,
+    "obs_id": 5864572089207030816,
     "target_name": "SIM_J0631+1548",
     "ra_deg": 97.88,
     "dec_deg": 15.81,
@@ -1396,13 +1403,13 @@
     "pm_anomaly_score": 5.61,
     "data_type": "gaia",
     "detection_method": "proper_motion_anomaly",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": 2499024357892944533,
+    "obs_id": -967058194527502351,
     "target_name": "CXO J001311.8+634937",
     "ra_deg": 3.299,
     "dec_deg": 63.827,
@@ -1418,13 +1425,13 @@
     "anomaly_note": "Unidentified soft X-ray point source \u2014 no optical counterpart",
     "data_type": "xray",
     "detection_method": "xray_unidentified",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": -7441650023073566938,
+    "obs_id": 7828518010264720968,
     "target_name": "CXO J024512.4-001234",
     "ra_deg": 41.302,
     "dec_deg": -0.21,
@@ -1440,13 +1447,13 @@
     "anomaly_note": "Unidentified soft X-ray point source \u2014 no optical counterpart",
     "data_type": "xray",
     "detection_method": "xray_unidentified",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": -5333334817329798660,
+    "obs_id": -5213928670024611384,
     "target_name": "CXO J073841.2+653201",
     "ra_deg": 114.672,
     "dec_deg": 65.534,
@@ -1462,13 +1469,13 @@
     "anomaly_note": "Unidentified soft X-ray point source \u2014 no optical counterpart",
     "data_type": "xray",
     "detection_method": "xray_unidentified",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": 1482235511175303161,
+    "obs_id": -2619769484697207250,
     "target_name": "CXO J182239.2-181442",
     "ra_deg": 275.663,
     "dec_deg": -18.245,
@@ -1484,13 +1491,13 @@
     "anomaly_note": "Unidentified hard X-ray point source \u2014 no optical counterpart",
     "data_type": "xray",
     "detection_method": "xray_unidentified",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": -6207583953580698416,
+    "obs_id": -212051298132069327,
     "target_name": "CXO J214521.3+122844",
     "ra_deg": 326.339,
     "dec_deg": 12.479,
@@ -1506,13 +1513,13 @@
     "anomaly_note": "Unidentified soft X-ray point source \u2014 no optical counterpart",
     "data_type": "xray",
     "detection_method": "xray_unidentified",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": 8049622472173271459,
+    "obs_id": -9118779316870928247,
     "target_name": "4XMM J034428.3-045712",
     "ra_deg": 56.118,
     "dec_deg": -4.953,
@@ -1528,13 +1535,13 @@
     "anomaly_note": "Unidentified soft X-ray point source \u2014 no optical counterpart",
     "data_type": "xray",
     "detection_method": "xray_unidentified",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": -7429019579871616697,
+    "obs_id": 6205114529213000749,
     "target_name": "4XMM J091234.2+303201",
     "ra_deg": 138.143,
     "dec_deg": 30.534,
@@ -1550,13 +1557,13 @@
     "anomaly_note": "Unidentified soft X-ray point source \u2014 no optical counterpart",
     "data_type": "xray",
     "detection_method": "xray_unidentified",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": -5310206504316215341,
+    "obs_id": -3316023004351282446,
     "target_name": "4XMM J143812.7-231456",
     "ra_deg": 219.553,
     "dec_deg": -23.249,
@@ -1572,13 +1579,13 @@
     "anomaly_note": "Unidentified soft X-ray point source \u2014 no optical counterpart",
     "data_type": "xray",
     "detection_method": "xray_unidentified",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": -7591003770018777000,
+    "obs_id": -7310350778282069116,
     "target_name": "4XMM J052211.8-692334",
     "ra_deg": 80.549,
     "dec_deg": -69.393,
@@ -1594,13 +1601,13 @@
     "anomaly_note": "Unidentified soft X-ray point source \u2014 no optical counterpart",
     "data_type": "xray",
     "detection_method": "xray_unidentified",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   },
   {
-    "obs_id": -6350312666433320375,
+    "obs_id": -3678325412566055507,
     "target_name": "4XMM J113021.4+052318",
     "ra_deg": 172.589,
     "dec_deg": 5.388,
@@ -1616,9 +1623,9 @@
     "anomaly_note": "Unidentified soft X-ray point source \u2014 no optical counterpart",
     "data_type": "xray",
     "detection_method": "xray_unidentified",
-    "candidacy_score": 70,
+    "candidacy_score": 40,
     "reasons": [
-      "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      "not cross-checked (limit)"
     ]
   }
 ]
