@@ -1,0 +1,6132 @@
+{
+  "version": "2.0.0",
+  "generated_utc": "2026-05-23T08:42:41.628238",
+  "pipeline_metadata": {
+    "n_observations": 307,
+    "n_targets": 60,
+    "n_frbs": 55,
+    "n_optical": 10,
+    "n_tess": 20,
+    "n_ir": 50,
+    "n_jwst": 20,
+    "n_interstellar": 7,
+    "n_candidates": 342,
+    "run_date": "2026-05-23T08:42:41.626649Z"
+  },
+  "candidates": [
+    {
+      "id": "DS-0001",
+      "target_name": "Kepler-93",
+      "ra_deg": 291.4181275,
+      "dec_deg": 38.6723124,
+      "center_freq_mhz": 8660.1799,
+      "snr": 49.89079200768279,
+      "bandwidth_mhz": 0.04484,
+      "drift_rate_hz_s": -0.088813,
+      "detection_method": "zscore",
+      "candidacy_score": 90,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: Kepler-93 b, Kepler-93 b, Kepler-93 b",
+        "Doppler drift rate 0.0888 Hz/s consistent with technological origin",
+        "High SNR: 49.9"
+      ],
+      "is_injected_anomaly": true
+    },
+    {
+      "id": "DS-0002",
+      "target_name": "HD 235088",
+      "ra_deg": 300.6154535,
+      "dec_deg": 53.3774418,
+      "center_freq_mhz": 8087.1749,
+      "snr": 20.668465327277183,
+      "bandwidth_mhz": 0.00105793,
+      "drift_rate_hz_s": 0.437238,
+      "detection_method": "zscore",
+      "candidacy_score": 60,
+      "tier": 2,
+      "reasons": [
+        "Frequency in known RFI band: X-band satellite",
+        "Exoplanet system nearby: HD 235088 b, HD 235088 b, HD 235088 b",
+        "Doppler drift rate 0.4372 Hz/s consistent with technological origin",
+        "High SNR: 20.7"
+      ],
+      "is_injected_anomaly": true
+    },
+    {
+      "id": "DS-0003",
+      "target_name": "HD 208487",
+      "ra_deg": 329.3332489,
+      "dec_deg": -37.7641354,
+      "center_freq_mhz": 2862.8664,
+      "snr": 31.089831255875723,
+      "bandwidth_mhz": 269.0936,
+      "drift_rate_hz_s": -1.138019,
+      "detection_method": "zscore",
+      "candidacy_score": 90,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 208487 b, HD 208487 b, HD 208487 b",
+        "Doppler drift rate 1.1380 Hz/s consistent with technological origin",
+        "High SNR: 31.1"
+      ],
+      "is_injected_anomaly": true
+    },
+    {
+      "id": "DS-0004",
+      "target_name": "Tau Ceti",
+      "ra_deg": 26.017,
+      "dec_deg": -15.9375,
+      "center_freq_mhz": 5814.0834,
+      "snr": 39.12506499812477,
+      "bandwidth_mhz": 0.00280278,
+      "drift_rate_hz_s": 0.386833,
+      "detection_method": "zscore",
+      "candidacy_score": 60,
+      "tier": 2,
+      "reasons": [
+        "Frequency in known RFI band: ISM 5.8 GHz",
+        "Exoplanet system nearby: tau Cet g, tau Cet h, tau Cet f",
+        "Doppler drift rate 0.3868 Hz/s consistent with technological origin",
+        "High SNR: 39.1"
+      ],
+      "is_injected_anomaly": true
+    },
+    {
+      "id": "DS-0005",
+      "target_name": "Gliese 667C",
+      "ra_deg": 259.7488,
+      "dec_deg": -34.9977,
+      "center_freq_mhz": 6509.9891,
+      "snr": 30.903459896635667,
+      "bandwidth_mhz": 0.006425,
+      "drift_rate_hz_s": -0.187122,
+      "detection_method": "zscore",
+      "candidacy_score": 90,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: GJ 667 C f, GJ 667 C b, GJ 667 C c",
+        "Doppler drift rate 0.1871 Hz/s consistent with technological origin",
+        "High SNR: 30.9"
+      ],
+      "is_injected_anomaly": true
+    },
+    {
+      "id": "DS-0006",
+      "target_name": "55 Cnc",
+      "ra_deg": 133.1468373,
+      "dec_deg": 28.3298154,
+      "center_freq_mhz": 4949.906,
+      "snr": 4.3505,
+      "bandwidth_mhz": 443.4392,
+      "drift_rate_hz_s": -0.195104,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: 55 Cnc b, 55 Cnc d, 55 Cnc e",
+        "Doppler drift rate 0.1951 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0007",
+      "target_name": "GJ 1214",
+      "ra_deg": 258.8313991,
+      "dec_deg": 4.9606795,
+      "center_freq_mhz": 7850.2573,
+      "snr": 2.6955,
+      "bandwidth_mhz": 414.4257,
+      "drift_rate_hz_s": -0.085304,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: GJ 1214 b, GJ 1214 b, GJ 1214 b",
+        "Doppler drift rate 0.0853 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0008",
+      "target_name": "GJ 1214",
+      "ra_deg": 258.8313991,
+      "dec_deg": 4.9606795,
+      "center_freq_mhz": 4337.1822,
+      "snr": 2.8095,
+      "bandwidth_mhz": 470.706,
+      "drift_rate_hz_s": 0.112724,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: GJ 1214 b, GJ 1214 b, GJ 1214 b",
+        "Doppler drift rate 0.1127 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0009",
+      "target_name": "HD 136352",
+      "ra_deg": 230.4401147,
+      "dec_deg": -48.3188174,
+      "center_freq_mhz": 3045.1485,
+      "snr": 1.683,
+      "bandwidth_mhz": 321.8339,
+      "drift_rate_hz_s": 0.087845,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 136352 d, HD 136352 d, HD 136352 b",
+        "Doppler drift rate 0.0878 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0010",
+      "target_name": "HD 136352",
+      "ra_deg": 230.4401147,
+      "dec_deg": -48.3188174,
+      "center_freq_mhz": 7822.7897,
+      "snr": 5.0092,
+      "bandwidth_mhz": 241.8104,
+      "drift_rate_hz_s": -0.015453,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 136352 d, HD 136352 d, HD 136352 b",
+        "Doppler drift rate 0.0155 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0011",
+      "target_name": "HD 136352",
+      "ra_deg": 230.4401147,
+      "dec_deg": -48.3188174,
+      "center_freq_mhz": 2751.7484,
+      "snr": 3.2632,
+      "bandwidth_mhz": 286.6884,
+      "drift_rate_hz_s": 0.041273,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 136352 d, HD 136352 d, HD 136352 b",
+        "Doppler drift rate 0.0413 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0012",
+      "target_name": "HD 136352",
+      "ra_deg": 230.4401147,
+      "dec_deg": -48.3188174,
+      "center_freq_mhz": 7147.4406,
+      "snr": 2.2184,
+      "bandwidth_mhz": 397.9049,
+      "drift_rate_hz_s": -0.051224,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 136352 d, HD 136352 d, HD 136352 b",
+        "Doppler drift rate 0.0512 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0013",
+      "target_name": "HD 136352",
+      "ra_deg": 230.4401147,
+      "dec_deg": -48.3188174,
+      "center_freq_mhz": 5226.0023,
+      "snr": 2.5677,
+      "bandwidth_mhz": 175.7885,
+      "drift_rate_hz_s": -0.084016,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 136352 d, HD 136352 d, HD 136352 b",
+        "Doppler drift rate 0.0840 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0014",
+      "target_name": "TOI-1468",
+      "ra_deg": 16.6538724,
+      "dec_deg": 19.2249195,
+      "center_freq_mhz": 7028.326,
+      "snr": 3.5665,
+      "bandwidth_mhz": 274.8608,
+      "drift_rate_hz_s": -0.066551,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: TOI-1468 b, TOI-1468 c, TOI-1468 c",
+        "Doppler drift rate 0.0666 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0015",
+      "target_name": "TOI-2018",
+      "ra_deg": 229.8374423,
+      "dec_deg": 29.2078771,
+      "center_freq_mhz": 4487.3054,
+      "snr": 4.2026,
+      "bandwidth_mhz": 215.3312,
+      "drift_rate_hz_s": 0.02236,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: TOI-2018 b, TOI-2018 b",
+        "Doppler drift rate 0.0224 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0016",
+      "target_name": "TOI-2018",
+      "ra_deg": 229.8374423,
+      "dec_deg": 29.2078771,
+      "center_freq_mhz": 2799.1738,
+      "snr": 3.1411,
+      "bandwidth_mhz": 102.9449,
+      "drift_rate_hz_s": 0.063129,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: TOI-2018 b, TOI-2018 b",
+        "Doppler drift rate 0.0631 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0017",
+      "target_name": "TOI-2427",
+      "ra_deg": 52.2917315,
+      "dec_deg": -31.3628665,
+      "center_freq_mhz": 8026.5613,
+      "snr": 1.975,
+      "bandwidth_mhz": 283.5663,
+      "drift_rate_hz_s": -0.027514,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 50,
+      "tier": 2,
+      "reasons": [
+        "Frequency in known RFI band: X-band satellite",
+        "Exoplanet system nearby: TOI-2427 b, TOI-2427 b",
+        "Doppler drift rate 0.0275 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0018",
+      "target_name": "TOI-2427",
+      "ra_deg": 52.2917315,
+      "dec_deg": -31.3628665,
+      "center_freq_mhz": 7015.6267,
+      "snr": 1.1718,
+      "bandwidth_mhz": 288.4385,
+      "drift_rate_hz_s": -0.033489,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: TOI-2427 b, TOI-2427 b",
+        "Doppler drift rate 0.0335 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0019",
+      "target_name": "TOI-2427",
+      "ra_deg": 52.2917315,
+      "dec_deg": -31.3628665,
+      "center_freq_mhz": 6712.4649,
+      "snr": 3.8791,
+      "bandwidth_mhz": 321.4318,
+      "drift_rate_hz_s": 0.079335,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: TOI-2427 b, TOI-2427 b",
+        "Doppler drift rate 0.0793 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0020",
+      "target_name": "TOI-700",
+      "ra_deg": 97.0957165,
+      "dec_deg": -65.5786149,
+      "center_freq_mhz": 4930.4565,
+      "snr": 2.4703,
+      "bandwidth_mhz": 185.8339,
+      "drift_rate_hz_s": -0.127569,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: TOI-700 c, TOI-700 d, TOI-700 b",
+        "Doppler drift rate 0.1276 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0021",
+      "target_name": "TOI-620",
+      "ra_deg": 142.1734459,
+      "dec_deg": -12.1671652,
+      "center_freq_mhz": 1524.7247,
+      "snr": 2.9189,
+      "bandwidth_mhz": 212.5536,
+      "drift_rate_hz_s": 0.069049,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: TOI-620 b, TOI-620 b",
+        "Doppler drift rate 0.0690 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0022",
+      "target_name": "TOI-2136",
+      "ra_deg": 281.1763433,
+      "dec_deg": 36.5631318,
+      "center_freq_mhz": 8055.0839,
+      "snr": 2.3287,
+      "bandwidth_mhz": 365.7254,
+      "drift_rate_hz_s": 0.045678,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 50,
+      "tier": 2,
+      "reasons": [
+        "Frequency in known RFI band: X-band satellite",
+        "Exoplanet system nearby: TOI-2136 b, TOI-2136 b, TOI-2136 b",
+        "Doppler drift rate 0.0457 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0023",
+      "target_name": "TOI-2136",
+      "ra_deg": 281.1763433,
+      "dec_deg": 36.5631318,
+      "center_freq_mhz": 1204.4087,
+      "snr": 1.4949,
+      "bandwidth_mhz": 136.0191,
+      "drift_rate_hz_s": 0.048697,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: TOI-2136 b, TOI-2136 b, TOI-2136 b",
+        "Doppler drift rate 0.0487 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0024",
+      "target_name": "TOI-5720",
+      "ra_deg": 170.3135774,
+      "dec_deg": 25.2732942,
+      "center_freq_mhz": 5509.403,
+      "snr": 3.3983,
+      "bandwidth_mhz": 160.9248,
+      "drift_rate_hz_s": 0.066539,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: TOI-5720 b, TOI-5720 b",
+        "Doppler drift rate 0.0665 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0025",
+      "target_name": "TOI-5720",
+      "ra_deg": 170.3135774,
+      "dec_deg": 25.2732942,
+      "center_freq_mhz": 4429.191,
+      "snr": 2.6121,
+      "bandwidth_mhz": 220.6048,
+      "drift_rate_hz_s": -0.168733,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: TOI-5720 b, TOI-5720 b",
+        "Doppler drift rate 0.1687 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0026",
+      "target_name": "TOI-5720",
+      "ra_deg": 170.3135774,
+      "dec_deg": 25.2732942,
+      "center_freq_mhz": 2062.0531,
+      "snr": 3.3197,
+      "bandwidth_mhz": 484.7591,
+      "drift_rate_hz_s": -0.090548,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: TOI-5720 b, TOI-5720 b",
+        "Doppler drift rate 0.0905 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0027",
+      "target_name": "TOI-1266",
+      "ra_deg": 197.9965833,
+      "dec_deg": 65.8336973,
+      "center_freq_mhz": 9722.5874,
+      "snr": 3.9305,
+      "bandwidth_mhz": 411.5004,
+      "drift_rate_hz_s": -0.093362,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: TOI-1266 b, TOI-1266 c, TOI-1266 c",
+        "Doppler drift rate 0.0934 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0028",
+      "target_name": "TOI-1266",
+      "ra_deg": 197.9965833,
+      "dec_deg": 65.8336973,
+      "center_freq_mhz": 3450.1741,
+      "snr": 2.2944,
+      "bandwidth_mhz": 138.5564,
+      "drift_rate_hz_s": 0.084031,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: TOI-1266 b, TOI-1266 c, TOI-1266 c",
+        "Doppler drift rate 0.0840 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0029",
+      "target_name": "HAT-P-11",
+      "ra_deg": 297.7101763,
+      "dec_deg": 48.0818635,
+      "center_freq_mhz": 3753.6096,
+      "snr": 2.0197,
+      "bandwidth_mhz": 331.6878,
+      "drift_rate_hz_s": -0.144606,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HAT-P-11 b, HAT-P-11 b, HAT-P-11 b",
+        "Doppler drift rate 0.1446 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0030",
+      "target_name": "Kepler-42",
+      "ra_deg": 292.2196,
+      "dec_deg": 44.6173667,
+      "center_freq_mhz": 7475.1666,
+      "snr": 2.7481,
+      "bandwidth_mhz": 272.8372,
+      "drift_rate_hz_s": 0.160178,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: Kepler-42 b, Kepler-1202 b, Kepler-42 d",
+        "Doppler drift rate 0.1602 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0031",
+      "target_name": "Kepler-42",
+      "ra_deg": 292.2196,
+      "dec_deg": 44.6173667,
+      "center_freq_mhz": 1759.9989,
+      "snr": 3.0344,
+      "bandwidth_mhz": 266.323,
+      "drift_rate_hz_s": 0.135919,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: Kepler-42 b, Kepler-1202 b, Kepler-42 d",
+        "Doppler drift rate 0.1359 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0032",
+      "target_name": "Kepler-42",
+      "ra_deg": 292.2196,
+      "dec_deg": 44.6173667,
+      "center_freq_mhz": 3968.7509,
+      "snr": 5.65,
+      "bandwidth_mhz": 157.8097,
+      "drift_rate_hz_s": -0.118876,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: Kepler-42 b, Kepler-1202 b, Kepler-42 d",
+        "Doppler drift rate 0.1189 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0033",
+      "target_name": "Kepler-42",
+      "ra_deg": 292.2196,
+      "dec_deg": 44.6173667,
+      "center_freq_mhz": 9326.0811,
+      "snr": 1.3657,
+      "bandwidth_mhz": 332.4245,
+      "drift_rate_hz_s": 0.063515,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: Kepler-42 b, Kepler-1202 b, Kepler-42 d",
+        "Doppler drift rate 0.0635 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0034",
+      "target_name": "TOI-544",
+      "ra_deg": 82.2900716,
+      "dec_deg": -0.3428983,
+      "center_freq_mhz": 9627.0329,
+      "snr": 3.1796,
+      "bandwidth_mhz": 292.9214,
+      "drift_rate_hz_s": 0.083813,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: TOI-544 b, TOI-544 b, TOI-544 b",
+        "Doppler drift rate 0.0838 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0035",
+      "target_name": "HD 235088",
+      "ra_deg": 300.6154535,
+      "dec_deg": 53.3774418,
+      "center_freq_mhz": 5416.3629,
+      "snr": 1.6574,
+      "bandwidth_mhz": 475.1306,
+      "drift_rate_hz_s": -0.213205,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 235088 b, HD 235088 b, HD 235088 b",
+        "Doppler drift rate 0.2132 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0036",
+      "target_name": "HD 235088",
+      "ra_deg": 300.6154535,
+      "dec_deg": 53.3774418,
+      "center_freq_mhz": 3984.121,
+      "snr": 2.0016,
+      "bandwidth_mhz": 308.269,
+      "drift_rate_hz_s": -0.014079,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 235088 b, HD 235088 b, HD 235088 b",
+        "Doppler drift rate 0.0141 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0037",
+      "target_name": "TOI-5800",
+      "ra_deg": 305.0655462,
+      "dec_deg": -7.4119237,
+      "center_freq_mhz": 9065.4469,
+      "snr": 1.6196,
+      "bandwidth_mhz": 156.0996,
+      "drift_rate_hz_s": -0.167468,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: TOI-5800 b, TOI-5800 b, TOI-5800 b",
+        "Doppler drift rate 0.1675 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0038",
+      "target_name": "TOI-5800",
+      "ra_deg": 305.0655462,
+      "dec_deg": -7.4119237,
+      "center_freq_mhz": 7050.1608,
+      "snr": 3.1278,
+      "bandwidth_mhz": 212.4935,
+      "drift_rate_hz_s": 0.176793,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: TOI-5800 b, TOI-5800 b, TOI-5800 b",
+        "Doppler drift rate 0.1768 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0039",
+      "target_name": "TOI-3884",
+      "ra_deg": 181.5718341,
+      "dec_deg": 12.5070258,
+      "center_freq_mhz": 1969.6685,
+      "snr": 1.5031,
+      "bandwidth_mhz": 466.4047,
+      "drift_rate_hz_s": -0.096512,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: TOI-3884 b, TOI-3884 b, TOI-3884 b",
+        "Doppler drift rate 0.0965 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0040",
+      "target_name": "TOI-3884",
+      "ra_deg": 181.5718341,
+      "dec_deg": 12.5070258,
+      "center_freq_mhz": 4338.3006,
+      "snr": 4.134,
+      "bandwidth_mhz": 431.9159,
+      "drift_rate_hz_s": -0.090293,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: TOI-3884 b, TOI-3884 b, TOI-3884 b",
+        "Doppler drift rate 0.0903 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0041",
+      "target_name": "K2-3",
+      "ra_deg": 172.3353708,
+      "dec_deg": -1.4551364,
+      "center_freq_mhz": 2481.4704,
+      "snr": 1.4728,
+      "bandwidth_mhz": 117.9642,
+      "drift_rate_hz_s": -0.127794,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: K2-3 d, K2-3 b, K2-3 c",
+        "Doppler drift rate 0.1278 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0042",
+      "target_name": "K2-3",
+      "ra_deg": 172.3353708,
+      "dec_deg": -1.4551364,
+      "center_freq_mhz": 7737.4722,
+      "snr": 2.5617,
+      "bandwidth_mhz": 456.317,
+      "drift_rate_hz_s": 0.028583,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: K2-3 d, K2-3 b, K2-3 c",
+        "Doppler drift rate 0.0286 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0043",
+      "target_name": "K2-3",
+      "ra_deg": 172.3353708,
+      "dec_deg": -1.4551364,
+      "center_freq_mhz": 3843.3615,
+      "snr": 2.2134,
+      "bandwidth_mhz": 408.805,
+      "drift_rate_hz_s": 0.110629,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: K2-3 d, K2-3 b, K2-3 c",
+        "Doppler drift rate 0.1106 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0044",
+      "target_name": "K2-3",
+      "ra_deg": 172.3353708,
+      "dec_deg": -1.4551364,
+      "center_freq_mhz": 7721.1065,
+      "snr": 1.4737,
+      "bandwidth_mhz": 204.9842,
+      "drift_rate_hz_s": -0.136816,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: K2-3 d, K2-3 b, K2-3 c",
+        "Doppler drift rate 0.1368 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0045",
+      "target_name": "K2-3",
+      "ra_deg": 172.3353708,
+      "dec_deg": -1.4551364,
+      "center_freq_mhz": 8480.014,
+      "snr": 2.2443,
+      "bandwidth_mhz": 161.3137,
+      "drift_rate_hz_s": 0.146144,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: K2-3 d, K2-3 b, K2-3 c",
+        "Doppler drift rate 0.1461 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0046",
+      "target_name": "K2-3",
+      "ra_deg": 172.3353708,
+      "dec_deg": -1.4551364,
+      "center_freq_mhz": 2767.912,
+      "snr": 3.7497,
+      "bandwidth_mhz": 224.1295,
+      "drift_rate_hz_s": -0.039461,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: K2-3 d, K2-3 b, K2-3 c",
+        "Doppler drift rate 0.0395 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0047",
+      "target_name": "K2-3",
+      "ra_deg": 172.3353708,
+      "dec_deg": -1.4551364,
+      "center_freq_mhz": 7098.9281,
+      "snr": 2.6529,
+      "bandwidth_mhz": 148.733,
+      "drift_rate_hz_s": -0.084323,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: K2-3 d, K2-3 b, K2-3 c",
+        "Doppler drift rate 0.0843 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0048",
+      "target_name": "Wolf 503",
+      "ra_deg": 206.8461979,
+      "dec_deg": -6.1393369,
+      "center_freq_mhz": 2797.9809,
+      "snr": 4.2971,
+      "bandwidth_mhz": 421.6498,
+      "drift_rate_hz_s": -0.132639,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: Wolf 503 b, Wolf 503 b, Wolf 503 b",
+        "Doppler drift rate 0.1326 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0049",
+      "target_name": "Wolf 503",
+      "ra_deg": 206.8461979,
+      "dec_deg": -6.1393369,
+      "center_freq_mhz": 2113.7842,
+      "snr": 2.1338,
+      "bandwidth_mhz": 471.025,
+      "drift_rate_hz_s": -0.032767,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: Wolf 503 b, Wolf 503 b, Wolf 503 b",
+        "Doppler drift rate 0.0328 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0050",
+      "target_name": "TOI-674",
+      "ra_deg": 164.5865592,
+      "dec_deg": -36.8581092,
+      "center_freq_mhz": 6965.7779,
+      "snr": 2.5162,
+      "bandwidth_mhz": 482.2493,
+      "drift_rate_hz_s": -0.069594,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: TOI-674 b, TOI-674 b, TOI-674 b",
+        "Doppler drift rate 0.0696 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0051",
+      "target_name": "HD 191939",
+      "ra_deg": 302.0256247,
+      "dec_deg": 66.8503014,
+      "center_freq_mhz": 4772.0289,
+      "snr": 6.9478,
+      "bandwidth_mhz": 486.4928,
+      "drift_rate_hz_s": -0.085324,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 191939 b, HD 191939 c, HD 191939 e",
+        "Doppler drift rate 0.0853 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0052",
+      "target_name": "K2-136",
+      "ra_deg": 67.4128615,
+      "dec_deg": 22.8825674,
+      "center_freq_mhz": 5206.4344,
+      "snr": 3.1829,
+      "bandwidth_mhz": 413.9054,
+      "drift_rate_hz_s": 0.120585,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: K2-136 c, K2-136 c, K2-136 c",
+        "Doppler drift rate 0.1206 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0053",
+      "target_name": "K2-136",
+      "ra_deg": 67.4128615,
+      "dec_deg": 22.8825674,
+      "center_freq_mhz": 8171.3538,
+      "snr": 2.5059,
+      "bandwidth_mhz": 193.0563,
+      "drift_rate_hz_s": -0.106241,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 50,
+      "tier": 2,
+      "reasons": [
+        "Frequency in known RFI band: X-band satellite",
+        "Exoplanet system nearby: K2-136 c, K2-136 c, K2-136 c",
+        "Doppler drift rate 0.1062 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0054",
+      "target_name": "K2-136",
+      "ra_deg": 67.4128615,
+      "dec_deg": 22.8825674,
+      "center_freq_mhz": 8809.6506,
+      "snr": 2.0861,
+      "bandwidth_mhz": 341.2429,
+      "drift_rate_hz_s": -0.087686,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: K2-136 c, K2-136 c, K2-136 c",
+        "Doppler drift rate 0.0877 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0055",
+      "target_name": "TOI-757",
+      "ra_deg": 187.9948428,
+      "dec_deg": -35.5544523,
+      "center_freq_mhz": 8807.4157,
+      "snr": 7.8823,
+      "bandwidth_mhz": 281.5588,
+      "drift_rate_hz_s": -0.128742,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: TOI-757 b, TOI-757 b",
+        "Doppler drift rate 0.1287 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0056",
+      "target_name": "TOI-757",
+      "ra_deg": 187.9948428,
+      "dec_deg": -35.5544523,
+      "center_freq_mhz": 8349.1189,
+      "snr": 1.5132,
+      "bandwidth_mhz": 142.1112,
+      "drift_rate_hz_s": -0.036825,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 50,
+      "tier": 2,
+      "reasons": [
+        "Frequency in known RFI band: X-band satellite",
+        "Exoplanet system nearby: TOI-757 b, TOI-757 b",
+        "Doppler drift rate 0.0368 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0057",
+      "target_name": "TOI-757",
+      "ra_deg": 187.9948428,
+      "dec_deg": -35.5544523,
+      "center_freq_mhz": 8421.9777,
+      "snr": 2.4045,
+      "bandwidth_mhz": 224.1339,
+      "drift_rate_hz_s": 0.077734,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: TOI-757 b, TOI-757 b",
+        "Doppler drift rate 0.0777 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0058",
+      "target_name": "TOI-757",
+      "ra_deg": 187.9948428,
+      "dec_deg": -35.5544523,
+      "center_freq_mhz": 2489.7855,
+      "snr": 2.5423,
+      "bandwidth_mhz": 213.888,
+      "drift_rate_hz_s": -0.13749,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 50,
+      "tier": 2,
+      "reasons": [
+        "Frequency in known RFI band: ISM 2.4 GHz",
+        "Exoplanet system nearby: TOI-757 b, TOI-757 b",
+        "Doppler drift rate 0.1375 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0059",
+      "target_name": "Kepler-37",
+      "ra_deg": 284.0592503,
+      "dec_deg": 44.5183733,
+      "center_freq_mhz": 1498.5587,
+      "snr": 2.0592,
+      "bandwidth_mhz": 169.8566,
+      "drift_rate_hz_s": 0.047154,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: Kepler-37 c, Kepler-37 c, Kepler-37 d",
+        "Doppler drift rate 0.0472 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0060",
+      "target_name": "Kepler-37",
+      "ra_deg": 284.0592503,
+      "dec_deg": 44.5183733,
+      "center_freq_mhz": 1391.2756,
+      "snr": 11.1011,
+      "bandwidth_mhz": 172.5994,
+      "drift_rate_hz_s": 0.209317,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: Kepler-37 c, Kepler-37 c, Kepler-37 d",
+        "Doppler drift rate 0.2093 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0061",
+      "target_name": "Kepler-37",
+      "ra_deg": 284.0592503,
+      "dec_deg": 44.5183733,
+      "center_freq_mhz": 6141.0939,
+      "snr": 1.8561,
+      "bandwidth_mhz": 266.505,
+      "drift_rate_hz_s": -0.111241,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: Kepler-37 c, Kepler-37 c, Kepler-37 d",
+        "Doppler drift rate 0.1112 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0062",
+      "target_name": "WASP-107",
+      "ra_deg": 188.3864277,
+      "dec_deg": -10.1462141,
+      "center_freq_mhz": 1467.6568,
+      "snr": 1.1362,
+      "bandwidth_mhz": 469.9367,
+      "drift_rate_hz_s": 0.092744,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: WASP-107 b, WASP-107 c, WASP-107 b",
+        "Doppler drift rate 0.0927 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0063",
+      "target_name": "WASP-107",
+      "ra_deg": 188.3864277,
+      "dec_deg": -10.1462141,
+      "center_freq_mhz": 8010.9672,
+      "snr": 2.3965,
+      "bandwidth_mhz": 153.8209,
+      "drift_rate_hz_s": 0.015256,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: WASP-107 b, WASP-107 c, WASP-107 b",
+        "Doppler drift rate 0.0153 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0064",
+      "target_name": "Kepler-138",
+      "ra_deg": 290.3814122,
+      "dec_deg": 43.2930645,
+      "center_freq_mhz": 5165.1943,
+      "snr": 2.9691,
+      "bandwidth_mhz": 254.0358,
+      "drift_rate_hz_s": 0.029599,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: Kepler-716 c, Kepler-138 c, Kepler-138 c",
+        "Doppler drift rate 0.0296 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0065",
+      "target_name": "Kepler-138",
+      "ra_deg": 290.3814122,
+      "dec_deg": 43.2930645,
+      "center_freq_mhz": 5300.8955,
+      "snr": 6.4474,
+      "bandwidth_mhz": 266.7557,
+      "drift_rate_hz_s": -0.153386,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: Kepler-716 c, Kepler-138 c, Kepler-138 c",
+        "Doppler drift rate 0.1534 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0066",
+      "target_name": "Kepler-138",
+      "ra_deg": 290.3814122,
+      "dec_deg": 43.2930645,
+      "center_freq_mhz": 4297.532,
+      "snr": 2.6362,
+      "bandwidth_mhz": 230.9982,
+      "drift_rate_hz_s": -0.10529,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: Kepler-716 c, Kepler-138 c, Kepler-138 c",
+        "Doppler drift rate 0.1053 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0067",
+      "target_name": "K2-240",
+      "ra_deg": 227.849371,
+      "dec_deg": -17.8754464,
+      "center_freq_mhz": 9539.7213,
+      "snr": 6.4634,
+      "bandwidth_mhz": 466.5392,
+      "drift_rate_hz_s": 0.117741,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: K2-240 b, K2-240 c",
+        "Doppler drift rate 0.1177 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0068",
+      "target_name": "TOI-6000",
+      "ra_deg": 292.6062979,
+      "dec_deg": 68.1545924,
+      "center_freq_mhz": 8637.0444,
+      "snr": 4.1123,
+      "bandwidth_mhz": 361.0349,
+      "drift_rate_hz_s": -0.029657,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: TOI-6000 b, TOI-6000 b",
+        "Doppler drift rate 0.0297 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0069",
+      "target_name": "TOI-6000",
+      "ra_deg": 292.6062979,
+      "dec_deg": 68.1545924,
+      "center_freq_mhz": 3593.4005,
+      "snr": 1.5081,
+      "bandwidth_mhz": 393.9573,
+      "drift_rate_hz_s": 0.078235,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: TOI-6000 b, TOI-6000 b",
+        "Doppler drift rate 0.0782 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0070",
+      "target_name": "K2-321",
+      "ra_deg": 156.4054989,
+      "dec_deg": 2.5138829,
+      "center_freq_mhz": 2188.9255,
+      "snr": 3.9568,
+      "bandwidth_mhz": 345.7519,
+      "drift_rate_hz_s": 0.182065,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: K2-321 b, K2-321 b, K2-321 b",
+        "Doppler drift rate 0.1821 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0071",
+      "target_name": "K2-321",
+      "ra_deg": 156.4054989,
+      "dec_deg": 2.5138829,
+      "center_freq_mhz": 1760.439,
+      "snr": 2.6288,
+      "bandwidth_mhz": 474.3759,
+      "drift_rate_hz_s": -0.117201,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: K2-321 b, K2-321 b, K2-321 b",
+        "Doppler drift rate 0.1172 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0072",
+      "target_name": "K2-167",
+      "ra_deg": 336.5761233,
+      "dec_deg": -18.011665,
+      "center_freq_mhz": 6343.138,
+      "snr": 1.9166,
+      "bandwidth_mhz": 413.0496,
+      "drift_rate_hz_s": -0.101372,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: K2-167 b, K2-167 b, K2-167 b",
+        "Doppler drift rate 0.1014 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0073",
+      "target_name": "K2-167",
+      "ra_deg": 336.5761233,
+      "dec_deg": -18.011665,
+      "center_freq_mhz": 6310.6831,
+      "snr": 3.1772,
+      "bandwidth_mhz": 138.0197,
+      "drift_rate_hz_s": 0.115531,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: K2-167 b, K2-167 b, K2-167 b",
+        "Doppler drift rate 0.1155 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0074",
+      "target_name": "K2-167",
+      "ra_deg": 336.5761233,
+      "dec_deg": -18.011665,
+      "center_freq_mhz": 5429.3789,
+      "snr": 2.0227,
+      "bandwidth_mhz": 339.8374,
+      "drift_rate_hz_s": 0.059091,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: K2-167 b, K2-167 b, K2-167 b",
+        "Doppler drift rate 0.0591 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0075",
+      "target_name": "K2-167",
+      "ra_deg": 336.5761233,
+      "dec_deg": -18.011665,
+      "center_freq_mhz": 1789.3811,
+      "snr": 4.1508,
+      "bandwidth_mhz": 363.1453,
+      "drift_rate_hz_s": -0.057094,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: K2-167 b, K2-167 b, K2-167 b",
+        "Doppler drift rate 0.0571 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0076",
+      "target_name": "K2-167",
+      "ra_deg": 336.5761233,
+      "dec_deg": -18.011665,
+      "center_freq_mhz": 7041.0827,
+      "snr": 3.054,
+      "bandwidth_mhz": 233.4551,
+      "drift_rate_hz_s": 0.02344,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: K2-167 b, K2-167 b, K2-167 b",
+        "Doppler drift rate 0.0234 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0077",
+      "target_name": "HAT-P-22",
+      "ra_deg": 155.6814593,
+      "dec_deg": 50.1287115,
+      "center_freq_mhz": 4277.7282,
+      "snr": 2.5187,
+      "bandwidth_mhz": 225.776,
+      "drift_rate_hz_s": 0.038339,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HAT-P-22 b, HAT-P-22 b, HAT-P-22 b",
+        "Doppler drift rate 0.0383 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0078",
+      "target_name": "K2-384",
+      "ra_deg": 20.4998403,
+      "dec_deg": 0.7509701,
+      "center_freq_mhz": 4941.1363,
+      "snr": 5.7015,
+      "bandwidth_mhz": 253.3279,
+      "drift_rate_hz_s": -0.074359,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: K2-384 d, K2-384 f, K2-384 e",
+        "Doppler drift rate 0.0744 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0079",
+      "target_name": "K2-384",
+      "ra_deg": 20.4998403,
+      "dec_deg": 0.7509701,
+      "center_freq_mhz": 8022.7134,
+      "snr": 2.7339,
+      "bandwidth_mhz": 291.7478,
+      "drift_rate_hz_s": 0.132896,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: K2-384 d, K2-384 f, K2-384 e",
+        "Doppler drift rate 0.1329 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0080",
+      "target_name": "K2-384",
+      "ra_deg": 20.4998403,
+      "dec_deg": 0.7509701,
+      "center_freq_mhz": 7459.8421,
+      "snr": 3.5861,
+      "bandwidth_mhz": 480.4779,
+      "drift_rate_hz_s": 0.232765,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: K2-384 d, K2-384 f, K2-384 e",
+        "Doppler drift rate 0.2328 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0081",
+      "target_name": "K2-21",
+      "ra_deg": 340.3037846,
+      "dec_deg": -14.4893256,
+      "center_freq_mhz": 2097.2951,
+      "snr": 2.1623,
+      "bandwidth_mhz": 335.3032,
+      "drift_rate_hz_s": 0.010788,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: K2-21 c, K2-21 b, K2-21 b",
+        "Doppler drift rate 0.0108 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0082",
+      "target_name": "K2-21",
+      "ra_deg": 340.3037846,
+      "dec_deg": -14.4893256,
+      "center_freq_mhz": 8428.5956,
+      "snr": 1.2206,
+      "bandwidth_mhz": 218.1436,
+      "drift_rate_hz_s": -0.079414,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: K2-21 c, K2-21 b, K2-21 b",
+        "Doppler drift rate 0.0794 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0083",
+      "target_name": "TOI-1136",
+      "ra_deg": 192.1848981,
+      "dec_deg": 64.8552755,
+      "center_freq_mhz": 9265.9771,
+      "snr": 1.3413,
+      "bandwidth_mhz": 412.5176,
+      "drift_rate_hz_s": -0.23101,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: TOI-1136 f, TOI-1136 d, TOI-1136 c",
+        "Doppler drift rate 0.2310 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0084",
+      "target_name": "TOI-4641",
+      "ra_deg": 42.5582023,
+      "dec_deg": 25.3335334,
+      "center_freq_mhz": 3555.1759,
+      "snr": 3.8612,
+      "bandwidth_mhz": 434.7586,
+      "drift_rate_hz_s": 0.013824,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: TOI-4641 b, TOI-4641 b",
+        "Doppler drift rate 0.0138 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0085",
+      "target_name": "WASP-8",
+      "ra_deg": 359.9008737,
+      "dec_deg": -35.0313349,
+      "center_freq_mhz": 9073.3006,
+      "snr": 1.9111,
+      "bandwidth_mhz": 111.5998,
+      "drift_rate_hz_s": -0.017961,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: WASP-8 b, WASP-8 c, WASP-8 b",
+        "Doppler drift rate 0.0180 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0086",
+      "target_name": "WASP-8",
+      "ra_deg": 359.9008737,
+      "dec_deg": -35.0313349,
+      "center_freq_mhz": 7990.9115,
+      "snr": 2.2325,
+      "bandwidth_mhz": 179.2817,
+      "drift_rate_hz_s": 0.052117,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: WASP-8 b, WASP-8 c, WASP-8 b",
+        "Doppler drift rate 0.0521 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0087",
+      "target_name": "HD 118203",
+      "ra_deg": 203.509956,
+      "dec_deg": 53.7281876,
+      "center_freq_mhz": 1048.8685,
+      "snr": 1.0035,
+      "bandwidth_mhz": 120.6632,
+      "drift_rate_hz_s": -0.129647,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 118203 b, HD 118203 b, HD 118203 b",
+        "Doppler drift rate 0.1296 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0088",
+      "target_name": "TOI-1174",
+      "ra_deg": 209.2171751,
+      "dec_deg": 68.6182106,
+      "center_freq_mhz": 8644.6796,
+      "snr": 3.954,
+      "bandwidth_mhz": 122.8928,
+      "drift_rate_hz_s": -0.028488,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: TOI-1174 b, TOI-1174 b, TOI-1174 b",
+        "Doppler drift rate 0.0285 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0089",
+      "target_name": "Kepler-93",
+      "ra_deg": 291.4181275,
+      "dec_deg": 38.6723124,
+      "center_freq_mhz": 7283.0871,
+      "snr": 2.6259,
+      "bandwidth_mhz": 435.1921,
+      "drift_rate_hz_s": 0.135359,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: Kepler-93 b, Kepler-93 b, Kepler-93 b",
+        "Doppler drift rate 0.1354 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0090",
+      "target_name": "Kepler-93",
+      "ra_deg": 291.4181275,
+      "dec_deg": 38.6723124,
+      "center_freq_mhz": 3436.8288,
+      "snr": 6.4262,
+      "bandwidth_mhz": 383.9619,
+      "drift_rate_hz_s": -0.138218,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: Kepler-93 b, Kepler-93 b, Kepler-93 b",
+        "Doppler drift rate 0.1382 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0091",
+      "target_name": "Kepler-93",
+      "ra_deg": 291.4181275,
+      "dec_deg": 38.6723124,
+      "center_freq_mhz": 6546.7807,
+      "snr": 2.5458,
+      "bandwidth_mhz": 116.9402,
+      "drift_rate_hz_s": -0.183091,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: Kepler-93 b, Kepler-93 b, Kepler-93 b",
+        "Doppler drift rate 0.1831 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0092",
+      "target_name": "Kepler-446",
+      "ra_deg": 282.2501047,
+      "dec_deg": 44.921002,
+      "center_freq_mhz": 1825.4891,
+      "snr": 1.5922,
+      "bandwidth_mhz": 173.4133,
+      "drift_rate_hz_s": -0.065428,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: Kepler-446 d, Kepler-446 c, Kepler-446 d",
+        "Doppler drift rate 0.0654 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0093",
+      "target_name": "Kepler-446",
+      "ra_deg": 282.2501047,
+      "dec_deg": 44.921002,
+      "center_freq_mhz": 6727.6751,
+      "snr": 3.2575,
+      "bandwidth_mhz": 328.9653,
+      "drift_rate_hz_s": 0.132066,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: Kepler-446 d, Kepler-446 c, Kepler-446 d",
+        "Doppler drift rate 0.1321 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0094",
+      "target_name": "Kepler-446",
+      "ra_deg": 282.2501047,
+      "dec_deg": 44.921002,
+      "center_freq_mhz": 6202.1549,
+      "snr": 2.3031,
+      "bandwidth_mhz": 379.9104,
+      "drift_rate_hz_s": 0.111459,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: Kepler-446 d, Kepler-446 c, Kepler-446 d",
+        "Doppler drift rate 0.1115 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0095",
+      "target_name": "Kepler-446",
+      "ra_deg": 282.2501047,
+      "dec_deg": 44.921002,
+      "center_freq_mhz": 2335.9509,
+      "snr": 3.2362,
+      "bandwidth_mhz": 303.3411,
+      "drift_rate_hz_s": 0.195101,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: Kepler-446 d, Kepler-446 c, Kepler-446 d",
+        "Doppler drift rate 0.1951 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0096",
+      "target_name": "alf Cen B",
+      "ra_deg": 219.9141283,
+      "dec_deg": -60.8394714,
+      "center_freq_mhz": 2206.8515,
+      "snr": 4.6558,
+      "bandwidth_mhz": 211.2302,
+      "drift_rate_hz_s": -0.084566,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 65,
+      "tier": 2,
+      "reasons": [
+        "Doppler drift rate 0.0846 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0097",
+      "target_name": "tau Cet",
+      "ra_deg": 26.0093029,
+      "dec_deg": -15.9337987,
+      "center_freq_mhz": 6711.6621,
+      "snr": 1.792,
+      "bandwidth_mhz": 264.7244,
+      "drift_rate_hz_s": -0.158957,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: tau Cet g, tau Cet h, tau Cet f",
+        "Doppler drift rate 0.1590 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0098",
+      "target_name": "tau Cet",
+      "ra_deg": 26.0093029,
+      "dec_deg": -15.9337987,
+      "center_freq_mhz": 3853.3682,
+      "snr": 2.3476,
+      "bandwidth_mhz": 114.4239,
+      "drift_rate_hz_s": 0.193723,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: tau Cet g, tau Cet h, tau Cet f",
+        "Doppler drift rate 0.1937 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0099",
+      "target_name": "tau Cet",
+      "ra_deg": 26.0093029,
+      "dec_deg": -15.9337987,
+      "center_freq_mhz": 6152.1214,
+      "snr": 2.2177,
+      "bandwidth_mhz": 326.3088,
+      "drift_rate_hz_s": -0.028436,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: tau Cet g, tau Cet h, tau Cet f",
+        "Doppler drift rate 0.0284 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0100",
+      "target_name": "eps Ind A",
+      "ra_deg": 330.8714021,
+      "dec_deg": -56.7969023,
+      "center_freq_mhz": 3845.9274,
+      "snr": 4.6271,
+      "bandwidth_mhz": 414.9729,
+      "drift_rate_hz_s": -0.114194,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: eps Ind A b, eps Ind A b, eps Ind A b",
+        "Doppler drift rate 0.1142 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0101",
+      "target_name": "eps Ind A",
+      "ra_deg": 330.8714021,
+      "dec_deg": -56.7969023,
+      "center_freq_mhz": 6634.1123,
+      "snr": 3.039,
+      "bandwidth_mhz": 244.2629,
+      "drift_rate_hz_s": 0.143321,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: eps Ind A b, eps Ind A b, eps Ind A b",
+        "Doppler drift rate 0.1433 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0102",
+      "target_name": "eps Ind A",
+      "ra_deg": 330.8714021,
+      "dec_deg": -56.7969023,
+      "center_freq_mhz": 9289.5148,
+      "snr": 2.4963,
+      "bandwidth_mhz": 301.4532,
+      "drift_rate_hz_s": -0.077948,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: eps Ind A b, eps Ind A b, eps Ind A b",
+        "Doppler drift rate 0.0779 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0103",
+      "target_name": "eps Ind A",
+      "ra_deg": 330.8714021,
+      "dec_deg": -56.7969023,
+      "center_freq_mhz": 8536.4413,
+      "snr": 16.132883743473524,
+      "bandwidth_mhz": 0.00118793,
+      "drift_rate_hz_s": 0.583188,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 90,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: eps Ind A b, eps Ind A b, eps Ind A b",
+        "Doppler drift rate 0.5832 Hz/s consistent with technological origin",
+        "High SNR: 16.1"
+      ],
+      "is_injected_anomaly": true
+    },
+    {
+      "id": "DS-0104",
+      "target_name": "eps Ind A",
+      "ra_deg": 330.8714021,
+      "dec_deg": -56.7969023,
+      "center_freq_mhz": 8577.9389,
+      "snr": 2.3558,
+      "bandwidth_mhz": 122.2272,
+      "drift_rate_hz_s": 0.045397,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: eps Ind A b, eps Ind A b, eps Ind A b",
+        "Doppler drift rate 0.0454 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0105",
+      "target_name": "eps Ind A",
+      "ra_deg": 330.8714021,
+      "dec_deg": -56.7969023,
+      "center_freq_mhz": 3825.0403,
+      "snr": 2.2984,
+      "bandwidth_mhz": 397.077,
+      "drift_rate_hz_s": -0.199081,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: eps Ind A b, eps Ind A b, eps Ind A b",
+        "Doppler drift rate 0.1991 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0106",
+      "target_name": "HD 20794",
+      "ra_deg": 49.9997666,
+      "dec_deg": -43.0666533,
+      "center_freq_mhz": 4350.3542,
+      "snr": 1.897,
+      "bandwidth_mhz": 161.4452,
+      "drift_rate_hz_s": -0.15025,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 20794 e, HD 20794 b, HD 20794 b",
+        "Doppler drift rate 0.1502 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0107",
+      "target_name": "HD 20794",
+      "ra_deg": 49.9997666,
+      "dec_deg": -43.0666533,
+      "center_freq_mhz": 9625.8626,
+      "snr": 3.3785,
+      "bandwidth_mhz": 498.1858,
+      "drift_rate_hz_s": -0.055957,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 20794 e, HD 20794 b, HD 20794 b",
+        "Doppler drift rate 0.0560 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0108",
+      "target_name": "HD 20794",
+      "ra_deg": 49.9997666,
+      "dec_deg": -43.0666533,
+      "center_freq_mhz": 2881.5189,
+      "snr": 3.7968,
+      "bandwidth_mhz": 310.0353,
+      "drift_rate_hz_s": -0.068837,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 20794 e, HD 20794 b, HD 20794 b",
+        "Doppler drift rate 0.0688 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0109",
+      "target_name": "61 Vir",
+      "ra_deg": 199.596455,
+      "dec_deg": -18.3157745,
+      "center_freq_mhz": 9902.197,
+      "snr": 1.7439,
+      "bandwidth_mhz": 322.3878,
+      "drift_rate_hz_s": 0.133578,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: 61 Vir d, 61 Vir c, 61 Vir b",
+        "Doppler drift rate 0.1336 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0110",
+      "target_name": "61 Vir",
+      "ra_deg": 199.596455,
+      "dec_deg": -18.3157745,
+      "center_freq_mhz": 5034.2105,
+      "snr": 5.6267,
+      "bandwidth_mhz": 257.0291,
+      "drift_rate_hz_s": 0.013149,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: 61 Vir d, 61 Vir c, 61 Vir b",
+        "Doppler drift rate 0.0131 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0111",
+      "target_name": "61 Vir",
+      "ra_deg": 199.596455,
+      "dec_deg": -18.3157745,
+      "center_freq_mhz": 4904.0112,
+      "snr": 2.2685,
+      "bandwidth_mhz": 287.7308,
+      "drift_rate_hz_s": -0.094112,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: 61 Vir d, 61 Vir c, 61 Vir b",
+        "Doppler drift rate 0.0941 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0112",
+      "target_name": "55 Cnc",
+      "ra_deg": 133.1468373,
+      "dec_deg": 28.3298154,
+      "center_freq_mhz": 1401.8418,
+      "snr": 3.7387,
+      "bandwidth_mhz": 193.1409,
+      "drift_rate_hz_s": -0.053877,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: 55 Cnc b, 55 Cnc d, 55 Cnc e",
+        "Doppler drift rate 0.0539 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0113",
+      "target_name": "55 Cnc",
+      "ra_deg": 133.1468373,
+      "dec_deg": 28.3298154,
+      "center_freq_mhz": 5439.6098,
+      "snr": 1.1697,
+      "bandwidth_mhz": 133.6461,
+      "drift_rate_hz_s": -0.082623,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: 55 Cnc b, 55 Cnc d, 55 Cnc e",
+        "Doppler drift rate 0.0826 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0114",
+      "target_name": "55 Cnc",
+      "ra_deg": 133.1468373,
+      "dec_deg": 28.3298154,
+      "center_freq_mhz": 6738.2983,
+      "snr": 2.3948,
+      "bandwidth_mhz": 359.6596,
+      "drift_rate_hz_s": -0.015918,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: 55 Cnc b, 55 Cnc d, 55 Cnc e",
+        "Doppler drift rate 0.0159 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0115",
+      "target_name": "55 Cnc",
+      "ra_deg": 133.1468373,
+      "dec_deg": 28.3298154,
+      "center_freq_mhz": 4299.4755,
+      "snr": 3.7861,
+      "bandwidth_mhz": 315.811,
+      "drift_rate_hz_s": 0.038504,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: 55 Cnc b, 55 Cnc d, 55 Cnc e",
+        "Doppler drift rate 0.0385 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0116",
+      "target_name": "55 Cnc",
+      "ra_deg": 133.1468373,
+      "dec_deg": 28.3298154,
+      "center_freq_mhz": 7917.6483,
+      "snr": 2.6024,
+      "bandwidth_mhz": 440.8062,
+      "drift_rate_hz_s": -0.030708,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: 55 Cnc b, 55 Cnc d, 55 Cnc e",
+        "Doppler drift rate 0.0307 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0117",
+      "target_name": "ups And",
+      "ra_deg": 24.1983534,
+      "dec_deg": 41.4038147,
+      "center_freq_mhz": 6677.4902,
+      "snr": 4.2635,
+      "bandwidth_mhz": 171.0026,
+      "drift_rate_hz_s": 0.073941,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: ups And c, ups And d, ups And d",
+        "Doppler drift rate 0.0739 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0118",
+      "target_name": "ups And",
+      "ra_deg": 24.1983534,
+      "dec_deg": 41.4038147,
+      "center_freq_mhz": 1223.4082,
+      "snr": 3.5759,
+      "bandwidth_mhz": 470.9842,
+      "drift_rate_hz_s": 0.018797,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 50,
+      "tier": 2,
+      "reasons": [
+        "Frequency in known RFI band: L-band satellite",
+        "Exoplanet system nearby: ups And c, ups And d, ups And d",
+        "Doppler drift rate 0.0188 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0119",
+      "target_name": "ups And",
+      "ra_deg": 24.1983534,
+      "dec_deg": 41.4038147,
+      "center_freq_mhz": 1065.8301,
+      "snr": 1.7335,
+      "bandwidth_mhz": 211.2088,
+      "drift_rate_hz_s": 0.018984,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: ups And c, ups And d, ups And d",
+        "Doppler drift rate 0.0190 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0120",
+      "target_name": "HD 136352",
+      "ra_deg": 230.4401147,
+      "dec_deg": -48.3188174,
+      "center_freq_mhz": 6583.2194,
+      "snr": 2.3959,
+      "bandwidth_mhz": 291.0023,
+      "drift_rate_hz_s": 0.036345,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 136352 d, HD 136352 d, HD 136352 b",
+        "Doppler drift rate 0.0363 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0121",
+      "target_name": "HD 136352",
+      "ra_deg": 230.4401147,
+      "dec_deg": -48.3188174,
+      "center_freq_mhz": 7486.2635,
+      "snr": 2.3469,
+      "bandwidth_mhz": 485.2845,
+      "drift_rate_hz_s": -0.107213,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 136352 d, HD 136352 d, HD 136352 b",
+        "Doppler drift rate 0.1072 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0122",
+      "target_name": "HD 136352",
+      "ra_deg": 230.4401147,
+      "dec_deg": -48.3188174,
+      "center_freq_mhz": 7591.7215,
+      "snr": 1.7883,
+      "bandwidth_mhz": 276.0355,
+      "drift_rate_hz_s": 0.023545,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 136352 d, HD 136352 d, HD 136352 b",
+        "Doppler drift rate 0.0235 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0123",
+      "target_name": "HD 136352",
+      "ra_deg": 230.4401147,
+      "dec_deg": -48.3188174,
+      "center_freq_mhz": 9861.2027,
+      "snr": 6.7575,
+      "bandwidth_mhz": 215.2913,
+      "drift_rate_hz_s": -0.165176,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 136352 d, HD 136352 d, HD 136352 b",
+        "Doppler drift rate 0.1652 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0124",
+      "target_name": "HD 136352",
+      "ra_deg": 230.4401147,
+      "dec_deg": -48.3188174,
+      "center_freq_mhz": 1368.5226,
+      "snr": 2.0953,
+      "bandwidth_mhz": 410.9373,
+      "drift_rate_hz_s": 0.08126,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 136352 d, HD 136352 d, HD 136352 b",
+        "Doppler drift rate 0.0813 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0125",
+      "target_name": "HD 136352",
+      "ra_deg": 230.4401147,
+      "dec_deg": -48.3188174,
+      "center_freq_mhz": 9801.2528,
+      "snr": 2.0365,
+      "bandwidth_mhz": 264.6304,
+      "drift_rate_hz_s": 0.127445,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 136352 d, HD 136352 d, HD 136352 b",
+        "Doppler drift rate 0.1274 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0126",
+      "target_name": "HD 136352",
+      "ra_deg": 230.4401147,
+      "dec_deg": -48.3188174,
+      "center_freq_mhz": 8218.5381,
+      "snr": 3.9807,
+      "bandwidth_mhz": 469.8807,
+      "drift_rate_hz_s": 0.04481,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 50,
+      "tier": 2,
+      "reasons": [
+        "Frequency in known RFI band: X-band satellite",
+        "Exoplanet system nearby: HD 136352 d, HD 136352 d, HD 136352 b",
+        "Doppler drift rate 0.0448 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0127",
+      "target_name": "HD 136352",
+      "ra_deg": 230.4401147,
+      "dec_deg": -48.3188174,
+      "center_freq_mhz": 1438.2863,
+      "snr": 20.404808080774984,
+      "bandwidth_mhz": 143.7129,
+      "drift_rate_hz_s": -1.209332,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 90,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 136352 d, HD 136352 d, HD 136352 b",
+        "Doppler drift rate 1.2093 Hz/s consistent with technological origin",
+        "High SNR: 20.4"
+      ],
+      "is_injected_anomaly": true
+    },
+    {
+      "id": "DS-0128",
+      "target_name": "HD 160691",
+      "ra_deg": 266.0361585,
+      "dec_deg": -51.8348751,
+      "center_freq_mhz": 8789.1089,
+      "snr": 3.8842,
+      "bandwidth_mhz": 395.7726,
+      "drift_rate_hz_s": 0.024164,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 160691 b, HD 160691 b, HD 160691 b",
+        "Doppler drift rate 0.0242 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0129",
+      "target_name": "HR 810",
+      "ra_deg": 40.6417178,
+      "dec_deg": -50.7993484,
+      "center_freq_mhz": 7095.5866,
+      "snr": 2.0819,
+      "bandwidth_mhz": 111.8429,
+      "drift_rate_hz_s": -0.041164,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HR 810 b, HR 810 b, HR 810 b",
+        "Doppler drift rate 0.0412 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0130",
+      "target_name": "HR 810",
+      "ra_deg": 40.6417178,
+      "dec_deg": -50.7993484,
+      "center_freq_mhz": 3138.9253,
+      "snr": 6.0828,
+      "bandwidth_mhz": 441.1125,
+      "drift_rate_hz_s": 0.254933,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HR 810 b, HR 810 b, HR 810 b",
+        "Doppler drift rate 0.2549 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0131",
+      "target_name": "HD 10647",
+      "ra_deg": 25.6233526,
+      "dec_deg": -53.7412852,
+      "center_freq_mhz": 6312.8823,
+      "snr": 2.3558,
+      "bandwidth_mhz": 258.776,
+      "drift_rate_hz_s": -0.018992,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 10647 b, HD 10647 b, HD 10647 b",
+        "Doppler drift rate 0.0190 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0132",
+      "target_name": "HD 10647",
+      "ra_deg": 25.6233526,
+      "dec_deg": -53.7412852,
+      "center_freq_mhz": 2688.3431,
+      "snr": 3.5334,
+      "bandwidth_mhz": 133.9246,
+      "drift_rate_hz_s": -0.149441,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 10647 b, HD 10647 b, HD 10647 b",
+        "Doppler drift rate 0.1494 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0133",
+      "target_name": "HD 10647",
+      "ra_deg": 25.6233526,
+      "dec_deg": -53.7412852,
+      "center_freq_mhz": 9988.6903,
+      "snr": 2.2964,
+      "bandwidth_mhz": 218.5448,
+      "drift_rate_hz_s": -0.0142,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 10647 b, HD 10647 b, HD 10647 b",
+        "Doppler drift rate 0.0142 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0134",
+      "target_name": "rho CrB",
+      "ra_deg": 240.2600639,
+      "dec_deg": 33.3001861,
+      "center_freq_mhz": 9978.2203,
+      "snr": 1.1442,
+      "bandwidth_mhz": 380.3524,
+      "drift_rate_hz_s": 0.016439,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: rho CrB c, rho CrB c, rho CrB e",
+        "Doppler drift rate 0.0164 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0135",
+      "target_name": "rho CrB",
+      "ra_deg": 240.2600639,
+      "dec_deg": 33.3001861,
+      "center_freq_mhz": 5472.2494,
+      "snr": 6.2585,
+      "bandwidth_mhz": 153.7468,
+      "drift_rate_hz_s": -0.110374,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: rho CrB c, rho CrB c, rho CrB e",
+        "Doppler drift rate 0.1104 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0136",
+      "target_name": "rho CrB",
+      "ra_deg": 240.2600639,
+      "dec_deg": 33.3001861,
+      "center_freq_mhz": 2817.8113,
+      "snr": 1.7603,
+      "bandwidth_mhz": 107.0675,
+      "drift_rate_hz_s": 0.01774,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: rho CrB c, rho CrB c, rho CrB e",
+        "Doppler drift rate 0.0177 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0137",
+      "target_name": "rho CrB",
+      "ra_deg": 240.2600639,
+      "dec_deg": 33.3001861,
+      "center_freq_mhz": 4783.4359,
+      "snr": 2.6945,
+      "bandwidth_mhz": 483.6837,
+      "drift_rate_hz_s": -0.090242,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: rho CrB c, rho CrB c, rho CrB e",
+        "Doppler drift rate 0.0902 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0138",
+      "target_name": "rho CrB",
+      "ra_deg": 240.2600639,
+      "dec_deg": 33.3001861,
+      "center_freq_mhz": 9072.9712,
+      "snr": 1.2119,
+      "bandwidth_mhz": 194.0388,
+      "drift_rate_hz_s": 0.048207,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: rho CrB c, rho CrB c, rho CrB e",
+        "Doppler drift rate 0.0482 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0139",
+      "target_name": "rho CrB",
+      "ra_deg": 240.2600639,
+      "dec_deg": 33.3001861,
+      "center_freq_mhz": 7680.8615,
+      "snr": 3.1149,
+      "bandwidth_mhz": 336.2979,
+      "drift_rate_hz_s": -0.071387,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: rho CrB c, rho CrB c, rho CrB e",
+        "Doppler drift rate 0.0714 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0140",
+      "target_name": "HD 189567",
+      "ra_deg": 301.3959616,
+      "dec_deg": -67.3237992,
+      "center_freq_mhz": 3902.4311,
+      "snr": 8.9468,
+      "bandwidth_mhz": 162.1766,
+      "drift_rate_hz_s": 0.042019,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 189567 b, HD 189567 c, HD 189567 b",
+        "Doppler drift rate 0.0420 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0141",
+      "target_name": "HD 189567",
+      "ra_deg": 301.3959616,
+      "dec_deg": -67.3237992,
+      "center_freq_mhz": 8127.7698,
+      "snr": 4.0894,
+      "bandwidth_mhz": 413.5296,
+      "drift_rate_hz_s": 0.062509,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 50,
+      "tier": 2,
+      "reasons": [
+        "Frequency in known RFI band: X-band satellite",
+        "Exoplanet system nearby: HD 189567 b, HD 189567 c, HD 189567 b",
+        "Doppler drift rate 0.0625 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0142",
+      "target_name": "HD 189567",
+      "ra_deg": 301.3959616,
+      "dec_deg": -67.3237992,
+      "center_freq_mhz": 7071.3773,
+      "snr": 2.1161,
+      "bandwidth_mhz": 425.8554,
+      "drift_rate_hz_s": -0.043541,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 189567 b, HD 189567 c, HD 189567 b",
+        "Doppler drift rate 0.0435 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0143",
+      "target_name": "HD 99492",
+      "ra_deg": 171.689687,
+      "dec_deg": 3.0071331,
+      "center_freq_mhz": 6059.5366,
+      "snr": 2.161,
+      "bandwidth_mhz": 140.7577,
+      "drift_rate_hz_s": -0.042477,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 99492 b, HD 99492 b, HD 99492 b",
+        "Doppler drift rate 0.0425 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0144",
+      "target_name": "HD 99492",
+      "ra_deg": 171.689687,
+      "dec_deg": 3.0071331,
+      "center_freq_mhz": 5614.5886,
+      "snr": 4.3755,
+      "bandwidth_mhz": 273.189,
+      "drift_rate_hz_s": -0.225178,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 99492 b, HD 99492 b, HD 99492 b",
+        "Doppler drift rate 0.2252 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0145",
+      "target_name": "GJ 3222",
+      "ra_deg": 50.8972464,
+      "dec_deg": -40.0762325,
+      "center_freq_mhz": 1369.7118,
+      "snr": 1.679,
+      "bandwidth_mhz": 198.4266,
+      "drift_rate_hz_s": -0.091516,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: GJ 3222 b",
+        "Doppler drift rate 0.0915 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0146",
+      "target_name": "HD 39091",
+      "ra_deg": 84.2992798,
+      "dec_deg": -80.4646041,
+      "center_freq_mhz": 7283.7075,
+      "snr": 3.594,
+      "bandwidth_mhz": 182.8082,
+      "drift_rate_hz_s": -0.022154,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 39091 b, pi Men c, pi Men c",
+        "Doppler drift rate 0.0222 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0147",
+      "target_name": "HD 154345",
+      "ra_deg": 255.6524619,
+      "dec_deg": 47.0855544,
+      "center_freq_mhz": 5405.5181,
+      "snr": 3.83,
+      "bandwidth_mhz": 233.2377,
+      "drift_rate_hz_s": -0.035095,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 154345 b, HD 154345 b, HD 154345 b",
+        "Doppler drift rate 0.0351 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0148",
+      "target_name": "HD 189733",
+      "ra_deg": 300.1821223,
+      "dec_deg": 22.7097759,
+      "center_freq_mhz": 3343.1369,
+      "snr": 0.869,
+      "bandwidth_mhz": 228.9962,
+      "drift_rate_hz_s": -0.149664,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 189733 b, HD 189733 b, HD 189733 b",
+        "Doppler drift rate 0.1497 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0149",
+      "target_name": "HD 189733",
+      "ra_deg": 300.1821223,
+      "dec_deg": 22.7097759,
+      "center_freq_mhz": 7149.3252,
+      "snr": 3.1308,
+      "bandwidth_mhz": 191.3012,
+      "drift_rate_hz_s": 0.076732,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 189733 b, HD 189733 b, HD 189733 b",
+        "Doppler drift rate 0.0767 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0150",
+      "target_name": "HD 189733",
+      "ra_deg": 300.1821223,
+      "dec_deg": 22.7097759,
+      "center_freq_mhz": 5146.9264,
+      "snr": 2.7987,
+      "bandwidth_mhz": 384.6232,
+      "drift_rate_hz_s": 0.054874,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 189733 b, HD 189733 b, HD 189733 b",
+        "Doppler drift rate 0.0549 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0151",
+      "target_name": "HD 189733",
+      "ra_deg": 300.1821223,
+      "dec_deg": 22.7097759,
+      "center_freq_mhz": 9269.4087,
+      "snr": 4.0104,
+      "bandwidth_mhz": 103.7039,
+      "drift_rate_hz_s": 0.080701,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 189733 b, HD 189733 b, HD 189733 b",
+        "Doppler drift rate 0.0807 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0152",
+      "target_name": "HD 189733",
+      "ra_deg": 300.1821223,
+      "dec_deg": 22.7097759,
+      "center_freq_mhz": 6581.3436,
+      "snr": 4.9227,
+      "bandwidth_mhz": 196.6556,
+      "drift_rate_hz_s": -0.102062,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 189733 b, HD 189733 b, HD 189733 b",
+        "Doppler drift rate 0.1021 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0153",
+      "target_name": "HD 217107",
+      "ra_deg": 344.5647243,
+      "dec_deg": -2.3954489,
+      "center_freq_mhz": 1042.6725,
+      "snr": 6.6779,
+      "bandwidth_mhz": 441.3478,
+      "drift_rate_hz_s": 0.05163,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 217107 b, HD 217107 c, HD 217107 c",
+        "Doppler drift rate 0.0516 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0154",
+      "target_name": "HD 217107",
+      "ra_deg": 344.5647243,
+      "dec_deg": -2.3954489,
+      "center_freq_mhz": 8699.4239,
+      "snr": 2.3405,
+      "bandwidth_mhz": 201.7054,
+      "drift_rate_hz_s": -0.101507,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 217107 b, HD 217107 c, HD 217107 c",
+        "Doppler drift rate 0.1015 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0155",
+      "target_name": "HD 217107",
+      "ra_deg": 344.5647243,
+      "dec_deg": -2.3954489,
+      "center_freq_mhz": 6430.8201,
+      "snr": 4.7972,
+      "bandwidth_mhz": 493.8598,
+      "drift_rate_hz_s": -0.092085,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 217107 b, HD 217107 c, HD 217107 c",
+        "Doppler drift rate 0.0921 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0156",
+      "target_name": "HD 63433",
+      "ra_deg": 117.4793699,
+      "dec_deg": 27.3631342,
+      "center_freq_mhz": 8192.9217,
+      "snr": 5.0776,
+      "bandwidth_mhz": 340.2936,
+      "drift_rate_hz_s": 0.063537,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 50,
+      "tier": 2,
+      "reasons": [
+        "Frequency in known RFI band: X-band satellite",
+        "Exoplanet system nearby: HD 63433 c, HD 63433 c, HD 63433 b",
+        "Doppler drift rate 0.0635 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0157",
+      "target_name": "psi1 Dra B",
+      "ra_deg": 265.4925754,
+      "dec_deg": 72.1557114,
+      "center_freq_mhz": 7526.6499,
+      "snr": 6.4527,
+      "bandwidth_mhz": 383.2365,
+      "drift_rate_hz_s": 0.135922,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: psi1 Dra B b",
+        "Doppler drift rate 0.1359 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0158",
+      "target_name": "DMPP-4",
+      "ra_deg": 293.5826648,
+      "dec_deg": 51.2358069,
+      "center_freq_mhz": 6344.4749,
+      "snr": 3.0084,
+      "bandwidth_mhz": 150.4105,
+      "drift_rate_hz_s": -0.109347,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: DMPP-4 b",
+        "Doppler drift rate 0.1093 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0159",
+      "target_name": "DMPP-4",
+      "ra_deg": 293.5826648,
+      "dec_deg": 51.2358069,
+      "center_freq_mhz": 9937.7612,
+      "snr": 2.7339,
+      "bandwidth_mhz": 333.8555,
+      "drift_rate_hz_s": 0.024879,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: DMPP-4 b",
+        "Doppler drift rate 0.0249 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0160",
+      "target_name": "DMPP-4",
+      "ra_deg": 293.5826648,
+      "dec_deg": 51.2358069,
+      "center_freq_mhz": 5825.8037,
+      "snr": 2.5205,
+      "bandwidth_mhz": 348.7168,
+      "drift_rate_hz_s": -0.07461,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 50,
+      "tier": 2,
+      "reasons": [
+        "Frequency in known RFI band: ISM 5.8 GHz",
+        "Exoplanet system nearby: DMPP-4 b",
+        "Doppler drift rate 0.0746 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0161",
+      "target_name": "DMPP-4",
+      "ra_deg": 293.5826648,
+      "dec_deg": 51.2358069,
+      "center_freq_mhz": 3652.7967,
+      "snr": 1.1125,
+      "bandwidth_mhz": 365.4484,
+      "drift_rate_hz_s": -0.012268,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: DMPP-4 b",
+        "Doppler drift rate 0.0123 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0162",
+      "target_name": "HD 60532",
+      "ra_deg": 113.5130656,
+      "dec_deg": -22.2958661,
+      "center_freq_mhz": 5981.8676,
+      "snr": 3.2859,
+      "bandwidth_mhz": 258.4666,
+      "drift_rate_hz_s": 0.128733,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 60532 c, HD 60532 b, HD 60532 b",
+        "Doppler drift rate 0.1287 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0163",
+      "target_name": "HD 60532",
+      "ra_deg": 113.5130656,
+      "dec_deg": -22.2958661,
+      "center_freq_mhz": 7825.8001,
+      "snr": 2.3174,
+      "bandwidth_mhz": 493.3668,
+      "drift_rate_hz_s": 0.021723,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 60532 c, HD 60532 b, HD 60532 b",
+        "Doppler drift rate 0.0217 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0164",
+      "target_name": "HD 216437",
+      "ra_deg": 343.6639631,
+      "dec_deg": -70.0733957,
+      "center_freq_mhz": 8164.257,
+      "snr": 2.1128,
+      "bandwidth_mhz": 308.092,
+      "drift_rate_hz_s": -0.062807,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 50,
+      "tier": 2,
+      "reasons": [
+        "Frequency in known RFI band: X-band satellite",
+        "Exoplanet system nearby: HD 216437 b, HD 216437 b, HD 216437 b",
+        "Doppler drift rate 0.0628 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0165",
+      "target_name": "HD 216437",
+      "ra_deg": 343.6639631,
+      "dec_deg": -70.0733957,
+      "center_freq_mhz": 9006.9078,
+      "snr": 3.0712,
+      "bandwidth_mhz": 258.0029,
+      "drift_rate_hz_s": 0.02732,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 216437 b, HD 216437 b, HD 216437 b",
+        "Doppler drift rate 0.0273 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0166",
+      "target_name": "HD 216437",
+      "ra_deg": 343.6639631,
+      "dec_deg": -70.0733957,
+      "center_freq_mhz": 2605.9759,
+      "snr": 1.5204,
+      "bandwidth_mhz": 179.8168,
+      "drift_rate_hz_s": -0.211665,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 216437 b, HD 216437 b, HD 216437 b",
+        "Doppler drift rate 0.2117 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0167",
+      "target_name": "HD 134606",
+      "ra_deg": 228.8103897,
+      "dec_deg": -70.5203328,
+      "center_freq_mhz": 8905.2916,
+      "snr": 2.563,
+      "bandwidth_mhz": 251.6211,
+      "drift_rate_hz_s": 0.121419,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 134606 f, HD 134606 d, HD 134606 c",
+        "Doppler drift rate 0.1214 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0168",
+      "target_name": "HD 134606",
+      "ra_deg": 228.8103897,
+      "dec_deg": -70.5203328,
+      "center_freq_mhz": 7580.2238,
+      "snr": 5.9341,
+      "bandwidth_mhz": 413.1841,
+      "drift_rate_hz_s": -0.112778,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 134606 f, HD 134606 d, HD 134606 c",
+        "Doppler drift rate 0.1128 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0169",
+      "target_name": "HD 134606",
+      "ra_deg": 228.8103897,
+      "dec_deg": -70.5203328,
+      "center_freq_mhz": 8790.1529,
+      "snr": 2.3091,
+      "bandwidth_mhz": 419.239,
+      "drift_rate_hz_s": 0.142749,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 134606 f, HD 134606 d, HD 134606 c",
+        "Doppler drift rate 0.1427 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0170",
+      "target_name": "HD 134606",
+      "ra_deg": 228.8103897,
+      "dec_deg": -70.5203328,
+      "center_freq_mhz": 1208.2609,
+      "snr": 2.7671,
+      "bandwidth_mhz": 491.6899,
+      "drift_rate_hz_s": 0.175369,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 134606 f, HD 134606 d, HD 134606 c",
+        "Doppler drift rate 0.1754 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0171",
+      "target_name": "HD 134606",
+      "ra_deg": 228.8103897,
+      "dec_deg": -70.5203328,
+      "center_freq_mhz": 8988.1398,
+      "snr": 3.2633,
+      "bandwidth_mhz": 257.852,
+      "drift_rate_hz_s": 0.317885,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 134606 f, HD 134606 d, HD 134606 c",
+        "Doppler drift rate 0.3179 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0172",
+      "target_name": "HD 158259",
+      "ra_deg": 261.3495847,
+      "dec_deg": 52.7904721,
+      "center_freq_mhz": 4682.2598,
+      "snr": 2.2684,
+      "bandwidth_mhz": 340.7099,
+      "drift_rate_hz_s": -0.048975,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 158259 e, HD 158259 f, HD 158259 b",
+        "Doppler drift rate 0.0490 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0173",
+      "target_name": "HD 158259",
+      "ra_deg": 261.3495847,
+      "dec_deg": 52.7904721,
+      "center_freq_mhz": 4394.8538,
+      "snr": 2.7374,
+      "bandwidth_mhz": 257.6428,
+      "drift_rate_hz_s": 0.033658,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 158259 e, HD 158259 f, HD 158259 b",
+        "Doppler drift rate 0.0337 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0174",
+      "target_name": "HD 114386",
+      "ra_deg": 197.6652124,
+      "dec_deg": -35.0561807,
+      "center_freq_mhz": 4055.2998,
+      "snr": 1.6636,
+      "bandwidth_mhz": 481.9594,
+      "drift_rate_hz_s": -0.14423,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 114386 b, HD 114386 b, HD 114386 c",
+        "Doppler drift rate 0.1442 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0175",
+      "target_name": "HD 114386",
+      "ra_deg": 197.6652124,
+      "dec_deg": -35.0561807,
+      "center_freq_mhz": 8929.3245,
+      "snr": 4.1186,
+      "bandwidth_mhz": 211.2453,
+      "drift_rate_hz_s": -0.134218,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 114386 b, HD 114386 b, HD 114386 c",
+        "Doppler drift rate 0.1342 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0176",
+      "target_name": "HD 114386",
+      "ra_deg": 197.6652124,
+      "dec_deg": -35.0561807,
+      "center_freq_mhz": 5698.1107,
+      "snr": 2.6557,
+      "bandwidth_mhz": 287.3667,
+      "drift_rate_hz_s": 0.027886,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 114386 b, HD 114386 b, HD 114386 c",
+        "Doppler drift rate 0.0279 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0177",
+      "target_name": "HD 114386",
+      "ra_deg": 197.6652124,
+      "dec_deg": -35.0561807,
+      "center_freq_mhz": 9633.9911,
+      "snr": 1.0555,
+      "bandwidth_mhz": 361.0077,
+      "drift_rate_hz_s": -0.195859,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 114386 b, HD 114386 b, HD 114386 c",
+        "Doppler drift rate 0.1959 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0178",
+      "target_name": "HD 114386",
+      "ra_deg": 197.6652124,
+      "dec_deg": -35.0561807,
+      "center_freq_mhz": 3652.9655,
+      "snr": 2.6805,
+      "bandwidth_mhz": 405.9214,
+      "drift_rate_hz_s": 0.022556,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 114386 b, HD 114386 b, HD 114386 c",
+        "Doppler drift rate 0.0226 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0179",
+      "target_name": "HD 114386",
+      "ra_deg": 197.6652124,
+      "dec_deg": -35.0561807,
+      "center_freq_mhz": 9841.3001,
+      "snr": 1.5736,
+      "bandwidth_mhz": 481.1997,
+      "drift_rate_hz_s": 0.028892,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 114386 b, HD 114386 b, HD 114386 c",
+        "Doppler drift rate 0.0289 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0180",
+      "target_name": "HD 13808",
+      "ra_deg": 33.1780708,
+      "dec_deg": -53.7437591,
+      "center_freq_mhz": 5976.0843,
+      "snr": 1.1595,
+      "bandwidth_mhz": 138.7912,
+      "drift_rate_hz_s": -0.083304,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 13808 b, HD 13808 c",
+        "Doppler drift rate 0.0833 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0181",
+      "target_name": "HD 13808",
+      "ra_deg": 33.1780708,
+      "dec_deg": -53.7437591,
+      "center_freq_mhz": 5881.2796,
+      "snr": 2.7712,
+      "bandwidth_mhz": 166.1245,
+      "drift_rate_hz_s": -0.031175,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 13808 b, HD 13808 c",
+        "Doppler drift rate 0.0312 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0182",
+      "target_name": "HD 13808",
+      "ra_deg": 33.1780708,
+      "dec_deg": -53.7437591,
+      "center_freq_mhz": 6258.0507,
+      "snr": 3.4537,
+      "bandwidth_mhz": 394.0518,
+      "drift_rate_hz_s": -0.153564,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 13808 b, HD 13808 c",
+        "Doppler drift rate 0.1536 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0183",
+      "target_name": "HD 13808",
+      "ra_deg": 33.1780708,
+      "dec_deg": -53.7437591,
+      "center_freq_mhz": 7840.1347,
+      "snr": 6.0143,
+      "bandwidth_mhz": 408.9412,
+      "drift_rate_hz_s": -0.062221,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 13808 b, HD 13808 c",
+        "Doppler drift rate 0.0622 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0184",
+      "target_name": "HD 13808",
+      "ra_deg": 33.1780708,
+      "dec_deg": -53.7437591,
+      "center_freq_mhz": 2615.4287,
+      "snr": 3.5887,
+      "bandwidth_mhz": 265.4272,
+      "drift_rate_hz_s": -0.062217,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 13808 b, HD 13808 c",
+        "Doppler drift rate 0.0622 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0185",
+      "target_name": "kap CrB",
+      "ra_deg": 237.8080012,
+      "dec_deg": 35.6558818,
+      "center_freq_mhz": 8662.0118,
+      "snr": 1.6796,
+      "bandwidth_mhz": 449.8301,
+      "drift_rate_hz_s": 0.052941,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: kap CrB b, kap CrB b, kap CrB b",
+        "Doppler drift rate 0.0529 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0186",
+      "target_name": "kap CrB",
+      "ra_deg": 237.8080012,
+      "dec_deg": 35.6558818,
+      "center_freq_mhz": 3235.6576,
+      "snr": 2.3188,
+      "bandwidth_mhz": 197.9186,
+      "drift_rate_hz_s": -0.086701,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: kap CrB b, kap CrB b, kap CrB b",
+        "Doppler drift rate 0.0867 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0187",
+      "target_name": "kap CrB",
+      "ra_deg": 237.8080012,
+      "dec_deg": 35.6558818,
+      "center_freq_mhz": 7996.2284,
+      "snr": 6.9663,
+      "bandwidth_mhz": 307.0646,
+      "drift_rate_hz_s": -0.016972,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: kap CrB b, kap CrB b, kap CrB b",
+        "Doppler drift rate 0.0170 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0188",
+      "target_name": "kap CrB",
+      "ra_deg": 237.8080012,
+      "dec_deg": 35.6558818,
+      "center_freq_mhz": 4911.0678,
+      "snr": 2.7265,
+      "bandwidth_mhz": 152.7019,
+      "drift_rate_hz_s": 0.044832,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: kap CrB b, kap CrB b, kap CrB b",
+        "Doppler drift rate 0.0448 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0189",
+      "target_name": "kap CrB",
+      "ra_deg": 237.8080012,
+      "dec_deg": 35.6558818,
+      "center_freq_mhz": 5338.2768,
+      "snr": 3.1734,
+      "bandwidth_mhz": 481.2822,
+      "drift_rate_hz_s": 0.058955,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: kap CrB b, kap CrB b, kap CrB b",
+        "Doppler drift rate 0.0590 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0190",
+      "target_name": "HD 73583",
+      "ra_deg": 129.6883026,
+      "dec_deg": -13.2565267,
+      "center_freq_mhz": 3278.6615,
+      "snr": 20.038678415324796,
+      "bandwidth_mhz": 0.00140969,
+      "drift_rate_hz_s": 0.747481,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 90,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 73583 b, HD 73583 b, HD 73583 b",
+        "Doppler drift rate 0.7475 Hz/s consistent with technological origin",
+        "High SNR: 20.0"
+      ],
+      "is_injected_anomaly": true
+    },
+    {
+      "id": "DS-0191",
+      "target_name": "HD 110067",
+      "ra_deg": 189.8392243,
+      "dec_deg": 20.0273377,
+      "center_freq_mhz": 6473.1629,
+      "snr": 3.1414,
+      "bandwidth_mhz": 286.0057,
+      "drift_rate_hz_s": -0.03557,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 110067 c, HD 110067 f, HD 110067 d",
+        "Doppler drift rate 0.0356 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0192",
+      "target_name": "TOI-5734",
+      "ra_deg": 111.2558179,
+      "dec_deg": 37.2311218,
+      "center_freq_mhz": 9897.4351,
+      "snr": 0.4386,
+      "bandwidth_mhz": 427.3231,
+      "drift_rate_hz_s": -0.172346,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: TOI-5734 b, TOI-5734 b, TOI-5734 b",
+        "Doppler drift rate 0.1723 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0193",
+      "target_name": "TOI-5734",
+      "ra_deg": 111.2558179,
+      "dec_deg": 37.2311218,
+      "center_freq_mhz": 9285.9927,
+      "snr": 1.904,
+      "bandwidth_mhz": 236.5548,
+      "drift_rate_hz_s": 0.137054,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: TOI-5734 b, TOI-5734 b, TOI-5734 b",
+        "Doppler drift rate 0.1371 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0194",
+      "target_name": "TOI-431",
+      "ra_deg": 83.2692502,
+      "dec_deg": -26.7238698,
+      "center_freq_mhz": 6604.3787,
+      "snr": 19.454666941516372,
+      "bandwidth_mhz": 400.3354,
+      "drift_rate_hz_s": 0.200959,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 90,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: TOI-431 d, TOI-431 d, TOI-431 b",
+        "Doppler drift rate 0.2010 Hz/s consistent with technological origin",
+        "High SNR: 19.5"
+      ],
+      "is_injected_anomaly": true
+    },
+    {
+      "id": "DS-0195",
+      "target_name": "TOI-431",
+      "ra_deg": 83.2692502,
+      "dec_deg": -26.7238698,
+      "center_freq_mhz": 4941.9064,
+      "snr": 2.6703,
+      "bandwidth_mhz": 355.6055,
+      "drift_rate_hz_s": -0.136474,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: TOI-431 d, TOI-431 d, TOI-431 b",
+        "Doppler drift rate 0.1365 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0196",
+      "target_name": "HD 111998",
+      "ra_deg": 193.2953521,
+      "dec_deg": -3.5531133,
+      "center_freq_mhz": 6690.5453,
+      "snr": 3.7003,
+      "bandwidth_mhz": 257.171,
+      "drift_rate_hz_s": -0.099971,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 111998 b, HD 111998 b",
+        "Doppler drift rate 0.1000 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0197",
+      "target_name": "HD 23079",
+      "ra_deg": 54.9281897,
+      "dec_deg": -52.9162344,
+      "center_freq_mhz": 5149.8949,
+      "snr": 1.3385,
+      "bandwidth_mhz": 363.9805,
+      "drift_rate_hz_s": 0.044381,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 23079 b, HD 23079 b, HD 23079 b",
+        "Doppler drift rate 0.0444 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0198",
+      "target_name": "HD 23079",
+      "ra_deg": 54.9281897,
+      "dec_deg": -52.9162344,
+      "center_freq_mhz": 4084.4228,
+      "snr": 3.9267,
+      "bandwidth_mhz": 170.8942,
+      "drift_rate_hz_s": 0.037439,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 23079 b, HD 23079 b, HD 23079 b",
+        "Doppler drift rate 0.0374 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0199",
+      "target_name": "HD 23079",
+      "ra_deg": 54.9281897,
+      "dec_deg": -52.9162344,
+      "center_freq_mhz": 1362.2837,
+      "snr": 3.2076,
+      "bandwidth_mhz": 279.8531,
+      "drift_rate_hz_s": -0.030262,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 23079 b, HD 23079 b, HD 23079 b",
+        "Doppler drift rate 0.0303 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0200",
+      "target_name": "HR 2562",
+      "ra_deg": 102.5042716,
+      "dec_deg": -60.2486775,
+      "center_freq_mhz": 3722.3225,
+      "snr": 6.6671,
+      "bandwidth_mhz": 479.0142,
+      "drift_rate_hz_s": 0.131481,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HR 2562 b, HR 2562 b, HR 2562 b",
+        "Doppler drift rate 0.1315 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0201",
+      "target_name": "HR 2562",
+      "ra_deg": 102.5042716,
+      "dec_deg": -60.2486775,
+      "center_freq_mhz": 6056.3704,
+      "snr": 2.8881,
+      "bandwidth_mhz": 387.913,
+      "drift_rate_hz_s": 0.013076,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HR 2562 b, HR 2562 b, HR 2562 b",
+        "Doppler drift rate 0.0131 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0202",
+      "target_name": "HD 73344",
+      "ra_deg": 129.6894456,
+      "dec_deg": 23.6852651,
+      "center_freq_mhz": 6823.6462,
+      "snr": 2.2095,
+      "bandwidth_mhz": 236.945,
+      "drift_rate_hz_s": 0.063391,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 73344 c, HD 73344 b, HD 73344 d",
+        "Doppler drift rate 0.0634 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0203",
+      "target_name": "HD 156279",
+      "ra_deg": 258.0966686,
+      "dec_deg": 63.3527828,
+      "center_freq_mhz": 1825.5131,
+      "snr": 2.2537,
+      "bandwidth_mhz": 366.996,
+      "drift_rate_hz_s": 0.075625,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 156279 b, HD 156279 c, HD 156279 c",
+        "Doppler drift rate 0.0756 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0204",
+      "target_name": "Kepler-444",
+      "ra_deg": 289.7528323,
+      "dec_deg": 41.631884,
+      "center_freq_mhz": 3938.9216,
+      "snr": 2.1162,
+      "bandwidth_mhz": 179.1239,
+      "drift_rate_hz_s": -0.16551,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: Kepler-444 b, Kepler-444 c, Kepler-444 e",
+        "Doppler drift rate 0.1655 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0205",
+      "target_name": "TOI-2128",
+      "ra_deg": 256.9817998,
+      "dec_deg": 32.1053027,
+      "center_freq_mhz": 7010.6424,
+      "snr": 2.3704,
+      "bandwidth_mhz": 151.7451,
+      "drift_rate_hz_s": -0.033683,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: TOI-2128 b, TOI-2128 b",
+        "Doppler drift rate 0.0337 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0206",
+      "target_name": "TOI-2128",
+      "ra_deg": 256.9817998,
+      "dec_deg": 32.1053027,
+      "center_freq_mhz": 3551.6869,
+      "snr": 3.1836,
+      "bandwidth_mhz": 369.8946,
+      "drift_rate_hz_s": 0.040983,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: TOI-2128 b, TOI-2128 b",
+        "Doppler drift rate 0.0410 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0207",
+      "target_name": "HD 95338",
+      "ra_deg": 164.8563364,
+      "dec_deg": -56.6235564,
+      "center_freq_mhz": 3884.4205,
+      "snr": 3.0083,
+      "bandwidth_mhz": 490.4514,
+      "drift_rate_hz_s": -0.050036,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 95338 b, HD 95338 b, HD 95338 b",
+        "Doppler drift rate 0.0500 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0208",
+      "target_name": "HD 95338",
+      "ra_deg": 164.8563364,
+      "dec_deg": -56.6235564,
+      "center_freq_mhz": 4600.553,
+      "snr": 4.4507,
+      "bandwidth_mhz": 450.043,
+      "drift_rate_hz_s": -0.055777,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 95338 b, HD 95338 b, HD 95338 b",
+        "Doppler drift rate 0.0558 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0209",
+      "target_name": "HD 95338",
+      "ra_deg": 164.8563364,
+      "dec_deg": -56.6235564,
+      "center_freq_mhz": 9423.4375,
+      "snr": 1.6864,
+      "bandwidth_mhz": 441.5938,
+      "drift_rate_hz_s": 0.097389,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 95338 b, HD 95338 b, HD 95338 b",
+        "Doppler drift rate 0.0974 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0210",
+      "target_name": "HD 169830",
+      "ra_deg": 276.9561859,
+      "dec_deg": -29.8167919,
+      "center_freq_mhz": 6689.8225,
+      "snr": 1.769,
+      "bandwidth_mhz": 233.6445,
+      "drift_rate_hz_s": -0.053766,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 169830 c, HD 169830 b, HD 169830 c",
+        "Doppler drift rate 0.0538 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0211",
+      "target_name": "HD 169830",
+      "ra_deg": 276.9561859,
+      "dec_deg": -29.8167919,
+      "center_freq_mhz": 8589.906,
+      "snr": 1.461,
+      "bandwidth_mhz": 491.2818,
+      "drift_rate_hz_s": -0.020407,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 169830 c, HD 169830 b, HD 169830 c",
+        "Doppler drift rate 0.0204 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0212",
+      "target_name": "HD 12661",
+      "ra_deg": 31.1423525,
+      "dec_deg": 25.4135632,
+      "center_freq_mhz": 5325.4687,
+      "snr": 5.6746,
+      "bandwidth_mhz": 282.5809,
+      "drift_rate_hz_s": 0.014984,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 12661 b, HD 12661 b, HD 12661 b",
+        "Doppler drift rate 0.0150 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0213",
+      "target_name": "HD 38283",
+      "ra_deg": 84.2605324,
+      "dec_deg": -73.6998131,
+      "center_freq_mhz": 3320.2757,
+      "snr": 2.5172,
+      "bandwidth_mhz": 334.3845,
+      "drift_rate_hz_s": 0.145405,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 38283 b, HD 38283 b",
+        "Doppler drift rate 0.1454 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0214",
+      "target_name": "HD 23472",
+      "ra_deg": 55.4590314,
+      "dec_deg": -62.7672667,
+      "center_freq_mhz": 8177.5975,
+      "snr": 2.6152,
+      "bandwidth_mhz": 435.6695,
+      "drift_rate_hz_s": -0.019689,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 50,
+      "tier": 2,
+      "reasons": [
+        "Frequency in known RFI band: X-band satellite",
+        "Exoplanet system nearby: HD 23472 e, HD 23472 b, HD 23472 e",
+        "Doppler drift rate 0.0197 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0215",
+      "target_name": "HD 23472",
+      "ra_deg": 55.4590314,
+      "dec_deg": -62.7672667,
+      "center_freq_mhz": 4510.5633,
+      "snr": 1.7221,
+      "bandwidth_mhz": 499.4438,
+      "drift_rate_hz_s": 0.022679,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 23472 e, HD 23472 b, HD 23472 e",
+        "Doppler drift rate 0.0227 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0216",
+      "target_name": "HD 28185",
+      "ra_deg": 66.6100461,
+      "dec_deg": -10.5510754,
+      "center_freq_mhz": 6577.0167,
+      "snr": 5.5714,
+      "bandwidth_mhz": 473.1603,
+      "drift_rate_hz_s": 0.024375,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 28185 c, HD 28185 b, HD 28185 b",
+        "Doppler drift rate 0.0244 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0217",
+      "target_name": "HD 168443",
+      "ra_deg": 275.0159879,
+      "dec_deg": -9.5966905,
+      "center_freq_mhz": 8116.6418,
+      "snr": 2.8725,
+      "bandwidth_mhz": 208.2529,
+      "drift_rate_hz_s": -0.040833,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 50,
+      "tier": 2,
+      "reasons": [
+        "Frequency in known RFI band: X-band satellite",
+        "Exoplanet system nearby: HD 168443 c, HD 168443 b, HD 168443 c",
+        "Doppler drift rate 0.0408 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0218",
+      "target_name": "HD 168443",
+      "ra_deg": 275.0159879,
+      "dec_deg": -9.5966905,
+      "center_freq_mhz": 2006.6032,
+      "snr": 3.7683,
+      "bandwidth_mhz": 433.0117,
+      "drift_rate_hz_s": -0.02767,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 168443 c, HD 168443 b, HD 168443 c",
+        "Doppler drift rate 0.0277 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0219",
+      "target_name": "HD 168443",
+      "ra_deg": 275.0159879,
+      "dec_deg": -9.5966905,
+      "center_freq_mhz": 5506.8953,
+      "snr": 2.9748,
+      "bandwidth_mhz": 374.4652,
+      "drift_rate_hz_s": -0.065605,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 168443 c, HD 168443 b, HD 168443 c",
+        "Doppler drift rate 0.0656 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0220",
+      "target_name": "HD 168443",
+      "ra_deg": 275.0159879,
+      "dec_deg": -9.5966905,
+      "center_freq_mhz": 5648.1346,
+      "snr": 3.4809,
+      "bandwidth_mhz": 138.0796,
+      "drift_rate_hz_s": 0.097366,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 168443 c, HD 168443 b, HD 168443 c",
+        "Doppler drift rate 0.0974 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0221",
+      "target_name": "HD 196067",
+      "ra_deg": 310.4364195,
+      "dec_deg": -75.3514992,
+      "center_freq_mhz": 5150.88,
+      "snr": 3.6663,
+      "bandwidth_mhz": 269.9108,
+      "drift_rate_hz_s": 0.051966,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 196067 c, HD 196067 b, HD 196067 b",
+        "Doppler drift rate 0.0520 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0222",
+      "target_name": "HD 235088",
+      "ra_deg": 300.6154535,
+      "dec_deg": 53.3774418,
+      "center_freq_mhz": 3893.9111,
+      "snr": 2.373,
+      "bandwidth_mhz": 399.5283,
+      "drift_rate_hz_s": -0.115225,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 235088 b, HD 235088 b, HD 235088 b",
+        "Doppler drift rate 0.1152 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0223",
+      "target_name": "HD 235088",
+      "ra_deg": 300.6154535,
+      "dec_deg": 53.3774418,
+      "center_freq_mhz": 2295.1783,
+      "snr": 4.7915,
+      "bandwidth_mhz": 451.6275,
+      "drift_rate_hz_s": -0.036127,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 235088 b, HD 235088 b, HD 235088 b",
+        "Doppler drift rate 0.0361 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0224",
+      "target_name": "TOI-2076",
+      "ra_deg": 217.3920159,
+      "dec_deg": 39.7903991,
+      "center_freq_mhz": 1607.6663,
+      "snr": 2.7225,
+      "bandwidth_mhz": 121.1228,
+      "drift_rate_hz_s": -0.074981,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 50,
+      "tier": 2,
+      "reasons": [
+        "Frequency in known RFI band: GNSS band",
+        "Exoplanet system nearby: TOI-2076 d, TOI-2076 b, TOI-2076 c",
+        "Doppler drift rate 0.0750 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0225",
+      "target_name": "TOI-1807",
+      "ra_deg": 201.2826259,
+      "dec_deg": 38.9223671,
+      "center_freq_mhz": 2321.7736,
+      "snr": 1.7383,
+      "bandwidth_mhz": 444.3204,
+      "drift_rate_hz_s": -0.026307,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: TOI-1807 b, TOI-1807 b, TOI-1807 b",
+        "Doppler drift rate 0.0263 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0226",
+      "target_name": "HD 28471",
+      "ra_deg": 66.2875166,
+      "dec_deg": -64.0786861,
+      "center_freq_mhz": 5537.6074,
+      "snr": 6.4199,
+      "bandwidth_mhz": 400.1064,
+      "drift_rate_hz_s": -0.231961,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 28471 b, HD 28471 c, HD 28471 d",
+        "Doppler drift rate 0.2320 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0227",
+      "target_name": "TOI-262",
+      "ra_deg": 32.534687,
+      "dec_deg": -31.0706272,
+      "center_freq_mhz": 2875.4141,
+      "snr": 3.8384,
+      "bandwidth_mhz": 400.5963,
+      "drift_rate_hz_s": 0.047309,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: TOI-262 b, TOI-262 b",
+        "Doppler drift rate 0.0473 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0228",
+      "target_name": "TOI-262",
+      "ra_deg": 32.534687,
+      "dec_deg": -31.0706272,
+      "center_freq_mhz": 2586.6223,
+      "snr": 4.5499,
+      "bandwidth_mhz": 170.1386,
+      "drift_rate_hz_s": 0.018406,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: TOI-262 b, TOI-262 b",
+        "Doppler drift rate 0.0184 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0229",
+      "target_name": "DS Tuc A",
+      "ra_deg": 354.9154673,
+      "dec_deg": -69.196043,
+      "center_freq_mhz": 2234.9013,
+      "snr": 3.8532,
+      "bandwidth_mhz": 361.4159,
+      "drift_rate_hz_s": 0.011061,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: DS Tuc A b, DS Tuc A b, DS Tuc A b",
+        "Doppler drift rate 0.0111 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0230",
+      "target_name": "DS Tuc A",
+      "ra_deg": 354.9154673,
+      "dec_deg": -69.196043,
+      "center_freq_mhz": 9780.3608,
+      "snr": 1.338,
+      "bandwidth_mhz": 449.1436,
+      "drift_rate_hz_s": -0.118707,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: DS Tuc A b, DS Tuc A b, DS Tuc A b",
+        "Doppler drift rate 0.1187 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0231",
+      "target_name": "DS Tuc A",
+      "ra_deg": 354.9154673,
+      "dec_deg": -69.196043,
+      "center_freq_mhz": 6904.6649,
+      "snr": 1.2793,
+      "bandwidth_mhz": 215.6334,
+      "drift_rate_hz_s": -0.098516,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: DS Tuc A b, DS Tuc A b, DS Tuc A b",
+        "Doppler drift rate 0.0985 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0232",
+      "target_name": "DS Tuc A",
+      "ra_deg": 354.9154673,
+      "dec_deg": -69.196043,
+      "center_freq_mhz": 8456.9223,
+      "snr": 2.2125,
+      "bandwidth_mhz": 384.2131,
+      "drift_rate_hz_s": -0.036358,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: DS Tuc A b, DS Tuc A b, DS Tuc A b",
+        "Doppler drift rate 0.0364 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0233",
+      "target_name": "Wolf 503",
+      "ra_deg": 206.8461979,
+      "dec_deg": -6.1393369,
+      "center_freq_mhz": 6051.0076,
+      "snr": 3.2645,
+      "bandwidth_mhz": 254.1478,
+      "drift_rate_hz_s": 0.041747,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: Wolf 503 b, Wolf 503 b, Wolf 503 b",
+        "Doppler drift rate 0.0417 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0234",
+      "target_name": "BD+60 1417",
+      "ra_deg": 190.8875453,
+      "dec_deg": 60.0143636,
+      "center_freq_mhz": 9050.6035,
+      "snr": 3.6932,
+      "bandwidth_mhz": 358.5163,
+      "drift_rate_hz_s": -0.014099,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: BD+60 1417 b",
+        "Doppler drift rate 0.0141 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0235",
+      "target_name": "HD 208487",
+      "ra_deg": 329.3332489,
+      "dec_deg": -37.7641354,
+      "center_freq_mhz": 5284.8258,
+      "snr": 3.9553,
+      "bandwidth_mhz": 474.2168,
+      "drift_rate_hz_s": 0.193379,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 208487 b, HD 208487 b, HD 208487 b",
+        "Doppler drift rate 0.1934 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0236",
+      "target_name": "HD 208487",
+      "ra_deg": 329.3332489,
+      "dec_deg": -37.7641354,
+      "center_freq_mhz": 2759.3786,
+      "snr": 5.7114,
+      "bandwidth_mhz": 371.8108,
+      "drift_rate_hz_s": -0.105828,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 208487 b, HD 208487 b, HD 208487 b",
+        "Doppler drift rate 0.1058 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0237",
+      "target_name": "HD 86226",
+      "ra_deg": 149.1235154,
+      "dec_deg": -24.0991859,
+      "center_freq_mhz": 3883.5748,
+      "snr": 1.7511,
+      "bandwidth_mhz": 244.3035,
+      "drift_rate_hz_s": 0.228163,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 86226 b, HD 86226 b, HD 86226 b",
+        "Doppler drift rate 0.2282 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0238",
+      "target_name": "HD 86226",
+      "ra_deg": 149.1235154,
+      "dec_deg": -24.0991859,
+      "center_freq_mhz": 6494.3656,
+      "snr": 2.4769,
+      "bandwidth_mhz": 182.1561,
+      "drift_rate_hz_s": -0.071355,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 86226 b, HD 86226 b, HD 86226 b",
+        "Doppler drift rate 0.0714 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0239",
+      "target_name": "HD 86226",
+      "ra_deg": 149.1235154,
+      "dec_deg": -24.0991859,
+      "center_freq_mhz": 1898.4795,
+      "snr": 1.0993,
+      "bandwidth_mhz": 142.9612,
+      "drift_rate_hz_s": -0.224978,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 86226 b, HD 86226 b, HD 86226 b",
+        "Doppler drift rate 0.2250 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0240",
+      "target_name": "HD 86226",
+      "ra_deg": 149.1235154,
+      "dec_deg": -24.0991859,
+      "center_freq_mhz": 8671.4409,
+      "snr": 5.1825,
+      "bandwidth_mhz": 401.7086,
+      "drift_rate_hz_s": 0.041098,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 86226 b, HD 86226 b, HD 86226 b",
+        "Doppler drift rate 0.0411 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0241",
+      "target_name": "HD 77338",
+      "ra_deg": 135.3022475,
+      "dec_deg": -25.5282343,
+      "center_freq_mhz": 1397.5759,
+      "snr": 3.9132,
+      "bandwidth_mhz": 260.506,
+      "drift_rate_hz_s": -0.057665,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 77338 b, HD 77338 b",
+        "Doppler drift rate 0.0577 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0242",
+      "target_name": "HD 77338",
+      "ra_deg": 135.3022475,
+      "dec_deg": -25.5282343,
+      "center_freq_mhz": 8255.7187,
+      "snr": 1.5506,
+      "bandwidth_mhz": 168.1365,
+      "drift_rate_hz_s": -0.118413,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 50,
+      "tier": 2,
+      "reasons": [
+        "Frequency in known RFI band: X-band satellite",
+        "Exoplanet system nearby: HD 77338 b, HD 77338 b",
+        "Doppler drift rate 0.1184 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0243",
+      "target_name": "HD 77338",
+      "ra_deg": 135.3022475,
+      "dec_deg": -25.5282343,
+      "center_freq_mhz": 5443.0487,
+      "snr": 2.8384,
+      "bandwidth_mhz": 488.3539,
+      "drift_rate_hz_s": 0.032701,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 77338 b, HD 77338 b",
+        "Doppler drift rate 0.0327 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0244",
+      "target_name": "HIP 113103",
+      "ra_deg": 343.5723794,
+      "dec_deg": -43.0102291,
+      "center_freq_mhz": 2152.4735,
+      "snr": 3.7028,
+      "bandwidth_mhz": 228.4343,
+      "drift_rate_hz_s": 0.155188,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HIP 113103 c, HIP 113103 b, HIP 113103 c",
+        "Doppler drift rate 0.1552 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0245",
+      "target_name": "HIP 113103",
+      "ra_deg": 343.5723794,
+      "dec_deg": -43.0102291,
+      "center_freq_mhz": 6303.9805,
+      "snr": 2.0845,
+      "bandwidth_mhz": 243.4691,
+      "drift_rate_hz_s": 0.104487,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HIP 113103 c, HIP 113103 b, HIP 113103 c",
+        "Doppler drift rate 0.1045 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0246",
+      "target_name": "HIP 18606",
+      "ra_deg": 59.7181058,
+      "dec_deg": -5.4706979,
+      "center_freq_mhz": 9340.9245,
+      "snr": 2.4948,
+      "bandwidth_mhz": 473.1118,
+      "drift_rate_hz_s": -0.155938,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HIP 18606 b",
+        "Doppler drift rate 0.1559 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0247",
+      "target_name": "HIP 18606",
+      "ra_deg": 59.7181058,
+      "dec_deg": -5.4706979,
+      "center_freq_mhz": 5059.4185,
+      "snr": 1.8249,
+      "bandwidth_mhz": 327.1737,
+      "drift_rate_hz_s": 0.030197,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HIP 18606 b",
+        "Doppler drift rate 0.0302 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0248",
+      "target_name": "HIP 18606",
+      "ra_deg": 59.7181058,
+      "dec_deg": -5.4706979,
+      "center_freq_mhz": 3886.4399,
+      "snr": 2.6664,
+      "bandwidth_mhz": 238.2923,
+      "drift_rate_hz_s": 0.173965,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HIP 18606 b",
+        "Doppler drift rate 0.1740 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0249",
+      "target_name": "HD 3167",
+      "ra_deg": 8.7401487,
+      "dec_deg": 4.3807215,
+      "center_freq_mhz": 7508.0242,
+      "snr": 4.0466,
+      "bandwidth_mhz": 255.6387,
+      "drift_rate_hz_s": -0.044716,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 3167 d, HD 3167 c, HD 3167 b",
+        "Doppler drift rate 0.0447 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0250",
+      "target_name": "TOI-500",
+      "ra_deg": 106.559098,
+      "dec_deg": -47.5878156,
+      "center_freq_mhz": 3316.8013,
+      "snr": 3.785,
+      "bandwidth_mhz": 430.716,
+      "drift_rate_hz_s": 0.065025,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: TOI-500 b, TOI-500 d, TOI-500 e",
+        "Doppler drift rate 0.0650 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0251",
+      "target_name": "TOI-500",
+      "ra_deg": 106.559098,
+      "dec_deg": -47.5878156,
+      "center_freq_mhz": 7020.5289,
+      "snr": 5.6107,
+      "bandwidth_mhz": 121.0304,
+      "drift_rate_hz_s": -0.037494,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: TOI-500 b, TOI-500 d, TOI-500 e",
+        "Doppler drift rate 0.0375 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0252",
+      "target_name": "TOI-500",
+      "ra_deg": 106.559098,
+      "dec_deg": -47.5878156,
+      "center_freq_mhz": 6210.7977,
+      "snr": 2.014,
+      "bandwidth_mhz": 101.8475,
+      "drift_rate_hz_s": 0.162007,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: TOI-500 b, TOI-500 d, TOI-500 e",
+        "Doppler drift rate 0.1620 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0253",
+      "target_name": "HD 13931",
+      "ra_deg": 34.1979991,
+      "dec_deg": 43.7722065,
+      "center_freq_mhz": 1238.7919,
+      "snr": 0.9182,
+      "bandwidth_mhz": 397.384,
+      "drift_rate_hz_s": -0.20141,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 50,
+      "tier": 2,
+      "reasons": [
+        "Frequency in known RFI band: L-band satellite",
+        "Exoplanet system nearby: HD 13931 b, HD 13931 b, HD 13931 b",
+        "Doppler drift rate 0.2014 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0254",
+      "target_name": "HD 13931",
+      "ra_deg": 34.1979991,
+      "dec_deg": 43.7722065,
+      "center_freq_mhz": 5191.817,
+      "snr": 3.0809,
+      "bandwidth_mhz": 102.1892,
+      "drift_rate_hz_s": -0.13264,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 13931 b, HD 13931 b, HD 13931 b",
+        "Doppler drift rate 0.1326 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0255",
+      "target_name": "HD 13931",
+      "ra_deg": 34.1979991,
+      "dec_deg": 43.7722065,
+      "center_freq_mhz": 4357.5453,
+      "snr": 2.959,
+      "bandwidth_mhz": 326.0312,
+      "drift_rate_hz_s": -0.043905,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 13931 b, HD 13931 b, HD 13931 b",
+        "Doppler drift rate 0.0439 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0256",
+      "target_name": "gam Lib",
+      "ra_deg": 233.8818636,
+      "dec_deg": -14.789502,
+      "center_freq_mhz": 5469.3143,
+      "snr": 4.1485,
+      "bandwidth_mhz": 314.5952,
+      "drift_rate_hz_s": -0.157562,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: gam Lib c, gam Lib b, gam Lib b",
+        "Doppler drift rate 0.1576 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0257",
+      "target_name": "HD 213885",
+      "ra_deg": 338.9837166,
+      "dec_deg": -59.864829,
+      "center_freq_mhz": 1909.9555,
+      "snr": 3.9627,
+      "bandwidth_mhz": 424.3852,
+      "drift_rate_hz_s": -0.02511,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 213885 c, HD 213885 b, HD 213885 b",
+        "Doppler drift rate 0.0251 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0258",
+      "target_name": "HD 213885",
+      "ra_deg": 338.9837166,
+      "dec_deg": -59.864829,
+      "center_freq_mhz": 6464.9029,
+      "snr": 0.6777,
+      "bandwidth_mhz": 269.9918,
+      "drift_rate_hz_s": -0.034752,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 213885 c, HD 213885 b, HD 213885 b",
+        "Doppler drift rate 0.0348 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0259",
+      "target_name": "HD 209458",
+      "ra_deg": 330.7950219,
+      "dec_deg": 18.8842419,
+      "center_freq_mhz": 8152.755,
+      "snr": 3.3267,
+      "bandwidth_mhz": 435.0867,
+      "drift_rate_hz_s": 0.056546,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 50,
+      "tier": 2,
+      "reasons": [
+        "Frequency in known RFI band: X-band satellite",
+        "Exoplanet system nearby: HD 209458 b, HD 209458 b, HD 209458 b",
+        "Doppler drift rate 0.0565 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0260",
+      "target_name": "HD 209458",
+      "ra_deg": 330.7950219,
+      "dec_deg": 18.8842419,
+      "center_freq_mhz": 1215.7332,
+      "snr": 1.2937,
+      "bandwidth_mhz": 308.183,
+      "drift_rate_hz_s": 0.119041,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 50,
+      "tier": 2,
+      "reasons": [
+        "Frequency in known RFI band: L-band satellite",
+        "Exoplanet system nearby: HD 209458 b, HD 209458 b, HD 209458 b",
+        "Doppler drift rate 0.1190 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0261",
+      "target_name": "HD 209458",
+      "ra_deg": 330.7950219,
+      "dec_deg": 18.8842419,
+      "center_freq_mhz": 2470.5253,
+      "snr": 2.6882,
+      "bandwidth_mhz": 367.3323,
+      "drift_rate_hz_s": -0.156288,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 209458 b, HD 209458 b, HD 209458 b",
+        "Doppler drift rate 0.1563 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0262",
+      "target_name": "HD 209458",
+      "ra_deg": 330.7950219,
+      "dec_deg": 18.8842419,
+      "center_freq_mhz": 5155.5448,
+      "snr": 1.2282,
+      "bandwidth_mhz": 308.9004,
+      "drift_rate_hz_s": -0.012381,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 209458 b, HD 209458 b, HD 209458 b",
+        "Doppler drift rate 0.0124 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0263",
+      "target_name": "HD 167042",
+      "ra_deg": 272.6326268,
+      "dec_deg": 54.2876184,
+      "center_freq_mhz": 4097.2697,
+      "snr": 12.952600710493918,
+      "bandwidth_mhz": 0.00423984,
+      "drift_rate_hz_s": 1.77151,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 167042 b, HD 167042 b, HD 167042 b",
+        "Doppler drift rate 1.7715 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": true
+    },
+    {
+      "id": "DS-0264",
+      "target_name": "HD 167042",
+      "ra_deg": 272.6326268,
+      "dec_deg": 54.2876184,
+      "center_freq_mhz": 8280.7264,
+      "snr": 3.4359,
+      "bandwidth_mhz": 489.7668,
+      "drift_rate_hz_s": 0.065789,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 50,
+      "tier": 2,
+      "reasons": [
+        "Frequency in known RFI band: X-band satellite",
+        "Exoplanet system nearby: HD 167042 b, HD 167042 b, HD 167042 b",
+        "Doppler drift rate 0.0658 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0265",
+      "target_name": "Proxima Centauri",
+      "ra_deg": 217.4288,
+      "dec_deg": -62.6793,
+      "center_freq_mhz": 6708.1099,
+      "snr": 3.3666,
+      "bandwidth_mhz": 271.6104,
+      "drift_rate_hz_s": 0.043899,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: Proxima Cen b, Proxima Cen b, Proxima Cen d",
+        "Doppler drift rate 0.0439 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0266",
+      "target_name": "Proxima Centauri",
+      "ra_deg": 217.4288,
+      "dec_deg": -62.6793,
+      "center_freq_mhz": 9628.3677,
+      "snr": 1.8849,
+      "bandwidth_mhz": 116.1597,
+      "drift_rate_hz_s": 0.091593,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: Proxima Cen b, Proxima Cen b, Proxima Cen d",
+        "Doppler drift rate 0.0916 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0267",
+      "target_name": "Proxima Centauri",
+      "ra_deg": 217.4288,
+      "dec_deg": -62.6793,
+      "center_freq_mhz": 1406.0327,
+      "snr": 1.4248,
+      "bandwidth_mhz": 474.3496,
+      "drift_rate_hz_s": 0.035263,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: Proxima Cen b, Proxima Cen b, Proxima Cen d",
+        "Doppler drift rate 0.0353 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0268",
+      "target_name": "Tau Ceti",
+      "ra_deg": 26.017,
+      "dec_deg": -15.9375,
+      "center_freq_mhz": 3574.4257,
+      "snr": 5.2821,
+      "bandwidth_mhz": 485.7493,
+      "drift_rate_hz_s": 0.124563,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: tau Cet g, tau Cet h, tau Cet f",
+        "Doppler drift rate 0.1246 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0269",
+      "target_name": "Tau Ceti",
+      "ra_deg": 26.017,
+      "dec_deg": -15.9375,
+      "center_freq_mhz": 8470.1726,
+      "snr": 3.3282,
+      "bandwidth_mhz": 490.359,
+      "drift_rate_hz_s": -0.160527,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: tau Cet g, tau Cet h, tau Cet f",
+        "Doppler drift rate 0.1605 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0270",
+      "target_name": "Epsilon Eridani",
+      "ra_deg": 53.2327,
+      "dec_deg": -9.4582,
+      "center_freq_mhz": 5911.0812,
+      "snr": 3.1444,
+      "bandwidth_mhz": 317.3982,
+      "drift_rate_hz_s": 0.147361,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: eps Eri b, eps Eri b, eps Eri b",
+        "Doppler drift rate 0.1474 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0271",
+      "target_name": "Gliese 667C",
+      "ra_deg": 259.7488,
+      "dec_deg": -34.9977,
+      "center_freq_mhz": 1696.9248,
+      "snr": 1.7196,
+      "bandwidth_mhz": 411.9479,
+      "drift_rate_hz_s": -0.067191,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: GJ 667 C f, GJ 667 C b, GJ 667 C c",
+        "Doppler drift rate 0.0672 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0272",
+      "target_name": "HD 40307",
+      "ra_deg": 89.336,
+      "dec_deg": -60.0161,
+      "center_freq_mhz": 2968.338,
+      "snr": 3.6247,
+      "bandwidth_mhz": 306.3023,
+      "drift_rate_hz_s": -0.140982,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 65,
+      "tier": 2,
+      "reasons": [
+        "Doppler drift rate 0.1410 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0273",
+      "target_name": "HD 40307",
+      "ra_deg": 89.336,
+      "dec_deg": -60.0161,
+      "center_freq_mhz": 1442.0588,
+      "snr": 2.1259,
+      "bandwidth_mhz": 161.4407,
+      "drift_rate_hz_s": -0.058065,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 65,
+      "tier": 2,
+      "reasons": [
+        "Doppler drift rate 0.0581 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0274",
+      "target_name": "Vega",
+      "ra_deg": 279.2347,
+      "dec_deg": 38.7837,
+      "center_freq_mhz": 8205.2526,
+      "snr": 1.2411,
+      "bandwidth_mhz": 347.1156,
+      "drift_rate_hz_s": 0.126094,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 35,
+      "tier": 3,
+      "reasons": [
+        "Frequency in known RFI band: X-band satellite",
+        "Doppler drift rate 0.1261 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0275",
+      "target_name": "61 Cygni A",
+      "ra_deg": 316.7282,
+      "dec_deg": 38.7488,
+      "center_freq_mhz": 1815.2115,
+      "snr": 4.4716,
+      "bandwidth_mhz": 190.3716,
+      "drift_rate_hz_s": 0.097114,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 65,
+      "tier": 2,
+      "reasons": [
+        "Doppler drift rate 0.0971 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0276",
+      "target_name": "61 Cygni A",
+      "ra_deg": 316.7282,
+      "dec_deg": 38.7488,
+      "center_freq_mhz": 5864.2902,
+      "snr": 5.4772,
+      "bandwidth_mhz": 173.1235,
+      "drift_rate_hz_s": 0.018131,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 35,
+      "tier": 3,
+      "reasons": [
+        "Frequency in known RFI band: ISM 5.8 GHz",
+        "Doppler drift rate 0.0181 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0277",
+      "target_name": "Epsilon Indi A",
+      "ra_deg": 330.84,
+      "dec_deg": -56.7867,
+      "center_freq_mhz": 3057.8104,
+      "snr": 3.9462,
+      "bandwidth_mhz": 388.7627,
+      "drift_rate_hz_s": -0.027093,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: eps Ind A b, eps Ind A b, eps Ind A b",
+        "Doppler drift rate 0.0271 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0278",
+      "target_name": "Fomalhaut",
+      "ra_deg": 344.4127,
+      "dec_deg": -29.6223,
+      "center_freq_mhz": 5478.8293,
+      "snr": 2.6072,
+      "bandwidth_mhz": 307.8198,
+      "drift_rate_hz_s": -0.043999,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 65,
+      "tier": 2,
+      "reasons": [
+        "Doppler drift rate 0.0440 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0279",
+      "target_name": "Fomalhaut",
+      "ra_deg": 344.4127,
+      "dec_deg": -29.6223,
+      "center_freq_mhz": 9953.334,
+      "snr": 4.7608,
+      "bandwidth_mhz": 294.5122,
+      "drift_rate_hz_s": -0.066463,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 65,
+      "tier": 2,
+      "reasons": [
+        "Doppler drift rate 0.0665 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0280",
+      "target_name": "Fomalhaut",
+      "ra_deg": 344.4127,
+      "dec_deg": -29.6223,
+      "center_freq_mhz": 6336.6097,
+      "snr": 2.5294,
+      "bandwidth_mhz": 191.1871,
+      "drift_rate_hz_s": 0.029004,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 65,
+      "tier": 2,
+      "reasons": [
+        "Doppler drift rate 0.0290 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0281",
+      "target_name": "Ross 128",
+      "ra_deg": 176.9351,
+      "dec_deg": 0.8048,
+      "center_freq_mhz": 5221.0457,
+      "snr": 2.0206,
+      "bandwidth_mhz": 458.7021,
+      "drift_rate_hz_s": -0.032555,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: Ross 128 b",
+        "Doppler drift rate 0.0326 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0282",
+      "target_name": "Ross 128",
+      "ra_deg": 176.9351,
+      "dec_deg": 0.8048,
+      "center_freq_mhz": 6833.6536,
+      "snr": 5.6609,
+      "bandwidth_mhz": 412.7028,
+      "drift_rate_hz_s": -0.011421,
+      "detection_method": "doppler_drift",
+      "candidacy_score": 80,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: Ross 128 b",
+        "Doppler drift rate 0.0114 Hz/s consistent with technological origin"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0283",
+      "target_name": "FRB20121102A",
+      "ra_deg": 82.9938,
+      "dec_deg": 33.148,
+      "center_freq_mhz": 600.0,
+      "snr": 25.3,
+      "bandwidth_mhz": 3.1,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "frb_repeater",
+      "candidacy_score": 60,
+      "tier": 2,
+      "reasons": [
+        "High SNR: 25.3"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0284",
+      "target_name": "FRB20180916B",
+      "ra_deg": 29.5031,
+      "dec_deg": 65.7168,
+      "center_freq_mhz": 600.0,
+      "snr": 19.7,
+      "bandwidth_mhz": 1.7,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "frb_repeater+periodic",
+      "candidacy_score": 60,
+      "tier": 2,
+      "reasons": [
+        "High SNR: 19.7"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0285",
+      "target_name": "FRB20190520B",
+      "ra_deg": 240.0275,
+      "dec_deg": -11.2921,
+      "center_freq_mhz": 600.0,
+      "snr": 14.2,
+      "bandwidth_mhz": 5.8,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "frb_repeater",
+      "candidacy_score": 50,
+      "tier": 2,
+      "reasons": [],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0286",
+      "target_name": "FRB20201124A",
+      "ra_deg": 77.0117,
+      "dec_deg": 26.0603,
+      "center_freq_mhz": 600.0,
+      "snr": 32.1,
+      "bandwidth_mhz": 2.4,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "frb_repeater",
+      "candidacy_score": 60,
+      "tier": 2,
+      "reasons": [
+        "High SNR: 32.1"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0287",
+      "target_name": "FRB20220912A",
+      "ra_deg": 347.2743,
+      "dec_deg": 48.7108,
+      "center_freq_mhz": 600.0,
+      "snr": 28.4,
+      "bandwidth_mhz": 1.1,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "frb_repeater",
+      "candidacy_score": 60,
+      "tier": 2,
+      "reasons": [
+        "High SNR: 28.4"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0288",
+      "target_name": "FRB_SIM_0011",
+      "ra_deg": 133.98669812347342,
+      "dec_deg": -84.5369470108599,
+      "center_freq_mhz": 600.0,
+      "snr": 12.14,
+      "bandwidth_mhz": 0.558,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "frb_repeater",
+      "candidacy_score": 50,
+      "tier": 2,
+      "reasons": [],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0289",
+      "target_name": "FRB_SIM_0006",
+      "ra_deg": 54.071902465362676,
+      "dec_deg": 56.940858687433625,
+      "center_freq_mhz": 600.0,
+      "snr": 12.74,
+      "bandwidth_mhz": 1.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "frb_low_dm_excess",
+      "candidacy_score": 50,
+      "tier": 2,
+      "reasons": [],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0290",
+      "target_name": "FRB_SIM_0014",
+      "ra_deg": 81.51245377097186,
+      "dec_deg": -54.26619336131889,
+      "center_freq_mhz": 600.0,
+      "snr": 15.74,
+      "bandwidth_mhz": 1.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "frb_low_dm_excess",
+      "candidacy_score": 60,
+      "tier": 2,
+      "reasons": [
+        "High SNR: 15.7"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0291",
+      "target_name": "FRB_SIM_0022",
+      "ra_deg": 7.587127599800789,
+      "dec_deg": -34.09736453042492,
+      "center_freq_mhz": 600.0,
+      "snr": 11.06,
+      "bandwidth_mhz": 1.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "frb_low_dm_excess",
+      "candidacy_score": 50,
+      "tier": 2,
+      "reasons": [],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0292",
+      "target_name": "FRB_SIM_0024",
+      "ra_deg": 225.5802549581236,
+      "dec_deg": 53.542471565940005,
+      "center_freq_mhz": 600.0,
+      "snr": 10.59,
+      "bandwidth_mhz": 1.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "frb_low_dm_excess",
+      "candidacy_score": 50,
+      "tier": 2,
+      "reasons": [],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0293",
+      "target_name": "FRB_SIM_0030",
+      "ra_deg": 47.95439124588418,
+      "dec_deg": -66.4768357546902,
+      "center_freq_mhz": 600.0,
+      "snr": 13.39,
+      "bandwidth_mhz": 1.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "frb_low_dm_excess",
+      "candidacy_score": 50,
+      "tier": 2,
+      "reasons": [],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0294",
+      "target_name": "FRB_SIM_0039",
+      "ra_deg": 163.80629393486396,
+      "dec_deg": -79.78061476927498,
+      "center_freq_mhz": 600.0,
+      "snr": 18.85,
+      "bandwidth_mhz": 1.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "frb_low_dm_excess",
+      "candidacy_score": 60,
+      "tier": 2,
+      "reasons": [
+        "High SNR: 18.9"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0295",
+      "target_name": "Proxima Centauri",
+      "ra_deg": 217.4288,
+      "dec_deg": -62.6793,
+      "center_freq_mhz": 0.0,
+      "snr": 5.66,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "optical_laser_pulse",
+      "candidacy_score": 85,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: Proxima Cen b, Proxima Cen b, Proxima Cen d",
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0296",
+      "target_name": "Tau Ceti",
+      "ra_deg": 26.017,
+      "dec_deg": -15.9375,
+      "center_freq_mhz": 0.0,
+      "snr": 24.66,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "optical_laser_pulse",
+      "candidacy_score": 95,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: tau Cet g, tau Cet h, tau Cet f",
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural",
+        "High SNR: 24.7"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0297",
+      "target_name": "Epsilon Eridani",
+      "ra_deg": 53.2327,
+      "dec_deg": -9.4582,
+      "center_freq_mhz": 0.0,
+      "snr": 41.19,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "optical_laser_pulse",
+      "candidacy_score": 95,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: eps Eri b, eps Eri b, eps Eri b",
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural",
+        "High SNR: 41.2"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0298",
+      "target_name": "Vega",
+      "ra_deg": 279.2347,
+      "dec_deg": 38.7837,
+      "center_freq_mhz": 0.0,
+      "snr": 6.25,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "optical_laser_pulse",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0299",
+      "target_name": "61 Cygni A",
+      "ra_deg": 316.7282,
+      "dec_deg": 38.7488,
+      "center_freq_mhz": 0.0,
+      "snr": 5.45,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "optical_laser_pulse",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0300",
+      "target_name": "Ross 128",
+      "ra_deg": 176.9351,
+      "dec_deg": 0.8048,
+      "center_freq_mhz": 0.0,
+      "snr": 6.12,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "optical_laser_pulse",
+      "candidacy_score": 85,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: Ross 128 b",
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0301",
+      "target_name": "TOI-700",
+      "ra_deg": 35.1611,
+      "dec_deg": -56.7867,
+      "center_freq_mhz": 0.0,
+      "snr": 10.0,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "lightcurve_anomaly",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0302",
+      "target_name": "TOI-216",
+      "ra_deg": 271.2716,
+      "dec_deg": -27.6274,
+      "center_freq_mhz": 0.0,
+      "snr": 10.0,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "lightcurve_anomaly",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0303",
+      "target_name": "SIM_STAR_0000",
+      "ra_deg": 311.32713132597115,
+      "dec_deg": 42.63630179184708,
+      "center_freq_mhz": 0.0,
+      "snr": 10.0,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "lightcurve_anomaly",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0304",
+      "target_name": "SIM_STAR_0001",
+      "ra_deg": 94.12069010993157,
+      "dec_deg": -50.73606507378943,
+      "center_freq_mhz": 0.0,
+      "snr": 10.0,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "lightcurve_anomaly",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0305",
+      "target_name": "SIM_STAR_0002",
+      "ra_deg": 220.96500877695667,
+      "dec_deg": -59.684309564844035,
+      "center_freq_mhz": 0.0,
+      "snr": 10.0,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "lightcurve_anomaly",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0306",
+      "target_name": "SIM_STAR_0003",
+      "ra_deg": 354.52925108551995,
+      "dec_deg": -25.64440750005955,
+      "center_freq_mhz": 0.0,
+      "snr": 10.0,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "lightcurve_anomaly",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0307",
+      "target_name": "SIM_STAR_0006",
+      "ra_deg": 293.04234693004025,
+      "dec_deg": -0.2559110000985365,
+      "center_freq_mhz": 0.0,
+      "snr": 10.0,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "lightcurve_anomaly",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0308",
+      "target_name": "SIM_STAR_0007",
+      "ra_deg": 279.60701616031264,
+      "dec_deg": 57.50739470274751,
+      "center_freq_mhz": 0.0,
+      "snr": 10.0,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "lightcurve_anomaly",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0309",
+      "target_name": "LHS 1140b",
+      "ra_deg": 18.0018,
+      "dec_deg": -15.267,
+      "center_freq_mhz": 0.0,
+      "snr": 3.0,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "atmospheric_biosignature",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0310",
+      "target_name": "HD 209458b",
+      "ra_deg": 330.795,
+      "dec_deg": 18.884,
+      "center_freq_mhz": 0.0,
+      "snr": 2.5,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "atmospheric_biosignature",
+      "candidacy_score": 85,
+      "tier": 1,
+      "reasons": [
+        "Exoplanet system nearby: HD 209458 b, HD 209458 b, HD 209458 b",
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0311",
+      "target_name": "TOI-SIM-0001",
+      "ra_deg": 77.37910688223663,
+      "dec_deg": -13.701115489296182,
+      "center_freq_mhz": 0.0,
+      "snr": 3.0,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "atmospheric_biosignature",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0312",
+      "target_name": "1I/\u02bbOumuamua",
+      "ra_deg": 23.4578,
+      "dec_deg": 26.8011,
+      "center_freq_mhz": 0.0,
+      "snr": 0.0,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "interstellar_trajectory",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0313",
+      "target_name": "SIM_ISO_0001",
+      "ra_deg": 65.56698756830662,
+      "dec_deg": 50.50768182417121,
+      "center_freq_mhz": 0.0,
+      "snr": 0.0,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "interstellar_trajectory",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0314",
+      "target_name": "SIM_ISO_0002",
+      "ra_deg": 7.327420975069443,
+      "dec_deg": 33.91410968287196,
+      "center_freq_mhz": 0.0,
+      "snr": 0.0,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "interstellar_trajectory",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0315",
+      "target_name": "SIM_ISO_0004",
+      "ra_deg": 219.63715039279094,
+      "dec_deg": 2.1437694557423725,
+      "center_freq_mhz": 0.0,
+      "snr": 0.0,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "interstellar_trajectory",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0316",
+      "target_name": "4FGL J0253.4+0220",
+      "ra_deg": 43.35,
+      "dec_deg": 2.34,
+      "center_freq_mhz": 0.0,
+      "snr": 0.0,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "gamma_unidentified",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0317",
+      "target_name": "4FGL J0521.9+2112",
+      "ra_deg": 80.49,
+      "dec_deg": 21.2,
+      "center_freq_mhz": 0.0,
+      "snr": 0.0,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "gamma_unidentified",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0318",
+      "target_name": "4FGL J1120.0-2204",
+      "ra_deg": 170.0,
+      "dec_deg": -22.08,
+      "center_freq_mhz": 0.0,
+      "snr": 0.0,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "gamma_unidentified",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0319",
+      "target_name": "4FGL J1231.6+1410",
+      "ra_deg": 187.9,
+      "dec_deg": 14.17,
+      "center_freq_mhz": 0.0,
+      "snr": 0.0,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "gamma_unidentified",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0320",
+      "target_name": "4FGL J1418.4-0233",
+      "ra_deg": 214.6,
+      "dec_deg": -2.56,
+      "center_freq_mhz": 0.0,
+      "snr": 0.0,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "gamma_unidentified",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0321",
+      "target_name": "4FGL J1653.6+3945",
+      "ra_deg": 253.4,
+      "dec_deg": 39.75,
+      "center_freq_mhz": 0.0,
+      "snr": 0.0,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "gamma_unidentified",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0322",
+      "target_name": "4FGL J1744.1-7619",
+      "ra_deg": 266.0,
+      "dec_deg": -76.32,
+      "center_freq_mhz": 0.0,
+      "snr": 0.0,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "gamma_unidentified",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0323",
+      "target_name": "4FGL J1828.4+3236",
+      "ra_deg": 277.1,
+      "dec_deg": 32.61,
+      "center_freq_mhz": 0.0,
+      "snr": 0.0,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "gamma_unidentified",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0324",
+      "target_name": "4FGL J1955.4+1123",
+      "ra_deg": 298.9,
+      "dec_deg": 11.39,
+      "center_freq_mhz": 0.0,
+      "snr": 0.0,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "gamma_unidentified",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0325",
+      "target_name": "4FGL J2049.9+1003",
+      "ra_deg": 312.5,
+      "dec_deg": 10.06,
+      "center_freq_mhz": 0.0,
+      "snr": 0.0,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "gamma_unidentified",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0326",
+      "target_name": "4FGL J2158.8-3013",
+      "ra_deg": 329.7,
+      "dec_deg": -30.23,
+      "center_freq_mhz": 0.0,
+      "snr": 0.0,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "gamma_unidentified",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0327",
+      "target_name": "4FGL J0111.0+3907",
+      "ra_deg": 17.8,
+      "dec_deg": 39.13,
+      "center_freq_mhz": 0.0,
+      "snr": 0.0,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "gamma_unidentified",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0328",
+      "target_name": "Kapteyn's Star",
+      "ra_deg": 77.14,
+      "dec_deg": -44.995,
+      "center_freq_mhz": 0.0,
+      "snr": 0.91,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "proper_motion_anomaly",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0329",
+      "target_name": "SIM_J0312+1847",
+      "ra_deg": 48.12,
+      "dec_deg": 18.79,
+      "center_freq_mhz": 0.0,
+      "snr": 4.87,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "proper_motion_anomaly",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0330",
+      "target_name": "SIM_J1147-0231",
+      "ra_deg": 176.91,
+      "dec_deg": -2.52,
+      "center_freq_mhz": 0.0,
+      "snr": 3.21,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "proper_motion_anomaly",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0331",
+      "target_name": "SIM_J2218+3341",
+      "ra_deg": 334.62,
+      "dec_deg": 33.69,
+      "center_freq_mhz": 0.0,
+      "snr": 3.94,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "proper_motion_anomaly",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0332",
+      "target_name": "SIM_J0631+1548",
+      "ra_deg": 97.88,
+      "dec_deg": 15.81,
+      "center_freq_mhz": 0.0,
+      "snr": 5.61,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "proper_motion_anomaly",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0333",
+      "target_name": "CXO J001311.8+634937",
+      "ra_deg": 3.299,
+      "dec_deg": 63.827,
+      "center_freq_mhz": 0.0,
+      "snr": 0.0,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "xray_unidentified",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0334",
+      "target_name": "CXO J024512.4-001234",
+      "ra_deg": 41.302,
+      "dec_deg": -0.21,
+      "center_freq_mhz": 0.0,
+      "snr": 0.0,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "xray_unidentified",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0335",
+      "target_name": "CXO J073841.2+653201",
+      "ra_deg": 114.672,
+      "dec_deg": 65.534,
+      "center_freq_mhz": 0.0,
+      "snr": 0.0,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "xray_unidentified",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0336",
+      "target_name": "CXO J182239.2-181442",
+      "ra_deg": 275.663,
+      "dec_deg": -18.245,
+      "center_freq_mhz": 0.0,
+      "snr": 0.0,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "xray_unidentified",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0337",
+      "target_name": "CXO J214521.3+122844",
+      "ra_deg": 326.339,
+      "dec_deg": 12.479,
+      "center_freq_mhz": 0.0,
+      "snr": 0.0,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "xray_unidentified",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0338",
+      "target_name": "4XMM J034428.3-045712",
+      "ra_deg": 56.118,
+      "dec_deg": -4.953,
+      "center_freq_mhz": 0.0,
+      "snr": 0.0,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "xray_unidentified",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0339",
+      "target_name": "4XMM J091234.2+303201",
+      "ra_deg": 138.143,
+      "dec_deg": 30.534,
+      "center_freq_mhz": 0.0,
+      "snr": 0.0,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "xray_unidentified",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0340",
+      "target_name": "4XMM J143812.7-231456",
+      "ra_deg": 219.553,
+      "dec_deg": -23.249,
+      "center_freq_mhz": 0.0,
+      "snr": 0.0,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "xray_unidentified",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0341",
+      "target_name": "4XMM J052211.8-692334",
+      "ra_deg": 80.549,
+      "dec_deg": -69.393,
+      "center_freq_mhz": 0.0,
+      "snr": 0.0,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "xray_unidentified",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    },
+    {
+      "id": "DS-0342",
+      "target_name": "4XMM J113021.4+052318",
+      "ra_deg": 172.589,
+      "dec_deg": 5.388,
+      "center_freq_mhz": 0.0,
+      "snr": 0.0,
+      "bandwidth_mhz": 0.0,
+      "drift_rate_hz_s": 0.0,
+      "detection_method": "xray_unidentified",
+      "candidacy_score": 70,
+      "tier": 1,
+      "reasons": [
+        "Ultra-narrowband signal (< 10 Hz) \u2014 unlikely natural"
+      ],
+      "is_injected_anomaly": false
+    }
+  ]
+}
