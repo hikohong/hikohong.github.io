@@ -1170,7 +1170,7 @@
   {
     "target_name": "TOI-SIM-0001",
     "ra_deg": 77.37910688223663,
-    "dec_deg": -13.701115489296182,
+    "dec_deg": -13.701115489296186,
     "planet_radius_rearth": 1.9560441475527428,
     "equilibrium_temp_k": 384,
     "n_transits_observed": 5,
@@ -1837,8 +1837,8 @@
   {
     "target_name": "TOI-SIM-0006",
     "ra_deg": 166.3048474321911,
-    "dec_deg": 8.040433947275108,
-    "planet_radius_rearth": 2.0201549043603095,
+    "dec_deg": 8.040433947275105,
+    "planet_radius_rearth": 2.02015490436031,
     "equilibrium_temp_k": 560,
     "n_transits_observed": 14,
     "detected_molecules": [
@@ -1968,7 +1968,7 @@
   {
     "target_name": "TOI-SIM-0007",
     "ra_deg": 293.37271447289675,
-    "dec_deg": -11.86007346000701,
+    "dec_deg": -11.860073460007008,
     "planet_radius_rearth": 1.3485362024469432,
     "equilibrium_temp_k": 659,
     "n_transits_observed": 5,
@@ -2356,7 +2356,7 @@
   {
     "target_name": "TOI-SIM-0010",
     "ra_deg": 237.681543922428,
-    "dec_deg": 1.7529087856545766,
+    "dec_deg": 1.7529087856545758,
     "planet_radius_rearth": 1.5535510234797079,
     "equilibrium_temp_k": 479,
     "n_transits_observed": 19,
@@ -2482,7 +2482,7 @@
   {
     "target_name": "TOI-SIM-0011",
     "ra_deg": 172.50869652231765,
-    "dec_deg": 18.39465778520822,
+    "dec_deg": 18.394657785208224,
     "planet_radius_rearth": 2.2640487481398304,
     "equilibrium_temp_k": 514,
     "n_transits_observed": 9,

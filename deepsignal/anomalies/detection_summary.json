@@ -1,11 +1,11 @@
 {
-  "total": 342,
+  "total": 80,
   "by_method": {
-    "zscore": 5,
+    "zscore": 1,
     "narrowband": 0,
-    "doppler": 282,
-    "iforest": 16,
-    "mathstruct": 8,
+    "doppler": 20,
+    "iforest": 1,
+    "mathstruct": 2,
     "frb_rep": 6,
     "frb_dm": 6,
     "optical": 6,
