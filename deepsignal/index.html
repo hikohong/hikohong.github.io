@@ -3,1096 +3,338 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DeepSignal — Sky Image Gallery</title>
+<title>DeepSignal — SETI Search</title>
+<link rel="icon" href="deepsignal-web-icon.jpg">
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-         background: #0d0d1a; color: #e0e0e0; padding: 24px; }
-  h1 { font-size: 1.6rem; color: #fff; margin-bottom: 4px; }
-  .subtitle { color: #7f8c8d; font-size: 0.9rem; margin-bottom: 16px; }
-  .stats { display: flex; gap: 16px; margin-bottom: 28px; flex-wrap: wrap; }
-  .stat { background: #1a1a2e; border-radius: 8px; padding: 12px 20px; }
-  .stat-n { font-size: 1.8rem; font-weight: 700; }
-  .stat-l { font-size: 0.75rem; color: #7f8c8d; text-transform: uppercase; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
-  .card { background: #12122a; border-radius: 10px; overflow: hidden;
-           border: 1px solid #2a2a4a; position: relative; }
-  .tier-badge { position: absolute; top: 10px; left: 10px; z-index: 2;
-                 font-size: 0.7rem; font-weight: 700; padding: 3px 10px;
-                 border-radius: 12px; color: #000; }
-  .survey-row { display: flex; gap: 4px; flex-wrap: wrap; padding: 6px 8px;
-                 background: #0d0d1a; border-top: 1px solid #1a1a3a; }
-  .survey-btn { font-size: 0.65rem; padding: 2px 7px; border-radius: 3px;
-                 background: #1e1e40; color: #8ab4f8; text-decoration: none;
-                 border: 1px solid #2a2a5a; white-space: nowrap; }
-  .survey-btn:hover { background: #2a2a5a; }
-  .card-body { padding: 14px; }
-  .name { font-size: 1rem; font-weight: 600; color: #fff; margin-bottom: 8px; }
-  .meta { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 6px; }
-  .tag { background: #2a2a4a; border-radius: 4px; padding: 2px 8px;
-          font-size: 0.7rem; color: #a0a0c0; text-transform: uppercase; }
-  .tag-method { background: #1a2a3a; color: #7ab4e8; text-transform: none; }
-  .coords { font-size: 0.75rem; color: #7f8c8d; margin-bottom: 8px; font-family: monospace; }
-  .nasa-section { margin: 8px 0; padding: 8px; background: #0d1525;
-                   border-radius: 6px; border: 1px solid #1a2a4a; }
-  .nasa-label { font-size: 0.7rem; color: #5dade2; margin-bottom: 6px; }
-  .nasa-row { display: flex; gap: 4px; }
-  .nasa-thumb { flex: 1; min-width: 0; }
-  .nasa-caption { font-size: 0.62rem; color: #556; margin-top: 2px;
-                   white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .reasons { font-size: 0.75rem; color: #a0a0b0; padding-left: 16px;
-              margin: 8px 0 10px; line-height: 1.5; }
-  .aladin-btn { display: inline-block; font-size: 0.78rem; color: #5dade2;
-                 text-decoration: none; border: 1px solid #2a5f8f;
-                 border-radius: 4px; padding: 4px 10px; }
-  .aladin-btn:hover { background: #1a3a5a; }
-  footer { margin-top: 40px; text-align: center; color: #444; font-size: 0.8rem; }
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#08111f;color:#eef3f8;min-height:100vh}
+
+/* ── Nav ── */
+nav{display:flex;align-items:center;gap:12px;padding:16px 24px;border-bottom:1px solid rgba(219,234,254,.10);background:rgba(8,17,31,.92);position:sticky;top:0;z-index:10;backdrop-filter:blur(8px)}
+.nav-home{display:inline-flex;align-items:center;gap:8px;color:#dbeafe;text-decoration:none;font-weight:700;font-size:.9rem}
+.nav-mark{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#7dd3fc,#f97316);color:#06121d;font-size:.65rem;font-weight:900;flex-shrink:0}
+.nav-links{margin-left:auto;display:flex;gap:8px}
+.nav-link{color:#b8c7d8;text-decoration:none;font-size:.85rem;padding:6px 12px;border-radius:5px;border:1px solid rgba(219,234,254,.15);transition:border-color 140ms,color 140ms}
+.nav-link:hover{color:#7dd3fc;border-color:#7dd3fc}
+
+/* ── Hero ── */
+.hero{padding:48px 24px 32px;text-align:center;background:linear-gradient(180deg,rgba(125,211,252,.06) 0%,transparent 100%)}
+.eyebrow{color:#7dd3fc;font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px}
+.hero h1{font-size:clamp(1.8rem,5vw,3.2rem);line-height:1.1;margin-bottom:12px}
+.hero p{color:#b8c7d8;font-size:1rem;line-height:1.6;max-width:520px;margin:0 auto 28px}
+
+/* ── Search ── */
+.search-wrap{max-width:600px;margin:0 auto}
+.search-row{display:flex;gap:8px}
+.search-input{flex:1;padding:12px 16px;background:rgba(255,255,255,.06);border:1px solid rgba(219,234,254,.22);border-radius:8px;color:#eef3f8;font-size:1rem;outline:none;transition:border-color 140ms}
+.search-input:focus{border-color:#7dd3fc}
+.search-input::placeholder{color:#5a6a7a}
+.search-btn{padding:12px 22px;background:#7dd3fc;color:#05111d;font-weight:700;border:none;border-radius:8px;cursor:pointer;font-size:.95rem;white-space:nowrap;transition:opacity 140ms}
+.search-btn:hover{opacity:.85}
+.search-hint{color:#5a6a7a;font-size:.78rem;margin-top:8px;text-align:center}
+
+/* ── Stats bar ── */
+.stats{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:20px 24px}
+.stat-chip{background:rgba(255,255,255,.05);border:1px solid rgba(219,234,254,.12);border-radius:6px;padding:8px 16px;font-size:.82rem;color:#b8c7d8}
+.stat-chip strong{color:#7dd3fc}
+
+/* ── Result panel ── */
+#result-panel{display:none;max-width:900px;margin:0 auto 32px;padding:0 24px}
+.result-card{background:rgba(255,255,255,.05);border:1px solid rgba(125,211,252,.3);border-radius:12px;overflow:hidden}
+.result-inner{display:grid;grid-template-columns:220px 1fr;gap:0}
+@media(max-width:600px){.result-inner{grid-template-columns:1fr}}
+.result-img{background:#040d18}
+.result-img img{width:220px;height:220px;object-fit:cover;display:block}
+@media(max-width:600px){.result-img img{width:100%;height:200px}}
+.result-body{padding:20px}
+.result-name{font-size:1.3rem;font-weight:700;margin-bottom:6px}
+.result-type{color:#7dd3fc;font-size:.85rem;margin-bottom:10px}
+.result-coords{font-family:monospace;font-size:.8rem;color:#7f8c9d;margin-bottom:12px}
+.result-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.tag{padding:3px 10px;border-radius:4px;font-size:.72rem;font-weight:600}
+.tag-tier1{background:rgba(245,158,11,.2);color:#f59e0b;border:1px solid rgba(245,158,11,.35)}
+.tag-tier2{background:rgba(59,130,246,.2);color:#60a5fa;border:1px solid rgba(59,130,246,.35)}
+.tag-tier3{background:rgba(107,114,128,.2);color:#9ca3af;border:1px solid rgba(107,114,128,.35)}
+.tag-method{background:#1a2a3a;color:#7ab4e8;border:1px solid #243a52}
+.tag-dtype{background:#2a2a4a;color:#a0a0c0;border:1px solid #3a3a6a;text-transform:uppercase}
+.result-score{font-size:.85rem;color:#b8c7d8;margin-bottom:10px}
+.result-score strong{color:#f0f0f0;font-size:1rem}
+.result-reasons{font-size:.78rem;color:#8a9aaa;line-height:1.6;margin-bottom:14px;padding-left:14px}
+.result-links{display:flex;flex-wrap:wrap;gap:8px}
+.ext-link{font-size:.8rem;color:#7dd3fc;text-decoration:none;padding:5px 12px;border:1px solid rgba(125,211,252,.3);border-radius:5px;transition:background 140ms}
+.ext-link:hover{background:rgba(125,211,252,.1)}
+.result-notfound{padding:16px;color:#7f8c9d;font-size:.9rem;text-align:center}
+.spinner{display:inline-block;width:18px;height:18px;border:2px solid rgba(125,211,252,.3);border-top-color:#7dd3fc;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:6px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── Highlights grid ── */
+.section{max-width:900px;margin:0 auto;padding:0 24px 48px}
+.section-head{display:flex;align-items:baseline;gap:12px;margin-bottom:16px}
+.section-head h2{font-size:1.1rem;font-weight:700}
+.section-head a{font-size:.82rem;color:#7dd3fc;text-decoration:none;margin-left:auto}
+.section-head a:hover{text-decoration:underline}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.card{background:rgba(255,255,255,.04);border:1px solid rgba(219,234,254,.12);border-radius:10px;overflow:hidden;text-decoration:none;color:inherit;transition:border-color 140ms,transform 140ms;display:block;cursor:pointer}
+.card:hover{border-color:rgba(125,211,252,.45);transform:translateY(-2px)}
+.card-img{position:relative;height:140px;background:#040d18;overflow:hidden}
+.card-img img{width:100%;height:100%;object-fit:cover;display:block}
+.tier-badge{position:absolute;top:8px;left:8px;font-size:.62rem;font-weight:700;padding:2px 8px;border-radius:10px;color:#000}
+.card-body{padding:12px 14px}
+.card-name{font-size:.9rem;font-weight:600;margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px}
+.card-score{font-size:.75rem;color:#7f8c9d}
+.card-score strong{color:#b8c7d8}
+
+/* ── Footer ── */
+footer{text-align:center;padding:24px;color:#3a4a5a;font-size:.78rem;border-top:1px solid rgba(219,234,254,.07)}
+footer a{color:#4a6a8a;text-decoration:none}
+
+/* ── Divider ── */
+.divider{height:1px;background:rgba(219,234,254,.08);max-width:900px;margin:0 auto 32px}
 </style>
 </head>
 <body>
-<h1>DeepSignal — Sky Image Gallery</h1>
-<div class="subtitle">
-  Generated 2026-05-23 18:53 UTC &nbsp;·&nbsp;
-  64 unique targets &nbsp;·&nbsp;
-  0 local sky cutouts &nbsp;·&nbsp; 64 Hips2Fits CDN embeds &nbsp;·&nbsp;
-  0 NASA mission photo sets &nbsp;·&nbsp;
-  Multi-wavelength survey overlays: optical · NIR · IR · X-ray · γ-ray · UV
+
+<nav>
+  <a class="nav-home" href="/">
+    <span class="nav-mark">HH</span>
+    <span>Hiko Hong</span>
+  </a>
+  <span style="color:#3a4a5a;font-size:.85rem">/ DeepSignal</span>
+  <div class="nav-links">
+    <a class="nav-link" href="gallery.html">Gallery</a>
+    <a class="nav-link" href="report.md">Report</a>
+    <a class="nav-link" href="https://github.com/hikohong/deepsignal" target="_blank">GitHub</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="eyebrow">SETI Analysis Pipeline</div>
+  <h1>Search the Universe</h1>
+  <p>Search any star, galaxy, or solar system body across 10 astronomical data sources and 14 detection algorithms.</p>
+  <div class="search-wrap">
+    <div class="search-row">
+      <input class="search-input" id="q" type="text"
+             placeholder="e.g. TRAPPIST-1, Proxima Centauri, Sgr A*, Mars…"
+             autocomplete="off" autocorrect="off" spellcheck="false">
+      <button class="search-btn" onclick="doSearch()">Search</button>
+    </div>
+    <p class="search-hint">Stars · Galaxies · Exoplanet systems · Solar system bodies · AGN · Nebulae</p>
+  </div>
 </div>
+
 <div class="stats">
-  <div class="stat"><div class="stat-n" style="color:#2ecc71">1</div><div class="stat-l">Tier 1 ≥70</div></div>
-  <div class="stat"><div class="stat-n" style="color:#f39c12">2</div><div class="stat-l">Tier 2 50–69</div></div>
-  <div class="stat"><div class="stat-n" style="color:#95a5a6">61</div><div class="stat-l">Tier 3 &lt;50</div></div>
-  <div class="stat"><div class="stat-n">64</div><div class="stat-l">Total candidates</div></div>
+  <div class="stat-chip">Pipeline candidates: <strong id="stat-n">422</strong></div>
+  <div class="stat-chip">Data sources: <strong>10</strong></div>
+  <div class="stat-chip">Detection algorithms: <strong>14</strong></div>
+  <div class="stat-chip">Last updated: <strong>2026-05-24 10:02 UTC</strong></div>
 </div>
-<div class="grid">
-    <div class="card">
-      <div class="tier-badge" style="background:#2ecc71">Tier 1 &nbsp;·&nbsp; 75/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=26.0170+-15.9375&fov=0.5&survey=P/DSS2/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=26.01700&dec=-15.93750&format=jpg" alt="Tau Ceti — DSS2 Optical" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(DSS2 Optical)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=26.0170+-15.9375&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=26.0170+-15.9375&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
-      <div class="card-body">
-        <div class="name">Tau Ceti</div>
-        <div class="meta">
-          <span class="tag">RADIO</span><span class="tag">OPTICAL</span>
-          <span class="tag tag-method">zscore</span><span class="tag tag-method">doppler_drift</span><span class="tag tag-method">optical_laser_pulse</span>
-        </div>
-        <div class="coords">RA 26.0170° &nbsp; Dec -15.9375°</div>
-        
-        <ul class="reasons"><li>Doppler drift rate 1.5186 Hz/s consistent with technological origin</li><li>High SNR: 35.2</li><li>Frequency in known RFI band: X-band satellite</li><li>Doppler drift rate 0.0879 Hz/s consistent with technological origin</li><li>Doppler drift rate 0.0428 Hz/s consistent with technological origin</li><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=26.0170+-15.9375&fov=0.5&survey=P/DSS2/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#f39c12">Tier 2 &nbsp;·&nbsp; 65/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=217.4288+-62.6793&fov=0.5&survey=P/DSS2/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=217.42880&dec=-62.67930&format=jpg" alt="Proxima Centauri — DSS2 Optical" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(DSS2 Optical)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=217.4288+-62.6793&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=217.4288+-62.6793&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
-      <div class="card-body">
-        <div class="name">Proxima Centauri</div>
-        <div class="meta">
-          <span class="tag">RADIO</span><span class="tag">OPTICAL</span>
-          <span class="tag tag-method">doppler_drift</span><span class="tag tag-method">optical_laser_pulse</span>
-        </div>
-        <div class="coords">RA 217.4288° &nbsp; Dec -62.6793°</div>
-        
-        <ul class="reasons"><li>Doppler drift rate 0.1951 Hz/s consistent with technological origin</li><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=217.4288+-62.6793&fov=0.5&survey=P/DSS2/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#f39c12">Tier 2 &nbsp;·&nbsp; 65/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=53.2327+-9.4582&fov=0.5&survey=P/DSS2/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=53.23270&dec=-9.45820&format=jpg" alt="Epsilon Eridani — DSS2 Optical" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(DSS2 Optical)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=53.2327+-9.4582&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=53.2327+-9.4582&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
-      <div class="card-body">
-        <div class="name">Epsilon Eridani</div>
-        <div class="meta">
-          <span class="tag">RADIO</span><span class="tag">OPTICAL</span>
-          <span class="tag tag-method">doppler_drift</span><span class="tag tag-method">optical_laser_pulse</span>
-        </div>
-        <div class="coords">RA 53.2327° &nbsp; Dec -9.4582°</div>
-        
-        <ul class="reasons"><li>Doppler drift rate 0.2142 Hz/s consistent with technological origin</li><li>Doppler drift rate 0.1129 Hz/s consistent with technological origin</li><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=53.2327+-9.4582&fov=0.5&survey=P/DSS2/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=259.7488+-34.9977&fov=0.5&survey=P/DSS2/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=259.74880&dec=-34.99770&format=jpg" alt="Gliese 667C — DSS2 Optical" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(DSS2 Optical)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=259.7488+-34.9977&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=259.7488+-34.9977&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
-      <div class="card-body">
-        <div class="name">Gliese 667C</div>
-        <div class="meta">
-          <span class="tag">RADIO</span>
-          <span class="tag tag-method">doppler_drift</span>
-        </div>
-        <div class="coords">RA 259.7488° &nbsp; Dec -34.9977°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=259.7488+-34.9977&fov=0.5&survey=P/DSS2/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=89.3360+-60.0161&fov=0.5&survey=P/DSS2/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=89.33600&dec=-60.01610&format=jpg" alt="HD 40307 — DSS2 Optical" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(DSS2 Optical)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=89.3360+-60.0161&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=89.3360+-60.0161&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
-      <div class="card-body">
-        <div class="name">HD 40307</div>
-        <div class="meta">
-          <span class="tag">RADIO</span>
-          <span class="tag tag-method">doppler_drift</span>
-        </div>
-        <div class="coords">RA 89.3360° &nbsp; Dec -60.0161°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=89.3360+-60.0161&fov=0.5&survey=P/DSS2/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=279.2347+38.7837&fov=0.5&survey=P/DSS2/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=279.23470&dec=38.78370&format=jpg" alt="Vega — DSS2 Optical" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(DSS2 Optical)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=279.2347+38.7837&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=279.2347+38.7837&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
-      <div class="card-body">
-        <div class="name">Vega</div>
-        <div class="meta">
-          <span class="tag">RADIO</span><span class="tag">OPTICAL</span>
-          <span class="tag tag-method">doppler_drift</span><span class="tag tag-method">optical_laser_pulse</span>
-        </div>
-        <div class="coords">RA 279.2347° &nbsp; Dec 38.7837°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=279.2347+38.7837&fov=0.5&survey=P/DSS2/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=316.7282+38.7488&fov=0.5&survey=P/DSS2/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=316.72820&dec=38.74880&format=jpg" alt="61 Cygni A — DSS2 Optical" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(DSS2 Optical)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=316.7282+38.7488&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=316.7282+38.7488&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
-      <div class="card-body">
-        <div class="name">61 Cygni A</div>
-        <div class="meta">
-          <span class="tag">RADIO</span><span class="tag">OPTICAL</span>
-          <span class="tag tag-method">doppler_drift</span><span class="tag tag-method">optical_laser_pulse</span>
-        </div>
-        <div class="coords">RA 316.7282° &nbsp; Dec 38.7488°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=316.7282+38.7488&fov=0.5&survey=P/DSS2/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=330.8400+-56.7867&fov=0.5&survey=P/DSS2/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=330.84000&dec=-56.78670&format=jpg" alt="Epsilon Indi A — DSS2 Optical" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(DSS2 Optical)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=330.8400+-56.7867&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=330.8400+-56.7867&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
-      <div class="card-body">
-        <div class="name">Epsilon Indi A</div>
-        <div class="meta">
-          <span class="tag">RADIO</span>
-          <span class="tag tag-method">doppler_drift</span>
-        </div>
-        <div class="coords">RA 330.8400° &nbsp; Dec -56.7867°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=330.8400+-56.7867&fov=0.5&survey=P/DSS2/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=344.4127+-29.6223&fov=0.5&survey=P/DSS2/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=344.41270&dec=-29.62230&format=jpg" alt="Fomalhaut — DSS2 Optical" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(DSS2 Optical)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=344.4127+-29.6223&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=344.4127+-29.6223&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
-      <div class="card-body">
-        <div class="name">Fomalhaut</div>
-        <div class="meta">
-          <span class="tag">RADIO</span>
-          <span class="tag tag-method">doppler_drift</span>
-        </div>
-        <div class="coords">RA 344.4127° &nbsp; Dec -29.6223°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=344.4127+-29.6223&fov=0.5&survey=P/DSS2/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=176.9351+0.8048&fov=0.5&survey=P/DSS2/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=176.93510&dec=0.80480&format=jpg" alt="Ross 128 — DSS2 Optical" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(DSS2 Optical)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=176.9351+0.8048&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=176.9351+0.8048&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
-      <div class="card-body">
-        <div class="name">Ross 128</div>
-        <div class="meta">
-          <span class="tag">RADIO</span><span class="tag">OPTICAL</span>
-          <span class="tag tag-method">doppler_drift</span><span class="tag tag-method">optical_laser_pulse</span>
-        </div>
-        <div class="coords">RA 176.9351° &nbsp; Dec 0.8048°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=176.9351+0.8048&fov=0.5&survey=P/DSS2/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=82.9938+33.1480&fov=0.5&survey=P/DSS2/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=82.99380&dec=33.14800&format=jpg" alt="FRB20121102A — DSS2 Optical" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(DSS2 Optical)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=82.9938+33.1480&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=82.9938+33.1480&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
-      <div class="card-body">
-        <div class="name">FRB20121102A</div>
-        <div class="meta">
-          <span class="tag">FRB</span>
-          <span class="tag tag-method">frb_repeater</span>
-        </div>
-        <div class="coords">RA 82.9938° &nbsp; Dec 33.1480°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=82.9938+33.1480&fov=0.5&survey=P/DSS2/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=29.5031+65.7168&fov=0.5&survey=P/DSS2/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=29.50310&dec=65.71680&format=jpg" alt="FRB20180916B — DSS2 Optical" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(DSS2 Optical)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=29.5031+65.7168&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=29.5031+65.7168&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
-      <div class="card-body">
-        <div class="name">FRB20180916B</div>
-        <div class="meta">
-          <span class="tag">FRB</span>
-          <span class="tag tag-method">frb_repeater+periodic</span>
-        </div>
-        <div class="coords">RA 29.5031° &nbsp; Dec 65.7168°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=29.5031+65.7168&fov=0.5&survey=P/DSS2/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=240.0275+-11.2921&fov=0.5&survey=P/DSS2/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=240.02750&dec=-11.29210&format=jpg" alt="FRB20190520B — DSS2 Optical" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(DSS2 Optical)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=240.0275+-11.2921&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=240.0275+-11.2921&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
-      <div class="card-body">
-        <div class="name">FRB20190520B</div>
-        <div class="meta">
-          <span class="tag">FRB</span>
-          <span class="tag tag-method">frb_repeater</span>
-        </div>
-        <div class="coords">RA 240.0275° &nbsp; Dec -11.2921°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=240.0275+-11.2921&fov=0.5&survey=P/DSS2/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=77.0117+26.0603&fov=0.5&survey=P/DSS2/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=77.01170&dec=26.06030&format=jpg" alt="FRB20201124A — DSS2 Optical" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(DSS2 Optical)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=77.0117+26.0603&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=77.0117+26.0603&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
-      <div class="card-body">
-        <div class="name">FRB20201124A</div>
-        <div class="meta">
-          <span class="tag">FRB</span>
-          <span class="tag tag-method">frb_repeater</span>
-        </div>
-        <div class="coords">RA 77.0117° &nbsp; Dec 26.0603°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=77.0117+26.0603&fov=0.5&survey=P/DSS2/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=347.2743+48.7108&fov=0.5&survey=P/DSS2/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=347.27430&dec=48.71080&format=jpg" alt="FRB20220912A — DSS2 Optical" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(DSS2 Optical)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=347.2743+48.7108&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=347.2743+48.7108&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
-      <div class="card-body">
-        <div class="name">FRB20220912A</div>
-        <div class="meta">
-          <span class="tag">FRB</span>
-          <span class="tag tag-method">frb_repeater</span>
-        </div>
-        <div class="coords">RA 347.2743° &nbsp; Dec 48.7108°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=347.2743+48.7108&fov=0.5&survey=P/DSS2/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=133.9867+-84.5369&fov=0.5&survey=P/DSS2/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=133.98670&dec=-84.53695&format=jpg" alt="FRB_SIM_0011 — DSS2 Optical" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(DSS2 Optical)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=133.9867+-84.5369&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=133.9867+-84.5369&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
-      <div class="card-body">
-        <div class="name">FRB_SIM_0011</div>
-        <div class="meta">
-          <span class="tag">FRB</span>
-          <span class="tag tag-method">frb_repeater</span>
-        </div>
-        <div class="coords">RA 133.9867° &nbsp; Dec -84.5369°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=133.9867+-84.5369&fov=0.5&survey=P/DSS2/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=54.0719+56.9409&fov=0.5&survey=P/DSS2/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=54.07190&dec=56.94086&format=jpg" alt="FRB_SIM_0006 — DSS2 Optical" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(DSS2 Optical)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=54.0719+56.9409&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=54.0719+56.9409&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
-      <div class="card-body">
-        <div class="name">FRB_SIM_0006</div>
-        <div class="meta">
-          <span class="tag">FRB</span>
-          <span class="tag tag-method">frb_low_dm_excess</span>
-        </div>
-        <div class="coords">RA 54.0719° &nbsp; Dec 56.9409°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=54.0719+56.9409&fov=0.5&survey=P/DSS2/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=81.5125+-54.2662&fov=0.5&survey=P/DSS2/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=81.51245&dec=-54.26619&format=jpg" alt="FRB_SIM_0014 — DSS2 Optical" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(DSS2 Optical)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=81.5125+-54.2662&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=81.5125+-54.2662&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
-      <div class="card-body">
-        <div class="name">FRB_SIM_0014</div>
-        <div class="meta">
-          <span class="tag">FRB</span>
-          <span class="tag tag-method">frb_low_dm_excess</span>
-        </div>
-        <div class="coords">RA 81.5125° &nbsp; Dec -54.2662°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=81.5125+-54.2662&fov=0.5&survey=P/DSS2/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=7.5871+-34.0974&fov=0.5&survey=P/DSS2/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=7.58713&dec=-34.09736&format=jpg" alt="FRB_SIM_0022 — DSS2 Optical" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(DSS2 Optical)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=7.5871+-34.0974&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=7.5871+-34.0974&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
-      <div class="card-body">
-        <div class="name">FRB_SIM_0022</div>
-        <div class="meta">
-          <span class="tag">FRB</span>
-          <span class="tag tag-method">frb_low_dm_excess</span>
-        </div>
-        <div class="coords">RA 7.5871° &nbsp; Dec -34.0974°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=7.5871+-34.0974&fov=0.5&survey=P/DSS2/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=225.5803+53.5425&fov=0.5&survey=P/DSS2/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=225.58025&dec=53.54247&format=jpg" alt="FRB_SIM_0024 — DSS2 Optical" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(DSS2 Optical)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=225.5803+53.5425&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=225.5803+53.5425&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
-      <div class="card-body">
-        <div class="name">FRB_SIM_0024</div>
-        <div class="meta">
-          <span class="tag">FRB</span>
-          <span class="tag tag-method">frb_low_dm_excess</span>
-        </div>
-        <div class="coords">RA 225.5803° &nbsp; Dec 53.5425°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=225.5803+53.5425&fov=0.5&survey=P/DSS2/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=47.9544+-66.4768&fov=0.5&survey=P/DSS2/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=47.95439&dec=-66.47684&format=jpg" alt="FRB_SIM_0030 — DSS2 Optical" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(DSS2 Optical)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=47.9544+-66.4768&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=47.9544+-66.4768&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
-      <div class="card-body">
-        <div class="name">FRB_SIM_0030</div>
-        <div class="meta">
-          <span class="tag">FRB</span>
-          <span class="tag tag-method">frb_low_dm_excess</span>
-        </div>
-        <div class="coords">RA 47.9544° &nbsp; Dec -66.4768°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=47.9544+-66.4768&fov=0.5&survey=P/DSS2/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=163.8063+-79.7806&fov=0.5&survey=P/DSS2/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=163.80629&dec=-79.78061&format=jpg" alt="FRB_SIM_0039 — DSS2 Optical" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(DSS2 Optical)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=163.8063+-79.7806&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=163.8063+-79.7806&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
-      <div class="card-body">
-        <div class="name">FRB_SIM_0039</div>
-        <div class="meta">
-          <span class="tag">FRB</span>
-          <span class="tag tag-method">frb_low_dm_excess</span>
-        </div>
-        <div class="coords">RA 163.8063° &nbsp; Dec -79.7806°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=163.8063+-79.7806&fov=0.5&survey=P/DSS2/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=35.1611+-56.7867&fov=0.5&survey=P/2MASS/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2F2MASS%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=35.16110&dec=-56.78670&format=jpg" alt="TOI-700 — 2MASS NIR" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(2MASS NIR)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=35.1611+-56.7867&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=35.1611+-56.7867&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a></div>
-      <div class="card-body">
-        <div class="name">TOI-700</div>
-        <div class="meta">
-          <span class="tag">TESS</span>
-          <span class="tag tag-method">lightcurve_anomaly</span>
-        </div>
-        <div class="coords">RA 35.1611° &nbsp; Dec -56.7867°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=35.1611+-56.7867&fov=0.5&survey=P/2MASS/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=271.2716+-27.6274&fov=0.5&survey=P/2MASS/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2F2MASS%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=271.27160&dec=-27.62740&format=jpg" alt="TOI-216 — 2MASS NIR" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(2MASS NIR)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=271.2716+-27.6274&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=271.2716+-27.6274&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a></div>
-      <div class="card-body">
-        <div class="name">TOI-216</div>
-        <div class="meta">
-          <span class="tag">TESS</span>
-          <span class="tag tag-method">lightcurve_anomaly</span>
-        </div>
-        <div class="coords">RA 271.2716° &nbsp; Dec -27.6274°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=271.2716+-27.6274&fov=0.5&survey=P/2MASS/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=311.3271+42.6363&fov=0.5&survey=P/2MASS/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2F2MASS%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=311.32713&dec=42.63630&format=jpg" alt="SIM_STAR_0000 — 2MASS NIR" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(2MASS NIR)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=311.3271+42.6363&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=311.3271+42.6363&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a></div>
-      <div class="card-body">
-        <div class="name">SIM_STAR_0000</div>
-        <div class="meta">
-          <span class="tag">TESS</span>
-          <span class="tag tag-method">lightcurve_anomaly</span>
-        </div>
-        <div class="coords">RA 311.3271° &nbsp; Dec 42.6363°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=311.3271+42.6363&fov=0.5&survey=P/2MASS/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=94.1207+-50.7361&fov=0.5&survey=P/2MASS/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2F2MASS%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=94.12069&dec=-50.73607&format=jpg" alt="SIM_STAR_0001 — 2MASS NIR" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(2MASS NIR)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=94.1207+-50.7361&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=94.1207+-50.7361&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a></div>
-      <div class="card-body">
-        <div class="name">SIM_STAR_0001</div>
-        <div class="meta">
-          <span class="tag">TESS</span>
-          <span class="tag tag-method">lightcurve_anomaly</span>
-        </div>
-        <div class="coords">RA 94.1207° &nbsp; Dec -50.7361°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=94.1207+-50.7361&fov=0.5&survey=P/2MASS/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=220.9650+-59.6843&fov=0.5&survey=P/2MASS/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2F2MASS%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=220.96501&dec=-59.68431&format=jpg" alt="SIM_STAR_0002 — 2MASS NIR" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(2MASS NIR)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=220.9650+-59.6843&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=220.9650+-59.6843&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a></div>
-      <div class="card-body">
-        <div class="name">SIM_STAR_0002</div>
-        <div class="meta">
-          <span class="tag">TESS</span>
-          <span class="tag tag-method">lightcurve_anomaly</span>
-        </div>
-        <div class="coords">RA 220.9650° &nbsp; Dec -59.6843°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=220.9650+-59.6843&fov=0.5&survey=P/2MASS/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=354.5293+-25.6444&fov=0.5&survey=P/2MASS/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2F2MASS%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=354.52925&dec=-25.64441&format=jpg" alt="SIM_STAR_0003 — 2MASS NIR" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(2MASS NIR)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=354.5293+-25.6444&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=354.5293+-25.6444&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a></div>
-      <div class="card-body">
-        <div class="name">SIM_STAR_0003</div>
-        <div class="meta">
-          <span class="tag">TESS</span>
-          <span class="tag tag-method">lightcurve_anomaly</span>
-        </div>
-        <div class="coords">RA 354.5293° &nbsp; Dec -25.6444°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=354.5293+-25.6444&fov=0.5&survey=P/2MASS/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=293.0423+-0.2559&fov=0.5&survey=P/2MASS/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2F2MASS%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=293.04235&dec=-0.25591&format=jpg" alt="SIM_STAR_0006 — 2MASS NIR" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(2MASS NIR)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=293.0423+-0.2559&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=293.0423+-0.2559&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a></div>
-      <div class="card-body">
-        <div class="name">SIM_STAR_0006</div>
-        <div class="meta">
-          <span class="tag">TESS</span>
-          <span class="tag tag-method">lightcurve_anomaly</span>
-        </div>
-        <div class="coords">RA 293.0423° &nbsp; Dec -0.2559°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=293.0423+-0.2559&fov=0.5&survey=P/2MASS/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=279.6070+57.5074&fov=0.5&survey=P/2MASS/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2F2MASS%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=279.60702&dec=57.50739&format=jpg" alt="SIM_STAR_0007 — 2MASS NIR" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(2MASS NIR)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=279.6070+57.5074&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=279.6070+57.5074&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a></div>
-      <div class="card-body">
-        <div class="name">SIM_STAR_0007</div>
-        <div class="meta">
-          <span class="tag">TESS</span>
-          <span class="tag tag-method">lightcurve_anomaly</span>
-        </div>
-        <div class="coords">RA 279.6070° &nbsp; Dec 57.5074°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=279.6070+57.5074&fov=0.5&survey=P/2MASS/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=18.0018+-15.2670&fov=0.5&survey=P/2MASS/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2F2MASS%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=18.00180&dec=-15.26700&format=jpg" alt="LHS 1140b — 2MASS NIR" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(2MASS NIR)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=18.0018+-15.2670&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=18.0018+-15.2670&fov=0.5&survey=P/WISE/W4" target="_blank" class="survey-btn">WISE 22µm</a></div>
-      <div class="card-body">
-        <div class="name">LHS 1140b</div>
-        <div class="meta">
-          <span class="tag">JWST</span>
-          <span class="tag tag-method">atmospheric_biosignature</span>
-        </div>
-        <div class="coords">RA 18.0018° &nbsp; Dec -15.2670°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=18.0018+-15.2670&fov=0.5&survey=P/2MASS/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=330.7950+18.8840&fov=0.5&survey=P/2MASS/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2F2MASS%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=330.79500&dec=18.88400&format=jpg" alt="HD 209458b — 2MASS NIR" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(2MASS NIR)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=330.7950+18.8840&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=330.7950+18.8840&fov=0.5&survey=P/WISE/W4" target="_blank" class="survey-btn">WISE 22µm</a></div>
-      <div class="card-body">
-        <div class="name">HD 209458b</div>
-        <div class="meta">
-          <span class="tag">JWST</span>
-          <span class="tag tag-method">atmospheric_biosignature</span>
-        </div>
-        <div class="coords">RA 330.7950° &nbsp; Dec 18.8840°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=330.7950+18.8840&fov=0.5&survey=P/2MASS/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=77.3791+-13.7011&fov=0.5&survey=P/2MASS/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2F2MASS%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=77.37911&dec=-13.70112&format=jpg" alt="TOI-SIM-0001 — 2MASS NIR" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(2MASS NIR)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=77.3791+-13.7011&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=77.3791+-13.7011&fov=0.5&survey=P/WISE/W4" target="_blank" class="survey-btn">WISE 22µm</a></div>
-      <div class="card-body">
-        <div class="name">TOI-SIM-0001</div>
-        <div class="meta">
-          <span class="tag">JWST</span>
-          <span class="tag tag-method">atmospheric_biosignature</span>
-        </div>
-        <div class="coords">RA 77.3791° &nbsp; Dec -13.7011°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=77.3791+-13.7011&fov=0.5&survey=P/2MASS/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=23.4578+26.8011&fov=0.5&survey=P/DSS2/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=23.45780&dec=26.80110&format=jpg" alt="1I/ʻOumuamua — DSS2 Optical" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(DSS2 Optical)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=23.4578+26.8011&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=23.4578+26.8011&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
-      <div class="card-body">
-        <div class="name">1I/ʻOumuamua</div>
-        <div class="meta">
-          <span class="tag">INTERSTELLAR</span>
-          <span class="tag tag-method">interstellar_trajectory</span>
-        </div>
-        <div class="coords">RA 23.4578° &nbsp; Dec 26.8011°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=23.4578+26.8011&fov=0.5&survey=P/DSS2/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=65.5670+50.5077&fov=0.5&survey=P/DSS2/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=65.56699&dec=50.50768&format=jpg" alt="SIM_ISO_0001 — DSS2 Optical" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(DSS2 Optical)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=65.5670+50.5077&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=65.5670+50.5077&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
-      <div class="card-body">
-        <div class="name">SIM_ISO_0001</div>
-        <div class="meta">
-          <span class="tag">INTERSTELLAR</span>
-          <span class="tag tag-method">interstellar_trajectory</span>
-        </div>
-        <div class="coords">RA 65.5670° &nbsp; Dec 50.5077°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=65.5670+50.5077&fov=0.5&survey=P/DSS2/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=7.3274+33.9141&fov=0.5&survey=P/DSS2/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=7.32742&dec=33.91411&format=jpg" alt="SIM_ISO_0002 — DSS2 Optical" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(DSS2 Optical)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=7.3274+33.9141&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=7.3274+33.9141&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
-      <div class="card-body">
-        <div class="name">SIM_ISO_0002</div>
-        <div class="meta">
-          <span class="tag">INTERSTELLAR</span>
-          <span class="tag tag-method">interstellar_trajectory</span>
-        </div>
-        <div class="coords">RA 7.3274° &nbsp; Dec 33.9141°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=7.3274+33.9141&fov=0.5&survey=P/DSS2/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=219.6372+2.1438&fov=0.5&survey=P/DSS2/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=219.63715&dec=2.14377&format=jpg" alt="SIM_ISO_0004 — DSS2 Optical" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(DSS2 Optical)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=219.6372+2.1438&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=219.6372+2.1438&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
-      <div class="card-body">
-        <div class="name">SIM_ISO_0004</div>
-        <div class="meta">
-          <span class="tag">INTERSTELLAR</span>
-          <span class="tag tag-method">interstellar_trajectory</span>
-        </div>
-        <div class="coords">RA 219.6372° &nbsp; Dec 2.1438°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=219.6372+2.1438&fov=0.5&survey=P/DSS2/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=43.3500+2.3400&fov=0.5&survey=P/Fermi/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FFermi%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=43.35000&dec=2.34000&format=jpg" alt="4FGL J0253.4+0220 — Fermi γ-ray" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(Fermi γ-ray)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=43.3500+2.3400&fov=0.5&survey=P/Fermi/color" target="_blank" class="survey-btn">Fermi γ-ray</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=43.3500+2.3400&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a></div>
-      <div class="card-body">
-        <div class="name">4FGL J0253.4+0220</div>
-        <div class="meta">
-          <span class="tag">FERMI</span>
-          <span class="tag tag-method">gamma_unidentified</span>
-        </div>
-        <div class="coords">RA 43.3500° &nbsp; Dec 2.3400°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=43.3500+2.3400&fov=0.5&survey=P/Fermi/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=80.4900+21.2000&fov=0.5&survey=P/Fermi/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FFermi%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=80.49000&dec=21.20000&format=jpg" alt="4FGL J0521.9+2112 — Fermi γ-ray" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(Fermi γ-ray)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=80.4900+21.2000&fov=0.5&survey=P/Fermi/color" target="_blank" class="survey-btn">Fermi γ-ray</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=80.4900+21.2000&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a></div>
-      <div class="card-body">
-        <div class="name">4FGL J0521.9+2112</div>
-        <div class="meta">
-          <span class="tag">FERMI</span>
-          <span class="tag tag-method">gamma_unidentified</span>
-        </div>
-        <div class="coords">RA 80.4900° &nbsp; Dec 21.2000°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=80.4900+21.2000&fov=0.5&survey=P/Fermi/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=170.0000+-22.0800&fov=0.5&survey=P/Fermi/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FFermi%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=170.00000&dec=-22.08000&format=jpg" alt="4FGL J1120.0-2204 — Fermi γ-ray" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(Fermi γ-ray)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=170.0000+-22.0800&fov=0.5&survey=P/Fermi/color" target="_blank" class="survey-btn">Fermi γ-ray</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=170.0000+-22.0800&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a></div>
-      <div class="card-body">
-        <div class="name">4FGL J1120.0-2204</div>
-        <div class="meta">
-          <span class="tag">FERMI</span>
-          <span class="tag tag-method">gamma_unidentified</span>
-        </div>
-        <div class="coords">RA 170.0000° &nbsp; Dec -22.0800°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=170.0000+-22.0800&fov=0.5&survey=P/Fermi/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=187.9000+14.1700&fov=0.5&survey=P/Fermi/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FFermi%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=187.90000&dec=14.17000&format=jpg" alt="4FGL J1231.6+1410 — Fermi γ-ray" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(Fermi γ-ray)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=187.9000+14.1700&fov=0.5&survey=P/Fermi/color" target="_blank" class="survey-btn">Fermi γ-ray</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=187.9000+14.1700&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a></div>
-      <div class="card-body">
-        <div class="name">4FGL J1231.6+1410</div>
-        <div class="meta">
-          <span class="tag">FERMI</span>
-          <span class="tag tag-method">gamma_unidentified</span>
-        </div>
-        <div class="coords">RA 187.9000° &nbsp; Dec 14.1700°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=187.9000+14.1700&fov=0.5&survey=P/Fermi/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=214.6000+-2.5600&fov=0.5&survey=P/Fermi/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FFermi%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=214.60000&dec=-2.56000&format=jpg" alt="4FGL J1418.4-0233 — Fermi γ-ray" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(Fermi γ-ray)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=214.6000+-2.5600&fov=0.5&survey=P/Fermi/color" target="_blank" class="survey-btn">Fermi γ-ray</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=214.6000+-2.5600&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a></div>
-      <div class="card-body">
-        <div class="name">4FGL J1418.4-0233</div>
-        <div class="meta">
-          <span class="tag">FERMI</span>
-          <span class="tag tag-method">gamma_unidentified</span>
-        </div>
-        <div class="coords">RA 214.6000° &nbsp; Dec -2.5600°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=214.6000+-2.5600&fov=0.5&survey=P/Fermi/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=253.4000+39.7500&fov=0.5&survey=P/Fermi/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FFermi%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=253.40000&dec=39.75000&format=jpg" alt="4FGL J1653.6+3945 — Fermi γ-ray" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(Fermi γ-ray)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=253.4000+39.7500&fov=0.5&survey=P/Fermi/color" target="_blank" class="survey-btn">Fermi γ-ray</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=253.4000+39.7500&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a></div>
-      <div class="card-body">
-        <div class="name">4FGL J1653.6+3945</div>
-        <div class="meta">
-          <span class="tag">FERMI</span>
-          <span class="tag tag-method">gamma_unidentified</span>
-        </div>
-        <div class="coords">RA 253.4000° &nbsp; Dec 39.7500°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=253.4000+39.7500&fov=0.5&survey=P/Fermi/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=266.0000+-76.3200&fov=0.5&survey=P/Fermi/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FFermi%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=266.00000&dec=-76.32000&format=jpg" alt="4FGL J1744.1-7619 — Fermi γ-ray" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(Fermi γ-ray)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=266.0000+-76.3200&fov=0.5&survey=P/Fermi/color" target="_blank" class="survey-btn">Fermi γ-ray</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=266.0000+-76.3200&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a></div>
-      <div class="card-body">
-        <div class="name">4FGL J1744.1-7619</div>
-        <div class="meta">
-          <span class="tag">FERMI</span>
-          <span class="tag tag-method">gamma_unidentified</span>
-        </div>
-        <div class="coords">RA 266.0000° &nbsp; Dec -76.3200°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=266.0000+-76.3200&fov=0.5&survey=P/Fermi/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=277.1000+32.6100&fov=0.5&survey=P/Fermi/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FFermi%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=277.10000&dec=32.61000&format=jpg" alt="4FGL J1828.4+3236 — Fermi γ-ray" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(Fermi γ-ray)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=277.1000+32.6100&fov=0.5&survey=P/Fermi/color" target="_blank" class="survey-btn">Fermi γ-ray</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=277.1000+32.6100&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a></div>
-      <div class="card-body">
-        <div class="name">4FGL J1828.4+3236</div>
-        <div class="meta">
-          <span class="tag">FERMI</span>
-          <span class="tag tag-method">gamma_unidentified</span>
-        </div>
-        <div class="coords">RA 277.1000° &nbsp; Dec 32.6100°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=277.1000+32.6100&fov=0.5&survey=P/Fermi/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=298.9000+11.3900&fov=0.5&survey=P/Fermi/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FFermi%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=298.90000&dec=11.39000&format=jpg" alt="4FGL J1955.4+1123 — Fermi γ-ray" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(Fermi γ-ray)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=298.9000+11.3900&fov=0.5&survey=P/Fermi/color" target="_blank" class="survey-btn">Fermi γ-ray</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=298.9000+11.3900&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a></div>
-      <div class="card-body">
-        <div class="name">4FGL J1955.4+1123</div>
-        <div class="meta">
-          <span class="tag">FERMI</span>
-          <span class="tag tag-method">gamma_unidentified</span>
-        </div>
-        <div class="coords">RA 298.9000° &nbsp; Dec 11.3900°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=298.9000+11.3900&fov=0.5&survey=P/Fermi/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=312.5000+10.0600&fov=0.5&survey=P/Fermi/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FFermi%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=312.50000&dec=10.06000&format=jpg" alt="4FGL J2049.9+1003 — Fermi γ-ray" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(Fermi γ-ray)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=312.5000+10.0600&fov=0.5&survey=P/Fermi/color" target="_blank" class="survey-btn">Fermi γ-ray</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=312.5000+10.0600&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a></div>
-      <div class="card-body">
-        <div class="name">4FGL J2049.9+1003</div>
-        <div class="meta">
-          <span class="tag">FERMI</span>
-          <span class="tag tag-method">gamma_unidentified</span>
-        </div>
-        <div class="coords">RA 312.5000° &nbsp; Dec 10.0600°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=312.5000+10.0600&fov=0.5&survey=P/Fermi/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=329.7000+-30.2300&fov=0.5&survey=P/Fermi/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FFermi%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=329.70000&dec=-30.23000&format=jpg" alt="4FGL J2158.8-3013 — Fermi γ-ray" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(Fermi γ-ray)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=329.7000+-30.2300&fov=0.5&survey=P/Fermi/color" target="_blank" class="survey-btn">Fermi γ-ray</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=329.7000+-30.2300&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a></div>
-      <div class="card-body">
-        <div class="name">4FGL J2158.8-3013</div>
-        <div class="meta">
-          <span class="tag">FERMI</span>
-          <span class="tag tag-method">gamma_unidentified</span>
-        </div>
-        <div class="coords">RA 329.7000° &nbsp; Dec -30.2300°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=329.7000+-30.2300&fov=0.5&survey=P/Fermi/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=17.8000+39.1300&fov=0.5&survey=P/Fermi/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FFermi%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=17.80000&dec=39.13000&format=jpg" alt="4FGL J0111.0+3907 — Fermi γ-ray" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(Fermi γ-ray)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=17.8000+39.1300&fov=0.5&survey=P/Fermi/color" target="_blank" class="survey-btn">Fermi γ-ray</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=17.8000+39.1300&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a></div>
-      <div class="card-body">
-        <div class="name">4FGL J0111.0+3907</div>
-        <div class="meta">
-          <span class="tag">FERMI</span>
-          <span class="tag tag-method">gamma_unidentified</span>
-        </div>
-        <div class="coords">RA 17.8000° &nbsp; Dec 39.1300°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=17.8000+39.1300&fov=0.5&survey=P/Fermi/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=77.1400+-44.9950&fov=0.5&survey=P/DSS2/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=77.14000&dec=-44.99500&format=jpg" alt="Kapteyn's Star — DSS2 Optical" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(DSS2 Optical)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=77.1400+-44.9950&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=77.1400+-44.9950&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
-      <div class="card-body">
-        <div class="name">Kapteyn's Star</div>
-        <div class="meta">
-          <span class="tag">GAIA</span>
-          <span class="tag tag-method">proper_motion_anomaly</span>
-        </div>
-        <div class="coords">RA 77.1400° &nbsp; Dec -44.9950°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=77.1400+-44.9950&fov=0.5&survey=P/DSS2/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=48.1200+18.7900&fov=0.5&survey=P/DSS2/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=48.12000&dec=18.79000&format=jpg" alt="SIM_J0312+1847 — DSS2 Optical" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(DSS2 Optical)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=48.1200+18.7900&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=48.1200+18.7900&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
-      <div class="card-body">
-        <div class="name">SIM_J0312+1847</div>
-        <div class="meta">
-          <span class="tag">GAIA</span>
-          <span class="tag tag-method">proper_motion_anomaly</span>
-        </div>
-        <div class="coords">RA 48.1200° &nbsp; Dec 18.7900°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=48.1200+18.7900&fov=0.5&survey=P/DSS2/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=176.9100+-2.5200&fov=0.5&survey=P/DSS2/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=176.91000&dec=-2.52000&format=jpg" alt="SIM_J1147-0231 — DSS2 Optical" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(DSS2 Optical)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=176.9100+-2.5200&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=176.9100+-2.5200&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
-      <div class="card-body">
-        <div class="name">SIM_J1147-0231</div>
-        <div class="meta">
-          <span class="tag">GAIA</span>
-          <span class="tag tag-method">proper_motion_anomaly</span>
-        </div>
-        <div class="coords">RA 176.9100° &nbsp; Dec -2.5200°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=176.9100+-2.5200&fov=0.5&survey=P/DSS2/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=334.6200+33.6900&fov=0.5&survey=P/DSS2/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=334.62000&dec=33.69000&format=jpg" alt="SIM_J2218+3341 — DSS2 Optical" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(DSS2 Optical)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=334.6200+33.6900&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=334.6200+33.6900&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
-      <div class="card-body">
-        <div class="name">SIM_J2218+3341</div>
-        <div class="meta">
-          <span class="tag">GAIA</span>
-          <span class="tag tag-method">proper_motion_anomaly</span>
-        </div>
-        <div class="coords">RA 334.6200° &nbsp; Dec 33.6900°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=334.6200+33.6900&fov=0.5&survey=P/DSS2/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=97.8800+15.8100&fov=0.5&survey=P/DSS2/color" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=97.88000&dec=15.81000&format=jpg" alt="SIM_J0631+1548 — DSS2 Optical" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(DSS2 Optical)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=97.8800+15.8100&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=97.8800+15.8100&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
-      <div class="card-body">
-        <div class="name">SIM_J0631+1548</div>
-        <div class="meta">
-          <span class="tag">GAIA</span>
-          <span class="tag tag-method">proper_motion_anomaly</span>
-        </div>
-        <div class="coords">RA 97.8800° &nbsp; Dec 15.8100°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=97.8800+15.8100&fov=0.5&survey=P/DSS2/color" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=3.2990+63.8270&fov=0.5&survey=P/Chandra/ACIS" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FChandra%2FACIS&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=3.29900&dec=63.82700&format=jpg" alt="CXO J001311.8+634937 — Chandra X-ray" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(Chandra X-ray)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=3.2990+63.8270&fov=0.5&survey=P/Chandra/ACIS" target="_blank" class="survey-btn">Chandra X-ray</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=3.2990+63.8270&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a></div>
-      <div class="card-body">
-        <div class="name">CXO J001311.8+634937</div>
-        <div class="meta">
-          <span class="tag">XRAY</span>
-          <span class="tag tag-method">xray_unidentified</span>
-        </div>
-        <div class="coords">RA 3.2990° &nbsp; Dec 63.8270°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=3.2990+63.8270&fov=0.5&survey=P/Chandra/ACIS" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=41.3020+-0.2100&fov=0.5&survey=P/Chandra/ACIS" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FChandra%2FACIS&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=41.30200&dec=-0.21000&format=jpg" alt="CXO J024512.4-001234 — Chandra X-ray" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(Chandra X-ray)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=41.3020+-0.2100&fov=0.5&survey=P/Chandra/ACIS" target="_blank" class="survey-btn">Chandra X-ray</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=41.3020+-0.2100&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a></div>
-      <div class="card-body">
-        <div class="name">CXO J024512.4-001234</div>
-        <div class="meta">
-          <span class="tag">XRAY</span>
-          <span class="tag tag-method">xray_unidentified</span>
-        </div>
-        <div class="coords">RA 41.3020° &nbsp; Dec -0.2100°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=41.3020+-0.2100&fov=0.5&survey=P/Chandra/ACIS" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=114.6720+65.5340&fov=0.5&survey=P/Chandra/ACIS" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FChandra%2FACIS&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=114.67200&dec=65.53400&format=jpg" alt="CXO J073841.2+653201 — Chandra X-ray" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(Chandra X-ray)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=114.6720+65.5340&fov=0.5&survey=P/Chandra/ACIS" target="_blank" class="survey-btn">Chandra X-ray</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=114.6720+65.5340&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a></div>
-      <div class="card-body">
-        <div class="name">CXO J073841.2+653201</div>
-        <div class="meta">
-          <span class="tag">XRAY</span>
-          <span class="tag tag-method">xray_unidentified</span>
-        </div>
-        <div class="coords">RA 114.6720° &nbsp; Dec 65.5340°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=114.6720+65.5340&fov=0.5&survey=P/Chandra/ACIS" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=275.6630+-18.2450&fov=0.5&survey=P/Chandra/ACIS" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FChandra%2FACIS&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=275.66300&dec=-18.24500&format=jpg" alt="CXO J182239.2-181442 — Chandra X-ray" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(Chandra X-ray)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=275.6630+-18.2450&fov=0.5&survey=P/Chandra/ACIS" target="_blank" class="survey-btn">Chandra X-ray</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=275.6630+-18.2450&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a></div>
-      <div class="card-body">
-        <div class="name">CXO J182239.2-181442</div>
-        <div class="meta">
-          <span class="tag">XRAY</span>
-          <span class="tag tag-method">xray_unidentified</span>
-        </div>
-        <div class="coords">RA 275.6630° &nbsp; Dec -18.2450°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=275.6630+-18.2450&fov=0.5&survey=P/Chandra/ACIS" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=326.3390+12.4790&fov=0.5&survey=P/Chandra/ACIS" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FChandra%2FACIS&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=326.33900&dec=12.47900&format=jpg" alt="CXO J214521.3+122844 — Chandra X-ray" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(Chandra X-ray)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=326.3390+12.4790&fov=0.5&survey=P/Chandra/ACIS" target="_blank" class="survey-btn">Chandra X-ray</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=326.3390+12.4790&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a></div>
-      <div class="card-body">
-        <div class="name">CXO J214521.3+122844</div>
-        <div class="meta">
-          <span class="tag">XRAY</span>
-          <span class="tag tag-method">xray_unidentified</span>
-        </div>
-        <div class="coords">RA 326.3390° &nbsp; Dec 12.4790°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=326.3390+12.4790&fov=0.5&survey=P/Chandra/ACIS" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=56.1180+-4.9530&fov=0.5&survey=P/Chandra/ACIS" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FChandra%2FACIS&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=56.11800&dec=-4.95300&format=jpg" alt="4XMM J034428.3-045712 — Chandra X-ray" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(Chandra X-ray)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=56.1180+-4.9530&fov=0.5&survey=P/Chandra/ACIS" target="_blank" class="survey-btn">Chandra X-ray</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=56.1180+-4.9530&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a></div>
-      <div class="card-body">
-        <div class="name">4XMM J034428.3-045712</div>
-        <div class="meta">
-          <span class="tag">XRAY</span>
-          <span class="tag tag-method">xray_unidentified</span>
-        </div>
-        <div class="coords">RA 56.1180° &nbsp; Dec -4.9530°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=56.1180+-4.9530&fov=0.5&survey=P/Chandra/ACIS" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=138.1430+30.5340&fov=0.5&survey=P/Chandra/ACIS" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FChandra%2FACIS&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=138.14300&dec=30.53400&format=jpg" alt="4XMM J091234.2+303201 — Chandra X-ray" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(Chandra X-ray)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=138.1430+30.5340&fov=0.5&survey=P/Chandra/ACIS" target="_blank" class="survey-btn">Chandra X-ray</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=138.1430+30.5340&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a></div>
-      <div class="card-body">
-        <div class="name">4XMM J091234.2+303201</div>
-        <div class="meta">
-          <span class="tag">XRAY</span>
-          <span class="tag tag-method">xray_unidentified</span>
-        </div>
-        <div class="coords">RA 138.1430° &nbsp; Dec 30.5340°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=138.1430+30.5340&fov=0.5&survey=P/Chandra/ACIS" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=219.5530+-23.2490&fov=0.5&survey=P/Chandra/ACIS" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FChandra%2FACIS&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=219.55300&dec=-23.24900&format=jpg" alt="4XMM J143812.7-231456 — Chandra X-ray" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(Chandra X-ray)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=219.5530+-23.2490&fov=0.5&survey=P/Chandra/ACIS" target="_blank" class="survey-btn">Chandra X-ray</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=219.5530+-23.2490&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a></div>
-      <div class="card-body">
-        <div class="name">4XMM J143812.7-231456</div>
-        <div class="meta">
-          <span class="tag">XRAY</span>
-          <span class="tag tag-method">xray_unidentified</span>
-        </div>
-        <div class="coords">RA 219.5530° &nbsp; Dec -23.2490°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=219.5530+-23.2490&fov=0.5&survey=P/Chandra/ACIS" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=80.5490+-69.3930&fov=0.5&survey=P/Chandra/ACIS" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FChandra%2FACIS&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=80.54900&dec=-69.39300&format=jpg" alt="4XMM J052211.8-692334 — Chandra X-ray" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(Chandra X-ray)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=80.5490+-69.3930&fov=0.5&survey=P/Chandra/ACIS" target="_blank" class="survey-btn">Chandra X-ray</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=80.5490+-69.3930&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a></div>
-      <div class="card-body">
-        <div class="name">4XMM J052211.8-692334</div>
-        <div class="meta">
-          <span class="tag">XRAY</span>
-          <span class="tag tag-method">xray_unidentified</span>
-        </div>
-        <div class="coords">RA 80.5490° &nbsp; Dec -69.3930°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=80.5490+-69.3930&fov=0.5&survey=P/Chandra/ACIS" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="tier-badge" style="background:#95a5a6">Tier 3 &nbsp;·&nbsp; 40/100</div>
-      <a href="https://aladin.u-strasbg.fr/AladinLite/?target=172.5890+5.3880&fov=0.5&survey=P/Chandra/ACIS" target="_blank"><img src="https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FChandra%2FACIS&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=172.58900&dec=5.38800&format=jpg" alt="4XMM J113021.4+052318 — Chandra X-ray" loading="lazy" style="width:100%;height:200px;object-fit:cover;border-radius:4px 4px 0 0;display:block;background:#1a1a2e;" onerror="this.style.display='none';this.nextSibling.style.display='flex'"><span style="display:none;align-items:center;justify-content:center;height:200px;background:#1a1a2e;color:#7f8c8d;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span>View in Aladin Sky Atlas</span><small style="color:#556;">(Chandra X-ray)</small></span></a>
-      <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=172.5890+5.3880&fov=0.5&survey=P/Chandra/ACIS" target="_blank" class="survey-btn">Chandra X-ray</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=172.5890+5.3880&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a></div>
-      <div class="card-body">
-        <div class="name">4XMM J113021.4+052318</div>
-        <div class="meta">
-          <span class="tag">XRAY</span>
-          <span class="tag tag-method">xray_unidentified</span>
-        </div>
-        <div class="coords">RA 172.5890° &nbsp; Dec 5.3880°</div>
-        
-        <ul class="reasons"><li>not cross-checked (limit)</li></ul>
-        <a class="aladin-btn" href="https://aladin.u-strasbg.fr/AladinLite/?target=172.5890+5.3880&fov=0.5&survey=P/Chandra/ACIS" target="_blank">🔭 Open in Aladin Sky Atlas</a>
-      </div>
-    </div></div>
+
+<div id="result-panel">
+  <div class="result-card" id="result-card"></div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section">
+  <div class="section-head">
+    <h2>Top Pipeline Candidates</h2>
+    <a href="gallery.html">View full gallery →</a>
+  </div>
+  <div class="grid" id="highlights"></div>
+</div>
+
 <footer>
-  DeepSignal · The Intelligent System To Search For Extraterrestrial Intelligence<br>
-  Sky data: DSS2 · 2MASS · WISE · Chandra · Fermi · GALEX · Spitzer · Herschel via CDS Aladin &amp; Hips2Fits<br>
-  Mission photos: NASA Images API
+  DeepSignal SETI Pipeline &nbsp;·&nbsp;
+  <a href="https://github.com/hikohong/deepsignal" target="_blank">GitHub</a> &nbsp;·&nbsp;
+  Sky images: <a href="https://alasky.cds.unistra.fr/hips-image-services/hips2fits" target="_blank">Hips2Fits CDN</a> &nbsp;·&nbsp;
+  Catalog: <a href="https://simbad.u-strasbg.fr" target="_blank">SIMBAD</a>
 </footer>
+
+<script>
+// ── Constants ─────────────────────────────────────────────────────────────────
+const SIMBAD_TAP  = "https://simbad.cds.unistra.fr/simbad/sim-tap/sync";
+const HIPS2FITS   = "https://alasky.cds.unistra.fr/hips-image-services/hips2fits";
+const TIER_COLORS = { 1: "#f59e0b", 2: "#3b82f6", 3: "#6b7280" };
+const SURVEYS     = [
+  { hips: "CDS/P/DSS2/color",        label: "Optical" },
+  { hips: "CDS/P/2MASS/K",           label: "NIR" },
+  { hips: "CDS/P/WISE/W3",           label: "IR" },
+];
+
+let catalog = [];
+
+// ── Load catalog.json on startup ──────────────────────────────────────────────
+async function loadCatalog() {
+  try {
+    const r = await fetch("catalog.json");
+    if (!r.ok) return;
+    const data = await r.json();
+    catalog = Array.isArray(data) ? data : [];
+    document.getElementById("stat-n").textContent = catalog.length;
+    renderHighlights();
+  } catch (_) {}
+}
+
+// ── Sky image URL ─────────────────────────────────────────────────────────────
+function skyUrl(ra, dec, fov = 0.25, survey = SURVEYS[0].hips) {
+  return `${HIPS2FITS}?hips=${encodeURIComponent(survey)}&ra=${ra}&dec=${dec}&fov=${fov}&width=300&height=300&projection=TAN&format=jpg`;
+}
+
+function aladInUrl(ra, dec) {
+  return `https://aladin.u-strasbg.fr/AladinLite/?target=${ra}+${dec}&fov=0.5&survey=P/DSS2/color`;
+}
+
+// ── SIMBAD TAP name resolution ────────────────────────────────────────────────
+async function resolveSimbad(name) {
+  const adql = `SELECT TOP 1 main_id,ra,dec,otype_txt,plx_value,rvz_redshift FROM basic JOIN ident ON oidref=oid WHERE id='${name.replace(/'/g,"''")}'`;
+  const url  = `${SIMBAD_TAP}?REQUEST=doQuery&LANG=ADQL&FORMAT=json&QUERY=${encodeURIComponent(adql)}`;
+  const r    = await fetch(url, { signal: AbortSignal.timeout(8000) });
+  if (!r.ok) return null;
+  const data = await r.json();
+  const cols = (data.fields || []).map(f => f.name);
+  const rows = data.data || [];
+  if (!rows.length) return null;
+  const row  = Object.fromEntries(cols.map((c, i) => [c, rows[0][i]]));
+  return { name: row.main_id, ra: parseFloat(row.ra), dec: parseFloat(row.dec), type: row.otype_txt, parallax: row.plx_value, redshift: row.rvz_redshift, source: "SIMBAD" };
+}
+
+// ── Search catalog for pipeline match ────────────────────────────────────────
+function searchCatalog(q) {
+  const lq = q.toLowerCase();
+  return catalog
+    .filter(c => (c.target_name || "").toLowerCase().includes(lq))
+    .sort((a, b) => (b.candidacy_score || 0) - (a.candidacy_score || 0));
+}
+
+// ── Render result panel ───────────────────────────────────────────────────────
+function showResult(resolved, pipelineMatches) {
+  const panel = document.getElementById("result-panel");
+  const card  = document.getElementById("result-card");
+  panel.style.display = "block";
+  panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+
+  if (!resolved && !pipelineMatches.length) {
+    card.innerHTML = `<div class="result-notfound">No results found. Try a different name or check spelling.<br><small style="color:#4a5a6a;margin-top:6px;display:block">Tip: Try alternate forms — e.g. "Proxima Cen" → "Proxima Centauri"</small></div>`;
+    return;
+  }
+
+  const r   = resolved || {};
+  const p   = pipelineMatches[0] || {};
+  const ra  = r.ra  ?? p.ra  ?? null;
+  const dec = r.dec ?? p.dec ?? null;
+  const name = r.name || p.target_name || "Unknown";
+  const tier = p.tier;
+  const score = p.candidacy_score;
+  const methods = p._all_methods || (p.detection_method ? [p.detection_method] : []);
+  const dtypes  = p._all_dtypes  || (p.data_type ? [p.data_type] : []);
+  const reasons = (p.reasons || []).slice(0, 4);
+
+  const imgSrc = ra != null ? skyUrl(ra, dec) : "";
+  const imgTag = imgSrc
+    ? `<img src="${imgSrc}" alt="Sky cutout of ${name}" loading="lazy" onerror="this.style.display='none'">`
+    : `<div style="width:220px;height:220px;display:grid;place-items:center;color:#3a4a5a;font-size:.8rem">No image</div>`;
+
+  const tierTag  = tier  ? `<span class="tag tag-tier${tier}">Tier ${tier}</span>` : "";
+  const scoreTxt = score != null ? `<div class="result-score">Candidacy score: <strong>${score}</strong>/100</div>` : "";
+  const methodTags = methods.map(m => `<span class="tag tag-method">${m}</span>`).join("");
+  const dtypeTags  = dtypes.map(d  => `<span class="tag tag-dtype">${d}</span>`).join("");
+  const reasonHtml = reasons.length ? `<ul class="result-reasons">${reasons.map(r => `<li>${r}</li>`).join("")}</ul>` : "";
+
+  const coordTxt = ra != null
+    ? `RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}°`
+    : "";
+
+  const extLinks = [
+    ra != null ? `<a class="ext-link" href="${aladInUrl(ra, dec)}" target="_blank">Aladin Lite</a>` : "",
+    `<a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=${encodeURIComponent(name)}" target="_blank">SIMBAD</a>`,
+    ra != null ? `<a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=${ra}&dec=${dec}&zoom=12" target="_blank">Legacy Survey</a>` : "",
+  ].filter(Boolean).join("");
+
+  const notInPipeline = !p.target_name
+    ? `<div style="font-size:.78rem;color:#4a5a6a;margin-bottom:10px">Not in current DeepSignal pipeline candidates</div>` : "";
+
+  card.innerHTML = `
+    <div class="result-inner">
+      <div class="result-img">${imgTag}</div>
+      <div class="result-body">
+        <div class="result-name">${name}</div>
+        <div class="result-type">${r.type || p.data_type || ""}</div>
+        <div class="result-coords">${coordTxt}</div>
+        <div class="result-tags">${tierTag}${methodTags}${dtypeTags}</div>
+        ${notInPipeline}
+        ${scoreTxt}
+        ${reasonHtml}
+        <div class="result-links">${extLinks}</div>
+      </div>
+    </div>`;
+}
+
+// ── Main search handler ───────────────────────────────────────────────────────
+async function doSearch() {
+  const q = document.getElementById("q").value.trim();
+  if (!q) return;
+
+  const panel = document.getElementById("result-panel");
+  const card  = document.getElementById("result-card");
+  panel.style.display = "block";
+  card.innerHTML = `<div class="result-notfound"><span class="spinner"></span>Searching…</div>`;
+  panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+
+  const pipelineMatches = searchCatalog(q);
+  let resolved = null;
+
+  try {
+    resolved = await resolveSimbad(q);
+  } catch (e) {
+    console.warn("SIMBAD resolve failed:", e.message);
+  }
+
+  showResult(resolved, pipelineMatches);
+}
+
+// ── Render top candidate highlights ──────────────────────────────────────────
+function renderHighlights() {
+  const top = catalog
+    .slice()
+    .sort((a, b) => (b.candidacy_score || 0) - (a.candidacy_score || 0))
+    .slice(0, 9);
+
+  const grid = document.getElementById("highlights");
+  grid.innerHTML = top.map(c => {
+    const ra  = c.ra  ?? null;
+    const dec = c.dec ?? null;
+    const img = ra != null
+      ? `<img src="${skyUrl(ra, dec, 0.5)}" alt="${c.target_name}" loading="lazy" onerror="this.style.display='none'">`
+      : "";
+    const tc   = TIER_COLORS[c.tier] || "#6b7280";
+    const badge = c.tier ? `<span class="tier-badge" style="background:${tc}">Tier ${c.tier}</span>` : "";
+    const methods = (c._all_methods || [c.detection_method]).filter(Boolean);
+    const mtags   = methods.slice(0, 2).map(m => `<span class="tag tag-method" style="font-size:.65rem">${m}</span>`).join("");
+
+    return `<div class="card" onclick="selectCandidate('${c.target_name.replace(/'/g,"\\'")}')">
+      <div class="card-img">${img}${badge}</div>
+      <div class="card-body">
+        <div class="card-name">${c.target_name}</div>
+        <div class="card-tags">${mtags}</div>
+        <div class="card-score">Score: <strong>${c.candidacy_score || "—"}</strong></div>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+function selectCandidate(name) {
+  document.getElementById("q").value = name;
+  doSearch();
+}
+
+// ── Keyboard shortcut ─────────────────────────────────────────────────────────
+document.getElementById("q").addEventListener("keydown", e => {
+  if (e.key === "Enter") doSearch();
+});
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+loadCatalog();
+</script>
 </body>
 </html>
