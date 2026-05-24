@@ -107,6 +107,9 @@ footer a{color:#4a6a8a;text-decoration:none}
 .card-coords{font-family:monospace;font-size:.68rem;color:#4a5a6a;margin:4px 0 2px}
 .card-reasons{font-size:.70rem;color:#6a7a8a;padding-left:13px;line-height:1.5;margin:4px 0 4px}
 .card-reasons li{list-style:disc;margin-bottom:1px}
+.card-ext-links{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px;padding-top:8px;border-top:1px solid rgba(219,234,254,.07)}
+.card-ext-link{font-size:.68rem;color:#7dd3fc;text-decoration:none;padding:2px 8px;border:1px solid rgba(125,211,252,.2);border-radius:4px;transition:background 120ms;white-space:nowrap}
+.card-ext-link:hover{background:rgba(125,211,252,.1)}
 </style>
 </head>
 <body>
@@ -143,7 +146,7 @@ footer a{color:#4a6a8a;text-decoration:none}
   <div class="stat-chip">Pipeline candidates: <strong id="stat-n">80</strong></div>
   <div class="stat-chip">Data sources: <strong>10</strong></div>
   <div class="stat-chip">Detection algorithms: <strong>14</strong></div>
-  <div class="stat-chip">Last updated: <strong>2026-05-24 16:45 UTC</strong></div>
+  <div class="stat-chip">Last updated: <strong>2026-05-24 17:04 UTC</strong></div>
 </div>
 
 <div id="result-panel">
@@ -639,6 +642,16 @@ function renderHighlights() {
     const reasonsHtml = allReasons.length
       ? `<ul class="card-reasons">${allReasons.slice(0, 5).map(r => `<li>${r}</li>`).join("")}</ul>` : "";
 
+    const extLinksHtml = ra != null ? `<div class="card-ext-links" onclick="event.stopPropagation()">
+        <a class="card-ext-link" href="${aladInUrl(ra, dec)}" target="_blank">Aladin Lite</a>
+        <a class="card-ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=${encodeURIComponent(c.target_name)}" target="_blank">SIMBAD</a>
+        <a class="card-ext-link" href="https://www.legacysurvey.org/viewer?ra=${ra}&dec=${dec}&zoom=12" target="_blank">Legacy Survey</a>
+        <a class="card-ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=${ra}&dec=${dec}&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a>
+        <a class="card-ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=${ra}+${dec}&-c.rs=2" target="_blank">VizieR</a>
+        <a class="card-ext-link" href="https://sky.esa.int/?target=${ra}+${dec}&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a>
+        <a class="card-ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3A${encodeURIComponent(c.target_name)}&sort=date+desc" target="_blank">NASA ADS</a>
+      </div>` : "";
+
     const countHtml = multi
       ? `<div class="card-count">${c.entries.length} detections <i class="arrow">▼</i></div>`
       : "";
@@ -663,6 +676,7 @@ function renderHighlights() {
         <div class="card-score">Score: <strong>${c.candidacy_score || "—"}</strong></div>
         ${coordsTxt}
         ${reasonsHtml}
+        ${extLinksHtml}
         ${countHtml}
       </div>
       ${multi ? `<div class="card-detections">${detectionRows}</div>` : ""}
