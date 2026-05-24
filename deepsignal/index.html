@@ -127,7 +127,7 @@ footer a{color:#4a6a8a;text-decoration:none}
   <div class="stat-chip">Pipeline candidates: <strong id="stat-n">422</strong></div>
   <div class="stat-chip">Data sources: <strong>10</strong></div>
   <div class="stat-chip">Detection algorithms: <strong>14</strong></div>
-  <div class="stat-chip">Last updated: <strong>2026-05-24 10:02 UTC</strong></div>
+  <div class="stat-chip">Last updated: <strong>2026-05-24 10:15 UTC</strong></div>
 </div>
 
 <div id="result-panel">
@@ -170,7 +170,7 @@ async function loadCatalog() {
     const r = await fetch("catalog.json");
     if (!r.ok) return;
     const data = await r.json();
-    catalog = Array.isArray(data) ? data : [];
+    catalog = Array.isArray(data) ? data : (Array.isArray(data.candidates) ? data.candidates : []);
     document.getElementById("stat-n").textContent = catalog.length;
     renderHighlights();
   } catch (_) {}
@@ -184,6 +184,29 @@ function skyUrl(ra, dec, fov = 0.25, survey = SURVEYS[0].hips) {
 function aladInUrl(ra, dec) {
   return `https://aladin.u-strasbg.fr/AladinLite/?target=${ra}+${dec}&fov=0.5&survey=P/DSS2/color`;
 }
+
+function candidateRa(c) {
+  return c.ra ?? c.ra_deg ?? null;
+}
+
+function candidateDec(c) {
+  return c.dec ?? c.dec_deg ?? null;
+}
+
+const LOCAL_TARGETS = {
+  "sun": { name: "Sun", type: "Solar System Object", ra: 286.13, dec: 63.87, source: "Static fallback" },
+  "mercury": { name: "Mercury", type: "Solar System Object", ra: 281.01, dec: 61.45, source: "Static fallback" },
+  "venus": { name: "Venus", type: "Solar System Object", ra: 272.76, dec: 67.16, source: "Static fallback" },
+  "mars": { name: "Mars", type: "Solar System Object", ra: 40.77, dec: 15.91, source: "Static fallback" },
+  "jupiter": { name: "Jupiter", type: "Solar System Object", ra: 118.31, dec: 21.88, source: "Static fallback" },
+  "saturn": { name: "Saturn", type: "Solar System Object", ra: 359.65, dec: -2.71, source: "Static fallback" },
+  "uranus": { name: "Uranus", type: "Solar System Object", ra: 57.36, dec: 19.40, source: "Static fallback" },
+  "neptune": { name: "Neptune", type: "Solar System Object", ra: 0.80, dec: -1.15, source: "Static fallback" },
+  "pluto": { name: "Pluto", type: "Dwarf Planet", ra: 304.10, dec: -23.10, source: "Static fallback" },
+  "99942 apophis": { name: "99942 Apophis", type: "Near-Earth Asteroid", ra: 118.85, dec: 20.10, source: "Static fallback" },
+  "c/2025 r3": { name: "C/2025 R3", type: "Comet", ra: 95.0867, dec: -10.0205, source: "Static fallback" },
+  "c 2025 r3": { name: "C/2025 R3", type: "Comet", ra: 95.0867, dec: -10.0205, source: "Static fallback" }
+};
 
 // ── SIMBAD TAP name resolution ────────────────────────────────────────────────
 async function resolveSimbad(name) {
@@ -207,6 +230,10 @@ function searchCatalog(q) {
     .sort((a, b) => (b.candidacy_score || 0) - (a.candidacy_score || 0));
 }
 
+function resolveLocalTarget(q) {
+  return LOCAL_TARGETS[q.toLowerCase()] || null;
+}
+
 // ── Render result panel ───────────────────────────────────────────────────────
 function showResult(resolved, pipelineMatches) {
   const panel = document.getElementById("result-panel");
@@ -221,8 +248,8 @@ function showResult(resolved, pipelineMatches) {
 
   const r   = resolved || {};
   const p   = pipelineMatches[0] || {};
-  const ra  = r.ra  ?? p.ra  ?? null;
-  const dec = r.dec ?? p.dec ?? null;
+  const ra  = r.ra  ?? candidateRa(p);
+  const dec = r.dec ?? candidateDec(p);
   const name = r.name || p.target_name || "Unknown";
   const tier = p.tier;
   const score = p.candidacy_score;
@@ -289,6 +316,7 @@ async function doSearch() {
   } catch (e) {
     console.warn("SIMBAD resolve failed:", e.message);
   }
+  if (!resolved) resolved = resolveLocalTarget(q);
 
   showResult(resolved, pipelineMatches);
 }
@@ -302,8 +330,8 @@ function renderHighlights() {
 
   const grid = document.getElementById("highlights");
   grid.innerHTML = top.map(c => {
-    const ra  = c.ra  ?? null;
-    const dec = c.dec ?? null;
+    const ra  = candidateRa(c);
+    const dec = candidateDec(c);
     const img = ra != null
       ? `<img src="${skyUrl(ra, dec, 0.5)}" alt="${c.target_name}" loading="lazy" onerror="this.style.display='none'">`
       : "";
