@@ -91,6 +91,19 @@ footer a{color:#4a6a8a;text-decoration:none}
 
 /* ── Divider ── */
 .divider{height:1px;background:rgba(219,234,254,.08);max-width:900px;margin:0 auto 32px}
+
+/* ── Folded card detections ── */
+.card-count{font-size:.72rem;color:#5a7a9a;margin-top:4px;user-select:none}
+.card-count .arrow{display:inline-block;transition:transform 200ms;font-style:normal}
+.card.expanded .card-count .arrow{transform:rotate(180deg)}
+.card-detections{display:none;border-top:1px solid rgba(219,234,254,.10);background:rgba(0,0,0,.18)}
+.card.expanded .card-detections{display:block}
+.detection-row{padding:7px 14px;font-size:.75rem;color:#8a9aaa;cursor:pointer;display:flex;gap:8px;align-items:center;transition:background 120ms;border-bottom:1px solid rgba(219,234,254,.05)}
+.detection-row:last-child{border-bottom:none}
+.detection-row:hover{background:rgba(125,211,252,.08);color:#cde}
+.d-method{color:#7ab4e8;font-weight:600;flex-shrink:0}
+.d-dtype{color:#a0a0c0;text-transform:uppercase;font-size:.68rem;flex-shrink:0}
+.d-score{margin-left:auto;color:#7f8c9d;flex-shrink:0}
 </style>
 </head>
 <body>
@@ -127,7 +140,7 @@ footer a{color:#4a6a8a;text-decoration:none}
   <div class="stat-chip">Pipeline candidates: <strong id="stat-n">80</strong></div>
   <div class="stat-chip">Data sources: <strong>10</strong></div>
   <div class="stat-chip">Detection algorithms: <strong>14</strong></div>
-  <div class="stat-chip">Last updated: <strong>2026-05-24 15:35 UTC</strong></div>
+  <div class="stat-chip">Last updated: <strong>2026-05-24 16:20 UTC</strong></div>
 </div>
 
 <div id="result-panel">
@@ -444,6 +457,39 @@ function searchCatalog(q) {
     .sort((a, b) => (b.candidacy_score || 0) - (a.candidacy_score || 0));
 }
 
+// ── Group catalog entries by target name (fold duplicates) ────────────────────
+function groupCatalogByTarget(entries) {
+  const map = new Map();
+  for (const c of entries) {
+    const key = (c.target_name || "").toLowerCase();
+    if (!map.has(key)) {
+      map.set(key, { ...c, entries: [], _all_methods: [], _all_dtypes: [] });
+    }
+    const g = map.get(key);
+    if ((c.candidacy_score || 0) > (g.candidacy_score || 0)) {
+      const saved = { entries: g.entries, _all_methods: g._all_methods, _all_dtypes: g._all_dtypes };
+      Object.assign(g, c, saved);
+    }
+    g.entries.push(c);
+    for (const m of [c.detection_method, ...(c._all_methods || [])]) {
+      if (m && !g._all_methods.includes(m)) g._all_methods.push(m);
+    }
+    for (const d of [c.data_type, ...(c._all_dtypes || [])]) {
+      if (d && !g._all_dtypes.includes(d)) g._all_dtypes.push(d);
+    }
+  }
+  return [...map.values()];
+}
+
+// ── Merge all pipeline matches for one target into a single summary ───────────
+function mergePipelineMatches(matches) {
+  const best = matches.reduce((a, b) => (b.candidacy_score || 0) > (a.candidacy_score || 0) ? b : a);
+  const allMethods = [...new Set(matches.flatMap(m => [m.detection_method, ...(m._all_methods || [])]).filter(Boolean))];
+  const allDtypes  = [...new Set(matches.flatMap(m => [m.data_type,        ...(m._all_dtypes  || [])].filter(Boolean)))];
+  const allReasons = [...new Set(matches.flatMap(m => m.reasons || []))].slice(0, 6);
+  return { ...best, _all_methods: allMethods, _all_dtypes: allDtypes, reasons: allReasons };
+}
+
 function resolveLocalTarget(q) {
   const key = q.toLowerCase().trim();
   if (LOCAL_TARGETS[key]) return LOCAL_TARGETS[key];
@@ -469,7 +515,7 @@ function showResult(resolved, pipelineMatches) {
   }
 
   const r   = resolved || {};
-  const p   = pipelineMatches[0] || {};
+  const p   = pipelineMatches.length ? mergePipelineMatches(pipelineMatches) : {};
   const ra  = r.ra  ?? candidateRa(p);
   const dec = r.dec ?? candidateDec(p);
   const name = r.name || p.target_name || "Unknown";
@@ -561,8 +607,7 @@ async function doSearch() {
 
 // ── Render top candidate highlights ──────────────────────────────────────────
 function renderHighlights() {
-  const top = catalog
-    .slice()
+  const top = groupCatalogByTarget(catalog)
     .sort((a, b) => (b.candidacy_score || 0) - (a.candidacy_score || 0))
     .slice(0, 9);
 
@@ -573,20 +618,47 @@ function renderHighlights() {
     const img = ra != null
       ? `<img src="${skyUrl(ra, dec, 0.5)}" alt="${c.target_name}" loading="lazy" onerror="this.style.display='none'">`
       : "";
-    const tc   = TIER_COLORS[c.tier] || "#6b7280";
+    const tc    = TIER_COLORS[c.tier] || "#6b7280";
     const badge = c.tier ? `<span class="tier-badge" style="background:${tc}">Tier ${c.tier}</span>` : "";
-    const methods = (c._all_methods || [c.detection_method]).filter(Boolean);
+    const methods = c._all_methods.filter(Boolean);
     const mtags   = methods.slice(0, 2).map(m => `<span class="tag tag-method" style="font-size:.65rem">${m}</span>`).join("");
 
-    return `<div class="card" onclick="selectCandidate('${c.target_name.replace(/'/g,"\\'")}')">
+    const safeN = c.target_name.replace(/'/g, "\\'");
+    const multi = c.entries.length > 1;
+
+    const countHtml = multi
+      ? `<div class="card-count">${c.entries.length} detections <i class="arrow">▼</i></div>`
+      : "";
+
+    const detectionRows = multi ? c.entries.map(e =>
+      `<div class="detection-row" onclick="event.stopPropagation();selectCandidate('${e.target_name.replace(/'/g,"\\'")}')">
+        <span class="d-method">${e.detection_method || "—"}</span>
+        <span class="d-dtype">${e.data_type || ""}</span>
+        <span class="d-score">${e.candidacy_score ?? "—"}</span>
+      </div>`
+    ).join("") : "";
+
+    const onclick = multi
+      ? `toggleCard(this,'${safeN}')`
+      : `selectCandidate('${safeN}')`;
+
+    return `<div class="card" onclick="${onclick}">
       <div class="card-img">${img}${badge}</div>
       <div class="card-body">
         <div class="card-name">${c.target_name}</div>
         <div class="card-tags">${mtags}</div>
         <div class="card-score">Score: <strong>${c.candidacy_score || "—"}</strong></div>
+        ${countHtml}
       </div>
+      ${multi ? `<div class="card-detections">${detectionRows}</div>` : ""}
     </div>`;
   }).join("");
+}
+
+function toggleCard(el, name) {
+  const det = el.querySelector(".card-detections");
+  if (!det) { selectCandidate(name); return; }
+  el.classList.toggle("expanded");
 }
 
 function selectCandidate(name) {
