@@ -104,6 +104,9 @@ footer a{color:#4a6a8a;text-decoration:none}
 .d-method{color:#7ab4e8;font-weight:600;flex-shrink:0}
 .d-dtype{color:#a0a0c0;text-transform:uppercase;font-size:.68rem;flex-shrink:0}
 .d-score{margin-left:auto;color:#7f8c9d;flex-shrink:0}
+.card-coords{font-family:monospace;font-size:.68rem;color:#4a5a6a;margin:4px 0 2px}
+.card-reasons{font-size:.70rem;color:#6a7a8a;padding-left:13px;line-height:1.5;margin:4px 0 4px}
+.card-reasons li{list-style:disc;margin-bottom:1px}
 </style>
 </head>
 <body>
@@ -140,7 +143,7 @@ footer a{color:#4a6a8a;text-decoration:none}
   <div class="stat-chip">Pipeline candidates: <strong id="stat-n">80</strong></div>
   <div class="stat-chip">Data sources: <strong>10</strong></div>
   <div class="stat-chip">Detection algorithms: <strong>14</strong></div>
-  <div class="stat-chip">Last updated: <strong>2026-05-24 16:20 UTC</strong></div>
+  <div class="stat-chip">Last updated: <strong>2026-05-24 16:45 UTC</strong></div>
 </div>
 
 <div id="result-panel">
@@ -463,11 +466,11 @@ function groupCatalogByTarget(entries) {
   for (const c of entries) {
     const key = (c.target_name || "").toLowerCase();
     if (!map.has(key)) {
-      map.set(key, { ...c, entries: [], _all_methods: [], _all_dtypes: [] });
+      map.set(key, { ...c, entries: [], _all_methods: [], _all_dtypes: [], _all_reasons: [] });
     }
     const g = map.get(key);
     if ((c.candidacy_score || 0) > (g.candidacy_score || 0)) {
-      const saved = { entries: g.entries, _all_methods: g._all_methods, _all_dtypes: g._all_dtypes };
+      const saved = { entries: g.entries, _all_methods: g._all_methods, _all_dtypes: g._all_dtypes, _all_reasons: g._all_reasons };
       Object.assign(g, c, saved);
     }
     g.entries.push(c);
@@ -476,6 +479,9 @@ function groupCatalogByTarget(entries) {
     }
     for (const d of [c.data_type, ...(c._all_dtypes || [])]) {
       if (d && !g._all_dtypes.includes(d)) g._all_dtypes.push(d);
+    }
+    for (const r of (c.reasons || [])) {
+      if (r && !g._all_reasons.includes(r)) g._all_reasons.push(r);
     }
   }
   return [...map.values()];
@@ -626,6 +632,13 @@ function renderHighlights() {
     const safeN = c.target_name.replace(/'/g, "\\'");
     const multi = c.entries.length > 1;
 
+    const coordsTxt = (ra != null)
+      ? `<div class="card-coords">RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}°</div>` : "";
+
+    const allReasons = c._all_reasons || c.reasons || [];
+    const reasonsHtml = allReasons.length
+      ? `<ul class="card-reasons">${allReasons.slice(0, 5).map(r => `<li>${r}</li>`).join("")}</ul>` : "";
+
     const countHtml = multi
       ? `<div class="card-count">${c.entries.length} detections <i class="arrow">▼</i></div>`
       : "";
@@ -648,6 +661,8 @@ function renderHighlights() {
         <div class="card-name">${c.target_name}</div>
         <div class="card-tags">${mtags}</div>
         <div class="card-score">Score: <strong>${c.candidacy_score || "—"}</strong></div>
+        ${coordsTxt}
+        ${reasonsHtml}
         ${countHtml}
       </div>
       ${multi ? `<div class="card-detections">${detectionRows}</div>` : ""}
