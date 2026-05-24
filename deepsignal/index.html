@@ -127,7 +127,7 @@ footer a{color:#4a6a8a;text-decoration:none}
   <div class="stat-chip">Pipeline candidates: <strong id="stat-n">80</strong></div>
   <div class="stat-chip">Data sources: <strong>10</strong></div>
   <div class="stat-chip">Detection algorithms: <strong>14</strong></div>
-  <div class="stat-chip">Last updated: <strong>2026-05-24 14:26 UTC</strong></div>
+  <div class="stat-chip">Last updated: <strong>2026-05-24 15:35 UTC</strong></div>
 </div>
 
 <div id="result-panel">
@@ -494,10 +494,16 @@ function showResult(resolved, pipelineMatches) {
     ? `RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}°`
     : "";
 
+  const isSS = r.solar_system || false;
   const extLinks = [
     ra != null ? `<a class="ext-link" href="${aladInUrl(ra, dec)}" target="_blank">Aladin Lite</a>` : "",
     `<a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=${encodeURIComponent(name)}" target="_blank">SIMBAD</a>`,
     ra != null ? `<a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=${ra}&dec=${dec}&zoom=12" target="_blank">Legacy Survey</a>` : "",
+    ra != null ? `<a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=${ra}&dec=${dec}&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a>` : "",
+    ra != null ? `<a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=${ra}+${dec}&-c.rs=2" target="_blank">VizieR</a>` : "",
+    ra != null ? `<a class="ext-link" href="https://sky.esa.int/?target=${ra}+${dec}&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a>` : "",
+    `<a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3A${encodeURIComponent(name)}&sort=date+desc" target="_blank">NASA ADS</a>`,
+    isSS ? `<a class="ext-link" href="https://ssd.jpl.nasa.gov/horizons/app.html#/" target="_blank">JPL Horizons</a>` : "",
   ].filter(Boolean).join("");
 
   const notInPipeline = !p.target_name
