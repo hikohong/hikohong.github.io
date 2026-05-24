@@ -124,10 +124,10 @@ footer a{color:#4a6a8a;text-decoration:none}
 </div>
 
 <div class="stats">
-  <div class="stat-chip">Pipeline candidates: <strong id="stat-n">127</strong></div>
+  <div class="stat-chip">Pipeline candidates: <strong id="stat-n">80</strong></div>
   <div class="stat-chip">Data sources: <strong>10</strong></div>
   <div class="stat-chip">Detection algorithms: <strong>14</strong></div>
-  <div class="stat-chip">Last updated: <strong>2026-05-24 13:04 UTC</strong></div>
+  <div class="stat-chip">Last updated: <strong>2026-05-24 14:26 UTC</strong></div>
 </div>
 
 <div id="result-panel">
@@ -155,6 +155,8 @@ footer a{color:#4a6a8a;text-decoration:none}
 // ── Constants ─────────────────────────────────────────────────────────────────
 const SIMBAD_TAP  = "https://simbad.cds.unistra.fr/simbad/sim-tap/sync";
 const HIPS2FITS   = "https://alasky.cds.unistra.fr/hips-image-services/hips2fits";
+const SESAME_URL  = "https://cdsweb.u-strasbg.fr/cgi-bin/nph-sesame/-ox?";
+const HORIZONS    = "https://ssd.jpl.nasa.gov/api/horizons.api";
 const TIER_COLORS = { 1: "#f59e0b", 2: "#3b82f6", 3: "#6b7280" };
 const SURVEYS     = [
   { hips: "CDS/P/DSS2/color",        label: "Optical" },
@@ -233,18 +235,34 @@ const LOCAL_TARGETS = {
   "io":               { name: "Io",        type: "Moon", ra:  80.4,  dec:  23.1, source: "Local table" },
   "triton":           { name: "Triton",    type: "Moon", ra: 357.8,  dec:  -3.9, source: "Local table" },
   "charon":           { name: "Charon",    type: "Moon", ra: 300.1,  dec: -22.7, source: "Local table" },
+  "callisto":         { name: "Callisto",  type: "Moon", ra:  80.4,  dec:  23.1, source: "Local table" },
+  "mimas":            { name: "Mimas",     type: "Moon", ra:  21.8,  dec:  -3.4, source: "Local table" },
+  "miranda":          { name: "Miranda",   type: "Moon", ra:  47.3,  dec:  16.2, source: "Local table" },
+  "phobos":           { name: "Phobos",    type: "Moon", ra: 113.2,  dec:  22.8, source: "Local table" },
+  "deimos":           { name: "Deimos",    type: "Moon", ra: 113.2,  dec:  22.8, source: "Local table" },
   // Asteroids
   "99942 apophis":    { name: "99942 Apophis",    type: "Asteroid", ra:  12.4,  dec:  -4.2,  source: "Local table" },
   "apophis":          { name: "99942 Apophis",    type: "Asteroid", ra:  12.4,  dec:  -4.2,  source: "Local table" },
   "bennu":            { name: "101955 Bennu",     type: "Asteroid", ra:  94.3,  dec:   8.8,  source: "Local table" },
   "vesta":            { name: "4 Vesta",          type: "Asteroid", ra: 193.2,  dec:  -5.6,  source: "Local table" },
   "ryugu":            { name: "162173 Ryugu",     type: "Asteroid", ra: 290.1,  dec: -20.4,  source: "Local table" },
+  "pallas":           { name: "2 Pallas",         type: "Asteroid", ra: 221.4,  dec:  20.3,  source: "Local table" },
+  "juno":             { name: "3 Juno",           type: "Asteroid", ra: 180.2,  dec:   8.1,  source: "Local table" },
+  "eros":             { name: "433 Eros",         type: "Asteroid", ra:  45.8,  dec:  18.7,  source: "Local table" },
+  "ida":              { name: "243 Ida",          type: "Asteroid", ra: 240.3,  dec:  -8.2,  source: "Local table" },
   // Comets
   "halley":           { name: "1P/Halley",        type: "Comet", ra:  44.2,  dec:  14.8, source: "Local table" },
   "1p/halley":        { name: "1P/Halley",        type: "Comet", ra:  44.2,  dec:  14.8, source: "Local table" },
   "neowise":          { name: "C/2020 F3",        type: "Comet", ra: 155.3,  dec:  38.1, source: "Local table" },
   "c/2025 r3":        { name: "C/2025 R3",        type: "Comet", ra:  95.09, dec: -10.02, source: "Local table" },
-  "c 2025 r3":        { name: "C/2025 R3",        type: "Comet", ra:  95.09, dec: -10.02, source: "Local table" },
+  "c 2025 r3":        { name: "C/2025 R3",                       type: "Comet", ra:  95.09, dec: -10.02, source: "Local table" },
+  "hale-bopp":        { name: "C/1995 O1 (Hale-Bopp)",          type: "Comet", ra:  87.9,  dec:  22.0,  source: "Local table" },
+  "c/1995 o1":        { name: "C/1995 O1 (Hale-Bopp)",          type: "Comet", ra:  87.9,  dec:  22.0,  source: "Local table" },
+  "67p":              { name: "67P/Churyumov-Gerasimenko",       type: "Comet", ra: 132.4,  dec:  19.3,  source: "Local table" },
+  "churyumov-gerasimenko": { name: "67P/Churyumov-Gerasimenko", type: "Comet", ra: 132.4,  dec:  19.3,  source: "Local table" },
+  "c/2020 f3":        { name: "C/2020 F3 (NEOWISE)",            type: "Comet", ra: 155.3,  dec:  38.1,  source: "Local table" },
+  "tsuchinshan-atlas":{ name: "C/2023 A3 (Tsuchinshan-ATLAS)",  type: "Comet", ra: 195.5,  dec:  12.4,  source: "Local table" },
+  "c/2023 a3":        { name: "C/2023 A3 (Tsuchinshan-ATLAS)",  type: "Comet", ra: 195.5,  dec:  12.4,  source: "Local table" },
   // Interstellar objects
   "oumuamua":         { name: "1I/ʻOumuamua", type: "Interstellar", ra: 308.23, dec:  24.24, source: "Local table" },
   "1i/oumuamua":      { name: "1I/ʻOumuamua", type: "Interstellar", ra: 308.23, dec:  24.24, source: "Local table" },
@@ -252,6 +270,9 @@ const LOCAL_TARGETS = {
   "2i/borisov":       { name: "2I/Borisov",   type: "Interstellar", ra:  94.18, dec:  20.85, source: "Local table" },
   "3i/atlas":         { name: "3I/Atlas",     type: "Interstellar", ra:  96.5,  dec: -25.0,  source: "Local table" },
   "atlas":            { name: "3I/Atlas",     type: "Interstellar", ra:  96.5,  dec: -25.0,  source: "Local table" },
+  "1i":               { name: "1I/ʻOumuamua", type: "Interstellar", ra: 308.23, dec:  24.24, source: "Local table" },
+  "2i":               { name: "2I/Borisov",   type: "Interstellar", ra:  94.18, dec:  20.85, source: "Local table" },
+  "3i":               { name: "3I/Atlas",     type: "Interstellar", ra:  96.5,  dec: -25.0,  source: "Local table" },
   // Nearby stars
   "proxima centauri": { name: "Proxima Centauri", type: "Star", ra: 217.43, dec: -62.68, source: "Local table" },
   "barnard's star":   { name: "Barnard's Star",   type: "Star", ra: 269.45, dec:   4.69, source: "Local table" },
@@ -265,14 +286,28 @@ const LOCAL_TARGETS = {
   "boyajian's star":  { name: "KIC 8462852",       type: "Star", ra: 301.56, dec:  44.46, source: "Local table" },
   "kic 8462852":      { name: "KIC 8462852",       type: "Star", ra: 301.56, dec:  44.46, source: "Local table" },
   "tau ceti":         { name: "Tau Ceti",          type: "Star", ra:  26.02, dec: -15.94, source: "Local table" },
-  "epsilon eridani":  { name: "eps Eri",           type: "Star", ra:  53.23, dec:  -9.46, source: "Local table" },
+  "epsilon eridani":  { name: "eps Eri",      type: "Star", ra:  53.23,  dec:  -9.46,  source: "Local table" },
+  "rigel":            { name: "Rigel",        type: "Star", ra:  78.634, dec:  -8.202, source: "Local table" },
+  "aldebaran":        { name: "Aldebaran",    type: "Star", ra:  68.980, dec:  16.509, source: "Local table" },
+  "antares":          { name: "Antares",      type: "Star", ra: 247.352, dec: -26.432, source: "Local table" },
+  "fomalhaut":        { name: "Fomalhaut",    type: "Star", ra: 344.413, dec: -29.622, source: "Local table" },
+  "wolf 359":         { name: "Wolf 359",     type: "Star", ra: 164.120, dec:   7.014, source: "Local table" },
+  "61 cygni":         { name: "61 Cyg A",     type: "Star", ra: 316.729, dec:  38.748, source: "Local table" },
+  "gliese 667c":      { name: "GJ 667C",      type: "Star", ra: 259.755, dec: -34.999, source: "Local table" },
+  "gl 667c":          { name: "GJ 667C",      type: "Star", ra: 259.755, dec: -34.999, source: "Local table" },
   // Exoplanet hosts
   "trappist-1":       { name: "TRAPPIST-1",  type: "Star", ra: 346.62, dec:  -5.04, source: "Local table" },
   "kepler-452":       { name: "Kepler-452",  type: "Star", ra: 292.17, dec:  44.32, source: "Local table" },
   "kepler-186":       { name: "Kepler-186",  type: "Star", ra: 286.52, dec:  44.32, source: "Local table" },
   "lhs 1140":         { name: "LHS 1140",    type: "Star", ra:  28.82, dec: -15.27, source: "Local table" },
   "k2-18":            { name: "K2-18",       type: "Star", ra: 172.56, dec:   7.59, source: "Local table" },
-  "51 pegasi":        { name: "51 Peg",      type: "Star", ra: 344.37, dec:  20.77, source: "Local table" },
+  "51 pegasi":        { name: "51 Peg",      type: "Star", ra: 344.37,  dec:  20.77,  source: "Local table" },
+  "kepler 452":       { name: "Kepler-452",  type: "Star", ra: 292.17,  dec:  44.32,  source: "Local table" },
+  "kepler-442":       { name: "Kepler-442",  type: "Star", ra: 280.889, dec:  39.279, source: "Local table" },
+  "55 cancri":        { name: "55 Cnc",      type: "Star", ra: 133.149, dec:  28.330, source: "Local table" },
+  "gj 1214":          { name: "GJ 1214",     type: "Star", ra: 258.831, dec:   4.961, source: "Local table" },
+  "hd 209458":        { name: "HD 209458",   type: "Star", ra: 330.795, dec:  18.885, source: "Local table" },
+  "toi-700":          { name: "TOI-700",     type: "Star", ra:  97.020, dec: -65.578, source: "Local table" },
   // Nebulae & clusters
   "orion nebula":     { name: "M42",              type: "Nebula",    ra:  83.82, dec:  -5.39, source: "Local table" },
   "m42":              { name: "M42",              type: "Nebula",    ra:  83.82, dec:  -5.39, source: "Local table" },
@@ -284,7 +319,12 @@ const LOCAL_TARGETS = {
   "horsehead nebula": { name: "Horsehead Nebula", type: "Nebula",    ra:  85.25, dec:  -2.46, source: "Local table" },
   "pleiades":         { name: "M45",              type: "Cluster",   ra:  56.75, dec:  24.12, source: "Local table" },
   "m45":              { name: "M45",              type: "Cluster",   ra:  56.75, dec:  24.12, source: "Local table" },
-  "omega centauri":   { name: "NGC 5139",         type: "GlobClust", ra: 201.70, dec: -47.48, source: "Local table" },
+  "omega centauri":   { name: "NGC 5139", type: "GlobClust", ra: 201.70,  dec: -47.48,  source: "Local table" },
+  "m1":               { name: "M1",       type: "SNRemnant", ra:  83.633, dec:  22.015, source: "Local table" },
+  "m16":              { name: "M16",      type: "Nebula",    ra: 274.700, dec: -13.807, source: "Local table" },
+  "m57":              { name: "M57",      type: "PN",        ra: 283.396, dec:  33.029, source: "Local table" },
+  "ngc 5139":         { name: "NGC 5139", type: "GlobClust", ra: 201.697, dec: -47.479, source: "Local table" },
+  "ngc 7293":         { name: "NGC 7293", type: "PN",        ra: 337.411, dec: -20.839, source: "Local table" },
   // Galaxies
   "andromeda galaxy": { name: "M31", type: "Galaxy", ra:  10.69, dec:  41.27, source: "Local table" },
   "andromeda":        { name: "M31", type: "Galaxy", ra:  10.69, dec:  41.27, source: "Local table" },
@@ -299,7 +339,11 @@ const LOCAL_TARGETS = {
   "galactic center":  { name: "Sgr A*",      type: "GalCenter",ra: 266.42, dec: -29.01, source: "Local table" },
   "centaurus a":      { name: "Centaurus A", type: "AGN",      ra: 201.37, dec: -43.02, source: "Local table" },
   "3c 273":           { name: "3C 273",      type: "QSO",      ra: 187.28, dec:   2.05, source: "Local table" },
-  "cygnus x-1":       { name: "Cyg X-1",    type: "XRB",      ra: 299.59, dec:  35.20, source: "Local table" },
+  "cygnus x-1":       { name: "Cyg X-1",      type: "XRB",      ra: 299.59,  dec:  35.20,  source: "Local table" },
+  "virgo a":          { name: "M87",          type: "AGN",      ra: 187.706, dec:  12.391, source: "Local table" },
+  "sgr a":            { name: "Sgr A*",       type: "GalCenter",ra: 266.42,  dec: -29.01,  source: "Local table" },
+  "milky way center": { name: "Sgr A*",       type: "GalCenter",ra: 266.42,  dec: -29.01,  source: "Local table" },
+  "ngc 5128":         { name: "Centaurus A",  type: "AGN",      ra: 201.365, dec: -43.019, source: "Local table" },
 };
 
 // ── SIMBAD TAP name resolution ────────────────────────────────────────────────
@@ -329,6 +373,67 @@ async function resolveSimbadFuzzy(name) {
     `SELECT TOP 1 main_id,ra,dec,otype_txt,plx_value,rvz_redshift FROM basic JOIN ident ON oidref=oid WHERE id LIKE '%${safe}%' ORDER BY main_id ASC`
   );
   return result ? { ...result, source: "SIMBAD (fuzzy)" } : null;
+}
+
+// ── CDS Sesame meta-resolver (SIMBAD + NED + VizieR) ─────────────────────────
+async function resolveSesame(name) {
+  const url = SESAME_URL + encodeURIComponent(name);
+  const r   = await fetch(url, { signal: AbortSignal.timeout(10000) });
+  if (!r.ok) return null;
+  const xml  = new DOMParser().parseFromString(await r.text(), "text/xml");
+  const raEl = xml.querySelector("jradeg"), decEl = xml.querySelector("jdedeg");
+  if (!raEl || !decEl) return null;
+  const otEl = xml.querySelector("otype");
+  const idEl = xml.querySelector("oname") || xml.querySelector("main_id");
+  return {
+    name:   (idEl?.textContent || name).trim(),
+    ra:     parseFloat(raEl.textContent),
+    dec:    parseFloat(decEl.textContent),
+    type:   (otEl?.textContent || "Unknown").trim(),
+    source: "Sesame",
+  };
+}
+
+// ── JPL Horizons (solar system live ephemeris) ────────────────────────────────
+async function resolveHorizons(name) {
+  const today    = new Date().toISOString().split("T")[0];
+  const tomorrow = new Date(Date.now() + 86400000).toISOString().split("T")[0];
+  const base = {
+    format:"text", OBJ_DATA:"NO", MAKE_EPHEM:"YES", EPHEM_TYPE:"OBSERVER",
+    CENTER:"500@399", START_TIME:today, STOP_TIME:tomorrow,
+    STEP_SIZE:"1d", QUANTITIES:"1", ANG_FORMAT:"DEG",
+  };
+  function parseEphem(text) {
+    const m = text.match(/\$\$SOE\s*\n([\s\S]*?)\$\$EOE/);
+    if (!m) return null;
+    const parts = m[1].trim().split("\n")[0].trim().split(/\s+/);
+    if (parts.length < 4) return null;
+    const ra = parseFloat(parts[2]), dec = parseFloat(parts[3]);
+    return (isNaN(ra) || isNaN(dec)) ? null : { ra, dec };
+  }
+  async function query(command) {
+    const p = new URLSearchParams({ ...base, COMMAND: command });
+    try {
+      const r = await fetch(`${HORIZONS}?${p}`, { signal: AbortSignal.timeout(12000) });
+      return r.ok ? r.text() : null;
+    } catch { return null; }
+  }
+  try {
+    let text = await query(`'${name}'`);
+    if (!text) return null;
+    let coords = parseEphem(text);
+    if (coords) return { ...coords, name, type: "Solar System Object", source: "JPL Horizons", solar_system: true };
+    let ids = [...text.matchAll(/^\s*(\d{7,9})\s+\d{4}/gm)].map(m => m[1]);
+    if (!ids.length) {
+      const slash = name.match(/^(\d+[PpCcDdXx])/);
+      if (slash) { text = await query(slash[1]) || ""; ids = [...text.matchAll(/^\s*(\d{7,9})\s+\d{4}/gm)].map(m => m[1]); }
+    }
+    if (ids.length) {
+      const text2 = await query(ids[ids.length - 1]);
+      if (text2) { coords = parseEphem(text2); if (coords) return { ...coords, name, type: "Solar System Object", source: "JPL Horizons", solar_system: true }; }
+    }
+  } catch { return null; }
+  return null;
 }
 
 // ── Search catalog for pipeline match ────────────────────────────────────────
@@ -428,11 +533,19 @@ async function doSearch() {
   const pipelineMatches = searchCatalog(q);
   let resolved = null;
 
-  // 1. SIMBAD exact
-  try { resolved = await resolveSimbad(q); } catch (e) { console.warn("SIMBAD exact failed:", e.message); }
-  // 2. Local table (exact + substring)
+  // 1. Sesame (meta-resolver: SIMBAD + NED + VizieR)
+  try { resolved = await resolveSesame(q); } catch (e) { console.warn("Sesame failed:", e.message); }
+  // 2. JPL Horizons (solar system live ephemeris)
+  if (!resolved) {
+    try { resolved = await resolveHorizons(q); } catch (e) { console.warn("Horizons failed:", e.message); }
+  }
+  // 3. SIMBAD exact
+  if (!resolved) {
+    try { resolved = await resolveSimbad(q); } catch (e) { console.warn("SIMBAD exact failed:", e.message); }
+  }
+  // 4. Local table (exact + substring)
   if (!resolved) resolved = resolveLocalTarget(q);
-  // 3. SIMBAD fuzzy LIKE
+  // 5. SIMBAD fuzzy LIKE
   if (!resolved) {
     try { resolved = await resolveSimbadFuzzy(q); } catch (e) { console.warn("SIMBAD fuzzy failed:", e.message); }
   }
