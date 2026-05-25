@@ -16,6 +16,8 @@ nav{display:flex;align-items:center;gap:12px;padding:16px 24px;border-bottom:1px
 .nav-links{margin-left:auto;display:flex;gap:8px}
 .nav-link{color:#b8c7d8;text-decoration:none;font-size:.85rem;padding:6px 12px;border-radius:5px;border:1px solid rgba(219,234,254,.15);transition:border-color 140ms,color 140ms}
 .nav-link:hover{color:#7dd3fc;border-color:#7dd3fc}
+.lang-btn{color:#b8c7d8;background:none;font-size:.85rem;padding:6px 12px;border-radius:5px;border:1px solid rgba(219,234,254,.15);cursor:pointer;transition:border-color 140ms,color 140ms;white-space:nowrap}
+.lang-btn:hover{color:#7dd3fc;border-color:#7dd3fc}
 
 /* ── Hero ── */
 .hero{padding:48px 24px 32px;text-align:center;background:linear-gradient(180deg,rgba(125,211,252,.06) 0%,transparent 100%)}
@@ -121,32 +123,33 @@ footer a{color:#4a6a8a;text-decoration:none}
   </a>
   <span style="color:#3a4a5a;font-size:.85rem">/ DeepSignal</span>
   <div class="nav-links">
-    <a class="nav-link" href="gallery.html">Gallery</a>
-    <a class="nav-link" href="report.md">Report</a>
+    <a class="nav-link" href="gallery.html" data-i18n="nav_gallery">Gallery</a>
+    <a class="nav-link" href="report.md" data-i18n="nav_report">Report</a>
     <a class="nav-link" href="https://github.com/hikohong/deepsignal" target="_blank">GitHub</a>
   </div>
+  <button class="lang-btn" id="lang-btn" onclick="toggleLang()">中文</button>
 </nav>
 
 <div class="hero">
-  <div class="eyebrow">SETI Analysis Pipeline</div>
-  <h1>Search the Universe</h1>
-  <p>Search any star, galaxy, or solar system body across 10 astronomical data sources and 14 detection algorithms.</p>
+  <div class="eyebrow" data-i18n="eyebrow">SETI Analysis Pipeline</div>
+  <h1 data-i18n="hero_h1">Search the Universe</h1>
+  <p data-i18n="hero_p">Search any star, galaxy, or solar system body across 10 astronomical data sources and 14 detection algorithms.</p>
   <div class="search-wrap">
     <div class="search-row">
       <input class="search-input" id="q" type="text"
              placeholder="e.g. TRAPPIST-1, Proxima Centauri, Sgr A*, Mars…"
              autocomplete="off" autocorrect="off" spellcheck="false">
-      <button class="search-btn" onclick="doSearch()">Search</button>
+      <button class="search-btn" onclick="doSearch()" data-i18n="search_btn">Search</button>
     </div>
-    <p class="search-hint">Stars · Galaxies · Exoplanet systems · Solar system bodies · AGN · Nebulae</p>
+    <p class="search-hint" data-i18n="search_hint">Stars · Galaxies · Exoplanet systems · Solar system bodies · AGN · Nebulae</p>
   </div>
 </div>
 
 <div class="stats">
-  <div class="stat-chip">Pipeline candidates: <strong id="stat-n">80</strong></div>
-  <div class="stat-chip">Data sources: <strong>10</strong></div>
-  <div class="stat-chip">Detection algorithms: <strong>14</strong></div>
-  <div class="stat-chip">Last updated: <strong>2026-05-24 17:04 UTC</strong></div>
+  <div class="stat-chip"><span data-i18n="stat_candidates">Pipeline candidates:</span> <strong id="stat-n">80</strong></div>
+  <div class="stat-chip"><span data-i18n="stat_sources">Data sources:</span> <strong>10</strong></div>
+  <div class="stat-chip"><span data-i18n="stat_algorithms">Detection algorithms:</span> <strong>14</strong></div>
+  <div class="stat-chip"><span data-i18n="stat_updated">Last updated:</span> <strong>2026-05-25 17:24 UTC</strong></div>
 </div>
 
 <div id="result-panel">
@@ -157,17 +160,17 @@ footer a{color:#4a6a8a;text-decoration:none}
 
 <div class="section">
   <div class="section-head">
-    <h2>Top Pipeline Candidates</h2>
-    <a href="gallery.html">View full gallery →</a>
+    <h2 data-i18n="section_top">Top Pipeline Candidates</h2>
+    <a href="gallery.html" data-i18n="gallery_link">View full gallery →</a>
   </div>
   <div class="grid" id="highlights"></div>
 </div>
 
 <footer>
-  DeepSignal SETI Pipeline &nbsp;·&nbsp;
+  <span data-i18n="footer_name">DeepSignal SETI Pipeline</span> &nbsp;·&nbsp;
   <a href="https://github.com/hikohong/deepsignal" target="_blank">GitHub</a> &nbsp;·&nbsp;
-  Sky images: <a href="https://alasky.cds.unistra.fr/hips-image-services/hips2fits" target="_blank">Hips2Fits CDN</a> &nbsp;·&nbsp;
-  Catalog: <a href="https://simbad.u-strasbg.fr" target="_blank">SIMBAD</a>
+  <span data-i18n="footer_sky">Sky images:</span> <a href="https://alasky.cds.unistra.fr/hips-image-services/hips2fits" target="_blank">Hips2Fits CDN</a> &nbsp;·&nbsp;
+  <span data-i18n="footer_catalog">Catalog:</span> <a href="https://simbad.u-strasbg.fr" target="_blank">SIMBAD</a>
 </footer>
 
 <script>
@@ -184,6 +187,84 @@ const SURVEYS     = [
 ];
 
 let catalog = [];
+
+// ── i18n ──────────────────────────────────────────────────────────────────────
+const TRANSLATIONS = {
+  en: {
+    nav_gallery:        "Gallery",
+    nav_report:         "Report",
+    eyebrow:            "SETI Analysis Pipeline",
+    hero_h1:            "Search the Universe",
+    hero_p:             "Search any star, galaxy, or solar system body across 10 astronomical data sources and 14 detection algorithms.",
+    search_placeholder: "e.g. TRAPPIST-1, Proxima Centauri, Sgr A*, Mars…",
+    search_btn:         "Search",
+    search_hint:        "Stars · Galaxies · Exoplanet systems · Solar system bodies · AGN · Nebulae",
+    stat_candidates:    "Pipeline candidates:",
+    stat_sources:       "Data sources:",
+    stat_algorithms:    "Detection algorithms:",
+    stat_updated:       "Last updated:",
+    searching:          "Searching…",
+    no_results:         "No results found. Try a different name or check spelling.",
+    no_results_tip:     "Tip: Try alternate forms — e.g. “Proxima Cen” → “Proxima Centauri”",
+    score_label:        "Candidacy score:",
+    not_in_pipeline:    "Not in current DeepSignal pipeline candidates",
+    section_top:        "Top Pipeline Candidates",
+    gallery_link:       "View full gallery →",
+    card_score:         "Score:",
+    tier_label:         "Tier",
+    footer_name:        "DeepSignal SETI Pipeline",
+    footer_sky:         "Sky images:",
+    footer_catalog:     "Catalog:",
+  },
+  zh: {
+    nav_gallery:        "圖庫",
+    nav_report:         "報告",
+    eyebrow:            "SETI 分析管道",
+    hero_h1:            "搜尋宇宙",
+    hero_p:             "在 10 個天文資料來源及 14 種偵測演算法中，搜尋任何恒星、星系或太陽系天體。",
+    search_placeholder: "例如 TRAPPIST-1、Proxima Centauri、Sgr A*、火星…",
+    search_btn:         "搜尋",
+    search_hint:        "恒星 · 星系 · 系外行星系統 · 太陽系天體 · 活躍星系核 · 星雲",
+    stat_candidates:    "管道候選天體：",
+    stat_sources:       "資料來源：",
+    stat_algorithms:    "偵測演算法：",
+    stat_updated:       "最後更新：",
+    searching:          "搜尋中…",
+    no_results:         "找不到結果，請嘗試其他名稱或確認拼寫。",
+    no_results_tip:     "提示：嘗試其他形式，例如「Proxima Cen」 → 「Proxima Centauri」",
+    score_label:        "候選分數：",
+    not_in_pipeline:    "不在目前 DeepSignal 管道候選名單中",
+    section_top:        "管道頂級候選天體",
+    gallery_link:       "查看完整圖庫 →",
+    card_score:         "分數：",
+    tier_label:         "第",
+    footer_name:        "DeepSignal SETI 管道",
+    footer_sky:         "天空影像：",
+    footer_catalog:     "目錄：",
+  }
+};
+
+let currentLang = localStorage.getItem("ds-lang") || "en";
+
+function t(key) {
+  return (TRANSLATIONS[currentLang] || TRANSLATIONS.en)[key] || key;
+}
+
+function applyLang(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang === "zh" ? "zh-TW" : "en";
+  document.getElementById("lang-btn").textContent = lang === "zh" ? "EN" : "中文";
+  document.getElementById("q").placeholder = t("search_placeholder");
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    el.textContent = t(el.dataset.i18n);
+  });
+  localStorage.setItem("ds-lang", lang);
+  renderHighlights();
+}
+
+function toggleLang() {
+  applyLang(currentLang === "en" ? "zh" : "en");
+}
 
 // ── Load catalog.json on startup ──────────────────────────────────────────────
 async function loadCatalog() {
@@ -519,7 +600,7 @@ function showResult(resolved, pipelineMatches) {
   panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
 
   if (!resolved && !pipelineMatches.length) {
-    card.innerHTML = `<div class="result-notfound">No results found. Try a different name or check spelling.<br><small style="color:#4a5a6a;margin-top:6px;display:block">Tip: Try alternate forms — e.g. "Proxima Cen" → "Proxima Centauri"</small></div>`;
+    card.innerHTML = `<div class="result-notfound">${t("no_results")}<br><small style="color:#4a5a6a;margin-top:6px;display:block">${t("no_results_tip")}</small></div>`;
     return;
   }
 
@@ -539,8 +620,9 @@ function showResult(resolved, pipelineMatches) {
     ? `<img src="${imgSrc}" alt="Sky cutout of ${name}" loading="lazy" onerror="this.style.display='none'">`
     : `<div style="width:220px;height:220px;display:grid;place-items:center;color:#3a4a5a;font-size:.8rem">No image</div>`;
 
-  const tierTag  = tier  ? `<span class="tag tag-tier${tier}">Tier ${tier}</span>` : "";
-  const scoreTxt = score != null ? `<div class="result-score">Candidacy score: <strong>${score}</strong>/100</div>` : "";
+  const tierText = currentLang === "zh" && tier ? `${t("tier_label")} ${tier} 級` : `Tier ${tier}`;
+  const tierTag  = tier  ? `<span class="tag tag-tier${tier}">${tierText}</span>` : "";
+  const scoreTxt = score != null ? `<div class="result-score">${t("score_label")} <strong>${score}</strong>/100</div>` : "";
   const methodTags = methods.map(m => `<span class="tag tag-method">${m}</span>`).join("");
   const dtypeTags  = dtypes.map(d  => `<span class="tag tag-dtype">${d}</span>`).join("");
   const reasonHtml = reasons.length ? `<ul class="result-reasons">${reasons.map(r => `<li>${r}</li>`).join("")}</ul>` : "";
@@ -562,7 +644,7 @@ function showResult(resolved, pipelineMatches) {
   ].filter(Boolean).join("");
 
   const notInPipeline = !p.target_name
-    ? `<div style="font-size:.78rem;color:#4a5a6a;margin-bottom:10px">Not in current DeepSignal pipeline candidates</div>` : "";
+    ? `<div style="font-size:.78rem;color:#4a5a6a;margin-bottom:10px">${t("not_in_pipeline")}</div>` : "";
 
   card.innerHTML = `
     <div class="result-inner">
@@ -588,7 +670,7 @@ async function doSearch() {
   const panel = document.getElementById("result-panel");
   const card  = document.getElementById("result-card");
   panel.style.display = "block";
-  card.innerHTML = `<div class="result-notfound"><span class="spinner"></span>Searching…</div>`;
+  card.innerHTML = `<div class="result-notfound"><span class="spinner"></span>${t("searching")}</div>`;
   panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
 
   const pipelineMatches = searchCatalog(q);
@@ -627,8 +709,9 @@ function renderHighlights() {
     const img = ra != null
       ? `<img src="${skyUrl(ra, dec, 0.5)}" alt="${c.target_name}" loading="lazy" onerror="this.style.display='none'">`
       : "";
-    const tc    = TIER_COLORS[c.tier] || "#6b7280";
-    const badge = c.tier ? `<span class="tier-badge" style="background:${tc}">Tier ${c.tier}</span>` : "";
+    const tc   = TIER_COLORS[c.tier] || "#6b7280";
+    const tierLabel = currentLang === "zh" && c.tier ? `${t("tier_label")} ${c.tier} 級` : `Tier ${c.tier}`;
+    const badge = c.tier ? `<span class="tier-badge" style="background:${tc}">${tierLabel}</span>` : "";
     const methods = c._all_methods.filter(Boolean);
     const mtags   = methods.slice(0, 2).map(m => `<span class="tag tag-method" style="font-size:.65rem">${m}</span>`).join("");
 
@@ -673,7 +756,7 @@ function renderHighlights() {
       <div class="card-body">
         <div class="card-name">${c.target_name}</div>
         <div class="card-tags">${mtags}</div>
-        <div class="card-score">Score: <strong>${c.candidacy_score || "—"}</strong></div>
+        <div class="card-score">${t("card_score")} <strong>${c.candidacy_score || "—"}</strong></div>
         ${coordsTxt}
         ${reasonsHtml}
         ${extLinksHtml}
@@ -701,6 +784,7 @@ document.getElementById("q").addEventListener("keydown", e => {
 });
 
 // ── Init ──────────────────────────────────────────────────────────────────────
+applyLang(currentLang);
 loadCatalog();
 </script>
 </body>
