@@ -1,6 +1,6 @@
 # DeepSignal SETI Candidate Report
 
-**Generated:** 2026-05-23 18:53 UTC
+**Generated:** 2026-05-26 01:43 UTC
 **Pipeline version:** 2.0.0
 
 ## Executive Summary
