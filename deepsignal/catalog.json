@@ -1,1364 +1,2949 @@
 [
   {
-    "id": "DS-0001",
+    "obs_id": 11,
     "target_name": "Tau Ceti",
     "ra_deg": 26.017,
     "dec_deg": -15.9375,
     "center_freq_mhz": 6794.7861,
-    "snr": 35.1736728157923,
     "bandwidth_mhz": 0.00568866,
+    "snr": 35.1736728157923,
     "drift_rate_hz_s": 1.518595,
+    "integration_time_s": 120.0,
+    "is_injected_anomaly": true,
+    "anomaly_type": "narrowband_high_snr",
+    "data_type": "radio",
     "detection_method": "zscore",
+    "zscore": 3.6081090172933914,
     "candidacy_score": 75,
-    "tier": 1,
     "reasons": [
       "Doppler drift rate 1.5186 Hz/s consistent with technological origin",
-      "High SNR: 35.2"
+      "High SNR: 35.2",
+      "Frequency in known RFI band: X-band satellite",
+      "Doppler drift rate 0.0879 Hz/s consistent with technological origin",
+      "Doppler drift rate 0.0428 Hz/s consistent with technological origin",
+      "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": true
+    "_all_methods": [
+      "zscore",
+      "doppler_drift",
+      "optical_laser_pulse"
+    ],
+    "_all_dtypes": [
+      "radio",
+      "optical"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=26.0170+-15.9375&fov=0.5&survey=P/DSS2/color",
+    "survey_label": "DSS2 Optical",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=26.0170+-15.9375&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=26.0170+-15.9375&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      }
+    ],
+    "image_path": "/Users/hikohong/Coding/deepsignal/output/images/DS-0001_Tau_Ceti.jpg",
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=26.01700&dec=-15.93750&format=jpg",
+    "image_cdn_label": "DSS2 Optical",
+    "image_filename": "DS-0001_Tau_Ceti.jpg",
+    "nasa_images": []
   },
   {
-    "id": "DS-0002",
+    "obs_id": 0,
     "target_name": "Proxima Centauri",
     "ra_deg": 217.4288,
     "dec_deg": -62.6793,
     "center_freq_mhz": 4949.906,
-    "snr": 4.3505,
     "bandwidth_mhz": 443.4392,
+    "snr": 4.3505,
     "drift_rate_hz_s": -0.195104,
+    "integration_time_s": 600.0,
+    "is_injected_anomaly": false,
+    "anomaly_type": null,
+    "data_type": "radio",
     "detection_method": "doppler_drift",
+    "abs_drift_rate_hz_s": 0.195104,
     "candidacy_score": 65,
-    "tier": 2,
     "reasons": [
-      "Doppler drift rate 0.1951 Hz/s consistent with technological origin"
+      "Doppler drift rate 0.1951 Hz/s consistent with technological origin",
+      "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "doppler_drift",
+      "optical_laser_pulse"
+    ],
+    "_all_dtypes": [
+      "radio",
+      "optical"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=217.4288+-62.6793&fov=0.5&survey=P/DSS2/color",
+    "survey_label": "DSS2 Optical",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=217.4288+-62.6793&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=217.4288+-62.6793&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      }
+    ],
+    "image_path": "/Users/hikohong/Coding/deepsignal/output/images/DS-0002_Proxima_Centauri.jpg",
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=217.42880&dec=-62.67930&format=jpg",
+    "image_cdn_label": "DSS2 Optical",
+    "image_filename": "DS-0002_Proxima_Centauri.jpg",
+    "nasa_images": [
+      {
+        "title": "Hubble's Best Image of Alpha Centauri A and B",
+        "thumbnail_url": "https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e000214/GSFC_20171208_Archive_e000214~thumb.jpg",
+        "description": "The closest star system to the Earth is the famous Alpha Centauri group. Located in the constellation of Centaurus (The Centaur), at a distance of 4.3 light-years, this system is made up of the binary",
+        "center": "GSFC",
+        "date_created": "2017-12-08T00:00:00Z",
+        "nasa_id": "GSFC_20171208_Archive_e000214"
+      }
+    ]
   },
   {
-    "id": "DS-0003",
-    "target_name": "Tau Ceti",
-    "ra_deg": 26.017,
-    "dec_deg": -15.9375,
-    "center_freq_mhz": 8074.5787,
-    "snr": 1.7744,
-    "bandwidth_mhz": 151.2455,
-    "drift_rate_hz_s": 0.08794,
-    "detection_method": "doppler_drift",
-    "candidacy_score": 35,
-    "tier": 3,
-    "reasons": [
-      "Frequency in known RFI band: X-band satellite",
-      "Doppler drift rate 0.0879 Hz/s consistent with technological origin"
-    ],
-    "is_injected_anomaly": false
-  },
-  {
-    "id": "DS-0004",
-    "target_name": "Tau Ceti",
-    "ra_deg": 26.017,
-    "dec_deg": -15.9375,
-    "center_freq_mhz": 4190.7337,
-    "snr": 2.5162,
-    "bandwidth_mhz": 488.2792,
-    "drift_rate_hz_s": -0.042833,
-    "detection_method": "doppler_drift",
-    "candidacy_score": 65,
-    "tier": 2,
-    "reasons": [
-      "Doppler drift rate 0.0428 Hz/s consistent with technological origin"
-    ],
-    "is_injected_anomaly": false
-  },
-  {
-    "id": "DS-0005",
+    "obs_id": 20,
     "target_name": "Epsilon Eridani",
     "ra_deg": 53.2327,
     "dec_deg": -9.4582,
     "center_freq_mhz": 1394.2339,
-    "snr": 3.3717,
     "bandwidth_mhz": 161.7158,
+    "snr": 3.3717,
     "drift_rate_hz_s": 0.214165,
+    "integration_time_s": 300.0,
+    "is_injected_anomaly": false,
+    "anomaly_type": null,
+    "data_type": "radio",
     "detection_method": "doppler_drift",
+    "abs_drift_rate_hz_s": 0.214165,
     "candidacy_score": 65,
-    "tier": 2,
     "reasons": [
-      "Doppler drift rate 0.2142 Hz/s consistent with technological origin"
+      "Doppler drift rate 0.2142 Hz/s consistent with technological origin",
+      "Doppler drift rate 0.1129 Hz/s consistent with technological origin",
+      "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "doppler_drift",
+      "optical_laser_pulse"
+    ],
+    "_all_dtypes": [
+      "radio",
+      "optical"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=53.2327+-9.4582&fov=0.5&survey=P/DSS2/color",
+    "survey_label": "DSS2 Optical",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=53.2327+-9.4582&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=53.2327+-9.4582&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      }
+    ],
+    "image_path": "/Users/hikohong/Coding/deepsignal/output/images/DS-0003_Epsilon_Eridani.jpg",
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=53.23270&dec=-9.45820&format=jpg",
+    "image_cdn_label": "DSS2 Optical",
+    "image_filename": "DS-0003_Epsilon_Eridani.jpg",
+    "nasa_images": [
+      {
+        "title": "Epsilon Eridani Inner Asteroid Belt",
+        "thumbnail_url": "https://images-assets.nasa.gov/image/ACD17-0168-009/ACD17-0168-009~thumb.jpg",
+        "description": "SCI2017_0004: Artist's illustration of the Epsilon Eridani system showing Epsilon Eridani b, right foreground, a Jupiter-mass planet orbiting its parent star at the outside edge of an asteroid belt. I",
+        "center": "ARC",
+        "date_created": "2017-09-14T00:00:00Z",
+        "nasa_id": "ACD17-0168-009"
+      },
+      {
+        "title": "Young Solar System in the Making  Artist Concept",
+        "thumbnail_url": "https://images-assets.nasa.gov/image/PIA11376/PIA11376~thumb.jpg",
+        "description": "This artist diagram based on observations from NASA Spitzer Space Telescope compares the Epsilon Eridani system to our own solar system. The two systems are structure",
+        "center": "JPL",
+        "date_created": "2008-10-27T16:54:03Z",
+        "nasa_id": "PIA11376"
+      },
+      {
+        "title": "Double the Rubble  Artist Concept",
+        "thumbnail_url": "https://images-assets.nasa.gov/image/PIA11375/PIA11375~thumb.jpg",
+        "description": "This artist conception shows the closest known planetary system to our own, called Epsilon Eridani. Observations from NASA Spitzer Space Telescope show that the system hosts two asteroid belts.",
+        "center": "JPL",
+        "date_created": "2008-10-27T16:54:02Z",
+        "nasa_id": "PIA11375"
+      }
+    ]
   },
   {
-    "id": "DS-0006",
-    "target_name": "Epsilon Eridani",
-    "ra_deg": 53.2327,
-    "dec_deg": -9.4582,
-    "center_freq_mhz": 3932.4282,
-    "snr": 3.6987,
-    "bandwidth_mhz": 248.1839,
-    "drift_rate_hz_s": 0.112897,
-    "detection_method": "doppler_drift",
-    "candidacy_score": 65,
-    "tier": 2,
-    "reasons": [
-      "Doppler drift rate 0.1129 Hz/s consistent with technological origin"
-    ],
-    "is_injected_anomaly": false
-  },
-  {
-    "id": "DS-0007",
+    "obs_id": 30,
     "target_name": "Gliese 667C",
     "ra_deg": 259.7488,
     "dec_deg": -34.9977,
     "center_freq_mhz": 3042.1841,
-    "snr": 3.9418,
     "bandwidth_mhz": 367.9256,
+    "snr": 3.9418,
     "drift_rate_hz_s": 0.054315,
+    "integration_time_s": 600.0,
+    "is_injected_anomaly": false,
+    "anomaly_type": null,
+    "data_type": "radio",
     "detection_method": "doppler_drift",
+    "abs_drift_rate_hz_s": 0.054315,
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "doppler_drift"
+    ],
+    "_all_dtypes": [
+      "radio"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=259.7488+-34.9977&fov=0.5&survey=P/DSS2/color",
+    "survey_label": "DSS2 Optical",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=259.7488+-34.9977&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=259.7488+-34.9977&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      }
+    ],
+    "image_path": "/Users/hikohong/Coding/deepsignal/output/images/DS-0004_Gliese_667C.jpg",
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=259.74880&dec=-34.99770&format=jpg",
+    "image_cdn_label": "DSS2 Optical",
+    "image_filename": "DS-0004_Gliese_667C.jpg",
+    "nasa_images": []
   },
   {
-    "id": "DS-0008",
+    "obs_id": 40,
     "target_name": "HD 40307",
     "ra_deg": 89.336,
     "dec_deg": -60.0161,
     "center_freq_mhz": 8242.8792,
-    "snr": 3.0324,
     "bandwidth_mhz": 254.9914,
+    "snr": 3.0324,
     "drift_rate_hz_s": 0.087143,
+    "integration_time_s": 300.0,
+    "is_injected_anomaly": false,
+    "anomaly_type": null,
+    "data_type": "radio",
     "detection_method": "doppler_drift",
+    "abs_drift_rate_hz_s": 0.087143,
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
-  },
-  {
-    "id": "DS-0009",
-    "target_name": "HD 40307",
-    "ra_deg": 89.336,
-    "dec_deg": -60.0161,
-    "center_freq_mhz": 2799.1738,
-    "snr": 3.1411,
-    "bandwidth_mhz": 102.9449,
-    "drift_rate_hz_s": 0.063129,
-    "detection_method": "doppler_drift",
-    "candidacy_score": 40,
-    "tier": 3,
-    "reasons": [
-      "not cross-checked (limit)"
+    "_all_methods": [
+      "doppler_drift"
     ],
-    "is_injected_anomaly": false
-  },
-  {
-    "id": "DS-0010",
-    "target_name": "HD 40307",
-    "ra_deg": 89.336,
-    "dec_deg": -60.0161,
-    "center_freq_mhz": 7346.4884,
-    "snr": 2.1486,
-    "bandwidth_mhz": 412.2916,
-    "drift_rate_hz_s": -0.063888,
-    "detection_method": "doppler_drift",
-    "candidacy_score": 40,
-    "tier": 3,
-    "reasons": [
-      "not cross-checked (limit)"
+    "_all_dtypes": [
+      "radio"
     ],
-    "is_injected_anomaly": false
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=89.3360+-60.0161&fov=0.5&survey=P/DSS2/color",
+    "survey_label": "DSS2 Optical",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=89.3360+-60.0161&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=89.3360+-60.0161&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      }
+    ],
+    "image_path": "/Users/hikohong/Coding/deepsignal/output/images/DS-0005_HD_40307.jpg",
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=89.33600&dec=-60.01610&format=jpg",
+    "image_cdn_label": "DSS2 Optical",
+    "image_filename": "DS-0005_HD_40307.jpg",
+    "nasa_images": []
   },
   {
-    "id": "DS-0011",
+    "obs_id": 50,
     "target_name": "Vega",
     "ra_deg": 279.2347,
     "dec_deg": 38.7837,
     "center_freq_mhz": 2030.7707,
-    "snr": 4.4112,
     "bandwidth_mhz": 367.3612,
+    "snr": 4.4112,
     "drift_rate_hz_s": -0.168287,
+    "integration_time_s": 120.0,
+    "is_injected_anomaly": false,
+    "anomaly_type": null,
+    "data_type": "radio",
     "detection_method": "doppler_drift",
+    "abs_drift_rate_hz_s": 0.168287,
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "doppler_drift",
+      "optical_laser_pulse"
+    ],
+    "_all_dtypes": [
+      "radio",
+      "optical"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=279.2347+38.7837&fov=0.5&survey=P/DSS2/color",
+    "survey_label": "DSS2 Optical",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=279.2347+38.7837&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=279.2347+38.7837&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      }
+    ],
+    "image_path": "/Users/hikohong/Coding/deepsignal/output/images/DS-0006_Vega.jpg",
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=279.23470&dec=38.78370&format=jpg",
+    "image_cdn_label": "DSS2 Optical",
+    "image_filename": "DS-0006_Vega.jpg",
+    "nasa_images": [
+      {
+        "title": "Massive Smash-up at Vega  Artist Concept",
+        "thumbnail_url": "https://images-assets.nasa.gov/image/PIA07217/PIA07217~thumb.jpg",
+        "description": "This artist concept illustrates how a massive collision of objects perhaps as large as the planet Pluto smashed together to create the dust ring around the nearby star Vega. New observations from NASA",
+        "center": "JPL",
+        "date_created": "2005-01-10T18:53:43Z",
+        "nasa_id": "PIA07217"
+      },
+      {
+        "title": "B-33 Vega Turrets",
+        "thumbnail_url": "https://images-assets.nasa.gov/image/LRC-1942-B701_P-28517/LRC-1942-B701_P-28517~thumb.jpg",
+        "description": "B-33 Vega Turrets.  Photo are listed in the NACA Wartime report L-463, October 1942, Test of a Large Spherical Turret and a modified Turret on a Typical Bomber Fuselage by Axel T. Mattson. ",
+        "center": "LRC",
+        "date_created": "1942-06-02T00:00:00Z",
+        "nasa_id": "LRC-1942-B701_P-28517"
+      },
+      {
+        "title": "B-33 Vega Turrets",
+        "thumbnail_url": "https://images-assets.nasa.gov/image/LRC-1942-B701_P-02814/LRC-1942-B701_P-02814~thumb.jpg",
+        "description": "B-33 Vega Turrets.  Photo are listed in the NACA Wartime report L-463, October 1942, Test of a Large Spherical Turret and a modified Turret on a Typical Bomber Fuselage by Axel T. Mattson. ",
+        "center": "LRC",
+        "date_created": "1942-06-02T00:00:00Z",
+        "nasa_id": "LRC-1942-B701_P-02814"
+      }
+    ]
   },
   {
-    "id": "DS-0012",
+    "obs_id": 60,
     "target_name": "61 Cygni A",
     "ra_deg": 316.7282,
     "dec_deg": 38.7488,
     "center_freq_mhz": 6712.4649,
-    "snr": 3.8791,
     "bandwidth_mhz": 321.4318,
+    "snr": 3.8791,
     "drift_rate_hz_s": 0.079335,
+    "integration_time_s": 300.0,
+    "is_injected_anomaly": false,
+    "anomaly_type": null,
+    "data_type": "radio",
     "detection_method": "doppler_drift",
+    "abs_drift_rate_hz_s": 0.079335,
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
-  },
-  {
-    "id": "DS-0013",
-    "target_name": "61 Cygni A",
-    "ra_deg": 316.7282,
-    "dec_deg": 38.7488,
-    "center_freq_mhz": 2931.2621,
-    "snr": 19.878748976615903,
-    "bandwidth_mhz": 0.00264941,
-    "drift_rate_hz_s": 1.327214,
-    "detection_method": "doppler_drift",
-    "candidacy_score": 40,
-    "tier": 3,
-    "reasons": [
-      "not cross-checked (limit)"
+    "_all_methods": [
+      "doppler_drift",
+      "optical_laser_pulse"
     ],
-    "is_injected_anomaly": true
-  },
-  {
-    "id": "DS-0014",
-    "target_name": "61 Cygni A",
-    "ra_deg": 316.7282,
-    "dec_deg": 38.7488,
-    "center_freq_mhz": 6013.2894,
-    "snr": 17.955551239896117,
-    "bandwidth_mhz": 413.5593,
-    "drift_rate_hz_s": -0.33677,
-    "detection_method": "doppler_drift",
-    "candidacy_score": 40,
-    "tier": 3,
-    "reasons": [
-      "not cross-checked (limit)"
+    "_all_dtypes": [
+      "radio",
+      "optical"
     ],
-    "is_injected_anomaly": true
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=316.7282+38.7488&fov=0.5&survey=P/DSS2/color",
+    "survey_label": "DSS2 Optical",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=316.7282+38.7488&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=316.7282+38.7488&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      }
+    ],
+    "image_path": "/Users/hikohong/Coding/deepsignal/output/images/DS-0007_61_Cygni_A.jpg",
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=316.72820&dec=38.74880&format=jpg",
+    "image_cdn_label": "DSS2 Optical",
+    "image_filename": "DS-0007_61_Cygni_A.jpg",
+    "nasa_images": []
   },
   {
-    "id": "DS-0015",
+    "obs_id": 70,
     "target_name": "Epsilon Indi A",
     "ra_deg": 330.84,
     "dec_deg": -56.7867,
     "center_freq_mhz": 1204.4087,
-    "snr": 1.4949,
     "bandwidth_mhz": 136.0191,
+    "snr": 1.4949,
     "drift_rate_hz_s": 0.048697,
+    "integration_time_s": 600.0,
+    "is_injected_anomaly": false,
+    "anomaly_type": null,
+    "data_type": "radio",
     "detection_method": "doppler_drift",
+    "abs_drift_rate_hz_s": 0.048697,
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
-  },
-  {
-    "id": "DS-0016",
-    "target_name": "Epsilon Indi A",
-    "ra_deg": 330.84,
-    "dec_deg": -56.7867,
-    "center_freq_mhz": 6672.5433,
-    "snr": 1.3184,
-    "bandwidth_mhz": 244.725,
-    "drift_rate_hz_s": -0.13227,
-    "detection_method": "doppler_drift",
-    "candidacy_score": 40,
-    "tier": 3,
-    "reasons": [
-      "not cross-checked (limit)"
+    "_all_methods": [
+      "doppler_drift"
     ],
-    "is_injected_anomaly": false
+    "_all_dtypes": [
+      "radio"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=330.8400+-56.7867&fov=0.5&survey=P/DSS2/color",
+    "survey_label": "DSS2 Optical",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=330.8400+-56.7867&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=330.8400+-56.7867&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      }
+    ],
+    "image_path": "/Users/hikohong/Coding/deepsignal/output/images/DS-0008_Epsilon_Indi_A.jpg",
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=330.84000&dec=-56.78670&format=jpg",
+    "image_cdn_label": "DSS2 Optical",
+    "image_filename": "DS-0008_Epsilon_Indi_A.jpg",
+    "nasa_images": []
   },
   {
-    "id": "DS-0017",
+    "obs_id": 80,
     "target_name": "Fomalhaut",
     "ra_deg": 344.4127,
     "dec_deg": -29.6223,
     "center_freq_mhz": 7297.3642,
-    "snr": 5.205,
     "bandwidth_mhz": 206.348,
+    "snr": 5.205,
     "drift_rate_hz_s": -0.035626,
+    "integration_time_s": 120.0,
+    "is_injected_anomaly": false,
+    "anomaly_type": null,
+    "data_type": "radio",
     "detection_method": "doppler_drift",
+    "abs_drift_rate_hz_s": 0.035626,
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
-  },
-  {
-    "id": "DS-0018",
-    "target_name": "Fomalhaut",
-    "ra_deg": 344.4127,
-    "dec_deg": -29.6223,
-    "center_freq_mhz": 5044.2535,
-    "snr": 1.6904,
-    "bandwidth_mhz": 208.8966,
-    "drift_rate_hz_s": -0.033903,
-    "detection_method": "doppler_drift",
-    "candidacy_score": 40,
-    "tier": 3,
-    "reasons": [
-      "not cross-checked (limit)"
+    "_all_methods": [
+      "doppler_drift"
     ],
-    "is_injected_anomaly": false
-  },
-  {
-    "id": "DS-0019",
-    "target_name": "Fomalhaut",
-    "ra_deg": 344.4127,
-    "dec_deg": -29.6223,
-    "center_freq_mhz": 5101.9866,
-    "snr": 3.3778,
-    "bandwidth_mhz": 180.9453,
-    "drift_rate_hz_s": 0.023774,
-    "detection_method": "doppler_drift",
-    "candidacy_score": 40,
-    "tier": 3,
-    "reasons": [
-      "not cross-checked (limit)"
+    "_all_dtypes": [
+      "radio"
     ],
-    "is_injected_anomaly": false
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=344.4127+-29.6223&fov=0.5&survey=P/DSS2/color",
+    "survey_label": "DSS2 Optical",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=344.4127+-29.6223&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=344.4127+-29.6223&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      }
+    ],
+    "image_path": "/Users/hikohong/Coding/deepsignal/output/images/DS-0009_Fomalhaut.jpg",
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=344.41270&dec=-29.62230&format=jpg",
+    "image_cdn_label": "DSS2 Optical",
+    "image_filename": "DS-0009_Fomalhaut.jpg",
+    "nasa_images": [
+      {
+        "title": "Circumstellar Disk Around Fomalhaut",
+        "thumbnail_url": "https://images-assets.nasa.gov/image/PIA04942/PIA04942~thumb.jpg",
+        "description": "NASA Spitzer Space Telescope has obtained the first infrared images of the dust disc surrounding Fomalhaut, the 18th brightest star in the sky.",
+        "center": "JPL",
+        "date_created": "2003-12-18T18:15:35Z",
+        "nasa_id": "PIA04942"
+      },
+      {
+        "title": "Herschel Spots Comet Massacre Around Nearby Star",
+        "thumbnail_url": "https://images-assets.nasa.gov/image/PIA15425/PIA15425~thumb.jpg",
+        "description": "New data from the Herschel Space Observatory suggest comets are constantly smashing together around the star Fomalhaut, a young star, just a few hundred million years old, and twice as massive as the ",
+        "center": "JPL",
+        "date_created": "2012-04-12T18:45:47Z",
+        "nasa_id": "PIA15425"
+      }
+    ]
   },
   {
-    "id": "DS-0020",
+    "obs_id": 90,
     "target_name": "Ross 128",
     "ra_deg": 176.9351,
     "dec_deg": 0.8048,
     "center_freq_mhz": 8709.5286,
-    "snr": 2.086,
     "bandwidth_mhz": 403.4078,
+    "snr": 2.086,
     "drift_rate_hz_s": 0.023268,
+    "integration_time_s": 120.0,
+    "is_injected_anomaly": false,
+    "anomaly_type": null,
+    "data_type": "radio",
     "detection_method": "doppler_drift",
+    "abs_drift_rate_hz_s": 0.023268,
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "doppler_drift",
+      "optical_laser_pulse"
+    ],
+    "_all_dtypes": [
+      "radio",
+      "optical"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=176.9351+0.8048&fov=0.5&survey=P/DSS2/color",
+    "survey_label": "DSS2 Optical",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=176.9351+0.8048&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=176.9351+0.8048&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      }
+    ],
+    "image_path": "/Users/hikohong/Coding/deepsignal/output/images/DS-0010_Ross_128.jpg",
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=176.93510&dec=0.80480&format=jpg",
+    "image_cdn_label": "DSS2 Optical",
+    "image_filename": "DS-0010_Ross_128.jpg",
+    "nasa_images": [
+      {
+        "title": "KSC-2009-5090",
+        "thumbnail_url": "https://images-assets.nasa.gov/image/KSC-2009-5090/KSC-2009-5090~thumb.jpg",
+        "description": "EDWARDS AIR FORCE BASE, Calif. -- (ED09-0253-01) Streams of smoke trail from the main landing gear tires as Space Shuttle Discovery touches down on Runway 22L at Edwards Air Force Base to conclude the",
+        "center": "KSC",
+        "date_created": "2009-09-11T00:00:00Z",
+        "nasa_id": "KSC-2009-5090"
+      },
+      {
+        "title": "KSC-2009-5148",
+        "thumbnail_url": "https://images-assets.nasa.gov/image/KSC-2009-5148/KSC-2009-5148~thumb.jpg",
+        "description": "EDWARDS AIR FORCE BASE, Calif. – (ED09-0253-114)  NASA’s modified Boeing 747 carrying the space shuttle Discovery taxis toward the runway at Edwards Air Force Base in Southern California shortly befor",
+        "center": "KSC",
+        "date_created": "2009-09-20T00:00:00Z",
+        "nasa_id": "KSC-2009-5148"
+      },
+      {
+        "title": "KSC-2009-4451",
+        "thumbnail_url": "https://images-assets.nasa.gov/image/KSC-2009-4451/KSC-2009-4451~thumb.jpg",
+        "description": "CAPE CANAVERAL, Fla. – Space shuttle Discovery's STS-128 mission crew members arrive in T-38 training jets at NASA Kennedy Space Center's Shuttle Landing Facility.  Commander Rick Sturckow is greeted ",
+        "center": "KSC",
+        "date_created": "2009-08-05T00:00:00Z",
+        "nasa_id": "KSC-2009-4451"
+      }
+    ]
   },
   {
-    "id": "DS-0021",
+    "obs_id": 9193943999440978972,
     "target_name": "FRB20121102A",
     "ra_deg": 82.9938,
     "dec_deg": 33.148,
-    "center_freq_mhz": 600.0,
     "snr": 25.3,
     "bandwidth_mhz": 3.1,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 600.0,
+    "dm": 557.0,
+    "dm_excess": 330.0,
+    "n_bursts": 18,
+    "period_days": null,
+    "data_type": "frb",
     "detection_method": "frb_repeater",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "frb_repeater"
+    ],
+    "_all_dtypes": [
+      "frb"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=82.9938+33.1480&fov=0.5&survey=P/DSS2/color",
+    "survey_label": "DSS2 Optical",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=82.9938+33.1480&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=82.9938+33.1480&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      }
+    ],
+    "image_path": "/Users/hikohong/Coding/deepsignal/output/images/DS-0011_FRB20121102A.jpg",
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=82.99380&dec=33.14800&format=jpg",
+    "image_cdn_label": "DSS2 Optical",
+    "image_filename": "DS-0011_FRB20121102A.jpg",
+    "nasa_images": []
   },
   {
-    "id": "DS-0022",
+    "obs_id": -5104347709783847838,
     "target_name": "FRB20180916B",
     "ra_deg": 29.5031,
     "dec_deg": 65.7168,
-    "center_freq_mhz": 600.0,
     "snr": 19.7,
     "bandwidth_mhz": 1.7,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 600.0,
+    "dm": 349.2,
+    "dm_excess": 209.0,
+    "n_bursts": 12,
+    "period_days": 16.35,
+    "data_type": "frb",
     "detection_method": "frb_repeater+periodic",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "frb_repeater+periodic"
+    ],
+    "_all_dtypes": [
+      "frb"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=29.5031+65.7168&fov=0.5&survey=P/DSS2/color",
+    "survey_label": "DSS2 Optical",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=29.5031+65.7168&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=29.5031+65.7168&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      }
+    ],
+    "image_path": "/Users/hikohong/Coding/deepsignal/output/images/DS-0012_FRB20180916B.jpg",
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=29.50310&dec=65.71680&format=jpg",
+    "image_cdn_label": "DSS2 Optical",
+    "image_filename": "DS-0012_FRB20180916B.jpg",
+    "nasa_images": []
   },
   {
-    "id": "DS-0023",
+    "obs_id": 4169343178285350731,
     "target_name": "FRB20190520B",
     "ra_deg": 240.0275,
     "dec_deg": -11.2921,
-    "center_freq_mhz": 600.0,
     "snr": 14.2,
     "bandwidth_mhz": 5.8,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 600.0,
+    "dm": 1205.0,
+    "dm_excess": 900.0,
+    "n_bursts": 7,
+    "period_days": null,
+    "data_type": "frb",
     "detection_method": "frb_repeater",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "frb_repeater"
+    ],
+    "_all_dtypes": [
+      "frb"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=240.0275+-11.2921&fov=0.5&survey=P/DSS2/color",
+    "survey_label": "DSS2 Optical",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=240.0275+-11.2921&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=240.0275+-11.2921&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      }
+    ],
+    "image_path": "/Users/hikohong/Coding/deepsignal/output/images/DS-0013_FRB20190520B.jpg",
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=240.02750&dec=-11.29210&format=jpg",
+    "image_cdn_label": "DSS2 Optical",
+    "image_filename": "DS-0013_FRB20190520B.jpg",
+    "nasa_images": []
   },
   {
-    "id": "DS-0024",
+    "obs_id": -2358893427945272753,
     "target_name": "FRB20201124A",
     "ra_deg": 77.0117,
     "dec_deg": 26.0603,
-    "center_freq_mhz": 600.0,
     "snr": 32.1,
     "bandwidth_mhz": 2.4,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 600.0,
+    "dm": 413.5,
+    "dm_excess": 280.0,
+    "n_bursts": 53,
+    "period_days": null,
+    "data_type": "frb",
     "detection_method": "frb_repeater",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "frb_repeater"
+    ],
+    "_all_dtypes": [
+      "frb"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=77.0117+26.0603&fov=0.5&survey=P/DSS2/color",
+    "survey_label": "DSS2 Optical",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=77.0117+26.0603&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=77.0117+26.0603&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      }
+    ],
+    "image_path": "/Users/hikohong/Coding/deepsignal/output/images/DS-0014_FRB20201124A.jpg",
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=77.01170&dec=26.06030&format=jpg",
+    "image_cdn_label": "DSS2 Optical",
+    "image_filename": "DS-0014_FRB20201124A.jpg",
+    "nasa_images": []
   },
   {
-    "id": "DS-0025",
+    "obs_id": -111418124096099446,
     "target_name": "FRB20220912A",
     "ra_deg": 347.2743,
     "dec_deg": 48.7108,
-    "center_freq_mhz": 600.0,
     "snr": 28.4,
     "bandwidth_mhz": 1.1,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 600.0,
+    "dm": 219.5,
+    "dm_excess": 65.0,
+    "n_bursts": 9,
+    "period_days": null,
+    "data_type": "frb",
     "detection_method": "frb_repeater",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "frb_repeater"
+    ],
+    "_all_dtypes": [
+      "frb"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=347.2743+48.7108&fov=0.5&survey=P/DSS2/color",
+    "survey_label": "DSS2 Optical",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=347.2743+48.7108&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=347.2743+48.7108&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      }
+    ],
+    "image_path": "/Users/hikohong/Coding/deepsignal/output/images/DS-0015_FRB20220912A.jpg",
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=347.27430&dec=48.71080&format=jpg",
+    "image_cdn_label": "DSS2 Optical",
+    "image_filename": "DS-0015_FRB20220912A.jpg",
+    "nasa_images": []
   },
   {
-    "id": "DS-0026",
+    "obs_id": -1386146981351987492,
     "target_name": "FRB_SIM_0011",
     "ra_deg": 133.98669812347342,
     "dec_deg": -84.5369470108599,
-    "center_freq_mhz": 600.0,
     "snr": 12.14,
     "bandwidth_mhz": 0.558,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 600.0,
+    "dm": 1140.51,
+    "dm_excess": 206.9,
+    "n_bursts": 2,
+    "period_days": null,
+    "data_type": "frb",
     "detection_method": "frb_repeater",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "frb_repeater"
+    ],
+    "_all_dtypes": [
+      "frb"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=133.9867+-84.5369&fov=0.5&survey=P/DSS2/color",
+    "survey_label": "DSS2 Optical",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=133.9867+-84.5369&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=133.9867+-84.5369&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      }
+    ],
+    "image_path": "/Users/hikohong/Coding/deepsignal/output/images/DS-0016_FRB_SIM_0011.jpg",
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=133.98670&dec=-84.53695&format=jpg",
+    "image_cdn_label": "DSS2 Optical",
+    "image_filename": "DS-0016_FRB_SIM_0011.jpg",
+    "nasa_images": []
   },
   {
-    "id": "DS-0027",
+    "obs_id": 2897290299900556191,
     "target_name": "FRB_SIM_0006",
     "ra_deg": 54.071902465362676,
     "dec_deg": 56.94085868743363,
-    "center_freq_mhz": 600.0,
     "snr": 12.74,
     "bandwidth_mhz": 1.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 600.0,
+    "dm_excess": 25.15,
+    "data_type": "frb",
     "detection_method": "frb_low_dm_excess",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "frb_low_dm_excess"
+    ],
+    "_all_dtypes": [
+      "frb"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=54.0719+56.9409&fov=0.5&survey=P/DSS2/color",
+    "survey_label": "DSS2 Optical",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=54.0719+56.9409&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=54.0719+56.9409&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      }
+    ],
+    "image_path": "/Users/hikohong/Coding/deepsignal/output/images/DS-0017_FRB_SIM_0006.jpg",
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=54.07190&dec=56.94086&format=jpg",
+    "image_cdn_label": "DSS2 Optical",
+    "image_filename": "DS-0017_FRB_SIM_0006.jpg",
+    "nasa_images": []
   },
   {
-    "id": "DS-0028",
+    "obs_id": 1779900916239279750,
     "target_name": "FRB_SIM_0014",
     "ra_deg": 81.51245377097186,
     "dec_deg": -54.26619336131889,
-    "center_freq_mhz": 600.0,
     "snr": 15.74,
     "bandwidth_mhz": 1.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 600.0,
+    "dm_excess": 40.5,
+    "data_type": "frb",
     "detection_method": "frb_low_dm_excess",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "frb_low_dm_excess"
+    ],
+    "_all_dtypes": [
+      "frb"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=81.5125+-54.2662&fov=0.5&survey=P/DSS2/color",
+    "survey_label": "DSS2 Optical",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=81.5125+-54.2662&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=81.5125+-54.2662&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      }
+    ],
+    "image_path": "/Users/hikohong/Coding/deepsignal/output/images/DS-0018_FRB_SIM_0014.jpg",
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=81.51245&dec=-54.26619&format=jpg",
+    "image_cdn_label": "DSS2 Optical",
+    "image_filename": "DS-0018_FRB_SIM_0014.jpg",
+    "nasa_images": []
   },
   {
-    "id": "DS-0029",
+    "obs_id": -3124730522839096094,
     "target_name": "FRB_SIM_0022",
     "ra_deg": 7.587127599800789,
     "dec_deg": -34.09736453042492,
-    "center_freq_mhz": 600.0,
     "snr": 11.06,
     "bandwidth_mhz": 1.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 600.0,
+    "dm_excess": 8.32,
+    "data_type": "frb",
     "detection_method": "frb_low_dm_excess",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "frb_low_dm_excess"
+    ],
+    "_all_dtypes": [
+      "frb"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=7.5871+-34.0974&fov=0.5&survey=P/DSS2/color",
+    "survey_label": "DSS2 Optical",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=7.5871+-34.0974&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=7.5871+-34.0974&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      }
+    ],
+    "image_path": "/Users/hikohong/Coding/deepsignal/output/images/DS-0019_FRB_SIM_0022.jpg",
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=7.58713&dec=-34.09736&format=jpg",
+    "image_cdn_label": "DSS2 Optical",
+    "image_filename": "DS-0019_FRB_SIM_0022.jpg",
+    "nasa_images": []
   },
   {
-    "id": "DS-0030",
+    "obs_id": 3615384491489787636,
     "target_name": "FRB_SIM_0024",
     "ra_deg": 225.5802549581236,
     "dec_deg": 53.54247156593999,
-    "center_freq_mhz": 600.0,
     "snr": 10.59,
     "bandwidth_mhz": 1.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 600.0,
+    "dm_excess": 33.43,
+    "data_type": "frb",
     "detection_method": "frb_low_dm_excess",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "frb_low_dm_excess"
+    ],
+    "_all_dtypes": [
+      "frb"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=225.5803+53.5425&fov=0.5&survey=P/DSS2/color",
+    "survey_label": "DSS2 Optical",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=225.5803+53.5425&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=225.5803+53.5425&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      }
+    ],
+    "image_path": "/Users/hikohong/Coding/deepsignal/output/images/DS-0020_FRB_SIM_0024.jpg",
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=225.58025&dec=53.54247&format=jpg",
+    "image_cdn_label": "DSS2 Optical",
+    "image_filename": "DS-0020_FRB_SIM_0024.jpg",
+    "nasa_images": []
   },
   {
-    "id": "DS-0031",
+    "obs_id": 1052707252090429552,
     "target_name": "FRB_SIM_0030",
     "ra_deg": 47.95439124588418,
     "dec_deg": -66.4768357546902,
-    "center_freq_mhz": 600.0,
     "snr": 13.39,
     "bandwidth_mhz": 1.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 600.0,
+    "dm_excess": 12.7,
+    "data_type": "frb",
     "detection_method": "frb_low_dm_excess",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "frb_low_dm_excess"
+    ],
+    "_all_dtypes": [
+      "frb"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=47.9544+-66.4768&fov=0.5&survey=P/DSS2/color",
+    "survey_label": "DSS2 Optical",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=47.9544+-66.4768&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=47.9544+-66.4768&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=47.95439&dec=-66.47684&format=jpg",
+    "image_cdn_label": "DSS2 Optical"
   },
   {
-    "id": "DS-0032",
+    "obs_id": -7511256732325491782,
     "target_name": "FRB_SIM_0039",
     "ra_deg": 163.80629393486396,
     "dec_deg": -79.78061476927498,
-    "center_freq_mhz": 600.0,
     "snr": 18.85,
     "bandwidth_mhz": 1.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 600.0,
+    "dm_excess": 0.18,
+    "data_type": "frb",
     "detection_method": "frb_low_dm_excess",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
-  },
-  {
-    "id": "DS-0033",
-    "target_name": "Proxima Centauri",
-    "ra_deg": 217.4288,
-    "dec_deg": -62.6793,
-    "center_freq_mhz": 0.0,
-    "snr": 5.66,
-    "bandwidth_mhz": 0.0,
-    "drift_rate_hz_s": 0.0,
-    "detection_method": "optical_laser_pulse",
-    "candidacy_score": 40,
-    "tier": 3,
-    "reasons": [
-      "not cross-checked (limit)"
+    "_all_methods": [
+      "frb_low_dm_excess"
     ],
-    "is_injected_anomaly": false
-  },
-  {
-    "id": "DS-0034",
-    "target_name": "Tau Ceti",
-    "ra_deg": 26.017,
-    "dec_deg": -15.9375,
-    "center_freq_mhz": 0.0,
-    "snr": 24.66,
-    "bandwidth_mhz": 0.0,
-    "drift_rate_hz_s": 0.0,
-    "detection_method": "optical_laser_pulse",
-    "candidacy_score": 40,
-    "tier": 3,
-    "reasons": [
-      "not cross-checked (limit)"
+    "_all_dtypes": [
+      "frb"
     ],
-    "is_injected_anomaly": false
-  },
-  {
-    "id": "DS-0035",
-    "target_name": "Epsilon Eridani",
-    "ra_deg": 53.2327,
-    "dec_deg": -9.4582,
-    "center_freq_mhz": 0.0,
-    "snr": 41.19,
-    "bandwidth_mhz": 0.0,
-    "drift_rate_hz_s": 0.0,
-    "detection_method": "optical_laser_pulse",
-    "candidacy_score": 40,
-    "tier": 3,
-    "reasons": [
-      "not cross-checked (limit)"
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=163.8063+-79.7806&fov=0.5&survey=P/DSS2/color",
+    "survey_label": "DSS2 Optical",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=163.8063+-79.7806&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=163.8063+-79.7806&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      }
     ],
-    "is_injected_anomaly": false
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=163.80629&dec=-79.78061&format=jpg",
+    "image_cdn_label": "DSS2 Optical"
   },
   {
-    "id": "DS-0036",
-    "target_name": "Vega",
-    "ra_deg": 279.2347,
-    "dec_deg": 38.7837,
-    "center_freq_mhz": 0.0,
-    "snr": 6.25,
-    "bandwidth_mhz": 0.0,
-    "drift_rate_hz_s": 0.0,
-    "detection_method": "optical_laser_pulse",
-    "candidacy_score": 40,
-    "tier": 3,
-    "reasons": [
-      "not cross-checked (limit)"
-    ],
-    "is_injected_anomaly": false
-  },
-  {
-    "id": "DS-0037",
-    "target_name": "61 Cygni A",
-    "ra_deg": 316.7282,
-    "dec_deg": 38.7488,
-    "center_freq_mhz": 0.0,
-    "snr": 5.45,
-    "bandwidth_mhz": 0.0,
-    "drift_rate_hz_s": 0.0,
-    "detection_method": "optical_laser_pulse",
-    "candidacy_score": 40,
-    "tier": 3,
-    "reasons": [
-      "not cross-checked (limit)"
-    ],
-    "is_injected_anomaly": false
-  },
-  {
-    "id": "DS-0038",
-    "target_name": "Ross 128",
-    "ra_deg": 176.9351,
-    "dec_deg": 0.8048,
-    "center_freq_mhz": 0.0,
-    "snr": 6.12,
-    "bandwidth_mhz": 0.0,
-    "drift_rate_hz_s": 0.0,
-    "detection_method": "optical_laser_pulse",
-    "candidacy_score": 40,
-    "tier": 3,
-    "reasons": [
-      "not cross-checked (limit)"
-    ],
-    "is_injected_anomaly": false
-  },
-  {
-    "id": "DS-0039",
+    "obs_id": -2890354481506590127,
     "target_name": "TOI-700",
     "ra_deg": 35.1611,
     "dec_deg": -56.7867,
-    "center_freq_mhz": 0.0,
     "snr": 10.0,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "transit_asymmetry": 0.1464,
+    "transit_depth": 0.002288,
+    "anomaly_type": "variable_depth",
+    "data_type": "tess",
     "detection_method": "lightcurve_anomaly",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "lightcurve_anomaly"
+    ],
+    "_all_dtypes": [
+      "tess"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=35.1611+-56.7867&fov=0.5&survey=P/2MASS/color",
+    "survey_label": "2MASS NIR",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=35.1611+-56.7867&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=35.1611+-56.7867&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2F2MASS%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=35.16110&dec=-56.78670&format=jpg",
+    "image_cdn_label": "2MASS NIR"
   },
   {
-    "id": "DS-0040",
+    "obs_id": 3651861415199758965,
     "target_name": "TOI-216",
     "ra_deg": 271.2716,
     "dec_deg": -27.6274,
-    "center_freq_mhz": 0.0,
     "snr": 10.0,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "transit_asymmetry": 0.2636,
+    "transit_depth": 0.001808,
+    "anomaly_type": null,
+    "data_type": "tess",
     "detection_method": "lightcurve_anomaly",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "lightcurve_anomaly"
+    ],
+    "_all_dtypes": [
+      "tess"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=271.2716+-27.6274&fov=0.5&survey=P/2MASS/color",
+    "survey_label": "2MASS NIR",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=271.2716+-27.6274&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=271.2716+-27.6274&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2F2MASS%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=271.27160&dec=-27.62740&format=jpg",
+    "image_cdn_label": "2MASS NIR"
   },
   {
-    "id": "DS-0041",
+    "obs_id": -7234861626766456070,
     "target_name": "SIM_STAR_0000",
     "ra_deg": 311.32713132597115,
     "dec_deg": 42.636301791847075,
-    "center_freq_mhz": 0.0,
     "snr": 10.0,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "transit_asymmetry": 0.2652,
+    "transit_depth": 0.001127,
+    "anomaly_type": null,
+    "data_type": "tess",
     "detection_method": "lightcurve_anomaly",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "lightcurve_anomaly"
+    ],
+    "_all_dtypes": [
+      "tess"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=311.3271+42.6363&fov=0.5&survey=P/2MASS/color",
+    "survey_label": "2MASS NIR",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=311.3271+42.6363&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=311.3271+42.6363&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2F2MASS%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=311.32713&dec=42.63630&format=jpg",
+    "image_cdn_label": "2MASS NIR"
   },
   {
-    "id": "DS-0042",
+    "obs_id": -7607015084343814097,
     "target_name": "SIM_STAR_0001",
     "ra_deg": 94.12069010993157,
     "dec_deg": -50.73606507378943,
-    "center_freq_mhz": 0.0,
     "snr": 10.0,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "transit_asymmetry": 0.3417,
+    "transit_depth": 0.001055,
+    "anomaly_type": null,
+    "data_type": "tess",
     "detection_method": "lightcurve_anomaly",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "lightcurve_anomaly"
+    ],
+    "_all_dtypes": [
+      "tess"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=94.1207+-50.7361&fov=0.5&survey=P/2MASS/color",
+    "survey_label": "2MASS NIR",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=94.1207+-50.7361&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=94.1207+-50.7361&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2F2MASS%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=94.12069&dec=-50.73607&format=jpg",
+    "image_cdn_label": "2MASS NIR"
   },
   {
-    "id": "DS-0043",
+    "obs_id": 5692197422326301022,
     "target_name": "SIM_STAR_0002",
     "ra_deg": 220.96500877695667,
     "dec_deg": -59.684309564844035,
-    "center_freq_mhz": 0.0,
     "snr": 10.0,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "transit_asymmetry": 0.2877,
+    "transit_depth": 0.002388,
+    "anomaly_type": null,
+    "data_type": "tess",
     "detection_method": "lightcurve_anomaly",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "lightcurve_anomaly"
+    ],
+    "_all_dtypes": [
+      "tess"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=220.9650+-59.6843&fov=0.5&survey=P/2MASS/color",
+    "survey_label": "2MASS NIR",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=220.9650+-59.6843&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=220.9650+-59.6843&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2F2MASS%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=220.96501&dec=-59.68431&format=jpg",
+    "image_cdn_label": "2MASS NIR"
   },
   {
-    "id": "DS-0044",
+    "obs_id": -918569040549099014,
     "target_name": "SIM_STAR_0003",
     "ra_deg": 354.52925108551995,
     "dec_deg": -25.64440750005955,
-    "center_freq_mhz": 0.0,
     "snr": 10.0,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "transit_asymmetry": 0.3677,
+    "transit_depth": 0.000811,
+    "anomaly_type": null,
+    "data_type": "tess",
     "detection_method": "lightcurve_anomaly",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "lightcurve_anomaly"
+    ],
+    "_all_dtypes": [
+      "tess"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=354.5293+-25.6444&fov=0.5&survey=P/2MASS/color",
+    "survey_label": "2MASS NIR",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=354.5293+-25.6444&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=354.5293+-25.6444&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2F2MASS%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=354.52925&dec=-25.64441&format=jpg",
+    "image_cdn_label": "2MASS NIR"
   },
   {
-    "id": "DS-0045",
+    "obs_id": 5011192875386036044,
     "target_name": "SIM_STAR_0006",
     "ra_deg": 293.04234693004025,
     "dec_deg": -0.2559110000985356,
-    "center_freq_mhz": 0.0,
     "snr": 10.0,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "transit_asymmetry": 0.6309,
+    "transit_depth": 0.000499,
+    "anomaly_type": null,
+    "data_type": "tess",
     "detection_method": "lightcurve_anomaly",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "lightcurve_anomaly"
+    ],
+    "_all_dtypes": [
+      "tess"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=293.0423+-0.2559&fov=0.5&survey=P/2MASS/color",
+    "survey_label": "2MASS NIR",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=293.0423+-0.2559&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=293.0423+-0.2559&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2F2MASS%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=293.04235&dec=-0.25591&format=jpg",
+    "image_cdn_label": "2MASS NIR"
   },
   {
-    "id": "DS-0046",
+    "obs_id": 999437357260176900,
     "target_name": "SIM_STAR_0007",
     "ra_deg": 279.60701616031264,
     "dec_deg": 57.50739470274752,
-    "center_freq_mhz": 0.0,
     "snr": 10.0,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "transit_asymmetry": 0.3103,
+    "transit_depth": 0.000505,
+    "anomaly_type": null,
+    "data_type": "tess",
     "detection_method": "lightcurve_anomaly",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "lightcurve_anomaly"
+    ],
+    "_all_dtypes": [
+      "tess"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=279.6070+57.5074&fov=0.5&survey=P/2MASS/color",
+    "survey_label": "2MASS NIR",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=279.6070+57.5074&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=279.6070+57.5074&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2F2MASS%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=279.60702&dec=57.50739&format=jpg",
+    "image_cdn_label": "2MASS NIR"
   },
   {
-    "id": "DS-0047",
+    "obs_id": -6300916437634940859,
     "target_name": "LHS 1140b",
     "ra_deg": 18.0018,
     "dec_deg": -15.267,
-    "center_freq_mhz": 0.0,
     "snr": 3.0,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "detected_molecules": [
+      "H2O",
+      "CO2",
+      "O2",
+      "CH4"
+    ],
+    "disequilibrium_flags": [
+      "O2+CH4 co-detected: thermodynamic disequilibrium"
+    ],
+    "tech_signature_flags": [],
+    "anomaly_type": "disequilibrium_o2_ch4",
+    "biosignature_score": 30,
+    "data_type": "jwst",
     "detection_method": "atmospheric_biosignature",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "atmospheric_biosignature"
+    ],
+    "_all_dtypes": [
+      "jwst"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=18.0018+-15.2670&fov=0.5&survey=P/2MASS/color",
+    "survey_label": "2MASS NIR",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=18.0018+-15.2670&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=18.0018+-15.2670&fov=0.5&survey=P/WISE/W4",
+        "label": "WISE 22µm",
+        "survey_key": "ir"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2F2MASS%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=18.00180&dec=-15.26700&format=jpg",
+    "image_cdn_label": "2MASS NIR"
   },
   {
-    "id": "DS-0048",
+    "obs_id": -2823897699544227851,
     "target_name": "HD 209458b",
     "ra_deg": 330.795,
     "dec_deg": 18.884,
-    "center_freq_mhz": 0.0,
     "snr": 2.5,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "detected_molecules": [
+      "CO2",
+      "N2O"
+    ],
+    "disequilibrium_flags": [
+      "N2O detected: primarily biological origin"
+    ],
+    "tech_signature_flags": [],
+    "anomaly_type": "n2o_biosignature",
+    "biosignature_score": 25,
+    "data_type": "jwst",
     "detection_method": "atmospheric_biosignature",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "atmospheric_biosignature"
+    ],
+    "_all_dtypes": [
+      "jwst"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=330.7950+18.8840&fov=0.5&survey=P/2MASS/color",
+    "survey_label": "2MASS NIR",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=330.7950+18.8840&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=330.7950+18.8840&fov=0.5&survey=P/WISE/W4",
+        "label": "WISE 22µm",
+        "survey_key": "ir"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2F2MASS%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=330.79500&dec=18.88400&format=jpg",
+    "image_cdn_label": "2MASS NIR"
   },
   {
-    "id": "DS-0049",
+    "obs_id": -4418599166749847675,
     "target_name": "TOI-SIM-0001",
     "ra_deg": 77.37910688223663,
     "dec_deg": -13.701115489296186,
-    "center_freq_mhz": 0.0,
     "snr": 3.0,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "detected_molecules": [
+      "H2O",
+      "CO2",
+      "O2",
+      "CH4"
+    ],
+    "disequilibrium_flags": [
+      "O2+CH4 co-detected: thermodynamic disequilibrium"
+    ],
+    "tech_signature_flags": [],
+    "anomaly_type": "disequilibrium_o2_ch4",
+    "biosignature_score": 30,
+    "data_type": "jwst",
     "detection_method": "atmospheric_biosignature",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "atmospheric_biosignature"
+    ],
+    "_all_dtypes": [
+      "jwst"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=77.3791+-13.7011&fov=0.5&survey=P/2MASS/color",
+    "survey_label": "2MASS NIR",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=77.3791+-13.7011&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=77.3791+-13.7011&fov=0.5&survey=P/WISE/W4",
+        "label": "WISE 22µm",
+        "survey_key": "ir"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2F2MASS%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=77.37911&dec=-13.70112&format=jpg",
+    "image_cdn_label": "2MASS NIR"
   },
   {
-    "id": "DS-0050",
+    "obs_id": 7795707027041531568,
     "target_name": "1I/ʻOumuamua",
     "ra_deg": 23.4578,
     "dec_deg": 26.8011,
-    "center_freq_mhz": 0.0,
     "snr": 0.0,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "eccentricity": 1.2011,
+    "non_grav_A1": 0.000492,
+    "anomaly_severity": "moderate",
+    "anomaly_notes": "Unexplained outward acceleration inconsistent with cometary outgassing (no coma detected). Possible radiation pressure on thin geometry or exotic composition.",
+    "data_type": "interstellar",
     "detection_method": "interstellar_trajectory",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "interstellar_trajectory"
+    ],
+    "_all_dtypes": [
+      "interstellar"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=23.4578+26.8011&fov=0.5&survey=P/DSS2/color",
+    "survey_label": "DSS2 Optical",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=23.4578+26.8011&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=23.4578+26.8011&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=23.45780&dec=26.80110&format=jpg",
+    "image_cdn_label": "DSS2 Optical"
   },
   {
-    "id": "DS-0051",
+    "obs_id": 742781831964355160,
     "target_name": "SIM_ISO_0001",
     "ra_deg": 65.56698756830662,
     "dec_deg": 50.507681824171215,
-    "center_freq_mhz": 0.0,
     "snr": 0.0,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "eccentricity": 4.9933,
+    "non_grav_A1": 0.001066,
+    "anomaly_severity": "strong",
+    "anomaly_notes": "",
+    "data_type": "interstellar",
     "detection_method": "interstellar_trajectory",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "interstellar_trajectory"
+    ],
+    "_all_dtypes": [
+      "interstellar"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=65.5670+50.5077&fov=0.5&survey=P/DSS2/color",
+    "survey_label": "DSS2 Optical",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=65.5670+50.5077&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=65.5670+50.5077&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=65.56699&dec=50.50768&format=jpg",
+    "image_cdn_label": "DSS2 Optical"
   },
   {
-    "id": "DS-0052",
+    "obs_id": 8903282743600335549,
     "target_name": "SIM_ISO_0002",
     "ra_deg": 7.327420975069443,
     "dec_deg": 33.91410968287197,
-    "center_freq_mhz": 0.0,
     "snr": 0.0,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "eccentricity": 3.8331,
+    "non_grav_A1": 0.011694,
+    "anomaly_severity": "strong",
+    "anomaly_notes": "Non-grav A1=1.17e-02 AU/d² exceeds typical cometary outgassing threshold.",
+    "data_type": "interstellar",
     "detection_method": "interstellar_trajectory",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "interstellar_trajectory"
+    ],
+    "_all_dtypes": [
+      "interstellar"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=7.3274+33.9141&fov=0.5&survey=P/DSS2/color",
+    "survey_label": "DSS2 Optical",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=7.3274+33.9141&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=7.3274+33.9141&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=7.32742&dec=33.91411&format=jpg",
+    "image_cdn_label": "DSS2 Optical"
   },
   {
-    "id": "DS-0053",
+    "obs_id": -6482227386983880425,
     "target_name": "SIM_ISO_0004",
     "ra_deg": 219.63715039279094,
     "dec_deg": 2.1437694557423725,
-    "center_freq_mhz": 0.0,
     "snr": 0.0,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "eccentricity": 3.9608,
+    "non_grav_A1": 0.000348,
+    "anomaly_severity": "moderate",
+    "anomaly_notes": "",
+    "data_type": "interstellar",
     "detection_method": "interstellar_trajectory",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "interstellar_trajectory"
+    ],
+    "_all_dtypes": [
+      "interstellar"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=219.6372+2.1438&fov=0.5&survey=P/DSS2/color",
+    "survey_label": "DSS2 Optical",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=219.6372+2.1438&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=219.6372+2.1438&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=219.63715&dec=2.14377&format=jpg",
+    "image_cdn_label": "DSS2 Optical"
   },
   {
-    "id": "DS-0054",
+    "obs_id": 3014281018023620087,
     "target_name": "4FGL J0253.4+0220",
     "ra_deg": 43.35,
     "dec_deg": 2.34,
-    "center_freq_mhz": 0.0,
     "snr": 0.0,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "energy_flux": 3.987204346963177e-12,
+    "spectral_index": 2.21,
+    "variability_index": 18.3,
+    "is_high_variability": false,
+    "anomaly_note": "Unidentified steady gamma-ray source — no known counterpart",
+    "data_type": "fermi",
     "detection_method": "gamma_unidentified",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "gamma_unidentified"
+    ],
+    "_all_dtypes": [
+      "fermi"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=43.3500+2.3400&fov=0.5&survey=P/Fermi/color",
+    "survey_label": "Fermi γ-ray",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=43.3500+2.3400&fov=0.5&survey=P/Fermi/color",
+        "label": "Fermi γ-ray",
+        "survey_key": "gamma"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=43.3500+2.3400&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FFermi%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=43.35000&dec=2.34000&format=jpg",
+    "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "id": "DS-0055",
+    "obs_id": -3844878016005053311,
     "target_name": "4FGL J0521.9+2112",
     "ra_deg": 80.49,
     "dec_deg": 21.2,
-    "center_freq_mhz": 0.0,
     "snr": 0.0,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "energy_flux": 6.928900231172684e-12,
+    "spectral_index": 1.98,
+    "variability_index": 72.1,
+    "is_high_variability": true,
+    "anomaly_note": "Unidentified variable gamma-ray source — no known counterpart",
+    "data_type": "fermi",
     "detection_method": "gamma_unidentified",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "gamma_unidentified"
+    ],
+    "_all_dtypes": [
+      "fermi"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=80.4900+21.2000&fov=0.5&survey=P/Fermi/color",
+    "survey_label": "Fermi γ-ray",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=80.4900+21.2000&fov=0.5&survey=P/Fermi/color",
+        "label": "Fermi γ-ray",
+        "survey_key": "gamma"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=80.4900+21.2000&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FFermi%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=80.49000&dec=21.20000&format=jpg",
+    "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "id": "DS-0056",
+    "obs_id": 7139459735491271208,
     "target_name": "4FGL J1120.0-2204",
     "ra_deg": 170.0,
     "dec_deg": -22.08,
-    "center_freq_mhz": 0.0,
     "snr": 0.0,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "energy_flux": 2.9474044565562815e-12,
+    "spectral_index": 2.44,
+    "variability_index": 9.8,
+    "is_high_variability": false,
+    "anomaly_note": "Unidentified steady gamma-ray source — no known counterpart",
+    "data_type": "fermi",
     "detection_method": "gamma_unidentified",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "gamma_unidentified"
+    ],
+    "_all_dtypes": [
+      "fermi"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=170.0000+-22.0800&fov=0.5&survey=P/Fermi/color",
+    "survey_label": "Fermi γ-ray",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=170.0000+-22.0800&fov=0.5&survey=P/Fermi/color",
+        "label": "Fermi γ-ray",
+        "survey_key": "gamma"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=170.0000+-22.0800&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FFermi%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=170.00000&dec=-22.08000&format=jpg",
+    "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "id": "DS-0057",
+    "obs_id": -2262725486823091526,
     "target_name": "4FGL J1231.6+1410",
     "ra_deg": 187.9,
     "dec_deg": 14.17,
-    "center_freq_mhz": 0.0,
     "snr": 0.0,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "energy_flux": 3.41243075205369e-12,
+    "spectral_index": 2.31,
+    "variability_index": 14.2,
+    "is_high_variability": false,
+    "anomaly_note": "Unidentified steady gamma-ray source — no known counterpart",
+    "data_type": "fermi",
     "detection_method": "gamma_unidentified",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "gamma_unidentified"
+    ],
+    "_all_dtypes": [
+      "fermi"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=187.9000+14.1700&fov=0.5&survey=P/Fermi/color",
+    "survey_label": "Fermi γ-ray",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=187.9000+14.1700&fov=0.5&survey=P/Fermi/color",
+        "label": "Fermi γ-ray",
+        "survey_key": "gamma"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=187.9000+14.1700&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FFermi%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=187.90000&dec=14.17000&format=jpg",
+    "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "id": "DS-0058",
+    "obs_id": 8692877920577323644,
     "target_name": "4FGL J1418.4-0233",
     "ra_deg": 214.6,
     "dec_deg": -2.56,
-    "center_freq_mhz": 0.0,
     "snr": 0.0,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "energy_flux": 5.512971959508495e-12,
+    "spectral_index": 2.09,
+    "variability_index": 31.4,
+    "is_high_variability": true,
+    "anomaly_note": "Unidentified variable gamma-ray source — no known counterpart",
+    "data_type": "fermi",
     "detection_method": "gamma_unidentified",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "gamma_unidentified"
+    ],
+    "_all_dtypes": [
+      "fermi"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=214.6000+-2.5600&fov=0.5&survey=P/Fermi/color",
+    "survey_label": "Fermi γ-ray",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=214.6000+-2.5600&fov=0.5&survey=P/Fermi/color",
+        "label": "Fermi γ-ray",
+        "survey_key": "gamma"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=214.6000+-2.5600&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FFermi%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=214.60000&dec=-2.56000&format=jpg",
+    "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "id": "DS-0059",
+    "obs_id": 5290493193215415823,
     "target_name": "4FGL J1653.6+3945",
     "ra_deg": 253.4,
     "dec_deg": 39.75,
-    "center_freq_mhz": 0.0,
     "snr": 0.0,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "energy_flux": 7.888774950094538e-12,
+    "spectral_index": 1.87,
+    "variability_index": 88.7,
+    "is_high_variability": true,
+    "anomaly_note": "Unidentified variable gamma-ray source — no known counterpart",
+    "data_type": "fermi",
     "detection_method": "gamma_unidentified",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "gamma_unidentified"
+    ],
+    "_all_dtypes": [
+      "fermi"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=253.4000+39.7500&fov=0.5&survey=P/Fermi/color",
+    "survey_label": "Fermi γ-ray",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=253.4000+39.7500&fov=0.5&survey=P/Fermi/color",
+        "label": "Fermi γ-ray",
+        "survey_key": "gamma"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=253.4000+39.7500&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FFermi%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=253.40000&dec=39.75000&format=jpg",
+    "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "id": "DS-0060",
+    "obs_id": 7068674844945592337,
     "target_name": "4FGL J1744.1-7619",
     "ra_deg": 266.0,
     "dec_deg": -76.32,
-    "center_freq_mhz": 0.0,
     "snr": 0.0,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "energy_flux": 3.4915418121226935e-12,
+    "spectral_index": 2.38,
+    "variability_index": 11.5,
+    "is_high_variability": false,
+    "anomaly_note": "Unidentified steady gamma-ray source — no known counterpart",
+    "data_type": "fermi",
     "detection_method": "gamma_unidentified",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "gamma_unidentified"
+    ],
+    "_all_dtypes": [
+      "fermi"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=266.0000+-76.3200&fov=0.5&survey=P/Fermi/color",
+    "survey_label": "Fermi γ-ray",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=266.0000+-76.3200&fov=0.5&survey=P/Fermi/color",
+        "label": "Fermi γ-ray",
+        "survey_key": "gamma"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=266.0000+-76.3200&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FFermi%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=266.00000&dec=-76.32000&format=jpg",
+    "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "id": "DS-0061",
+    "obs_id": 1985346937347561514,
     "target_name": "4FGL J1828.4+3236",
     "ra_deg": 277.1,
     "dec_deg": 32.61,
-    "center_freq_mhz": 0.0,
     "snr": 0.0,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "energy_flux": 2.5221585833599047e-12,
+    "spectral_index": 2.55,
+    "variability_index": 7.2,
+    "is_high_variability": false,
+    "anomaly_note": "Unidentified steady gamma-ray source — no known counterpart",
+    "data_type": "fermi",
     "detection_method": "gamma_unidentified",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "gamma_unidentified"
+    ],
+    "_all_dtypes": [
+      "fermi"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=277.1000+32.6100&fov=0.5&survey=P/Fermi/color",
+    "survey_label": "Fermi γ-ray",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=277.1000+32.6100&fov=0.5&survey=P/Fermi/color",
+        "label": "Fermi γ-ray",
+        "survey_key": "gamma"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=277.1000+32.6100&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FFermi%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=277.10000&dec=32.61000&format=jpg",
+    "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "id": "DS-0062",
+    "obs_id": 3969191856467089540,
     "target_name": "4FGL J1955.4+1123",
     "ra_deg": 298.9,
     "dec_deg": 11.39,
-    "center_freq_mhz": 0.0,
     "snr": 0.0,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "energy_flux": 4.072928468808404e-12,
+    "spectral_index": 2.17,
+    "variability_index": 22.8,
+    "is_high_variability": false,
+    "anomaly_note": "Unidentified steady gamma-ray source — no known counterpart",
+    "data_type": "fermi",
     "detection_method": "gamma_unidentified",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "gamma_unidentified"
+    ],
+    "_all_dtypes": [
+      "fermi"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=298.9000+11.3900&fov=0.5&survey=P/Fermi/color",
+    "survey_label": "Fermi γ-ray",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=298.9000+11.3900&fov=0.5&survey=P/Fermi/color",
+        "label": "Fermi γ-ray",
+        "survey_key": "gamma"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=298.9000+11.3900&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FFermi%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=298.90000&dec=11.39000&format=jpg",
+    "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "id": "DS-0063",
+    "obs_id": -6268187421725790278,
     "target_name": "4FGL J2049.9+1003",
     "ra_deg": 312.5,
     "dec_deg": 10.06,
-    "center_freq_mhz": 0.0,
     "snr": 0.0,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "energy_flux": 3.0120541139875315e-12,
+    "spectral_index": 2.27,
+    "variability_index": 13.1,
+    "is_high_variability": false,
+    "anomaly_note": "Unidentified steady gamma-ray source — no known counterpart",
+    "data_type": "fermi",
     "detection_method": "gamma_unidentified",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "gamma_unidentified"
+    ],
+    "_all_dtypes": [
+      "fermi"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=312.5000+10.0600&fov=0.5&survey=P/Fermi/color",
+    "survey_label": "Fermi γ-ray",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=312.5000+10.0600&fov=0.5&survey=P/Fermi/color",
+        "label": "Fermi γ-ray",
+        "survey_key": "gamma"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=312.5000+10.0600&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FFermi%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=312.50000&dec=10.06000&format=jpg",
+    "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "id": "DS-0064",
+    "obs_id": 3257440875776419467,
     "target_name": "4FGL J2158.8-3013",
     "ra_deg": 329.7,
     "dec_deg": -30.23,
-    "center_freq_mhz": 0.0,
     "snr": 0.0,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "energy_flux": 2.5590461892386976e-12,
+    "spectral_index": 2.41,
+    "variability_index": 8.4,
+    "is_high_variability": false,
+    "anomaly_note": "Unidentified steady gamma-ray source — no known counterpart",
+    "data_type": "fermi",
     "detection_method": "gamma_unidentified",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "gamma_unidentified"
+    ],
+    "_all_dtypes": [
+      "fermi"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=329.7000+-30.2300&fov=0.5&survey=P/Fermi/color",
+    "survey_label": "Fermi γ-ray",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=329.7000+-30.2300&fov=0.5&survey=P/Fermi/color",
+        "label": "Fermi γ-ray",
+        "survey_key": "gamma"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=329.7000+-30.2300&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FFermi%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=329.70000&dec=-30.23000&format=jpg",
+    "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "id": "DS-0065",
+    "obs_id": 6413437095582601275,
     "target_name": "4FGL J0111.0+3907",
     "ra_deg": 17.8,
     "dec_deg": 39.13,
-    "center_freq_mhz": 0.0,
     "snr": 0.0,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "energy_flux": 5.0176165161011875e-12,
+    "spectral_index": 2.03,
+    "variability_index": 44.3,
+    "is_high_variability": true,
+    "anomaly_note": "Unidentified variable gamma-ray source — no known counterpart",
+    "data_type": "fermi",
     "detection_method": "gamma_unidentified",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "gamma_unidentified"
+    ],
+    "_all_dtypes": [
+      "fermi"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=17.8000+39.1300&fov=0.5&survey=P/Fermi/color",
+    "survey_label": "Fermi γ-ray",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=17.8000+39.1300&fov=0.5&survey=P/Fermi/color",
+        "label": "Fermi γ-ray",
+        "survey_key": "gamma"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=17.8000+39.1300&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FFermi%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=17.80000&dec=39.13000&format=jpg",
+    "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "id": "DS-0066",
+    "obs_id": -6580021498785546689,
     "target_name": "Kapteyn's Star",
     "ra_deg": 77.14,
     "dec_deg": -44.995,
-    "center_freq_mhz": 0.0,
     "snr": 0.91,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "pm_total_masyr": 8680.2,
+    "radial_velocity_kms": 245.2,
+    "dist_pc": 3.91,
+    "anomaly_type": "halo_retrograde",
+    "pm_anomaly_score": 0.91,
+    "data_type": "gaia",
     "detection_method": "proper_motion_anomaly",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "proper_motion_anomaly"
+    ],
+    "_all_dtypes": [
+      "gaia"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=77.1400+-44.9950&fov=0.5&survey=P/DSS2/color",
+    "survey_label": "DSS2 Optical",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=77.1400+-44.9950&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=77.1400+-44.9950&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=77.14000&dec=-44.99500&format=jpg",
+    "image_cdn_label": "DSS2 Optical"
   },
   {
-    "id": "DS-0067",
+    "obs_id": 5703796461961018030,
     "target_name": "SIM_J0312+1847",
     "ra_deg": 48.12,
     "dec_deg": 18.79,
-    "center_freq_mhz": 0.0,
     "snr": 4.87,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "pm_total_masyr": 1461.2,
+    "radial_velocity_kms": 412.3,
+    "dist_pc": 12.15,
+    "anomaly_type": "extreme_space_velocity",
+    "pm_anomaly_score": 4.87,
+    "data_type": "gaia",
     "detection_method": "proper_motion_anomaly",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "proper_motion_anomaly"
+    ],
+    "_all_dtypes": [
+      "gaia"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=48.1200+18.7900&fov=0.5&survey=P/DSS2/color",
+    "survey_label": "DSS2 Optical",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=48.1200+18.7900&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=48.1200+18.7900&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=48.12000&dec=18.79000&format=jpg",
+    "image_cdn_label": "DSS2 Optical"
   },
   {
-    "id": "DS-0068",
+    "obs_id": -7377332823302296304,
     "target_name": "SIM_J1147-0231",
     "ra_deg": 176.91,
     "dec_deg": -2.52,
-    "center_freq_mhz": 0.0,
     "snr": 3.21,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "pm_total_masyr": 965.6,
+    "radial_velocity_kms": -289.1,
+    "dist_pc": 7.44,
+    "anomaly_type": "retrograde_disk_orbit",
+    "pm_anomaly_score": 3.21,
+    "data_type": "gaia",
     "detection_method": "proper_motion_anomaly",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "proper_motion_anomaly"
+    ],
+    "_all_dtypes": [
+      "gaia"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=176.9100+-2.5200&fov=0.5&survey=P/DSS2/color",
+    "survey_label": "DSS2 Optical",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=176.9100+-2.5200&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=176.9100+-2.5200&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=176.91000&dec=-2.52000&format=jpg",
+    "image_cdn_label": "DSS2 Optical"
   },
   {
-    "id": "DS-0069",
+    "obs_id": 6289964788145108056,
     "target_name": "SIM_J2218+3341",
     "ra_deg": 334.62,
     "dec_deg": 33.69,
-    "center_freq_mhz": 0.0,
     "snr": 3.94,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "pm_total_masyr": 1465.8,
+    "radial_velocity_kms": -178.4,
+    "dist_pc": 22.32,
+    "anomaly_type": "pm_proper_motion_excess",
+    "pm_anomaly_score": 3.94,
+    "data_type": "gaia",
     "detection_method": "proper_motion_anomaly",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "proper_motion_anomaly"
+    ],
+    "_all_dtypes": [
+      "gaia"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=334.6200+33.6900&fov=0.5&survey=P/DSS2/color",
+    "survey_label": "DSS2 Optical",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=334.6200+33.6900&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=334.6200+33.6900&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=334.62000&dec=33.69000&format=jpg",
+    "image_cdn_label": "DSS2 Optical"
   },
   {
-    "id": "DS-0070",
+    "obs_id": 6330051364344457442,
     "target_name": "SIM_J0631+1548",
     "ra_deg": 97.88,
     "dec_deg": 15.81,
-    "center_freq_mhz": 0.0,
     "snr": 5.61,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "pm_total_masyr": 1927.8,
+    "radial_velocity_kms": 521.8,
+    "dist_pc": 16.1,
+    "anomaly_type": "hyperbolic_runaway",
+    "pm_anomaly_score": 5.61,
+    "data_type": "gaia",
     "detection_method": "proper_motion_anomaly",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "proper_motion_anomaly"
+    ],
+    "_all_dtypes": [
+      "gaia"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=97.8800+15.8100&fov=0.5&survey=P/DSS2/color",
+    "survey_label": "DSS2 Optical",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=97.8800+15.8100&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=97.8800+15.8100&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=97.88000&dec=15.81000&format=jpg",
+    "image_cdn_label": "DSS2 Optical"
   },
   {
-    "id": "DS-0071",
+    "obs_id": -4678428393014563282,
     "target_name": "CXO J001311.8+634937",
     "ra_deg": 3.299,
     "dec_deg": 63.827,
-    "center_freq_mhz": 0.0,
     "snr": 0.0,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "flux_soft": 2.3e-14,
+    "flux_hard": 8.1e-15,
+    "hardness_ratio": 0.12,
+    "catalog": "Chandra",
+    "is_hard_spectrum": false,
+    "anomaly_note": "Unidentified soft X-ray point source — no optical counterpart",
+    "data_type": "xray",
     "detection_method": "xray_unidentified",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "xray_unidentified"
+    ],
+    "_all_dtypes": [
+      "xray"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=3.2990+63.8270&fov=0.5&survey=P/Chandra/ACIS",
+    "survey_label": "Chandra X-ray",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=3.2990+63.8270&fov=0.5&survey=P/Chandra/ACIS",
+        "label": "Chandra X-ray",
+        "survey_key": "xray"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=3.2990+63.8270&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FChandra%2FACIS&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=3.29900&dec=63.82700&format=jpg",
+    "image_cdn_label": "Chandra X-ray"
   },
   {
-    "id": "DS-0072",
+    "obs_id": 7466391920910123566,
     "target_name": "CXO J024512.4-001234",
     "ra_deg": 41.302,
     "dec_deg": -0.21,
-    "center_freq_mhz": 0.0,
     "snr": 0.0,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "flux_soft": 5.8e-14,
+    "flux_hard": 1.2e-14,
+    "hardness_ratio": 0.07,
+    "catalog": "Chandra",
+    "is_hard_spectrum": false,
+    "anomaly_note": "Unidentified soft X-ray point source — no optical counterpart",
+    "data_type": "xray",
     "detection_method": "xray_unidentified",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "xray_unidentified"
+    ],
+    "_all_dtypes": [
+      "xray"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=41.3020+-0.2100&fov=0.5&survey=P/Chandra/ACIS",
+    "survey_label": "Chandra X-ray",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=41.3020+-0.2100&fov=0.5&survey=P/Chandra/ACIS",
+        "label": "Chandra X-ray",
+        "survey_key": "xray"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=41.3020+-0.2100&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FChandra%2FACIS&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=41.30200&dec=-0.21000&format=jpg",
+    "image_cdn_label": "Chandra X-ray"
   },
   {
-    "id": "DS-0073",
+    "obs_id": -6946081992027184110,
     "target_name": "CXO J073841.2+653201",
     "ra_deg": 114.672,
     "dec_deg": 65.534,
-    "center_freq_mhz": 0.0,
     "snr": 0.0,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "flux_soft": 1.1e-14,
+    "flux_hard": 9.4e-15,
+    "hardness_ratio": 0.41,
+    "catalog": "Chandra",
+    "is_hard_spectrum": false,
+    "anomaly_note": "Unidentified soft X-ray point source — no optical counterpart",
+    "data_type": "xray",
     "detection_method": "xray_unidentified",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "xray_unidentified"
+    ],
+    "_all_dtypes": [
+      "xray"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=114.6720+65.5340&fov=0.5&survey=P/Chandra/ACIS",
+    "survey_label": "Chandra X-ray",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=114.6720+65.5340&fov=0.5&survey=P/Chandra/ACIS",
+        "label": "Chandra X-ray",
+        "survey_key": "xray"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=114.6720+65.5340&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FChandra%2FACIS&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=114.67200&dec=65.53400&format=jpg",
+    "image_cdn_label": "Chandra X-ray"
   },
   {
-    "id": "DS-0074",
+    "obs_id": 7023206108780914223,
     "target_name": "CXO J182239.2-181442",
     "ra_deg": 275.663,
     "dec_deg": -18.245,
-    "center_freq_mhz": 0.0,
     "snr": 0.0,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "flux_soft": 8.2e-15,
+    "flux_hard": 4.5e-14,
+    "hardness_ratio": 0.83,
+    "catalog": "Chandra",
+    "is_hard_spectrum": true,
+    "anomaly_note": "Unidentified hard X-ray point source — no optical counterpart",
+    "data_type": "xray",
     "detection_method": "xray_unidentified",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "xray_unidentified"
+    ],
+    "_all_dtypes": [
+      "xray"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=275.6630+-18.2450&fov=0.5&survey=P/Chandra/ACIS",
+    "survey_label": "Chandra X-ray",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=275.6630+-18.2450&fov=0.5&survey=P/Chandra/ACIS",
+        "label": "Chandra X-ray",
+        "survey_key": "xray"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=275.6630+-18.2450&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FChandra%2FACIS&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=275.66300&dec=-18.24500&format=jpg",
+    "image_cdn_label": "Chandra X-ray"
   },
   {
-    "id": "DS-0075",
+    "obs_id": 4140883498427111531,
     "target_name": "CXO J214521.3+122844",
     "ra_deg": 326.339,
     "dec_deg": 12.479,
-    "center_freq_mhz": 0.0,
     "snr": 0.0,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "flux_soft": 6.4e-14,
+    "flux_hard": 8.8e-15,
+    "hardness_ratio": -0.08,
+    "catalog": "Chandra",
+    "is_hard_spectrum": false,
+    "anomaly_note": "Unidentified soft X-ray point source — no optical counterpart",
+    "data_type": "xray",
     "detection_method": "xray_unidentified",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "xray_unidentified"
+    ],
+    "_all_dtypes": [
+      "xray"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=326.3390+12.4790&fov=0.5&survey=P/Chandra/ACIS",
+    "survey_label": "Chandra X-ray",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=326.3390+12.4790&fov=0.5&survey=P/Chandra/ACIS",
+        "label": "Chandra X-ray",
+        "survey_key": "xray"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=326.3390+12.4790&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FChandra%2FACIS&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=326.33900&dec=12.47900&format=jpg",
+    "image_cdn_label": "Chandra X-ray"
   },
   {
-    "id": "DS-0076",
+    "obs_id": 2333607044963966867,
     "target_name": "4XMM J034428.3-045712",
     "ra_deg": 56.118,
     "dec_deg": -4.953,
-    "center_freq_mhz": 0.0,
     "snr": 0.0,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "flux_soft": 1.9e-14,
+    "flux_hard": 7.3e-15,
+    "hardness_ratio": 0.18,
+    "catalog": "XMM",
+    "is_hard_spectrum": false,
+    "anomaly_note": "Unidentified soft X-ray point source — no optical counterpart",
+    "data_type": "xray",
     "detection_method": "xray_unidentified",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "xray_unidentified"
+    ],
+    "_all_dtypes": [
+      "xray"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=56.1180+-4.9530&fov=0.5&survey=P/Chandra/ACIS",
+    "survey_label": "Chandra X-ray",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=56.1180+-4.9530&fov=0.5&survey=P/Chandra/ACIS",
+        "label": "Chandra X-ray",
+        "survey_key": "xray"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=56.1180+-4.9530&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FChandra%2FACIS&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=56.11800&dec=-4.95300&format=jpg",
+    "image_cdn_label": "Chandra X-ray"
   },
   {
-    "id": "DS-0077",
+    "obs_id": 6967879539375902730,
     "target_name": "4XMM J091234.2+303201",
     "ra_deg": 138.143,
     "dec_deg": 30.534,
-    "center_freq_mhz": 0.0,
     "snr": 0.0,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "flux_soft": 4.4e-14,
+    "flux_hard": 1.8e-14,
+    "hardness_ratio": 0.15,
+    "catalog": "XMM",
+    "is_hard_spectrum": false,
+    "anomaly_note": "Unidentified soft X-ray point source — no optical counterpart",
+    "data_type": "xray",
     "detection_method": "xray_unidentified",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "xray_unidentified"
+    ],
+    "_all_dtypes": [
+      "xray"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=138.1430+30.5340&fov=0.5&survey=P/Chandra/ACIS",
+    "survey_label": "Chandra X-ray",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=138.1430+30.5340&fov=0.5&survey=P/Chandra/ACIS",
+        "label": "Chandra X-ray",
+        "survey_key": "xray"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=138.1430+30.5340&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FChandra%2FACIS&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=138.14300&dec=30.53400&format=jpg",
+    "image_cdn_label": "Chandra X-ray"
   },
   {
-    "id": "DS-0078",
+    "obs_id": 7866623387779996370,
     "target_name": "4XMM J143812.7-231456",
     "ra_deg": 219.553,
     "dec_deg": -23.249,
-    "center_freq_mhz": 0.0,
     "snr": 0.0,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "flux_soft": 2.8e-14,
+    "flux_hard": 1.1e-14,
+    "hardness_ratio": 0.22,
+    "catalog": "XMM",
+    "is_hard_spectrum": false,
+    "anomaly_note": "Unidentified soft X-ray point source — no optical counterpart",
+    "data_type": "xray",
     "detection_method": "xray_unidentified",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "xray_unidentified"
+    ],
+    "_all_dtypes": [
+      "xray"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=219.5530+-23.2490&fov=0.5&survey=P/Chandra/ACIS",
+    "survey_label": "Chandra X-ray",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=219.5530+-23.2490&fov=0.5&survey=P/Chandra/ACIS",
+        "label": "Chandra X-ray",
+        "survey_key": "xray"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=219.5530+-23.2490&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FChandra%2FACIS&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=219.55300&dec=-23.24900&format=jpg",
+    "image_cdn_label": "Chandra X-ray"
   },
   {
-    "id": "DS-0079",
+    "obs_id": -1462856907313272055,
     "target_name": "4XMM J052211.8-692334",
     "ra_deg": 80.549,
     "dec_deg": -69.393,
-    "center_freq_mhz": 0.0,
     "snr": 0.0,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "flux_soft": 3.3e-14,
+    "flux_hard": 9.2e-15,
+    "hardness_ratio": 0.11,
+    "catalog": "XMM",
+    "is_hard_spectrum": false,
+    "anomaly_note": "Unidentified soft X-ray point source — no optical counterpart",
+    "data_type": "xray",
     "detection_method": "xray_unidentified",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "xray_unidentified"
+    ],
+    "_all_dtypes": [
+      "xray"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=80.5490+-69.3930&fov=0.5&survey=P/Chandra/ACIS",
+    "survey_label": "Chandra X-ray",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=80.5490+-69.3930&fov=0.5&survey=P/Chandra/ACIS",
+        "label": "Chandra X-ray",
+        "survey_key": "xray"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=80.5490+-69.3930&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FChandra%2FACIS&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=80.54900&dec=-69.39300&format=jpg",
+    "image_cdn_label": "Chandra X-ray"
   },
   {
-    "id": "DS-0080",
+    "obs_id": 4686807755076849943,
     "target_name": "4XMM J113021.4+052318",
     "ra_deg": 172.589,
     "dec_deg": 5.388,
-    "center_freq_mhz": 0.0,
     "snr": 0.0,
     "bandwidth_mhz": 0.0,
     "drift_rate_hz_s": 0.0,
+    "center_freq_mhz": 0.0,
+    "flux_soft": 5.2e-14,
+    "flux_hard": 2.4e-14,
+    "hardness_ratio": 0.29,
+    "catalog": "XMM",
+    "is_hard_spectrum": false,
+    "anomaly_note": "Unidentified soft X-ray point source — no optical counterpart",
+    "data_type": "xray",
     "detection_method": "xray_unidentified",
     "candidacy_score": 40,
-    "tier": 3,
     "reasons": [
       "not cross-checked (limit)"
     ],
-    "is_injected_anomaly": false
+    "_all_methods": [
+      "xray_unidentified"
+    ],
+    "_all_dtypes": [
+      "xray"
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=172.5890+5.3880&fov=0.5&survey=P/Chandra/ACIS",
+    "survey_label": "Chandra X-ray",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=172.5890+5.3880&fov=0.5&survey=P/Chandra/ACIS",
+        "label": "Chandra X-ray",
+        "survey_key": "xray"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=172.5890+5.3880&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FChandra%2FACIS&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=172.58900&dec=5.38800&format=jpg",
+    "image_cdn_label": "Chandra X-ray"
   }
 ]
