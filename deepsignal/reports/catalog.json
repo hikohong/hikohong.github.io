@@ -1,1385 +1,1364 @@
-{
-  "version": "2.0.0",
-  "generated_utc": "2026-05-23T18:53:42.656504",
-  "pipeline_metadata": {
-    "n_observations": 21,
-    "n_targets": 10,
-    "n_frbs": 55,
-    "n_optical": 10,
-    "n_tess": 20,
-    "n_ir": 10,
-    "n_jwst": 20,
-    "n_interstellar": 7,
-    "n_fermi": 15,
-    "n_gaia": 10,
-    "n_xray": 12,
-    "n_anomalies": 80,
-    "n_candidates": 80,
-    "run_date": "2026-05-23T18:53:42Z",
-    "pipeline_config_version": "2.1.0"
+[
+  {
+    "id": "DS-0001",
+    "target_name": "Tau Ceti",
+    "ra_deg": 26.017,
+    "dec_deg": -15.9375,
+    "center_freq_mhz": 6794.7861,
+    "snr": 35.1736728157923,
+    "bandwidth_mhz": 0.00568866,
+    "drift_rate_hz_s": 1.518595,
+    "detection_method": "zscore",
+    "candidacy_score": 75,
+    "tier": 1,
+    "reasons": [
+      "Doppler drift rate 1.5186 Hz/s consistent with technological origin",
+      "High SNR: 35.2"
+    ],
+    "is_injected_anomaly": true
   },
-  "candidates": [
-    {
-      "id": "DS-0001",
-      "target_name": "Tau Ceti",
-      "ra_deg": 26.017,
-      "dec_deg": -15.9375,
-      "center_freq_mhz": 6794.7861,
-      "snr": 35.1736728157923,
-      "bandwidth_mhz": 0.00568866,
-      "drift_rate_hz_s": 1.518595,
-      "detection_method": "zscore",
-      "candidacy_score": 75,
-      "tier": 1,
-      "reasons": [
-        "Doppler drift rate 1.5186 Hz/s consistent with technological origin",
-        "High SNR: 35.2"
-      ],
-      "is_injected_anomaly": true
-    },
-    {
-      "id": "DS-0002",
-      "target_name": "Proxima Centauri",
-      "ra_deg": 217.4288,
-      "dec_deg": -62.6793,
-      "center_freq_mhz": 4949.906,
-      "snr": 4.3505,
-      "bandwidth_mhz": 443.4392,
-      "drift_rate_hz_s": -0.195104,
-      "detection_method": "doppler_drift",
-      "candidacy_score": 65,
-      "tier": 2,
-      "reasons": [
-        "Doppler drift rate 0.1951 Hz/s consistent with technological origin"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0003",
-      "target_name": "Tau Ceti",
-      "ra_deg": 26.017,
-      "dec_deg": -15.9375,
-      "center_freq_mhz": 8074.5787,
-      "snr": 1.7744,
-      "bandwidth_mhz": 151.2455,
-      "drift_rate_hz_s": 0.08794,
-      "detection_method": "doppler_drift",
-      "candidacy_score": 35,
-      "tier": 3,
-      "reasons": [
-        "Frequency in known RFI band: X-band satellite",
-        "Doppler drift rate 0.0879 Hz/s consistent with technological origin"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0004",
-      "target_name": "Tau Ceti",
-      "ra_deg": 26.017,
-      "dec_deg": -15.9375,
-      "center_freq_mhz": 4190.7337,
-      "snr": 2.5162,
-      "bandwidth_mhz": 488.2792,
-      "drift_rate_hz_s": -0.042833,
-      "detection_method": "doppler_drift",
-      "candidacy_score": 65,
-      "tier": 2,
-      "reasons": [
-        "Doppler drift rate 0.0428 Hz/s consistent with technological origin"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0005",
-      "target_name": "Epsilon Eridani",
-      "ra_deg": 53.2327,
-      "dec_deg": -9.4582,
-      "center_freq_mhz": 1394.2339,
-      "snr": 3.3717,
-      "bandwidth_mhz": 161.7158,
-      "drift_rate_hz_s": 0.214165,
-      "detection_method": "doppler_drift",
-      "candidacy_score": 65,
-      "tier": 2,
-      "reasons": [
-        "Doppler drift rate 0.2142 Hz/s consistent with technological origin"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0006",
-      "target_name": "Epsilon Eridani",
-      "ra_deg": 53.2327,
-      "dec_deg": -9.4582,
-      "center_freq_mhz": 3932.4282,
-      "snr": 3.6987,
-      "bandwidth_mhz": 248.1839,
-      "drift_rate_hz_s": 0.112897,
-      "detection_method": "doppler_drift",
-      "candidacy_score": 65,
-      "tier": 2,
-      "reasons": [
-        "Doppler drift rate 0.1129 Hz/s consistent with technological origin"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0007",
-      "target_name": "Gliese 667C",
-      "ra_deg": 259.7488,
-      "dec_deg": -34.9977,
-      "center_freq_mhz": 3042.1841,
-      "snr": 3.9418,
-      "bandwidth_mhz": 367.9256,
-      "drift_rate_hz_s": 0.054315,
-      "detection_method": "doppler_drift",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0008",
-      "target_name": "HD 40307",
-      "ra_deg": 89.336,
-      "dec_deg": -60.0161,
-      "center_freq_mhz": 8242.8792,
-      "snr": 3.0324,
-      "bandwidth_mhz": 254.9914,
-      "drift_rate_hz_s": 0.087143,
-      "detection_method": "doppler_drift",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0009",
-      "target_name": "HD 40307",
-      "ra_deg": 89.336,
-      "dec_deg": -60.0161,
-      "center_freq_mhz": 2799.1738,
-      "snr": 3.1411,
-      "bandwidth_mhz": 102.9449,
-      "drift_rate_hz_s": 0.063129,
-      "detection_method": "doppler_drift",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0010",
-      "target_name": "HD 40307",
-      "ra_deg": 89.336,
-      "dec_deg": -60.0161,
-      "center_freq_mhz": 7346.4884,
-      "snr": 2.1486,
-      "bandwidth_mhz": 412.2916,
-      "drift_rate_hz_s": -0.063888,
-      "detection_method": "doppler_drift",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0011",
-      "target_name": "Vega",
-      "ra_deg": 279.2347,
-      "dec_deg": 38.7837,
-      "center_freq_mhz": 2030.7707,
-      "snr": 4.4112,
-      "bandwidth_mhz": 367.3612,
-      "drift_rate_hz_s": -0.168287,
-      "detection_method": "doppler_drift",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0012",
-      "target_name": "61 Cygni A",
-      "ra_deg": 316.7282,
-      "dec_deg": 38.7488,
-      "center_freq_mhz": 6712.4649,
-      "snr": 3.8791,
-      "bandwidth_mhz": 321.4318,
-      "drift_rate_hz_s": 0.079335,
-      "detection_method": "doppler_drift",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0013",
-      "target_name": "61 Cygni A",
-      "ra_deg": 316.7282,
-      "dec_deg": 38.7488,
-      "center_freq_mhz": 2931.2621,
-      "snr": 19.878748976615903,
-      "bandwidth_mhz": 0.00264941,
-      "drift_rate_hz_s": 1.327214,
-      "detection_method": "doppler_drift",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": true
-    },
-    {
-      "id": "DS-0014",
-      "target_name": "61 Cygni A",
-      "ra_deg": 316.7282,
-      "dec_deg": 38.7488,
-      "center_freq_mhz": 6013.2894,
-      "snr": 17.955551239896117,
-      "bandwidth_mhz": 413.5593,
-      "drift_rate_hz_s": -0.33677,
-      "detection_method": "doppler_drift",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": true
-    },
-    {
-      "id": "DS-0015",
-      "target_name": "Epsilon Indi A",
-      "ra_deg": 330.84,
-      "dec_deg": -56.7867,
-      "center_freq_mhz": 1204.4087,
-      "snr": 1.4949,
-      "bandwidth_mhz": 136.0191,
-      "drift_rate_hz_s": 0.048697,
-      "detection_method": "doppler_drift",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0016",
-      "target_name": "Epsilon Indi A",
-      "ra_deg": 330.84,
-      "dec_deg": -56.7867,
-      "center_freq_mhz": 6672.5433,
-      "snr": 1.3184,
-      "bandwidth_mhz": 244.725,
-      "drift_rate_hz_s": -0.13227,
-      "detection_method": "doppler_drift",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0017",
-      "target_name": "Fomalhaut",
-      "ra_deg": 344.4127,
-      "dec_deg": -29.6223,
-      "center_freq_mhz": 7297.3642,
-      "snr": 5.205,
-      "bandwidth_mhz": 206.348,
-      "drift_rate_hz_s": -0.035626,
-      "detection_method": "doppler_drift",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0018",
-      "target_name": "Fomalhaut",
-      "ra_deg": 344.4127,
-      "dec_deg": -29.6223,
-      "center_freq_mhz": 5044.2535,
-      "snr": 1.6904,
-      "bandwidth_mhz": 208.8966,
-      "drift_rate_hz_s": -0.033903,
-      "detection_method": "doppler_drift",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0019",
-      "target_name": "Fomalhaut",
-      "ra_deg": 344.4127,
-      "dec_deg": -29.6223,
-      "center_freq_mhz": 5101.9866,
-      "snr": 3.3778,
-      "bandwidth_mhz": 180.9453,
-      "drift_rate_hz_s": 0.023774,
-      "detection_method": "doppler_drift",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0020",
-      "target_name": "Ross 128",
-      "ra_deg": 176.9351,
-      "dec_deg": 0.8048,
-      "center_freq_mhz": 8709.5286,
-      "snr": 2.086,
-      "bandwidth_mhz": 403.4078,
-      "drift_rate_hz_s": 0.023268,
-      "detection_method": "doppler_drift",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0021",
-      "target_name": "FRB20121102A",
-      "ra_deg": 82.9938,
-      "dec_deg": 33.148,
-      "center_freq_mhz": 600.0,
-      "snr": 25.3,
-      "bandwidth_mhz": 3.1,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "frb_repeater",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0022",
-      "target_name": "FRB20180916B",
-      "ra_deg": 29.5031,
-      "dec_deg": 65.7168,
-      "center_freq_mhz": 600.0,
-      "snr": 19.7,
-      "bandwidth_mhz": 1.7,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "frb_repeater+periodic",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0023",
-      "target_name": "FRB20190520B",
-      "ra_deg": 240.0275,
-      "dec_deg": -11.2921,
-      "center_freq_mhz": 600.0,
-      "snr": 14.2,
-      "bandwidth_mhz": 5.8,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "frb_repeater",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0024",
-      "target_name": "FRB20201124A",
-      "ra_deg": 77.0117,
-      "dec_deg": 26.0603,
-      "center_freq_mhz": 600.0,
-      "snr": 32.1,
-      "bandwidth_mhz": 2.4,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "frb_repeater",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0025",
-      "target_name": "FRB20220912A",
-      "ra_deg": 347.2743,
-      "dec_deg": 48.7108,
-      "center_freq_mhz": 600.0,
-      "snr": 28.4,
-      "bandwidth_mhz": 1.1,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "frb_repeater",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0026",
-      "target_name": "FRB_SIM_0011",
-      "ra_deg": 133.98669812347342,
-      "dec_deg": -84.5369470108599,
-      "center_freq_mhz": 600.0,
-      "snr": 12.14,
-      "bandwidth_mhz": 0.558,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "frb_repeater",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0027",
-      "target_name": "FRB_SIM_0006",
-      "ra_deg": 54.071902465362676,
-      "dec_deg": 56.94085868743363,
-      "center_freq_mhz": 600.0,
-      "snr": 12.74,
-      "bandwidth_mhz": 1.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "frb_low_dm_excess",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0028",
-      "target_name": "FRB_SIM_0014",
-      "ra_deg": 81.51245377097186,
-      "dec_deg": -54.26619336131889,
-      "center_freq_mhz": 600.0,
-      "snr": 15.74,
-      "bandwidth_mhz": 1.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "frb_low_dm_excess",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0029",
-      "target_name": "FRB_SIM_0022",
-      "ra_deg": 7.587127599800789,
-      "dec_deg": -34.09736453042492,
-      "center_freq_mhz": 600.0,
-      "snr": 11.06,
-      "bandwidth_mhz": 1.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "frb_low_dm_excess",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0030",
-      "target_name": "FRB_SIM_0024",
-      "ra_deg": 225.5802549581236,
-      "dec_deg": 53.54247156593999,
-      "center_freq_mhz": 600.0,
-      "snr": 10.59,
-      "bandwidth_mhz": 1.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "frb_low_dm_excess",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0031",
-      "target_name": "FRB_SIM_0030",
-      "ra_deg": 47.95439124588418,
-      "dec_deg": -66.4768357546902,
-      "center_freq_mhz": 600.0,
-      "snr": 13.39,
-      "bandwidth_mhz": 1.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "frb_low_dm_excess",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0032",
-      "target_name": "FRB_SIM_0039",
-      "ra_deg": 163.80629393486396,
-      "dec_deg": -79.78061476927498,
-      "center_freq_mhz": 600.0,
-      "snr": 18.85,
-      "bandwidth_mhz": 1.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "frb_low_dm_excess",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0033",
-      "target_name": "Proxima Centauri",
-      "ra_deg": 217.4288,
-      "dec_deg": -62.6793,
-      "center_freq_mhz": 0.0,
-      "snr": 5.66,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "optical_laser_pulse",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0034",
-      "target_name": "Tau Ceti",
-      "ra_deg": 26.017,
-      "dec_deg": -15.9375,
-      "center_freq_mhz": 0.0,
-      "snr": 24.66,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "optical_laser_pulse",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0035",
-      "target_name": "Epsilon Eridani",
-      "ra_deg": 53.2327,
-      "dec_deg": -9.4582,
-      "center_freq_mhz": 0.0,
-      "snr": 41.19,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "optical_laser_pulse",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0036",
-      "target_name": "Vega",
-      "ra_deg": 279.2347,
-      "dec_deg": 38.7837,
-      "center_freq_mhz": 0.0,
-      "snr": 6.25,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "optical_laser_pulse",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0037",
-      "target_name": "61 Cygni A",
-      "ra_deg": 316.7282,
-      "dec_deg": 38.7488,
-      "center_freq_mhz": 0.0,
-      "snr": 5.45,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "optical_laser_pulse",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0038",
-      "target_name": "Ross 128",
-      "ra_deg": 176.9351,
-      "dec_deg": 0.8048,
-      "center_freq_mhz": 0.0,
-      "snr": 6.12,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "optical_laser_pulse",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0039",
-      "target_name": "TOI-700",
-      "ra_deg": 35.1611,
-      "dec_deg": -56.7867,
-      "center_freq_mhz": 0.0,
-      "snr": 10.0,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "lightcurve_anomaly",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0040",
-      "target_name": "TOI-216",
-      "ra_deg": 271.2716,
-      "dec_deg": -27.6274,
-      "center_freq_mhz": 0.0,
-      "snr": 10.0,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "lightcurve_anomaly",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0041",
-      "target_name": "SIM_STAR_0000",
-      "ra_deg": 311.32713132597115,
-      "dec_deg": 42.636301791847075,
-      "center_freq_mhz": 0.0,
-      "snr": 10.0,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "lightcurve_anomaly",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0042",
-      "target_name": "SIM_STAR_0001",
-      "ra_deg": 94.12069010993157,
-      "dec_deg": -50.73606507378943,
-      "center_freq_mhz": 0.0,
-      "snr": 10.0,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "lightcurve_anomaly",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0043",
-      "target_name": "SIM_STAR_0002",
-      "ra_deg": 220.96500877695667,
-      "dec_deg": -59.684309564844035,
-      "center_freq_mhz": 0.0,
-      "snr": 10.0,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "lightcurve_anomaly",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0044",
-      "target_name": "SIM_STAR_0003",
-      "ra_deg": 354.52925108551995,
-      "dec_deg": -25.64440750005955,
-      "center_freq_mhz": 0.0,
-      "snr": 10.0,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "lightcurve_anomaly",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0045",
-      "target_name": "SIM_STAR_0006",
-      "ra_deg": 293.04234693004025,
-      "dec_deg": -0.2559110000985356,
-      "center_freq_mhz": 0.0,
-      "snr": 10.0,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "lightcurve_anomaly",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0046",
-      "target_name": "SIM_STAR_0007",
-      "ra_deg": 279.60701616031264,
-      "dec_deg": 57.50739470274752,
-      "center_freq_mhz": 0.0,
-      "snr": 10.0,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "lightcurve_anomaly",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0047",
-      "target_name": "LHS 1140b",
-      "ra_deg": 18.0018,
-      "dec_deg": -15.267,
-      "center_freq_mhz": 0.0,
-      "snr": 3.0,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "atmospheric_biosignature",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0048",
-      "target_name": "HD 209458b",
-      "ra_deg": 330.795,
-      "dec_deg": 18.884,
-      "center_freq_mhz": 0.0,
-      "snr": 2.5,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "atmospheric_biosignature",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0049",
-      "target_name": "TOI-SIM-0001",
-      "ra_deg": 77.37910688223663,
-      "dec_deg": -13.701115489296186,
-      "center_freq_mhz": 0.0,
-      "snr": 3.0,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "atmospheric_biosignature",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0050",
-      "target_name": "1I/\u02bbOumuamua",
-      "ra_deg": 23.4578,
-      "dec_deg": 26.8011,
-      "center_freq_mhz": 0.0,
-      "snr": 0.0,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "interstellar_trajectory",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0051",
-      "target_name": "SIM_ISO_0001",
-      "ra_deg": 65.56698756830662,
-      "dec_deg": 50.507681824171215,
-      "center_freq_mhz": 0.0,
-      "snr": 0.0,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "interstellar_trajectory",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0052",
-      "target_name": "SIM_ISO_0002",
-      "ra_deg": 7.327420975069443,
-      "dec_deg": 33.91410968287197,
-      "center_freq_mhz": 0.0,
-      "snr": 0.0,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "interstellar_trajectory",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0053",
-      "target_name": "SIM_ISO_0004",
-      "ra_deg": 219.63715039279094,
-      "dec_deg": 2.1437694557423725,
-      "center_freq_mhz": 0.0,
-      "snr": 0.0,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "interstellar_trajectory",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0054",
-      "target_name": "4FGL J0253.4+0220",
-      "ra_deg": 43.35,
-      "dec_deg": 2.34,
-      "center_freq_mhz": 0.0,
-      "snr": 0.0,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "gamma_unidentified",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0055",
-      "target_name": "4FGL J0521.9+2112",
-      "ra_deg": 80.49,
-      "dec_deg": 21.2,
-      "center_freq_mhz": 0.0,
-      "snr": 0.0,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "gamma_unidentified",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0056",
-      "target_name": "4FGL J1120.0-2204",
-      "ra_deg": 170.0,
-      "dec_deg": -22.08,
-      "center_freq_mhz": 0.0,
-      "snr": 0.0,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "gamma_unidentified",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0057",
-      "target_name": "4FGL J1231.6+1410",
-      "ra_deg": 187.9,
-      "dec_deg": 14.17,
-      "center_freq_mhz": 0.0,
-      "snr": 0.0,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "gamma_unidentified",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0058",
-      "target_name": "4FGL J1418.4-0233",
-      "ra_deg": 214.6,
-      "dec_deg": -2.56,
-      "center_freq_mhz": 0.0,
-      "snr": 0.0,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "gamma_unidentified",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0059",
-      "target_name": "4FGL J1653.6+3945",
-      "ra_deg": 253.4,
-      "dec_deg": 39.75,
-      "center_freq_mhz": 0.0,
-      "snr": 0.0,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "gamma_unidentified",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0060",
-      "target_name": "4FGL J1744.1-7619",
-      "ra_deg": 266.0,
-      "dec_deg": -76.32,
-      "center_freq_mhz": 0.0,
-      "snr": 0.0,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "gamma_unidentified",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0061",
-      "target_name": "4FGL J1828.4+3236",
-      "ra_deg": 277.1,
-      "dec_deg": 32.61,
-      "center_freq_mhz": 0.0,
-      "snr": 0.0,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "gamma_unidentified",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0062",
-      "target_name": "4FGL J1955.4+1123",
-      "ra_deg": 298.9,
-      "dec_deg": 11.39,
-      "center_freq_mhz": 0.0,
-      "snr": 0.0,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "gamma_unidentified",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0063",
-      "target_name": "4FGL J2049.9+1003",
-      "ra_deg": 312.5,
-      "dec_deg": 10.06,
-      "center_freq_mhz": 0.0,
-      "snr": 0.0,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "gamma_unidentified",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0064",
-      "target_name": "4FGL J2158.8-3013",
-      "ra_deg": 329.7,
-      "dec_deg": -30.23,
-      "center_freq_mhz": 0.0,
-      "snr": 0.0,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "gamma_unidentified",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0065",
-      "target_name": "4FGL J0111.0+3907",
-      "ra_deg": 17.8,
-      "dec_deg": 39.13,
-      "center_freq_mhz": 0.0,
-      "snr": 0.0,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "gamma_unidentified",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0066",
-      "target_name": "Kapteyn's Star",
-      "ra_deg": 77.14,
-      "dec_deg": -44.995,
-      "center_freq_mhz": 0.0,
-      "snr": 0.91,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "proper_motion_anomaly",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0067",
-      "target_name": "SIM_J0312+1847",
-      "ra_deg": 48.12,
-      "dec_deg": 18.79,
-      "center_freq_mhz": 0.0,
-      "snr": 4.87,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "proper_motion_anomaly",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0068",
-      "target_name": "SIM_J1147-0231",
-      "ra_deg": 176.91,
-      "dec_deg": -2.52,
-      "center_freq_mhz": 0.0,
-      "snr": 3.21,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "proper_motion_anomaly",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0069",
-      "target_name": "SIM_J2218+3341",
-      "ra_deg": 334.62,
-      "dec_deg": 33.69,
-      "center_freq_mhz": 0.0,
-      "snr": 3.94,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "proper_motion_anomaly",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0070",
-      "target_name": "SIM_J0631+1548",
-      "ra_deg": 97.88,
-      "dec_deg": 15.81,
-      "center_freq_mhz": 0.0,
-      "snr": 5.61,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "proper_motion_anomaly",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0071",
-      "target_name": "CXO J001311.8+634937",
-      "ra_deg": 3.299,
-      "dec_deg": 63.827,
-      "center_freq_mhz": 0.0,
-      "snr": 0.0,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "xray_unidentified",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0072",
-      "target_name": "CXO J024512.4-001234",
-      "ra_deg": 41.302,
-      "dec_deg": -0.21,
-      "center_freq_mhz": 0.0,
-      "snr": 0.0,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "xray_unidentified",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0073",
-      "target_name": "CXO J073841.2+653201",
-      "ra_deg": 114.672,
-      "dec_deg": 65.534,
-      "center_freq_mhz": 0.0,
-      "snr": 0.0,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "xray_unidentified",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0074",
-      "target_name": "CXO J182239.2-181442",
-      "ra_deg": 275.663,
-      "dec_deg": -18.245,
-      "center_freq_mhz": 0.0,
-      "snr": 0.0,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "xray_unidentified",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0075",
-      "target_name": "CXO J214521.3+122844",
-      "ra_deg": 326.339,
-      "dec_deg": 12.479,
-      "center_freq_mhz": 0.0,
-      "snr": 0.0,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "xray_unidentified",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0076",
-      "target_name": "4XMM J034428.3-045712",
-      "ra_deg": 56.118,
-      "dec_deg": -4.953,
-      "center_freq_mhz": 0.0,
-      "snr": 0.0,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "xray_unidentified",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0077",
-      "target_name": "4XMM J091234.2+303201",
-      "ra_deg": 138.143,
-      "dec_deg": 30.534,
-      "center_freq_mhz": 0.0,
-      "snr": 0.0,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "xray_unidentified",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0078",
-      "target_name": "4XMM J143812.7-231456",
-      "ra_deg": 219.553,
-      "dec_deg": -23.249,
-      "center_freq_mhz": 0.0,
-      "snr": 0.0,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "xray_unidentified",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0079",
-      "target_name": "4XMM J052211.8-692334",
-      "ra_deg": 80.549,
-      "dec_deg": -69.393,
-      "center_freq_mhz": 0.0,
-      "snr": 0.0,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "xray_unidentified",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    },
-    {
-      "id": "DS-0080",
-      "target_name": "4XMM J113021.4+052318",
-      "ra_deg": 172.589,
-      "dec_deg": 5.388,
-      "center_freq_mhz": 0.0,
-      "snr": 0.0,
-      "bandwidth_mhz": 0.0,
-      "drift_rate_hz_s": 0.0,
-      "detection_method": "xray_unidentified",
-      "candidacy_score": 40,
-      "tier": 3,
-      "reasons": [
-        "not cross-checked (limit)"
-      ],
-      "is_injected_anomaly": false
-    }
-  ]
-}
+  {
+    "id": "DS-0002",
+    "target_name": "Proxima Centauri",
+    "ra_deg": 217.4288,
+    "dec_deg": -62.6793,
+    "center_freq_mhz": 4949.906,
+    "snr": 4.3505,
+    "bandwidth_mhz": 443.4392,
+    "drift_rate_hz_s": -0.195104,
+    "detection_method": "doppler_drift",
+    "candidacy_score": 65,
+    "tier": 2,
+    "reasons": [
+      "Doppler drift rate 0.1951 Hz/s consistent with technological origin"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0003",
+    "target_name": "Tau Ceti",
+    "ra_deg": 26.017,
+    "dec_deg": -15.9375,
+    "center_freq_mhz": 8074.5787,
+    "snr": 1.7744,
+    "bandwidth_mhz": 151.2455,
+    "drift_rate_hz_s": 0.08794,
+    "detection_method": "doppler_drift",
+    "candidacy_score": 35,
+    "tier": 3,
+    "reasons": [
+      "Frequency in known RFI band: X-band satellite",
+      "Doppler drift rate 0.0879 Hz/s consistent with technological origin"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0004",
+    "target_name": "Tau Ceti",
+    "ra_deg": 26.017,
+    "dec_deg": -15.9375,
+    "center_freq_mhz": 4190.7337,
+    "snr": 2.5162,
+    "bandwidth_mhz": 488.2792,
+    "drift_rate_hz_s": -0.042833,
+    "detection_method": "doppler_drift",
+    "candidacy_score": 65,
+    "tier": 2,
+    "reasons": [
+      "Doppler drift rate 0.0428 Hz/s consistent with technological origin"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0005",
+    "target_name": "Epsilon Eridani",
+    "ra_deg": 53.2327,
+    "dec_deg": -9.4582,
+    "center_freq_mhz": 1394.2339,
+    "snr": 3.3717,
+    "bandwidth_mhz": 161.7158,
+    "drift_rate_hz_s": 0.214165,
+    "detection_method": "doppler_drift",
+    "candidacy_score": 65,
+    "tier": 2,
+    "reasons": [
+      "Doppler drift rate 0.2142 Hz/s consistent with technological origin"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0006",
+    "target_name": "Epsilon Eridani",
+    "ra_deg": 53.2327,
+    "dec_deg": -9.4582,
+    "center_freq_mhz": 3932.4282,
+    "snr": 3.6987,
+    "bandwidth_mhz": 248.1839,
+    "drift_rate_hz_s": 0.112897,
+    "detection_method": "doppler_drift",
+    "candidacy_score": 65,
+    "tier": 2,
+    "reasons": [
+      "Doppler drift rate 0.1129 Hz/s consistent with technological origin"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0007",
+    "target_name": "Gliese 667C",
+    "ra_deg": 259.7488,
+    "dec_deg": -34.9977,
+    "center_freq_mhz": 3042.1841,
+    "snr": 3.9418,
+    "bandwidth_mhz": 367.9256,
+    "drift_rate_hz_s": 0.054315,
+    "detection_method": "doppler_drift",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0008",
+    "target_name": "HD 40307",
+    "ra_deg": 89.336,
+    "dec_deg": -60.0161,
+    "center_freq_mhz": 8242.8792,
+    "snr": 3.0324,
+    "bandwidth_mhz": 254.9914,
+    "drift_rate_hz_s": 0.087143,
+    "detection_method": "doppler_drift",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0009",
+    "target_name": "HD 40307",
+    "ra_deg": 89.336,
+    "dec_deg": -60.0161,
+    "center_freq_mhz": 2799.1738,
+    "snr": 3.1411,
+    "bandwidth_mhz": 102.9449,
+    "drift_rate_hz_s": 0.063129,
+    "detection_method": "doppler_drift",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0010",
+    "target_name": "HD 40307",
+    "ra_deg": 89.336,
+    "dec_deg": -60.0161,
+    "center_freq_mhz": 7346.4884,
+    "snr": 2.1486,
+    "bandwidth_mhz": 412.2916,
+    "drift_rate_hz_s": -0.063888,
+    "detection_method": "doppler_drift",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0011",
+    "target_name": "Vega",
+    "ra_deg": 279.2347,
+    "dec_deg": 38.7837,
+    "center_freq_mhz": 2030.7707,
+    "snr": 4.4112,
+    "bandwidth_mhz": 367.3612,
+    "drift_rate_hz_s": -0.168287,
+    "detection_method": "doppler_drift",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0012",
+    "target_name": "61 Cygni A",
+    "ra_deg": 316.7282,
+    "dec_deg": 38.7488,
+    "center_freq_mhz": 6712.4649,
+    "snr": 3.8791,
+    "bandwidth_mhz": 321.4318,
+    "drift_rate_hz_s": 0.079335,
+    "detection_method": "doppler_drift",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0013",
+    "target_name": "61 Cygni A",
+    "ra_deg": 316.7282,
+    "dec_deg": 38.7488,
+    "center_freq_mhz": 2931.2621,
+    "snr": 19.878748976615903,
+    "bandwidth_mhz": 0.00264941,
+    "drift_rate_hz_s": 1.327214,
+    "detection_method": "doppler_drift",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": true
+  },
+  {
+    "id": "DS-0014",
+    "target_name": "61 Cygni A",
+    "ra_deg": 316.7282,
+    "dec_deg": 38.7488,
+    "center_freq_mhz": 6013.2894,
+    "snr": 17.955551239896117,
+    "bandwidth_mhz": 413.5593,
+    "drift_rate_hz_s": -0.33677,
+    "detection_method": "doppler_drift",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": true
+  },
+  {
+    "id": "DS-0015",
+    "target_name": "Epsilon Indi A",
+    "ra_deg": 330.84,
+    "dec_deg": -56.7867,
+    "center_freq_mhz": 1204.4087,
+    "snr": 1.4949,
+    "bandwidth_mhz": 136.0191,
+    "drift_rate_hz_s": 0.048697,
+    "detection_method": "doppler_drift",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0016",
+    "target_name": "Epsilon Indi A",
+    "ra_deg": 330.84,
+    "dec_deg": -56.7867,
+    "center_freq_mhz": 6672.5433,
+    "snr": 1.3184,
+    "bandwidth_mhz": 244.725,
+    "drift_rate_hz_s": -0.13227,
+    "detection_method": "doppler_drift",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0017",
+    "target_name": "Fomalhaut",
+    "ra_deg": 344.4127,
+    "dec_deg": -29.6223,
+    "center_freq_mhz": 7297.3642,
+    "snr": 5.205,
+    "bandwidth_mhz": 206.348,
+    "drift_rate_hz_s": -0.035626,
+    "detection_method": "doppler_drift",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0018",
+    "target_name": "Fomalhaut",
+    "ra_deg": 344.4127,
+    "dec_deg": -29.6223,
+    "center_freq_mhz": 5044.2535,
+    "snr": 1.6904,
+    "bandwidth_mhz": 208.8966,
+    "drift_rate_hz_s": -0.033903,
+    "detection_method": "doppler_drift",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0019",
+    "target_name": "Fomalhaut",
+    "ra_deg": 344.4127,
+    "dec_deg": -29.6223,
+    "center_freq_mhz": 5101.9866,
+    "snr": 3.3778,
+    "bandwidth_mhz": 180.9453,
+    "drift_rate_hz_s": 0.023774,
+    "detection_method": "doppler_drift",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0020",
+    "target_name": "Ross 128",
+    "ra_deg": 176.9351,
+    "dec_deg": 0.8048,
+    "center_freq_mhz": 8709.5286,
+    "snr": 2.086,
+    "bandwidth_mhz": 403.4078,
+    "drift_rate_hz_s": 0.023268,
+    "detection_method": "doppler_drift",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0021",
+    "target_name": "FRB20121102A",
+    "ra_deg": 82.9938,
+    "dec_deg": 33.148,
+    "center_freq_mhz": 600.0,
+    "snr": 25.3,
+    "bandwidth_mhz": 3.1,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "frb_repeater",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0022",
+    "target_name": "FRB20180916B",
+    "ra_deg": 29.5031,
+    "dec_deg": 65.7168,
+    "center_freq_mhz": 600.0,
+    "snr": 19.7,
+    "bandwidth_mhz": 1.7,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "frb_repeater+periodic",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0023",
+    "target_name": "FRB20190520B",
+    "ra_deg": 240.0275,
+    "dec_deg": -11.2921,
+    "center_freq_mhz": 600.0,
+    "snr": 14.2,
+    "bandwidth_mhz": 5.8,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "frb_repeater",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0024",
+    "target_name": "FRB20201124A",
+    "ra_deg": 77.0117,
+    "dec_deg": 26.0603,
+    "center_freq_mhz": 600.0,
+    "snr": 32.1,
+    "bandwidth_mhz": 2.4,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "frb_repeater",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0025",
+    "target_name": "FRB20220912A",
+    "ra_deg": 347.2743,
+    "dec_deg": 48.7108,
+    "center_freq_mhz": 600.0,
+    "snr": 28.4,
+    "bandwidth_mhz": 1.1,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "frb_repeater",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0026",
+    "target_name": "FRB_SIM_0011",
+    "ra_deg": 133.98669812347342,
+    "dec_deg": -84.5369470108599,
+    "center_freq_mhz": 600.0,
+    "snr": 12.14,
+    "bandwidth_mhz": 0.558,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "frb_repeater",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0027",
+    "target_name": "FRB_SIM_0006",
+    "ra_deg": 54.071902465362676,
+    "dec_deg": 56.94085868743363,
+    "center_freq_mhz": 600.0,
+    "snr": 12.74,
+    "bandwidth_mhz": 1.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "frb_low_dm_excess",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0028",
+    "target_name": "FRB_SIM_0014",
+    "ra_deg": 81.51245377097186,
+    "dec_deg": -54.26619336131889,
+    "center_freq_mhz": 600.0,
+    "snr": 15.74,
+    "bandwidth_mhz": 1.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "frb_low_dm_excess",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0029",
+    "target_name": "FRB_SIM_0022",
+    "ra_deg": 7.587127599800789,
+    "dec_deg": -34.09736453042492,
+    "center_freq_mhz": 600.0,
+    "snr": 11.06,
+    "bandwidth_mhz": 1.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "frb_low_dm_excess",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0030",
+    "target_name": "FRB_SIM_0024",
+    "ra_deg": 225.5802549581236,
+    "dec_deg": 53.54247156593999,
+    "center_freq_mhz": 600.0,
+    "snr": 10.59,
+    "bandwidth_mhz": 1.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "frb_low_dm_excess",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0031",
+    "target_name": "FRB_SIM_0030",
+    "ra_deg": 47.95439124588418,
+    "dec_deg": -66.4768357546902,
+    "center_freq_mhz": 600.0,
+    "snr": 13.39,
+    "bandwidth_mhz": 1.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "frb_low_dm_excess",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0032",
+    "target_name": "FRB_SIM_0039",
+    "ra_deg": 163.80629393486396,
+    "dec_deg": -79.78061476927498,
+    "center_freq_mhz": 600.0,
+    "snr": 18.85,
+    "bandwidth_mhz": 1.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "frb_low_dm_excess",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0033",
+    "target_name": "Proxima Centauri",
+    "ra_deg": 217.4288,
+    "dec_deg": -62.6793,
+    "center_freq_mhz": 0.0,
+    "snr": 5.66,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "optical_laser_pulse",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0034",
+    "target_name": "Tau Ceti",
+    "ra_deg": 26.017,
+    "dec_deg": -15.9375,
+    "center_freq_mhz": 0.0,
+    "snr": 24.66,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "optical_laser_pulse",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0035",
+    "target_name": "Epsilon Eridani",
+    "ra_deg": 53.2327,
+    "dec_deg": -9.4582,
+    "center_freq_mhz": 0.0,
+    "snr": 41.19,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "optical_laser_pulse",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0036",
+    "target_name": "Vega",
+    "ra_deg": 279.2347,
+    "dec_deg": 38.7837,
+    "center_freq_mhz": 0.0,
+    "snr": 6.25,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "optical_laser_pulse",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0037",
+    "target_name": "61 Cygni A",
+    "ra_deg": 316.7282,
+    "dec_deg": 38.7488,
+    "center_freq_mhz": 0.0,
+    "snr": 5.45,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "optical_laser_pulse",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0038",
+    "target_name": "Ross 128",
+    "ra_deg": 176.9351,
+    "dec_deg": 0.8048,
+    "center_freq_mhz": 0.0,
+    "snr": 6.12,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "optical_laser_pulse",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0039",
+    "target_name": "TOI-700",
+    "ra_deg": 35.1611,
+    "dec_deg": -56.7867,
+    "center_freq_mhz": 0.0,
+    "snr": 10.0,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "lightcurve_anomaly",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0040",
+    "target_name": "TOI-216",
+    "ra_deg": 271.2716,
+    "dec_deg": -27.6274,
+    "center_freq_mhz": 0.0,
+    "snr": 10.0,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "lightcurve_anomaly",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0041",
+    "target_name": "SIM_STAR_0000",
+    "ra_deg": 311.32713132597115,
+    "dec_deg": 42.636301791847075,
+    "center_freq_mhz": 0.0,
+    "snr": 10.0,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "lightcurve_anomaly",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0042",
+    "target_name": "SIM_STAR_0001",
+    "ra_deg": 94.12069010993157,
+    "dec_deg": -50.73606507378943,
+    "center_freq_mhz": 0.0,
+    "snr": 10.0,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "lightcurve_anomaly",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0043",
+    "target_name": "SIM_STAR_0002",
+    "ra_deg": 220.96500877695667,
+    "dec_deg": -59.684309564844035,
+    "center_freq_mhz": 0.0,
+    "snr": 10.0,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "lightcurve_anomaly",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0044",
+    "target_name": "SIM_STAR_0003",
+    "ra_deg": 354.52925108551995,
+    "dec_deg": -25.64440750005955,
+    "center_freq_mhz": 0.0,
+    "snr": 10.0,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "lightcurve_anomaly",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0045",
+    "target_name": "SIM_STAR_0006",
+    "ra_deg": 293.04234693004025,
+    "dec_deg": -0.2559110000985356,
+    "center_freq_mhz": 0.0,
+    "snr": 10.0,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "lightcurve_anomaly",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0046",
+    "target_name": "SIM_STAR_0007",
+    "ra_deg": 279.60701616031264,
+    "dec_deg": 57.50739470274752,
+    "center_freq_mhz": 0.0,
+    "snr": 10.0,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "lightcurve_anomaly",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0047",
+    "target_name": "LHS 1140b",
+    "ra_deg": 18.0018,
+    "dec_deg": -15.267,
+    "center_freq_mhz": 0.0,
+    "snr": 3.0,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "atmospheric_biosignature",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0048",
+    "target_name": "HD 209458b",
+    "ra_deg": 330.795,
+    "dec_deg": 18.884,
+    "center_freq_mhz": 0.0,
+    "snr": 2.5,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "atmospheric_biosignature",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0049",
+    "target_name": "TOI-SIM-0001",
+    "ra_deg": 77.37910688223663,
+    "dec_deg": -13.701115489296186,
+    "center_freq_mhz": 0.0,
+    "snr": 3.0,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "atmospheric_biosignature",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0050",
+    "target_name": "1I/ʻOumuamua",
+    "ra_deg": 23.4578,
+    "dec_deg": 26.8011,
+    "center_freq_mhz": 0.0,
+    "snr": 0.0,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "interstellar_trajectory",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0051",
+    "target_name": "SIM_ISO_0001",
+    "ra_deg": 65.56698756830662,
+    "dec_deg": 50.507681824171215,
+    "center_freq_mhz": 0.0,
+    "snr": 0.0,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "interstellar_trajectory",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0052",
+    "target_name": "SIM_ISO_0002",
+    "ra_deg": 7.327420975069443,
+    "dec_deg": 33.91410968287197,
+    "center_freq_mhz": 0.0,
+    "snr": 0.0,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "interstellar_trajectory",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0053",
+    "target_name": "SIM_ISO_0004",
+    "ra_deg": 219.63715039279094,
+    "dec_deg": 2.1437694557423725,
+    "center_freq_mhz": 0.0,
+    "snr": 0.0,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "interstellar_trajectory",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0054",
+    "target_name": "4FGL J0253.4+0220",
+    "ra_deg": 43.35,
+    "dec_deg": 2.34,
+    "center_freq_mhz": 0.0,
+    "snr": 0.0,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "gamma_unidentified",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0055",
+    "target_name": "4FGL J0521.9+2112",
+    "ra_deg": 80.49,
+    "dec_deg": 21.2,
+    "center_freq_mhz": 0.0,
+    "snr": 0.0,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "gamma_unidentified",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0056",
+    "target_name": "4FGL J1120.0-2204",
+    "ra_deg": 170.0,
+    "dec_deg": -22.08,
+    "center_freq_mhz": 0.0,
+    "snr": 0.0,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "gamma_unidentified",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0057",
+    "target_name": "4FGL J1231.6+1410",
+    "ra_deg": 187.9,
+    "dec_deg": 14.17,
+    "center_freq_mhz": 0.0,
+    "snr": 0.0,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "gamma_unidentified",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0058",
+    "target_name": "4FGL J1418.4-0233",
+    "ra_deg": 214.6,
+    "dec_deg": -2.56,
+    "center_freq_mhz": 0.0,
+    "snr": 0.0,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "gamma_unidentified",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0059",
+    "target_name": "4FGL J1653.6+3945",
+    "ra_deg": 253.4,
+    "dec_deg": 39.75,
+    "center_freq_mhz": 0.0,
+    "snr": 0.0,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "gamma_unidentified",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0060",
+    "target_name": "4FGL J1744.1-7619",
+    "ra_deg": 266.0,
+    "dec_deg": -76.32,
+    "center_freq_mhz": 0.0,
+    "snr": 0.0,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "gamma_unidentified",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0061",
+    "target_name": "4FGL J1828.4+3236",
+    "ra_deg": 277.1,
+    "dec_deg": 32.61,
+    "center_freq_mhz": 0.0,
+    "snr": 0.0,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "gamma_unidentified",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0062",
+    "target_name": "4FGL J1955.4+1123",
+    "ra_deg": 298.9,
+    "dec_deg": 11.39,
+    "center_freq_mhz": 0.0,
+    "snr": 0.0,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "gamma_unidentified",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0063",
+    "target_name": "4FGL J2049.9+1003",
+    "ra_deg": 312.5,
+    "dec_deg": 10.06,
+    "center_freq_mhz": 0.0,
+    "snr": 0.0,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "gamma_unidentified",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0064",
+    "target_name": "4FGL J2158.8-3013",
+    "ra_deg": 329.7,
+    "dec_deg": -30.23,
+    "center_freq_mhz": 0.0,
+    "snr": 0.0,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "gamma_unidentified",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0065",
+    "target_name": "4FGL J0111.0+3907",
+    "ra_deg": 17.8,
+    "dec_deg": 39.13,
+    "center_freq_mhz": 0.0,
+    "snr": 0.0,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "gamma_unidentified",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0066",
+    "target_name": "Kapteyn's Star",
+    "ra_deg": 77.14,
+    "dec_deg": -44.995,
+    "center_freq_mhz": 0.0,
+    "snr": 0.91,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "proper_motion_anomaly",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0067",
+    "target_name": "SIM_J0312+1847",
+    "ra_deg": 48.12,
+    "dec_deg": 18.79,
+    "center_freq_mhz": 0.0,
+    "snr": 4.87,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "proper_motion_anomaly",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0068",
+    "target_name": "SIM_J1147-0231",
+    "ra_deg": 176.91,
+    "dec_deg": -2.52,
+    "center_freq_mhz": 0.0,
+    "snr": 3.21,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "proper_motion_anomaly",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0069",
+    "target_name": "SIM_J2218+3341",
+    "ra_deg": 334.62,
+    "dec_deg": 33.69,
+    "center_freq_mhz": 0.0,
+    "snr": 3.94,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "proper_motion_anomaly",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0070",
+    "target_name": "SIM_J0631+1548",
+    "ra_deg": 97.88,
+    "dec_deg": 15.81,
+    "center_freq_mhz": 0.0,
+    "snr": 5.61,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "proper_motion_anomaly",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0071",
+    "target_name": "CXO J001311.8+634937",
+    "ra_deg": 3.299,
+    "dec_deg": 63.827,
+    "center_freq_mhz": 0.0,
+    "snr": 0.0,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "xray_unidentified",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0072",
+    "target_name": "CXO J024512.4-001234",
+    "ra_deg": 41.302,
+    "dec_deg": -0.21,
+    "center_freq_mhz": 0.0,
+    "snr": 0.0,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "xray_unidentified",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0073",
+    "target_name": "CXO J073841.2+653201",
+    "ra_deg": 114.672,
+    "dec_deg": 65.534,
+    "center_freq_mhz": 0.0,
+    "snr": 0.0,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "xray_unidentified",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0074",
+    "target_name": "CXO J182239.2-181442",
+    "ra_deg": 275.663,
+    "dec_deg": -18.245,
+    "center_freq_mhz": 0.0,
+    "snr": 0.0,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "xray_unidentified",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0075",
+    "target_name": "CXO J214521.3+122844",
+    "ra_deg": 326.339,
+    "dec_deg": 12.479,
+    "center_freq_mhz": 0.0,
+    "snr": 0.0,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "xray_unidentified",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0076",
+    "target_name": "4XMM J034428.3-045712",
+    "ra_deg": 56.118,
+    "dec_deg": -4.953,
+    "center_freq_mhz": 0.0,
+    "snr": 0.0,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "xray_unidentified",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0077",
+    "target_name": "4XMM J091234.2+303201",
+    "ra_deg": 138.143,
+    "dec_deg": 30.534,
+    "center_freq_mhz": 0.0,
+    "snr": 0.0,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "xray_unidentified",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0078",
+    "target_name": "4XMM J143812.7-231456",
+    "ra_deg": 219.553,
+    "dec_deg": -23.249,
+    "center_freq_mhz": 0.0,
+    "snr": 0.0,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "xray_unidentified",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0079",
+    "target_name": "4XMM J052211.8-692334",
+    "ra_deg": 80.549,
+    "dec_deg": -69.393,
+    "center_freq_mhz": 0.0,
+    "snr": 0.0,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "xray_unidentified",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  },
+  {
+    "id": "DS-0080",
+    "target_name": "4XMM J113021.4+052318",
+    "ra_deg": 172.589,
+    "dec_deg": 5.388,
+    "center_freq_mhz": 0.0,
+    "snr": 0.0,
+    "bandwidth_mhz": 0.0,
+    "drift_rate_hz_s": 0.0,
+    "detection_method": "xray_unidentified",
+    "candidacy_score": 40,
+    "tier": 3,
+    "reasons": [
+      "not cross-checked (limit)"
+    ],
+    "is_injected_anomaly": false
+  }
+]
