@@ -143,10 +143,10 @@ footer a{color:#4a6a8a;text-decoration:none}
 </div>
 
 <div class="stats">
-  <div class="stat-chip">Pipeline candidates: <strong id="stat-n">64</strong></div>
+  <div class="stat-chip">Pipeline candidates: <strong id="stat-n">80</strong></div>
   <div class="stat-chip">Data sources: <strong>10</strong></div>
   <div class="stat-chip">Detection algorithms: <strong>14</strong></div>
-  <div class="stat-chip">Last updated: <strong>2026-05-26 14:30 UTC</strong></div>
+  <div class="stat-chip">Last updated: <strong>2026-05-26 01:43 UTC</strong></div>
 </div>
 
 <div id="result-panel">
@@ -562,7 +562,7 @@ function showResult(resolved, pipelineMatches) {
   ].filter(Boolean).join("");
 
   const notInPipeline = !p.target_name
-    ? `<div style="font-size:.78rem;color:#4a5a6a;margin-bottom:10px">Not in current DeepSignal pipeline candidates</div>` : "";
+    ? `<div style="font-size:.78rem;color:#4a6a8a;margin-bottom:10px">Not in current DeepSignal pipeline candidates</div>` : "";
 
   card.innerHTML = `
     <div class="result-inner">
@@ -632,7 +632,7 @@ function renderHighlights() {
     const methods = c._all_methods.filter(Boolean);
     const mtags   = methods.slice(0, 2).map(m => `<span class="tag tag-method" style="font-size:.65rem">${m}</span>`).join("");
 
-    const safeN = c.target_name.replace(/'/g, "\\'");
+    const safeN = c.target_name.replace(/'/g, "\\'" );
     const multi = c.entries.length > 1;
 
     const coordsTxt = (ra != null)
@@ -657,11 +657,7 @@ function renderHighlights() {
       : "";
 
     const detectionRows = multi ? c.entries.map(e =>
-      `<div class="detection-row" onclick="event.stopPropagation();selectCandidate('${e.target_name.replace(/'/g,"\\'")}')">
-        <span class="d-method">${e.detection_method || "—"}</span>
-        <span class="d-dtype">${e.data_type || ""}</span>
-        <span class="d-score">${e.candidacy_score ?? "—"}</span>
-      </div>`
+      `<div class="detection-row" onclick="event.stopPropagation();selectCandidate('${e.target_name.replace(/'/g,"\\'")}')">\n        <span class="d-method">${e.detection_method || "—"}</span>\n        <span class="d-dtype">${e.data_type || ""}</span>\n        <span class="d-score">${e.candidacy_score ?? "—"}</span>\n      </div>`
     ).join("") : "";
 
     const onclick = multi
