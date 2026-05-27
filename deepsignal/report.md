@@ -22,10 +22,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### Tau Ceti — Score 75/100
 
-![Tau Ceti sky field — DSS2 Optical](images/DS-0001_Tau_Ceti.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=26.0170+-15.9375&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=26.0170+-15.9375&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=26.0170+-15.9375&fov=0.5&survey=P/2MASS/color)*
-
 - **Position:** RA=26.0170°, Dec=-15.9375°
 - **Frequency:** 6794.79 MHz
 - **SNR:** 35.2
@@ -42,10 +38,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### Proxima Centauri — Score 65/100
 
-![Proxima Centauri sky field — DSS2 Optical](images/DS-0002_Proxima_Centauri.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=217.4288+-62.6793&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=217.4288+-62.6793&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=217.4288+-62.6793&fov=0.5&survey=P/2MASS/color)*
-
 - **Position:** RA=217.4288°, Dec=-62.6793°
 - **Frequency:** 4949.91 MHz
 - **SNR:** 4.4
@@ -58,10 +50,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
   - Doppler drift rate 0.1951 Hz/s consistent with technological origin
 
 ### Tau Ceti — Score 65/100
-
-![Tau Ceti sky field — DSS2 Optical](images/DS-0001_Tau_Ceti.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=26.0170+-15.9375&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=26.0170+-15.9375&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=26.0170+-15.9375&fov=0.5&survey=P/2MASS/color)*
 
 - **Position:** RA=26.0170°, Dec=-15.9375°
 - **Frequency:** 4190.73 MHz
@@ -76,10 +64,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### Epsilon Eridani — Score 65/100
 
-![Epsilon Eridani sky field — DSS2 Optical](images/DS-0003_Epsilon_Eridani.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=53.2327+-9.4582&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=53.2327+-9.4582&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=53.2327+-9.4582&fov=0.5&survey=P/2MASS/color)*
-
 - **Position:** RA=53.2327°, Dec=-9.4582°
 - **Frequency:** 1394.23 MHz
 - **SNR:** 3.4
@@ -92,10 +76,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
   - Doppler drift rate 0.2142 Hz/s consistent with technological origin
 
 ### Epsilon Eridani — Score 65/100
-
-![Epsilon Eridani sky field — DSS2 Optical](images/DS-0003_Epsilon_Eridani.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=53.2327+-9.4582&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=53.2327+-9.4582&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=53.2327+-9.4582&fov=0.5&survey=P/2MASS/color)*
 
 - **Position:** RA=53.2327°, Dec=-9.4582°
 - **Frequency:** 3932.43 MHz
@@ -112,10 +92,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### Tau Ceti — Score 35/100
 
-![Tau Ceti sky field — DSS2 Optical](images/DS-0001_Tau_Ceti.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=26.0170+-15.9375&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=26.0170+-15.9375&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=26.0170+-15.9375&fov=0.5&survey=P/2MASS/color)*
-
 - **Position:** RA=26.0170°, Dec=-15.9375°
 - **Frequency:** 8074.58 MHz
 - **SNR:** 1.8
@@ -130,10 +106,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### Gliese 667C — Score 40/100
 
-![Gliese 667C sky field — DSS2 Optical](images/DS-0004_Gliese_667C.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=259.7488+-34.9977&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=259.7488+-34.9977&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=259.7488+-34.9977&fov=0.5&survey=P/2MASS/color)*
-
 - **Position:** RA=259.7488°, Dec=-34.9977°
 - **Frequency:** 3042.18 MHz
 - **SNR:** 3.9
@@ -146,10 +118,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
   - not cross-checked (limit)
 
 ### HD 40307 — Score 40/100
-
-![HD 40307 sky field — DSS2 Optical](images/DS-0005_HD_40307.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=89.3360+-60.0161&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=89.3360+-60.0161&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=89.3360+-60.0161&fov=0.5&survey=P/2MASS/color)*
 
 - **Position:** RA=89.3360°, Dec=-60.0161°
 - **Frequency:** 8242.88 MHz
@@ -164,10 +132,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### HD 40307 — Score 40/100
 
-![HD 40307 sky field — DSS2 Optical](images/DS-0005_HD_40307.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=89.3360+-60.0161&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=89.3360+-60.0161&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=89.3360+-60.0161&fov=0.5&survey=P/2MASS/color)*
-
 - **Position:** RA=89.3360°, Dec=-60.0161°
 - **Frequency:** 2799.17 MHz
 - **SNR:** 3.1
@@ -180,10 +144,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
   - not cross-checked (limit)
 
 ### HD 40307 — Score 40/100
-
-![HD 40307 sky field — DSS2 Optical](images/DS-0005_HD_40307.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=89.3360+-60.0161&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=89.3360+-60.0161&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=89.3360+-60.0161&fov=0.5&survey=P/2MASS/color)*
 
 - **Position:** RA=89.3360°, Dec=-60.0161°
 - **Frequency:** 7346.49 MHz
@@ -198,10 +158,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### Vega — Score 40/100
 
-![Vega sky field — DSS2 Optical](images/DS-0006_Vega.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=279.2347+38.7837&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=279.2347+38.7837&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=279.2347+38.7837&fov=0.5&survey=P/2MASS/color)*
-
 - **Position:** RA=279.2347°, Dec=38.7837°
 - **Frequency:** 2030.77 MHz
 - **SNR:** 4.4
@@ -214,10 +170,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
   - not cross-checked (limit)
 
 ### 61 Cygni A — Score 40/100
-
-![61 Cygni A sky field — DSS2 Optical](images/DS-0007_61_Cygni_A.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=316.7282+38.7488&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=316.7282+38.7488&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=316.7282+38.7488&fov=0.5&survey=P/2MASS/color)*
 
 - **Position:** RA=316.7282°, Dec=38.7488°
 - **Frequency:** 6712.46 MHz
@@ -232,10 +184,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### 61 Cygni A — Score 40/100
 
-![61 Cygni A sky field — DSS2 Optical](images/DS-0007_61_Cygni_A.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=316.7282+38.7488&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=316.7282+38.7488&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=316.7282+38.7488&fov=0.5&survey=P/2MASS/color)*
-
 - **Position:** RA=316.7282°, Dec=38.7488°
 - **Frequency:** 2931.26 MHz
 - **SNR:** 19.9
@@ -248,10 +196,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
   - not cross-checked (limit)
 
 ### 61 Cygni A — Score 40/100
-
-![61 Cygni A sky field — DSS2 Optical](images/DS-0007_61_Cygni_A.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=316.7282+38.7488&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=316.7282+38.7488&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=316.7282+38.7488&fov=0.5&survey=P/2MASS/color)*
 
 - **Position:** RA=316.7282°, Dec=38.7488°
 - **Frequency:** 6013.29 MHz
@@ -266,10 +210,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### Epsilon Indi A — Score 40/100
 
-![Epsilon Indi A sky field — DSS2 Optical](images/DS-0008_Epsilon_Indi_A.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=330.8400+-56.7867&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=330.8400+-56.7867&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=330.8400+-56.7867&fov=0.5&survey=P/2MASS/color)*
-
 - **Position:** RA=330.8400°, Dec=-56.7867°
 - **Frequency:** 1204.41 MHz
 - **SNR:** 1.5
@@ -282,10 +222,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
   - not cross-checked (limit)
 
 ### Epsilon Indi A — Score 40/100
-
-![Epsilon Indi A sky field — DSS2 Optical](images/DS-0008_Epsilon_Indi_A.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=330.8400+-56.7867&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=330.8400+-56.7867&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=330.8400+-56.7867&fov=0.5&survey=P/2MASS/color)*
 
 - **Position:** RA=330.8400°, Dec=-56.7867°
 - **Frequency:** 6672.54 MHz
@@ -300,10 +236,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### Fomalhaut — Score 40/100
 
-![Fomalhaut sky field — DSS2 Optical](images/DS-0009_Fomalhaut.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=344.4127+-29.6223&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=344.4127+-29.6223&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=344.4127+-29.6223&fov=0.5&survey=P/2MASS/color)*
-
 - **Position:** RA=344.4127°, Dec=-29.6223°
 - **Frequency:** 7297.36 MHz
 - **SNR:** 5.2
@@ -316,10 +248,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
   - not cross-checked (limit)
 
 ### Fomalhaut — Score 40/100
-
-![Fomalhaut sky field — DSS2 Optical](images/DS-0009_Fomalhaut.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=344.4127+-29.6223&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=344.4127+-29.6223&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=344.4127+-29.6223&fov=0.5&survey=P/2MASS/color)*
 
 - **Position:** RA=344.4127°, Dec=-29.6223°
 - **Frequency:** 5044.25 MHz
@@ -334,10 +262,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### Fomalhaut — Score 40/100
 
-![Fomalhaut sky field — DSS2 Optical](images/DS-0009_Fomalhaut.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=344.4127+-29.6223&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=344.4127+-29.6223&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=344.4127+-29.6223&fov=0.5&survey=P/2MASS/color)*
-
 - **Position:** RA=344.4127°, Dec=-29.6223°
 - **Frequency:** 5101.99 MHz
 - **SNR:** 3.4
@@ -350,10 +274,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
   - not cross-checked (limit)
 
 ### Ross 128 — Score 40/100
-
-![Ross 128 sky field — DSS2 Optical](images/DS-0010_Ross_128.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=176.9351+0.8048&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=176.9351+0.8048&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=176.9351+0.8048&fov=0.5&survey=P/2MASS/color)*
 
 - **Position:** RA=176.9351°, Dec=0.8048°
 - **Frequency:** 8709.53 MHz
@@ -368,10 +288,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### FRB20121102A — Score 40/100
 
-![FRB20121102A sky field — DSS2 Optical](images/DS-0011_FRB20121102A.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=82.9938+33.1480&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=82.9938+33.1480&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=82.9938+33.1480&fov=0.5&survey=P/2MASS/color)*
-
 - **Position:** RA=82.9938°, Dec=33.1480°
 - **Frequency:** 600.00 MHz
 - **SNR:** 25.3
@@ -384,10 +300,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
   - not cross-checked (limit)
 
 ### FRB20180916B — Score 40/100
-
-![FRB20180916B sky field — DSS2 Optical](images/DS-0012_FRB20180916B.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=29.5031+65.7168&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=29.5031+65.7168&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=29.5031+65.7168&fov=0.5&survey=P/2MASS/color)*
 
 - **Position:** RA=29.5031°, Dec=65.7168°
 - **Frequency:** 600.00 MHz
@@ -402,10 +314,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### FRB20190520B — Score 40/100
 
-![FRB20190520B sky field — DSS2 Optical](images/DS-0013_FRB20190520B.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=240.0275+-11.2921&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=240.0275+-11.2921&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=240.0275+-11.2921&fov=0.5&survey=P/2MASS/color)*
-
 - **Position:** RA=240.0275°, Dec=-11.2921°
 - **Frequency:** 600.00 MHz
 - **SNR:** 14.2
@@ -418,10 +326,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
   - not cross-checked (limit)
 
 ### FRB20201124A — Score 40/100
-
-![FRB20201124A sky field — DSS2 Optical](images/DS-0014_FRB20201124A.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=77.0117+26.0603&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=77.0117+26.0603&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=77.0117+26.0603&fov=0.5&survey=P/2MASS/color)*
 
 - **Position:** RA=77.0117°, Dec=26.0603°
 - **Frequency:** 600.00 MHz
@@ -436,10 +340,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### FRB20220912A — Score 40/100
 
-![FRB20220912A sky field — DSS2 Optical](images/DS-0015_FRB20220912A.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=347.2743+48.7108&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=347.2743+48.7108&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=347.2743+48.7108&fov=0.5&survey=P/2MASS/color)*
-
 - **Position:** RA=347.2743°, Dec=48.7108°
 - **Frequency:** 600.00 MHz
 - **SNR:** 28.4
@@ -452,10 +352,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
   - not cross-checked (limit)
 
 ### FRB_SIM_0011 — Score 40/100
-
-![FRB_SIM_0011 sky field — DSS2 Optical](images/DS-0016_FRB_SIM_0011.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=133.9867+-84.5369&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=133.9867+-84.5369&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=133.9867+-84.5369&fov=0.5&survey=P/2MASS/color)*
 
 - **Position:** RA=133.9867°, Dec=-84.5369°
 - **Frequency:** 600.00 MHz
@@ -470,10 +366,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### FRB_SIM_0006 — Score 40/100
 
-![FRB_SIM_0006 sky field — DSS2 Optical](images/DS-0017_FRB_SIM_0006.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=54.0719+56.9409&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=54.0719+56.9409&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=54.0719+56.9409&fov=0.5&survey=P/2MASS/color)*
-
 - **Position:** RA=54.0719°, Dec=56.9409°
 - **Frequency:** 600.00 MHz
 - **SNR:** 12.7
@@ -486,10 +378,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
   - not cross-checked (limit)
 
 ### FRB_SIM_0014 — Score 40/100
-
-![FRB_SIM_0014 sky field — DSS2 Optical](images/DS-0018_FRB_SIM_0014.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=81.5125+-54.2662&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=81.5125+-54.2662&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=81.5125+-54.2662&fov=0.5&survey=P/2MASS/color)*
 
 - **Position:** RA=81.5125°, Dec=-54.2662°
 - **Frequency:** 600.00 MHz
@@ -504,10 +392,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### FRB_SIM_0022 — Score 40/100
 
-![FRB_SIM_0022 sky field — DSS2 Optical](images/DS-0019_FRB_SIM_0022.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=7.5871+-34.0974&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=7.5871+-34.0974&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=7.5871+-34.0974&fov=0.5&survey=P/2MASS/color)*
-
 - **Position:** RA=7.5871°, Dec=-34.0974°
 - **Frequency:** 600.00 MHz
 - **SNR:** 11.1
@@ -520,10 +404,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
   - not cross-checked (limit)
 
 ### FRB_SIM_0024 — Score 40/100
-
-![FRB_SIM_0024 sky field — DSS2 Optical](images/DS-0020_FRB_SIM_0024.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=225.5803+53.5425&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=225.5803+53.5425&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=225.5803+53.5425&fov=0.5&survey=P/2MASS/color)*
 
 - **Position:** RA=225.5803°, Dec=53.5425°
 - **Frequency:** 600.00 MHz
@@ -538,9 +418,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### FRB_SIM_0030 — Score 40/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=47.9544+-66.4768&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=47.9544+-66.4768&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=47.9544+-66.4768&fov=0.5&survey=P/2MASS/color)*
-
 - **Position:** RA=47.9544°, Dec=-66.4768°
 - **Frequency:** 600.00 MHz
 - **SNR:** 13.4
@@ -553,9 +430,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
   - not cross-checked (limit)
 
 ### FRB_SIM_0039 — Score 40/100
-
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=163.8063+-79.7806&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=163.8063+-79.7806&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=163.8063+-79.7806&fov=0.5&survey=P/2MASS/color)*
 
 - **Position:** RA=163.8063°, Dec=-79.7806°
 - **Frequency:** 600.00 MHz
@@ -570,10 +444,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### Proxima Centauri — Score 40/100
 
-![Proxima Centauri sky field — DSS2 Optical](images/DS-0002_Proxima_Centauri.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=217.4288+-62.6793&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=217.4288+-62.6793&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=217.4288+-62.6793&fov=0.5&survey=P/2MASS/color)*
-
 - **Position:** RA=217.4288°, Dec=-62.6793°
 - **Frequency:** 0.00 MHz
 - **SNR:** 5.7
@@ -586,10 +456,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
   - not cross-checked (limit)
 
 ### Tau Ceti — Score 40/100
-
-![Tau Ceti sky field — DSS2 Optical](images/DS-0001_Tau_Ceti.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=26.0170+-15.9375&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=26.0170+-15.9375&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=26.0170+-15.9375&fov=0.5&survey=P/2MASS/color)*
 
 - **Position:** RA=26.0170°, Dec=-15.9375°
 - **Frequency:** 0.00 MHz
@@ -604,10 +470,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### Epsilon Eridani — Score 40/100
 
-![Epsilon Eridani sky field — DSS2 Optical](images/DS-0003_Epsilon_Eridani.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=53.2327+-9.4582&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=53.2327+-9.4582&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=53.2327+-9.4582&fov=0.5&survey=P/2MASS/color)*
-
 - **Position:** RA=53.2327°, Dec=-9.4582°
 - **Frequency:** 0.00 MHz
 - **SNR:** 41.2
@@ -620,10 +482,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
   - not cross-checked (limit)
 
 ### Vega — Score 40/100
-
-![Vega sky field — DSS2 Optical](images/DS-0006_Vega.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=279.2347+38.7837&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=279.2347+38.7837&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=279.2347+38.7837&fov=0.5&survey=P/2MASS/color)*
 
 - **Position:** RA=279.2347°, Dec=38.7837°
 - **Frequency:** 0.00 MHz
@@ -638,10 +496,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### 61 Cygni A — Score 40/100
 
-![61 Cygni A sky field — DSS2 Optical](images/DS-0007_61_Cygni_A.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=316.7282+38.7488&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=316.7282+38.7488&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=316.7282+38.7488&fov=0.5&survey=P/2MASS/color)*
-
 - **Position:** RA=316.7282°, Dec=38.7488°
 - **Frequency:** 0.00 MHz
 - **SNR:** 5.5
@@ -654,10 +508,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
   - not cross-checked (limit)
 
 ### Ross 128 — Score 40/100
-
-![Ross 128 sky field — DSS2 Optical](images/DS-0010_Ross_128.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=176.9351+0.8048&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=176.9351+0.8048&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=176.9351+0.8048&fov=0.5&survey=P/2MASS/color)*
 
 - **Position:** RA=176.9351°, Dec=0.8048°
 - **Frequency:** 0.00 MHz
@@ -672,9 +522,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### TOI-700 — Score 40/100
 
-🔭 **[View in Aladin Sky Atlas (2MASS NIR)](https://aladin.u-strasbg.fr/AladinLite/?target=35.1611+-56.7867&fov=0.5&survey=P/2MASS/color)**
-*Multi-wavelength: [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=35.1611+-56.7867&fov=0.5&survey=P/2MASS/color) · [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=35.1611+-56.7867&fov=0.5&survey=P/DSS2/color)*
-
 - **Position:** RA=35.1611°, Dec=-56.7867°
 - **Frequency:** 0.00 MHz
 - **SNR:** 10.0
@@ -687,9 +534,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
   - not cross-checked (limit)
 
 ### TOI-216 — Score 40/100
-
-🔭 **[View in Aladin Sky Atlas (2MASS NIR)](https://aladin.u-strasbg.fr/AladinLite/?target=271.2716+-27.6274&fov=0.5&survey=P/2MASS/color)**
-*Multi-wavelength: [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=271.2716+-27.6274&fov=0.5&survey=P/2MASS/color) · [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=271.2716+-27.6274&fov=0.5&survey=P/DSS2/color)*
 
 - **Position:** RA=271.2716°, Dec=-27.6274°
 - **Frequency:** 0.00 MHz
@@ -704,9 +548,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### SIM_STAR_0000 — Score 40/100
 
-🔭 **[View in Aladin Sky Atlas (2MASS NIR)](https://aladin.u-strasbg.fr/AladinLite/?target=311.3271+42.6363&fov=0.5&survey=P/2MASS/color)**
-*Multi-wavelength: [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=311.3271+42.6363&fov=0.5&survey=P/2MASS/color) · [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=311.3271+42.6363&fov=0.5&survey=P/DSS2/color)*
-
 - **Position:** RA=311.3271°, Dec=42.6363°
 - **Frequency:** 0.00 MHz
 - **SNR:** 10.0
@@ -719,9 +560,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
   - not cross-checked (limit)
 
 ### SIM_STAR_0001 — Score 40/100
-
-🔭 **[View in Aladin Sky Atlas (2MASS NIR)](https://aladin.u-strasbg.fr/AladinLite/?target=94.1207+-50.7361&fov=0.5&survey=P/2MASS/color)**
-*Multi-wavelength: [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=94.1207+-50.7361&fov=0.5&survey=P/2MASS/color) · [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=94.1207+-50.7361&fov=0.5&survey=P/DSS2/color)*
 
 - **Position:** RA=94.1207°, Dec=-50.7361°
 - **Frequency:** 0.00 MHz
@@ -736,9 +574,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### SIM_STAR_0002 — Score 40/100
 
-🔭 **[View in Aladin Sky Atlas (2MASS NIR)](https://aladin.u-strasbg.fr/AladinLite/?target=220.9650+-59.6843&fov=0.5&survey=P/2MASS/color)**
-*Multi-wavelength: [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=220.9650+-59.6843&fov=0.5&survey=P/2MASS/color) · [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=220.9650+-59.6843&fov=0.5&survey=P/DSS2/color)*
-
 - **Position:** RA=220.9650°, Dec=-59.6843°
 - **Frequency:** 0.00 MHz
 - **SNR:** 10.0
@@ -751,9 +586,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
   - not cross-checked (limit)
 
 ### SIM_STAR_0003 — Score 40/100
-
-🔭 **[View in Aladin Sky Atlas (2MASS NIR)](https://aladin.u-strasbg.fr/AladinLite/?target=354.5293+-25.6444&fov=0.5&survey=P/2MASS/color)**
-*Multi-wavelength: [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=354.5293+-25.6444&fov=0.5&survey=P/2MASS/color) · [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=354.5293+-25.6444&fov=0.5&survey=P/DSS2/color)*
 
 - **Position:** RA=354.5293°, Dec=-25.6444°
 - **Frequency:** 0.00 MHz
@@ -768,9 +600,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### SIM_STAR_0006 — Score 40/100
 
-🔭 **[View in Aladin Sky Atlas (2MASS NIR)](https://aladin.u-strasbg.fr/AladinLite/?target=293.0423+-0.2559&fov=0.5&survey=P/2MASS/color)**
-*Multi-wavelength: [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=293.0423+-0.2559&fov=0.5&survey=P/2MASS/color) · [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=293.0423+-0.2559&fov=0.5&survey=P/DSS2/color)*
-
 - **Position:** RA=293.0423°, Dec=-0.2559°
 - **Frequency:** 0.00 MHz
 - **SNR:** 10.0
@@ -783,9 +612,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
   - not cross-checked (limit)
 
 ### SIM_STAR_0007 — Score 40/100
-
-🔭 **[View in Aladin Sky Atlas (2MASS NIR)](https://aladin.u-strasbg.fr/AladinLite/?target=279.6070+57.5074&fov=0.5&survey=P/2MASS/color)**
-*Multi-wavelength: [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=279.6070+57.5074&fov=0.5&survey=P/2MASS/color) · [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=279.6070+57.5074&fov=0.5&survey=P/DSS2/color)*
 
 - **Position:** RA=279.6070°, Dec=57.5074°
 - **Frequency:** 0.00 MHz
@@ -800,9 +626,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### LHS 1140b — Score 40/100
 
-🔭 **[View in Aladin Sky Atlas (2MASS NIR)](https://aladin.u-strasbg.fr/AladinLite/?target=18.0018+-15.2670&fov=0.5&survey=P/2MASS/color)**
-*Multi-wavelength: [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=18.0018+-15.2670&fov=0.5&survey=P/2MASS/color) · [WISE 22µm](https://aladin.u-strasbg.fr/AladinLite/?target=18.0018+-15.2670&fov=0.5&survey=P/WISE/W4)*
-
 - **Position:** RA=18.0018°, Dec=-15.2670°
 - **Frequency:** 0.00 MHz
 - **SNR:** 3.0
@@ -815,9 +638,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
   - not cross-checked (limit)
 
 ### HD 209458b — Score 40/100
-
-🔭 **[View in Aladin Sky Atlas (2MASS NIR)](https://aladin.u-strasbg.fr/AladinLite/?target=330.7950+18.8840&fov=0.5&survey=P/2MASS/color)**
-*Multi-wavelength: [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=330.7950+18.8840&fov=0.5&survey=P/2MASS/color) · [WISE 22µm](https://aladin.u-strasbg.fr/AladinLite/?target=330.7950+18.8840&fov=0.5&survey=P/WISE/W4)*
 
 - **Position:** RA=330.7950°, Dec=18.8840°
 - **Frequency:** 0.00 MHz
@@ -832,9 +652,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### TOI-SIM-0001 — Score 40/100
 
-🔭 **[View in Aladin Sky Atlas (2MASS NIR)](https://aladin.u-strasbg.fr/AladinLite/?target=77.3791+-13.7011&fov=0.5&survey=P/2MASS/color)**
-*Multi-wavelength: [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=77.3791+-13.7011&fov=0.5&survey=P/2MASS/color) · [WISE 22µm](https://aladin.u-strasbg.fr/AladinLite/?target=77.3791+-13.7011&fov=0.5&survey=P/WISE/W4)*
-
 - **Position:** RA=77.3791°, Dec=-13.7011°
 - **Frequency:** 0.00 MHz
 - **SNR:** 3.0
@@ -847,9 +664,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
   - not cross-checked (limit)
 
 ### 1I/ʻOumuamua — Score 40/100
-
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=23.4578+26.8011&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=23.4578+26.8011&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=23.4578+26.8011&fov=0.5&survey=P/2MASS/color)*
 
 - **Position:** RA=23.4578°, Dec=26.8011°
 - **Frequency:** 0.00 MHz
@@ -864,9 +678,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### SIM_ISO_0001 — Score 40/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=65.5670+50.5077&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=65.5670+50.5077&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=65.5670+50.5077&fov=0.5&survey=P/2MASS/color)*
-
 - **Position:** RA=65.5670°, Dec=50.5077°
 - **Frequency:** 0.00 MHz
 - **SNR:** 0.0
@@ -879,9 +690,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
   - not cross-checked (limit)
 
 ### SIM_ISO_0002 — Score 40/100
-
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=7.3274+33.9141&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=7.3274+33.9141&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=7.3274+33.9141&fov=0.5&survey=P/2MASS/color)*
 
 - **Position:** RA=7.3274°, Dec=33.9141°
 - **Frequency:** 0.00 MHz
@@ -896,9 +704,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### SIM_ISO_0004 — Score 40/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=219.6372+2.1438&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=219.6372+2.1438&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=219.6372+2.1438&fov=0.5&survey=P/2MASS/color)*
-
 - **Position:** RA=219.6372°, Dec=2.1438°
 - **Frequency:** 0.00 MHz
 - **SNR:** 0.0
@@ -911,9 +716,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
   - not cross-checked (limit)
 
 ### 4FGL J0253.4+0220 — Score 40/100
-
-🔭 **[View in Aladin Sky Atlas (Fermi γ-ray)](https://aladin.u-strasbg.fr/AladinLite/?target=43.3500+2.3400&fov=0.5&survey=P/Fermi/color)**
-*Multi-wavelength: [Fermi γ-ray](https://aladin.u-strasbg.fr/AladinLite/?target=43.3500+2.3400&fov=0.5&survey=P/Fermi/color) · [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=43.3500+2.3400&fov=0.5&survey=P/DSS2/color)*
 
 - **Position:** RA=43.3500°, Dec=2.3400°
 - **Frequency:** 0.00 MHz
@@ -928,9 +730,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### 4FGL J0521.9+2112 — Score 40/100
 
-🔭 **[View in Aladin Sky Atlas (Fermi γ-ray)](https://aladin.u-strasbg.fr/AladinLite/?target=80.4900+21.2000&fov=0.5&survey=P/Fermi/color)**
-*Multi-wavelength: [Fermi γ-ray](https://aladin.u-strasbg.fr/AladinLite/?target=80.4900+21.2000&fov=0.5&survey=P/Fermi/color) · [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=80.4900+21.2000&fov=0.5&survey=P/DSS2/color)*
-
 - **Position:** RA=80.4900°, Dec=21.2000°
 - **Frequency:** 0.00 MHz
 - **SNR:** 0.0
@@ -943,9 +742,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
   - not cross-checked (limit)
 
 ### 4FGL J1120.0-2204 — Score 40/100
-
-🔭 **[View in Aladin Sky Atlas (Fermi γ-ray)](https://aladin.u-strasbg.fr/AladinLite/?target=170.0000+-22.0800&fov=0.5&survey=P/Fermi/color)**
-*Multi-wavelength: [Fermi γ-ray](https://aladin.u-strasbg.fr/AladinLite/?target=170.0000+-22.0800&fov=0.5&survey=P/Fermi/color) · [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=170.0000+-22.0800&fov=0.5&survey=P/DSS2/color)*
 
 - **Position:** RA=170.0000°, Dec=-22.0800°
 - **Frequency:** 0.00 MHz
@@ -960,9 +756,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### 4FGL J1231.6+1410 — Score 40/100
 
-🔭 **[View in Aladin Sky Atlas (Fermi γ-ray)](https://aladin.u-strasbg.fr/AladinLite/?target=187.9000+14.1700&fov=0.5&survey=P/Fermi/color)**
-*Multi-wavelength: [Fermi γ-ray](https://aladin.u-strasbg.fr/AladinLite/?target=187.9000+14.1700&fov=0.5&survey=P/Fermi/color) · [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=187.9000+14.1700&fov=0.5&survey=P/DSS2/color)*
-
 - **Position:** RA=187.9000°, Dec=14.1700°
 - **Frequency:** 0.00 MHz
 - **SNR:** 0.0
@@ -975,9 +768,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
   - not cross-checked (limit)
 
 ### 4FGL J1418.4-0233 — Score 40/100
-
-🔭 **[View in Aladin Sky Atlas (Fermi γ-ray)](https://aladin.u-strasbg.fr/AladinLite/?target=214.6000+-2.5600&fov=0.5&survey=P/Fermi/color)**
-*Multi-wavelength: [Fermi γ-ray](https://aladin.u-strasbg.fr/AladinLite/?target=214.6000+-2.5600&fov=0.5&survey=P/Fermi/color) · [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=214.6000+-2.5600&fov=0.5&survey=P/DSS2/color)*
 
 - **Position:** RA=214.6000°, Dec=-2.5600°
 - **Frequency:** 0.00 MHz
@@ -992,9 +782,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### 4FGL J1653.6+3945 — Score 40/100
 
-🔭 **[View in Aladin Sky Atlas (Fermi γ-ray)](https://aladin.u-strasbg.fr/AladinLite/?target=253.4000+39.7500&fov=0.5&survey=P/Fermi/color)**
-*Multi-wavelength: [Fermi γ-ray](https://aladin.u-strasbg.fr/AladinLite/?target=253.4000+39.7500&fov=0.5&survey=P/Fermi/color) · [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=253.4000+39.7500&fov=0.5&survey=P/DSS2/color)*
-
 - **Position:** RA=253.4000°, Dec=39.7500°
 - **Frequency:** 0.00 MHz
 - **SNR:** 0.0
@@ -1007,9 +794,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
   - not cross-checked (limit)
 
 ### 4FGL J1744.1-7619 — Score 40/100
-
-🔭 **[View in Aladin Sky Atlas (Fermi γ-ray)](https://aladin.u-strasbg.fr/AladinLite/?target=266.0000+-76.3200&fov=0.5&survey=P/Fermi/color)**
-*Multi-wavelength: [Fermi γ-ray](https://aladin.u-strasbg.fr/AladinLite/?target=266.0000+-76.3200&fov=0.5&survey=P/Fermi/color) · [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=266.0000+-76.3200&fov=0.5&survey=P/DSS2/color)*
 
 - **Position:** RA=266.0000°, Dec=-76.3200°
 - **Frequency:** 0.00 MHz
@@ -1024,9 +808,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### 4FGL J1828.4+3236 — Score 40/100
 
-🔭 **[View in Aladin Sky Atlas (Fermi γ-ray)](https://aladin.u-strasbg.fr/AladinLite/?target=277.1000+32.6100&fov=0.5&survey=P/Fermi/color)**
-*Multi-wavelength: [Fermi γ-ray](https://aladin.u-strasbg.fr/AladinLite/?target=277.1000+32.6100&fov=0.5&survey=P/Fermi/color) · [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=277.1000+32.6100&fov=0.5&survey=P/DSS2/color)*
-
 - **Position:** RA=277.1000°, Dec=32.6100°
 - **Frequency:** 0.00 MHz
 - **SNR:** 0.0
@@ -1039,9 +820,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
   - not cross-checked (limit)
 
 ### 4FGL J1955.4+1123 — Score 40/100
-
-🔭 **[View in Aladin Sky Atlas (Fermi γ-ray)](https://aladin.u-strasbg.fr/AladinLite/?target=298.9000+11.3900&fov=0.5&survey=P/Fermi/color)**
-*Multi-wavelength: [Fermi γ-ray](https://aladin.u-strasbg.fr/AladinLite/?target=298.9000+11.3900&fov=0.5&survey=P/Fermi/color) · [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=298.9000+11.3900&fov=0.5&survey=P/DSS2/color)*
 
 - **Position:** RA=298.9000°, Dec=11.3900°
 - **Frequency:** 0.00 MHz
@@ -1056,9 +834,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### 4FGL J2049.9+1003 — Score 40/100
 
-🔭 **[View in Aladin Sky Atlas (Fermi γ-ray)](https://aladin.u-strasbg.fr/AladinLite/?target=312.5000+10.0600&fov=0.5&survey=P/Fermi/color)**
-*Multi-wavelength: [Fermi γ-ray](https://aladin.u-strasbg.fr/AladinLite/?target=312.5000+10.0600&fov=0.5&survey=P/Fermi/color) · [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=312.5000+10.0600&fov=0.5&survey=P/DSS2/color)*
-
 - **Position:** RA=312.5000°, Dec=10.0600°
 - **Frequency:** 0.00 MHz
 - **SNR:** 0.0
@@ -1071,9 +846,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
   - not cross-checked (limit)
 
 ### 4FGL J2158.8-3013 — Score 40/100
-
-🔭 **[View in Aladin Sky Atlas (Fermi γ-ray)](https://aladin.u-strasbg.fr/AladinLite/?target=329.7000+-30.2300&fov=0.5&survey=P/Fermi/color)**
-*Multi-wavelength: [Fermi γ-ray](https://aladin.u-strasbg.fr/AladinLite/?target=329.7000+-30.2300&fov=0.5&survey=P/Fermi/color) · [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=329.7000+-30.2300&fov=0.5&survey=P/DSS2/color)*
 
 - **Position:** RA=329.7000°, Dec=-30.2300°
 - **Frequency:** 0.00 MHz
@@ -1088,9 +860,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### 4FGL J0111.0+3907 — Score 40/100
 
-🔭 **[View in Aladin Sky Atlas (Fermi γ-ray)](https://aladin.u-strasbg.fr/AladinLite/?target=17.8000+39.1300&fov=0.5&survey=P/Fermi/color)**
-*Multi-wavelength: [Fermi γ-ray](https://aladin.u-strasbg.fr/AladinLite/?target=17.8000+39.1300&fov=0.5&survey=P/Fermi/color) · [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=17.8000+39.1300&fov=0.5&survey=P/DSS2/color)*
-
 - **Position:** RA=17.8000°, Dec=39.1300°
 - **Frequency:** 0.00 MHz
 - **SNR:** 0.0
@@ -1103,9 +872,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
   - not cross-checked (limit)
 
 ### Kapteyn's Star — Score 40/100
-
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=77.1400+-44.9950&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=77.1400+-44.9950&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=77.1400+-44.9950&fov=0.5&survey=P/2MASS/color)*
 
 - **Position:** RA=77.1400°, Dec=-44.9950°
 - **Frequency:** 0.00 MHz
@@ -1120,9 +886,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### SIM_J0312+1847 — Score 40/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=48.1200+18.7900&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=48.1200+18.7900&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=48.1200+18.7900&fov=0.5&survey=P/2MASS/color)*
-
 - **Position:** RA=48.1200°, Dec=18.7900°
 - **Frequency:** 0.00 MHz
 - **SNR:** 4.9
@@ -1135,9 +898,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
   - not cross-checked (limit)
 
 ### SIM_J1147-0231 — Score 40/100
-
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=176.9100+-2.5200&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=176.9100+-2.5200&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=176.9100+-2.5200&fov=0.5&survey=P/2MASS/color)*
 
 - **Position:** RA=176.9100°, Dec=-2.5200°
 - **Frequency:** 0.00 MHz
@@ -1152,9 +912,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### SIM_J2218+3341 — Score 40/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=334.6200+33.6900&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=334.6200+33.6900&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=334.6200+33.6900&fov=0.5&survey=P/2MASS/color)*
-
 - **Position:** RA=334.6200°, Dec=33.6900°
 - **Frequency:** 0.00 MHz
 - **SNR:** 3.9
@@ -1167,9 +924,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
   - not cross-checked (limit)
 
 ### SIM_J0631+1548 — Score 40/100
-
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=97.8800+15.8100&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=97.8800+15.8100&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=97.8800+15.8100&fov=0.5&survey=P/2MASS/color)*
 
 - **Position:** RA=97.8800°, Dec=15.8100°
 - **Frequency:** 0.00 MHz
@@ -1184,9 +938,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### CXO J001311.8+634937 — Score 40/100
 
-🔭 **[View in Aladin Sky Atlas (Chandra X-ray)](https://aladin.u-strasbg.fr/AladinLite/?target=3.2990+63.8270&fov=0.5&survey=P/Chandra/ACIS)**
-*Multi-wavelength: [Chandra X-ray](https://aladin.u-strasbg.fr/AladinLite/?target=3.2990+63.8270&fov=0.5&survey=P/Chandra/ACIS) · [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=3.2990+63.8270&fov=0.5&survey=P/DSS2/color)*
-
 - **Position:** RA=3.2990°, Dec=63.8270°
 - **Frequency:** 0.00 MHz
 - **SNR:** 0.0
@@ -1199,9 +950,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
   - not cross-checked (limit)
 
 ### CXO J024512.4-001234 — Score 40/100
-
-🔭 **[View in Aladin Sky Atlas (Chandra X-ray)](https://aladin.u-strasbg.fr/AladinLite/?target=41.3020+-0.2100&fov=0.5&survey=P/Chandra/ACIS)**
-*Multi-wavelength: [Chandra X-ray](https://aladin.u-strasbg.fr/AladinLite/?target=41.3020+-0.2100&fov=0.5&survey=P/Chandra/ACIS) · [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=41.3020+-0.2100&fov=0.5&survey=P/DSS2/color)*
 
 - **Position:** RA=41.3020°, Dec=-0.2100°
 - **Frequency:** 0.00 MHz
@@ -1216,9 +964,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### CXO J073841.2+653201 — Score 40/100
 
-🔭 **[View in Aladin Sky Atlas (Chandra X-ray)](https://aladin.u-strasbg.fr/AladinLite/?target=114.6720+65.5340&fov=0.5&survey=P/Chandra/ACIS)**
-*Multi-wavelength: [Chandra X-ray](https://aladin.u-strasbg.fr/AladinLite/?target=114.6720+65.5340&fov=0.5&survey=P/Chandra/ACIS) · [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=114.6720+65.5340&fov=0.5&survey=P/DSS2/color)*
-
 - **Position:** RA=114.6720°, Dec=65.5340°
 - **Frequency:** 0.00 MHz
 - **SNR:** 0.0
@@ -1231,9 +976,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
   - not cross-checked (limit)
 
 ### CXO J182239.2-181442 — Score 40/100
-
-🔭 **[View in Aladin Sky Atlas (Chandra X-ray)](https://aladin.u-strasbg.fr/AladinLite/?target=275.6630+-18.2450&fov=0.5&survey=P/Chandra/ACIS)**
-*Multi-wavelength: [Chandra X-ray](https://aladin.u-strasbg.fr/AladinLite/?target=275.6630+-18.2450&fov=0.5&survey=P/Chandra/ACIS) · [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=275.6630+-18.2450&fov=0.5&survey=P/DSS2/color)*
 
 - **Position:** RA=275.6630°, Dec=-18.2450°
 - **Frequency:** 0.00 MHz
@@ -1248,9 +990,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### CXO J214521.3+122844 — Score 40/100
 
-🔭 **[View in Aladin Sky Atlas (Chandra X-ray)](https://aladin.u-strasbg.fr/AladinLite/?target=326.3390+12.4790&fov=0.5&survey=P/Chandra/ACIS)**
-*Multi-wavelength: [Chandra X-ray](https://aladin.u-strasbg.fr/AladinLite/?target=326.3390+12.4790&fov=0.5&survey=P/Chandra/ACIS) · [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=326.3390+12.4790&fov=0.5&survey=P/DSS2/color)*
-
 - **Position:** RA=326.3390°, Dec=12.4790°
 - **Frequency:** 0.00 MHz
 - **SNR:** 0.0
@@ -1263,9 +1002,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
   - not cross-checked (limit)
 
 ### 4XMM J034428.3-045712 — Score 40/100
-
-🔭 **[View in Aladin Sky Atlas (Chandra X-ray)](https://aladin.u-strasbg.fr/AladinLite/?target=56.1180+-4.9530&fov=0.5&survey=P/Chandra/ACIS)**
-*Multi-wavelength: [Chandra X-ray](https://aladin.u-strasbg.fr/AladinLite/?target=56.1180+-4.9530&fov=0.5&survey=P/Chandra/ACIS) · [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=56.1180+-4.9530&fov=0.5&survey=P/DSS2/color)*
 
 - **Position:** RA=56.1180°, Dec=-4.9530°
 - **Frequency:** 0.00 MHz
@@ -1280,9 +1016,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### 4XMM J091234.2+303201 — Score 40/100
 
-🔭 **[View in Aladin Sky Atlas (Chandra X-ray)](https://aladin.u-strasbg.fr/AladinLite/?target=138.1430+30.5340&fov=0.5&survey=P/Chandra/ACIS)**
-*Multi-wavelength: [Chandra X-ray](https://aladin.u-strasbg.fr/AladinLite/?target=138.1430+30.5340&fov=0.5&survey=P/Chandra/ACIS) · [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=138.1430+30.5340&fov=0.5&survey=P/DSS2/color)*
-
 - **Position:** RA=138.1430°, Dec=30.5340°
 - **Frequency:** 0.00 MHz
 - **SNR:** 0.0
@@ -1295,9 +1028,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
   - not cross-checked (limit)
 
 ### 4XMM J143812.7-231456 — Score 40/100
-
-🔭 **[View in Aladin Sky Atlas (Chandra X-ray)](https://aladin.u-strasbg.fr/AladinLite/?target=219.5530+-23.2490&fov=0.5&survey=P/Chandra/ACIS)**
-*Multi-wavelength: [Chandra X-ray](https://aladin.u-strasbg.fr/AladinLite/?target=219.5530+-23.2490&fov=0.5&survey=P/Chandra/ACIS) · [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=219.5530+-23.2490&fov=0.5&survey=P/DSS2/color)*
 
 - **Position:** RA=219.5530°, Dec=-23.2490°
 - **Frequency:** 0.00 MHz
@@ -1312,9 +1042,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
 
 ### 4XMM J052211.8-692334 — Score 40/100
 
-🔭 **[View in Aladin Sky Atlas (Chandra X-ray)](https://aladin.u-strasbg.fr/AladinLite/?target=80.5490+-69.3930&fov=0.5&survey=P/Chandra/ACIS)**
-*Multi-wavelength: [Chandra X-ray](https://aladin.u-strasbg.fr/AladinLite/?target=80.5490+-69.3930&fov=0.5&survey=P/Chandra/ACIS) · [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=80.5490+-69.3930&fov=0.5&survey=P/DSS2/color)*
-
 - **Position:** RA=80.5490°, Dec=-69.3930°
 - **Frequency:** 0.00 MHz
 - **SNR:** 0.0
@@ -1327,9 +1054,6 @@ The DeepSignal pipeline processed 21 radio telescope observations across 10 astr
   - not cross-checked (limit)
 
 ### 4XMM J113021.4+052318 — Score 40/100
-
-🔭 **[View in Aladin Sky Atlas (Chandra X-ray)](https://aladin.u-strasbg.fr/AladinLite/?target=172.5890+5.3880&fov=0.5&survey=P/Chandra/ACIS)**
-*Multi-wavelength: [Chandra X-ray](https://aladin.u-strasbg.fr/AladinLite/?target=172.5890+5.3880&fov=0.5&survey=P/Chandra/ACIS) · [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=172.5890+5.3880&fov=0.5&survey=P/DSS2/color)*
 
 - **Position:** RA=172.5890°, Dec=5.3880°
 - **Frequency:** 0.00 MHz
