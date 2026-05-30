@@ -110,6 +110,37 @@ footer a{color:#4a6a8a;text-decoration:none}
 .card-ext-links{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px;padding-top:8px;border-top:1px solid rgba(219,234,254,.07)}
 .card-ext-link{font-size:.68rem;color:#7dd3fc;text-decoration:none;padding:2px 8px;border:1px solid rgba(125,211,252,.2);border-radius:4px;transition:background 120ms;white-space:nowrap}
 .card-ext-link:hover{background:rgba(125,211,252,.1)}
+
+/* ── Literature Modal ── */
+#lit-overlay{display:none;position:fixed;inset:0;background:rgba(0,5,15,.88);backdrop-filter:blur(6px);z-index:900;align-items:center;justify-content:center}
+#lit-overlay.open{display:flex}
+#lit-modal{width:min(740px,96vw);max-height:82vh;background:#030c18;border:1px solid #7dd3fc;border-radius:12px;box-shadow:0 0 48px rgba(125,211,252,.22),0 0 120px rgba(125,211,252,.07);display:flex;flex-direction:column;overflow:hidden;position:relative;animation:lit-in .18s ease-out}
+@keyframes lit-in{from{opacity:0;transform:scale(.96) translateY(8px)}to{opacity:1;transform:none}}
+#lit-modal::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,20,50,.12) 3px,rgba(0,20,50,.12) 4px);pointer-events:none;z-index:1}
+.lit-hdr{padding:14px 18px;border-bottom:1px solid rgba(125,211,252,.18);display:flex;align-items:center;gap:12px;flex-shrink:0;background:rgba(0,20,40,.5)}
+.lit-hdr-eyebrow{font-size:.6rem;color:#7dd3fc;font-family:monospace;letter-spacing:.14em;text-transform:uppercase;opacity:.8;margin-bottom:2px}
+.lit-hdr-name{font-size:1.05rem;font-weight:700;color:#eef3f8}
+.lit-hdr-icon{font-size:1.4rem;opacity:.7;flex-shrink:0}
+.lit-close{margin-left:auto;background:none;border:1px solid rgba(125,211,252,.25);color:#7dd3fc;width:28px;height:28px;border-radius:6px;cursor:pointer;font-size:.9rem;display:grid;place-items:center;transition:background 140ms,border-color 140ms;flex-shrink:0}
+.lit-close:hover{background:rgba(125,211,252,.12);border-color:#7dd3fc}
+.lit-body{padding:16px 18px;overflow-y:auto;flex:1;scrollbar-width:thin;scrollbar-color:#1a3a5a transparent}
+.lit-status{font-family:monospace;font-size:.73rem;color:#3a6a8a;margin-bottom:14px;letter-spacing:.04em}
+.lit-paper{border:1px solid rgba(125,211,252,.1);border-radius:8px;padding:13px 15px;margin-bottom:10px;background:rgba(255,255,255,.025);transition:border-color 160ms,background 160ms;position:relative}
+.lit-paper:hover{border-color:rgba(125,211,252,.35);background:rgba(125,211,252,.04)}
+.lit-paper-num{position:absolute;top:10px;right:12px;font-family:monospace;font-size:.62rem;color:#2a4a6a}
+.lit-title{font-size:.88rem;font-weight:600;color:#dbeafe;margin-bottom:5px;line-height:1.4;padding-right:30px}
+.lit-meta{font-family:monospace;font-size:.68rem;color:#3a6a8a;margin-bottom:8px}
+.lit-abstract{font-size:.76rem;color:#5a7a9a;line-height:1.55;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.lit-actions{display:flex;gap:6px;flex-wrap:wrap}
+.lit-btn{font-size:.72rem;color:#7dd3fc;text-decoration:none;padding:3px 10px;border:1px solid rgba(125,211,252,.22);border-radius:4px;transition:background 140ms;white-space:nowrap;font-family:monospace}
+.lit-btn:hover{background:rgba(125,211,252,.1)}
+.lit-empty{text-align:center;color:#2a4a6a;font-family:monospace;font-size:.82rem;padding:48px 0;line-height:2}
+.lit-footer{padding:10px 18px;border-top:1px solid rgba(125,211,252,.1);font-family:monospace;font-size:.62rem;color:#1a3a5a;flex-shrink:0;display:flex;justify-content:space-between}
+/* Papers badge button */
+.btn-papers{display:inline-flex;align-items:center;gap:5px;font-size:.8rem;color:#7dd3fc;background:rgba(125,211,252,.08);border:1px solid rgba(125,211,252,.3);border-radius:5px;padding:5px 12px;cursor:pointer;transition:background 140ms,border-color 140ms;font-family:inherit;white-space:nowrap}
+.btn-papers:hover{background:rgba(125,211,252,.16);border-color:#7dd3fc}
+.btn-papers .papers-dot{width:6px;height:6px;border-radius:50%;background:#7dd3fc;animation:blink 1.8s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:.3}50%{opacity:1}}
 </style>
 </head>
 <body>
@@ -142,10 +173,10 @@ footer a{color:#4a6a8a;text-decoration:none}
 </div>
 
 <div class="stats">
-  <div class="stat-chip">Pipeline candidates: <strong id="stat-n">247</strong></div>
+  <div class="stat-chip">Pipeline candidates: <strong id="stat-n">80</strong></div>
   <div class="stat-chip">Data sources: <strong>10</strong></div>
   <div class="stat-chip">Detection algorithms: <strong>14</strong></div>
-  <div class="stat-chip">Last updated: <strong>2026-05-30 05:22 UTC</strong></div>
+  <div class="stat-chip">Last updated: <strong>2026-05-30 06:45 UTC</strong></div>
 </div>
 
 <div id="result-panel">
@@ -167,6 +198,25 @@ footer a{color:#4a6a8a;text-decoration:none}
   Sky images: <a href="https://alasky.cds.unistra.fr/hips-image-services/hips2fits" target="_blank">Hips2Fits CDN</a> &nbsp;·&nbsp;
   Catalog: <a href="https://simbad.u-strasbg.fr" target="_blank">SIMBAD</a>
 </footer>
+
+<!-- ── Literature Modal ─────────────────────────────────────────────────────── -->
+<div id="lit-overlay" onclick="if(event.target===this)litClose()">
+  <div id="lit-modal" role="dialog" aria-modal="true">
+    <div class="lit-hdr">
+      <span class="lit-hdr-icon">◈</span>
+      <div>
+        <div class="lit-hdr-eyebrow">⬡ DeepSignal · Literature Scan · arXiv / ADS</div>
+        <div class="lit-hdr-name" id="lit-target-name">—</div>
+      </div>
+      <button class="lit-close" onclick="litClose()" aria-label="Close">✕</button>
+    </div>
+    <div class="lit-body" id="lit-body"></div>
+    <div class="lit-footer">
+      <span id="lit-footer-src">arXiv.org · astro-ph</span>
+      <span id="lit-footer-ts"></span>
+    </div>
+  </div>
+</div>
 
 <script>
 // ── Constants ─────────────────────────────────────────────────────────────────
@@ -574,6 +624,11 @@ function showResult(resolved, pipelineMatches) {
         ${scoreTxt}
         ${reasonHtml}
         <div class="result-links">${extLinks}</div>
+        <div style="margin-top:12px">
+          <button class="btn-papers" onclick="litOpen('${name.replace(/'/g,"\\'")}')">
+            <span class="papers-dot"></span> Search Literature
+          </button>
+        </div>
       </div>
     </div>`;
 }
@@ -741,10 +796,82 @@ function selectCandidate(name) {
   doSearch();
 }
 
+// ── Literature Modal ──────────────────────────────────────────────────────────
+function litOpen(targetName) {
+  document.getElementById("lit-target-name").textContent = targetName;
+  document.getElementById("lit-footer-ts").textContent = "";
+  document.getElementById("lit-body").innerHTML =
+    `<div class="lit-status"><span class="spinner"></span> SCANNING LITERATURE DATABASE…</div>`;
+  document.getElementById("lit-overlay").classList.add("open");
+  document.body.style.overflow = "hidden";
+  _litFetch(targetName);
+}
+
+function litClose() {
+  document.getElementById("lit-overlay").classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+async function _litFetch(name) {
+  const body   = document.getElementById("lit-body");
+  const footer = document.getElementById("lit-footer-ts");
+  const t0 = Date.now();
+  try {
+    // arXiv Atom API — CORS-enabled, no key required
+    const q   = `(ti:"${name}" OR abs:"${name}") AND cat:astro-ph*`;
+    const url = `https://export.arxiv.org/api/query?search_query=${encodeURIComponent(q)}&sortBy=relevance&sortOrder=descending&max_results=10`;
+    const resp = await fetch(url, { signal: AbortSignal.timeout(12000) });
+    if (!resp.ok) throw new Error(`arXiv HTTP ${resp.status}`);
+    const xml  = new DOMParser().parseFromString(await resp.text(), "application/xml");
+    const entries = [...xml.querySelectorAll("entry")];
+    const elapsed = ((Date.now() - t0) / 1000).toFixed(1);
+    footer.textContent = `${elapsed}s · arXiv Atom API`;
+
+    if (!entries.length) {
+      body.innerHTML = `<div class="lit-empty">[ NO RECORDS FOUND ]<br>
+        <span style="font-size:.72rem">No astro-ph papers matched "${name}"</span><br><br>
+        <a class="lit-btn" href="https://ui.adsabs.harvard.edu/search/q=object%3A${encodeURIComponent(name)}&sort=date+desc" target="_blank" rel="noopener">↗ Try NASA ADS directly</a></div>`;
+      return;
+    }
+
+    const statusLine = `<div class="lit-status">▸ ${entries.length} record${entries.length>1?"s":""} · astro-ph · sorted by relevance</div>`;
+    const cards = entries.map((e, i) => {
+      const title    = e.querySelector("title")?.textContent?.trim() || "—";
+      const authors  = [...e.querySelectorAll("author name")].slice(0,3).map(a=>a.textContent.trim());
+      const authorTxt = authors.join(", ") + (authors.length===3 ? " et al." : "");
+      const published = (e.querySelector("published")?.textContent||"").slice(0,10);
+      const abstract  = e.querySelector("summary")?.textContent?.trim() || "";
+      const idUrl     = e.querySelector("id")?.textContent?.trim() || "";
+      const arxivId   = idUrl.replace(/https?:\/\/arxiv\.org\/abs\//,"").trim();
+      const cats      = [...e.querySelectorAll("category")].map(c=>c.getAttribute("term")).filter(Boolean).slice(0,2).join(" · ");
+      return `<div class="lit-paper">
+        <div class="lit-paper-num">#${i+1}</div>
+        <div class="lit-title">${title}</div>
+        <div class="lit-meta">${authorTxt} &nbsp;·&nbsp; ${published} &nbsp;·&nbsp; ${cats}</div>
+        <div class="lit-abstract">${abstract}</div>
+        <div class="lit-actions">
+          <a class="lit-btn" href="https://arxiv.org/abs/${arxivId}" target="_blank" rel="noopener">↗ arXiv:${arxivId}</a>
+          <a class="lit-btn" href="https://ui.adsabs.harvard.edu/abs/arXiv:${arxivId}" target="_blank" rel="noopener">NASA ADS</a>
+        </div>
+      </div>`;
+    }).join("");
+    body.innerHTML = statusLine + cards;
+  } catch (err) {
+    footer.textContent = `error · ${((Date.now()-t0)/1000).toFixed(1)}s`;
+    body.innerHTML = `<div class="lit-empty">[ LINK ERROR ]<br>
+      <span style="font-size:.72rem">${err.message}</span><br><br>
+      <a class="lit-btn" href="https://ui.adsabs.harvard.edu/search/q=object%3A${encodeURIComponent(name)}&sort=date+desc" target="_blank" rel="noopener">↗ Search NASA ADS</a>
+      &nbsp;
+      <a class="lit-btn" href="https://arxiv.org/search/?searchtype=all&query=${encodeURIComponent(name)}&start=0" target="_blank" rel="noopener">↗ arXiv Search</a>
+    </div>`;
+  }
+}
+
 // ── Keyboard shortcut ─────────────────────────────────────────────────────────
 document.getElementById("q").addEventListener("keydown", e => {
   if (e.key === "Enter") doSearch();
 });
+document.addEventListener("keydown", e => { if (e.key === "Escape") litClose(); });
 
 // ── Init ──────────────────────────────────────────────────────────────────────
 loadCatalog();
