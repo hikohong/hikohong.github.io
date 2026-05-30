@@ -7,7 +7,17 @@
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-       background:#080818;color:#e0e0e0;padding:24px}
+       background:#080818;color:#e0e0e0}
+  nav{display:flex;align-items:center;gap:12px;padding:14px 24px;border-bottom:1px solid rgba(219,234,254,.10);
+      background:rgba(8,17,31,.92);position:sticky;top:0;z-index:10;backdrop-filter:blur(8px)}
+  .nav-home{display:inline-flex;align-items:center;gap:8px;color:#dbeafe;text-decoration:none;font-weight:700;font-size:.9rem}
+  .nav-mark{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;
+            background:linear-gradient(135deg,#7dd3fc,#f97316);color:#06121d;font-size:.65rem;font-weight:900;flex-shrink:0}
+  .nav-links{margin-left:auto;display:flex;gap:8px}
+  .nav-link{color:#b8c7d8;text-decoration:none;font-size:.85rem;padding:6px 12px;border-radius:5px;
+            border:1px solid rgba(219,234,254,.15);transition:border-color 140ms,color 140ms;background:none;cursor:pointer}
+  .nav-link:hover{color:#7dd3fc;border-color:#7dd3fc}
+  .gallery-hdr{padding:24px 24px 0}
   h1{font-size:1.5rem;color:#fff;margin-bottom:4px}
   .subtitle{color:#4a5a6a;font-size:.85rem;margin-bottom:16px}
   .stats{display:flex;gap:12px;margin-bottom:28px;flex-wrap:wrap}
@@ -71,10 +81,66 @@
   .d-method{color:#7dd3fc;flex:1}
   .d-dtype{color:#6b7280;font-size:.65rem;text-transform:uppercase}
   .d-score{color:#7f8c9d;flex-shrink:0}
-  footer{margin-top:40px;text-align:center;color:#2a3a4a;font-size:.8rem}
+  footer{margin-top:40px;text-align:center;color:#2a3a4a;font-size:.8rem;padding:24px}
+  #report-overlay{display:none;position:fixed;inset:0;background:rgba(0,5,15,.88);backdrop-filter:blur(6px);z-index:900;align-items:center;justify-content:center}
+  #report-overlay.open{display:flex}
+  #report-modal{width:min(780px,96vw);max-height:88vh;background:#030c18;border:1px solid #7dd3fc;border-radius:12px;box-shadow:0 0 48px rgba(125,211,252,.22);display:flex;flex-direction:column;overflow:hidden;position:relative;animation:lit-in .18s ease-out}
+  #report-modal::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,20,50,.12) 3px,rgba(0,20,50,.12) 4px);pointer-events:none;z-index:1}
+  @keyframes lit-in{from{opacity:0;transform:scale(.96) translateY(8px)}to{opacity:1;transform:none}}
+  .report-hdr{padding:14px 18px;border-bottom:1px solid rgba(125,211,252,.18);display:flex;align-items:center;gap:12px;flex-shrink:0;background:rgba(0,20,40,.5)}
+  .report-eyebrow{font-size:.6rem;color:#7dd3fc;font-family:monospace;letter-spacing:.14em;text-transform:uppercase;opacity:.8;margin-bottom:2px}
+  .report-hdr-name{font-size:1.05rem;font-weight:700;color:#eef3f8}
+  .report-close{margin-left:auto;background:none;border:1px solid rgba(125,211,252,.25);color:#7dd3fc;width:28px;height:28px;border-radius:6px;cursor:pointer;font-size:.9rem;display:grid;place-items:center;transition:background 140ms;flex-shrink:0}
+  .report-close:hover{background:rgba(125,211,252,.12);border-color:#7dd3fc}
+  .report-body{padding:20px 24px;overflow-y:auto;flex:1;scrollbar-width:thin;scrollbar-color:#1a3a5a transparent;position:relative;z-index:2}
+  .report-body h1,.report-body h2,.report-body h3{color:#7dd3fc;margin:1.2em 0 .5em;line-height:1.3}
+  .report-body h1{font-size:1.3rem;border-bottom:1px solid rgba(125,211,252,.2);padding-bottom:.4em}
+  .report-body h2{font-size:1.05rem} .report-body h3{font-size:.9rem;color:#b8c7d8}
+  .report-body p{color:#b8c7d8;line-height:1.7;margin-bottom:.8em;font-size:.87rem}
+  .report-body ul,.report-body ol{color:#b8c7d8;padding-left:1.5em;margin-bottom:.8em}
+  .report-body li{font-size:.87rem;line-height:1.6;margin-bottom:.2em}
+  .report-body table{width:100%;border-collapse:collapse;margin-bottom:1em;font-size:.81rem}
+  .report-body th{background:rgba(125,211,252,.1);color:#7dd3fc;padding:7px 10px;text-align:left;border:1px solid rgba(125,211,252,.2)}
+  .report-body td{color:#b8c7d8;padding:6px 10px;border:1px solid rgba(219,234,254,.08)}
+  .report-body code{background:rgba(125,211,252,.08);color:#7dd3fc;padding:1px 5px;border-radius:3px;font-size:.82em;font-family:monospace}
+  .report-body pre{background:rgba(0,0,0,.4);border:1px solid rgba(125,211,252,.15);border-radius:6px;padding:12px;margin-bottom:.8em;overflow-x:auto}
+  .report-body strong{color:#eef3f8} .report-body a{color:#7dd3fc;text-decoration:none}
+  .report-body hr{border:none;border-top:1px solid rgba(219,234,254,.12);margin:1.5em 0}
+  .report-footer{padding:10px 18px;border-top:1px solid rgba(125,211,252,.1);font-family:monospace;font-size:.62rem;color:#1a3a5a;flex-shrink:0;display:flex;justify-content:space-between;position:relative;z-index:2}
+  .spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(125,211,252,.3);border-top-color:#7dd3fc;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:4px}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .lit-btn{font-size:.72rem;color:#7dd3fc;text-decoration:none;padding:3px 10px;border:1px solid rgba(125,211,252,.22);border-radius:4px;transition:background 140ms;white-space:nowrap;font-family:monospace}
 </style>
 </head>
 <body>
+<nav>
+  <a class="nav-home" href="/">
+    <span class="nav-mark">HH</span>
+    <span>Hiko Hong</span>
+  </a>
+  <span style="color:#3a4a5a;font-size:.85rem">/ DeepSignal</span>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html">Search</a>
+    <button class="nav-link" onclick="reportOpen()">Report</button>
+  </div>
+</nav>
+<div id="report-overlay" onclick="if(event.target===this)reportClose()">
+  <div id="report-modal" role="dialog" aria-modal="true">
+    <div class="report-hdr">
+      <span style="font-size:1.4rem;opacity:.7;flex-shrink:0">◈</span>
+      <div>
+        <div class="report-eyebrow">⬡ DeepSignal · Pipeline Analysis Report</div>
+        <div class="report-hdr-name">Latest Run Report</div>
+      </div>
+      <button class="report-close" onclick="reportClose()" aria-label="Close">✕</button>
+    </div>
+    <div class="report-body" id="report-body"></div>
+    <div class="report-footer">
+      <span>report.md</span><span id="report-footer-ts"></span>
+    </div>
+  </div>
+</div>
+<div class="gallery-hdr">
 <h1>DeepSignal — Sky Image Gallery</h1>
 <div class="subtitle">Generated 2026-05-30 04:21 UTC &nbsp;·&nbsp; 247 targets &nbsp;·&nbsp; 247 sky images via Hips2Fits CDN</div>
 <div class="stats">
@@ -83,7 +149,8 @@
   <div class="stat"><div class="stat-n" style="color:#9ca3af">0</div><div class="stat-l">Tier 3 &lt;50</div></div>
   <div class="stat"><div class="stat-n">247</div><div class="stat-l">Total</div></div>
 </div>
-<div class="grid">
+</div>
+<div class="grid" style="padding:0 24px 24px">
     <div class="card">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=26.0170+-15.9375&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
         <div class="card-img">
@@ -6013,5 +6080,37 @@
 
     </div></div>
 <footer>DeepSignal · Sky data via CDS Hips2Fits CDN · No local images required</footer>
+<script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+<script>
+async function reportOpen() {
+  document.getElementById("report-body").innerHTML =
+    '<div style="font-family:monospace;font-size:.73rem;color:#3a6a8a;padding:24px"><span class="spinner"></span> LOADING REPORT…</div>';
+  document.getElementById("report-footer-ts").textContent = "";
+  document.getElementById("report-overlay").classList.add("open");
+  document.body.style.overflow = "hidden";
+  const t0 = Date.now();
+  try {
+    const resp = await fetch("report.md");
+    if (!resp.ok) throw new Error("HTTP " + resp.status);
+    let md = await resp.text();
+    md = md.replace(/!\[[^\]]*\]\([^)]*\)/g, "").replace(/<img[^>]*>/gi, "");
+    document.getElementById("report-footer-ts").textContent =
+      ((Date.now()-t0)/1000).toFixed(1) + "s";
+    document.getElementById("report-body").innerHTML =
+      typeof marked !== "undefined" ? marked.parse(md)
+      : '<pre style="white-space:pre-wrap;color:#b8c7d8;font-size:.82rem">' + md.replace(/</g,"&lt;") + "</pre>";
+  } catch(err) {
+    document.getElementById("report-body").innerHTML =
+      '<div style="text-align:center;color:#2a4a6a;font-family:monospace;font-size:.82rem;padding:48px 0">[ FAILED TO LOAD ]<br>' +
+      '<span style="font-size:.72rem">' + err.message + '</span><br><br>' +
+      '<a style="font-size:.72rem;color:#7dd3fc;text-decoration:none;padding:3px 10px;border:1px solid rgba(125,211,252,.22);border-radius:4px" href="report.md" target="_blank">↗ Open raw report.md</a></div>';
+  }
+}
+function reportClose() {
+  document.getElementById("report-overlay").classList.remove("open");
+  document.body.style.overflow = "";
+}
+document.addEventListener("keydown", e => { if (e.key === "Escape") reportClose(); });
+</script>
 </body>
 </html>
