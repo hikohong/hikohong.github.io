@@ -832,6 +832,11 @@ function renderHighlights() {
         ${coordsTxt}
         ${reasonsHtml}
         ${extLinksHtml}
+        <div style="margin-top:8px" onclick="event.stopPropagation()">
+          <button class="btn-papers" onclick="litOpen('${safeN}')">
+            <span class="papers-dot"></span> Search Literature
+          </button>
+        </div>
         ${countHtml}
       </div>
       ${multi ? `<div class="card-detections">${detectionRows}</div>` : ""}
