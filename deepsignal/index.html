@@ -145,7 +145,7 @@ footer a{color:#4a6a8a;text-decoration:none}
   <div class="stat-chip">Pipeline candidates: <strong id="stat-n">247</strong></div>
   <div class="stat-chip">Data sources: <strong>10</strong></div>
   <div class="stat-chip">Detection algorithms: <strong>14</strong></div>
-  <div class="stat-chip">Last updated: <strong>2026-05-30 04:51 UTC</strong></div>
+  <div class="stat-chip">Last updated: <strong>2026-05-30 05:22 UTC</strong></div>
 </div>
 
 <div id="result-panel">
@@ -523,8 +523,8 @@ function showResult(resolved, pipelineMatches) {
 
   const r   = resolved || {};
   const p   = pipelineMatches.length ? mergePipelineMatches(pipelineMatches) : {};
-  const ra  = r.ra  ?? candidateRa(p);
-  const dec = r.dec ?? candidateDec(p);
+  const ra  = (r.ra  != null && !isNaN(r.ra))  ? r.ra  : candidateRa(p);
+  const dec = (r.dec != null && !isNaN(r.dec)) ? r.dec : candidateDec(p);
   const name = r.name || p.target_name || "Unknown";
   const tier = p.tier;
   const score = p.candidacy_score;
@@ -578,6 +578,46 @@ function showResult(resolved, pipelineMatches) {
     </div>`;
 }
 
+// ── Show multiple pipeline matches as selectable cards ────────────────────────
+function showMultipleResults(groups) {
+  const panel = document.getElementById("result-panel");
+  const card  = document.getElementById("result-card");
+  panel.style.display = "block";
+  panel.scrollIntoView({ behavior: "smooth", block: "start" });
+
+  const sorted = [...groups].sort((a, b) => (b.candidacy_score || 0) - (a.candidacy_score || 0));
+
+  const cardsHtml = sorted.map(c => {
+    const name  = c.target_name || "";
+    const ra    = candidateRa(c);
+    const dec   = candidateDec(c);
+    const img   = (ra != null && !isNaN(ra))
+      ? `<img src="${skyUrl(ra, dec, 0.5)}" alt="${name}" loading="lazy" onerror="this.style.display='none'">`
+      : "";
+    const tc      = TIER_COLORS[c.tier] || "#6b7280";
+    const badge   = c.tier ? `<span class="tier-badge" style="background:${tc}">Tier ${c.tier}</span>` : "";
+    const methods = (c._all_methods || []).filter(Boolean);
+    const mtags   = methods.slice(0, 2).map(m => `<span class="tag tag-method" style="font-size:.65rem">${m}</span>`).join("");
+    const coordsTxt = (ra != null && !isNaN(ra))
+      ? `<div class="card-coords">RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}°</div>` : "";
+    const safeN   = name.replace(/'/g, "\\'");
+    return `<div class="card" onclick="selectCandidate('${safeN}')">
+      <div class="card-img">${img}${badge}</div>
+      <div class="card-body">
+        <div class="card-name">${name}</div>
+        <div class="card-tags">${mtags}</div>
+        <div class="card-score">Score: <strong>${c.candidacy_score || "—"}</strong></div>
+        ${coordsTxt}
+      </div>
+    </div>`;
+  }).join("");
+
+  card.innerHTML = `<div style="padding:16px">
+    <div style="margin-bottom:12px;color:#8ab4c8;font-size:.85rem">${sorted.length} matching targets — click to view details</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;max-height:70vh;overflow-y:auto;padding-right:4px">${cardsHtml}</div>
+  </div>`;
+}
+
 // ── Main search handler ───────────────────────────────────────────────────────
 async function doSearch() {
   const q = document.getElementById("q").value.trim();
@@ -590,6 +630,14 @@ async function doSearch() {
   panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
 
   const pipelineMatches = searchCatalog(q);
+  const groups = groupCatalogByTarget(pipelineMatches);
+
+  // Multiple unique targets match → show selectable grid, skip external resolution
+  if (groups.length > 1) {
+    showMultipleResults(groups);
+    return;
+  }
+
   let resolved = null;
 
   // 1. Sesame (meta-resolver: SIMBAD + NED + VizieR)
