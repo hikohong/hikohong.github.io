@@ -176,7 +176,7 @@ footer a{color:#4a6a8a;text-decoration:none}
   <div class="stat-chip">Pipeline candidates: <strong id="stat-n">80</strong></div>
   <div class="stat-chip">Data sources: <strong>10</strong></div>
   <div class="stat-chip">Detection algorithms: <strong>14</strong></div>
-  <div class="stat-chip">Last updated: <strong>2026-05-30 06:45 UTC</strong></div>
+  <div class="stat-chip">Last updated: <strong>2026-05-30 09:30 UTC</strong></div>
 </div>
 
 <div id="result-panel">
@@ -817,52 +817,61 @@ async function _litFetch(name) {
   const footer = document.getElementById("lit-footer-ts");
   const t0 = Date.now();
   try {
-    // arXiv Atom API — CORS-enabled, no key required
-    const q   = `(ti:"${name}" OR abs:"${name}") AND cat:astro-ph*`;
-    const url = `https://export.arxiv.org/api/query?search_query=${encodeURIComponent(q)}&sortBy=relevance&sortOrder=descending&max_results=10`;
-    const resp = await fetch(url, { signal: AbortSignal.timeout(12000) });
-    if (!resp.ok) throw new Error(`arXiv HTTP ${resp.status}`);
-    const xml  = new DOMParser().parseFromString(await resp.text(), "application/xml");
-    const entries = [...xml.querySelectorAll("entry")];
+    // Semantic Scholar API — CORS-enabled, no key required, indexes arXiv
+    const fields = "title,authors,year,abstract,externalIds,url";
+    const url = `https://api.semanticscholar.org/graph/v1/paper/search?query=${encodeURIComponent(name + " astronomy")}&fields=${fields}&limit=10`;
+    const resp = await fetch(url, {
+      headers: { "Accept": "application/json" },
+      signal: AbortSignal.timeout(15000)
+    });
+    if (!resp.ok) throw new Error(`Semantic Scholar HTTP ${resp.status}`);
+    const data = await resp.json();
+    const papers = data.data || [];
     const elapsed = ((Date.now() - t0) / 1000).toFixed(1);
-    footer.textContent = `${elapsed}s · arXiv Atom API`;
+    footer.textContent = `${elapsed}s · Semantic Scholar`;
 
-    if (!entries.length) {
+    if (!papers.length) {
       body.innerHTML = `<div class="lit-empty">[ NO RECORDS FOUND ]<br>
-        <span style="font-size:.72rem">No astro-ph papers matched "${name}"</span><br><br>
-        <a class="lit-btn" href="https://ui.adsabs.harvard.edu/search/q=object%3A${encodeURIComponent(name)}&sort=date+desc" target="_blank" rel="noopener">↗ Try NASA ADS directly</a></div>`;
+        <span style="font-size:.72rem">No papers matched "${name}"</span><br><br>
+        <a class="lit-btn" href="https://ui.adsabs.harvard.edu/search/q=object%3A${encodeURIComponent(name)}&sort=date+desc" target="_blank" rel="noopener">↗ Try NASA ADS</a> &nbsp;
+        <a class="lit-btn" href="https://arxiv.org/search/?searchtype=all&query=${encodeURIComponent(name)}" target="_blank" rel="noopener">↗ arXiv Search</a></div>`;
       return;
     }
 
-    const statusLine = `<div class="lit-status">▸ ${entries.length} record${entries.length>1?"s":""} · astro-ph · sorted by relevance</div>`;
-    const cards = entries.map((e, i) => {
-      const title    = e.querySelector("title")?.textContent?.trim() || "—";
-      const authors  = [...e.querySelectorAll("author name")].slice(0,3).map(a=>a.textContent.trim());
-      const authorTxt = authors.join(", ") + (authors.length===3 ? " et al." : "");
-      const published = (e.querySelector("published")?.textContent||"").slice(0,10);
-      const abstract  = e.querySelector("summary")?.textContent?.trim() || "";
-      const idUrl     = e.querySelector("id")?.textContent?.trim() || "";
-      const arxivId   = idUrl.replace(/https?:\/\/arxiv\.org\/abs\//,"").trim();
-      const cats      = [...e.querySelectorAll("category")].map(c=>c.getAttribute("term")).filter(Boolean).slice(0,2).join(" · ");
+    const statusLine = `<div class="lit-status">▸ ${papers.length} record${papers.length>1?"s":""} · Semantic Scholar · sorted by relevance</div>`;
+    const cards = papers.map((p, i) => {
+      const title     = p.title || "—";
+      const allAuth   = p.authors || [];
+      const authorTxt = allAuth.slice(0,3).map(a=>a.name).join(", ") + (allAuth.length>3 ? " et al." : "");
+      const year      = p.year ? String(p.year) : "";
+      const abstract  = p.abstract || "";
+      const arxivId   = p.externalIds?.ArXiv;
+      const doi       = p.externalIds?.DOI;
+      const semUrl    = p.url || "";
+      const links = [
+        arxivId ? `<a class="lit-btn" href="https://arxiv.org/abs/${arxivId}" target="_blank" rel="noopener">↗ arXiv:${arxivId}</a>` : "",
+        arxivId ? `<a class="lit-btn" href="https://ui.adsabs.harvard.edu/abs/arXiv:${arxivId}" target="_blank" rel="noopener">NASA ADS</a>` : "",
+        !arxivId && semUrl ? `<a class="lit-btn" href="${semUrl}" target="_blank" rel="noopener">↗ Semantic Scholar</a>` : "",
+        !arxivId && doi ? `<a class="lit-btn" href="https://doi.org/${doi}" target="_blank" rel="noopener">DOI</a>` : "",
+      ].filter(Boolean).join("");
       return `<div class="lit-paper">
         <div class="lit-paper-num">#${i+1}</div>
         <div class="lit-title">${title}</div>
-        <div class="lit-meta">${authorTxt} &nbsp;·&nbsp; ${published} &nbsp;·&nbsp; ${cats}</div>
+        <div class="lit-meta">${authorTxt}${year ? " &nbsp;·&nbsp; " + year : ""}</div>
         <div class="lit-abstract">${abstract}</div>
-        <div class="lit-actions">
-          <a class="lit-btn" href="https://arxiv.org/abs/${arxivId}" target="_blank" rel="noopener">↗ arXiv:${arxivId}</a>
-          <a class="lit-btn" href="https://ui.adsabs.harvard.edu/abs/arXiv:${arxivId}" target="_blank" rel="noopener">NASA ADS</a>
-        </div>
+        <div class="lit-actions">${links}</div>
       </div>`;
     }).join("");
     body.innerHTML = statusLine + cards;
   } catch (err) {
     footer.textContent = `error · ${((Date.now()-t0)/1000).toFixed(1)}s`;
-    body.innerHTML = `<div class="lit-empty">[ LINK ERROR ]<br>
+    body.innerHTML = `<div class="lit-empty">[ NETWORK ERROR ]<br>
       <span style="font-size:.72rem">${err.message}</span><br><br>
-      <a class="lit-btn" href="https://ui.adsabs.harvard.edu/search/q=object%3A${encodeURIComponent(name)}&sort=date+desc" target="_blank" rel="noopener">↗ Search NASA ADS</a>
+      <a class="lit-btn" href="https://ui.adsabs.harvard.edu/search/q=object%3A${encodeURIComponent(name)}&sort=date+desc" target="_blank" rel="noopener">↗ NASA ADS</a>
       &nbsp;
-      <a class="lit-btn" href="https://arxiv.org/search/?searchtype=all&query=${encodeURIComponent(name)}&start=0" target="_blank" rel="noopener">↗ arXiv Search</a>
+      <a class="lit-btn" href="https://arxiv.org/search/?searchtype=all&query=${encodeURIComponent(name)}" target="_blank" rel="noopener">↗ arXiv Search</a>
+      &nbsp;
+      <a class="lit-btn" href="https://www.semanticscholar.org/search?q=${encodeURIComponent(name)}&sort=Relevance" target="_blank" rel="noopener">↗ Semantic Scholar</a>
     </div>`;
   }
 }
