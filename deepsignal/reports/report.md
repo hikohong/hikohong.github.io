@@ -1,6 +1,6 @@
 # DeepSignal SETI Candidate Report
 
-**Generated:** 2026-05-29 16:31 UTC
+**Generated:** 2026-05-30 04:20 UTC
 **Pipeline version:** 2.0.0
 
 ## Executive Summary
@@ -22,7 +22,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### Kepler-93 — Score 90/100
 
-![Kepler-93 sky field — DSS2 Optical](../images/DS-0003_Kepler-93.jpg)
+![Kepler-93 sky field — DSS2 Optical](images/DS-0003_Kepler-93.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=291.4181+38.6723&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=291.4181+38.6723&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=291.4181+38.6723&fov=0.5&survey=P/2MASS/color)*
 
@@ -41,7 +41,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### HD 208487 — Score 90/100
 
-![HD 208487 sky field — DSS2 Optical](../images/DS-0004_HD_208487.jpg)
+![HD 208487 sky field — DSS2 Optical](images/DS-0004_HD_208487.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=329.3332+-37.7641&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=329.3332+-37.7641&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=329.3332+-37.7641&fov=0.5&survey=P/2MASS/color)*
 
@@ -60,7 +60,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### Gliese 667C — Score 90/100
 
-![Gliese 667C sky field — DSS2 Optical](../images/DS-0005_Gliese_667C.jpg)
+![Gliese 667C sky field — DSS2 Optical](images/DS-0005_Gliese_667C.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=259.7488+-34.9977&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=259.7488+-34.9977&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=259.7488+-34.9977&fov=0.5&survey=P/2MASS/color)*
 
@@ -79,7 +79,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### 55 Cnc — Score 80/100
 
-![55 Cnc sky field — DSS2 Optical](../images/DS-0014_55_Cnc.jpg)
+![55 Cnc sky field — DSS2 Optical](images/DS-0014_55_Cnc.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=133.1468+28.3298&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=133.1468+28.3298&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=133.1468+28.3298&fov=0.5&survey=P/2MASS/color)*
 
@@ -97,7 +97,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### GJ 1214 — Score 80/100
 
-![GJ 1214 sky field — DSS2 Optical](../images/DS-0015_GJ_1214.jpg)
+![GJ 1214 sky field — DSS2 Optical](images/DS-0015_GJ_1214.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=258.8314+4.9607&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=258.8314+4.9607&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=258.8314+4.9607&fov=0.5&survey=P/2MASS/color)*
 
@@ -115,7 +115,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### GJ 1214 — Score 80/100
 
-![GJ 1214 sky field — DSS2 Optical](../images/DS-0015_GJ_1214.jpg)
+![GJ 1214 sky field — DSS2 Optical](images/DS-0015_GJ_1214.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=258.8314+4.9607&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=258.8314+4.9607&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=258.8314+4.9607&fov=0.5&survey=P/2MASS/color)*
 
@@ -133,7 +133,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### HD 136352 — Score 80/100
 
-![HD 136352 sky field — DSS2 Optical](../images/DS-0006_HD_136352.jpg)
+![HD 136352 sky field — DSS2 Optical](images/DS-0006_HD_136352.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/2MASS/color)*
 
@@ -151,7 +151,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### HD 136352 — Score 80/100
 
-![HD 136352 sky field — DSS2 Optical](../images/DS-0006_HD_136352.jpg)
+![HD 136352 sky field — DSS2 Optical](images/DS-0006_HD_136352.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/2MASS/color)*
 
@@ -169,7 +169,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### HD 136352 — Score 80/100
 
-![HD 136352 sky field — DSS2 Optical](../images/DS-0006_HD_136352.jpg)
+![HD 136352 sky field — DSS2 Optical](images/DS-0006_HD_136352.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/2MASS/color)*
 
@@ -187,7 +187,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### HD 136352 — Score 80/100
 
-![HD 136352 sky field — DSS2 Optical](../images/DS-0006_HD_136352.jpg)
+![HD 136352 sky field — DSS2 Optical](images/DS-0006_HD_136352.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/2MASS/color)*
 
@@ -205,7 +205,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### HD 136352 — Score 80/100
 
-![HD 136352 sky field — DSS2 Optical](../images/DS-0006_HD_136352.jpg)
+![HD 136352 sky field — DSS2 Optical](images/DS-0006_HD_136352.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/2MASS/color)*
 
@@ -223,7 +223,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### TOI-1468 — Score 80/100
 
-![TOI-1468 sky field — DSS2 Optical](../images/DS-0016_TOI-1468.jpg)
+![TOI-1468 sky field — DSS2 Optical](images/DS-0016_TOI-1468.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=16.6539+19.2249&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=16.6539+19.2249&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=16.6539+19.2249&fov=0.5&survey=P/2MASS/color)*
 
@@ -241,7 +241,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### TOI-2018 — Score 80/100
 
-![TOI-2018 sky field — DSS2 Optical](../images/DS-0017_TOI-2018.jpg)
+![TOI-2018 sky field — DSS2 Optical](images/DS-0017_TOI-2018.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=229.8374+29.2079&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=229.8374+29.2079&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=229.8374+29.2079&fov=0.5&survey=P/2MASS/color)*
 
@@ -259,7 +259,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### TOI-2018 — Score 80/100
 
-![TOI-2018 sky field — DSS2 Optical](../images/DS-0017_TOI-2018.jpg)
+![TOI-2018 sky field — DSS2 Optical](images/DS-0017_TOI-2018.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=229.8374+29.2079&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=229.8374+29.2079&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=229.8374+29.2079&fov=0.5&survey=P/2MASS/color)*
 
@@ -277,7 +277,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### TOI-2427 — Score 80/100
 
-![TOI-2427 sky field — DSS2 Optical](../images/DS-0018_TOI-2427.jpg)
+![TOI-2427 sky field — DSS2 Optical](images/DS-0018_TOI-2427.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/2MASS/color)*
 
@@ -295,7 +295,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### TOI-2427 — Score 80/100
 
-![TOI-2427 sky field — DSS2 Optical](../images/DS-0018_TOI-2427.jpg)
+![TOI-2427 sky field — DSS2 Optical](images/DS-0018_TOI-2427.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/2MASS/color)*
 
@@ -313,7 +313,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### TOI-700 — Score 80/100
 
-![TOI-700 sky field — DSS2 Optical](../images/DS-0019_TOI-700.jpg)
+![TOI-700 sky field — DSS2 Optical](images/DS-0019_TOI-700.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=97.0957+-65.5786&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=97.0957+-65.5786&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=97.0957+-65.5786&fov=0.5&survey=P/2MASS/color)*
 
@@ -331,7 +331,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### TOI-620 — Score 80/100
 
-![TOI-620 sky field — DSS2 Optical](../images/DS-0020_TOI-620.jpg)
+![TOI-620 sky field — DSS2 Optical](images/DS-0020_TOI-620.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=142.1734+-12.1672&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=142.1734+-12.1672&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=142.1734+-12.1672&fov=0.5&survey=P/2MASS/color)*
 
@@ -553,7 +553,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### HD 235088 — Score 80/100
 
-![HD 235088 sky field — DSS2 Optical](../images/DS-0013_HD_235088.jpg)
+![HD 235088 sky field — DSS2 Optical](images/DS-0013_HD_235088.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=300.6155+53.3774&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=300.6155+53.3774&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=300.6155+53.3774&fov=0.5&survey=P/2MASS/color)*
 
@@ -571,7 +571,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### HD 235088 — Score 80/100
 
-![HD 235088 sky field — DSS2 Optical](../images/DS-0013_HD_235088.jpg)
+![HD 235088 sky field — DSS2 Optical](images/DS-0013_HD_235088.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=300.6155+53.3774&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=300.6155+53.3774&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=300.6155+53.3774&fov=0.5&survey=P/2MASS/color)*
 
@@ -1422,7 +1422,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### Kepler-93 — Score 80/100
 
-![Kepler-93 sky field — DSS2 Optical](../images/DS-0003_Kepler-93.jpg)
+![Kepler-93 sky field — DSS2 Optical](images/DS-0003_Kepler-93.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=291.4181+38.6723&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=291.4181+38.6723&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=291.4181+38.6723&fov=0.5&survey=P/2MASS/color)*
 
@@ -1440,7 +1440,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### Kepler-93 — Score 80/100
 
-![Kepler-93 sky field — DSS2 Optical](../images/DS-0003_Kepler-93.jpg)
+![Kepler-93 sky field — DSS2 Optical](images/DS-0003_Kepler-93.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=291.4181+38.6723&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=291.4181+38.6723&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=291.4181+38.6723&fov=0.5&survey=P/2MASS/color)*
 
@@ -1458,7 +1458,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### Kepler-93 — Score 80/100
 
-![Kepler-93 sky field — DSS2 Optical](../images/DS-0003_Kepler-93.jpg)
+![Kepler-93 sky field — DSS2 Optical](images/DS-0003_Kepler-93.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=291.4181+38.6723&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=291.4181+38.6723&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=291.4181+38.6723&fov=0.5&survey=P/2MASS/color)*
 
@@ -1595,7 +1595,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### eps Ind A — Score 80/100
 
-![eps Ind A sky field — DSS2 Optical](../images/DS-0007_eps_Ind_A.jpg)
+![eps Ind A sky field — DSS2 Optical](images/DS-0007_eps_Ind_A.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=330.8714+-56.7969&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=330.8714+-56.7969&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=330.8714+-56.7969&fov=0.5&survey=P/2MASS/color)*
 
@@ -1613,7 +1613,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### eps Ind A — Score 80/100
 
-![eps Ind A sky field — DSS2 Optical](../images/DS-0007_eps_Ind_A.jpg)
+![eps Ind A sky field — DSS2 Optical](images/DS-0007_eps_Ind_A.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=330.8714+-56.7969&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=330.8714+-56.7969&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=330.8714+-56.7969&fov=0.5&survey=P/2MASS/color)*
 
@@ -1631,7 +1631,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### eps Ind A — Score 80/100
 
-![eps Ind A sky field — DSS2 Optical](../images/DS-0007_eps_Ind_A.jpg)
+![eps Ind A sky field — DSS2 Optical](images/DS-0007_eps_Ind_A.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=330.8714+-56.7969&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=330.8714+-56.7969&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=330.8714+-56.7969&fov=0.5&survey=P/2MASS/color)*
 
@@ -1649,7 +1649,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### eps Ind A — Score 90/100
 
-![eps Ind A sky field — DSS2 Optical](../images/DS-0007_eps_Ind_A.jpg)
+![eps Ind A sky field — DSS2 Optical](images/DS-0007_eps_Ind_A.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=330.8714+-56.7969&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=330.8714+-56.7969&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=330.8714+-56.7969&fov=0.5&survey=P/2MASS/color)*
 
@@ -1668,7 +1668,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### eps Ind A — Score 80/100
 
-![eps Ind A sky field — DSS2 Optical](../images/DS-0007_eps_Ind_A.jpg)
+![eps Ind A sky field — DSS2 Optical](images/DS-0007_eps_Ind_A.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=330.8714+-56.7969&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=330.8714+-56.7969&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=330.8714+-56.7969&fov=0.5&survey=P/2MASS/color)*
 
@@ -1686,7 +1686,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### eps Ind A — Score 80/100
 
-![eps Ind A sky field — DSS2 Optical](../images/DS-0007_eps_Ind_A.jpg)
+![eps Ind A sky field — DSS2 Optical](images/DS-0007_eps_Ind_A.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=330.8714+-56.7969&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=330.8714+-56.7969&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=330.8714+-56.7969&fov=0.5&survey=P/2MASS/color)*
 
@@ -1806,7 +1806,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### 55 Cnc — Score 80/100
 
-![55 Cnc sky field — DSS2 Optical](../images/DS-0014_55_Cnc.jpg)
+![55 Cnc sky field — DSS2 Optical](images/DS-0014_55_Cnc.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=133.1468+28.3298&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=133.1468+28.3298&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=133.1468+28.3298&fov=0.5&survey=P/2MASS/color)*
 
@@ -1824,7 +1824,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### 55 Cnc — Score 80/100
 
-![55 Cnc sky field — DSS2 Optical](../images/DS-0014_55_Cnc.jpg)
+![55 Cnc sky field — DSS2 Optical](images/DS-0014_55_Cnc.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=133.1468+28.3298&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=133.1468+28.3298&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=133.1468+28.3298&fov=0.5&survey=P/2MASS/color)*
 
@@ -1842,7 +1842,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### 55 Cnc — Score 80/100
 
-![55 Cnc sky field — DSS2 Optical](../images/DS-0014_55_Cnc.jpg)
+![55 Cnc sky field — DSS2 Optical](images/DS-0014_55_Cnc.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=133.1468+28.3298&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=133.1468+28.3298&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=133.1468+28.3298&fov=0.5&survey=P/2MASS/color)*
 
@@ -1860,7 +1860,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### 55 Cnc — Score 80/100
 
-![55 Cnc sky field — DSS2 Optical](../images/DS-0014_55_Cnc.jpg)
+![55 Cnc sky field — DSS2 Optical](images/DS-0014_55_Cnc.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=133.1468+28.3298&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=133.1468+28.3298&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=133.1468+28.3298&fov=0.5&survey=P/2MASS/color)*
 
@@ -1878,7 +1878,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### 55 Cnc — Score 80/100
 
-![55 Cnc sky field — DSS2 Optical](../images/DS-0014_55_Cnc.jpg)
+![55 Cnc sky field — DSS2 Optical](images/DS-0014_55_Cnc.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=133.1468+28.3298&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=133.1468+28.3298&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=133.1468+28.3298&fov=0.5&survey=P/2MASS/color)*
 
@@ -1930,7 +1930,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### HD 136352 — Score 80/100
 
-![HD 136352 sky field — DSS2 Optical](../images/DS-0006_HD_136352.jpg)
+![HD 136352 sky field — DSS2 Optical](images/DS-0006_HD_136352.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/2MASS/color)*
 
@@ -1948,7 +1948,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### HD 136352 — Score 80/100
 
-![HD 136352 sky field — DSS2 Optical](../images/DS-0006_HD_136352.jpg)
+![HD 136352 sky field — DSS2 Optical](images/DS-0006_HD_136352.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/2MASS/color)*
 
@@ -1966,7 +1966,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### HD 136352 — Score 80/100
 
-![HD 136352 sky field — DSS2 Optical](../images/DS-0006_HD_136352.jpg)
+![HD 136352 sky field — DSS2 Optical](images/DS-0006_HD_136352.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/2MASS/color)*
 
@@ -1984,7 +1984,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### HD 136352 — Score 80/100
 
-![HD 136352 sky field — DSS2 Optical](../images/DS-0006_HD_136352.jpg)
+![HD 136352 sky field — DSS2 Optical](images/DS-0006_HD_136352.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/2MASS/color)*
 
@@ -2002,7 +2002,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### HD 136352 — Score 80/100
 
-![HD 136352 sky field — DSS2 Optical](../images/DS-0006_HD_136352.jpg)
+![HD 136352 sky field — DSS2 Optical](images/DS-0006_HD_136352.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/2MASS/color)*
 
@@ -2020,7 +2020,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### HD 136352 — Score 80/100
 
-![HD 136352 sky field — DSS2 Optical](../images/DS-0006_HD_136352.jpg)
+![HD 136352 sky field — DSS2 Optical](images/DS-0006_HD_136352.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/2MASS/color)*
 
@@ -2038,7 +2038,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### HD 136352 — Score 90/100
 
-![HD 136352 sky field — DSS2 Optical](../images/DS-0006_HD_136352.jpg)
+![HD 136352 sky field — DSS2 Optical](images/DS-0006_HD_136352.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/2MASS/color)*
 
@@ -3043,7 +3043,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### HD 73583 — Score 90/100
 
-![HD 73583 sky field — DSS2 Optical](../images/DS-0008_HD_73583.jpg)
+![HD 73583 sky field — DSS2 Optical](images/DS-0008_HD_73583.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=129.6883+-13.2565&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=129.6883+-13.2565&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=129.6883+-13.2565&fov=0.5&survey=P/2MASS/color)*
 
@@ -3113,7 +3113,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### TOI-431 — Score 90/100
 
-![TOI-431 sky field — DSS2 Optical](../images/DS-0009_TOI-431.jpg)
+![TOI-431 sky field — DSS2 Optical](images/DS-0009_TOI-431.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=83.2693+-26.7239&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=83.2693+-26.7239&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=83.2693+-26.7239&fov=0.5&survey=P/2MASS/color)*
 
@@ -3132,7 +3132,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### TOI-431 — Score 80/100
 
-![TOI-431 sky field — DSS2 Optical](../images/DS-0009_TOI-431.jpg)
+![TOI-431 sky field — DSS2 Optical](images/DS-0009_TOI-431.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=83.2693+-26.7239&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=83.2693+-26.7239&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=83.2693+-26.7239&fov=0.5&survey=P/2MASS/color)*
 
@@ -3558,7 +3558,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### HD 235088 — Score 80/100
 
-![HD 235088 sky field — DSS2 Optical](../images/DS-0013_HD_235088.jpg)
+![HD 235088 sky field — DSS2 Optical](images/DS-0013_HD_235088.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=300.6155+53.3774&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=300.6155+53.3774&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=300.6155+53.3774&fov=0.5&survey=P/2MASS/color)*
 
@@ -3576,7 +3576,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### HD 235088 — Score 80/100
 
-![HD 235088 sky field — DSS2 Optical](../images/DS-0013_HD_235088.jpg)
+![HD 235088 sky field — DSS2 Optical](images/DS-0013_HD_235088.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=300.6155+53.3774&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=300.6155+53.3774&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=300.6155+53.3774&fov=0.5&survey=P/2MASS/color)*
 
@@ -3764,7 +3764,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### HD 208487 — Score 80/100
 
-![HD 208487 sky field — DSS2 Optical](../images/DS-0004_HD_208487.jpg)
+![HD 208487 sky field — DSS2 Optical](images/DS-0004_HD_208487.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=329.3332+-37.7641&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=329.3332+-37.7641&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=329.3332+-37.7641&fov=0.5&survey=P/2MASS/color)*
 
@@ -3782,7 +3782,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### HD 208487 — Score 80/100
 
-![HD 208487 sky field — DSS2 Optical](../images/DS-0004_HD_208487.jpg)
+![HD 208487 sky field — DSS2 Optical](images/DS-0004_HD_208487.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=329.3332+-37.7641&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=329.3332+-37.7641&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=329.3332+-37.7641&fov=0.5&survey=P/2MASS/color)*
 
@@ -4191,7 +4191,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### Proxima Centauri — Score 80/100
 
-![Proxima Centauri sky field — DSS2 Optical](../images/DS-0010_Proxima_Centauri.jpg)
+![Proxima Centauri sky field — DSS2 Optical](images/DS-0010_Proxima_Centauri.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=217.4288+-62.6793&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=217.4288+-62.6793&fov=0.5&survey=P/DSS2/color) · [GALEX UV](https://aladin.u-strasbg.fr/AladinLite/?target=217.4288+-62.6793&fov=0.5&survey=P/GALEX/color)*
 
@@ -4209,7 +4209,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### Proxima Centauri — Score 80/100
 
-![Proxima Centauri sky field — DSS2 Optical](../images/DS-0010_Proxima_Centauri.jpg)
+![Proxima Centauri sky field — DSS2 Optical](images/DS-0010_Proxima_Centauri.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=217.4288+-62.6793&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=217.4288+-62.6793&fov=0.5&survey=P/DSS2/color) · [GALEX UV](https://aladin.u-strasbg.fr/AladinLite/?target=217.4288+-62.6793&fov=0.5&survey=P/GALEX/color)*
 
@@ -4227,7 +4227,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### Proxima Centauri — Score 80/100
 
-![Proxima Centauri sky field — DSS2 Optical](../images/DS-0010_Proxima_Centauri.jpg)
+![Proxima Centauri sky field — DSS2 Optical](images/DS-0010_Proxima_Centauri.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=217.4288+-62.6793&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=217.4288+-62.6793&fov=0.5&survey=P/DSS2/color) · [GALEX UV](https://aladin.u-strasbg.fr/AladinLite/?target=217.4288+-62.6793&fov=0.5&survey=P/GALEX/color)*
 
@@ -4245,7 +4245,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### Tau Ceti — Score 80/100
 
-![Tau Ceti sky field — DSS2 Optical](../images/DS-0001_Tau_Ceti.jpg)
+![Tau Ceti sky field — DSS2 Optical](images/DS-0001_Tau_Ceti.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=26.0170+-15.9375&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=26.0170+-15.9375&fov=0.5&survey=P/DSS2/color) · [GALEX UV](https://aladin.u-strasbg.fr/AladinLite/?target=26.0170+-15.9375&fov=0.5&survey=P/GALEX/color)*
 
@@ -4263,7 +4263,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### Tau Ceti — Score 80/100
 
-![Tau Ceti sky field — DSS2 Optical](../images/DS-0001_Tau_Ceti.jpg)
+![Tau Ceti sky field — DSS2 Optical](images/DS-0001_Tau_Ceti.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=26.0170+-15.9375&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=26.0170+-15.9375&fov=0.5&survey=P/DSS2/color) · [GALEX UV](https://aladin.u-strasbg.fr/AladinLite/?target=26.0170+-15.9375&fov=0.5&survey=P/GALEX/color)*
 
@@ -4281,7 +4281,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### Epsilon Eridani — Score 80/100
 
-![Epsilon Eridani sky field — DSS2 Optical](../images/DS-0002_Epsilon_Eridani.jpg)
+![Epsilon Eridani sky field — DSS2 Optical](images/DS-0002_Epsilon_Eridani.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=53.2327+-9.4582&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=53.2327+-9.4582&fov=0.5&survey=P/DSS2/color) · [GALEX UV](https://aladin.u-strasbg.fr/AladinLite/?target=53.2327+-9.4582&fov=0.5&survey=P/GALEX/color)*
 
@@ -4299,7 +4299,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### Gliese 667C — Score 80/100
 
-![Gliese 667C sky field — DSS2 Optical](../images/DS-0005_Gliese_667C.jpg)
+![Gliese 667C sky field — DSS2 Optical](images/DS-0005_Gliese_667C.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=259.7488+-34.9977&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=259.7488+-34.9977&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=259.7488+-34.9977&fov=0.5&survey=P/2MASS/color)*
 
@@ -4334,7 +4334,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### Ross 128 — Score 80/100
 
-![Ross 128 sky field — DSS2 Optical](../images/DS-0011_Ross_128.jpg)
+![Ross 128 sky field — DSS2 Optical](images/DS-0011_Ross_128.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=176.9351+0.8048&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=176.9351+0.8048&fov=0.5&survey=P/DSS2/color) · [GALEX UV](https://aladin.u-strasbg.fr/AladinLite/?target=176.9351+0.8048&fov=0.5&survey=P/GALEX/color)*
 
@@ -4352,7 +4352,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### Ross 128 — Score 80/100
 
-![Ross 128 sky field — DSS2 Optical](../images/DS-0011_Ross_128.jpg)
+![Ross 128 sky field — DSS2 Optical](images/DS-0011_Ross_128.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=176.9351+0.8048&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=176.9351+0.8048&fov=0.5&survey=P/DSS2/color) · [GALEX UV](https://aladin.u-strasbg.fr/AladinLite/?target=176.9351+0.8048&fov=0.5&survey=P/GALEX/color)*
 
@@ -4370,7 +4370,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### Proxima Centauri — Score 85/100
 
-![Proxima Centauri sky field — DSS2 Optical](../images/DS-0010_Proxima_Centauri.jpg)
+![Proxima Centauri sky field — DSS2 Optical](images/DS-0010_Proxima_Centauri.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=217.4288+-62.6793&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=217.4288+-62.6793&fov=0.5&survey=P/DSS2/color) · [GALEX UV](https://aladin.u-strasbg.fr/AladinLite/?target=217.4288+-62.6793&fov=0.5&survey=P/GALEX/color)*
 
@@ -4388,7 +4388,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### Tau Ceti — Score 95/100
 
-![Tau Ceti sky field — DSS2 Optical](../images/DS-0001_Tau_Ceti.jpg)
+![Tau Ceti sky field — DSS2 Optical](images/DS-0001_Tau_Ceti.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=26.0170+-15.9375&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=26.0170+-15.9375&fov=0.5&survey=P/DSS2/color) · [GALEX UV](https://aladin.u-strasbg.fr/AladinLite/?target=26.0170+-15.9375&fov=0.5&survey=P/GALEX/color)*
 
@@ -4407,7 +4407,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### Epsilon Eridani — Score 95/100
 
-![Epsilon Eridani sky field — DSS2 Optical](../images/DS-0002_Epsilon_Eridani.jpg)
+![Epsilon Eridani sky field — DSS2 Optical](images/DS-0002_Epsilon_Eridani.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=53.2327+-9.4582&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=53.2327+-9.4582&fov=0.5&survey=P/DSS2/color) · [GALEX UV](https://aladin.u-strasbg.fr/AladinLite/?target=53.2327+-9.4582&fov=0.5&survey=P/GALEX/color)*
 
@@ -4458,7 +4458,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### Ross 128 — Score 85/100
 
-![Ross 128 sky field — DSS2 Optical](../images/DS-0011_Ross_128.jpg)
+![Ross 128 sky field — DSS2 Optical](images/DS-0011_Ross_128.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=176.9351+0.8048&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=176.9351+0.8048&fov=0.5&survey=P/DSS2/color) · [GALEX UV](https://aladin.u-strasbg.fr/AladinLite/?target=176.9351+0.8048&fov=0.5&survey=P/GALEX/color)*
 
@@ -4476,7 +4476,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### TOI-700 — Score 70/100
 
-![TOI-700 sky field — DSS2 Optical](../images/DS-0019_TOI-700.jpg)
+![TOI-700 sky field — DSS2 Optical](images/DS-0019_TOI-700.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=97.0957+-65.5786&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=97.0957+-65.5786&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=97.0957+-65.5786&fov=0.5&survey=P/2MASS/color)*
 
@@ -4621,7 +4621,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### HD 209458b — Score 85/100
 
-![HD 209458b sky field — 2MASS NIR](../images/DS-0012_HD_209458b.jpg)
+![HD 209458b sky field — 2MASS NIR](images/DS-0012_HD_209458b.jpg)
 🔭 **[View in Aladin Sky Atlas (2MASS NIR)](https://aladin.u-strasbg.fr/AladinLite/?target=330.7950+18.8840&fov=0.5&survey=P/2MASS/color)**
 *Multi-wavelength: [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=330.7950+18.8840&fov=0.5&survey=P/2MASS/color) · [WISE 22µm](https://aladin.u-strasbg.fr/AladinLite/?target=330.7950+18.8840&fov=0.5&survey=P/WISE/W4)*
 
@@ -6433,7 +6433,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### HD 235088 — Score 60/100
 
-![HD 235088 sky field — DSS2 Optical](../images/DS-0013_HD_235088.jpg)
+![HD 235088 sky field — DSS2 Optical](images/DS-0013_HD_235088.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=300.6155+53.3774&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=300.6155+53.3774&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=300.6155+53.3774&fov=0.5&survey=P/2MASS/color)*
 
@@ -6453,7 +6453,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### Tau Ceti — Score 60/100
 
-![Tau Ceti sky field — DSS2 Optical](../images/DS-0001_Tau_Ceti.jpg)
+![Tau Ceti sky field — DSS2 Optical](images/DS-0001_Tau_Ceti.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=26.0170+-15.9375&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=26.0170+-15.9375&fov=0.5&survey=P/DSS2/color) · [GALEX UV](https://aladin.u-strasbg.fr/AladinLite/?target=26.0170+-15.9375&fov=0.5&survey=P/GALEX/color)*
 
@@ -6473,7 +6473,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### TOI-2427 — Score 50/100
 
-![TOI-2427 sky field — DSS2 Optical](../images/DS-0018_TOI-2427.jpg)
+![TOI-2427 sky field — DSS2 Optical](images/DS-0018_TOI-2427.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/2MASS/color)*
 
@@ -6598,7 +6598,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### HD 136352 — Score 50/100
 
-![HD 136352 sky field — DSS2 Optical](../images/DS-0006_HD_136352.jpg)
+![HD 136352 sky field — DSS2 Optical](images/DS-0006_HD_136352.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/2MASS/color)*
 
