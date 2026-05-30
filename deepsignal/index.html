@@ -176,7 +176,7 @@ footer a{color:#4a6a8a;text-decoration:none}
   <div class="stat-chip">Pipeline candidates: <strong id="stat-n">80</strong></div>
   <div class="stat-chip">Data sources: <strong>10</strong></div>
   <div class="stat-chip">Detection algorithms: <strong>14</strong></div>
-  <div class="stat-chip">Last updated: <strong>2026-05-30 10:21 UTC</strong></div>
+  <div class="stat-chip">Last updated: <strong>2026-05-30 11:04 UTC</strong></div>
 </div>
 
 <div id="result-panel">
@@ -803,18 +803,48 @@ function selectCandidate(name) {
 }
 
 // ── NASA Images API for solar system objects ──────────────────────────────────
+const NASA_IMG_QUERY = {
+  sun:       "sun full disk visible light SDO HMI continuum photosphere",
+  mercury:   "mercury planet MESSENGER full disk globe",
+  venus:     "venus planet full disk mariner atmosphere",
+  earth:     "earth full disk blue marble ocean",
+  moon:      "moon full disk lunar surface",
+  mars:      "mars globe full disk color MGS",
+  jupiter:   "jupiter planet full disk storm hubble",
+  saturn:    "saturn planet rings cassini full",
+  uranus:    "uranus planet voyager 2 full disk",
+  neptune:   "neptune planet voyager 2 full disk",
+  pluto:     "pluto heart full disk new horizons",
+  ceres:     "ceres dwarf planet dawn full disk",
+  europa:    "europa moon jupiter icy surface",
+  ganymede:  "ganymede moon jupiter surface",
+  callisto:  "callisto moon jupiter crater",
+  io:        "io moon jupiter volcanic surface",
+  titan:     "titan moon saturn cassini",
+  enceladus: "enceladus moon saturn jets south pole",
+  triton:    "triton moon neptune voyager",
+  charon:    "charon pluto moon new horizons",
+  eris:      "eris dwarf planet",
+  makemake:  "makemake dwarf planet",
+  haumea:    "haumea dwarf planet",
+};
+const _HUMAN_IMG = /\b(astronaut|cosmonaut|crew|personnel|scientist|technician|engineer|rover|lander|mission team|team members?|launch|rocket|capsule|press conference|portrait|spacewalk|suited)\b/i;
+
 async function _loadNasaImage(name) {
   const box = document.getElementById("result-img-box");
   if (!box) return;
   try {
-    const resp = await fetch(`https://images-api.nasa.gov/search?q=${encodeURIComponent(name)}&media_type=image`);
+    const key   = name.toLowerCase().replace(/[^a-z]/g, "");
+    const query = NASA_IMG_QUERY[key] || `${name} planet space full disk`;
+    const resp  = await fetch(`https://images-api.nasa.gov/search?q=${encodeURIComponent(query)}&media_type=image`);
     if (!resp.ok) throw new Error(resp.status);
     const data  = await resp.json();
     const items = data?.collection?.items || [];
-    const thumb = items[0]?.links?.find(l => l.rel === "preview")?.href;
+    const item  = items.find(it => !_HUMAN_IMG.test(it.data?.[0]?.title || "")) || items[0];
+    const thumb = item?.links?.find(l => l.rel === "preview")?.href;
     if (!thumb) { box.textContent = "No image"; return; }
     box.style.cssText = "";
-    box.innerHTML = `<img src="${thumb}" alt="NASA: ${name}" style="width:220px;height:220px;object-fit:cover;display:block" onerror="this.parentNode.textContent='No image'">`;
+    box.innerHTML = `<img src="${thumb}" alt="NASA: ${name}" style="width:220px;height:220px;object-fit:contain;background:#040d18;display:block" onerror="this.parentNode.textContent='No image'">`;
   } catch (e) { box.textContent = "No image"; }
 }
 
