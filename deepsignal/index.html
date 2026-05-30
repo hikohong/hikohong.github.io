@@ -176,7 +176,7 @@ footer a{color:#4a6a8a;text-decoration:none}
   <div class="stat-chip">Pipeline candidates: <strong id="stat-n">80</strong></div>
   <div class="stat-chip">Data sources: <strong>10</strong></div>
   <div class="stat-chip">Detection algorithms: <strong>14</strong></div>
-  <div class="stat-chip">Last updated: <strong>2026-05-30 11:13 UTC</strong></div>
+  <div class="stat-chip">Last updated: <strong>2026-05-30 11:29 UTC</strong></div>
 </div>
 
 <div id="result-panel">
@@ -636,7 +636,7 @@ function showResult(resolved, pipelineMatches) {
         </div>
       </div>
     </div>`;
-  if (isSS) _loadNasaImage(name);
+  if (isSS) _loadSolarSystemImage(name);
 }
 
 // ── Show multiple pipeline matches as selectable cards ────────────────────────
@@ -803,52 +803,21 @@ function selectCandidate(name) {
 }
 
 // ── NASA Images API for solar system objects ──────────────────────────────────
-const NASA_IMG_QUERY = {
-  sun:       "sun photosphere white light",
-  mercury:   "mercury planet MESSENGER",
-  venus:     "venus planet full disk",
-  earth:     "earth full disk blue marble",
-  moon:      "moon full disk",
-  mars:      "mars globe full disk",
-  jupiter:   "jupiter planet full disk",
-  saturn:    "saturn planet rings cassini",
-  uranus:    "uranus planet voyager",
-  neptune:   "neptune planet voyager",
-  pluto:     "pluto new horizons",
-  ceres:     "ceres dwarf planet dawn",
-  europa:    "europa moon jupiter",
-  ganymede:  "ganymede moon jupiter",
-  callisto:  "callisto moon jupiter",
-  io:        "io moon jupiter",
-  titan:     "titan moon saturn",
-  enceladus: "enceladus moon saturn",
-  triton:    "triton moon neptune",
-  charon:    "charon moon pluto",
-  eris:      "eris dwarf planet",
-  makemake:  "makemake dwarf planet",
-  haumea:    "haumea dwarf planet",
-};
-const _HUMAN_IMG = /\b(astronaut|cosmonaut|crew|personnel|scientist|technician|engineer|rover|lander|mission team|launch|rocket|capsule|portrait|spacewalk)\b/i;
-
-async function _loadNasaImage(name) {
+async function _loadSolarSystemImage(name) {
   const box = document.getElementById("result-img-box");
   if (!box) return;
   try {
-    const key      = name.toLowerCase().replace(/[^a-z]/g, "");
-    const queries  = [NASA_IMG_QUERY[key] || `${name} space`, name];
-    let items = [];
-    for (const q of queries) {
-      const resp = await fetch(`https://images-api.nasa.gov/search?q=${encodeURIComponent(q)}&media_type=image`);
-      if (!resp.ok) throw new Error(resp.status);
-      const data = await resp.json();
-      items = data?.collection?.items || [];
-      if (items.length) break;
-    }
-    const item  = items.find(it => !_HUMAN_IMG.test(it.data?.[0]?.title || "")) || items[0];
-    const thumb = item?.links?.find(l => l.rel === "preview")?.href;
+    // Wikipedia pageimages — curated, CORS-enabled, always the right representative photo
+    const resp = await fetch(
+      `https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(name)}&prop=pageimages&pithumbsize=300&format=json&origin=*`
+    );
+    if (!resp.ok) throw new Error(resp.status);
+    const data  = await resp.json();
+    const pages = Object.values(data?.query?.pages || {});
+    const thumb = pages[0]?.thumbnail?.source;
     if (!thumb) { box.textContent = "No image"; return; }
     box.style.cssText = "";
-    box.innerHTML = `<img src="${thumb}" alt="NASA: ${name}" style="width:220px;height:220px;object-fit:contain;background:#040d18;display:block" onerror="this.parentNode.textContent='No image'">`;
+    box.innerHTML = `<img src="${thumb}" alt="${name}" style="width:220px;height:220px;object-fit:contain;background:#040d18;display:block" onerror="this.parentNode.textContent='No image'">`;
   } catch (e) { box.textContent = "No image"; }
 }
 
