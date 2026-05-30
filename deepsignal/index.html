@@ -176,7 +176,7 @@ footer a{color:#4a6a8a;text-decoration:none}
   <div class="stat-chip">Pipeline candidates: <strong id="stat-n">80</strong></div>
   <div class="stat-chip">Data sources: <strong>10</strong></div>
   <div class="stat-chip">Detection algorithms: <strong>14</strong></div>
-  <div class="stat-chip">Last updated: <strong>2026-05-30 11:29 UTC</strong></div>
+  <div class="stat-chip">Last updated: <strong>2026-05-30 11:33 UTC</strong></div>
 </div>
 
 <div id="result-panel">
@@ -803,13 +803,42 @@ function selectCandidate(name) {
 }
 
 // ── NASA Images API for solar system objects ──────────────────────────────────
+// Disambiguated Wikipedia titles for solar system objects
+const SS_WIKI_TITLE = {
+  sun:       "Sun",
+  mercury:   "Mercury (planet)",
+  venus:     "Venus",
+  earth:     "Earth",
+  moon:      "Moon",
+  mars:      "Mars",
+  jupiter:   "Jupiter",
+  saturn:    "Saturn",
+  uranus:    "Uranus",
+  neptune:   "Neptune",
+  pluto:     "Pluto",
+  ceres:     "Ceres (dwarf planet)",
+  io:        "Io (moon)",
+  europa:    "Europa (moon)",
+  ganymede:  "Ganymede (moon)",
+  callisto:  "Callisto (moon)",
+  titan:     "Titan (moon)",
+  enceladus: "Enceladus",
+  triton:    "Triton (moon)",
+  charon:    "Charon (moon)",
+  eris:      "Eris (dwarf planet)",
+  makemake:  "Makemake",
+  haumea:    "Haumea",
+};
+
 async function _loadSolarSystemImage(name) {
   const box = document.getElementById("result-img-box");
   if (!box) return;
   try {
+    const key   = name.toLowerCase().replace(/[^a-z]/g, "");
+    const title = SS_WIKI_TITLE[key] || name;
     // Wikipedia pageimages — curated, CORS-enabled, always the right representative photo
     const resp = await fetch(
-      `https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(name)}&prop=pageimages&pithumbsize=300&format=json&origin=*`
+      `https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(title)}&prop=pageimages&pithumbsize=300&format=json&origin=*`
     );
     if (!resp.ok) throw new Error(resp.status);
     const data  = await resp.json();
