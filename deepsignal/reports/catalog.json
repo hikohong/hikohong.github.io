@@ -144,7 +144,7 @@
         "survey_key": "uv"
       }
     ],
-    "image_path": "/Users/hikohong/Coding/deepsignal/output/images/DS-0001_Tau_Ceti.jpg",
+    "image_path": "images/DS-0001_Tau_Ceti.jpg",
     "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=26.01700&dec=-15.93750&format=jpg",
     "image_cdn_label": "DSS2 Optical",
     "image_filename": "DS-0001_Tau_Ceti.jpg",
@@ -238,7 +238,7 @@
         "survey_key": "uv"
       }
     ],
-    "image_path": "/Users/hikohong/Coding/deepsignal/output/images/DS-0002_Epsilon_Eridani.jpg",
+    "image_path": "images/DS-0002_Epsilon_Eridani.jpg",
     "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=53.23270&dec=-9.45820&format=jpg",
     "image_cdn_label": "DSS2 Optical",
     "image_filename": "DS-0002_Epsilon_Eridani.jpg",
@@ -404,7 +404,7 @@
         "survey_key": "nir"
       }
     ],
-    "image_path": "/Users/hikohong/Coding/deepsignal/output/images/DS-0003_Kepler-93.jpg",
+    "image_path": "images/DS-0003_Kepler-93.jpg",
     "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=291.41813&dec=38.67231&format=jpg",
     "image_cdn_label": "DSS2 Optical",
     "image_filename": "DS-0003_Kepler-93.jpg",
@@ -522,7 +522,7 @@
         "survey_key": "nir"
       }
     ],
-    "image_path": "/Users/hikohong/Coding/deepsignal/output/images/DS-0004_HD_208487.jpg",
+    "image_path": "images/DS-0004_HD_208487.jpg",
     "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=329.33325&dec=-37.76414&format=jpg",
     "image_cdn_label": "DSS2 Optical",
     "image_filename": "DS-0004_HD_208487.jpg",
@@ -617,7 +617,7 @@
         "survey_key": "nir"
       }
     ],
-    "image_path": "/Users/hikohong/Coding/deepsignal/output/images/DS-0005_Gliese_667C.jpg",
+    "image_path": "images/DS-0005_Gliese_667C.jpg",
     "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=259.74880&dec=-34.99770&format=jpg",
     "image_cdn_label": "DSS2 Optical",
     "image_filename": "DS-0005_Gliese_667C.jpg",
@@ -979,7 +979,7 @@
         "survey_key": "nir"
       }
     ],
-    "image_path": "/Users/hikohong/Coding/deepsignal/output/images/DS-0006_HD_136352.jpg",
+    "image_path": "images/DS-0006_HD_136352.jpg",
     "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=230.44011&dec=-48.31882&format=jpg",
     "image_cdn_label": "DSS2 Optical",
     "image_filename": "DS-0006_HD_136352.jpg",
@@ -1167,7 +1167,7 @@
         "survey_key": "nir"
       }
     ],
-    "image_path": "/Users/hikohong/Coding/deepsignal/output/images/DS-0007_eps_Ind_A.jpg",
+    "image_path": "images/DS-0007_eps_Ind_A.jpg",
     "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=330.87140&dec=-56.79690&format=jpg",
     "image_cdn_label": "DSS2 Optical",
     "image_filename": "DS-0007_eps_Ind_A.jpg",
@@ -1238,7 +1238,7 @@
         "survey_key": "nir"
       }
     ],
-    "image_path": "/Users/hikohong/Coding/deepsignal/output/images/DS-0008_HD_73583.jpg",
+    "image_path": "images/DS-0008_HD_73583.jpg",
     "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=129.68830&dec=-13.25653&format=jpg",
     "image_cdn_label": "DSS2 Optical",
     "image_filename": "DS-0008_HD_73583.jpg",
@@ -1332,7 +1332,7 @@
         "survey_key": "nir"
       }
     ],
-    "image_path": "/Users/hikohong/Coding/deepsignal/output/images/DS-0009_TOI-431.jpg",
+    "image_path": "images/DS-0009_TOI-431.jpg",
     "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=83.26925&dec=-26.72387&format=jpg",
     "image_cdn_label": "DSS2 Optical",
     "image_filename": "DS-0009_TOI-431.jpg",
@@ -1472,7 +1472,7 @@
         "survey_key": "uv"
       }
     ],
-    "image_path": "/Users/hikohong/Coding/deepsignal/output/images/DS-0010_Proxima_Centauri.jpg",
+    "image_path": "images/DS-0010_Proxima_Centauri.jpg",
     "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=217.42880&dec=-62.67930&format=jpg",
     "image_cdn_label": "DSS2 Optical",
     "image_filename": "DS-0010_Proxima_Centauri.jpg",
@@ -1597,7 +1597,7 @@
         "survey_key": "uv"
       }
     ],
-    "image_path": "/Users/hikohong/Coding/deepsignal/output/images/DS-0011_Ross_128.jpg",
+    "image_path": "images/DS-0011_Ross_128.jpg",
     "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=176.93510&dec=0.80480&format=jpg",
     "image_cdn_label": "DSS2 Optical",
     "image_filename": "DS-0011_Ross_128.jpg",
@@ -1703,7 +1703,7 @@
         "survey_key": "ir"
       }
     ],
-    "image_path": "/Users/hikohong/Coding/deepsignal/output/images/DS-0012_HD_209458b.jpg",
+    "image_path": "images/DS-0012_HD_209458b.jpg",
     "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2F2MASS%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=330.79500&dec=18.88400&format=jpg",
     "image_cdn_label": "2MASS NIR",
     "image_filename": "DS-0012_HD_209458b.jpg",
@@ -1896,7 +1896,7 @@
         "survey_key": "nir"
       }
     ],
-    "image_path": "/Users/hikohong/Coding/deepsignal/output/images/DS-0013_HD_235088.jpg",
+    "image_path": "images/DS-0013_HD_235088.jpg",
     "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=300.61545&dec=53.37744&format=jpg",
     "image_cdn_label": "DSS2 Optical",
     "image_filename": "DS-0013_HD_235088.jpg",
@@ -2080,7 +2080,7 @@
         "survey_key": "nir"
       }
     ],
-    "image_path": "/Users/hikohong/Coding/deepsignal/output/images/DS-0014_55_Cnc.jpg",
+    "image_path": "images/DS-0014_55_Cnc.jpg",
     "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=133.14684&dec=28.32982&format=jpg",
     "image_cdn_label": "DSS2 Optical",
     "image_filename": "DS-0014_55_Cnc.jpg",
@@ -2172,7 +2172,7 @@
         "survey_key": "nir"
       }
     ],
-    "image_path": "/Users/hikohong/Coding/deepsignal/output/images/DS-0015_GJ_1214.jpg",
+    "image_path": "images/DS-0015_GJ_1214.jpg",
     "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=258.83140&dec=4.96068&format=jpg",
     "image_cdn_label": "DSS2 Optical",
     "image_filename": "DS-0015_GJ_1214.jpg",
@@ -2241,7 +2241,7 @@
         "survey_key": "nir"
       }
     ],
-    "image_path": "/Users/hikohong/Coding/deepsignal/output/images/DS-0016_TOI-1468.jpg",
+    "image_path": "images/DS-0016_TOI-1468.jpg",
     "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=16.65387&dec=19.22492&format=jpg",
     "image_cdn_label": "DSS2 Optical",
     "image_filename": "DS-0016_TOI-1468.jpg",
@@ -2333,7 +2333,7 @@
         "survey_key": "nir"
       }
     ],
-    "image_path": "/Users/hikohong/Coding/deepsignal/output/images/DS-0017_TOI-2018.jpg",
+    "image_path": "images/DS-0017_TOI-2018.jpg",
     "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=229.83744&dec=29.20788&format=jpg",
     "image_cdn_label": "DSS2 Optical",
     "image_filename": "DS-0017_TOI-2018.jpg",
@@ -2476,7 +2476,7 @@
         "survey_key": "nir"
       }
     ],
-    "image_path": "/Users/hikohong/Coding/deepsignal/output/images/DS-0018_TOI-2427.jpg",
+    "image_path": "images/DS-0018_TOI-2427.jpg",
     "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=52.29173&dec=-31.36287&format=jpg",
     "image_cdn_label": "DSS2 Optical",
     "image_filename": "DS-0018_TOI-2427.jpg",
@@ -2568,7 +2568,7 @@
         "survey_key": "nir"
       }
     ],
-    "image_path": "/Users/hikohong/Coding/deepsignal/output/images/DS-0019_TOI-700.jpg",
+    "image_path": "images/DS-0019_TOI-700.jpg",
     "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=97.09572&dec=-65.57861&format=jpg",
     "image_cdn_label": "DSS2 Optical",
     "image_filename": "DS-0019_TOI-700.jpg",
@@ -2654,7 +2654,7 @@
         "survey_key": "nir"
       }
     ],
-    "image_path": "/Users/hikohong/Coding/deepsignal/output/images/DS-0020_TOI-620.jpg",
+    "image_path": "images/DS-0020_TOI-620.jpg",
     "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=142.17345&dec=-12.16717&format=jpg",
     "image_cdn_label": "DSS2 Optical",
     "image_filename": "DS-0020_TOI-620.jpg",
