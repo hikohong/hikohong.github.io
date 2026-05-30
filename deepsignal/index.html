@@ -176,7 +176,7 @@ footer a{color:#4a6a8a;text-decoration:none}
   <div class="stat-chip">Pipeline candidates: <strong id="stat-n">80</strong></div>
   <div class="stat-chip">Data sources: <strong>10</strong></div>
   <div class="stat-chip">Detection algorithms: <strong>14</strong></div>
-  <div class="stat-chip">Last updated: <strong>2026-05-30 09:30 UTC</strong></div>
+  <div class="stat-chip">Last updated: <strong>2026-05-30 10:21 UTC</strong></div>
 </div>
 
 <div id="result-panel">
@@ -225,6 +225,7 @@ const HIPS2FITS   = "https://alasky.cds.unistra.fr/hips-image-services/hips2fits
 const SESAME_URL  = "https://cdsweb.u-strasbg.fr/cgi-bin/nph-sesame/-ox?";
 const HORIZONS    = "https://ssd.jpl.nasa.gov/api/horizons.api";
 const TIER_COLORS = { 1: "#f59e0b", 2: "#3b82f6", 3: "#6b7280" };
+const SS_TYPES = new Set(["Solar System Object","Planet","Dwarf Planet","Moon","Solar System Region","Comet","Asteroid"]);
 const SURVEYS     = [
   { hips: "CDS/P/DSS2/color",        label: "Optical" },
   { hips: "CDS/P/2MASS/K",           label: "NIR" },
@@ -582,10 +583,16 @@ function showResult(resolved, pipelineMatches) {
   const dtypes  = p._all_dtypes  || (p.data_type ? [p.data_type] : []);
   const reasons = (p.reasons || []).slice(0, 4);
 
-  const imgSrc = ra != null ? skyUrl(ra, dec) : "";
-  const imgTag = imgSrc
-    ? `<img src="${imgSrc}" alt="Sky cutout of ${name}" loading="lazy" onerror="this.style.display='none'">`
-    : `<div style="width:220px;height:220px;display:grid;place-items:center;color:#3a4a5a;font-size:.8rem">No image</div>`;
+  const isSS = r.solar_system || SS_TYPES.has(r.type || "") || false;
+  let imgTag;
+  if (isSS) {
+    imgTag = `<div id="result-img-box" style="width:220px;height:220px;display:grid;place-items:center;color:#3a4a5a;font-family:monospace;font-size:.72rem">Loading…</div>`;
+  } else {
+    const imgSrc = ra != null ? skyUrl(ra, dec) : "";
+    imgTag = imgSrc
+      ? `<img src="${imgSrc}" alt="Sky cutout of ${name}" loading="lazy" onerror="this.style.display='none'">`
+      : `<div style="width:220px;height:220px;display:grid;place-items:center;color:#3a4a5a;font-size:.8rem">No image</div>`;
+  }
 
   const tierTag  = tier  ? `<span class="tag tag-tier${tier}">Tier ${tier}</span>` : "";
   const scoreTxt = score != null ? `<div class="result-score">Candidacy score: <strong>${score}</strong>/100</div>` : "";
@@ -596,8 +603,6 @@ function showResult(resolved, pipelineMatches) {
   const coordTxt = ra != null
     ? `RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}°`
     : "";
-
-  const isSS = r.solar_system || false;
   const extLinks = [
     ra != null ? `<a class="ext-link" href="${aladInUrl(ra, dec)}" target="_blank">Aladin Lite</a>` : "",
     `<a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=${encodeURIComponent(name)}" target="_blank">SIMBAD</a>`,
@@ -631,6 +636,7 @@ function showResult(resolved, pipelineMatches) {
         </div>
       </div>
     </div>`;
+  if (isSS) _loadNasaImage(name);
 }
 
 // ── Show multiple pipeline matches as selectable cards ────────────────────────
@@ -796,6 +802,22 @@ function selectCandidate(name) {
   doSearch();
 }
 
+// ── NASA Images API for solar system objects ──────────────────────────────────
+async function _loadNasaImage(name) {
+  const box = document.getElementById("result-img-box");
+  if (!box) return;
+  try {
+    const resp = await fetch(`https://images-api.nasa.gov/search?q=${encodeURIComponent(name)}&media_type=image`);
+    if (!resp.ok) throw new Error(resp.status);
+    const data  = await resp.json();
+    const items = data?.collection?.items || [];
+    const thumb = items[0]?.links?.find(l => l.rel === "preview")?.href;
+    if (!thumb) { box.textContent = "No image"; return; }
+    box.style.cssText = "";
+    box.innerHTML = `<img src="${thumb}" alt="NASA: ${name}" style="width:220px;height:220px;object-fit:cover;display:block" onerror="this.parentNode.textContent='No image'">`;
+  } catch (e) { box.textContent = "No image"; }
+}
+
 // ── Literature Modal ──────────────────────────────────────────────────────────
 function litOpen(targetName) {
   document.getElementById("lit-target-name").textContent = targetName;
@@ -812,59 +834,108 @@ function litClose() {
   document.body.style.overflow = "";
 }
 
+function _abortFetch(ms) {
+  const ctrl = new AbortController();
+  const id = setTimeout(() => ctrl.abort(), ms);
+  ctrl.signal.addEventListener("abort", () => clearTimeout(id));
+  return ctrl;
+}
+
+function _renderS2(papers, elapsed) {
+  const statusLine = `<div class="lit-status">▸ ${papers.length} record${papers.length>1?"s":""} · Semantic Scholar · sorted by relevance · ${elapsed}s</div>`;
+  const cards = papers.map((p, i) => {
+    const title     = p.title || "—";
+    const allAuth   = p.authors || [];
+    const authorTxt = allAuth.slice(0,3).map(a=>a.name).join(", ") + (allAuth.length>3 ? " et al." : "");
+    const year      = p.year ? String(p.year) : "";
+    const abstract  = p.abstract || "";
+    const arxivId   = p.externalIds?.ArXiv;
+    const doi       = p.externalIds?.DOI;
+    const semUrl    = p.url || "";
+    const links = [
+      arxivId ? `<a class="lit-btn" href="https://arxiv.org/abs/${arxivId}" target="_blank" rel="noopener">↗ arXiv:${arxivId}</a>` : "",
+      arxivId ? `<a class="lit-btn" href="https://ui.adsabs.harvard.edu/abs/arXiv:${arxivId}" target="_blank" rel="noopener">NASA ADS</a>` : "",
+      !arxivId && semUrl ? `<a class="lit-btn" href="${semUrl}" target="_blank" rel="noopener">↗ Semantic Scholar</a>` : "",
+      !arxivId && doi ? `<a class="lit-btn" href="https://doi.org/${doi}" target="_blank" rel="noopener">DOI</a>` : "",
+    ].filter(Boolean).join("");
+    return `<div class="lit-paper">
+      <div class="lit-paper-num">#${i+1}</div>
+      <div class="lit-title">${title}</div>
+      <div class="lit-meta">${authorTxt}${year ? " &nbsp;·&nbsp; " + year : ""}</div>
+      <div class="lit-abstract">${abstract}</div>
+      <div class="lit-actions">${links}</div>
+    </div>`;
+  }).join("");
+  return statusLine + cards;
+}
+
+function _renderCrossRef(items, elapsed) {
+  const statusLine = `<div class="lit-status">▸ ${items.length} record${items.length>1?"s":""} · CrossRef · sorted by relevance · ${elapsed}s</div>`;
+  const cards = items.map((p, i) => {
+    const title     = (p.title || [])[0] || "—";
+    const allAuth   = p.author || [];
+    const authorTxt = allAuth.slice(0,3).map(a=>`${a.given||""} ${a.family||""}`.trim()).join(", ") + (allAuth.length>3 ? " et al." : "");
+    const year      = p.issued?.["date-parts"]?.[0]?.[0] ? String(p.issued["date-parts"][0][0]) : "";
+    const doi       = p.DOI || "";
+    const links = doi ? `<a class="lit-btn" href="https://doi.org/${doi}" target="_blank" rel="noopener">↗ DOI</a>` : "";
+    return `<div class="lit-paper">
+      <div class="lit-paper-num">#${i+1}</div>
+      <div class="lit-title">${title}</div>
+      <div class="lit-meta">${authorTxt}${year ? " &nbsp;·&nbsp; " + year : ""}</div>
+      <div class="lit-actions">${links}</div>
+    </div>`;
+  }).join("");
+  return statusLine + cards;
+}
+
 async function _litFetch(name) {
   const body   = document.getElementById("lit-body");
   const footer = document.getElementById("lit-footer-ts");
   const t0 = Date.now();
+
+  // Try Semantic Scholar first
   try {
-    // Semantic Scholar API — CORS-enabled, no key required, indexes arXiv
     const fields = "title,authors,year,abstract,externalIds,url";
     const url = `https://api.semanticscholar.org/graph/v1/paper/search?query=${encodeURIComponent(name + " astronomy")}&fields=${fields}&limit=10`;
-    const resp = await fetch(url, {
-      headers: { "Accept": "application/json" },
-      signal: AbortSignal.timeout(15000)
-    });
-    if (!resp.ok) throw new Error(`Semantic Scholar HTTP ${resp.status}`);
+    const ctrl = _abortFetch(15000);
+    const resp = await fetch(url, { headers: { "Accept": "application/json" }, signal: ctrl.signal });
+    if (!resp.ok) throw new Error(`S2 HTTP ${resp.status}`);
     const data = await resp.json();
     const papers = data.data || [];
     const elapsed = ((Date.now() - t0) / 1000).toFixed(1);
     footer.textContent = `${elapsed}s · Semantic Scholar`;
 
-    if (!papers.length) {
-      body.innerHTML = `<div class="lit-empty">[ NO RECORDS FOUND ]<br>
-        <span style="font-size:.72rem">No papers matched "${name}"</span><br><br>
-        <a class="lit-btn" href="https://ui.adsabs.harvard.edu/search/q=object%3A${encodeURIComponent(name)}&sort=date+desc" target="_blank" rel="noopener">↗ Try NASA ADS</a> &nbsp;
-        <a class="lit-btn" href="https://arxiv.org/search/?searchtype=all&query=${encodeURIComponent(name)}" target="_blank" rel="noopener">↗ arXiv Search</a></div>`;
+    if (papers.length) {
+      body.innerHTML = _renderS2(papers, elapsed);
       return;
     }
+    // Empty result — fall through to CrossRef
+  } catch (_) { /* fall through */ }
 
-    const statusLine = `<div class="lit-status">▸ ${papers.length} record${papers.length>1?"s":""} · Semantic Scholar · sorted by relevance</div>`;
-    const cards = papers.map((p, i) => {
-      const title     = p.title || "—";
-      const allAuth   = p.authors || [];
-      const authorTxt = allAuth.slice(0,3).map(a=>a.name).join(", ") + (allAuth.length>3 ? " et al." : "");
-      const year      = p.year ? String(p.year) : "";
-      const abstract  = p.abstract || "";
-      const arxivId   = p.externalIds?.ArXiv;
-      const doi       = p.externalIds?.DOI;
-      const semUrl    = p.url || "";
-      const links = [
-        arxivId ? `<a class="lit-btn" href="https://arxiv.org/abs/${arxivId}" target="_blank" rel="noopener">↗ arXiv:${arxivId}</a>` : "",
-        arxivId ? `<a class="lit-btn" href="https://ui.adsabs.harvard.edu/abs/arXiv:${arxivId}" target="_blank" rel="noopener">NASA ADS</a>` : "",
-        !arxivId && semUrl ? `<a class="lit-btn" href="${semUrl}" target="_blank" rel="noopener">↗ Semantic Scholar</a>` : "",
-        !arxivId && doi ? `<a class="lit-btn" href="https://doi.org/${doi}" target="_blank" rel="noopener">DOI</a>` : "",
-      ].filter(Boolean).join("");
-      return `<div class="lit-paper">
-        <div class="lit-paper-num">#${i+1}</div>
-        <div class="lit-title">${title}</div>
-        <div class="lit-meta">${authorTxt}${year ? " &nbsp;·&nbsp; " + year : ""}</div>
-        <div class="lit-abstract">${abstract}</div>
-        <div class="lit-actions">${links}</div>
-      </div>`;
-    }).join("");
-    body.innerHTML = statusLine + cards;
+  // CrossRef fallback
+  try {
+    const url = `https://api.crossref.org/works?query=${encodeURIComponent(name + " astronomy")}&rows=10&sort=relevance&filter=type:journal-article`;
+    const ctrl = _abortFetch(15000);
+    const resp = await fetch(url, { headers: { "Accept": "application/json" }, signal: ctrl.signal });
+    if (!resp.ok) throw new Error(`CrossRef HTTP ${resp.status}`);
+    const data = await resp.json();
+    const items = data.message?.items || [];
+    const elapsed = ((Date.now() - t0) / 1000).toFixed(1);
+    footer.textContent = `${elapsed}s · CrossRef`;
+
+    if (items.length) {
+      body.innerHTML = _renderCrossRef(items, elapsed);
+      return;
+    }
+    // Empty from both sources
+    footer.textContent = `${elapsed}s · no results`;
+    body.innerHTML = `<div class="lit-empty">[ NO RECORDS FOUND ]<br>
+      <span style="font-size:.72rem">No papers matched "${name}" in Semantic Scholar or CrossRef</span><br><br>
+      <a class="lit-btn" href="https://ui.adsabs.harvard.edu/search/q=object%3A${encodeURIComponent(name)}&sort=date+desc" target="_blank" rel="noopener">↗ Try NASA ADS</a> &nbsp;
+      <a class="lit-btn" href="https://arxiv.org/search/?searchtype=all&query=${encodeURIComponent(name)}" target="_blank" rel="noopener">↗ arXiv Search</a></div>`;
   } catch (err) {
-    footer.textContent = `error · ${((Date.now()-t0)/1000).toFixed(1)}s`;
+    const elapsed = ((Date.now() - t0) / 1000).toFixed(1);
+    footer.textContent = `error · ${elapsed}s`;
     body.innerHTML = `<div class="lit-empty">[ NETWORK ERROR ]<br>
       <span style="font-size:.72rem">${err.message}</span><br><br>
       <a class="lit-btn" href="https://ui.adsabs.harvard.edu/search/q=object%3A${encodeURIComponent(name)}&sort=date+desc" target="_blank" rel="noopener">↗ NASA ADS</a>
