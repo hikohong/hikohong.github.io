@@ -142,6 +142,41 @@ footer a{color:#4a6a8a;text-decoration:none}
 .btn-papers .papers-dot{width:4px;height:4px;border-radius:50%;background:#7dd3fc;animation:blink 1.8s ease-in-out infinite}
 @keyframes blink{0%,100%{opacity:.3}50%{opacity:1}}
 
+/* ── Filter bar ── */
+.filter-bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.fb-label{font-size:.72rem;color:#4a5a6a;text-transform:uppercase;letter-spacing:.06em;margin-right:2px}
+.fb-btn{font-size:.72rem;padding:4px 11px;border-radius:5px;border:1px solid rgba(219,234,254,.18);
+        background:none;color:#7dd3fc;cursor:pointer;font-family:inherit;transition:background 120ms,border-color 120ms}
+.fb-btn.active,.fb-btn:hover{background:rgba(125,211,252,.15);border-color:rgba(125,211,252,.5)}
+.fb-sep{width:1px;height:18px;background:rgba(219,234,254,.1);margin:0 4px}
+.fb-select{font-size:.72rem;padding:4px 8px;border-radius:5px;border:1px solid rgba(219,234,254,.18);
+           background:#08111f;color:#7dd3fc;cursor:pointer;font-family:inherit}
+.fb-count{font-size:.72rem;color:#4a5a6a;margin-left:auto}
+/* ── Score histogram ── */
+.hist-section{max-width:900px;margin:0 auto;padding:0 24px 20px}
+.hist-title{font-size:.72rem;color:#4a5a6a;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.hist-wrap{display:flex;gap:2px;align-items:flex-end;height:52px}
+.hb-wrap{display:flex;flex-direction:column;align-items:center;flex:1;height:100%;cursor:default}
+.hb-bar{width:100%;min-height:2px;border-radius:2px 2px 0 0}
+.hb-lbl{font-size:.52rem;color:#3a4a5a;margin-top:1px;line-height:1}
+/* ── Sky map ── */
+.sky-section{max-width:900px;margin:0 auto;padding:0 24px 20px}
+.sky-title{font-size:.72rem;color:#4a5a6a;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.sky-svg-wrap{background:rgba(255,255,255,.025);border:1px solid rgba(219,234,254,.1);border-radius:8px;
+              overflow:hidden;width:100%;cursor:crosshair}
+.sky-dot{cursor:pointer;transition:fill-opacity 140ms}
+.sky-dot:hover{fill-opacity:1!important}
+#sky-tooltip-idx{position:fixed;background:#030c18;border:1px solid rgba(125,211,252,.35);
+                 border-radius:6px;padding:5px 10px;font-size:.72rem;color:#b8c7d8;
+                 pointer-events:none;z-index:800;display:none;white-space:nowrap;font-family:monospace}
+/* ── Copy coords ── */
+.btn-copy-coords{background:none;border:1px solid rgba(219,234,254,.15);color:#4a5a6a;
+                 border-radius:3px;padding:0 4px;font-size:.65rem;cursor:pointer;font-family:inherit;
+                 transition:color 120ms,border-color 120ms;line-height:1.4;vertical-align:middle}
+.btn-copy-coords:hover{color:#7dd3fc;border-color:rgba(125,211,252,.4)}
+.copy-ok{font-size:.65rem;color:#22c55e;margin-left:2px;opacity:0;transition:opacity 600ms;vertical-align:middle}
+/* ── Permalink highlight ── */
+.card.highlighted{border-color:#7dd3fc!important;box-shadow:0 0 18px rgba(125,211,252,.35)}
 /* ── Report Modal ── */
 #report-overlay{display:none;position:fixed;inset:0;background:rgba(0,5,15,.88);backdrop-filter:blur(6px);z-index:900;align-items:center;justify-content:center}
 #report-overlay.open{display:flex}
@@ -207,6 +242,9 @@ footer a{color:#4a6a8a;text-decoration:none}
   <div class="stat-chip">Last updated: <strong>2026-06-06 UTC</strong></div>
 </div>
 
+<div id="hist-section" class="hist-section" style="display:none"></div>
+<div id="sky-section" class="sky-section" style="display:none"></div>
+<div id="sky-tooltip-idx"></div>
 <div id="result-panel">
   <div class="result-card" id="result-card"></div>
 </div>
@@ -217,6 +255,19 @@ footer a{color:#4a6a8a;text-decoration:none}
   <div class="section-head">
     <h2>Top Pipeline Candidates</h2>
     <a href="gallery.html">View full gallery →</a>
+  </div>
+  <div class="filter-bar" id="hl-filter-bar" style="display:none">
+    <span class="fb-label">Tier</span>
+    <button class="fb-btn active" data-tier="all" onclick="setHlTier('all')">All</button>
+    <button class="fb-btn" data-tier="1" onclick="setHlTier('1')">Tier 1</button>
+    <button class="fb-btn" data-tier="2" onclick="setHlTier('2')">Tier 2</button>
+    <button class="fb-btn" data-tier="3" onclick="setHlTier('3')">Tier 3</button>
+    <div class="fb-sep"></div>
+    <select class="fb-select" id="hl-sort" onchange="filterHighlights()">
+      <option value="score-desc">Score ↓</option>
+      <option value="score-asc">Score ↑</option>
+    </select>
+    <span class="fb-count" id="hl-count"></span>
   </div>
   <div class="grid" id="highlights"></div>
 </div>
@@ -267,6 +318,31 @@ footer a{color:#4a6a8a;text-decoration:none}
 
 <script defer src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
 <script>
+// ── Method descriptions (for tooltips) ───────────────────────────────────────
+const _MD = {
+  zscore:                   "Z-score SNR outlier in radio spectrum",
+  narrowband:               "Bandwidth <10 Hz — no known natural emitter",
+  doppler_drift:            "Drift 0.01–2 Hz/s consistent with planetary surface transmitter",
+  isolation_forest:         "ML multivariate anomaly in (SNR, bandwidth, drift) space",
+  mathematical_structure:   "Prime/π pattern detected in signal encoding",
+  frb_repeater:             "Confirmed repeating Fast Radio Burst source",
+  "frb_repeater+periodic":  "Periodic repeating FRB with Lomb-Scargle period",
+  frb_low_dm_excess:        "FRB with low dispersion measure excess — nearby / followable",
+  optical_laser_pulse:      "Nanosecond laser pulse >5σ above stellar continuum",
+  lightcurve_anomaly:       "Asymmetric or non-planetary transit shape (TESS/Kepler)",
+  ir_excess_dyson:          "IR W4 excess >3σ — partial Dyson sphere waste heat signature",
+  atmospheric_biosignature: "Disequilibrium atmosphere: O₂+CH₄, N₂O, or CFC co-detection",
+  interstellar_trajectory:  "Non-gravitational acceleration in hyperbolic orbit",
+  gamma_unidentified:       "Fermi 4FGL source without known astrophysical counterpart",
+  proper_motion_anomaly:    "Kinematically extreme proper motion / space velocity (Gaia DR3)",
+  xray_unidentified:        "X-ray point source without optical counterpart (Chandra/XMM)",
+  water_hole_concentration: "Signal within ±10 MHz of H 21cm (1420.4) or OH (1667.4) — prime SETI band",
+  spectral_entropy:         "Low Shannon entropy of SNR spectrum → structured artificial signal",
+  radio_periodicity:        "Consistent Doppler drift across multiple detections → possible beacon",
+  stellar_flux_variability: "Aperiodic flux drops — Tabby's Star type (KIC 8462852)",
+  transit_timing_variation: "TTV amplitude exceeds gravitational planet-planet prediction",
+  waste_heat_model:         "IR excess fitting ~300 K Dyson sphere waste heat blackbody",
+};
 // ── Constants ─────────────────────────────────────────────────────────────────
 const SIMBAD_TAP  = "https://simbad.cds.unistra.fr/simbad/sim-tap/sync";
 const HIPS2FITS   = "https://alasky.cds.unistra.fr/hips-image-services/hips2fits";
@@ -291,6 +367,8 @@ async function loadCatalog() {
     catalog = Array.isArray(data) ? data : (Array.isArray(data.candidates) ? data.candidates : []);
     document.getElementById("stat-n").textContent = catalog.length;
     renderHighlights();
+    renderHistogram(catalog);
+    renderSkyMap(catalog);
   } catch (_) {}
 }
 
@@ -649,7 +727,7 @@ function showResult(resolved, pipelineMatches) {
   const reasonHtml = reasons.length ? `<ul class="result-reasons">${reasons.map(r => `<li>${r}</li>`).join("")}</ul>` : "";
 
   const coordTxt = ra != null
-    ? `RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}°`
+    ? `RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}° <button class="btn-copy-coords" onclick="copyCoords('result-cc',${ra},${dec})" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-result-cc">✓</span>`
     : "";
   const extLinks = [
     ra != null ? `<a class="ext-link" href="${aladInUrl(ra, dec)}" target="_blank">Aladin Lite</a>` : "",
@@ -706,7 +784,7 @@ function showMultipleResults(groups) {
     const tc      = TIER_COLORS[c.tier] || "#6b7280";
     const badge   = c.tier ? `<span class="tier-badge" style="background:${tc}">Tier ${c.tier}</span>` : "";
     const methods = (c._all_methods || []).filter(Boolean);
-    const mtags   = methods.slice(0, 2).map(m => `<span class="tag tag-method" style="font-size:.65rem">${m}</span>`).join("");
+    const mtags   = methods.slice(0, 2).map(m => `<span class="tag tag-method" style="font-size:.65rem" title="${_MD[m]||m}">${m}</span>`).join("");
     const coordsTxt = (ra != null && !isNaN(ra))
       ? `<div class="card-coords">RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}°</div>` : "";
     const safeN   = name.replace(/'/g, "\\'");
@@ -773,7 +851,9 @@ async function doSearch() {
 function renderHighlights() {
   const top = groupCatalogByTarget(catalog)
     .sort((a, b) => (b.candidacy_score || 0) - (a.candidacy_score || 0))
-    .slice(0, 9);
+    .slice(0, 18);
+  document.getElementById("hl-filter-bar").style.display = top.length ? "flex" : "none";
+  document.getElementById("hl-count").textContent = top.length+" shown";
 
   const grid = document.getElementById("highlights");
   grid.innerHTML = top.map(c => {
@@ -785,14 +865,15 @@ function renderHighlights() {
     const tc    = TIER_COLORS[c.tier] || "#6b7280";
     const badge = c.tier ? `<span class="tier-badge" style="background:${tc}">Tier ${c.tier}</span>` : "";
     const methods = c._all_methods.filter(Boolean);
-    const mtags   = methods.slice(0, 2).map(m => `<span class="tag tag-method" style="font-size:.65rem">${m}</span>`).join("");
+    const mtags   = methods.slice(0, 2).map(m => `<span class="tag tag-method" style="font-size:.65rem" title="${_MD[m]||m}">${m}</span>`).join("");
 
     const safeN = c.target_name.replace(/'/g, "\\'");
     const safeMethod = (methods[0] || "").replace(/'/g, "\\'");
     const multi = c.entries.length > 1;
+    const _cid = `hl-${c.target_name.replace(/[^a-zA-Z0-9]/g,"_")}`;
 
     const coordsTxt = (ra != null)
-      ? `<div class="card-coords">RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}°</div>` : "";
+      ? `<div class="card-coords">RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}° <button class="btn-copy-coords" onclick="event.stopPropagation();copyCoords('${_cid}',${ra},${dec})" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-${_cid}">✓</span></div>` : "";
 
     const allReasons = c._all_reasons || c.reasons || [];
     const reasonsHtml = allReasons.length
@@ -824,7 +905,7 @@ function renderHighlights() {
       ? `toggleCard(this,'${safeN}')`
       : `selectCandidate('${safeN}')`;
 
-    return `<div class="card" onclick="${onclick}">
+    return `<div class="card" id="${_cid}" data-tier="${c.tier||3}" data-score="${c.candidacy_score||0}" onclick="${onclick}">
       <div class="card-img">${img}${badge}</div>
       <div class="card-body">
         <div class="card-name">${c.target_name}</div>
@@ -1032,6 +1113,113 @@ async function _litFetch(name, method) {
       &nbsp;
       <a class="lit-btn" href="https://www.semanticscholar.org/search?q=${encodeURIComponent(name)}&sort=Relevance" target="_blank" rel="noopener">↗ Semantic Scholar</a>
     </div>`;
+  }
+}
+
+// ── Score histogram ───────────────────────────────────────────────────────────
+function renderHistogram(data) {
+  const sec = document.getElementById("hist-section");
+  if (!sec || !data.length) return;
+  const bins = new Array(11).fill(0);
+  data.forEach(c => bins[Math.min(Math.floor((c.candidacy_score||0)/10),10)]++);
+  const max = Math.max(...bins) || 1;
+  const colors = ["#374151","#374151","#374151","#374151","#374151",
+                  "#3b82f6","#3b82f6","#f59e0b","#f59e0b","#f59e0b","#f59e0b"];
+  const labels = ["0-9","10-19","20-29","30-39","40-49","50-59","60-69","70-79","80-89","90-99","100"];
+  const bars = bins.map((n,k) =>
+    `<div class="hb-wrap" title="${labels[k]}: ${n}">
+      <div class="hb-bar" style="height:${Math.round(n/max*100)}%;background:${colors[k]}"></div>
+      <div class="hb-lbl">${n||""}</div>
+    </div>`
+  ).join("");
+  sec.innerHTML = `<div class="hist-title">Score distribution (0–100)</div><div class="hist-wrap">${bars}</div>`;
+  sec.style.display = "";
+}
+
+// ── Sky scatter map ───────────────────────────────────────────────────────────
+function renderSkyMap(data) {
+  const sec = document.getElementById("sky-section");
+  const tip = document.getElementById("sky-tooltip-idx");
+  if (!sec) return;
+  const withCoords = data.filter(c => c.ra_deg || c.ra);
+  if (!withCoords.length) return;
+  const dots = withCoords.map(c => {
+    const ra  = c.ra_deg || c.ra || 0;
+    const dec = c.dec_deg || c.dec || 0;
+    const sc  = c.candidacy_score || 0;
+    const ti  = sc>=70?1:(sc>=50?2:3);
+    const col = ti===1?"#f59e0b":(ti===2?"#3b82f6":"#6b7280");
+    const nm  = (c.target_name||"?").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+    return `<circle cx="${ra.toFixed(2)}" cy="${(90-dec).toFixed(2)}" r="3.5" fill="${col}" fill-opacity="0.85" class="sky-dot" data-name="${nm}" data-score="${sc}"/>`;
+  }).join("\n");
+  sec.innerHTML = `
+    <div class="sky-title">Sky coverage — RA / Dec scatter</div>
+    <div class="sky-svg-wrap">
+      <svg viewBox="0 0 360 180" width="100%" preserveAspectRatio="xMidYMid meet" style="display:block">
+        <rect width="360" height="180" fill="none"/>
+        <line x1="60" y1="0" x2="60" y2="180" stroke="rgba(219,234,254,.07)" stroke-width=".5"/>
+        <line x1="120" y1="0" x2="120" y2="180" stroke="rgba(219,234,254,.07)" stroke-width=".5"/>
+        <line x1="180" y1="0" x2="180" y2="180" stroke="rgba(219,234,254,.07)" stroke-width=".5"/>
+        <line x1="240" y1="0" x2="240" y2="180" stroke="rgba(219,234,254,.07)" stroke-width=".5"/>
+        <line x1="300" y1="0" x2="300" y2="180" stroke="rgba(219,234,254,.07)" stroke-width=".5"/>
+        <line x1="0" y1="45" x2="360" y2="45" stroke="rgba(219,234,254,.07)" stroke-width=".5"/>
+        <line x1="0" y1="90" x2="360" y2="90" stroke="rgba(219,234,254,.12)" stroke-width=".5"/>
+        <line x1="0" y1="135" x2="360" y2="135" stroke="rgba(219,234,254,.07)" stroke-width=".5"/>
+        <text x="2" y="9" fill="#3a4a5a" font-size="6" font-family="monospace">+90°</text>
+        <text x="2" y="93" fill="#3a4a5a" font-size="6" font-family="monospace">0°</text>
+        <text x="2" y="177" fill="#3a4a5a" font-size="6" font-family="monospace">-90°</text>
+        <circle cx="318" cy="8" r="3" fill="#f59e0b" fill-opacity=".8"/>
+        <text x="324" y="11" fill="#6b7280" font-size="6" font-family="monospace">T1</text>
+        <circle cx="338" cy="8" r="3" fill="#3b82f6" fill-opacity=".8"/>
+        <text x="344" y="11" fill="#6b7280" font-size="6" font-family="monospace">T2</text>
+        <circle cx="356" cy="8" r="3" fill="#6b7280" fill-opacity=".8"/>
+        ${dots}
+      </svg>
+    </div>`;
+  sec.style.display = "";
+  if (tip) sec.querySelectorAll(".sky-dot").forEach(dot => {
+    dot.addEventListener("mousemove", e => {
+      tip.style.display="block";
+      tip.style.left=(e.clientX+14)+"px";
+      tip.style.top=(e.clientY-34)+"px";
+      tip.textContent=dot.dataset.name+" (score: "+dot.dataset.score+")";
+    });
+    dot.addEventListener("mouseleave", ()=>{ tip.style.display="none"; });
+  });
+}
+
+// ── Copy coordinates ──────────────────────────────────────────────────────────
+function copyCoords(cid, ra, dec) {
+  const txt = "RA "+Number(ra).toFixed(5)+" Dec "+Number(dec).toFixed(5);
+  navigator.clipboard && navigator.clipboard.writeText(txt).then(() => {
+    const el = document.getElementById("ck-"+cid);
+    if (el) { el.style.opacity="1"; setTimeout(()=>el.style.opacity="0", 1800); }
+  }).catch(()=>{});
+}
+
+// ── Highlights filter / sort ──────────────────────────────────────────────────
+let _hlTier = "all";
+function setHlTier(t) {
+  _hlTier = t;
+  document.querySelectorAll("#hl-filter-bar .fb-btn[data-tier]").forEach(b =>
+    b.classList.toggle("active", b.dataset.tier===t));
+  filterHighlights();
+}
+function filterHighlights() {
+  const grid  = document.getElementById("highlights");
+  const sort  = document.getElementById("hl-sort")?.value;
+  const cards = [...grid.children];
+  let visible = 0;
+  cards.forEach(card => {
+    const ok = _hlTier==="all" || card.dataset.tier===_hlTier;
+    card.style.display = ok ? "" : "none";
+    if (ok) visible++;
+  });
+  document.getElementById("hl-count").textContent = visible+" shown";
+  if (sort) {
+    const sorted = cards.filter(c=>c.style.display!=="none")
+      .sort((a,b)=>{ const sa=+a.dataset.score,sb=+b.dataset.score; return sort==="score-asc"?sa-sb:sb-sa; });
+    sorted.forEach(c=>grid.appendChild(c));
   }
 }
 
