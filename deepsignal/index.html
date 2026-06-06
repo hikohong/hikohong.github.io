@@ -1276,7 +1276,7 @@ function mapShowDetail(idx) {
   const links = [
     ra ? `<a class="ext-link" href="https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=${ra.toFixed(4)}+${dec.toFixed(4)}&CooFrame=ICRS&Radius=2&Radius.unit=arcmin" target="_blank" rel="noreferrer">SIMBAD</a>` : "",
     ra ? `<a class="ext-link" href="https://aladin.u-strasbg.fr/AladinLite/?target=${ra.toFixed(4)}+${dec.toFixed(4)}&fov=0.5&survey=P/DSS2/color" target="_blank" rel="noreferrer">Aladin</a>` : "",
-    `<a class="ext-link" href="gallery.html">View in gallery →</a>`,
+    `<a class="ext-link" href="gallery.html?target=${encodeURIComponent(c.target_name||'')}">View in gallery →</a>`,
   ].filter(Boolean).join("");
   const el = document.getElementById("map-detail");
   el.style.display = "block";
@@ -1374,7 +1374,11 @@ function reportClose() {
 document.getElementById("q").addEventListener("keydown", e => {
   if (e.key === "Enter") doSearch();
 });
-document.addEventListener("keydown", e => { if (e.key === "Escape") { mapClose(); litClose(); reportClose(); } });
+document.addEventListener("keydown", e => {
+  if (e.key !== "Escape") return;
+  const anyOpen = ["map-overlay","lit-overlay","report-overlay"].some(id => document.getElementById(id)?.classList.contains("open"));
+  if (anyOpen) { mapClose(); litClose(); reportClose(); } else { history.back(); }
+});
 
 // ── Init ──────────────────────────────────────────────────────────────────────
 loadCatalog();
