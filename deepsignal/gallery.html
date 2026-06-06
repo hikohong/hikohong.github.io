@@ -147,22 +147,29 @@
   .fb-select{font-size:.72rem;padding:4px 8px;border-radius:5px;border:1px solid rgba(219,234,254,.18);
               background:#080818;color:#7dd3fc;cursor:pointer;font-family:inherit}
   .fb-count{font-size:.72rem;color:#4a5a6a;margin-left:auto}
-  /* Score histogram */
-  .hist-section{padding:0 24px 20px}
-  .hist-title{font-size:.72rem;color:#4a5a6a;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
-  .hist-wrap{display:flex;gap:2px;align-items:flex-end;height:52px}
+  /* Viz panel — histogram + sky, collapsed by default */
+  .viz-panel{border-top:1px solid rgba(125,211,252,.06);border-bottom:1px solid rgba(125,211,252,.06);margin-bottom:6px}
+  .viz-panel>summary{list-style:none;padding:5px 24px;font-size:.58rem;font-family:monospace;
+    letter-spacing:.12em;text-transform:uppercase;color:#1e3348;cursor:pointer;user-select:none;
+    display:flex;align-items:center;gap:6px;transition:color 140ms}
+  .viz-panel>summary::-webkit-details-marker{display:none}
+  .viz-panel>summary::before{content:'▸';transition:transform 200ms;display:inline-block;width:10px;flex-shrink:0}
+  .viz-panel[open]>summary::before{transform:rotate(90deg)}
+  .viz-panel>summary:hover{color:#3a6a8a}
+  .viz-inner{padding:8px 24px 16px}
+  /* Histogram */
+  .hist-title{font-size:.58rem;color:#1e3348;font-family:monospace;letter-spacing:.08em;margin-bottom:8px}
+  .hist-wrap{display:flex;gap:3px;align-items:flex-end;height:36px}
   .hb-wrap{display:flex;flex-direction:column;align-items:center;flex:1;height:100%;cursor:default}
-  .hb-bar{width:100%;min-height:2px;border-radius:2px 2px 0 0;margin-top:auto}
-  .hb-lbl{font-size:.52rem;color:#3a4a5a;margin-top:1px;line-height:1}
+  .hb-bar{width:60%;min-height:1px;border-radius:1px 1px 0 0;margin-top:auto}
+  .hb-lbl{font-size:.40rem;color:#1e3348;margin-top:2px;font-family:monospace;line-height:1}
   /* Sky map */
-  .sky-section{padding:0 24px 20px}
-  .sky-title{font-size:.72rem;color:#4a5a6a;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
-  .sky-svg-wrap{background:rgba(255,255,255,.025);border:1px solid rgba(219,234,254,.1);border-radius:8px;
-                 overflow:hidden;width:100%;cursor:crosshair}
-  .sky-dot{cursor:pointer;transition:fill-opacity 140ms}
+  .sky-title{font-size:.58rem;color:#1e3348;font-family:monospace;letter-spacing:.08em;margin-bottom:6px;margin-top:14px}
+  .sky-svg-wrap{background:#010c16;border:1px solid rgba(125,211,252,.08);border-radius:3px;overflow:hidden;width:100%;cursor:crosshair}
+  .sky-dot{cursor:pointer;transition:fill-opacity 120ms}
   .sky-dot:hover{fill-opacity:1!important}
-  #sky-tooltip{position:fixed;background:#030c18;border:1px solid rgba(125,211,252,.35);
-                border-radius:6px;padding:5px 10px;font-size:.72rem;color:#b8c7d8;
+  #sky-tooltip{position:fixed;background:#010c16;border:1px solid rgba(125,211,252,.25);
+                border-radius:4px;padding:4px 8px;font-size:.65rem;color:#7ab8d8;
                 pointer-events:none;z-index:800;display:none;white-space:nowrap;font-family:monospace}
   /* Copy coords */
   .btn-copy-coords{background:none;border:1px solid rgba(219,234,254,.15);color:#4a5a6a;
@@ -221,7 +228,7 @@
 </div>
 <div class="gallery-hdr">
 <h1>DeepSignal — Sky Image Gallery</h1>
-<div class="subtitle">Generated 2026-06-06 05:06 UTC &nbsp;·&nbsp; 64 targets &nbsp;·&nbsp; 64 sky images via Hips2Fits CDN</div>
+<div class="subtitle">Generated 2026-06-06 05:28 UTC &nbsp;·&nbsp; 64 targets &nbsp;·&nbsp; 64 sky images via Hips2Fits CDN</div>
 <div class="stats">
   <div class="stat"><div class="stat-n" style="color:#f59e0b">14</div><div class="stat-l">Tier 1 ≥70</div></div>
   <div class="stat"><div class="stat-n" style="color:#60a5fa">38</div><div class="stat-l">Tier 2 50–69</div></div>
@@ -229,105 +236,118 @@
   <div class="stat"><div class="stat-n">64</div><div class="stat-l">Total</div></div>
 </div>
 </div>
-<div class="hist-section">
-  <div class="hist-title">Score distribution (0–100)</div>
-  <div class="hist-wrap"><div class="hb-wrap" title="0–9: 0"><div class="hb-bar" style="height:0%;background:#374151"></div><div class="hb-lbl"></div></div><div class="hb-wrap" title="10–19: 0"><div class="hb-bar" style="height:0%;background:#374151"></div><div class="hb-lbl"></div></div><div class="hb-wrap" title="20–29: 6"><div class="hb-bar" style="height:22%;background:#374151"></div><div class="hb-lbl">6</div></div><div class="hb-wrap" title="30–39: 6"><div class="hb-bar" style="height:22%;background:#374151"></div><div class="hb-lbl">6</div></div><div class="hb-wrap" title="40–49: 0"><div class="hb-bar" style="height:0%;background:#374151"></div><div class="hb-lbl"></div></div><div class="hb-wrap" title="50–59: 27"><div class="hb-bar" style="height:100%;background:#3b82f6"></div><div class="hb-lbl">27</div></div><div class="hb-wrap" title="60–69: 11"><div class="hb-bar" style="height:40%;background:#3b82f6"></div><div class="hb-lbl">11</div></div><div class="hb-wrap" title="70–79: 7"><div class="hb-bar" style="height:25%;background:#f59e0b"></div><div class="hb-lbl">7</div></div><div class="hb-wrap" title="80–89: 2"><div class="hb-bar" style="height:7%;background:#f59e0b"></div><div class="hb-lbl">2</div></div><div class="hb-wrap" title="90–99: 3"><div class="hb-bar" style="height:11%;background:#f59e0b"></div><div class="hb-lbl">3</div></div><div class="hb-wrap" title="100: 2"><div class="hb-bar" style="height:7%;background:#f59e0b"></div><div class="hb-lbl">2</div></div></div>
-</div>
-<div class="sky-section">
-  <div class="sky-title">Sky coverage — RA / Dec scatter (click dot → jump to card)</div>
-  <div class="sky-svg-wrap">
-    <svg viewBox="0 0 360 180" width="100%" preserveAspectRatio="xMidYMid meet" style="display:block">
-      <rect width="360" height="180" fill="none"/>
-      <!-- RA grid lines every 60° -->
-      <line x1="60" y1="0" x2="60" y2="180" stroke="rgba(219,234,254,.07)" stroke-width=".5"/>
-      <line x1="120" y1="0" x2="120" y2="180" stroke="rgba(219,234,254,.07)" stroke-width=".5"/>
-      <line x1="180" y1="0" x2="180" y2="180" stroke="rgba(219,234,254,.07)" stroke-width=".5"/>
-      <line x1="240" y1="0" x2="240" y2="180" stroke="rgba(219,234,254,.07)" stroke-width=".5"/>
-      <line x1="300" y1="0" x2="300" y2="180" stroke="rgba(219,234,254,.07)" stroke-width=".5"/>
-      <!-- Dec grid lines -->
-      <line x1="0" y1="45" x2="360" y2="45" stroke="rgba(219,234,254,.07)" stroke-width=".5"/>
-      <line x1="0" y1="90" x2="360" y2="90" stroke="rgba(219,234,254,.12)" stroke-width=".5"/>
-      <line x1="0" y1="135" x2="360" y2="135" stroke="rgba(219,234,254,.07)" stroke-width=".5"/>
-      <!-- Axis labels -->
-      <text x="2" y="9" fill="#3a4a5a" font-size="6" font-family="monospace">+90°</text>
-      <text x="2" y="93" fill="#3a4a5a" font-size="6" font-family="monospace">0°</text>
-      <text x="2" y="177" fill="#3a4a5a" font-size="6" font-family="monospace">−90°</text>
-      <text x="0" y="177" fill="#3a4a5a" font-size="5.5" font-family="monospace" transform="translate(175,180)">180°</text>
-      <!-- Tier legend -->
-      <circle cx="296" cy="8" r="3" fill="#f59e0b" fill-opacity=".8"/>
-      <text x="302" y="11" fill="#6b7280" font-size="6" font-family="monospace">T1</text>
-      <circle cx="316" cy="8" r="3" fill="#3b82f6" fill-opacity=".8"/>
-      <text x="322" y="11" fill="#6b7280" font-size="6" font-family="monospace">T2</text>
-      <circle cx="340" cy="8" r="3" fill="#6b7280" fill-opacity=".8"/>
-      <text x="346" y="11" fill="#6b7280" font-size="6" font-family="monospace">T3</text>
-      <!-- Candidate dots -->
-      <circle cx="26.02" cy="105.94" r="3.5" fill="#f59e0b" fill-opacity="0.85" class="sky-dot" data-name="Tau Ceti" data-score="100" onclick="scrollToCard('#card-1')" />
-<circle cx="53.23" cy="99.46" r="3.5" fill="#f59e0b" fill-opacity="0.85" class="sky-dot" data-name="Epsilon Eridani" data-score="100" onclick="scrollToCard('#card-2')" />
-<circle cx="217.43" cy="152.68" r="3.5" fill="#f59e0b" fill-opacity="0.85" class="sky-dot" data-name="Proxima Centauri" data-score="95" onclick="scrollToCard('#card-3')" />
-<circle cx="316.73" cy="51.25" r="3.5" fill="#f59e0b" fill-opacity="0.85" class="sky-dot" data-name="61 Cygni A" data-score="95" onclick="scrollToCard('#card-4')" />
-<circle cx="176.94" cy="89.20" r="3.5" fill="#f59e0b" fill-opacity="0.85" class="sky-dot" data-name="Ross 128" data-score="95" onclick="scrollToCard('#card-5')" />
-<circle cx="259.75" cy="125.00" r="3.5" fill="#f59e0b" fill-opacity="0.85" class="sky-dot" data-name="Gliese 667C" data-score="80" onclick="scrollToCard('#card-6')" />
-<circle cx="279.23" cy="51.22" r="3.5" fill="#f59e0b" fill-opacity="0.85" class="sky-dot" data-name="Vega" data-score="80" onclick="scrollToCard('#card-7')" />
-<circle cx="18.00" cy="105.27" r="3.5" fill="#f59e0b" fill-opacity="0.85" class="sky-dot" data-name="LHS 1140b" data-score="75" onclick="scrollToCard('#card-8')" />
-<circle cx="330.80" cy="71.12" r="3.5" fill="#f59e0b" fill-opacity="0.85" class="sky-dot" data-name="HD 209458b" data-score="75" onclick="scrollToCard('#card-9')" />
-<circle cx="77.38" cy="103.70" r="3.5" fill="#f59e0b" fill-opacity="0.85" class="sky-dot" data-name="TOI-SIM-0001" data-score="75" onclick="scrollToCard('#card-10')" />
-<circle cx="23.46" cy="63.20" r="3.5" fill="#f59e0b" fill-opacity="0.85" class="sky-dot" data-name="1I/ʻOumuamua" data-score="75" onclick="scrollToCard('#card-11')" />
-<circle cx="65.57" cy="39.49" r="3.5" fill="#f59e0b" fill-opacity="0.85" class="sky-dot" data-name="SIM_ISO_0001" data-score="75" onclick="scrollToCard('#card-12')" />
-<circle cx="7.33" cy="56.09" r="3.5" fill="#f59e0b" fill-opacity="0.85" class="sky-dot" data-name="SIM_ISO_0002" data-score="75" onclick="scrollToCard('#card-13')" />
-<circle cx="219.64" cy="87.86" r="3.5" fill="#f59e0b" fill-opacity="0.85" class="sky-dot" data-name="SIM_ISO_0004" data-score="75" onclick="scrollToCard('#card-14')" />
-<circle cx="89.34" cy="150.02" r="3.5" fill="#3b82f6" fill-opacity="0.85" class="sky-dot" data-name="HD 40307" data-score="65" onclick="scrollToCard('#card-15')" />
-<circle cx="330.84" cy="146.79" r="3.5" fill="#3b82f6" fill-opacity="0.85" class="sky-dot" data-name="Epsilon Indi A" data-score="65" onclick="scrollToCard('#card-16')" />
-<circle cx="344.41" cy="119.62" r="3.5" fill="#3b82f6" fill-opacity="0.85" class="sky-dot" data-name="Fomalhaut" data-score="65" onclick="scrollToCard('#card-17')" />
-<circle cx="35.16" cy="146.79" r="3.5" fill="#3b82f6" fill-opacity="0.85" class="sky-dot" data-name="TOI-700" data-score="65" onclick="scrollToCard('#card-18')" />
-<circle cx="271.27" cy="117.63" r="3.5" fill="#3b82f6" fill-opacity="0.85" class="sky-dot" data-name="TOI-216" data-score="65" onclick="scrollToCard('#card-19')" />
-<circle cx="311.33" cy="47.36" r="3.5" fill="#3b82f6" fill-opacity="0.85" class="sky-dot" data-name="SIM_STAR_0000" data-score="65" onclick="scrollToCard('#card-20')" />
-<circle cx="94.12" cy="140.74" r="3.5" fill="#3b82f6" fill-opacity="0.85" class="sky-dot" data-name="SIM_STAR_0001" data-score="65" onclick="scrollToCard('#card-21')" />
-<circle cx="220.97" cy="149.68" r="3.5" fill="#3b82f6" fill-opacity="0.85" class="sky-dot" data-name="SIM_STAR_0002" data-score="65" onclick="scrollToCard('#card-22')" />
-<circle cx="354.53" cy="115.64" r="3.5" fill="#3b82f6" fill-opacity="0.85" class="sky-dot" data-name="SIM_STAR_0003" data-score="65" onclick="scrollToCard('#card-23')" />
-<circle cx="293.04" cy="90.26" r="3.5" fill="#3b82f6" fill-opacity="0.85" class="sky-dot" data-name="SIM_STAR_0006" data-score="65" onclick="scrollToCard('#card-24')" />
-<circle cx="279.61" cy="32.49" r="3.5" fill="#3b82f6" fill-opacity="0.85" class="sky-dot" data-name="SIM_STAR_0007" data-score="65" onclick="scrollToCard('#card-25')" />
-<circle cx="43.35" cy="87.66" r="3.5" fill="#3b82f6" fill-opacity="0.85" class="sky-dot" data-name="4FGL J0253.4+0220" data-score="55" onclick="scrollToCard('#card-26')" />
-<circle cx="80.49" cy="68.80" r="3.5" fill="#3b82f6" fill-opacity="0.85" class="sky-dot" data-name="4FGL J0521.9+2112" data-score="55" onclick="scrollToCard('#card-27')" />
-<circle cx="170.00" cy="112.08" r="3.5" fill="#3b82f6" fill-opacity="0.85" class="sky-dot" data-name="4FGL J1120.0-2204" data-score="55" onclick="scrollToCard('#card-28')" />
-<circle cx="187.90" cy="75.83" r="3.5" fill="#3b82f6" fill-opacity="0.85" class="sky-dot" data-name="4FGL J1231.6+1410" data-score="55" onclick="scrollToCard('#card-29')" />
-<circle cx="214.60" cy="92.56" r="3.5" fill="#3b82f6" fill-opacity="0.85" class="sky-dot" data-name="4FGL J1418.4-0233" data-score="55" onclick="scrollToCard('#card-30')" />
-<circle cx="253.40" cy="50.25" r="3.5" fill="#3b82f6" fill-opacity="0.85" class="sky-dot" data-name="4FGL J1653.6+3945" data-score="55" onclick="scrollToCard('#card-31')" />
-<circle cx="266.00" cy="166.32" r="3.5" fill="#3b82f6" fill-opacity="0.85" class="sky-dot" data-name="4FGL J1744.1-7619" data-score="55" onclick="scrollToCard('#card-32')" />
-<circle cx="277.10" cy="57.39" r="3.5" fill="#3b82f6" fill-opacity="0.85" class="sky-dot" data-name="4FGL J1828.4+3236" data-score="55" onclick="scrollToCard('#card-33')" />
-<circle cx="298.90" cy="78.61" r="3.5" fill="#3b82f6" fill-opacity="0.85" class="sky-dot" data-name="4FGL J1955.4+1123" data-score="55" onclick="scrollToCard('#card-34')" />
-<circle cx="312.50" cy="79.94" r="3.5" fill="#3b82f6" fill-opacity="0.85" class="sky-dot" data-name="4FGL J2049.9+1003" data-score="55" onclick="scrollToCard('#card-35')" />
-<circle cx="329.70" cy="120.23" r="3.5" fill="#3b82f6" fill-opacity="0.85" class="sky-dot" data-name="4FGL J2158.8-3013" data-score="55" onclick="scrollToCard('#card-36')" />
-<circle cx="17.80" cy="50.87" r="3.5" fill="#3b82f6" fill-opacity="0.85" class="sky-dot" data-name="4FGL J0111.0+3907" data-score="55" onclick="scrollToCard('#card-37')" />
-<circle cx="77.14" cy="135.00" r="3.5" fill="#3b82f6" fill-opacity="0.85" class="sky-dot" data-name="Kapteyn&#39;s Star" data-score="55" onclick="scrollToCard('#card-38')" />
-<circle cx="48.12" cy="71.21" r="3.5" fill="#3b82f6" fill-opacity="0.85" class="sky-dot" data-name="SIM_J0312+1847" data-score="55" onclick="scrollToCard('#card-39')" />
-<circle cx="176.91" cy="92.52" r="3.5" fill="#3b82f6" fill-opacity="0.85" class="sky-dot" data-name="SIM_J1147-0231" data-score="55" onclick="scrollToCard('#card-40')" />
-<circle cx="334.62" cy="56.31" r="3.5" fill="#3b82f6" fill-opacity="0.85" class="sky-dot" data-name="SIM_J2218+3341" data-score="55" onclick="scrollToCard('#card-41')" />
-<circle cx="97.88" cy="74.19" r="3.5" fill="#3b82f6" fill-opacity="0.85" class="sky-dot" data-name="SIM_J0631+1548" data-score="55" onclick="scrollToCard('#card-42')" />
-<circle cx="3.30" cy="26.17" r="3.5" fill="#3b82f6" fill-opacity="0.85" class="sky-dot" data-name="CXO J001311.8+634937" data-score="55" onclick="scrollToCard('#card-43')" />
-<circle cx="41.30" cy="90.21" r="3.5" fill="#3b82f6" fill-opacity="0.85" class="sky-dot" data-name="CXO J024512.4-001234" data-score="55" onclick="scrollToCard('#card-44')" />
-<circle cx="114.67" cy="24.47" r="3.5" fill="#3b82f6" fill-opacity="0.85" class="sky-dot" data-name="CXO J073841.2+653201" data-score="55" onclick="scrollToCard('#card-45')" />
-<circle cx="275.66" cy="108.25" r="3.5" fill="#3b82f6" fill-opacity="0.85" class="sky-dot" data-name="CXO J182239.2-181442" data-score="55" onclick="scrollToCard('#card-46')" />
-<circle cx="326.34" cy="77.52" r="3.5" fill="#3b82f6" fill-opacity="0.85" class="sky-dot" data-name="CXO J214521.3+122844" data-score="55" onclick="scrollToCard('#card-47')" />
-<circle cx="56.12" cy="94.95" r="3.5" fill="#3b82f6" fill-opacity="0.85" class="sky-dot" data-name="4XMM J034428.3-045712" data-score="55" onclick="scrollToCard('#card-48')" />
-<circle cx="138.14" cy="59.47" r="3.5" fill="#3b82f6" fill-opacity="0.85" class="sky-dot" data-name="4XMM J091234.2+303201" data-score="55" onclick="scrollToCard('#card-49')" />
-<circle cx="219.55" cy="113.25" r="3.5" fill="#3b82f6" fill-opacity="0.85" class="sky-dot" data-name="4XMM J143812.7-231456" data-score="55" onclick="scrollToCard('#card-50')" />
-<circle cx="80.55" cy="159.39" r="3.5" fill="#3b82f6" fill-opacity="0.85" class="sky-dot" data-name="4XMM J052211.8-692334" data-score="55" onclick="scrollToCard('#card-51')" />
-<circle cx="172.59" cy="84.61" r="3.5" fill="#3b82f6" fill-opacity="0.85" class="sky-dot" data-name="4XMM J113021.4+052318" data-score="55" onclick="scrollToCard('#card-52')" />
-<circle cx="82.99" cy="56.85" r="3.5" fill="#6b7280" fill-opacity="0.85" class="sky-dot" data-name="FRB20121102A" data-score="30" onclick="scrollToCard('#card-53')" />
-<circle cx="29.50" cy="24.28" r="3.5" fill="#6b7280" fill-opacity="0.85" class="sky-dot" data-name="FRB20180916B" data-score="30" onclick="scrollToCard('#card-54')" />
-<circle cx="77.01" cy="63.94" r="3.5" fill="#6b7280" fill-opacity="0.85" class="sky-dot" data-name="FRB20201124A" data-score="30" onclick="scrollToCard('#card-55')" />
-<circle cx="347.27" cy="41.29" r="3.5" fill="#6b7280" fill-opacity="0.85" class="sky-dot" data-name="FRB20220912A" data-score="30" onclick="scrollToCard('#card-56')" />
-<circle cx="81.51" cy="144.27" r="3.5" fill="#6b7280" fill-opacity="0.85" class="sky-dot" data-name="FRB_SIM_0014" data-score="30" onclick="scrollToCard('#card-57')" />
-<circle cx="163.81" cy="169.78" r="3.5" fill="#6b7280" fill-opacity="0.85" class="sky-dot" data-name="FRB_SIM_0039" data-score="30" onclick="scrollToCard('#card-58')" />
-<circle cx="240.03" cy="101.29" r="3.5" fill="#6b7280" fill-opacity="0.85" class="sky-dot" data-name="FRB20190520B" data-score="20" onclick="scrollToCard('#card-59')" />
-<circle cx="133.99" cy="174.54" r="3.5" fill="#6b7280" fill-opacity="0.85" class="sky-dot" data-name="FRB_SIM_0011" data-score="20" onclick="scrollToCard('#card-60')" />
-<circle cx="54.07" cy="33.06" r="3.5" fill="#6b7280" fill-opacity="0.85" class="sky-dot" data-name="FRB_SIM_0006" data-score="20" onclick="scrollToCard('#card-61')" />
-<circle cx="7.59" cy="124.10" r="3.5" fill="#6b7280" fill-opacity="0.85" class="sky-dot" data-name="FRB_SIM_0022" data-score="20" onclick="scrollToCard('#card-62')" />
-<circle cx="225.58" cy="36.46" r="3.5" fill="#6b7280" fill-opacity="0.85" class="sky-dot" data-name="FRB_SIM_0024" data-score="20" onclick="scrollToCard('#card-63')" />
-<circle cx="47.95" cy="156.48" r="3.5" fill="#6b7280" fill-opacity="0.85" class="sky-dot" data-name="FRB_SIM_0030" data-score="20" onclick="scrollToCard('#card-64')" />
-    </svg>
+<details class="viz-panel">
+  <summary>Score Distribution &amp; Sky Coverage</summary>
+  <div class="viz-inner">
+    <div class="hist-title">Score distribution (0–100)</div>
+    <div class="hist-wrap"><div class="hb-wrap" title="0–9: 0"><div class="hb-bar" style="height:0%;background:#374151"></div><div class="hb-lbl"></div></div><div class="hb-wrap" title="10–19: 0"><div class="hb-bar" style="height:0%;background:#374151"></div><div class="hb-lbl"></div></div><div class="hb-wrap" title="20–29: 6"><div class="hb-bar" style="height:22%;background:#374151"></div><div class="hb-lbl">6</div></div><div class="hb-wrap" title="30–39: 6"><div class="hb-bar" style="height:22%;background:#374151"></div><div class="hb-lbl">6</div></div><div class="hb-wrap" title="40–49: 0"><div class="hb-bar" style="height:0%;background:#374151"></div><div class="hb-lbl"></div></div><div class="hb-wrap" title="50–59: 27"><div class="hb-bar" style="height:100%;background:#3b82f6"></div><div class="hb-lbl">27</div></div><div class="hb-wrap" title="60–69: 11"><div class="hb-bar" style="height:40%;background:#3b82f6"></div><div class="hb-lbl">11</div></div><div class="hb-wrap" title="70–79: 7"><div class="hb-bar" style="height:25%;background:#f59e0b"></div><div class="hb-lbl">7</div></div><div class="hb-wrap" title="80–89: 2"><div class="hb-bar" style="height:7%;background:#f59e0b"></div><div class="hb-lbl">2</div></div><div class="hb-wrap" title="90–99: 3"><div class="hb-bar" style="height:11%;background:#f59e0b"></div><div class="hb-lbl">3</div></div><div class="hb-wrap" title="100: 2"><div class="hb-bar" style="height:7%;background:#f59e0b"></div><div class="hb-lbl">2</div></div></div>
+    <div class="sky-title">Sky coverage — RA/Dec equirectangular (click dot → jump to card)</div>
+    <div class="sky-svg-wrap">
+      <svg viewBox="0 0 360 180" width="100%" preserveAspectRatio="xMidYMid meet" style="display:block">
+        <defs>
+          <filter id="glow1" x="-300%" y="-300%" width="700%" height="700%">
+            <feGaussianBlur stdDeviation="2.5" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="glow2" x="-200%" y="-200%" width="500%" height="500%">
+            <feGaussianBlur stdDeviation="1.5" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <rect width="360" height="180" fill="#010c16"/>
+        <circle cx="230.2" cy="4.5" r="0.3" fill="#ffffff" fill-opacity="0.08"/><circle cx="80.4" cy="132.6" r="0.3" fill="#ffffff" fill-opacity="0.13"/><circle cx="321.2" cy="15.6" r="0.3" fill="#ffffff" fill-opacity="0.10"/><circle cx="10.7" cy="39.4" r="0.3" fill="#ffffff" fill-opacity="0.11"/><circle cx="9.6" cy="35.8" r="0.3" fill="#ffffff" fill-opacity="0.13"/><circle cx="196.2" cy="39.7" r="0.3" fill="#ffffff" fill-opacity="0.12"/><circle cx="291.4" cy="1.2" r="0.3" fill="#ffffff" fill-opacity="0.15"/><circle cx="251.3" cy="61.2" r="0.3" fill="#ffffff" fill-opacity="0.06"/><circle cx="344.6" cy="60.6" r="0.3" fill="#ffffff" fill-opacity="0.05"/><circle cx="34.8" cy="152.5" r="0.3" fill="#ffffff" fill-opacity="0.12"/><circle cx="290.6" cy="131.4" r="0.3" fill="#ffffff" fill-opacity="0.12"/><circle cx="350.3" cy="68.1" r="0.3" fill="#ffffff" fill-opacity="0.12"/><circle cx="298.6" cy="111.3" r="0.3" fill="#ffffff" fill-opacity="0.16"/><circle cx="207.8" cy="126.8" r="0.3" fill="#ffffff" fill-opacity="0.05"/><circle cx="82.0" cy="52.1" r="0.3" fill="#ffffff" fill-opacity="0.05"/><circle cx="83.8" cy="18.2" r="0.3" fill="#ffffff" fill-opacity="0.08"/><circle cx="228.8" cy="65.7" r="0.3" fill="#ffffff" fill-opacity="0.09"/><circle cx="75.4" cy="48.1" r="0.3" fill="#ffffff" fill-opacity="0.17"/><circle cx="233.3" cy="109.6" r="0.3" fill="#ffffff" fill-opacity="0.06"/><circle cx="262.5" cy="29.4" r="0.3" fill="#ffffff" fill-opacity="0.09"/><circle cx="356.2" cy="115.2" r="0.3" fill="#ffffff" fill-opacity="0.12"/><circle cx="246.5" cy="151.7" r="0.3" fill="#ffffff" fill-opacity="0.15"/><circle cx="82.5" cy="5.8" r="0.3" fill="#ffffff" fill-opacity="0.08"/><circle cx="96.4" cy="38.0" r="0.3" fill="#ffffff" fill-opacity="0.17"/><circle cx="315.5" cy="56.6" r="0.3" fill="#ffffff" fill-opacity="0.13"/><circle cx="142.4" cy="164.6" r="0.3" fill="#ffffff" fill-opacity="0.10"/><circle cx="95.4" cy="44.4" r="0.3" fill="#ffffff" fill-opacity="0.12"/><circle cx="94.6" cy="105.2" r="0.3" fill="#ffffff" fill-opacity="0.17"/><circle cx="143.8" cy="39.5" r="0.3" fill="#ffffff" fill-opacity="0.18"/><circle cx="183.4" cy="16.4" r="0.3" fill="#ffffff" fill-opacity="0.05"/><circle cx="39.5" cy="112.9" r="0.3" fill="#ffffff" fill-opacity="0.15"/><circle cx="152.0" cy="11.4" r="0.3" fill="#ffffff" fill-opacity="0.09"/><circle cx="358.6" cy="95.2" r="0.3" fill="#ffffff" fill-opacity="0.18"/><circle cx="309.9" cy="2.1" r="0.3" fill="#ffffff" fill-opacity="0.14"/><circle cx="245.4" cy="96.7" r="0.3" fill="#ffffff" fill-opacity="0.08"/><circle cx="230.7" cy="20.1" r="0.3" fill="#ffffff" fill-opacity="0.10"/><circle cx="163.3" cy="171.7" r="0.3" fill="#ffffff" fill-opacity="0.16"/><circle cx="94.8" cy="90.1" r="0.3" fill="#ffffff" fill-opacity="0.07"/><circle cx="328.5" cy="156.7" r="0.3" fill="#ffffff" fill-opacity="0.08"/><circle cx="230.0" cy="109.6" r="0.3" fill="#ffffff" fill-opacity="0.06"/><circle cx="274.5" cy="97.1" r="0.3" fill="#ffffff" fill-opacity="0.15"/><circle cx="190.9" cy="0.1" r="0.3" fill="#ffffff" fill-opacity="0.09"/><circle cx="7.0" cy="167.2" r="0.3" fill="#ffffff" fill-opacity="0.16"/><circle cx="299.4" cy="55.4" r="0.3" fill="#ffffff" fill-opacity="0.05"/><circle cx="316.1" cy="170.5" r="0.3" fill="#ffffff" fill-opacity="0.05"/><circle cx="175.0" cy="12.5" r="0.3" fill="#ffffff" fill-opacity="0.15"/><circle cx="275.7" cy="23.1" r="0.3" fill="#ffffff" fill-opacity="0.11"/><circle cx="197.9" cy="47.7" r="0.3" fill="#ffffff" fill-opacity="0.16"/><circle cx="152.3" cy="38.1" r="0.3" fill="#ffffff" fill-opacity="0.12"/><circle cx="262.8" cy="36.2" r="0.3" fill="#ffffff" fill-opacity="0.08"/><circle cx="358.3" cy="117.0" r="0.3" fill="#ffffff" fill-opacity="0.10"/><circle cx="186.3" cy="21.8" r="0.3" fill="#ffffff" fill-opacity="0.07"/><circle cx="121.7" cy="105.9" r="0.3" fill="#ffffff" fill-opacity="0.07"/><circle cx="79.3" cy="12.8" r="0.3" fill="#ffffff" fill-opacity="0.13"/><circle cx="82.4" cy="163.0" r="0.3" fill="#ffffff" fill-opacity="0.16"/><circle cx="25.5" cy="42.8" r="0.3" fill="#ffffff" fill-opacity="0.13"/><circle cx="77.1" cy="23.8" r="0.3" fill="#ffffff" fill-opacity="0.17"/><circle cx="205.6" cy="85.1" r="0.3" fill="#ffffff" fill-opacity="0.15"/><circle cx="290.7" cy="34.3" r="0.3" fill="#ffffff" fill-opacity="0.05"/><circle cx="155.2" cy="76.2" r="0.3" fill="#ffffff" fill-opacity="0.11"/><circle cx="262.5" cy="121.2" r="0.3" fill="#ffffff" fill-opacity="0.18"/><circle cx="35.4" cy="72.5" r="0.3" fill="#ffffff" fill-opacity="0.09"/><circle cx="310.2" cy="44.8" r="0.3" fill="#ffffff" fill-opacity="0.07"/><circle cx="161.5" cy="75.9" r="0.3" fill="#ffffff" fill-opacity="0.08"/><circle cx="89.9" cy="166.2" r="0.3" fill="#ffffff" fill-opacity="0.10"/><circle cx="310.1" cy="99.1" r="0.3" fill="#ffffff" fill-opacity="0.05"/><circle cx="359.7" cy="150.5" r="0.3" fill="#ffffff" fill-opacity="0.18"/><circle cx="333.5" cy="152.8" r="0.3" fill="#ffffff" fill-opacity="0.06"/><circle cx="174.8" cy="38.5" r="0.3" fill="#ffffff" fill-opacity="0.10"/><circle cx="21.1" cy="68.2" r="0.3" fill="#ffffff" fill-opacity="0.18"/><circle cx="95.5" cy="141.1" r="0.3" fill="#ffffff" fill-opacity="0.10"/><circle cx="152.3" cy="172.3" r="0.3" fill="#ffffff" fill-opacity="0.18"/><circle cx="200.1" cy="129.3" r="0.3" fill="#ffffff" fill-opacity="0.06"/><circle cx="106.8" cy="174.4" r="0.3" fill="#ffffff" fill-opacity="0.12"/><circle cx="195.2" cy="134.6" r="0.3" fill="#ffffff" fill-opacity="0.05"/><circle cx="210.3" cy="90.5" r="0.3" fill="#ffffff" fill-opacity="0.16"/><circle cx="56.7" cy="172.9" r="0.3" fill="#ffffff" fill-opacity="0.05"/><circle cx="66.9" cy="107.1" r="0.3" fill="#ffffff" fill-opacity="0.13"/><circle cx="84.7" cy="21.6" r="0.3" fill="#ffffff" fill-opacity="0.16"/><circle cx="88.6" cy="107.0" r="0.3" fill="#ffffff" fill-opacity="0.13"/><circle cx="150.9" cy="105.1" r="0.3" fill="#ffffff" fill-opacity="0.11"/><circle cx="336.5" cy="36.8" r="0.3" fill="#ffffff" fill-opacity="0.14"/><circle cx="85.9" cy="71.2" r="0.3" fill="#ffffff" fill-opacity="0.13"/><circle cx="108.0" cy="56.9" r="0.3" fill="#ffffff" fill-opacity="0.15"/><circle cx="26.1" cy="82.5" r="0.3" fill="#ffffff" fill-opacity="0.18"/><circle cx="358.6" cy="13.2" r="0.3" fill="#ffffff" fill-opacity="0.07"/><circle cx="95.5" cy="168.0" r="0.3" fill="#ffffff" fill-opacity="0.16"/><circle cx="316.5" cy="66.5" r="0.3" fill="#ffffff" fill-opacity="0.06"/><circle cx="300.1" cy="126.6" r="0.3" fill="#ffffff" fill-opacity="0.13"/><circle cx="355.4" cy="117.7" r="0.3" fill="#ffffff" fill-opacity="0.04"/><circle cx="294.2" cy="53.9" r="0.3" fill="#ffffff" fill-opacity="0.13"/><circle cx="338.0" cy="24.2" r="0.3" fill="#ffffff" fill-opacity="0.06"/><circle cx="38.5" cy="99.6" r="0.3" fill="#ffffff" fill-opacity="0.08"/><circle cx="217.7" cy="129.2" r="0.3" fill="#ffffff" fill-opacity="0.07"/><circle cx="228.3" cy="47.5" r="0.3" fill="#ffffff" fill-opacity="0.11"/><circle cx="325.9" cy="152.3" r="0.3" fill="#ffffff" fill-opacity="0.05"/><circle cx="152.5" cy="49.8" r="0.3" fill="#ffffff" fill-opacity="0.04"/><circle cx="277.6" cy="114.7" r="0.3" fill="#ffffff" fill-opacity="0.08"/><circle cx="266.8" cy="99.3" r="0.3" fill="#ffffff" fill-opacity="0.10"/><circle cx="3.5" cy="13.5" r="0.3" fill="#ffffff" fill-opacity="0.16"/><circle cx="325.4" cy="98.2" r="0.3" fill="#ffffff" fill-opacity="0.16"/><circle cx="209.7" cy="26.7" r="0.3" fill="#ffffff" fill-opacity="0.06"/><circle cx="111.0" cy="161.8" r="0.3" fill="#ffffff" fill-opacity="0.15"/><circle cx="309.9" cy="161.8" r="0.3" fill="#ffffff" fill-opacity="0.07"/><circle cx="89.8" cy="18.5" r="0.3" fill="#ffffff" fill-opacity="0.15"/><circle cx="318.3" cy="73.1" r="0.3" fill="#ffffff" fill-opacity="0.13"/><circle cx="55.6" cy="167.4" r="0.3" fill="#ffffff" fill-opacity="0.16"/><circle cx="351.4" cy="145.9" r="0.3" fill="#ffffff" fill-opacity="0.16"/><circle cx="8.9" cy="132.6" r="0.3" fill="#ffffff" fill-opacity="0.09"/><circle cx="335.1" cy="144.4" r="0.3" fill="#ffffff" fill-opacity="0.16"/><circle cx="291.9" cy="48.0" r="0.3" fill="#ffffff" fill-opacity="0.15"/><circle cx="38.9" cy="157.0" r="0.3" fill="#ffffff" fill-opacity="0.16"/><circle cx="80.1" cy="147.0" r="0.3" fill="#ffffff" fill-opacity="0.10"/><circle cx="109.9" cy="143.2" r="0.3" fill="#ffffff" fill-opacity="0.07"/><circle cx="8.5" cy="34.8" r="0.3" fill="#ffffff" fill-opacity="0.09"/><circle cx="311.2" cy="174.0" r="0.3" fill="#ffffff" fill-opacity="0.08"/><circle cx="230.9" cy="71.9" r="0.3" fill="#ffffff" fill-opacity="0.18"/><circle cx="193.0" cy="169.1" r="0.3" fill="#ffffff" fill-opacity="0.06"/><circle cx="349.3" cy="32.1" r="0.3" fill="#ffffff" fill-opacity="0.17"/><circle cx="95.6" cy="19.5" r="0.3" fill="#ffffff" fill-opacity="0.10"/><circle cx="262.3" cy="56.5" r="0.3" fill="#ffffff" fill-opacity="0.12"/><circle cx="184.1" cy="69.3" r="0.3" fill="#ffffff" fill-opacity="0.12"/><circle cx="91.7" cy="127.6" r="0.3" fill="#ffffff" fill-opacity="0.04"/><circle cx="333.2" cy="96.9" r="0.3" fill="#ffffff" fill-opacity="0.14"/><circle cx="267.1" cy="120.7" r="0.3" fill="#ffffff" fill-opacity="0.09"/><circle cx="25.2" cy="119.6" r="0.3" fill="#ffffff" fill-opacity="0.09"/><circle cx="113.0" cy="152.6" r="0.3" fill="#ffffff" fill-opacity="0.14"/><circle cx="108.1" cy="55.7" r="0.3" fill="#ffffff" fill-opacity="0.10"/><circle cx="144.9" cy="53.2" r="0.3" fill="#ffffff" fill-opacity="0.06"/><circle cx="151.4" cy="169.3" r="0.3" fill="#ffffff" fill-opacity="0.13"/><circle cx="325.0" cy="110.8" r="0.3" fill="#ffffff" fill-opacity="0.08"/><circle cx="197.3" cy="0.1" r="0.3" fill="#ffffff" fill-opacity="0.08"/><circle cx="154.8" cy="104.4" r="0.3" fill="#ffffff" fill-opacity="0.13"/><circle cx="167.4" cy="79.6" r="0.3" fill="#ffffff" fill-opacity="0.07"/><circle cx="170.3" cy="162.2" r="0.3" fill="#ffffff" fill-opacity="0.15"/><circle cx="61.1" cy="15.3" r="0.3" fill="#ffffff" fill-opacity="0.11"/><circle cx="227.9" cy="60.3" r="0.3" fill="#ffffff" fill-opacity="0.15"/><circle cx="270.4" cy="121.1" r="0.3" fill="#ffffff" fill-opacity="0.07"/><circle cx="71.7" cy="4.4" r="0.3" fill="#ffffff" fill-opacity="0.07"/><circle cx="171.0" cy="153.0" r="0.3" fill="#ffffff" fill-opacity="0.05"/><circle cx="149.2" cy="113.4" r="0.3" fill="#ffffff" fill-opacity="0.07"/><circle cx="250.7" cy="89.0" r="0.3" fill="#ffffff" fill-opacity="0.07"/><circle cx="236.2" cy="1.0" r="0.3" fill="#ffffff" fill-opacity="0.15"/><circle cx="277.2" cy="19.2" r="0.3" fill="#ffffff" fill-opacity="0.10"/><circle cx="63.3" cy="172.4" r="0.3" fill="#ffffff" fill-opacity="0.11"/><circle cx="18.1" cy="44.9" r="0.3" fill="#ffffff" fill-opacity="0.16"/><circle cx="164.3" cy="144.3" r="0.3" fill="#ffffff" fill-opacity="0.13"/><circle cx="355.6" cy="107.2" r="0.3" fill="#ffffff" fill-opacity="0.17"/><circle cx="320.9" cy="110.3" r="0.3" fill="#ffffff" fill-opacity="0.14"/><circle cx="181.7" cy="149.5" r="0.3" fill="#ffffff" fill-opacity="0.12"/><circle cx="323.0" cy="133.9" r="0.3" fill="#ffffff" fill-opacity="0.11"/><circle cx="93.3" cy="44.5" r="0.3" fill="#ffffff" fill-opacity="0.13"/><circle cx="275.7" cy="93.8" r="0.3" fill="#ffffff" fill-opacity="0.13"/><circle cx="98.9" cy="13.9" r="0.3" fill="#ffffff" fill-opacity="0.08"/><circle cx="97.8" cy="57.5" r="0.3" fill="#ffffff" fill-opacity="0.12"/><circle cx="49.8" cy="41.6" r="0.3" fill="#ffffff" fill-opacity="0.14"/><circle cx="254.3" cy="11.6" r="0.3" fill="#ffffff" fill-opacity="0.10"/><circle cx="195.3" cy="74.8" r="0.3" fill="#ffffff" fill-opacity="0.07"/><circle cx="151.3" cy="162.9" r="0.3" fill="#ffffff" fill-opacity="0.12"/><circle cx="250.4" cy="154.2" r="0.3" fill="#ffffff" fill-opacity="0.15"/><circle cx="136.9" cy="1.1" r="0.3" fill="#ffffff" fill-opacity="0.09"/><circle cx="271.3" cy="153.6" r="0.3" fill="#ffffff" fill-opacity="0.17"/><circle cx="150.8" cy="134.6" r="0.3" fill="#ffffff" fill-opacity="0.12"/><circle cx="217.2" cy="39.7" r="0.3" fill="#ffffff" fill-opacity="0.07"/><circle cx="156.9" cy="5.2" r="0.3" fill="#ffffff" fill-opacity="0.09"/><circle cx="244.5" cy="72.8" r="0.3" fill="#ffffff" fill-opacity="0.06"/><circle cx="168.3" cy="23.0" r="0.3" fill="#ffffff" fill-opacity="0.13"/><circle cx="9.7" cy="70.9" r="0.3" fill="#ffffff" fill-opacity="0.12"/><circle cx="9.8" cy="115.7" r="0.3" fill="#ffffff" fill-opacity="0.06"/><circle cx="166.2" cy="9.1" r="0.3" fill="#ffffff" fill-opacity="0.09"/><circle cx="76.2" cy="58.8" r="0.3" fill="#ffffff" fill-opacity="0.15"/><circle cx="136.5" cy="135.4" r="0.3" fill="#ffffff" fill-opacity="0.16"/><circle cx="90.8" cy="14.7" r="0.3" fill="#ffffff" fill-opacity="0.04"/><circle cx="194.2" cy="180.0" r="0.3" fill="#ffffff" fill-opacity="0.09"/><circle cx="234.1" cy="140.6" r="0.3" fill="#ffffff" fill-opacity="0.13"/><circle cx="271.5" cy="170.9" r="0.3" fill="#ffffff" fill-opacity="0.07"/><circle cx="7.3" cy="27.4" r="0.3" fill="#ffffff" fill-opacity="0.06"/><circle cx="241.0" cy="101.5" r="0.3" fill="#ffffff" fill-opacity="0.07"/><circle cx="251.8" cy="138.0" r="0.3" fill="#ffffff" fill-opacity="0.06"/><circle cx="218.6" cy="134.6" r="0.3" fill="#ffffff" fill-opacity="0.06"/><circle cx="294.9" cy="173.6" r="0.3" fill="#ffffff" fill-opacity="0.06"/><circle cx="9.2" cy="56.2" r="0.3" fill="#ffffff" fill-opacity="0.13"/><circle cx="344.9" cy="71.4" r="0.3" fill="#ffffff" fill-opacity="0.14"/><circle cx="27.4" cy="124.3" r="0.3" fill="#ffffff" fill-opacity="0.13"/><circle cx="36.7" cy="139.0" r="0.3" fill="#ffffff" fill-opacity="0.16"/><circle cx="216.1" cy="21.8" r="0.3" fill="#ffffff" fill-opacity="0.18"/><circle cx="281.7" cy="62.5" r="0.3" fill="#ffffff" fill-opacity="0.10"/><circle cx="133.4" cy="91.1" r="0.3" fill="#ffffff" fill-opacity="0.09"/><circle cx="305.8" cy="148.0" r="0.3" fill="#ffffff" fill-opacity="0.05"/><circle cx="345.9" cy="114.4" r="0.3" fill="#ffffff" fill-opacity="0.16"/><circle cx="254.6" cy="78.4" r="0.3" fill="#ffffff" fill-opacity="0.14"/><circle cx="347.6" cy="48.6" r="0.3" fill="#ffffff" fill-opacity="0.15"/><circle cx="193.7" cy="87.0" r="0.3" fill="#ffffff" fill-opacity="0.10"/><circle cx="263.2" cy="48.3" r="0.3" fill="#ffffff" fill-opacity="0.16"/><circle cx="299.1" cy="15.6" r="0.3" fill="#ffffff" fill-opacity="0.16"/><circle cx="87.8" cy="83.6" r="0.3" fill="#ffffff" fill-opacity="0.13"/><circle cx="136.4" cy="5.2" r="0.3" fill="#ffffff" fill-opacity="0.16"/><circle cx="65.5" cy="38.2" r="0.3" fill="#ffffff" fill-opacity="0.15"/><circle cx="122.5" cy="158.5" r="0.3" fill="#ffffff" fill-opacity="0.14"/><circle cx="99.5" cy="1.8" r="0.3" fill="#ffffff" fill-opacity="0.17"/>
+        <ellipse cx="180" cy="90" rx="200" ry="22" fill="#4466aa" fill-opacity=".03"/>
+        <!-- RA grid -->
+        <line x1="60" y1="0" x2="60" y2="180" stroke="#1a3a5a" stroke-width=".4" stroke-dasharray="2,5"/>
+        <line x1="120" y1="0" x2="120" y2="180" stroke="#1a3a5a" stroke-width=".4" stroke-dasharray="2,5"/>
+        <line x1="180" y1="0" x2="180" y2="180" stroke="#2a4a6a" stroke-width=".5" stroke-dasharray="2,5"/>
+        <line x1="240" y1="0" x2="240" y2="180" stroke="#1a3a5a" stroke-width=".4" stroke-dasharray="2,5"/>
+        <line x1="300" y1="0" x2="300" y2="180" stroke="#1a3a5a" stroke-width=".4" stroke-dasharray="2,5"/>
+        <!-- Dec grid -->
+        <line x1="0" y1="45" x2="360" y2="45" stroke="#1a3a5a" stroke-width=".4" stroke-dasharray="2,5"/>
+        <line x1="0" y1="90" x2="360" y2="90" stroke="#2a4a6a" stroke-width=".5" stroke-dasharray="3,4"/>
+        <line x1="0" y1="135" x2="360" y2="135" stroke="#1a3a5a" stroke-width=".4" stroke-dasharray="2,5"/>
+        <!-- Axis labels -->
+        <text x="2" y="8" fill="#1e3a5a" font-size="5" font-family="monospace">+90°</text>
+        <text x="2" y="92" fill="#1e3a5a" font-size="5" font-family="monospace">0°</text>
+        <text x="2" y="178" fill="#1e3a5a" font-size="5" font-family="monospace">−90°</text>
+        <text x="170" y="177" fill="#1e3a5a" font-size="5" font-family="monospace">180°</text>
+        <!-- Tier legend -->
+        <circle cx="298" cy="7" r="1.5" fill="#f59e0b" fill-opacity=".9" filter="url(#glow1)"/>
+        <text x="303" y="9.5" fill="#3a5a7a" font-size="5" font-family="monospace">T1</text>
+        <circle cx="316" cy="7" r="1.5" fill="#3b82f6" fill-opacity=".9" filter="url(#glow2)"/>
+        <text x="321" y="9.5" fill="#3a5a7a" font-size="5" font-family="monospace">T2</text>
+        <circle cx="334" cy="7" r="1.2" fill="#4a5a6a" fill-opacity=".6"/>
+        <text x="338.5" y="9.5" fill="#3a5a7a" font-size="5" font-family="monospace">T3</text>
+        <!-- Candidate dots -->
+        <circle cx="26.02" cy="105.94" r="1.8" fill="#f59e0b" fill-opacity="0.95" filter="url(#glow1)" class="sky-dot" data-name="Tau Ceti" data-score="100" onclick="scrollToCard('#card-1')" />
+<circle cx="53.23" cy="99.46" r="1.8" fill="#f59e0b" fill-opacity="0.95" filter="url(#glow1)" class="sky-dot" data-name="Epsilon Eridani" data-score="100" onclick="scrollToCard('#card-2')" />
+<circle cx="217.43" cy="152.68" r="1.8" fill="#f59e0b" fill-opacity="0.95" filter="url(#glow1)" class="sky-dot" data-name="Proxima Centauri" data-score="95" onclick="scrollToCard('#card-3')" />
+<circle cx="316.73" cy="51.25" r="1.8" fill="#f59e0b" fill-opacity="0.95" filter="url(#glow1)" class="sky-dot" data-name="61 Cygni A" data-score="95" onclick="scrollToCard('#card-4')" />
+<circle cx="176.94" cy="89.20" r="1.8" fill="#f59e0b" fill-opacity="0.95" filter="url(#glow1)" class="sky-dot" data-name="Ross 128" data-score="95" onclick="scrollToCard('#card-5')" />
+<circle cx="259.75" cy="125.00" r="1.8" fill="#f59e0b" fill-opacity="0.95" filter="url(#glow1)" class="sky-dot" data-name="Gliese 667C" data-score="80" onclick="scrollToCard('#card-6')" />
+<circle cx="279.23" cy="51.22" r="1.8" fill="#f59e0b" fill-opacity="0.95" filter="url(#glow1)" class="sky-dot" data-name="Vega" data-score="80" onclick="scrollToCard('#card-7')" />
+<circle cx="18.00" cy="105.27" r="1.8" fill="#f59e0b" fill-opacity="0.95" filter="url(#glow1)" class="sky-dot" data-name="LHS 1140b" data-score="75" onclick="scrollToCard('#card-8')" />
+<circle cx="330.80" cy="71.12" r="1.8" fill="#f59e0b" fill-opacity="0.95" filter="url(#glow1)" class="sky-dot" data-name="HD 209458b" data-score="75" onclick="scrollToCard('#card-9')" />
+<circle cx="77.38" cy="103.70" r="1.8" fill="#f59e0b" fill-opacity="0.95" filter="url(#glow1)" class="sky-dot" data-name="TOI-SIM-0001" data-score="75" onclick="scrollToCard('#card-10')" />
+<circle cx="23.46" cy="63.20" r="1.8" fill="#f59e0b" fill-opacity="0.95" filter="url(#glow1)" class="sky-dot" data-name="1I/ʻOumuamua" data-score="75" onclick="scrollToCard('#card-11')" />
+<circle cx="65.57" cy="39.49" r="1.8" fill="#f59e0b" fill-opacity="0.95" filter="url(#glow1)" class="sky-dot" data-name="SIM_ISO_0001" data-score="75" onclick="scrollToCard('#card-12')" />
+<circle cx="7.33" cy="56.09" r="1.8" fill="#f59e0b" fill-opacity="0.95" filter="url(#glow1)" class="sky-dot" data-name="SIM_ISO_0002" data-score="75" onclick="scrollToCard('#card-13')" />
+<circle cx="219.64" cy="87.86" r="1.8" fill="#f59e0b" fill-opacity="0.95" filter="url(#glow1)" class="sky-dot" data-name="SIM_ISO_0004" data-score="75" onclick="scrollToCard('#card-14')" />
+<circle cx="89.34" cy="150.02" r="1.5" fill="#3b82f6" fill-opacity="0.85" filter="url(#glow2)" class="sky-dot" data-name="HD 40307" data-score="65" onclick="scrollToCard('#card-15')" />
+<circle cx="330.84" cy="146.79" r="1.5" fill="#3b82f6" fill-opacity="0.85" filter="url(#glow2)" class="sky-dot" data-name="Epsilon Indi A" data-score="65" onclick="scrollToCard('#card-16')" />
+<circle cx="344.41" cy="119.62" r="1.5" fill="#3b82f6" fill-opacity="0.85" filter="url(#glow2)" class="sky-dot" data-name="Fomalhaut" data-score="65" onclick="scrollToCard('#card-17')" />
+<circle cx="35.16" cy="146.79" r="1.5" fill="#3b82f6" fill-opacity="0.85" filter="url(#glow2)" class="sky-dot" data-name="TOI-700" data-score="65" onclick="scrollToCard('#card-18')" />
+<circle cx="271.27" cy="117.63" r="1.5" fill="#3b82f6" fill-opacity="0.85" filter="url(#glow2)" class="sky-dot" data-name="TOI-216" data-score="65" onclick="scrollToCard('#card-19')" />
+<circle cx="311.33" cy="47.36" r="1.5" fill="#3b82f6" fill-opacity="0.85" filter="url(#glow2)" class="sky-dot" data-name="SIM_STAR_0000" data-score="65" onclick="scrollToCard('#card-20')" />
+<circle cx="94.12" cy="140.74" r="1.5" fill="#3b82f6" fill-opacity="0.85" filter="url(#glow2)" class="sky-dot" data-name="SIM_STAR_0001" data-score="65" onclick="scrollToCard('#card-21')" />
+<circle cx="220.97" cy="149.68" r="1.5" fill="#3b82f6" fill-opacity="0.85" filter="url(#glow2)" class="sky-dot" data-name="SIM_STAR_0002" data-score="65" onclick="scrollToCard('#card-22')" />
+<circle cx="354.53" cy="115.64" r="1.5" fill="#3b82f6" fill-opacity="0.85" filter="url(#glow2)" class="sky-dot" data-name="SIM_STAR_0003" data-score="65" onclick="scrollToCard('#card-23')" />
+<circle cx="293.04" cy="90.26" r="1.5" fill="#3b82f6" fill-opacity="0.85" filter="url(#glow2)" class="sky-dot" data-name="SIM_STAR_0006" data-score="65" onclick="scrollToCard('#card-24')" />
+<circle cx="279.61" cy="32.49" r="1.5" fill="#3b82f6" fill-opacity="0.85" filter="url(#glow2)" class="sky-dot" data-name="SIM_STAR_0007" data-score="65" onclick="scrollToCard('#card-25')" />
+<circle cx="43.35" cy="87.66" r="1.5" fill="#3b82f6" fill-opacity="0.85" filter="url(#glow2)" class="sky-dot" data-name="4FGL J0253.4+0220" data-score="55" onclick="scrollToCard('#card-26')" />
+<circle cx="80.49" cy="68.80" r="1.5" fill="#3b82f6" fill-opacity="0.85" filter="url(#glow2)" class="sky-dot" data-name="4FGL J0521.9+2112" data-score="55" onclick="scrollToCard('#card-27')" />
+<circle cx="170.00" cy="112.08" r="1.5" fill="#3b82f6" fill-opacity="0.85" filter="url(#glow2)" class="sky-dot" data-name="4FGL J1120.0-2204" data-score="55" onclick="scrollToCard('#card-28')" />
+<circle cx="187.90" cy="75.83" r="1.5" fill="#3b82f6" fill-opacity="0.85" filter="url(#glow2)" class="sky-dot" data-name="4FGL J1231.6+1410" data-score="55" onclick="scrollToCard('#card-29')" />
+<circle cx="214.60" cy="92.56" r="1.5" fill="#3b82f6" fill-opacity="0.85" filter="url(#glow2)" class="sky-dot" data-name="4FGL J1418.4-0233" data-score="55" onclick="scrollToCard('#card-30')" />
+<circle cx="253.40" cy="50.25" r="1.5" fill="#3b82f6" fill-opacity="0.85" filter="url(#glow2)" class="sky-dot" data-name="4FGL J1653.6+3945" data-score="55" onclick="scrollToCard('#card-31')" />
+<circle cx="266.00" cy="166.32" r="1.5" fill="#3b82f6" fill-opacity="0.85" filter="url(#glow2)" class="sky-dot" data-name="4FGL J1744.1-7619" data-score="55" onclick="scrollToCard('#card-32')" />
+<circle cx="277.10" cy="57.39" r="1.5" fill="#3b82f6" fill-opacity="0.85" filter="url(#glow2)" class="sky-dot" data-name="4FGL J1828.4+3236" data-score="55" onclick="scrollToCard('#card-33')" />
+<circle cx="298.90" cy="78.61" r="1.5" fill="#3b82f6" fill-opacity="0.85" filter="url(#glow2)" class="sky-dot" data-name="4FGL J1955.4+1123" data-score="55" onclick="scrollToCard('#card-34')" />
+<circle cx="312.50" cy="79.94" r="1.5" fill="#3b82f6" fill-opacity="0.85" filter="url(#glow2)" class="sky-dot" data-name="4FGL J2049.9+1003" data-score="55" onclick="scrollToCard('#card-35')" />
+<circle cx="329.70" cy="120.23" r="1.5" fill="#3b82f6" fill-opacity="0.85" filter="url(#glow2)" class="sky-dot" data-name="4FGL J2158.8-3013" data-score="55" onclick="scrollToCard('#card-36')" />
+<circle cx="17.80" cy="50.87" r="1.5" fill="#3b82f6" fill-opacity="0.85" filter="url(#glow2)" class="sky-dot" data-name="4FGL J0111.0+3907" data-score="55" onclick="scrollToCard('#card-37')" />
+<circle cx="77.14" cy="135.00" r="1.5" fill="#3b82f6" fill-opacity="0.85" filter="url(#glow2)" class="sky-dot" data-name="Kapteyn&#39;s Star" data-score="55" onclick="scrollToCard('#card-38')" />
+<circle cx="48.12" cy="71.21" r="1.5" fill="#3b82f6" fill-opacity="0.85" filter="url(#glow2)" class="sky-dot" data-name="SIM_J0312+1847" data-score="55" onclick="scrollToCard('#card-39')" />
+<circle cx="176.91" cy="92.52" r="1.5" fill="#3b82f6" fill-opacity="0.85" filter="url(#glow2)" class="sky-dot" data-name="SIM_J1147-0231" data-score="55" onclick="scrollToCard('#card-40')" />
+<circle cx="334.62" cy="56.31" r="1.5" fill="#3b82f6" fill-opacity="0.85" filter="url(#glow2)" class="sky-dot" data-name="SIM_J2218+3341" data-score="55" onclick="scrollToCard('#card-41')" />
+<circle cx="97.88" cy="74.19" r="1.5" fill="#3b82f6" fill-opacity="0.85" filter="url(#glow2)" class="sky-dot" data-name="SIM_J0631+1548" data-score="55" onclick="scrollToCard('#card-42')" />
+<circle cx="3.30" cy="26.17" r="1.5" fill="#3b82f6" fill-opacity="0.85" filter="url(#glow2)" class="sky-dot" data-name="CXO J001311.8+634937" data-score="55" onclick="scrollToCard('#card-43')" />
+<circle cx="41.30" cy="90.21" r="1.5" fill="#3b82f6" fill-opacity="0.85" filter="url(#glow2)" class="sky-dot" data-name="CXO J024512.4-001234" data-score="55" onclick="scrollToCard('#card-44')" />
+<circle cx="114.67" cy="24.47" r="1.5" fill="#3b82f6" fill-opacity="0.85" filter="url(#glow2)" class="sky-dot" data-name="CXO J073841.2+653201" data-score="55" onclick="scrollToCard('#card-45')" />
+<circle cx="275.66" cy="108.25" r="1.5" fill="#3b82f6" fill-opacity="0.85" filter="url(#glow2)" class="sky-dot" data-name="CXO J182239.2-181442" data-score="55" onclick="scrollToCard('#card-46')" />
+<circle cx="326.34" cy="77.52" r="1.5" fill="#3b82f6" fill-opacity="0.85" filter="url(#glow2)" class="sky-dot" data-name="CXO J214521.3+122844" data-score="55" onclick="scrollToCard('#card-47')" />
+<circle cx="56.12" cy="94.95" r="1.5" fill="#3b82f6" fill-opacity="0.85" filter="url(#glow2)" class="sky-dot" data-name="4XMM J034428.3-045712" data-score="55" onclick="scrollToCard('#card-48')" />
+<circle cx="138.14" cy="59.47" r="1.5" fill="#3b82f6" fill-opacity="0.85" filter="url(#glow2)" class="sky-dot" data-name="4XMM J091234.2+303201" data-score="55" onclick="scrollToCard('#card-49')" />
+<circle cx="219.55" cy="113.25" r="1.5" fill="#3b82f6" fill-opacity="0.85" filter="url(#glow2)" class="sky-dot" data-name="4XMM J143812.7-231456" data-score="55" onclick="scrollToCard('#card-50')" />
+<circle cx="80.55" cy="159.39" r="1.5" fill="#3b82f6" fill-opacity="0.85" filter="url(#glow2)" class="sky-dot" data-name="4XMM J052211.8-692334" data-score="55" onclick="scrollToCard('#card-51')" />
+<circle cx="172.59" cy="84.61" r="1.5" fill="#3b82f6" fill-opacity="0.85" filter="url(#glow2)" class="sky-dot" data-name="4XMM J113021.4+052318" data-score="55" onclick="scrollToCard('#card-52')" />
+<circle cx="82.99" cy="56.85" r="1.2" fill="#4a5a6a" fill-opacity="0.4"  class="sky-dot" data-name="FRB20121102A" data-score="30" onclick="scrollToCard('#card-53')" />
+<circle cx="29.50" cy="24.28" r="1.2" fill="#4a5a6a" fill-opacity="0.4"  class="sky-dot" data-name="FRB20180916B" data-score="30" onclick="scrollToCard('#card-54')" />
+<circle cx="77.01" cy="63.94" r="1.2" fill="#4a5a6a" fill-opacity="0.4"  class="sky-dot" data-name="FRB20201124A" data-score="30" onclick="scrollToCard('#card-55')" />
+<circle cx="347.27" cy="41.29" r="1.2" fill="#4a5a6a" fill-opacity="0.4"  class="sky-dot" data-name="FRB20220912A" data-score="30" onclick="scrollToCard('#card-56')" />
+<circle cx="81.51" cy="144.27" r="1.2" fill="#4a5a6a" fill-opacity="0.4"  class="sky-dot" data-name="FRB_SIM_0014" data-score="30" onclick="scrollToCard('#card-57')" />
+<circle cx="163.81" cy="169.78" r="1.2" fill="#4a5a6a" fill-opacity="0.4"  class="sky-dot" data-name="FRB_SIM_0039" data-score="30" onclick="scrollToCard('#card-58')" />
+<circle cx="240.03" cy="101.29" r="1.2" fill="#4a5a6a" fill-opacity="0.4"  class="sky-dot" data-name="FRB20190520B" data-score="20" onclick="scrollToCard('#card-59')" />
+<circle cx="133.99" cy="174.54" r="1.2" fill="#4a5a6a" fill-opacity="0.4"  class="sky-dot" data-name="FRB_SIM_0011" data-score="20" onclick="scrollToCard('#card-60')" />
+<circle cx="54.07" cy="33.06" r="1.2" fill="#4a5a6a" fill-opacity="0.4"  class="sky-dot" data-name="FRB_SIM_0006" data-score="20" onclick="scrollToCard('#card-61')" />
+<circle cx="7.59" cy="124.10" r="1.2" fill="#4a5a6a" fill-opacity="0.4"  class="sky-dot" data-name="FRB_SIM_0022" data-score="20" onclick="scrollToCard('#card-62')" />
+<circle cx="225.58" cy="36.46" r="1.2" fill="#4a5a6a" fill-opacity="0.4"  class="sky-dot" data-name="FRB_SIM_0024" data-score="20" onclick="scrollToCard('#card-63')" />
+<circle cx="47.95" cy="156.48" r="1.2" fill="#4a5a6a" fill-opacity="0.4"  class="sky-dot" data-name="FRB_SIM_0030" data-score="20" onclick="scrollToCard('#card-64')" />
+      </svg>
+    </div>
   </div>
-</div>
+</details>
 <div class="filter-bar">
   <span class="fb-label">Tier</span>
   <button class="fb-btn active" data-tier="all" onclick="setTier('all')">All</button>
