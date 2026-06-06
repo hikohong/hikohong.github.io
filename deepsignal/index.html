@@ -393,6 +393,7 @@ const HIPS2FITS   = "https://alasky.cds.unistra.fr/hips-image-services/hips2fits
 const SESAME_URL  = "https://cdsweb.u-strasbg.fr/cgi-bin/nph-sesame/-ox?";
 const HORIZONS    = "https://ssd.jpl.nasa.gov/api/horizons.api";
 const TIER_COLORS = { 1: "#f59e0b", 2: "#3b82f6", 3: "#6b7280" };
+const cleanName = n => (n || '').replace(/^\*\s+/, '').trim() || n || '?';
 const SS_TYPES = new Set(["Solar System Object","Planet","Dwarf Planet","Moon","Solar System Region","Comet","Asteroid"]);
 const SURVEYS     = [
   { hips: "CDS/P/DSS2/color",        label: "Optical" },
@@ -821,7 +822,7 @@ function showMultipleResults(groups) {
   const sorted = [...groups].sort((a, b) => (b.candidacy_score || 0) - (a.candidacy_score || 0));
 
   const cardsHtml = sorted.map(c => {
-    const name  = c.target_name || "";
+    const name  = cleanName(c.target_name);
     const ra    = candidateRa(c);
     const dec   = candidateDec(c);
     const img   = (ra != null && !isNaN(ra))
@@ -954,7 +955,7 @@ function renderHighlights() {
     return `<div class="card" id="${_cid}" data-tier="${c.tier||3}" data-score="${c.candidacy_score||0}" onclick="${onclick}">
       <div class="card-img">${img}${badge}</div>
       <div class="card-body">
-        <div class="card-name">${c.target_name}</div>
+        <div class="card-name">${cleanName(c.target_name)}</div>
         <div class="card-tags">${mtags}</div>
         <div class="card-score">Score: <strong>${c.candidacy_score || "—"}</strong></div>
         ${coordsTxt}
@@ -1196,8 +1197,11 @@ function renderSkyMap(data) {
     const r   = ti===1?"1.8":(ti===2?"1.5":"1.2");
     const op  = ti===1?"0.95":(ti===2?"0.85":"0.4");
     const fl  = ti===1?` filter="url(#glow1)"`:(ti===2?` filter="url(#glow2)"`:"");
-    const nm  = (c.target_name||"?").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
-    return `<circle cx="${ra.toFixed(2)}" cy="${(90-dec).toFixed(2)}" r="${r}" fill="${col}" fill-opacity="${op}"${fl} class="sky-dot" data-name="${nm}" data-score="${sc}" data-idx="${i}" onclick="mapShowDetail(${i})"/>`;
+    const nm  = cleanName(c.target_name||"?").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+    return [
+      `<circle cx="${ra.toFixed(2)}" cy="${(90-dec).toFixed(2)}" r="${r}" fill="${col}" fill-opacity="${op}"${fl} class="sky-dot"/>`,
+      `<circle cx="${ra.toFixed(2)}" cy="${(90-dec).toFixed(2)}" r="8" fill="transparent" style="pointer-events:all" class="sky-dot" data-name="${nm}" data-score="${sc}" data-idx="${i}" onclick="mapShowDetail(${i})"/>`
+    ].join("");
   }).join("\n");
   sec.innerHTML = `
     <div class="sky-title">Sky coverage — RA/Dec equirectangular (hover for name)</div>
@@ -1245,6 +1249,14 @@ function renderSkyMap(data) {
       tip.textContent=dot.dataset.name+" · "+dot.dataset.score;
     });
     dot.addEventListener("mouseleave", ()=>{ tip.style.display="none"; });
+    dot.addEventListener("touchstart", e => {
+      const t = e.touches[0];
+      tip.style.display="block";
+      tip.style.left=(t.clientX+14)+"px";
+      tip.style.top=(t.clientY-54)+"px";
+      tip.textContent=dot.dataset.name+" · "+dot.dataset.score;
+      setTimeout(()=>tip.style.display="none", 2000);
+    }, {passive:true});
   });
 }
 
@@ -1276,7 +1288,7 @@ function mapShowDetail(idx) {
   const links = [
     ra ? `<a class="ext-link" href="https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=${ra.toFixed(4)}+${dec.toFixed(4)}&CooFrame=ICRS&Radius=2&Radius.unit=arcmin" target="_blank" rel="noreferrer">SIMBAD</a>` : "",
     ra ? `<a class="ext-link" href="https://aladin.u-strasbg.fr/AladinLite/?target=${ra.toFixed(4)}+${dec.toFixed(4)}&fov=0.5&survey=P/DSS2/color" target="_blank" rel="noreferrer">Aladin</a>` : "",
-    `<a class="ext-link" href="gallery.html?target=${encodeURIComponent(c.target_name||'')}">View in gallery →</a>`,
+    `<a class="ext-link" href="gallery.html?target=${encodeURIComponent(cleanName(c.target_name))}">View in gallery →</a>`,
   ].filter(Boolean).join("");
   const el = document.getElementById("map-detail");
   el.style.display = "block";
@@ -1287,7 +1299,7 @@ function mapShowDetail(idx) {
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap">
           <span style="font-size:.6rem;font-weight:700;padding:2px 8px;border-radius:10px;
             background:${tbg};color:${tc};border:1px solid ${tc}55;flex-shrink:0">T${tier}</span>
-          <span style="font-size:.92rem;font-weight:700;color:#eef3f8">${c.target_name||"?"}</span>
+          <span style="font-size:.92rem;font-weight:700;color:#eef3f8">${cleanName(c.target_name)}</span>
           <span style="margin-left:auto;font-family:monospace;font-weight:700;font-size:1.05rem;color:${tc}">${sc.toFixed(0)}</span>
         </div>
         <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:4px">
