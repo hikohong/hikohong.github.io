@@ -13,9 +13,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 nav{display:flex;align-items:center;gap:12px;padding:16px 24px;border-bottom:1px solid rgba(219,234,254,.10);background:rgba(8,17,31,.92);position:sticky;top:0;z-index:10;backdrop-filter:blur(8px)}
 .nav-home{display:inline-flex;align-items:center;gap:8px;color:#dbeafe;text-decoration:none;font-weight:700;font-size:.9rem}
 .nav-mark{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#7dd3fc,#f97316);color:#06121d;font-size:.65rem;font-weight:900;flex-shrink:0}
-.nav-links{margin-left:auto;display:flex;gap:8px}
-.nav-link{color:#b8c7d8;text-decoration:none;font-size:.85rem;padding:6px 12px;border-radius:5px;border:1px solid rgba(219,234,254,.15);transition:border-color 140ms,color 140ms}
+.nav-links{display:flex;gap:8px}
+.nav-link{color:#b8c7d8;text-decoration:none;font-size:.85rem;padding:6px 12px;border-radius:5px;border:1px solid rgba(219,234,254,.15);transition:border-color 140ms,color 140ms;background:none;cursor:pointer;font-family:inherit}
 .nav-link:hover{color:#7dd3fc;border-color:#7dd3fc}
+.nav-link.active{color:#7dd3fc;border-color:rgba(125,211,252,.4)}
 
 /* ── Hero ── */
 .hero{padding:48px 24px 32px;text-align:center;background:linear-gradient(180deg,rgba(125,211,252,.06) 0%,transparent 100%)}
@@ -232,12 +233,13 @@ footer a{color:#4a6a8a;text-decoration:none}
     <span class="nav-mark">HH</span>
     <span>Hiko Hong</span>
   </a>
-  <span style="color:#3a4a5a;font-size:.85rem">/ DeepSignal</span>
   <div class="nav-links">
+    <a class="nav-link active" href="index.html">Search</a>
     <a class="nav-link" href="gallery.html">Gallery</a>
-    <button class="nav-link" onclick="mapOpen()" style="background:none;cursor:pointer">Map</button>
-    <button class="nav-link" onclick="reportOpen()" style="background:none;cursor:pointer">Report</button>
+    <button class="nav-link" onclick="mapOpen()">Map</button>
+    <button class="nav-link" onclick="reportOpen()">Report</button>
   </div>
+  <span style="margin-left:auto;color:#3a4a5a;font-size:.85rem">/ DeepSignal</span>
 </nav>
 
 <div class="hero">
@@ -1274,6 +1276,7 @@ function mapShowDetail(idx) {
   const links = [
     ra ? `<a class="ext-link" href="https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=${ra.toFixed(4)}+${dec.toFixed(4)}&CooFrame=ICRS&Radius=2&Radius.unit=arcmin" target="_blank" rel="noreferrer">SIMBAD</a>` : "",
     ra ? `<a class="ext-link" href="https://aladin.u-strasbg.fr/AladinLite/?target=${ra.toFixed(4)}+${dec.toFixed(4)}&fov=0.5&survey=P/DSS2/color" target="_blank" rel="noreferrer">Aladin</a>` : "",
+    `<a class="ext-link" href="gallery.html">View in gallery →</a>`,
   ].filter(Boolean).join("");
   const el = document.getElementById("map-detail");
   el.style.display = "block";
