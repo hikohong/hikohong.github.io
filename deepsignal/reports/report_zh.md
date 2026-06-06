@@ -2,7 +2,7 @@
 
 > 本報告為自動翻譯版本（繁體中文）。
 
-**生成時間：** 2026-05-31 01:38 UTC
+**生成時間：** 2026-06-06 01:32 UTC
 **管線版本：** 2.0.0
 
 ## 執行摘要
@@ -97,13 +97,13 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
   - Exoplanet system nearby: 55 Cnc b, 55 Cnc d, 55 Cnc e
   - 都卜勒頻移率 0.1951 Hz/s 符合人工來源特徵
 
-### GJ 1214 — 評分 80/100
+### HD 136352 — 評分 80/100
 
-![GJ 1214 sky field — DSS2 Optical](images/DS-0015_GJ_1214.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=258.8314+4.9607&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=258.8314+4.9607&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=258.8314+4.9607&fov=0.5&survey=P/2MASS/color)*
+![HD 136352 sky field — DSS2 Optical](images/DS-0006_HD_136352.jpg)
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=258.8314°, Dec=4.9607°
+- **位置：** RA=230.4401°, Dec=-48.3188°
 - **頻率：** 7850.26 MHz
 - **訊噪比：** 2.7
 - **頻寬：** 414.4257 MHz
@@ -112,16 +112,16 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: GJ 1214 b, GJ 1214 b, GJ 1214 b
+  - Exoplanet system nearby: HD 136352 d, HD 136352 d, HD 136352 b
   - 都卜勒頻移率 0.0853 Hz/s 符合人工來源特徵
 
-### GJ 1214 — 評分 80/100
+### HD 136352 — 評分 80/100
 
-![GJ 1214 sky field — DSS2 Optical](images/DS-0015_GJ_1214.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=258.8314+4.9607&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=258.8314+4.9607&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=258.8314+4.9607&fov=0.5&survey=P/2MASS/color)*
+![HD 136352 sky field — DSS2 Optical](images/DS-0006_HD_136352.jpg)
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=258.8314°, Dec=4.9607°
+- **位置：** RA=230.4401°, Dec=-48.3188°
 - **頻率：** 4337.18 MHz
 - **訊噪比：** 2.8
 - **頻寬：** 470.706 MHz
@@ -130,7 +130,7 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: GJ 1214 b, GJ 1214 b, GJ 1214 b
+  - Exoplanet system nearby: HD 136352 d, HD 136352 d, HD 136352 b
   - 都卜勒頻移率 0.1127 Hz/s 符合人工來源特徵
 
 ### HD 136352 — 評分 80/100
@@ -169,13 +169,13 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
   - Exoplanet system nearby: HD 136352 d, HD 136352 d, HD 136352 b
   - 都卜勒頻移率 0.0155 Hz/s 符合人工來源特徵
 
-### HD 136352 — 評分 80/100
+### TOI-1468 — 評分 80/100
 
-![HD 136352 sky field — DSS2 Optical](images/DS-0006_HD_136352.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/2MASS/color)*
+![TOI-1468 sky field — DSS2 Optical](images/DS-0015_TOI-1468.jpg)
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=16.6539+19.2249&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=16.6539+19.2249&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=16.6539+19.2249&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=230.4401°, Dec=-48.3188°
+- **位置：** RA=16.6539°, Dec=19.2249°
 - **頻率：** 2751.75 MHz
 - **訊噪比：** 3.3
 - **頻寬：** 286.6884 MHz
@@ -184,16 +184,16 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: HD 136352 d, HD 136352 d, HD 136352 b
+  - Exoplanet system nearby: TOI-1468 b, TOI-1468 c, TOI-1468 c
   - 都卜勒頻移率 0.0413 Hz/s 符合人工來源特徵
 
-### HD 136352 — 評分 80/100
+### TOI-1468 — 評分 80/100
 
-![HD 136352 sky field — DSS2 Optical](images/DS-0006_HD_136352.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/2MASS/color)*
+![TOI-1468 sky field — DSS2 Optical](images/DS-0015_TOI-1468.jpg)
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=16.6539+19.2249&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=16.6539+19.2249&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=16.6539+19.2249&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=230.4401°, Dec=-48.3188°
+- **位置：** RA=16.6539°, Dec=19.2249°
 - **頻率：** 7147.44 MHz
 - **訊噪比：** 2.2
 - **頻寬：** 397.9049 MHz
@@ -202,16 +202,16 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: HD 136352 d, HD 136352 d, HD 136352 b
+  - Exoplanet system nearby: TOI-1468 b, TOI-1468 c, TOI-1468 c
   - 都卜勒頻移率 0.0512 Hz/s 符合人工來源特徵
 
-### HD 136352 — 評分 80/100
+### TOI-1468 — 評分 80/100
 
-![HD 136352 sky field — DSS2 Optical](images/DS-0006_HD_136352.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/2MASS/color)*
+![TOI-1468 sky field — DSS2 Optical](images/DS-0015_TOI-1468.jpg)
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=16.6539+19.2249&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=16.6539+19.2249&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=16.6539+19.2249&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=230.4401°, Dec=-48.3188°
+- **位置：** RA=16.6539°, Dec=19.2249°
 - **頻率：** 5226.00 MHz
 - **訊噪比：** 2.6
 - **頻寬：** 175.7885 MHz
@@ -220,16 +220,16 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: HD 136352 d, HD 136352 d, HD 136352 b
+  - Exoplanet system nearby: TOI-1468 b, TOI-1468 c, TOI-1468 c
   - 都卜勒頻移率 0.0840 Hz/s 符合人工來源特徵
 
-### TOI-1468 — 評分 80/100
+### TOI-2018 — 評分 80/100
 
-![TOI-1468 sky field — DSS2 Optical](images/DS-0016_TOI-1468.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=16.6539+19.2249&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=16.6539+19.2249&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=16.6539+19.2249&fov=0.5&survey=P/2MASS/color)*
+![TOI-2018 sky field — DSS2 Optical](images/DS-0016_TOI-2018.jpg)
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=229.8374+29.2079&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=229.8374+29.2079&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=229.8374+29.2079&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=16.6539°, Dec=19.2249°
+- **位置：** RA=229.8374°, Dec=29.2079°
 - **頻率：** 7028.33 MHz
 - **訊噪比：** 3.6
 - **頻寬：** 274.8608 MHz
@@ -238,16 +238,16 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: TOI-1468 b, TOI-1468 c, TOI-1468 c
+  - Exoplanet system nearby: TOI-2018 b, TOI-2018 b
   - 都卜勒頻移率 0.0666 Hz/s 符合人工來源特徵
 
-### TOI-2018 — 評分 80/100
+### TOI-2427 — 評分 80/100
 
-![TOI-2018 sky field — DSS2 Optical](images/DS-0017_TOI-2018.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=229.8374+29.2079&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=229.8374+29.2079&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=229.8374+29.2079&fov=0.5&survey=P/2MASS/color)*
+![TOI-2427 sky field — DSS2 Optical](images/DS-0017_TOI-2427.jpg)
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=229.8374°, Dec=29.2079°
+- **位置：** RA=52.2917°, Dec=-31.3629°
 - **頻率：** 4487.31 MHz
 - **訊噪比：** 4.2
 - **頻寬：** 215.3312 MHz
@@ -256,16 +256,16 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: TOI-2018 b, TOI-2018 b
+  - Exoplanet system nearby: TOI-2427 b, TOI-2427 b
   - 都卜勒頻移率 0.0224 Hz/s 符合人工來源特徵
 
-### TOI-2018 — 評分 80/100
+### TOI-2427 — 評分 80/100
 
-![TOI-2018 sky field — DSS2 Optical](images/DS-0017_TOI-2018.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=229.8374+29.2079&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=229.8374+29.2079&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=229.8374+29.2079&fov=0.5&survey=P/2MASS/color)*
+![TOI-2427 sky field — DSS2 Optical](images/DS-0017_TOI-2427.jpg)
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=229.8374°, Dec=29.2079°
+- **位置：** RA=52.2917°, Dec=-31.3629°
 - **頻率：** 2799.17 MHz
 - **訊噪比：** 3.1
 - **頻寬：** 102.9449 MHz
@@ -274,16 +274,16 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: TOI-2018 b, TOI-2018 b
+  - Exoplanet system nearby: TOI-2427 b, TOI-2427 b
   - 都卜勒頻移率 0.0631 Hz/s 符合人工來源特徵
 
-### TOI-2427 — 評分 80/100
+### TOI-700 — 評分 80/100
 
-![TOI-2427 sky field — DSS2 Optical](images/DS-0018_TOI-2427.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/2MASS/color)*
+![TOI-700 sky field — DSS2 Optical](images/DS-0018_TOI-700.jpg)
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=97.0957+-65.5786&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=97.0957+-65.5786&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=97.0957+-65.5786&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=52.2917°, Dec=-31.3629°
+- **位置：** RA=97.0957°, Dec=-65.5786°
 - **頻率：** 7015.63 MHz
 - **訊噪比：** 1.2
 - **頻寬：** 288.4385 MHz
@@ -292,16 +292,16 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: TOI-2427 b, TOI-2427 b
+  - Exoplanet system nearby: TOI-700 c, TOI-700 d, TOI-700 b
   - 都卜勒頻移率 0.0335 Hz/s 符合人工來源特徵
 
-### TOI-2427 — 評分 80/100
+### TOI-700 — 評分 80/100
 
-![TOI-2427 sky field — DSS2 Optical](images/DS-0018_TOI-2427.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/2MASS/color)*
+![TOI-700 sky field — DSS2 Optical](images/DS-0018_TOI-700.jpg)
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=97.0957+-65.5786&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=97.0957+-65.5786&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=97.0957+-65.5786&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=52.2917°, Dec=-31.3629°
+- **位置：** RA=97.0957°, Dec=-65.5786°
 - **頻率：** 6712.46 MHz
 - **訊噪比：** 3.9
 - **頻寬：** 321.4318 MHz
@@ -310,16 +310,16 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: TOI-2427 b, TOI-2427 b
+  - Exoplanet system nearby: TOI-700 c, TOI-700 d, TOI-700 b
   - 都卜勒頻移率 0.0793 Hz/s 符合人工來源特徵
 
-### TOI-700 — 評分 80/100
+### TOI-620 — 評分 80/100
 
-![TOI-700 sky field — DSS2 Optical](images/DS-0019_TOI-700.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=97.0957+-65.5786&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=97.0957+-65.5786&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=97.0957+-65.5786&fov=0.5&survey=P/2MASS/color)*
+![TOI-620 sky field — DSS2 Optical](images/DS-0019_TOI-620.jpg)
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=142.1734+-12.1672&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=142.1734+-12.1672&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=142.1734+-12.1672&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=97.0957°, Dec=-65.5786°
+- **位置：** RA=142.1734°, Dec=-12.1672°
 - **頻率：** 4930.46 MHz
 - **訊噪比：** 2.5
 - **頻寬：** 185.8339 MHz
@@ -328,16 +328,16 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: TOI-700 c, TOI-700 d, TOI-700 b
+  - Exoplanet system nearby: TOI-620 b, TOI-620 b
   - 都卜勒頻移率 0.1276 Hz/s 符合人工來源特徵
 
-### TOI-620 — 評分 80/100
+### TOI-2136 — 評分 80/100
 
-![TOI-620 sky field — DSS2 Optical](images/DS-0020_TOI-620.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=142.1734+-12.1672&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=142.1734+-12.1672&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=142.1734+-12.1672&fov=0.5&survey=P/2MASS/color)*
+![TOI-2136 sky field — DSS2 Optical](images/DS-0020_TOI-2136.jpg)
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=281.1763+36.5631&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=281.1763+36.5631&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=281.1763+36.5631&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=142.1734°, Dec=-12.1672°
+- **位置：** RA=281.1763°, Dec=36.5631°
 - **頻率：** 1524.72 MHz
 - **訊噪比：** 2.9
 - **頻寬：** 212.5536 MHz
@@ -346,15 +346,15 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: TOI-620 b, TOI-620 b
+  - Exoplanet system nearby: TOI-2136 b, TOI-2136 b, TOI-2136 b
   - 都卜勒頻移率 0.0690 Hz/s 符合人工來源特徵
 
-### TOI-2136 — 評分 80/100
+### TOI-5720 — 評分 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=281.1763+36.5631&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=281.1763+36.5631&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=281.1763+36.5631&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=170.3136+25.2733&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=170.3136+25.2733&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=170.3136+25.2733&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=281.1763°, Dec=36.5631°
+- **位置：** RA=170.3136°, Dec=25.2733°
 - **頻率：** 1204.41 MHz
 - **訊噪比：** 1.5
 - **頻寬：** 136.0191 MHz
@@ -363,15 +363,15 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: TOI-2136 b, TOI-2136 b, TOI-2136 b
+  - Exoplanet system nearby: TOI-5720 b, TOI-5720 b
   - 都卜勒頻移率 0.0487 Hz/s 符合人工來源特徵
 
-### TOI-5720 — 評分 80/100
+### TOI-1266 — 評分 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=170.3136+25.2733&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=170.3136+25.2733&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=170.3136+25.2733&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=197.9966+65.8337&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=197.9966+65.8337&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=197.9966+65.8337&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=170.3136°, Dec=25.2733°
+- **位置：** RA=197.9966°, Dec=65.8337°
 - **頻率：** 5509.40 MHz
 - **訊噪比：** 3.4
 - **頻寬：** 160.9248 MHz
@@ -380,15 +380,15 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: TOI-5720 b, TOI-5720 b
+  - Exoplanet system nearby: TOI-1266 b, TOI-1266 c, TOI-1266 c
   - 都卜勒頻移率 0.0665 Hz/s 符合人工來源特徵
 
-### TOI-5720 — 評分 80/100
+### TOI-1266 — 評分 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=170.3136+25.2733&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=170.3136+25.2733&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=170.3136+25.2733&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=197.9966+65.8337&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=197.9966+65.8337&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=197.9966+65.8337&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=170.3136°, Dec=25.2733°
+- **位置：** RA=197.9966°, Dec=65.8337°
 - **頻率：** 4429.19 MHz
 - **訊噪比：** 2.6
 - **頻寬：** 220.6048 MHz
@@ -397,15 +397,15 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: TOI-5720 b, TOI-5720 b
+  - Exoplanet system nearby: TOI-1266 b, TOI-1266 c, TOI-1266 c
   - 都卜勒頻移率 0.1687 Hz/s 符合人工來源特徵
 
-### TOI-5720 — 評分 80/100
+### TOI-1266 — 評分 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=170.3136+25.2733&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=170.3136+25.2733&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=170.3136+25.2733&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=197.9966+65.8337&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=197.9966+65.8337&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=197.9966+65.8337&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=170.3136°, Dec=25.2733°
+- **位置：** RA=197.9966°, Dec=65.8337°
 - **頻率：** 2062.05 MHz
 - **訊噪比：** 3.3
 - **頻寬：** 484.7591 MHz
@@ -414,15 +414,15 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: TOI-5720 b, TOI-5720 b
+  - Exoplanet system nearby: TOI-1266 b, TOI-1266 c, TOI-1266 c
   - 都卜勒頻移率 0.0905 Hz/s 符合人工來源特徵
 
-### TOI-1266 — 評分 80/100
+### HAT-P-11 — 評分 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=197.9966+65.8337&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=197.9966+65.8337&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=197.9966+65.8337&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=297.7102+48.0819&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=297.7102+48.0819&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=297.7102+48.0819&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=197.9966°, Dec=65.8337°
+- **位置：** RA=297.7102°, Dec=48.0819°
 - **頻率：** 9722.59 MHz
 - **訊噪比：** 3.9
 - **頻寬：** 411.5004 MHz
@@ -431,15 +431,15 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: TOI-1266 b, TOI-1266 c, TOI-1266 c
+  - Exoplanet system nearby: HAT-P-11 b, HAT-P-11 b, HAT-P-11 b
   - 都卜勒頻移率 0.0934 Hz/s 符合人工來源特徵
 
-### TOI-1266 — 評分 80/100
+### HAT-P-11 — 評分 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=197.9966+65.8337&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=197.9966+65.8337&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=197.9966+65.8337&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=297.7102+48.0819&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=297.7102+48.0819&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=297.7102+48.0819&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=197.9966°, Dec=65.8337°
+- **位置：** RA=297.7102°, Dec=48.0819°
 - **頻率：** 3450.17 MHz
 - **訊噪比：** 2.3
 - **頻寬：** 138.5564 MHz
@@ -448,15 +448,15 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: TOI-1266 b, TOI-1266 c, TOI-1266 c
+  - Exoplanet system nearby: HAT-P-11 b, HAT-P-11 b, HAT-P-11 b
   - 都卜勒頻移率 0.0840 Hz/s 符合人工來源特徵
 
-### HAT-P-11 — 評分 80/100
+### Kepler-42 — 評分 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=297.7102+48.0819&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=297.7102+48.0819&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=297.7102+48.0819&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=292.2196+44.6174&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=292.2196+44.6174&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=292.2196+44.6174&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=297.7102°, Dec=48.0819°
+- **位置：** RA=292.2196°, Dec=44.6174°
 - **頻率：** 3753.61 MHz
 - **訊噪比：** 2.0
 - **頻寬：** 331.6878 MHz
@@ -465,7 +465,7 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: HAT-P-11 b, HAT-P-11 b, HAT-P-11 b
+  - Exoplanet system nearby: Kepler-1202 b, Kepler-42 d, Kepler-42 b
   - 都卜勒頻移率 0.1446 Hz/s 符合人工來源特徵
 
 ### Kepler-42 — 評分 80/100
@@ -482,7 +482,7 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: Kepler-42 b, Kepler-1202 b, Kepler-42 d
+  - Exoplanet system nearby: Kepler-1202 b, Kepler-42 d, Kepler-42 b
   - 都卜勒頻移率 0.1602 Hz/s 符合人工來源特徵
 
 ### Kepler-42 — 評分 80/100
@@ -499,7 +499,7 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: Kepler-42 b, Kepler-1202 b, Kepler-42 d
+  - Exoplanet system nearby: Kepler-1202 b, Kepler-42 d, Kepler-42 b
   - 都卜勒頻移率 0.1359 Hz/s 符合人工來源特徵
 
 ### Kepler-42 — 評分 80/100
@@ -516,15 +516,15 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: Kepler-42 b, Kepler-1202 b, Kepler-42 d
+  - Exoplanet system nearby: Kepler-1202 b, Kepler-42 d, Kepler-42 b
   - 都卜勒頻移率 0.1189 Hz/s 符合人工來源特徵
 
-### Kepler-42 — 評分 80/100
+### TOI-544 — 評分 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=292.2196+44.6174&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=292.2196+44.6174&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=292.2196+44.6174&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=82.2901+-0.3429&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=82.2901+-0.3429&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=82.2901+-0.3429&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=292.2196°, Dec=44.6174°
+- **位置：** RA=82.2901°, Dec=-0.3429°
 - **頻率：** 9326.08 MHz
 - **訊噪比：** 1.4
 - **頻寬：** 332.4245 MHz
@@ -533,15 +533,16 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: Kepler-42 b, Kepler-1202 b, Kepler-42 d
+  - Exoplanet system nearby: TOI-544 b, TOI-544 b, TOI-544 b
   - 都卜勒頻移率 0.0635 Hz/s 符合人工來源特徵
 
-### TOI-544 — 評分 80/100
+### HD 235088 — 評分 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=82.2901+-0.3429&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=82.2901+-0.3429&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=82.2901+-0.3429&fov=0.5&survey=P/2MASS/color)*
+![HD 235088 sky field — DSS2 Optical](images/DS-0013_HD_235088.jpg)
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=300.6155+53.3774&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=300.6155+53.3774&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=300.6155+53.3774&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=82.2901°, Dec=-0.3429°
+- **位置：** RA=300.6155°, Dec=53.3774°
 - **頻率：** 9627.03 MHz
 - **訊噪比：** 3.2
 - **頻寬：** 292.9214 MHz
@@ -550,16 +551,15 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: TOI-544 b, TOI-544 b, TOI-544 b
+  - Exoplanet system nearby: HD 235088 b, HD 235088 b, HD 235088 b
   - 都卜勒頻移率 0.0838 Hz/s 符合人工來源特徵
 
-### HD 235088 — 評分 80/100
+### TOI-5800 — 評分 80/100
 
-![HD 235088 sky field — DSS2 Optical](images/DS-0013_HD_235088.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=300.6155+53.3774&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=300.6155+53.3774&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=300.6155+53.3774&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=305.0655+-7.4119&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=305.0655+-7.4119&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=305.0655+-7.4119&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=300.6155°, Dec=53.3774°
+- **位置：** RA=305.0655°, Dec=-7.4119°
 - **頻率：** 5416.36 MHz
 - **訊噪比：** 1.7
 - **頻寬：** 475.1306 MHz
@@ -568,16 +568,15 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: HD 235088 b, HD 235088 b, HD 235088 b
+  - Exoplanet system nearby: TOI-5800 b, TOI-5800 b, TOI-5800 b
   - 都卜勒頻移率 0.2132 Hz/s 符合人工來源特徵
 
-### HD 235088 — 評分 80/100
+### TOI-5800 — 評分 80/100
 
-![HD 235088 sky field — DSS2 Optical](images/DS-0013_HD_235088.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=300.6155+53.3774&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=300.6155+53.3774&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=300.6155+53.3774&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=305.0655+-7.4119&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=305.0655+-7.4119&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=305.0655+-7.4119&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=300.6155°, Dec=53.3774°
+- **位置：** RA=305.0655°, Dec=-7.4119°
 - **頻率：** 3984.12 MHz
 - **訊噪比：** 2.0
 - **頻寬：** 308.269 MHz
@@ -586,15 +585,15 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: HD 235088 b, HD 235088 b, HD 235088 b
+  - Exoplanet system nearby: TOI-5800 b, TOI-5800 b, TOI-5800 b
   - 都卜勒頻移率 0.0141 Hz/s 符合人工來源特徵
 
-### TOI-5800 — 評分 80/100
+### TOI-3884 — 評分 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=305.0655+-7.4119&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=305.0655+-7.4119&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=305.0655+-7.4119&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=181.5718+12.5070&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=181.5718+12.5070&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=181.5718+12.5070&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=305.0655°, Dec=-7.4119°
+- **位置：** RA=181.5718°, Dec=12.5070°
 - **頻率：** 9065.45 MHz
 - **訊噪比：** 1.6
 - **頻寬：** 156.0996 MHz
@@ -603,15 +602,15 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: TOI-5800 b, TOI-5800 b, TOI-5800 b
+  - Exoplanet system nearby: TOI-3884 b, TOI-3884 b, TOI-3884 b
   - 都卜勒頻移率 0.1675 Hz/s 符合人工來源特徵
 
-### TOI-5800 — 評分 80/100
+### TOI-3884 — 評分 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=305.0655+-7.4119&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=305.0655+-7.4119&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=305.0655+-7.4119&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=181.5718+12.5070&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=181.5718+12.5070&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=181.5718+12.5070&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=305.0655°, Dec=-7.4119°
+- **位置：** RA=181.5718°, Dec=12.5070°
 - **頻率：** 7050.16 MHz
 - **訊噪比：** 3.1
 - **頻寬：** 212.4935 MHz
@@ -620,15 +619,15 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: TOI-5800 b, TOI-5800 b, TOI-5800 b
+  - Exoplanet system nearby: TOI-3884 b, TOI-3884 b, TOI-3884 b
   - 都卜勒頻移率 0.1768 Hz/s 符合人工來源特徵
 
-### TOI-3884 — 評分 80/100
+### K2-3 — 評分 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=181.5718+12.5070&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=181.5718+12.5070&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=181.5718+12.5070&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=172.3354+-1.4551&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=172.3354+-1.4551&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=172.3354+-1.4551&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=181.5718°, Dec=12.5070°
+- **位置：** RA=172.3354°, Dec=-1.4551°
 - **頻率：** 1969.67 MHz
 - **訊噪比：** 1.5
 - **頻寬：** 466.4047 MHz
@@ -637,15 +636,15 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: TOI-3884 b, TOI-3884 b, TOI-3884 b
+  - Exoplanet system nearby: K2-3 d, K2-3 b, K2-3 c
   - 都卜勒頻移率 0.0965 Hz/s 符合人工來源特徵
 
-### TOI-3884 — 評分 80/100
+### K2-3 — 評分 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=181.5718+12.5070&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=181.5718+12.5070&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=181.5718+12.5070&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=172.3354+-1.4551&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=172.3354+-1.4551&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=172.3354+-1.4551&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=181.5718°, Dec=12.5070°
+- **位置：** RA=172.3354°, Dec=-1.4551°
 - **頻率：** 4338.30 MHz
 - **訊噪比：** 4.1
 - **頻寬：** 431.9159 MHz
@@ -654,7 +653,7 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: TOI-3884 b, TOI-3884 b, TOI-3884 b
+  - Exoplanet system nearby: K2-3 d, K2-3 b, K2-3 c
   - 都卜勒頻移率 0.0903 Hz/s 符合人工來源特徵
 
 ### K2-3 — 評分 80/100
@@ -742,12 +741,12 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
   - Exoplanet system nearby: K2-3 d, K2-3 b, K2-3 c
   - 都卜勒頻移率 0.1461 Hz/s 符合人工來源特徵
 
-### K2-3 — 評分 80/100
+### Wolf 503 — 評分 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=172.3354+-1.4551&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=172.3354+-1.4551&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=172.3354+-1.4551&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=206.8462+-6.1393&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=206.8462+-6.1393&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=206.8462+-6.1393&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=172.3354°, Dec=-1.4551°
+- **位置：** RA=206.8462°, Dec=-6.1393°
 - **頻率：** 2767.91 MHz
 - **訊噪比：** 3.7
 - **頻寬：** 224.1295 MHz
@@ -756,15 +755,15 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: K2-3 d, K2-3 b, K2-3 c
+  - Exoplanet system nearby: Wolf 503 b, Wolf 503 b, Wolf 503 b
   - 都卜勒頻移率 0.0395 Hz/s 符合人工來源特徵
 
-### K2-3 — 評分 80/100
+### Wolf 503 — 評分 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=172.3354+-1.4551&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=172.3354+-1.4551&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=172.3354+-1.4551&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=206.8462+-6.1393&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=206.8462+-6.1393&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=206.8462+-6.1393&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=172.3354°, Dec=-1.4551°
+- **位置：** RA=206.8462°, Dec=-6.1393°
 - **頻率：** 7098.93 MHz
 - **訊噪比：** 2.7
 - **頻寬：** 148.733 MHz
@@ -773,15 +772,15 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: K2-3 d, K2-3 b, K2-3 c
+  - Exoplanet system nearby: Wolf 503 b, Wolf 503 b, Wolf 503 b
   - 都卜勒頻移率 0.0843 Hz/s 符合人工來源特徵
 
-### Wolf 503 — 評分 80/100
+### TOI-674 — 評分 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=206.8462+-6.1393&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=206.8462+-6.1393&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=206.8462+-6.1393&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=164.5866+-36.8581&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=164.5866+-36.8581&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=164.5866+-36.8581&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=206.8462°, Dec=-6.1393°
+- **位置：** RA=164.5866°, Dec=-36.8581°
 - **頻率：** 2797.98 MHz
 - **訊噪比：** 4.3
 - **頻寬：** 421.6498 MHz
@@ -790,15 +789,15 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: Wolf 503 b, Wolf 503 b, Wolf 503 b
+  - Exoplanet system nearby: TOI-674 b, TOI-674 b, TOI-674 b
   - 都卜勒頻移率 0.1326 Hz/s 符合人工來源特徵
 
-### Wolf 503 — 評分 80/100
+### TOI-674 — 評分 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=206.8462+-6.1393&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=206.8462+-6.1393&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=206.8462+-6.1393&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=164.5866+-36.8581&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=164.5866+-36.8581&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=164.5866+-36.8581&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=206.8462°, Dec=-6.1393°
+- **位置：** RA=164.5866°, Dec=-36.8581°
 - **頻率：** 2113.78 MHz
 - **訊噪比：** 2.1
 - **頻寬：** 471.025 MHz
@@ -807,15 +806,15 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: Wolf 503 b, Wolf 503 b, Wolf 503 b
+  - Exoplanet system nearby: TOI-674 b, TOI-674 b, TOI-674 b
   - 都卜勒頻移率 0.0328 Hz/s 符合人工來源特徵
 
-### TOI-674 — 評分 80/100
+### HD 191939 — 評分 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=164.5866+-36.8581&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=164.5866+-36.8581&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=164.5866+-36.8581&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=302.0256+66.8503&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=302.0256+66.8503&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=302.0256+66.8503&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=164.5866°, Dec=-36.8581°
+- **位置：** RA=302.0256°, Dec=66.8503°
 - **頻率：** 6965.78 MHz
 - **訊噪比：** 2.5
 - **頻寬：** 482.2493 MHz
@@ -824,15 +823,15 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: TOI-674 b, TOI-674 b, TOI-674 b
+  - Exoplanet system nearby: HD 191939 b, HD 191939 c, HD 191939 e
   - 都卜勒頻移率 0.0696 Hz/s 符合人工來源特徵
 
-### HD 191939 — 評分 80/100
+### K2-136 — 評分 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=302.0256+66.8503&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=302.0256+66.8503&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=302.0256+66.8503&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=67.4129+22.8826&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=67.4129+22.8826&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=67.4129+22.8826&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=302.0256°, Dec=66.8503°
+- **位置：** RA=67.4129°, Dec=22.8826°
 - **頻率：** 4772.03 MHz
 - **訊噪比：** 6.9
 - **頻寬：** 486.4928 MHz
@@ -841,15 +840,15 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: HD 191939 b, HD 191939 c, HD 191939 e
+  - Exoplanet system nearby: K2-136 c, K2-136 c, K2-136 c
   - 都卜勒頻移率 0.0853 Hz/s 符合人工來源特徵
 
-### K2-136 — 評分 80/100
+### TOI-757 — 評分 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=67.4129+22.8826&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=67.4129+22.8826&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=67.4129+22.8826&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=187.9948+-35.5545&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=187.9948+-35.5545&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=187.9948+-35.5545&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=67.4129°, Dec=22.8826°
+- **位置：** RA=187.9948°, Dec=-35.5545°
 - **頻率：** 5206.43 MHz
 - **訊噪比：** 3.2
 - **頻寬：** 413.9054 MHz
@@ -858,15 +857,15 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: K2-136 c, K2-136 c, K2-136 c
+  - Exoplanet system nearby: TOI-757 b, TOI-757 b
   - 都卜勒頻移率 0.1206 Hz/s 符合人工來源特徵
 
-### K2-136 — 評分 80/100
+### TOI-757 — 評分 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=67.4129+22.8826&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=67.4129+22.8826&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=67.4129+22.8826&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=187.9948+-35.5545&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=187.9948+-35.5545&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=187.9948+-35.5545&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=67.4129°, Dec=22.8826°
+- **位置：** RA=187.9948°, Dec=-35.5545°
 - **頻率：** 8809.65 MHz
 - **訊噪比：** 2.1
 - **頻寬：** 341.2429 MHz
@@ -875,7 +874,7 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: K2-136 c, K2-136 c, K2-136 c
+  - Exoplanet system nearby: TOI-757 b, TOI-757 b
   - 都卜勒頻移率 0.0877 Hz/s 符合人工來源特徵
 
 ### TOI-757 — 評分 80/100
@@ -895,12 +894,12 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
   - Exoplanet system nearby: TOI-757 b, TOI-757 b
   - 都卜勒頻移率 0.1287 Hz/s 符合人工來源特徵
 
-### TOI-757 — 評分 80/100
+### Kepler-37 — 評分 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=187.9948+-35.5545&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=187.9948+-35.5545&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=187.9948+-35.5545&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=284.0593+44.5184&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=284.0593+44.5184&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=284.0593+44.5184&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=187.9948°, Dec=-35.5545°
+- **位置：** RA=284.0593°, Dec=44.5184°
 - **頻率：** 8421.98 MHz
 - **訊噪比：** 2.4
 - **頻寬：** 224.1339 MHz
@@ -909,7 +908,7 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: TOI-757 b, TOI-757 b
+  - Exoplanet system nearby: Kepler-37 c, Kepler-37 c, Kepler-37 d
   - 都卜勒頻移率 0.0777 Hz/s 符合人工來源特徵
 
 ### Kepler-37 — 評分 80/100
@@ -929,12 +928,12 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
   - Exoplanet system nearby: Kepler-37 c, Kepler-37 c, Kepler-37 d
   - 都卜勒頻移率 0.0472 Hz/s 符合人工來源特徵
 
-### Kepler-37 — 評分 80/100
+### WASP-107 — 評分 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=284.0593+44.5184&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=284.0593+44.5184&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=284.0593+44.5184&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=188.3864+-10.1462&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=188.3864+-10.1462&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=188.3864+-10.1462&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=284.0593°, Dec=44.5184°
+- **位置：** RA=188.3864°, Dec=-10.1462°
 - **頻率：** 1391.28 MHz
 - **訊噪比：** 11.1
 - **頻寬：** 172.5994 MHz
@@ -943,15 +942,15 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: Kepler-37 c, Kepler-37 c, Kepler-37 d
+  - Exoplanet system nearby: WASP-107 b, WASP-107 c, WASP-107 b
   - 都卜勒頻移率 0.2093 Hz/s 符合人工來源特徵
 
-### Kepler-37 — 評分 80/100
+### WASP-107 — 評分 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=284.0593+44.5184&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=284.0593+44.5184&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=284.0593+44.5184&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=188.3864+-10.1462&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=188.3864+-10.1462&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=188.3864+-10.1462&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=284.0593°, Dec=44.5184°
+- **位置：** RA=188.3864°, Dec=-10.1462°
 - **頻率：** 6141.09 MHz
 - **訊噪比：** 1.9
 - **頻寬：** 266.505 MHz
@@ -960,15 +959,15 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: Kepler-37 c, Kepler-37 c, Kepler-37 d
+  - Exoplanet system nearby: WASP-107 b, WASP-107 c, WASP-107 b
   - 都卜勒頻移率 0.1112 Hz/s 符合人工來源特徵
 
-### WASP-107 — 評分 80/100
+### Kepler-138 — 評分 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=188.3864+-10.1462&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=188.3864+-10.1462&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=188.3864+-10.1462&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=290.3814+43.2931&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=290.3814+43.2931&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=290.3814+43.2931&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=188.3864°, Dec=-10.1462°
+- **位置：** RA=290.3814°, Dec=43.2931°
 - **頻率：** 1467.66 MHz
 - **訊噪比：** 1.1
 - **頻寬：** 469.9367 MHz
@@ -977,15 +976,15 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: WASP-107 b, WASP-107 c, WASP-107 b
+  - Exoplanet system nearby: Kepler-716 c, Kepler-138 c, Kepler-138 c
   - 都卜勒頻移率 0.0927 Hz/s 符合人工來源特徵
 
-### WASP-107 — 評分 80/100
+### Kepler-138 — 評分 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=188.3864+-10.1462&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=188.3864+-10.1462&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=188.3864+-10.1462&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=290.3814+43.2931&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=290.3814+43.2931&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=290.3814+43.2931&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=188.3864°, Dec=-10.1462°
+- **位置：** RA=290.3814°, Dec=43.2931°
 - **頻率：** 8010.97 MHz
 - **訊噪比：** 2.4
 - **頻寬：** 153.8209 MHz
@@ -994,15 +993,15 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: WASP-107 b, WASP-107 c, WASP-107 b
+  - Exoplanet system nearby: Kepler-716 c, Kepler-138 c, Kepler-138 c
   - 都卜勒頻移率 0.0153 Hz/s 符合人工來源特徵
 
-### Kepler-138 — 評分 80/100
+### K2-240 — 評分 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=290.3814+43.2931&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=290.3814+43.2931&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=290.3814+43.2931&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=227.8494+-17.8754&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=227.8494+-17.8754&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=227.8494+-17.8754&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=290.3814°, Dec=43.2931°
+- **位置：** RA=227.8494°, Dec=-17.8754°
 - **頻率：** 5165.19 MHz
 - **訊噪比：** 3.0
 - **頻寬：** 254.0358 MHz
@@ -1011,15 +1010,15 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: Kepler-716 c, Kepler-138 c, Kepler-138 c
+  - Exoplanet system nearby: K2-240 b, K2-240 c
   - 都卜勒頻移率 0.0296 Hz/s 符合人工來源特徵
 
-### Kepler-138 — 評分 80/100
+### K2-240 — 評分 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=290.3814+43.2931&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=290.3814+43.2931&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=290.3814+43.2931&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=227.8494+-17.8754&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=227.8494+-17.8754&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=227.8494+-17.8754&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=290.3814°, Dec=43.2931°
+- **位置：** RA=227.8494°, Dec=-17.8754°
 - **頻率：** 5300.90 MHz
 - **訊噪比：** 6.4
 - **頻寬：** 266.7557 MHz
@@ -1028,15 +1027,15 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: Kepler-716 c, Kepler-138 c, Kepler-138 c
+  - Exoplanet system nearby: K2-240 b, K2-240 c
   - 都卜勒頻移率 0.1534 Hz/s 符合人工來源特徵
 
-### Kepler-138 — 評分 80/100
+### K2-240 — 評分 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=290.3814+43.2931&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=290.3814+43.2931&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=290.3814+43.2931&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=227.8494+-17.8754&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=227.8494+-17.8754&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=227.8494+-17.8754&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=290.3814°, Dec=43.2931°
+- **位置：** RA=227.8494°, Dec=-17.8754°
 - **頻率：** 4297.53 MHz
 - **訊噪比：** 2.6
 - **頻寬：** 230.9982 MHz
@@ -1045,15 +1044,15 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: Kepler-716 c, Kepler-138 c, Kepler-138 c
+  - Exoplanet system nearby: K2-240 b, K2-240 c
   - 都卜勒頻移率 0.1053 Hz/s 符合人工來源特徵
 
-### K2-240 — 評分 80/100
+### TOI-6000 — 評分 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=227.8494+-17.8754&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=227.8494+-17.8754&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=227.8494+-17.8754&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=292.6063+68.1546&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=292.6063+68.1546&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=292.6063+68.1546&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=227.8494°, Dec=-17.8754°
+- **位置：** RA=292.6063°, Dec=68.1546°
 - **頻率：** 9539.72 MHz
 - **訊噪比：** 6.5
 - **頻寬：** 466.5392 MHz
@@ -1062,15 +1061,15 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: K2-240 b, K2-240 c
+  - Exoplanet system nearby: TOI-6000 b, TOI-6000 b
   - 都卜勒頻移率 0.1177 Hz/s 符合人工來源特徵
 
-### TOI-6000 — 評分 80/100
+### TOI-2141 — 評分 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=292.6063+68.1546&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=292.6063+68.1546&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=292.6063+68.1546&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=258.7623+18.3403&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=258.7623+18.3403&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=258.7623+18.3403&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=292.6063°, Dec=68.1546°
+- **位置：** RA=258.7623°, Dec=18.3403°
 - **頻率：** 8637.04 MHz
 - **訊噪比：** 4.1
 - **頻寬：** 361.0349 MHz
@@ -1079,15 +1078,15 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: TOI-6000 b, TOI-6000 b
+  - Exoplanet system nearby: TOI-2141 c, TOI-2141 b, TOI-2141 b
   - 都卜勒頻移率 0.0297 Hz/s 符合人工來源特徵
 
-### TOI-6000 — 評分 80/100
+### TOI-2141 — 評分 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=292.6063+68.1546&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=292.6063+68.1546&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=292.6063+68.1546&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=258.7623+18.3403&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=258.7623+18.3403&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=258.7623+18.3403&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=292.6063°, Dec=68.1546°
+- **位置：** RA=258.7623°, Dec=18.3403°
 - **頻率：** 3593.40 MHz
 - **訊噪比：** 1.5
 - **頻寬：** 393.9573 MHz
@@ -1096,7 +1095,7 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: TOI-6000 b, TOI-6000 b
+  - Exoplanet system nearby: TOI-2141 c, TOI-2141 b, TOI-2141 b
   - 都卜勒頻移率 0.0782 Hz/s 符合人工來源特徵
 
 ### K2-321 — 評分 80/100
@@ -1368,7 +1367,7 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: WASP-8 b, WASP-8 c, WASP-8 b
+  - Exoplanet system nearby: WASP-8 c, WASP-8 b, WASP-8 b
   - 都卜勒頻移率 0.0180 Hz/s 符合人工來源特徵
 
 ### WASP-8 — 評分 80/100
@@ -1385,7 +1384,7 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: WASP-8 b, WASP-8 c, WASP-8 b
+  - Exoplanet system nearby: WASP-8 c, WASP-8 b, WASP-8 b
   - 都卜勒頻移率 0.0521 Hz/s 符合人工來源特徵
 
 ### HD 118203 — 評分 80/100
@@ -2346,12 +2345,12 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
   - Exoplanet system nearby: GJ 3222 b
   - 都卜勒頻移率 0.0915 Hz/s 符合人工來源特徵
 
-### HD 39091 — 評分 80/100
+### HD 154345 — 評分 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=84.2993+-80.4646&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=84.2993+-80.4646&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=84.2993+-80.4646&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=255.6525+47.0856&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=255.6525+47.0856&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=255.6525+47.0856&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=84.2993°, Dec=-80.4646°
+- **位置：** RA=255.6525°, Dec=47.0856°
 - **頻率：** 7283.71 MHz
 - **訊噪比：** 3.6
 - **頻寬：** 182.8082 MHz
@@ -2360,15 +2359,15 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: HD 39091 b, pi Men c, pi Men c
+  - Exoplanet system nearby: HD 154345 b, HD 154345 b, HD 154345 b
   - 都卜勒頻移率 0.0222 Hz/s 符合人工來源特徵
 
-### HD 154345 — 評分 80/100
+### HD 189733 — 評分 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=255.6525+47.0856&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=255.6525+47.0856&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=255.6525+47.0856&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=300.1821+22.7098&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=300.1821+22.7098&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=300.1821+22.7098&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=255.6525°, Dec=47.0856°
+- **位置：** RA=300.1821°, Dec=22.7098°
 - **頻率：** 5405.52 MHz
 - **訊噪比：** 3.8
 - **頻寬：** 233.2377 MHz
@@ -2377,7 +2376,7 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: HD 154345 b, HD 154345 b, HD 154345 b
+  - Exoplanet system nearby: HD 189733 b, HD 189733 b, HD 189733 b
   - 都卜勒頻移率 0.0351 Hz/s 符合人工來源特徵
 
 ### HD 189733 — 評分 80/100
@@ -2431,12 +2430,12 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
   - Exoplanet system nearby: HD 189733 b, HD 189733 b, HD 189733 b
   - 都卜勒頻移率 0.0549 Hz/s 符合人工來源特徵
 
-### HD 189733 — 評分 80/100
+### HD 217107 — 評分 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=300.1821+22.7098&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=300.1821+22.7098&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=300.1821+22.7098&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=344.5647+-2.3954&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=344.5647+-2.3954&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=344.5647+-2.3954&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=300.1821°, Dec=22.7098°
+- **位置：** RA=344.5647°, Dec=-2.3954°
 - **頻率：** 9269.41 MHz
 - **訊噪比：** 4.0
 - **頻寬：** 103.7039 MHz
@@ -2445,15 +2444,15 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: HD 189733 b, HD 189733 b, HD 189733 b
+  - Exoplanet system nearby: HD 217107 b, HD 217107 c, HD 217107 c
   - 都卜勒頻移率 0.0807 Hz/s 符合人工來源特徵
 
-### HD 189733 — 評分 80/100
+### HD 114783 — 評分 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=300.1821+22.7098&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=300.1821+22.7098&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=300.1821+22.7098&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=198.1818+-2.2650&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=198.1818+-2.2650&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=198.1818+-2.2650&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=300.1821°, Dec=22.7098°
+- **位置：** RA=198.1818°, Dec=-2.2650°
 - **頻率：** 6581.34 MHz
 - **訊噪比：** 4.9
 - **頻寬：** 196.6556 MHz
@@ -2462,15 +2461,15 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: HD 189733 b, HD 189733 b, HD 189733 b
+  - Exoplanet system nearby: HD 114783 b, HD 114783 c, HD 114783 c
   - 都卜勒頻移率 0.1021 Hz/s 符合人工來源特徵
 
-### HD 217107 — 評分 80/100
+### HD 114783 — 評分 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=344.5647+-2.3954&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=344.5647+-2.3954&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=344.5647+-2.3954&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=198.1818+-2.2650&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=198.1818+-2.2650&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=198.1818+-2.2650&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=344.5647°, Dec=-2.3954°
+- **位置：** RA=198.1818°, Dec=-2.2650°
 - **頻率：** 1042.67 MHz
 - **訊噪比：** 6.7
 - **頻寬：** 441.3478 MHz
@@ -2479,15 +2478,15 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: HD 217107 b, HD 217107 c, HD 217107 c
+  - Exoplanet system nearby: HD 114783 b, HD 114783 c, HD 114783 c
   - 都卜勒頻移率 0.0516 Hz/s 符合人工來源特徵
 
-### HD 217107 — 評分 80/100
+### HD 114783 — 評分 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=344.5647+-2.3954&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=344.5647+-2.3954&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=344.5647+-2.3954&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=198.1818+-2.2650&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=198.1818+-2.2650&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=198.1818+-2.2650&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=344.5647°, Dec=-2.3954°
+- **位置：** RA=198.1818°, Dec=-2.2650°
 - **頻率：** 8699.42 MHz
 - **訊噪比：** 2.3
 - **頻寬：** 201.7054 MHz
@@ -2496,15 +2495,15 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: HD 217107 b, HD 217107 c, HD 217107 c
+  - Exoplanet system nearby: HD 114783 b, HD 114783 c, HD 114783 c
   - 都卜勒頻移率 0.1015 Hz/s 符合人工來源特徵
 
-### HD 217107 — 評分 80/100
+### HD 114783 — 評分 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=344.5647+-2.3954&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=344.5647+-2.3954&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=344.5647+-2.3954&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=198.1818+-2.2650&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=198.1818+-2.2650&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=198.1818+-2.2650&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=344.5647°, Dec=-2.3954°
+- **位置：** RA=198.1818°, Dec=-2.2650°
 - **頻率：** 6430.82 MHz
 - **訊噪比：** 4.8
 - **頻寬：** 493.8598 MHz
@@ -2513,7 +2512,7 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 **交叉比對證據：**
 
-  - Exoplanet system nearby: HD 217107 b, HD 217107 c, HD 217107 c
+  - Exoplanet system nearby: HD 114783 b, HD 114783 c, HD 114783 c
   - 都卜勒頻移率 0.0921 Hz/s 符合人工來源特徵
 
 ### psi1 Dra B — 評分 80/100
@@ -4478,7 +4477,7 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 
 ### TOI-700 — 評分 70/100
 
-![TOI-700 sky field — DSS2 Optical](images/DS-0019_TOI-700.jpg)
+![TOI-700 sky field — DSS2 Optical](images/DS-0018_TOI-700.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=97.0957+-65.5786&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=97.0957+-65.5786&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=97.0957+-65.5786&fov=0.5&survey=P/2MASS/color)*
 
@@ -6473,13 +6472,13 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
   - 都卜勒頻移率 0.3868 Hz/s 符合人工來源特徵
   - 高訊噪比： 39.1
 
-### TOI-2427 — 評分 50/100
+### TOI-700 — 評分 50/100
 
-![TOI-2427 sky field — DSS2 Optical](images/DS-0018_TOI-2427.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/2MASS/color)*
+![TOI-700 sky field — DSS2 Optical](images/DS-0018_TOI-700.jpg)
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=97.0957+-65.5786&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=97.0957+-65.5786&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=97.0957+-65.5786&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=52.2917°, Dec=-31.3629°
+- **位置：** RA=97.0957°, Dec=-65.5786°
 - **頻率：** 8026.56 MHz
 - **訊噪比：** 2.0
 - **頻寬：** 283.5663 MHz
@@ -6489,15 +6488,15 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 **交叉比對證據：**
 
   - Frequency in known RFI band: X-band satellite
-  - Exoplanet system nearby: TOI-2427 b, TOI-2427 b
+  - Exoplanet system nearby: TOI-700 c, TOI-700 d, TOI-700 b
   - 都卜勒頻移率 0.0275 Hz/s 符合人工來源特徵
 
-### TOI-2136 — 評分 50/100
+### TOI-5720 — 評分 50/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=281.1763+36.5631&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=281.1763+36.5631&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=281.1763+36.5631&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=170.3136+25.2733&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=170.3136+25.2733&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=170.3136+25.2733&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=281.1763°, Dec=36.5631°
+- **位置：** RA=170.3136°, Dec=25.2733°
 - **頻率：** 8055.08 MHz
 - **訊噪比：** 2.3
 - **頻寬：** 365.7254 MHz
@@ -6507,15 +6506,15 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 **交叉比對證據：**
 
   - Frequency in known RFI band: X-band satellite
-  - Exoplanet system nearby: TOI-2136 b, TOI-2136 b, TOI-2136 b
+  - Exoplanet system nearby: TOI-5720 b, TOI-5720 b
   - 都卜勒頻移率 0.0457 Hz/s 符合人工來源特徵
 
-### K2-136 — 評分 50/100
+### TOI-757 — 評分 50/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=67.4129+22.8826&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=67.4129+22.8826&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=67.4129+22.8826&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=187.9948+-35.5545&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=187.9948+-35.5545&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=187.9948+-35.5545&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=67.4129°, Dec=22.8826°
+- **位置：** RA=187.9948°, Dec=-35.5545°
 - **頻率：** 8171.35 MHz
 - **訊噪比：** 2.5
 - **頻寬：** 193.0563 MHz
@@ -6525,7 +6524,7 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 **交叉比對證據：**
 
   - Frequency in known RFI band: X-band satellite
-  - Exoplanet system nearby: K2-136 c, K2-136 c, K2-136 c
+  - Exoplanet system nearby: TOI-757 b, TOI-757 b
   - 都卜勒頻移率 0.1062 Hz/s 符合人工來源特徵
 
 ### TOI-757 — 評分 50/100
@@ -6546,12 +6545,12 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
   - Exoplanet system nearby: TOI-757 b, TOI-757 b
   - 都卜勒頻移率 0.0368 Hz/s 符合人工來源特徵
 
-### TOI-757 — 評分 50/100
+### Kepler-37 — 評分 50/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=187.9948+-35.5545&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=187.9948+-35.5545&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=187.9948+-35.5545&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=284.0593+44.5184&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=284.0593+44.5184&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=284.0593+44.5184&fov=0.5&survey=P/2MASS/color)*
 
-- **位置：** RA=187.9948°, Dec=-35.5545°
+- **位置：** RA=284.0593°, Dec=44.5184°
 - **頻率：** 2489.79 MHz
 - **訊噪比：** 2.5
 - **頻寬：** 213.888 MHz
@@ -6561,7 +6560,7 @@ DeepSignal 管線共處理了 307 個天文目標的 60 次無線電望遠鏡觀
 **交叉比對證據：**
 
   - Frequency in known RFI band: ISM 2.4 GHz
-  - Exoplanet system nearby: TOI-757 b, TOI-757 b
+  - Exoplanet system nearby: Kepler-37 c, Kepler-37 c, Kepler-37 d
   - 都卜勒頻移率 0.1375 Hz/s 符合人工來源特徵
 
 ### alf Cen B — 評分 65/100

@@ -643,11 +643,10 @@
       "Exoplanet system nearby: HD 136352 d, HD 136352 d, HD 136352 b",
       "Doppler drift rate 1.2093 Hz/s consistent with technological origin",
       "High SNR: 20.4",
+      "Doppler drift rate 0.0853 Hz/s consistent with technological origin",
+      "Doppler drift rate 0.1127 Hz/s consistent with technological origin",
       "Doppler drift rate 0.0878 Hz/s consistent with technological origin",
       "Doppler drift rate 0.0155 Hz/s consistent with technological origin",
-      "Doppler drift rate 0.0413 Hz/s consistent with technological origin",
-      "Doppler drift rate 0.0512 Hz/s consistent with technological origin",
-      "Doppler drift rate 0.0840 Hz/s consistent with technological origin",
       "Doppler drift rate 0.0363 Hz/s consistent with technological origin",
       "Doppler drift rate 0.1072 Hz/s consistent with technological origin",
       "Doppler drift rate 0.0235 Hz/s consistent with technological origin",
@@ -664,6 +663,59 @@
       "radio"
     ],
     "_entries": [
+      {
+        "obs_id": 10,
+        "target_name": "HD 136352",
+        "ra_deg": 230.4401147,
+        "dec_deg": -48.3188174,
+        "center_freq_mhz": 7850.2573,
+        "bandwidth_mhz": 414.4257,
+        "snr": 2.6955,
+        "drift_rate_hz_s": -0.085304,
+        "integration_time_s": 600.0,
+        "is_injected_anomaly": false,
+        "anomaly_type": null,
+        "data_type": "radio",
+        "detection_method": "doppler_drift",
+        "abs_drift_rate_hz_s": 0.085304,
+        "candidacy_score": 80,
+        "reasons": [
+          "Exoplanet system nearby: HD 136352 d, HD 136352 d, HD 136352 b",
+          "Doppler drift rate 0.0853 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.1127 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.0878 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.0155 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.0363 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.1072 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.0235 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.1652 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.0813 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.1274 Hz/s consistent with technological origin",
+          "Frequency in known RFI band: X-band satellite",
+          "Doppler drift rate 0.0448 Hz/s consistent with technological origin"
+        ]
+      },
+      {
+        "obs_id": 11,
+        "target_name": "HD 136352",
+        "ra_deg": 230.4401147,
+        "dec_deg": -48.3188174,
+        "center_freq_mhz": 4337.1822,
+        "bandwidth_mhz": 470.706,
+        "snr": 2.8095,
+        "drift_rate_hz_s": 0.112724,
+        "integration_time_s": 300.0,
+        "is_injected_anomaly": false,
+        "anomaly_type": null,
+        "data_type": "radio",
+        "detection_method": "doppler_drift",
+        "abs_drift_rate_hz_s": 0.112724,
+        "candidacy_score": 80,
+        "reasons": [
+          "Exoplanet system nearby: HD 136352 d, HD 136352 d, HD 136352 b",
+          "Doppler drift rate 0.1127 Hz/s consistent with technological origin"
+        ]
+      },
       {
         "obs_id": 20,
         "target_name": "HD 136352",
@@ -682,19 +734,7 @@
         "candidacy_score": 80,
         "reasons": [
           "Exoplanet system nearby: HD 136352 d, HD 136352 d, HD 136352 b",
-          "Doppler drift rate 0.0878 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.0155 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.0413 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.0512 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.0840 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.0363 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.1072 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.0235 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.1652 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.0813 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.1274 Hz/s consistent with technological origin",
-          "Frequency in known RFI band: X-band satellite",
-          "Doppler drift rate 0.0448 Hz/s consistent with technological origin"
+          "Doppler drift rate 0.0878 Hz/s consistent with technological origin"
         ]
       },
       {
@@ -716,69 +756,6 @@
         "reasons": [
           "Exoplanet system nearby: HD 136352 d, HD 136352 d, HD 136352 b",
           "Doppler drift rate 0.0155 Hz/s consistent with technological origin"
-        ]
-      },
-      {
-        "obs_id": 30,
-        "target_name": "HD 136352",
-        "ra_deg": 230.4401147,
-        "dec_deg": -48.3188174,
-        "center_freq_mhz": 2751.7484,
-        "bandwidth_mhz": 286.6884,
-        "snr": 3.2632,
-        "drift_rate_hz_s": 0.041273,
-        "integration_time_s": 600.0,
-        "is_injected_anomaly": false,
-        "anomaly_type": null,
-        "data_type": "radio",
-        "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.041273,
-        "candidacy_score": 80,
-        "reasons": [
-          "Exoplanet system nearby: HD 136352 d, HD 136352 d, HD 136352 b",
-          "Doppler drift rate 0.0413 Hz/s consistent with technological origin"
-        ]
-      },
-      {
-        "obs_id": 31,
-        "target_name": "HD 136352",
-        "ra_deg": 230.4401147,
-        "dec_deg": -48.3188174,
-        "center_freq_mhz": 7147.4406,
-        "bandwidth_mhz": 397.9049,
-        "snr": 2.2184,
-        "drift_rate_hz_s": -0.051224,
-        "integration_time_s": 600.0,
-        "is_injected_anomaly": false,
-        "anomaly_type": null,
-        "data_type": "radio",
-        "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.051224,
-        "candidacy_score": 80,
-        "reasons": [
-          "Exoplanet system nearby: HD 136352 d, HD 136352 d, HD 136352 b",
-          "Doppler drift rate 0.0512 Hz/s consistent with technological origin"
-        ]
-      },
-      {
-        "obs_id": 32,
-        "target_name": "HD 136352",
-        "ra_deg": 230.4401147,
-        "dec_deg": -48.3188174,
-        "center_freq_mhz": 5226.0023,
-        "bandwidth_mhz": 175.7885,
-        "snr": 2.5677,
-        "drift_rate_hz_s": -0.084016,
-        "integration_time_s": 300.0,
-        "is_injected_anomaly": false,
-        "anomaly_type": null,
-        "data_type": "radio",
-        "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.084016,
-        "candidacy_score": 80,
-        "reasons": [
-          "Exoplanet system nearby: HD 136352 d, HD 136352 d, HD 136352 b",
-          "Doppler drift rate 0.0840 Hz/s consistent with technological origin"
         ]
       },
       {
@@ -949,11 +926,10 @@
           "Exoplanet system nearby: HD 136352 d, HD 136352 d, HD 136352 b",
           "Doppler drift rate 1.2093 Hz/s consistent with technological origin",
           "High SNR: 20.4",
+          "Doppler drift rate 0.0853 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.1127 Hz/s consistent with technological origin",
           "Doppler drift rate 0.0878 Hz/s consistent with technological origin",
           "Doppler drift rate 0.0155 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.0413 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.0512 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.0840 Hz/s consistent with technological origin",
           "Doppler drift rate 0.0363 Hz/s consistent with technological origin",
           "Doppler drift rate 0.1072 Hz/s consistent with technological origin",
           "Doppler drift rate 0.0235 Hz/s consistent with technological origin",
@@ -1629,7 +1605,7 @@
     ]
   },
   {
-    "obs_id": -5680894254241185317,
+    "obs_id": -1378327450468262582,
     "target_name": "HD 209458b",
     "ra_deg": 330.795,
     "dec_deg": 18.884,
@@ -1662,7 +1638,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -5680894254241185317,
+        "obs_id": -1378327450468262582,
         "target_name": "HD 209458b",
         "ra_deg": 330.795,
         "dec_deg": 18.884,
@@ -1735,28 +1711,27 @@
     ]
   },
   {
-    "obs_id": 160,
+    "obs_id": 150,
     "target_name": "HD 235088",
     "ra_deg": 300.6154535,
     "dec_deg": 53.3774418,
-    "center_freq_mhz": 5416.3629,
-    "bandwidth_mhz": 475.1306,
-    "snr": 1.6574,
-    "drift_rate_hz_s": -0.213205,
-    "integration_time_s": 600.0,
+    "center_freq_mhz": 9627.0329,
+    "bandwidth_mhz": 292.9214,
+    "snr": 3.1796,
+    "drift_rate_hz_s": 0.083813,
+    "integration_time_s": 120.0,
     "is_injected_anomaly": false,
     "anomaly_type": null,
     "data_type": "radio",
     "detection_method": "doppler_drift",
-    "abs_drift_rate_hz_s": 0.213205,
+    "abs_drift_rate_hz_s": 0.083813,
     "candidacy_score": 80,
     "reasons": [
       "Exoplanet system nearby: HD 235088 b, HD 235088 b, HD 235088 b",
-      "Doppler drift rate 0.2132 Hz/s consistent with technological origin",
+      "Doppler drift rate 0.0838 Hz/s consistent with technological origin",
       "Frequency in known RFI band: X-band satellite",
       "Doppler drift rate 0.4372 Hz/s consistent with technological origin",
       "High SNR: 20.7",
-      "Doppler drift rate 0.0141 Hz/s consistent with technological origin",
       "Doppler drift rate 0.1152 Hz/s consistent with technological origin",
       "Doppler drift rate 0.0361 Hz/s consistent with technological origin"
     ],
@@ -1792,51 +1767,29 @@
         ]
       },
       {
-        "obs_id": 160,
+        "obs_id": 150,
         "target_name": "HD 235088",
         "ra_deg": 300.6154535,
         "dec_deg": 53.3774418,
-        "center_freq_mhz": 5416.3629,
-        "bandwidth_mhz": 475.1306,
-        "snr": 1.6574,
-        "drift_rate_hz_s": -0.213205,
-        "integration_time_s": 600.0,
-        "is_injected_anomaly": false,
-        "anomaly_type": null,
-        "data_type": "radio",
-        "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.213205,
-        "candidacy_score": 80,
-        "reasons": [
-          "Exoplanet system nearby: HD 235088 b, HD 235088 b, HD 235088 b",
-          "Doppler drift rate 0.2132 Hz/s consistent with technological origin",
-          "Frequency in known RFI band: X-band satellite",
-          "Doppler drift rate 0.4372 Hz/s consistent with technological origin",
-          "High SNR: 20.7",
-          "Doppler drift rate 0.0141 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.1152 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.0361 Hz/s consistent with technological origin"
-        ]
-      },
-      {
-        "obs_id": 161,
-        "target_name": "HD 235088",
-        "ra_deg": 300.6154535,
-        "dec_deg": 53.3774418,
-        "center_freq_mhz": 3984.121,
-        "bandwidth_mhz": 308.269,
-        "snr": 2.0016,
-        "drift_rate_hz_s": -0.014079,
+        "center_freq_mhz": 9627.0329,
+        "bandwidth_mhz": 292.9214,
+        "snr": 3.1796,
+        "drift_rate_hz_s": 0.083813,
         "integration_time_s": 120.0,
         "is_injected_anomaly": false,
         "anomaly_type": null,
         "data_type": "radio",
         "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.014079,
+        "abs_drift_rate_hz_s": 0.083813,
         "candidacy_score": 80,
         "reasons": [
           "Exoplanet system nearby: HD 235088 b, HD 235088 b, HD 235088 b",
-          "Doppler drift rate 0.0141 Hz/s consistent with technological origin"
+          "Doppler drift rate 0.0838 Hz/s consistent with technological origin",
+          "Frequency in known RFI band: X-band satellite",
+          "Doppler drift rate 0.4372 Hz/s consistent with technological origin",
+          "High SNR: 20.7",
+          "Doppler drift rate 0.1152 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.0361 Hz/s consistent with technological origin"
         ]
       },
       {
@@ -2087,25 +2040,26 @@
     "nasa_images": []
   },
   {
-    "obs_id": 10,
-    "target_name": "GJ 1214",
-    "ra_deg": 258.8313991,
-    "dec_deg": 4.9606795,
-    "center_freq_mhz": 7850.2573,
-    "bandwidth_mhz": 414.4257,
-    "snr": 2.6955,
-    "drift_rate_hz_s": -0.085304,
+    "obs_id": 30,
+    "target_name": "TOI-1468",
+    "ra_deg": 16.6538724,
+    "dec_deg": 19.2249195,
+    "center_freq_mhz": 2751.7484,
+    "bandwidth_mhz": 286.6884,
+    "snr": 3.2632,
+    "drift_rate_hz_s": 0.041273,
     "integration_time_s": 600.0,
     "is_injected_anomaly": false,
     "anomaly_type": null,
     "data_type": "radio",
     "detection_method": "doppler_drift",
-    "abs_drift_rate_hz_s": 0.085304,
+    "abs_drift_rate_hz_s": 0.041273,
     "candidacy_score": 80,
     "reasons": [
-      "Exoplanet system nearby: GJ 1214 b, GJ 1214 b, GJ 1214 b",
-      "Doppler drift rate 0.0853 Hz/s consistent with technological origin",
-      "Doppler drift rate 0.1127 Hz/s consistent with technological origin"
+      "Exoplanet system nearby: TOI-1468 b, TOI-1468 c, TOI-1468 c",
+      "Doppler drift rate 0.0413 Hz/s consistent with technological origin",
+      "Doppler drift rate 0.0512 Hz/s consistent with technological origin",
+      "Doppler drift rate 0.0840 Hz/s consistent with technological origin"
     ],
     "_all_methods": [
       "doppler_drift"
@@ -2115,115 +2069,68 @@
     ],
     "_entries": [
       {
-        "obs_id": 10,
-        "target_name": "GJ 1214",
-        "ra_deg": 258.8313991,
-        "dec_deg": 4.9606795,
-        "center_freq_mhz": 7850.2573,
-        "bandwidth_mhz": 414.4257,
-        "snr": 2.6955,
-        "drift_rate_hz_s": -0.085304,
+        "obs_id": 30,
+        "target_name": "TOI-1468",
+        "ra_deg": 16.6538724,
+        "dec_deg": 19.2249195,
+        "center_freq_mhz": 2751.7484,
+        "bandwidth_mhz": 286.6884,
+        "snr": 3.2632,
+        "drift_rate_hz_s": 0.041273,
         "integration_time_s": 600.0,
         "is_injected_anomaly": false,
         "anomaly_type": null,
         "data_type": "radio",
         "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.085304,
+        "abs_drift_rate_hz_s": 0.041273,
         "candidacy_score": 80,
         "reasons": [
-          "Exoplanet system nearby: GJ 1214 b, GJ 1214 b, GJ 1214 b",
-          "Doppler drift rate 0.0853 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.1127 Hz/s consistent with technological origin"
+          "Exoplanet system nearby: TOI-1468 b, TOI-1468 c, TOI-1468 c",
+          "Doppler drift rate 0.0413 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.0512 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.0840 Hz/s consistent with technological origin"
         ]
       },
       {
-        "obs_id": 11,
-        "target_name": "GJ 1214",
-        "ra_deg": 258.8313991,
-        "dec_deg": 4.9606795,
-        "center_freq_mhz": 4337.1822,
-        "bandwidth_mhz": 470.706,
-        "snr": 2.8095,
-        "drift_rate_hz_s": 0.112724,
+        "obs_id": 31,
+        "target_name": "TOI-1468",
+        "ra_deg": 16.6538724,
+        "dec_deg": 19.2249195,
+        "center_freq_mhz": 7147.4406,
+        "bandwidth_mhz": 397.9049,
+        "snr": 2.2184,
+        "drift_rate_hz_s": -0.051224,
+        "integration_time_s": 600.0,
+        "is_injected_anomaly": false,
+        "anomaly_type": null,
+        "data_type": "radio",
+        "detection_method": "doppler_drift",
+        "abs_drift_rate_hz_s": 0.051224,
+        "candidacy_score": 80,
+        "reasons": [
+          "Exoplanet system nearby: TOI-1468 b, TOI-1468 c, TOI-1468 c",
+          "Doppler drift rate 0.0512 Hz/s consistent with technological origin"
+        ]
+      },
+      {
+        "obs_id": 32,
+        "target_name": "TOI-1468",
+        "ra_deg": 16.6538724,
+        "dec_deg": 19.2249195,
+        "center_freq_mhz": 5226.0023,
+        "bandwidth_mhz": 175.7885,
+        "snr": 2.5677,
+        "drift_rate_hz_s": -0.084016,
         "integration_time_s": 300.0,
         "is_injected_anomaly": false,
         "anomaly_type": null,
         "data_type": "radio",
         "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.112724,
-        "candidacy_score": 80,
-        "reasons": [
-          "Exoplanet system nearby: GJ 1214 b, GJ 1214 b, GJ 1214 b",
-          "Doppler drift rate 0.1127 Hz/s consistent with technological origin"
-        ]
-      }
-    ],
-    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=258.8314+4.9607&fov=0.5&survey=P/DSS2/color",
-    "survey_label": "DSS2 Optical",
-    "multisurvey_links": [
-      {
-        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=258.8314+4.9607&fov=0.5&survey=P/DSS2/color",
-        "label": "DSS2 Optical",
-        "survey_key": "optical"
-      },
-      {
-        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=258.8314+4.9607&fov=0.5&survey=P/2MASS/color",
-        "label": "2MASS NIR",
-        "survey_key": "nir"
-      }
-    ],
-    "image_path": "images/DS-0015_GJ_1214.jpg",
-    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=258.83140&dec=4.96068&format=jpg",
-    "image_cdn_label": "DSS2 Optical",
-    "image_filename": "DS-0015_GJ_1214.jpg",
-    "nasa_images": []
-  },
-  {
-    "obs_id": 40,
-    "target_name": "TOI-1468",
-    "ra_deg": 16.6538724,
-    "dec_deg": 19.2249195,
-    "center_freq_mhz": 7028.326,
-    "bandwidth_mhz": 274.8608,
-    "snr": 3.5665,
-    "drift_rate_hz_s": -0.066551,
-    "integration_time_s": 120.0,
-    "is_injected_anomaly": false,
-    "anomaly_type": null,
-    "data_type": "radio",
-    "detection_method": "doppler_drift",
-    "abs_drift_rate_hz_s": 0.066551,
-    "candidacy_score": 80,
-    "reasons": [
-      "Exoplanet system nearby: TOI-1468 b, TOI-1468 c, TOI-1468 c",
-      "Doppler drift rate 0.0666 Hz/s consistent with technological origin"
-    ],
-    "_all_methods": [
-      "doppler_drift"
-    ],
-    "_all_dtypes": [
-      "radio"
-    ],
-    "_entries": [
-      {
-        "obs_id": 40,
-        "target_name": "TOI-1468",
-        "ra_deg": 16.6538724,
-        "dec_deg": 19.2249195,
-        "center_freq_mhz": 7028.326,
-        "bandwidth_mhz": 274.8608,
-        "snr": 3.5665,
-        "drift_rate_hz_s": -0.066551,
-        "integration_time_s": 120.0,
-        "is_injected_anomaly": false,
-        "anomaly_type": null,
-        "data_type": "radio",
-        "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.066551,
+        "abs_drift_rate_hz_s": 0.084016,
         "candidacy_score": 80,
         "reasons": [
           "Exoplanet system nearby: TOI-1468 b, TOI-1468 c, TOI-1468 c",
-          "Doppler drift rate 0.0666 Hz/s consistent with technological origin"
+          "Doppler drift rate 0.0840 Hz/s consistent with technological origin"
         ]
       }
     ],
@@ -2241,32 +2148,31 @@
         "survey_key": "nir"
       }
     ],
-    "image_path": "images/DS-0016_TOI-1468.jpg",
+    "image_path": "images/DS-0015_TOI-1468.jpg",
     "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=16.65387&dec=19.22492&format=jpg",
     "image_cdn_label": "DSS2 Optical",
-    "image_filename": "DS-0016_TOI-1468.jpg",
+    "image_filename": "DS-0015_TOI-1468.jpg",
     "nasa_images": []
   },
   {
-    "obs_id": 50,
+    "obs_id": 40,
     "target_name": "TOI-2018",
     "ra_deg": 229.8374423,
     "dec_deg": 29.2078771,
-    "center_freq_mhz": 4487.3054,
-    "bandwidth_mhz": 215.3312,
-    "snr": 4.2026,
-    "drift_rate_hz_s": 0.02236,
-    "integration_time_s": 600.0,
+    "center_freq_mhz": 7028.326,
+    "bandwidth_mhz": 274.8608,
+    "snr": 3.5665,
+    "drift_rate_hz_s": -0.066551,
+    "integration_time_s": 120.0,
     "is_injected_anomaly": false,
     "anomaly_type": null,
     "data_type": "radio",
     "detection_method": "doppler_drift",
-    "abs_drift_rate_hz_s": 0.02236,
+    "abs_drift_rate_hz_s": 0.066551,
     "candidacy_score": 80,
     "reasons": [
       "Exoplanet system nearby: TOI-2018 b, TOI-2018 b",
-      "Doppler drift rate 0.0224 Hz/s consistent with technological origin",
-      "Doppler drift rate 0.0631 Hz/s consistent with technological origin"
+      "Doppler drift rate 0.0666 Hz/s consistent with technological origin"
     ],
     "_all_methods": [
       "doppler_drift"
@@ -2276,46 +2182,24 @@
     ],
     "_entries": [
       {
-        "obs_id": 50,
+        "obs_id": 40,
         "target_name": "TOI-2018",
         "ra_deg": 229.8374423,
         "dec_deg": 29.2078771,
-        "center_freq_mhz": 4487.3054,
-        "bandwidth_mhz": 215.3312,
-        "snr": 4.2026,
-        "drift_rate_hz_s": 0.02236,
-        "integration_time_s": 600.0,
+        "center_freq_mhz": 7028.326,
+        "bandwidth_mhz": 274.8608,
+        "snr": 3.5665,
+        "drift_rate_hz_s": -0.066551,
+        "integration_time_s": 120.0,
         "is_injected_anomaly": false,
         "anomaly_type": null,
         "data_type": "radio",
         "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.02236,
+        "abs_drift_rate_hz_s": 0.066551,
         "candidacy_score": 80,
         "reasons": [
           "Exoplanet system nearby: TOI-2018 b, TOI-2018 b",
-          "Doppler drift rate 0.0224 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.0631 Hz/s consistent with technological origin"
-        ]
-      },
-      {
-        "obs_id": 51,
-        "target_name": "TOI-2018",
-        "ra_deg": 229.8374423,
-        "dec_deg": 29.2078771,
-        "center_freq_mhz": 2799.1738,
-        "bandwidth_mhz": 102.9449,
-        "snr": 3.1411,
-        "drift_rate_hz_s": 0.063129,
-        "integration_time_s": 300.0,
-        "is_injected_anomaly": false,
-        "anomaly_type": null,
-        "data_type": "radio",
-        "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.063129,
-        "candidacy_score": 80,
-        "reasons": [
-          "Exoplanet system nearby: TOI-2018 b, TOI-2018 b",
-          "Doppler drift rate 0.0631 Hz/s consistent with technological origin"
+          "Doppler drift rate 0.0666 Hz/s consistent with technological origin"
         ]
       }
     ],
@@ -2333,10 +2217,10 @@
         "survey_key": "nir"
       }
     ],
-    "image_path": "images/DS-0017_TOI-2018.jpg",
+    "image_path": "images/DS-0016_TOI-2018.jpg",
     "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=229.83744&dec=29.20788&format=jpg",
     "image_cdn_label": "DSS2 Optical",
-    "image_filename": "DS-0017_TOI-2018.jpg",
+    "image_filename": "DS-0016_TOI-2018.jpg",
     "nasa_images": [
       {
         "title": "Toy Dog Portrait",
@@ -2365,27 +2249,25 @@
     ]
   },
   {
-    "obs_id": 61,
+    "obs_id": 50,
     "target_name": "TOI-2427",
     "ra_deg": 52.2917315,
     "dec_deg": -31.3628665,
-    "center_freq_mhz": 7015.6267,
-    "bandwidth_mhz": 288.4385,
-    "snr": 1.1718,
-    "drift_rate_hz_s": -0.033489,
-    "integration_time_s": 120.0,
+    "center_freq_mhz": 4487.3054,
+    "bandwidth_mhz": 215.3312,
+    "snr": 4.2026,
+    "drift_rate_hz_s": 0.02236,
+    "integration_time_s": 600.0,
     "is_injected_anomaly": false,
     "anomaly_type": null,
     "data_type": "radio",
     "detection_method": "doppler_drift",
-    "abs_drift_rate_hz_s": 0.033489,
+    "abs_drift_rate_hz_s": 0.02236,
     "candidacy_score": 80,
     "reasons": [
       "Exoplanet system nearby: TOI-2427 b, TOI-2427 b",
-      "Doppler drift rate 0.0335 Hz/s consistent with technological origin",
-      "Frequency in known RFI band: X-band satellite",
-      "Doppler drift rate 0.0275 Hz/s consistent with technological origin",
-      "Doppler drift rate 0.0793 Hz/s consistent with technological origin"
+      "Doppler drift rate 0.0224 Hz/s consistent with technological origin",
+      "Doppler drift rate 0.0631 Hz/s consistent with technological origin"
     ],
     "_all_methods": [
       "doppler_drift"
@@ -2395,70 +2277,46 @@
     ],
     "_entries": [
       {
-        "obs_id": 60,
+        "obs_id": 50,
         "target_name": "TOI-2427",
         "ra_deg": 52.2917315,
         "dec_deg": -31.3628665,
-        "center_freq_mhz": 8026.5613,
-        "bandwidth_mhz": 283.5663,
-        "snr": 1.975,
-        "drift_rate_hz_s": -0.027514,
-        "integration_time_s": 120.0,
+        "center_freq_mhz": 4487.3054,
+        "bandwidth_mhz": 215.3312,
+        "snr": 4.2026,
+        "drift_rate_hz_s": 0.02236,
+        "integration_time_s": 600.0,
         "is_injected_anomaly": false,
         "anomaly_type": null,
         "data_type": "radio",
         "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.027514,
-        "candidacy_score": 50,
-        "reasons": [
-          "Frequency in known RFI band: X-band satellite",
-          "Exoplanet system nearby: TOI-2427 b, TOI-2427 b",
-          "Doppler drift rate 0.0275 Hz/s consistent with technological origin"
-        ]
-      },
-      {
-        "obs_id": 61,
-        "target_name": "TOI-2427",
-        "ra_deg": 52.2917315,
-        "dec_deg": -31.3628665,
-        "center_freq_mhz": 7015.6267,
-        "bandwidth_mhz": 288.4385,
-        "snr": 1.1718,
-        "drift_rate_hz_s": -0.033489,
-        "integration_time_s": 120.0,
-        "is_injected_anomaly": false,
-        "anomaly_type": null,
-        "data_type": "radio",
-        "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.033489,
+        "abs_drift_rate_hz_s": 0.02236,
         "candidacy_score": 80,
         "reasons": [
           "Exoplanet system nearby: TOI-2427 b, TOI-2427 b",
-          "Doppler drift rate 0.0335 Hz/s consistent with technological origin",
-          "Frequency in known RFI band: X-band satellite",
-          "Doppler drift rate 0.0275 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.0793 Hz/s consistent with technological origin"
+          "Doppler drift rate 0.0224 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.0631 Hz/s consistent with technological origin"
         ]
       },
       {
-        "obs_id": 62,
+        "obs_id": 51,
         "target_name": "TOI-2427",
         "ra_deg": 52.2917315,
         "dec_deg": -31.3628665,
-        "center_freq_mhz": 6712.4649,
-        "bandwidth_mhz": 321.4318,
-        "snr": 3.8791,
-        "drift_rate_hz_s": 0.079335,
+        "center_freq_mhz": 2799.1738,
+        "bandwidth_mhz": 102.9449,
+        "snr": 3.1411,
+        "drift_rate_hz_s": 0.063129,
         "integration_time_s": 300.0,
         "is_injected_anomaly": false,
         "anomaly_type": null,
         "data_type": "radio",
         "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.079335,
+        "abs_drift_rate_hz_s": 0.063129,
         "candidacy_score": 80,
         "reasons": [
           "Exoplanet system nearby: TOI-2427 b, TOI-2427 b",
-          "Doppler drift rate 0.0793 Hz/s consistent with technological origin"
+          "Doppler drift rate 0.0631 Hz/s consistent with technological origin"
         ]
       }
     ],
@@ -2476,31 +2334,34 @@
         "survey_key": "nir"
       }
     ],
-    "image_path": "images/DS-0018_TOI-2427.jpg",
+    "image_path": "images/DS-0017_TOI-2427.jpg",
     "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=52.29173&dec=-31.36287&format=jpg",
     "image_cdn_label": "DSS2 Optical",
-    "image_filename": "DS-0018_TOI-2427.jpg",
+    "image_filename": "DS-0017_TOI-2427.jpg",
     "nasa_images": []
   },
   {
-    "obs_id": 70,
+    "obs_id": 61,
     "target_name": "TOI-700",
     "ra_deg": 97.0957165,
     "dec_deg": -65.5786149,
-    "center_freq_mhz": 4930.4565,
-    "bandwidth_mhz": 185.8339,
-    "snr": 2.4703,
-    "drift_rate_hz_s": -0.127569,
+    "center_freq_mhz": 7015.6267,
+    "bandwidth_mhz": 288.4385,
+    "snr": 1.1718,
+    "drift_rate_hz_s": -0.033489,
     "integration_time_s": 120.0,
     "is_injected_anomaly": false,
     "anomaly_type": null,
     "data_type": "radio",
     "detection_method": "doppler_drift",
-    "abs_drift_rate_hz_s": 0.127569,
+    "abs_drift_rate_hz_s": 0.033489,
     "candidacy_score": 80,
     "reasons": [
       "Exoplanet system nearby: TOI-700 c, TOI-700 d, TOI-700 b",
-      "Doppler drift rate 0.1276 Hz/s consistent with technological origin",
+      "Doppler drift rate 0.0335 Hz/s consistent with technological origin",
+      "Frequency in known RFI band: X-band satellite",
+      "Doppler drift rate 0.0275 Hz/s consistent with technological origin",
+      "Doppler drift rate 0.0793 Hz/s consistent with technological origin",
       "Ultra-narrowband signal (< 10 Hz) — unlikely natural"
     ],
     "_all_methods": [
@@ -2513,29 +2374,75 @@
     ],
     "_entries": [
       {
-        "obs_id": 70,
+        "obs_id": 60,
         "target_name": "TOI-700",
         "ra_deg": 97.0957165,
         "dec_deg": -65.5786149,
-        "center_freq_mhz": 4930.4565,
-        "bandwidth_mhz": 185.8339,
-        "snr": 2.4703,
-        "drift_rate_hz_s": -0.127569,
+        "center_freq_mhz": 8026.5613,
+        "bandwidth_mhz": 283.5663,
+        "snr": 1.975,
+        "drift_rate_hz_s": -0.027514,
         "integration_time_s": 120.0,
         "is_injected_anomaly": false,
         "anomaly_type": null,
         "data_type": "radio",
         "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.127569,
+        "abs_drift_rate_hz_s": 0.027514,
+        "candidacy_score": 50,
+        "reasons": [
+          "Frequency in known RFI band: X-band satellite",
+          "Exoplanet system nearby: TOI-700 c, TOI-700 d, TOI-700 b",
+          "Doppler drift rate 0.0275 Hz/s consistent with technological origin"
+        ]
+      },
+      {
+        "obs_id": 61,
+        "target_name": "TOI-700",
+        "ra_deg": 97.0957165,
+        "dec_deg": -65.5786149,
+        "center_freq_mhz": 7015.6267,
+        "bandwidth_mhz": 288.4385,
+        "snr": 1.1718,
+        "drift_rate_hz_s": -0.033489,
+        "integration_time_s": 120.0,
+        "is_injected_anomaly": false,
+        "anomaly_type": null,
+        "data_type": "radio",
+        "detection_method": "doppler_drift",
+        "abs_drift_rate_hz_s": 0.033489,
         "candidacy_score": 80,
         "reasons": [
           "Exoplanet system nearby: TOI-700 c, TOI-700 d, TOI-700 b",
-          "Doppler drift rate 0.1276 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.0335 Hz/s consistent with technological origin",
+          "Frequency in known RFI band: X-band satellite",
+          "Doppler drift rate 0.0275 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.0793 Hz/s consistent with technological origin",
           "Ultra-narrowband signal (< 10 Hz) — unlikely natural"
         ]
       },
       {
-        "obs_id": -5907803078836444930,
+        "obs_id": 62,
+        "target_name": "TOI-700",
+        "ra_deg": 97.0957165,
+        "dec_deg": -65.5786149,
+        "center_freq_mhz": 6712.4649,
+        "bandwidth_mhz": 321.4318,
+        "snr": 3.8791,
+        "drift_rate_hz_s": 0.079335,
+        "integration_time_s": 300.0,
+        "is_injected_anomaly": false,
+        "anomaly_type": null,
+        "data_type": "radio",
+        "detection_method": "doppler_drift",
+        "abs_drift_rate_hz_s": 0.079335,
+        "candidacy_score": 80,
+        "reasons": [
+          "Exoplanet system nearby: TOI-700 c, TOI-700 d, TOI-700 b",
+          "Doppler drift rate 0.0793 Hz/s consistent with technological origin"
+        ]
+      },
+      {
+        "obs_id": -6715702130650380271,
         "target_name": "TOI-700",
         "ra_deg": 35.1611,
         "dec_deg": -56.7867,
@@ -2568,10 +2475,10 @@
         "survey_key": "nir"
       }
     ],
-    "image_path": "images/DS-0019_TOI-700.jpg",
+    "image_path": "images/DS-0018_TOI-700.jpg",
     "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=97.09572&dec=-65.57861&format=jpg",
     "image_cdn_label": "DSS2 Optical",
-    "image_filename": "DS-0019_TOI-700.jpg",
+    "image_filename": "DS-0018_TOI-700.jpg",
     "nasa_images": [
       {
         "title": "TOI 700 Artists' Illustration",
@@ -2592,24 +2499,24 @@
     ]
   },
   {
-    "obs_id": 80,
+    "obs_id": 70,
     "target_name": "TOI-620",
     "ra_deg": 142.1734459,
     "dec_deg": -12.1671652,
-    "center_freq_mhz": 1524.7247,
-    "bandwidth_mhz": 212.5536,
-    "snr": 2.9189,
-    "drift_rate_hz_s": 0.069049,
+    "center_freq_mhz": 4930.4565,
+    "bandwidth_mhz": 185.8339,
+    "snr": 2.4703,
+    "drift_rate_hz_s": -0.127569,
     "integration_time_s": 120.0,
     "is_injected_anomaly": false,
     "anomaly_type": null,
     "data_type": "radio",
     "detection_method": "doppler_drift",
-    "abs_drift_rate_hz_s": 0.069049,
+    "abs_drift_rate_hz_s": 0.127569,
     "candidacy_score": 80,
     "reasons": [
       "Exoplanet system nearby: TOI-620 b, TOI-620 b",
-      "Doppler drift rate 0.0690 Hz/s consistent with technological origin"
+      "Doppler drift rate 0.1276 Hz/s consistent with technological origin"
     ],
     "_all_methods": [
       "doppler_drift"
@@ -2619,24 +2526,24 @@
     ],
     "_entries": [
       {
-        "obs_id": 80,
+        "obs_id": 70,
         "target_name": "TOI-620",
         "ra_deg": 142.1734459,
         "dec_deg": -12.1671652,
-        "center_freq_mhz": 1524.7247,
-        "bandwidth_mhz": 212.5536,
-        "snr": 2.9189,
-        "drift_rate_hz_s": 0.069049,
+        "center_freq_mhz": 4930.4565,
+        "bandwidth_mhz": 185.8339,
+        "snr": 2.4703,
+        "drift_rate_hz_s": -0.127569,
         "integration_time_s": 120.0,
         "is_injected_anomaly": false,
         "anomaly_type": null,
         "data_type": "radio",
         "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.069049,
+        "abs_drift_rate_hz_s": 0.127569,
         "candidacy_score": 80,
         "reasons": [
           "Exoplanet system nearby: TOI-620 b, TOI-620 b",
-          "Doppler drift rate 0.0690 Hz/s consistent with technological origin"
+          "Doppler drift rate 0.1276 Hz/s consistent with technological origin"
         ]
       }
     ],
@@ -2654,33 +2561,31 @@
         "survey_key": "nir"
       }
     ],
-    "image_path": "images/DS-0020_TOI-620.jpg",
+    "image_path": "images/DS-0019_TOI-620.jpg",
     "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=142.17345&dec=-12.16717&format=jpg",
     "image_cdn_label": "DSS2 Optical",
-    "image_filename": "DS-0020_TOI-620.jpg",
+    "image_filename": "DS-0019_TOI-620.jpg",
     "nasa_images": []
   },
   {
-    "obs_id": 91,
+    "obs_id": 80,
     "target_name": "TOI-2136",
     "ra_deg": 281.1763433,
     "dec_deg": 36.5631318,
-    "center_freq_mhz": 1204.4087,
-    "bandwidth_mhz": 136.0191,
-    "snr": 1.4949,
-    "drift_rate_hz_s": 0.048697,
+    "center_freq_mhz": 1524.7247,
+    "bandwidth_mhz": 212.5536,
+    "snr": 2.9189,
+    "drift_rate_hz_s": 0.069049,
     "integration_time_s": 120.0,
     "is_injected_anomaly": false,
     "anomaly_type": null,
     "data_type": "radio",
     "detection_method": "doppler_drift",
-    "abs_drift_rate_hz_s": 0.048697,
+    "abs_drift_rate_hz_s": 0.069049,
     "candidacy_score": 80,
     "reasons": [
       "Exoplanet system nearby: TOI-2136 b, TOI-2136 b, TOI-2136 b",
-      "Doppler drift rate 0.0487 Hz/s consistent with technological origin",
-      "Frequency in known RFI band: X-band satellite",
-      "Doppler drift rate 0.0457 Hz/s consistent with technological origin"
+      "Doppler drift rate 0.0690 Hz/s consistent with technological origin"
     ],
     "_all_methods": [
       "doppler_drift"
@@ -2690,48 +2595,24 @@
     ],
     "_entries": [
       {
-        "obs_id": 90,
+        "obs_id": 80,
         "target_name": "TOI-2136",
         "ra_deg": 281.1763433,
         "dec_deg": 36.5631318,
-        "center_freq_mhz": 8055.0839,
-        "bandwidth_mhz": 365.7254,
-        "snr": 2.3287,
-        "drift_rate_hz_s": 0.045678,
+        "center_freq_mhz": 1524.7247,
+        "bandwidth_mhz": 212.5536,
+        "snr": 2.9189,
+        "drift_rate_hz_s": 0.069049,
         "integration_time_s": 120.0,
         "is_injected_anomaly": false,
         "anomaly_type": null,
         "data_type": "radio",
         "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.045678,
-        "candidacy_score": 50,
-        "reasons": [
-          "Frequency in known RFI band: X-band satellite",
-          "Exoplanet system nearby: TOI-2136 b, TOI-2136 b, TOI-2136 b",
-          "Doppler drift rate 0.0457 Hz/s consistent with technological origin"
-        ]
-      },
-      {
-        "obs_id": 91,
-        "target_name": "TOI-2136",
-        "ra_deg": 281.1763433,
-        "dec_deg": 36.5631318,
-        "center_freq_mhz": 1204.4087,
-        "bandwidth_mhz": 136.0191,
-        "snr": 1.4949,
-        "drift_rate_hz_s": 0.048697,
-        "integration_time_s": 120.0,
-        "is_injected_anomaly": false,
-        "anomaly_type": null,
-        "data_type": "radio",
-        "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.048697,
+        "abs_drift_rate_hz_s": 0.069049,
         "candidacy_score": 80,
         "reasons": [
           "Exoplanet system nearby: TOI-2136 b, TOI-2136 b, TOI-2136 b",
-          "Doppler drift rate 0.0487 Hz/s consistent with technological origin",
-          "Frequency in known RFI band: X-band satellite",
-          "Doppler drift rate 0.0457 Hz/s consistent with technological origin"
+          "Doppler drift rate 0.0690 Hz/s consistent with technological origin"
         ]
       }
     ],
@@ -2749,31 +2630,33 @@
         "survey_key": "nir"
       }
     ],
-    "image_path": null,
+    "image_path": "images/DS-0020_TOI-2136.jpg",
     "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=281.17634&dec=36.56313&format=jpg",
-    "image_cdn_label": "DSS2 Optical"
+    "image_cdn_label": "DSS2 Optical",
+    "image_filename": "DS-0020_TOI-2136.jpg",
+    "nasa_images": []
   },
   {
-    "obs_id": 100,
+    "obs_id": 91,
     "target_name": "TOI-5720",
     "ra_deg": 170.3135774,
     "dec_deg": 25.2732942,
-    "center_freq_mhz": 5509.403,
-    "bandwidth_mhz": 160.9248,
-    "snr": 3.3983,
-    "drift_rate_hz_s": 0.066539,
+    "center_freq_mhz": 1204.4087,
+    "bandwidth_mhz": 136.0191,
+    "snr": 1.4949,
+    "drift_rate_hz_s": 0.048697,
     "integration_time_s": 120.0,
     "is_injected_anomaly": false,
     "anomaly_type": null,
     "data_type": "radio",
     "detection_method": "doppler_drift",
-    "abs_drift_rate_hz_s": 0.066539,
+    "abs_drift_rate_hz_s": 0.048697,
     "candidacy_score": 80,
     "reasons": [
       "Exoplanet system nearby: TOI-5720 b, TOI-5720 b",
-      "Doppler drift rate 0.0665 Hz/s consistent with technological origin",
-      "Doppler drift rate 0.1687 Hz/s consistent with technological origin",
-      "Doppler drift rate 0.0905 Hz/s consistent with technological origin"
+      "Doppler drift rate 0.0487 Hz/s consistent with technological origin",
+      "Frequency in known RFI band: X-band satellite",
+      "Doppler drift rate 0.0457 Hz/s consistent with technological origin"
     ],
     "_all_methods": [
       "doppler_drift"
@@ -2783,68 +2666,48 @@
     ],
     "_entries": [
       {
-        "obs_id": 100,
+        "obs_id": 90,
         "target_name": "TOI-5720",
         "ra_deg": 170.3135774,
         "dec_deg": 25.2732942,
-        "center_freq_mhz": 5509.403,
-        "bandwidth_mhz": 160.9248,
-        "snr": 3.3983,
-        "drift_rate_hz_s": 0.066539,
+        "center_freq_mhz": 8055.0839,
+        "bandwidth_mhz": 365.7254,
+        "snr": 2.3287,
+        "drift_rate_hz_s": 0.045678,
         "integration_time_s": 120.0,
         "is_injected_anomaly": false,
         "anomaly_type": null,
         "data_type": "radio",
         "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.066539,
-        "candidacy_score": 80,
+        "abs_drift_rate_hz_s": 0.045678,
+        "candidacy_score": 50,
         "reasons": [
+          "Frequency in known RFI band: X-band satellite",
           "Exoplanet system nearby: TOI-5720 b, TOI-5720 b",
-          "Doppler drift rate 0.0665 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.1687 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.0905 Hz/s consistent with technological origin"
+          "Doppler drift rate 0.0457 Hz/s consistent with technological origin"
         ]
       },
       {
-        "obs_id": 101,
+        "obs_id": 91,
         "target_name": "TOI-5720",
         "ra_deg": 170.3135774,
         "dec_deg": 25.2732942,
-        "center_freq_mhz": 4429.191,
-        "bandwidth_mhz": 220.6048,
-        "snr": 2.6121,
-        "drift_rate_hz_s": -0.168733,
-        "integration_time_s": 600.0,
-        "is_injected_anomaly": false,
-        "anomaly_type": null,
-        "data_type": "radio",
-        "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.168733,
-        "candidacy_score": 80,
-        "reasons": [
-          "Exoplanet system nearby: TOI-5720 b, TOI-5720 b",
-          "Doppler drift rate 0.1687 Hz/s consistent with technological origin"
-        ]
-      },
-      {
-        "obs_id": 102,
-        "target_name": "TOI-5720",
-        "ra_deg": 170.3135774,
-        "dec_deg": 25.2732942,
-        "center_freq_mhz": 2062.0531,
-        "bandwidth_mhz": 484.7591,
-        "snr": 3.3197,
-        "drift_rate_hz_s": -0.090548,
+        "center_freq_mhz": 1204.4087,
+        "bandwidth_mhz": 136.0191,
+        "snr": 1.4949,
+        "drift_rate_hz_s": 0.048697,
         "integration_time_s": 120.0,
         "is_injected_anomaly": false,
         "anomaly_type": null,
         "data_type": "radio",
         "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.090548,
+        "abs_drift_rate_hz_s": 0.048697,
         "candidacy_score": 80,
         "reasons": [
           "Exoplanet system nearby: TOI-5720 b, TOI-5720 b",
-          "Doppler drift rate 0.0905 Hz/s consistent with technological origin"
+          "Doppler drift rate 0.0487 Hz/s consistent with technological origin",
+          "Frequency in known RFI band: X-band satellite",
+          "Doppler drift rate 0.0457 Hz/s consistent with technological origin"
         ]
       }
     ],
@@ -2867,25 +2730,26 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": 110,
+    "obs_id": 100,
     "target_name": "TOI-1266",
     "ra_deg": 197.9965833,
     "dec_deg": 65.8336973,
-    "center_freq_mhz": 9722.5874,
-    "bandwidth_mhz": 411.5004,
-    "snr": 3.9305,
-    "drift_rate_hz_s": -0.093362,
+    "center_freq_mhz": 5509.403,
+    "bandwidth_mhz": 160.9248,
+    "snr": 3.3983,
+    "drift_rate_hz_s": 0.066539,
     "integration_time_s": 120.0,
     "is_injected_anomaly": false,
     "anomaly_type": null,
     "data_type": "radio",
     "detection_method": "doppler_drift",
-    "abs_drift_rate_hz_s": 0.093362,
+    "abs_drift_rate_hz_s": 0.066539,
     "candidacy_score": 80,
     "reasons": [
       "Exoplanet system nearby: TOI-1266 b, TOI-1266 c, TOI-1266 c",
-      "Doppler drift rate 0.0934 Hz/s consistent with technological origin",
-      "Doppler drift rate 0.0840 Hz/s consistent with technological origin"
+      "Doppler drift rate 0.0665 Hz/s consistent with technological origin",
+      "Doppler drift rate 0.1687 Hz/s consistent with technological origin",
+      "Doppler drift rate 0.0905 Hz/s consistent with technological origin"
     ],
     "_all_methods": [
       "doppler_drift"
@@ -2895,46 +2759,68 @@
     ],
     "_entries": [
       {
-        "obs_id": 110,
+        "obs_id": 100,
         "target_name": "TOI-1266",
         "ra_deg": 197.9965833,
         "dec_deg": 65.8336973,
-        "center_freq_mhz": 9722.5874,
-        "bandwidth_mhz": 411.5004,
-        "snr": 3.9305,
-        "drift_rate_hz_s": -0.093362,
+        "center_freq_mhz": 5509.403,
+        "bandwidth_mhz": 160.9248,
+        "snr": 3.3983,
+        "drift_rate_hz_s": 0.066539,
         "integration_time_s": 120.0,
         "is_injected_anomaly": false,
         "anomaly_type": null,
         "data_type": "radio",
         "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.093362,
+        "abs_drift_rate_hz_s": 0.066539,
         "candidacy_score": 80,
         "reasons": [
           "Exoplanet system nearby: TOI-1266 b, TOI-1266 c, TOI-1266 c",
-          "Doppler drift rate 0.0934 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.0840 Hz/s consistent with technological origin"
+          "Doppler drift rate 0.0665 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.1687 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.0905 Hz/s consistent with technological origin"
         ]
       },
       {
-        "obs_id": 111,
+        "obs_id": 101,
         "target_name": "TOI-1266",
         "ra_deg": 197.9965833,
         "dec_deg": 65.8336973,
-        "center_freq_mhz": 3450.1741,
-        "bandwidth_mhz": 138.5564,
-        "snr": 2.2944,
-        "drift_rate_hz_s": 0.084031,
+        "center_freq_mhz": 4429.191,
+        "bandwidth_mhz": 220.6048,
+        "snr": 2.6121,
+        "drift_rate_hz_s": -0.168733,
         "integration_time_s": 600.0,
         "is_injected_anomaly": false,
         "anomaly_type": null,
         "data_type": "radio",
         "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.084031,
+        "abs_drift_rate_hz_s": 0.168733,
         "candidacy_score": 80,
         "reasons": [
           "Exoplanet system nearby: TOI-1266 b, TOI-1266 c, TOI-1266 c",
-          "Doppler drift rate 0.0840 Hz/s consistent with technological origin"
+          "Doppler drift rate 0.1687 Hz/s consistent with technological origin"
+        ]
+      },
+      {
+        "obs_id": 102,
+        "target_name": "TOI-1266",
+        "ra_deg": 197.9965833,
+        "dec_deg": 65.8336973,
+        "center_freq_mhz": 2062.0531,
+        "bandwidth_mhz": 484.7591,
+        "snr": 3.3197,
+        "drift_rate_hz_s": -0.090548,
+        "integration_time_s": 120.0,
+        "is_injected_anomaly": false,
+        "anomaly_type": null,
+        "data_type": "radio",
+        "detection_method": "doppler_drift",
+        "abs_drift_rate_hz_s": 0.090548,
+        "candidacy_score": 80,
+        "reasons": [
+          "Exoplanet system nearby: TOI-1266 b, TOI-1266 c, TOI-1266 c",
+          "Doppler drift rate 0.0905 Hz/s consistent with technological origin"
         ]
       }
     ],
@@ -2957,24 +2843,25 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": 120,
+    "obs_id": 110,
     "target_name": "HAT-P-11",
     "ra_deg": 297.7101763,
     "dec_deg": 48.0818635,
-    "center_freq_mhz": 3753.6096,
-    "bandwidth_mhz": 331.6878,
-    "snr": 2.0197,
-    "drift_rate_hz_s": -0.144606,
+    "center_freq_mhz": 9722.5874,
+    "bandwidth_mhz": 411.5004,
+    "snr": 3.9305,
+    "drift_rate_hz_s": -0.093362,
     "integration_time_s": 120.0,
     "is_injected_anomaly": false,
     "anomaly_type": null,
     "data_type": "radio",
     "detection_method": "doppler_drift",
-    "abs_drift_rate_hz_s": 0.144606,
+    "abs_drift_rate_hz_s": 0.093362,
     "candidacy_score": 80,
     "reasons": [
       "Exoplanet system nearby: HAT-P-11 b, HAT-P-11 b, HAT-P-11 b",
-      "Doppler drift rate 0.1446 Hz/s consistent with technological origin"
+      "Doppler drift rate 0.0934 Hz/s consistent with technological origin",
+      "Doppler drift rate 0.0840 Hz/s consistent with technological origin"
     ],
     "_all_methods": [
       "doppler_drift"
@@ -2984,24 +2871,46 @@
     ],
     "_entries": [
       {
-        "obs_id": 120,
+        "obs_id": 110,
         "target_name": "HAT-P-11",
         "ra_deg": 297.7101763,
         "dec_deg": 48.0818635,
-        "center_freq_mhz": 3753.6096,
-        "bandwidth_mhz": 331.6878,
-        "snr": 2.0197,
-        "drift_rate_hz_s": -0.144606,
+        "center_freq_mhz": 9722.5874,
+        "bandwidth_mhz": 411.5004,
+        "snr": 3.9305,
+        "drift_rate_hz_s": -0.093362,
         "integration_time_s": 120.0,
         "is_injected_anomaly": false,
         "anomaly_type": null,
         "data_type": "radio",
         "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.144606,
+        "abs_drift_rate_hz_s": 0.093362,
         "candidacy_score": 80,
         "reasons": [
           "Exoplanet system nearby: HAT-P-11 b, HAT-P-11 b, HAT-P-11 b",
-          "Doppler drift rate 0.1446 Hz/s consistent with technological origin"
+          "Doppler drift rate 0.0934 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.0840 Hz/s consistent with technological origin"
+        ]
+      },
+      {
+        "obs_id": 111,
+        "target_name": "HAT-P-11",
+        "ra_deg": 297.7101763,
+        "dec_deg": 48.0818635,
+        "center_freq_mhz": 3450.1741,
+        "bandwidth_mhz": 138.5564,
+        "snr": 2.2944,
+        "drift_rate_hz_s": 0.084031,
+        "integration_time_s": 600.0,
+        "is_injected_anomaly": false,
+        "anomaly_type": null,
+        "data_type": "radio",
+        "detection_method": "doppler_drift",
+        "abs_drift_rate_hz_s": 0.084031,
+        "candidacy_score": 80,
+        "reasons": [
+          "Exoplanet system nearby: HAT-P-11 b, HAT-P-11 b, HAT-P-11 b",
+          "Doppler drift rate 0.0840 Hz/s consistent with technological origin"
         ]
       }
     ],
@@ -3024,27 +2933,27 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": 130,
+    "obs_id": 120,
     "target_name": "Kepler-42",
     "ra_deg": 292.2196,
     "dec_deg": 44.6173667,
-    "center_freq_mhz": 7475.1666,
-    "bandwidth_mhz": 272.8372,
-    "snr": 2.7481,
-    "drift_rate_hz_s": 0.160178,
+    "center_freq_mhz": 3753.6096,
+    "bandwidth_mhz": 331.6878,
+    "snr": 2.0197,
+    "drift_rate_hz_s": -0.144606,
     "integration_time_s": 120.0,
     "is_injected_anomaly": false,
     "anomaly_type": null,
     "data_type": "radio",
     "detection_method": "doppler_drift",
-    "abs_drift_rate_hz_s": 0.160178,
+    "abs_drift_rate_hz_s": 0.144606,
     "candidacy_score": 80,
     "reasons": [
-      "Exoplanet system nearby: Kepler-42 b, Kepler-1202 b, Kepler-42 d",
+      "Exoplanet system nearby: Kepler-1202 b, Kepler-42 d, Kepler-42 b",
+      "Doppler drift rate 0.1446 Hz/s consistent with technological origin",
       "Doppler drift rate 0.1602 Hz/s consistent with technological origin",
       "Doppler drift rate 0.1359 Hz/s consistent with technological origin",
-      "Doppler drift rate 0.1189 Hz/s consistent with technological origin",
-      "Doppler drift rate 0.0635 Hz/s consistent with technological origin"
+      "Doppler drift rate 0.1189 Hz/s consistent with technological origin"
     ],
     "_all_methods": [
       "doppler_drift"
@@ -3053,6 +2962,30 @@
       "radio"
     ],
     "_entries": [
+      {
+        "obs_id": 120,
+        "target_name": "Kepler-42",
+        "ra_deg": 292.2196,
+        "dec_deg": 44.6173667,
+        "center_freq_mhz": 3753.6096,
+        "bandwidth_mhz": 331.6878,
+        "snr": 2.0197,
+        "drift_rate_hz_s": -0.144606,
+        "integration_time_s": 120.0,
+        "is_injected_anomaly": false,
+        "anomaly_type": null,
+        "data_type": "radio",
+        "detection_method": "doppler_drift",
+        "abs_drift_rate_hz_s": 0.144606,
+        "candidacy_score": 80,
+        "reasons": [
+          "Exoplanet system nearby: Kepler-1202 b, Kepler-42 d, Kepler-42 b",
+          "Doppler drift rate 0.1446 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.1602 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.1359 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.1189 Hz/s consistent with technological origin"
+        ]
+      },
       {
         "obs_id": 130,
         "target_name": "Kepler-42",
@@ -3070,11 +3003,8 @@
         "abs_drift_rate_hz_s": 0.160178,
         "candidacy_score": 80,
         "reasons": [
-          "Exoplanet system nearby: Kepler-42 b, Kepler-1202 b, Kepler-42 d",
-          "Doppler drift rate 0.1602 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.1359 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.1189 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.0635 Hz/s consistent with technological origin"
+          "Exoplanet system nearby: Kepler-1202 b, Kepler-42 d, Kepler-42 b",
+          "Doppler drift rate 0.1602 Hz/s consistent with technological origin"
         ]
       },
       {
@@ -3094,7 +3024,7 @@
         "abs_drift_rate_hz_s": 0.135919,
         "candidacy_score": 80,
         "reasons": [
-          "Exoplanet system nearby: Kepler-42 b, Kepler-1202 b, Kepler-42 d",
+          "Exoplanet system nearby: Kepler-1202 b, Kepler-42 d, Kepler-42 b",
           "Doppler drift rate 0.1359 Hz/s consistent with technological origin"
         ]
       },
@@ -3115,29 +3045,8 @@
         "abs_drift_rate_hz_s": 0.118876,
         "candidacy_score": 80,
         "reasons": [
-          "Exoplanet system nearby: Kepler-42 b, Kepler-1202 b, Kepler-42 d",
+          "Exoplanet system nearby: Kepler-1202 b, Kepler-42 d, Kepler-42 b",
           "Doppler drift rate 0.1189 Hz/s consistent with technological origin"
-        ]
-      },
-      {
-        "obs_id": 140,
-        "target_name": "Kepler-42",
-        "ra_deg": 292.2196,
-        "dec_deg": 44.6173667,
-        "center_freq_mhz": 9326.0811,
-        "bandwidth_mhz": 332.4245,
-        "snr": 1.3657,
-        "drift_rate_hz_s": 0.063515,
-        "integration_time_s": 120.0,
-        "is_injected_anomaly": false,
-        "anomaly_type": null,
-        "data_type": "radio",
-        "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.063515,
-        "candidacy_score": 80,
-        "reasons": [
-          "Exoplanet system nearby: Kepler-42 b, Kepler-1202 b, Kepler-42 d",
-          "Doppler drift rate 0.0635 Hz/s consistent with technological origin"
         ]
       }
     ],
@@ -3160,24 +3069,24 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": 150,
+    "obs_id": 140,
     "target_name": "TOI-544",
     "ra_deg": 82.2900716,
     "dec_deg": -0.3428983,
-    "center_freq_mhz": 9627.0329,
-    "bandwidth_mhz": 292.9214,
-    "snr": 3.1796,
-    "drift_rate_hz_s": 0.083813,
+    "center_freq_mhz": 9326.0811,
+    "bandwidth_mhz": 332.4245,
+    "snr": 1.3657,
+    "drift_rate_hz_s": 0.063515,
     "integration_time_s": 120.0,
     "is_injected_anomaly": false,
     "anomaly_type": null,
     "data_type": "radio",
     "detection_method": "doppler_drift",
-    "abs_drift_rate_hz_s": 0.083813,
+    "abs_drift_rate_hz_s": 0.063515,
     "candidacy_score": 80,
     "reasons": [
       "Exoplanet system nearby: TOI-544 b, TOI-544 b, TOI-544 b",
-      "Doppler drift rate 0.0838 Hz/s consistent with technological origin"
+      "Doppler drift rate 0.0635 Hz/s consistent with technological origin"
     ],
     "_all_methods": [
       "doppler_drift"
@@ -3187,24 +3096,24 @@
     ],
     "_entries": [
       {
-        "obs_id": 150,
+        "obs_id": 140,
         "target_name": "TOI-544",
         "ra_deg": 82.2900716,
         "dec_deg": -0.3428983,
-        "center_freq_mhz": 9627.0329,
-        "bandwidth_mhz": 292.9214,
-        "snr": 3.1796,
-        "drift_rate_hz_s": 0.083813,
+        "center_freq_mhz": 9326.0811,
+        "bandwidth_mhz": 332.4245,
+        "snr": 1.3657,
+        "drift_rate_hz_s": 0.063515,
         "integration_time_s": 120.0,
         "is_injected_anomaly": false,
         "anomaly_type": null,
         "data_type": "radio",
         "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.083813,
+        "abs_drift_rate_hz_s": 0.063515,
         "candidacy_score": 80,
         "reasons": [
           "Exoplanet system nearby: TOI-544 b, TOI-544 b, TOI-544 b",
-          "Doppler drift rate 0.0838 Hz/s consistent with technological origin"
+          "Doppler drift rate 0.0635 Hz/s consistent with technological origin"
         ]
       }
     ],
@@ -3227,25 +3136,25 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": 170,
+    "obs_id": 160,
     "target_name": "TOI-5800",
     "ra_deg": 305.0655462,
     "dec_deg": -7.4119237,
-    "center_freq_mhz": 9065.4469,
-    "bandwidth_mhz": 156.0996,
-    "snr": 1.6196,
-    "drift_rate_hz_s": -0.167468,
+    "center_freq_mhz": 5416.3629,
+    "bandwidth_mhz": 475.1306,
+    "snr": 1.6574,
+    "drift_rate_hz_s": -0.213205,
     "integration_time_s": 600.0,
     "is_injected_anomaly": false,
     "anomaly_type": null,
     "data_type": "radio",
     "detection_method": "doppler_drift",
-    "abs_drift_rate_hz_s": 0.167468,
+    "abs_drift_rate_hz_s": 0.213205,
     "candidacy_score": 80,
     "reasons": [
       "Exoplanet system nearby: TOI-5800 b, TOI-5800 b, TOI-5800 b",
-      "Doppler drift rate 0.1675 Hz/s consistent with technological origin",
-      "Doppler drift rate 0.1768 Hz/s consistent with technological origin"
+      "Doppler drift rate 0.2132 Hz/s consistent with technological origin",
+      "Doppler drift rate 0.0141 Hz/s consistent with technological origin"
     ],
     "_all_methods": [
       "doppler_drift"
@@ -3255,46 +3164,46 @@
     ],
     "_entries": [
       {
-        "obs_id": 170,
+        "obs_id": 160,
         "target_name": "TOI-5800",
         "ra_deg": 305.0655462,
         "dec_deg": -7.4119237,
-        "center_freq_mhz": 9065.4469,
-        "bandwidth_mhz": 156.0996,
-        "snr": 1.6196,
-        "drift_rate_hz_s": -0.167468,
+        "center_freq_mhz": 5416.3629,
+        "bandwidth_mhz": 475.1306,
+        "snr": 1.6574,
+        "drift_rate_hz_s": -0.213205,
         "integration_time_s": 600.0,
         "is_injected_anomaly": false,
         "anomaly_type": null,
         "data_type": "radio",
         "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.167468,
+        "abs_drift_rate_hz_s": 0.213205,
         "candidacy_score": 80,
         "reasons": [
           "Exoplanet system nearby: TOI-5800 b, TOI-5800 b, TOI-5800 b",
-          "Doppler drift rate 0.1675 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.1768 Hz/s consistent with technological origin"
+          "Doppler drift rate 0.2132 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.0141 Hz/s consistent with technological origin"
         ]
       },
       {
-        "obs_id": 171,
+        "obs_id": 161,
         "target_name": "TOI-5800",
         "ra_deg": 305.0655462,
         "dec_deg": -7.4119237,
-        "center_freq_mhz": 7050.1608,
-        "bandwidth_mhz": 212.4935,
-        "snr": 3.1278,
-        "drift_rate_hz_s": 0.176793,
-        "integration_time_s": 600.0,
+        "center_freq_mhz": 3984.121,
+        "bandwidth_mhz": 308.269,
+        "snr": 2.0016,
+        "drift_rate_hz_s": -0.014079,
+        "integration_time_s": 120.0,
         "is_injected_anomaly": false,
         "anomaly_type": null,
         "data_type": "radio",
         "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.176793,
+        "abs_drift_rate_hz_s": 0.014079,
         "candidacy_score": 80,
         "reasons": [
           "Exoplanet system nearby: TOI-5800 b, TOI-5800 b, TOI-5800 b",
-          "Doppler drift rate 0.1768 Hz/s consistent with technological origin"
+          "Doppler drift rate 0.0141 Hz/s consistent with technological origin"
         ]
       }
     ],
@@ -3317,25 +3226,25 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": 180,
+    "obs_id": 170,
     "target_name": "TOI-3884",
     "ra_deg": 181.5718341,
     "dec_deg": 12.5070258,
-    "center_freq_mhz": 1969.6685,
-    "bandwidth_mhz": 466.4047,
-    "snr": 1.5031,
-    "drift_rate_hz_s": -0.096512,
-    "integration_time_s": 120.0,
+    "center_freq_mhz": 9065.4469,
+    "bandwidth_mhz": 156.0996,
+    "snr": 1.6196,
+    "drift_rate_hz_s": -0.167468,
+    "integration_time_s": 600.0,
     "is_injected_anomaly": false,
     "anomaly_type": null,
     "data_type": "radio",
     "detection_method": "doppler_drift",
-    "abs_drift_rate_hz_s": 0.096512,
+    "abs_drift_rate_hz_s": 0.167468,
     "candidacy_score": 80,
     "reasons": [
       "Exoplanet system nearby: TOI-3884 b, TOI-3884 b, TOI-3884 b",
-      "Doppler drift rate 0.0965 Hz/s consistent with technological origin",
-      "Doppler drift rate 0.0903 Hz/s consistent with technological origin"
+      "Doppler drift rate 0.1675 Hz/s consistent with technological origin",
+      "Doppler drift rate 0.1768 Hz/s consistent with technological origin"
     ],
     "_all_methods": [
       "doppler_drift"
@@ -3345,46 +3254,46 @@
     ],
     "_entries": [
       {
-        "obs_id": 180,
+        "obs_id": 170,
         "target_name": "TOI-3884",
         "ra_deg": 181.5718341,
         "dec_deg": 12.5070258,
-        "center_freq_mhz": 1969.6685,
-        "bandwidth_mhz": 466.4047,
-        "snr": 1.5031,
-        "drift_rate_hz_s": -0.096512,
-        "integration_time_s": 120.0,
+        "center_freq_mhz": 9065.4469,
+        "bandwidth_mhz": 156.0996,
+        "snr": 1.6196,
+        "drift_rate_hz_s": -0.167468,
+        "integration_time_s": 600.0,
         "is_injected_anomaly": false,
         "anomaly_type": null,
         "data_type": "radio",
         "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.096512,
+        "abs_drift_rate_hz_s": 0.167468,
         "candidacy_score": 80,
         "reasons": [
           "Exoplanet system nearby: TOI-3884 b, TOI-3884 b, TOI-3884 b",
-          "Doppler drift rate 0.0965 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.0903 Hz/s consistent with technological origin"
+          "Doppler drift rate 0.1675 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.1768 Hz/s consistent with technological origin"
         ]
       },
       {
-        "obs_id": 181,
+        "obs_id": 171,
         "target_name": "TOI-3884",
         "ra_deg": 181.5718341,
         "dec_deg": 12.5070258,
-        "center_freq_mhz": 4338.3006,
-        "bandwidth_mhz": 431.9159,
-        "snr": 4.134,
-        "drift_rate_hz_s": -0.090293,
-        "integration_time_s": 300.0,
+        "center_freq_mhz": 7050.1608,
+        "bandwidth_mhz": 212.4935,
+        "snr": 3.1278,
+        "drift_rate_hz_s": 0.176793,
+        "integration_time_s": 600.0,
         "is_injected_anomaly": false,
         "anomaly_type": null,
         "data_type": "radio",
         "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.090293,
+        "abs_drift_rate_hz_s": 0.176793,
         "candidacy_score": 80,
         "reasons": [
           "Exoplanet system nearby: TOI-3884 b, TOI-3884 b, TOI-3884 b",
-          "Doppler drift rate 0.0903 Hz/s consistent with technological origin"
+          "Doppler drift rate 0.1768 Hz/s consistent with technological origin"
         ]
       }
     ],
@@ -3407,30 +3316,30 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": 190,
+    "obs_id": 180,
     "target_name": "K2-3",
     "ra_deg": 172.3353708,
     "dec_deg": -1.4551364,
-    "center_freq_mhz": 2481.4704,
-    "bandwidth_mhz": 117.9642,
-    "snr": 1.4728,
-    "drift_rate_hz_s": -0.127794,
+    "center_freq_mhz": 1969.6685,
+    "bandwidth_mhz": 466.4047,
+    "snr": 1.5031,
+    "drift_rate_hz_s": -0.096512,
     "integration_time_s": 120.0,
     "is_injected_anomaly": false,
     "anomaly_type": null,
     "data_type": "radio",
     "detection_method": "doppler_drift",
-    "abs_drift_rate_hz_s": 0.127794,
+    "abs_drift_rate_hz_s": 0.096512,
     "candidacy_score": 80,
     "reasons": [
       "Exoplanet system nearby: K2-3 d, K2-3 b, K2-3 c",
+      "Doppler drift rate 0.0965 Hz/s consistent with technological origin",
+      "Doppler drift rate 0.0903 Hz/s consistent with technological origin",
       "Doppler drift rate 0.1278 Hz/s consistent with technological origin",
       "Doppler drift rate 0.0286 Hz/s consistent with technological origin",
       "Doppler drift rate 0.1106 Hz/s consistent with technological origin",
       "Doppler drift rate 0.1368 Hz/s consistent with technological origin",
-      "Doppler drift rate 0.1461 Hz/s consistent with technological origin",
-      "Doppler drift rate 0.0395 Hz/s consistent with technological origin",
-      "Doppler drift rate 0.0843 Hz/s consistent with technological origin"
+      "Doppler drift rate 0.1461 Hz/s consistent with technological origin"
     ],
     "_all_methods": [
       "doppler_drift"
@@ -3439,6 +3348,54 @@
       "radio"
     ],
     "_entries": [
+      {
+        "obs_id": 180,
+        "target_name": "K2-3",
+        "ra_deg": 172.3353708,
+        "dec_deg": -1.4551364,
+        "center_freq_mhz": 1969.6685,
+        "bandwidth_mhz": 466.4047,
+        "snr": 1.5031,
+        "drift_rate_hz_s": -0.096512,
+        "integration_time_s": 120.0,
+        "is_injected_anomaly": false,
+        "anomaly_type": null,
+        "data_type": "radio",
+        "detection_method": "doppler_drift",
+        "abs_drift_rate_hz_s": 0.096512,
+        "candidacy_score": 80,
+        "reasons": [
+          "Exoplanet system nearby: K2-3 d, K2-3 b, K2-3 c",
+          "Doppler drift rate 0.0965 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.0903 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.1278 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.0286 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.1106 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.1368 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.1461 Hz/s consistent with technological origin"
+        ]
+      },
+      {
+        "obs_id": 181,
+        "target_name": "K2-3",
+        "ra_deg": 172.3353708,
+        "dec_deg": -1.4551364,
+        "center_freq_mhz": 4338.3006,
+        "bandwidth_mhz": 431.9159,
+        "snr": 4.134,
+        "drift_rate_hz_s": -0.090293,
+        "integration_time_s": 300.0,
+        "is_injected_anomaly": false,
+        "anomaly_type": null,
+        "data_type": "radio",
+        "detection_method": "doppler_drift",
+        "abs_drift_rate_hz_s": 0.090293,
+        "candidacy_score": 80,
+        "reasons": [
+          "Exoplanet system nearby: K2-3 d, K2-3 b, K2-3 c",
+          "Doppler drift rate 0.0903 Hz/s consistent with technological origin"
+        ]
+      },
       {
         "obs_id": 190,
         "target_name": "K2-3",
@@ -3457,13 +3414,7 @@
         "candidacy_score": 80,
         "reasons": [
           "Exoplanet system nearby: K2-3 d, K2-3 b, K2-3 c",
-          "Doppler drift rate 0.1278 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.0286 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.1106 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.1368 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.1461 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.0395 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.0843 Hz/s consistent with technological origin"
+          "Doppler drift rate 0.1278 Hz/s consistent with technological origin"
         ]
       },
       {
@@ -3549,48 +3500,6 @@
           "Exoplanet system nearby: K2-3 d, K2-3 b, K2-3 c",
           "Doppler drift rate 0.1461 Hz/s consistent with technological origin"
         ]
-      },
-      {
-        "obs_id": 220,
-        "target_name": "K2-3",
-        "ra_deg": 172.3353708,
-        "dec_deg": -1.4551364,
-        "center_freq_mhz": 2767.912,
-        "bandwidth_mhz": 224.1295,
-        "snr": 3.7497,
-        "drift_rate_hz_s": -0.039461,
-        "integration_time_s": 300.0,
-        "is_injected_anomaly": false,
-        "anomaly_type": null,
-        "data_type": "radio",
-        "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.039461,
-        "candidacy_score": 80,
-        "reasons": [
-          "Exoplanet system nearby: K2-3 d, K2-3 b, K2-3 c",
-          "Doppler drift rate 0.0395 Hz/s consistent with technological origin"
-        ]
-      },
-      {
-        "obs_id": 222,
-        "target_name": "K2-3",
-        "ra_deg": 172.3353708,
-        "dec_deg": -1.4551364,
-        "center_freq_mhz": 7098.9281,
-        "bandwidth_mhz": 148.733,
-        "snr": 2.6529,
-        "drift_rate_hz_s": -0.084323,
-        "integration_time_s": 600.0,
-        "is_injected_anomaly": false,
-        "anomaly_type": null,
-        "data_type": "radio",
-        "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.084323,
-        "candidacy_score": 80,
-        "reasons": [
-          "Exoplanet system nearby: K2-3 d, K2-3 b, K2-3 c",
-          "Doppler drift rate 0.0843 Hz/s consistent with technological origin"
-        ]
       }
     ],
     "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=172.3354+-1.4551&fov=0.5&survey=P/DSS2/color",
@@ -3612,25 +3521,25 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": 230,
+    "obs_id": 220,
     "target_name": "Wolf 503",
     "ra_deg": 206.8461979,
     "dec_deg": -6.1393369,
-    "center_freq_mhz": 2797.9809,
-    "bandwidth_mhz": 421.6498,
-    "snr": 4.2971,
-    "drift_rate_hz_s": -0.132639,
-    "integration_time_s": 600.0,
+    "center_freq_mhz": 2767.912,
+    "bandwidth_mhz": 224.1295,
+    "snr": 3.7497,
+    "drift_rate_hz_s": -0.039461,
+    "integration_time_s": 300.0,
     "is_injected_anomaly": false,
     "anomaly_type": null,
     "data_type": "radio",
     "detection_method": "doppler_drift",
-    "abs_drift_rate_hz_s": 0.132639,
+    "abs_drift_rate_hz_s": 0.039461,
     "candidacy_score": 80,
     "reasons": [
       "Exoplanet system nearby: Wolf 503 b, Wolf 503 b, Wolf 503 b",
-      "Doppler drift rate 0.1326 Hz/s consistent with technological origin",
-      "Doppler drift rate 0.0328 Hz/s consistent with technological origin",
+      "Doppler drift rate 0.0395 Hz/s consistent with technological origin",
+      "Doppler drift rate 0.0843 Hz/s consistent with technological origin",
       "Doppler drift rate 0.0417 Hz/s consistent with technological origin"
     ],
     "_all_methods": [
@@ -3641,47 +3550,47 @@
     ],
     "_entries": [
       {
-        "obs_id": 230,
+        "obs_id": 220,
         "target_name": "Wolf 503",
         "ra_deg": 206.8461979,
         "dec_deg": -6.1393369,
-        "center_freq_mhz": 2797.9809,
-        "bandwidth_mhz": 421.6498,
-        "snr": 4.2971,
-        "drift_rate_hz_s": -0.132639,
+        "center_freq_mhz": 2767.912,
+        "bandwidth_mhz": 224.1295,
+        "snr": 3.7497,
+        "drift_rate_hz_s": -0.039461,
+        "integration_time_s": 300.0,
+        "is_injected_anomaly": false,
+        "anomaly_type": null,
+        "data_type": "radio",
+        "detection_method": "doppler_drift",
+        "abs_drift_rate_hz_s": 0.039461,
+        "candidacy_score": 80,
+        "reasons": [
+          "Exoplanet system nearby: Wolf 503 b, Wolf 503 b, Wolf 503 b",
+          "Doppler drift rate 0.0395 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.0843 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.0417 Hz/s consistent with technological origin"
+        ]
+      },
+      {
+        "obs_id": 222,
+        "target_name": "Wolf 503",
+        "ra_deg": 206.8461979,
+        "dec_deg": -6.1393369,
+        "center_freq_mhz": 7098.9281,
+        "bandwidth_mhz": 148.733,
+        "snr": 2.6529,
+        "drift_rate_hz_s": -0.084323,
         "integration_time_s": 600.0,
         "is_injected_anomaly": false,
         "anomaly_type": null,
         "data_type": "radio",
         "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.132639,
+        "abs_drift_rate_hz_s": 0.084323,
         "candidacy_score": 80,
         "reasons": [
           "Exoplanet system nearby: Wolf 503 b, Wolf 503 b, Wolf 503 b",
-          "Doppler drift rate 0.1326 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.0328 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.0417 Hz/s consistent with technological origin"
-        ]
-      },
-      {
-        "obs_id": 231,
-        "target_name": "Wolf 503",
-        "ra_deg": 206.8461979,
-        "dec_deg": -6.1393369,
-        "center_freq_mhz": 2113.7842,
-        "bandwidth_mhz": 471.025,
-        "snr": 2.1338,
-        "drift_rate_hz_s": -0.032767,
-        "integration_time_s": 120.0,
-        "is_injected_anomaly": false,
-        "anomaly_type": null,
-        "data_type": "radio",
-        "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.032767,
-        "candidacy_score": 80,
-        "reasons": [
-          "Exoplanet system nearby: Wolf 503 b, Wolf 503 b, Wolf 503 b",
-          "Doppler drift rate 0.0328 Hz/s consistent with technological origin"
+          "Doppler drift rate 0.0843 Hz/s consistent with technological origin"
         ]
       },
       {
@@ -3725,24 +3634,25 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": 240,
+    "obs_id": 230,
     "target_name": "TOI-674",
     "ra_deg": 164.5865592,
     "dec_deg": -36.8581092,
-    "center_freq_mhz": 6965.7779,
-    "bandwidth_mhz": 482.2493,
-    "snr": 2.5162,
-    "drift_rate_hz_s": -0.069594,
-    "integration_time_s": 300.0,
+    "center_freq_mhz": 2797.9809,
+    "bandwidth_mhz": 421.6498,
+    "snr": 4.2971,
+    "drift_rate_hz_s": -0.132639,
+    "integration_time_s": 600.0,
     "is_injected_anomaly": false,
     "anomaly_type": null,
     "data_type": "radio",
     "detection_method": "doppler_drift",
-    "abs_drift_rate_hz_s": 0.069594,
+    "abs_drift_rate_hz_s": 0.132639,
     "candidacy_score": 80,
     "reasons": [
       "Exoplanet system nearby: TOI-674 b, TOI-674 b, TOI-674 b",
-      "Doppler drift rate 0.0696 Hz/s consistent with technological origin"
+      "Doppler drift rate 0.1326 Hz/s consistent with technological origin",
+      "Doppler drift rate 0.0328 Hz/s consistent with technological origin"
     ],
     "_all_methods": [
       "doppler_drift"
@@ -3752,24 +3662,46 @@
     ],
     "_entries": [
       {
-        "obs_id": 240,
+        "obs_id": 230,
         "target_name": "TOI-674",
         "ra_deg": 164.5865592,
         "dec_deg": -36.8581092,
-        "center_freq_mhz": 6965.7779,
-        "bandwidth_mhz": 482.2493,
-        "snr": 2.5162,
-        "drift_rate_hz_s": -0.069594,
-        "integration_time_s": 300.0,
+        "center_freq_mhz": 2797.9809,
+        "bandwidth_mhz": 421.6498,
+        "snr": 4.2971,
+        "drift_rate_hz_s": -0.132639,
+        "integration_time_s": 600.0,
         "is_injected_anomaly": false,
         "anomaly_type": null,
         "data_type": "radio",
         "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.069594,
+        "abs_drift_rate_hz_s": 0.132639,
         "candidacy_score": 80,
         "reasons": [
           "Exoplanet system nearby: TOI-674 b, TOI-674 b, TOI-674 b",
-          "Doppler drift rate 0.0696 Hz/s consistent with technological origin"
+          "Doppler drift rate 0.1326 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.0328 Hz/s consistent with technological origin"
+        ]
+      },
+      {
+        "obs_id": 231,
+        "target_name": "TOI-674",
+        "ra_deg": 164.5865592,
+        "dec_deg": -36.8581092,
+        "center_freq_mhz": 2113.7842,
+        "bandwidth_mhz": 471.025,
+        "snr": 2.1338,
+        "drift_rate_hz_s": -0.032767,
+        "integration_time_s": 120.0,
+        "is_injected_anomaly": false,
+        "anomaly_type": null,
+        "data_type": "radio",
+        "detection_method": "doppler_drift",
+        "abs_drift_rate_hz_s": 0.032767,
+        "candidacy_score": 80,
+        "reasons": [
+          "Exoplanet system nearby: TOI-674 b, TOI-674 b, TOI-674 b",
+          "Doppler drift rate 0.0328 Hz/s consistent with technological origin"
         ]
       }
     ],
@@ -3792,24 +3724,24 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": 251,
+    "obs_id": 240,
     "target_name": "HD 191939",
     "ra_deg": 302.0256247,
     "dec_deg": 66.8503014,
-    "center_freq_mhz": 4772.0289,
-    "bandwidth_mhz": 486.4928,
-    "snr": 6.9478,
-    "drift_rate_hz_s": -0.085324,
-    "integration_time_s": 600.0,
+    "center_freq_mhz": 6965.7779,
+    "bandwidth_mhz": 482.2493,
+    "snr": 2.5162,
+    "drift_rate_hz_s": -0.069594,
+    "integration_time_s": 300.0,
     "is_injected_anomaly": false,
     "anomaly_type": null,
     "data_type": "radio",
     "detection_method": "doppler_drift",
-    "abs_drift_rate_hz_s": 0.085324,
+    "abs_drift_rate_hz_s": 0.069594,
     "candidacy_score": 80,
     "reasons": [
       "Exoplanet system nearby: HD 191939 b, HD 191939 c, HD 191939 e",
-      "Doppler drift rate 0.0853 Hz/s consistent with technological origin"
+      "Doppler drift rate 0.0696 Hz/s consistent with technological origin"
     ],
     "_all_methods": [
       "doppler_drift"
@@ -3819,24 +3751,24 @@
     ],
     "_entries": [
       {
-        "obs_id": 251,
+        "obs_id": 240,
         "target_name": "HD 191939",
         "ra_deg": 302.0256247,
         "dec_deg": 66.8503014,
-        "center_freq_mhz": 4772.0289,
-        "bandwidth_mhz": 486.4928,
-        "snr": 6.9478,
-        "drift_rate_hz_s": -0.085324,
-        "integration_time_s": 600.0,
+        "center_freq_mhz": 6965.7779,
+        "bandwidth_mhz": 482.2493,
+        "snr": 2.5162,
+        "drift_rate_hz_s": -0.069594,
+        "integration_time_s": 300.0,
         "is_injected_anomaly": false,
         "anomaly_type": null,
         "data_type": "radio",
         "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.085324,
+        "abs_drift_rate_hz_s": 0.069594,
         "candidacy_score": 80,
         "reasons": [
           "Exoplanet system nearby: HD 191939 b, HD 191939 c, HD 191939 e",
-          "Doppler drift rate 0.0853 Hz/s consistent with technological origin"
+          "Doppler drift rate 0.0696 Hz/s consistent with technological origin"
         ]
       }
     ],
@@ -3859,27 +3791,24 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": 260,
+    "obs_id": 251,
     "target_name": "K2-136",
     "ra_deg": 67.4128615,
     "dec_deg": 22.8825674,
-    "center_freq_mhz": 5206.4344,
-    "bandwidth_mhz": 413.9054,
-    "snr": 3.1829,
-    "drift_rate_hz_s": 0.120585,
-    "integration_time_s": 120.0,
+    "center_freq_mhz": 4772.0289,
+    "bandwidth_mhz": 486.4928,
+    "snr": 6.9478,
+    "drift_rate_hz_s": -0.085324,
+    "integration_time_s": 600.0,
     "is_injected_anomaly": false,
     "anomaly_type": null,
     "data_type": "radio",
     "detection_method": "doppler_drift",
-    "abs_drift_rate_hz_s": 0.120585,
+    "abs_drift_rate_hz_s": 0.085324,
     "candidacy_score": 80,
     "reasons": [
       "Exoplanet system nearby: K2-136 c, K2-136 c, K2-136 c",
-      "Doppler drift rate 0.1206 Hz/s consistent with technological origin",
-      "Frequency in known RFI band: X-band satellite",
-      "Doppler drift rate 0.1062 Hz/s consistent with technological origin",
-      "Doppler drift rate 0.0877 Hz/s consistent with technological origin"
+      "Doppler drift rate 0.0853 Hz/s consistent with technological origin"
     ],
     "_all_methods": [
       "doppler_drift"
@@ -3889,70 +3818,24 @@
     ],
     "_entries": [
       {
-        "obs_id": 260,
+        "obs_id": 251,
         "target_name": "K2-136",
         "ra_deg": 67.4128615,
         "dec_deg": 22.8825674,
-        "center_freq_mhz": 5206.4344,
-        "bandwidth_mhz": 413.9054,
-        "snr": 3.1829,
-        "drift_rate_hz_s": 0.120585,
-        "integration_time_s": 120.0,
-        "is_injected_anomaly": false,
-        "anomaly_type": null,
-        "data_type": "radio",
-        "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.120585,
-        "candidacy_score": 80,
-        "reasons": [
-          "Exoplanet system nearby: K2-136 c, K2-136 c, K2-136 c",
-          "Doppler drift rate 0.1206 Hz/s consistent with technological origin",
-          "Frequency in known RFI band: X-band satellite",
-          "Doppler drift rate 0.1062 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.0877 Hz/s consistent with technological origin"
-        ]
-      },
-      {
-        "obs_id": 261,
-        "target_name": "K2-136",
-        "ra_deg": 67.4128615,
-        "dec_deg": 22.8825674,
-        "center_freq_mhz": 8171.3538,
-        "bandwidth_mhz": 193.0563,
-        "snr": 2.5059,
-        "drift_rate_hz_s": -0.106241,
+        "center_freq_mhz": 4772.0289,
+        "bandwidth_mhz": 486.4928,
+        "snr": 6.9478,
+        "drift_rate_hz_s": -0.085324,
         "integration_time_s": 600.0,
         "is_injected_anomaly": false,
         "anomaly_type": null,
         "data_type": "radio",
         "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.106241,
-        "candidacy_score": 50,
-        "reasons": [
-          "Frequency in known RFI band: X-band satellite",
-          "Exoplanet system nearby: K2-136 c, K2-136 c, K2-136 c",
-          "Doppler drift rate 0.1062 Hz/s consistent with technological origin"
-        ]
-      },
-      {
-        "obs_id": 262,
-        "target_name": "K2-136",
-        "ra_deg": 67.4128615,
-        "dec_deg": 22.8825674,
-        "center_freq_mhz": 8809.6506,
-        "bandwidth_mhz": 341.2429,
-        "snr": 2.0861,
-        "drift_rate_hz_s": -0.087686,
-        "integration_time_s": 120.0,
-        "is_injected_anomaly": false,
-        "anomaly_type": null,
-        "data_type": "radio",
-        "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.087686,
+        "abs_drift_rate_hz_s": 0.085324,
         "candidacy_score": 80,
         "reasons": [
           "Exoplanet system nearby: K2-136 c, K2-136 c, K2-136 c",
-          "Doppler drift rate 0.0877 Hz/s consistent with technological origin"
+          "Doppler drift rate 0.0853 Hz/s consistent with technological origin"
         ]
       }
     ],
@@ -3975,29 +3858,29 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": 270,
+    "obs_id": 260,
     "target_name": "TOI-757",
     "ra_deg": 187.9948428,
     "dec_deg": -35.5544523,
-    "center_freq_mhz": 8807.4157,
-    "bandwidth_mhz": 281.5588,
-    "snr": 7.8823,
-    "drift_rate_hz_s": -0.128742,
-    "integration_time_s": 600.0,
+    "center_freq_mhz": 5206.4344,
+    "bandwidth_mhz": 413.9054,
+    "snr": 3.1829,
+    "drift_rate_hz_s": 0.120585,
+    "integration_time_s": 120.0,
     "is_injected_anomaly": false,
     "anomaly_type": null,
     "data_type": "radio",
     "detection_method": "doppler_drift",
-    "abs_drift_rate_hz_s": 0.128742,
+    "abs_drift_rate_hz_s": 0.120585,
     "candidacy_score": 80,
     "reasons": [
       "Exoplanet system nearby: TOI-757 b, TOI-757 b",
-      "Doppler drift rate 0.1287 Hz/s consistent with technological origin",
+      "Doppler drift rate 0.1206 Hz/s consistent with technological origin",
       "Frequency in known RFI band: X-band satellite",
-      "Doppler drift rate 0.0368 Hz/s consistent with technological origin",
-      "Doppler drift rate 0.0777 Hz/s consistent with technological origin",
-      "Frequency in known RFI band: ISM 2.4 GHz",
-      "Doppler drift rate 0.1375 Hz/s consistent with technological origin"
+      "Doppler drift rate 0.1062 Hz/s consistent with technological origin",
+      "Doppler drift rate 0.0877 Hz/s consistent with technological origin",
+      "Doppler drift rate 0.1287 Hz/s consistent with technological origin",
+      "Doppler drift rate 0.0368 Hz/s consistent with technological origin"
     ],
     "_all_methods": [
       "doppler_drift"
@@ -4006,6 +3889,75 @@
       "radio"
     ],
     "_entries": [
+      {
+        "obs_id": 260,
+        "target_name": "TOI-757",
+        "ra_deg": 187.9948428,
+        "dec_deg": -35.5544523,
+        "center_freq_mhz": 5206.4344,
+        "bandwidth_mhz": 413.9054,
+        "snr": 3.1829,
+        "drift_rate_hz_s": 0.120585,
+        "integration_time_s": 120.0,
+        "is_injected_anomaly": false,
+        "anomaly_type": null,
+        "data_type": "radio",
+        "detection_method": "doppler_drift",
+        "abs_drift_rate_hz_s": 0.120585,
+        "candidacy_score": 80,
+        "reasons": [
+          "Exoplanet system nearby: TOI-757 b, TOI-757 b",
+          "Doppler drift rate 0.1206 Hz/s consistent with technological origin",
+          "Frequency in known RFI band: X-band satellite",
+          "Doppler drift rate 0.1062 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.0877 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.1287 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.0368 Hz/s consistent with technological origin"
+        ]
+      },
+      {
+        "obs_id": 261,
+        "target_name": "TOI-757",
+        "ra_deg": 187.9948428,
+        "dec_deg": -35.5544523,
+        "center_freq_mhz": 8171.3538,
+        "bandwidth_mhz": 193.0563,
+        "snr": 2.5059,
+        "drift_rate_hz_s": -0.106241,
+        "integration_time_s": 600.0,
+        "is_injected_anomaly": false,
+        "anomaly_type": null,
+        "data_type": "radio",
+        "detection_method": "doppler_drift",
+        "abs_drift_rate_hz_s": 0.106241,
+        "candidacy_score": 50,
+        "reasons": [
+          "Frequency in known RFI band: X-band satellite",
+          "Exoplanet system nearby: TOI-757 b, TOI-757 b",
+          "Doppler drift rate 0.1062 Hz/s consistent with technological origin"
+        ]
+      },
+      {
+        "obs_id": 262,
+        "target_name": "TOI-757",
+        "ra_deg": 187.9948428,
+        "dec_deg": -35.5544523,
+        "center_freq_mhz": 8809.6506,
+        "bandwidth_mhz": 341.2429,
+        "snr": 2.0861,
+        "drift_rate_hz_s": -0.087686,
+        "integration_time_s": 120.0,
+        "is_injected_anomaly": false,
+        "anomaly_type": null,
+        "data_type": "radio",
+        "detection_method": "doppler_drift",
+        "abs_drift_rate_hz_s": 0.087686,
+        "candidacy_score": 80,
+        "reasons": [
+          "Exoplanet system nearby: TOI-757 b, TOI-757 b",
+          "Doppler drift rate 0.0877 Hz/s consistent with technological origin"
+        ]
+      },
       {
         "obs_id": 270,
         "target_name": "TOI-757",
@@ -4024,12 +3976,7 @@
         "candidacy_score": 80,
         "reasons": [
           "Exoplanet system nearby: TOI-757 b, TOI-757 b",
-          "Doppler drift rate 0.1287 Hz/s consistent with technological origin",
-          "Frequency in known RFI band: X-band satellite",
-          "Doppler drift rate 0.0368 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.0777 Hz/s consistent with technological origin",
-          "Frequency in known RFI band: ISM 2.4 GHz",
-          "Doppler drift rate 0.1375 Hz/s consistent with technological origin"
+          "Doppler drift rate 0.1287 Hz/s consistent with technological origin"
         ]
       },
       {
@@ -4053,49 +4000,6 @@
           "Exoplanet system nearby: TOI-757 b, TOI-757 b",
           "Doppler drift rate 0.0368 Hz/s consistent with technological origin"
         ]
-      },
-      {
-        "obs_id": 280,
-        "target_name": "TOI-757",
-        "ra_deg": 187.9948428,
-        "dec_deg": -35.5544523,
-        "center_freq_mhz": 8421.9777,
-        "bandwidth_mhz": 224.1339,
-        "snr": 2.4045,
-        "drift_rate_hz_s": 0.077734,
-        "integration_time_s": 120.0,
-        "is_injected_anomaly": false,
-        "anomaly_type": null,
-        "data_type": "radio",
-        "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.077734,
-        "candidacy_score": 80,
-        "reasons": [
-          "Exoplanet system nearby: TOI-757 b, TOI-757 b",
-          "Doppler drift rate 0.0777 Hz/s consistent with technological origin"
-        ]
-      },
-      {
-        "obs_id": 281,
-        "target_name": "TOI-757",
-        "ra_deg": 187.9948428,
-        "dec_deg": -35.5544523,
-        "center_freq_mhz": 2489.7855,
-        "bandwidth_mhz": 213.888,
-        "snr": 2.5423,
-        "drift_rate_hz_s": -0.13749,
-        "integration_time_s": 300.0,
-        "is_injected_anomaly": false,
-        "anomaly_type": null,
-        "data_type": "radio",
-        "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.13749,
-        "candidacy_score": 50,
-        "reasons": [
-          "Frequency in known RFI band: ISM 2.4 GHz",
-          "Exoplanet system nearby: TOI-757 b, TOI-757 b",
-          "Doppler drift rate 0.1375 Hz/s consistent with technological origin"
-        ]
       }
     ],
     "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=187.9948+-35.5545&fov=0.5&survey=P/DSS2/color",
@@ -4117,26 +4021,27 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": 290,
+    "obs_id": 280,
     "target_name": "Kepler-37",
     "ra_deg": 284.0592503,
     "dec_deg": 44.5183733,
-    "center_freq_mhz": 1498.5587,
-    "bandwidth_mhz": 169.8566,
-    "snr": 2.0592,
-    "drift_rate_hz_s": 0.047154,
-    "integration_time_s": 300.0,
+    "center_freq_mhz": 8421.9777,
+    "bandwidth_mhz": 224.1339,
+    "snr": 2.4045,
+    "drift_rate_hz_s": 0.077734,
+    "integration_time_s": 120.0,
     "is_injected_anomaly": false,
     "anomaly_type": null,
     "data_type": "radio",
     "detection_method": "doppler_drift",
-    "abs_drift_rate_hz_s": 0.047154,
+    "abs_drift_rate_hz_s": 0.077734,
     "candidacy_score": 80,
     "reasons": [
       "Exoplanet system nearby: Kepler-37 c, Kepler-37 c, Kepler-37 d",
-      "Doppler drift rate 0.0472 Hz/s consistent with technological origin",
-      "Doppler drift rate 0.2093 Hz/s consistent with technological origin",
-      "Doppler drift rate 0.1112 Hz/s consistent with technological origin"
+      "Doppler drift rate 0.0777 Hz/s consistent with technological origin",
+      "Frequency in known RFI band: ISM 2.4 GHz",
+      "Doppler drift rate 0.1375 Hz/s consistent with technological origin",
+      "Doppler drift rate 0.0472 Hz/s consistent with technological origin"
     ],
     "_all_methods": [
       "doppler_drift"
@@ -4145,6 +4050,52 @@
       "radio"
     ],
     "_entries": [
+      {
+        "obs_id": 280,
+        "target_name": "Kepler-37",
+        "ra_deg": 284.0592503,
+        "dec_deg": 44.5183733,
+        "center_freq_mhz": 8421.9777,
+        "bandwidth_mhz": 224.1339,
+        "snr": 2.4045,
+        "drift_rate_hz_s": 0.077734,
+        "integration_time_s": 120.0,
+        "is_injected_anomaly": false,
+        "anomaly_type": null,
+        "data_type": "radio",
+        "detection_method": "doppler_drift",
+        "abs_drift_rate_hz_s": 0.077734,
+        "candidacy_score": 80,
+        "reasons": [
+          "Exoplanet system nearby: Kepler-37 c, Kepler-37 c, Kepler-37 d",
+          "Doppler drift rate 0.0777 Hz/s consistent with technological origin",
+          "Frequency in known RFI band: ISM 2.4 GHz",
+          "Doppler drift rate 0.1375 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.0472 Hz/s consistent with technological origin"
+        ]
+      },
+      {
+        "obs_id": 281,
+        "target_name": "Kepler-37",
+        "ra_deg": 284.0592503,
+        "dec_deg": 44.5183733,
+        "center_freq_mhz": 2489.7855,
+        "bandwidth_mhz": 213.888,
+        "snr": 2.5423,
+        "drift_rate_hz_s": -0.13749,
+        "integration_time_s": 300.0,
+        "is_injected_anomaly": false,
+        "anomaly_type": null,
+        "data_type": "radio",
+        "detection_method": "doppler_drift",
+        "abs_drift_rate_hz_s": 0.13749,
+        "candidacy_score": 50,
+        "reasons": [
+          "Frequency in known RFI band: ISM 2.4 GHz",
+          "Exoplanet system nearby: Kepler-37 c, Kepler-37 c, Kepler-37 d",
+          "Doppler drift rate 0.1375 Hz/s consistent with technological origin"
+        ]
+      },
       {
         "obs_id": 290,
         "target_name": "Kepler-37",
@@ -4163,51 +4114,7 @@
         "candidacy_score": 80,
         "reasons": [
           "Exoplanet system nearby: Kepler-37 c, Kepler-37 c, Kepler-37 d",
-          "Doppler drift rate 0.0472 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.2093 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.1112 Hz/s consistent with technological origin"
-        ]
-      },
-      {
-        "obs_id": 301,
-        "target_name": "Kepler-37",
-        "ra_deg": 284.0592503,
-        "dec_deg": 44.5183733,
-        "center_freq_mhz": 1391.2756,
-        "bandwidth_mhz": 172.5994,
-        "snr": 11.1011,
-        "drift_rate_hz_s": 0.209317,
-        "integration_time_s": 600.0,
-        "is_injected_anomaly": false,
-        "anomaly_type": null,
-        "data_type": "radio",
-        "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.209317,
-        "candidacy_score": 80,
-        "reasons": [
-          "Exoplanet system nearby: Kepler-37 c, Kepler-37 c, Kepler-37 d",
-          "Doppler drift rate 0.2093 Hz/s consistent with technological origin"
-        ]
-      },
-      {
-        "obs_id": 302,
-        "target_name": "Kepler-37",
-        "ra_deg": 284.0592503,
-        "dec_deg": 44.5183733,
-        "center_freq_mhz": 6141.0939,
-        "bandwidth_mhz": 266.505,
-        "snr": 1.8561,
-        "drift_rate_hz_s": -0.111241,
-        "integration_time_s": 120.0,
-        "is_injected_anomaly": false,
-        "anomaly_type": null,
-        "data_type": "radio",
-        "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.111241,
-        "candidacy_score": 80,
-        "reasons": [
-          "Exoplanet system nearby: Kepler-37 c, Kepler-37 c, Kepler-37 d",
-          "Doppler drift rate 0.1112 Hz/s consistent with technological origin"
+          "Doppler drift rate 0.0472 Hz/s consistent with technological origin"
         ]
       }
     ],
@@ -4230,25 +4137,25 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": 310,
+    "obs_id": 301,
     "target_name": "WASP-107",
     "ra_deg": 188.3864277,
     "dec_deg": -10.1462141,
-    "center_freq_mhz": 1467.6568,
-    "bandwidth_mhz": 469.9367,
-    "snr": 1.1362,
-    "drift_rate_hz_s": 0.092744,
+    "center_freq_mhz": 1391.2756,
+    "bandwidth_mhz": 172.5994,
+    "snr": 11.1011,
+    "drift_rate_hz_s": 0.209317,
     "integration_time_s": 600.0,
     "is_injected_anomaly": false,
     "anomaly_type": null,
     "data_type": "radio",
     "detection_method": "doppler_drift",
-    "abs_drift_rate_hz_s": 0.092744,
+    "abs_drift_rate_hz_s": 0.209317,
     "candidacy_score": 80,
     "reasons": [
       "Exoplanet system nearby: WASP-107 b, WASP-107 c, WASP-107 b",
-      "Doppler drift rate 0.0927 Hz/s consistent with technological origin",
-      "Doppler drift rate 0.0153 Hz/s consistent with technological origin"
+      "Doppler drift rate 0.2093 Hz/s consistent with technological origin",
+      "Doppler drift rate 0.1112 Hz/s consistent with technological origin"
     ],
     "_all_methods": [
       "doppler_drift"
@@ -4258,46 +4165,46 @@
     ],
     "_entries": [
       {
-        "obs_id": 310,
+        "obs_id": 301,
         "target_name": "WASP-107",
         "ra_deg": 188.3864277,
         "dec_deg": -10.1462141,
-        "center_freq_mhz": 1467.6568,
-        "bandwidth_mhz": 469.9367,
-        "snr": 1.1362,
-        "drift_rate_hz_s": 0.092744,
+        "center_freq_mhz": 1391.2756,
+        "bandwidth_mhz": 172.5994,
+        "snr": 11.1011,
+        "drift_rate_hz_s": 0.209317,
         "integration_time_s": 600.0,
         "is_injected_anomaly": false,
         "anomaly_type": null,
         "data_type": "radio",
         "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.092744,
+        "abs_drift_rate_hz_s": 0.209317,
         "candidacy_score": 80,
         "reasons": [
           "Exoplanet system nearby: WASP-107 b, WASP-107 c, WASP-107 b",
-          "Doppler drift rate 0.0927 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.0153 Hz/s consistent with technological origin"
+          "Doppler drift rate 0.2093 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.1112 Hz/s consistent with technological origin"
         ]
       },
       {
-        "obs_id": 312,
+        "obs_id": 302,
         "target_name": "WASP-107",
         "ra_deg": 188.3864277,
         "dec_deg": -10.1462141,
-        "center_freq_mhz": 8010.9672,
-        "bandwidth_mhz": 153.8209,
-        "snr": 2.3965,
-        "drift_rate_hz_s": 0.015256,
-        "integration_time_s": 600.0,
+        "center_freq_mhz": 6141.0939,
+        "bandwidth_mhz": 266.505,
+        "snr": 1.8561,
+        "drift_rate_hz_s": -0.111241,
+        "integration_time_s": 120.0,
         "is_injected_anomaly": false,
         "anomaly_type": null,
         "data_type": "radio",
         "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.015256,
+        "abs_drift_rate_hz_s": 0.111241,
         "candidacy_score": 80,
         "reasons": [
           "Exoplanet system nearby: WASP-107 b, WASP-107 c, WASP-107 b",
-          "Doppler drift rate 0.0153 Hz/s consistent with technological origin"
+          "Doppler drift rate 0.1112 Hz/s consistent with technological origin"
         ]
       }
     ],
@@ -4320,26 +4227,25 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": 320,
+    "obs_id": 310,
     "target_name": "Kepler-138",
     "ra_deg": 290.3814122,
     "dec_deg": 43.2930645,
-    "center_freq_mhz": 5165.1943,
-    "bandwidth_mhz": 254.0358,
-    "snr": 2.9691,
-    "drift_rate_hz_s": 0.029599,
-    "integration_time_s": 120.0,
+    "center_freq_mhz": 1467.6568,
+    "bandwidth_mhz": 469.9367,
+    "snr": 1.1362,
+    "drift_rate_hz_s": 0.092744,
+    "integration_time_s": 600.0,
     "is_injected_anomaly": false,
     "anomaly_type": null,
     "data_type": "radio",
     "detection_method": "doppler_drift",
-    "abs_drift_rate_hz_s": 0.029599,
+    "abs_drift_rate_hz_s": 0.092744,
     "candidacy_score": 80,
     "reasons": [
       "Exoplanet system nearby: Kepler-716 c, Kepler-138 c, Kepler-138 c",
-      "Doppler drift rate 0.0296 Hz/s consistent with technological origin",
-      "Doppler drift rate 0.1534 Hz/s consistent with technological origin",
-      "Doppler drift rate 0.1053 Hz/s consistent with technological origin"
+      "Doppler drift rate 0.0927 Hz/s consistent with technological origin",
+      "Doppler drift rate 0.0153 Hz/s consistent with technological origin"
     ],
     "_all_methods": [
       "doppler_drift"
@@ -4349,68 +4255,46 @@
     ],
     "_entries": [
       {
-        "obs_id": 320,
+        "obs_id": 310,
         "target_name": "Kepler-138",
         "ra_deg": 290.3814122,
         "dec_deg": 43.2930645,
-        "center_freq_mhz": 5165.1943,
-        "bandwidth_mhz": 254.0358,
-        "snr": 2.9691,
-        "drift_rate_hz_s": 0.029599,
-        "integration_time_s": 120.0,
+        "center_freq_mhz": 1467.6568,
+        "bandwidth_mhz": 469.9367,
+        "snr": 1.1362,
+        "drift_rate_hz_s": 0.092744,
+        "integration_time_s": 600.0,
         "is_injected_anomaly": false,
         "anomaly_type": null,
         "data_type": "radio",
         "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.029599,
+        "abs_drift_rate_hz_s": 0.092744,
         "candidacy_score": 80,
         "reasons": [
           "Exoplanet system nearby: Kepler-716 c, Kepler-138 c, Kepler-138 c",
-          "Doppler drift rate 0.0296 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.1534 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.1053 Hz/s consistent with technological origin"
+          "Doppler drift rate 0.0927 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.0153 Hz/s consistent with technological origin"
         ]
       },
       {
-        "obs_id": 321,
+        "obs_id": 312,
         "target_name": "Kepler-138",
         "ra_deg": 290.3814122,
         "dec_deg": 43.2930645,
-        "center_freq_mhz": 5300.8955,
-        "bandwidth_mhz": 266.7557,
-        "snr": 6.4474,
-        "drift_rate_hz_s": -0.153386,
-        "integration_time_s": 120.0,
+        "center_freq_mhz": 8010.9672,
+        "bandwidth_mhz": 153.8209,
+        "snr": 2.3965,
+        "drift_rate_hz_s": 0.015256,
+        "integration_time_s": 600.0,
         "is_injected_anomaly": false,
         "anomaly_type": null,
         "data_type": "radio",
         "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.153386,
+        "abs_drift_rate_hz_s": 0.015256,
         "candidacy_score": 80,
         "reasons": [
           "Exoplanet system nearby: Kepler-716 c, Kepler-138 c, Kepler-138 c",
-          "Doppler drift rate 0.1534 Hz/s consistent with technological origin"
-        ]
-      },
-      {
-        "obs_id": 322,
-        "target_name": "Kepler-138",
-        "ra_deg": 290.3814122,
-        "dec_deg": 43.2930645,
-        "center_freq_mhz": 4297.532,
-        "bandwidth_mhz": 230.9982,
-        "snr": 2.6362,
-        "drift_rate_hz_s": -0.10529,
-        "integration_time_s": 120.0,
-        "is_injected_anomaly": false,
-        "anomaly_type": null,
-        "data_type": "radio",
-        "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.10529,
-        "candidacy_score": 80,
-        "reasons": [
-          "Exoplanet system nearby: Kepler-716 c, Kepler-138 c, Kepler-138 c",
-          "Doppler drift rate 0.1053 Hz/s consistent with technological origin"
+          "Doppler drift rate 0.0153 Hz/s consistent with technological origin"
         ]
       }
     ],
@@ -4433,24 +4317,26 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": 330,
+    "obs_id": 320,
     "target_name": "K2-240",
     "ra_deg": 227.849371,
     "dec_deg": -17.8754464,
-    "center_freq_mhz": 9539.7213,
-    "bandwidth_mhz": 466.5392,
-    "snr": 6.4634,
-    "drift_rate_hz_s": 0.117741,
-    "integration_time_s": 300.0,
+    "center_freq_mhz": 5165.1943,
+    "bandwidth_mhz": 254.0358,
+    "snr": 2.9691,
+    "drift_rate_hz_s": 0.029599,
+    "integration_time_s": 120.0,
     "is_injected_anomaly": false,
     "anomaly_type": null,
     "data_type": "radio",
     "detection_method": "doppler_drift",
-    "abs_drift_rate_hz_s": 0.117741,
+    "abs_drift_rate_hz_s": 0.029599,
     "candidacy_score": 80,
     "reasons": [
       "Exoplanet system nearby: K2-240 b, K2-240 c",
-      "Doppler drift rate 0.1177 Hz/s consistent with technological origin"
+      "Doppler drift rate 0.0296 Hz/s consistent with technological origin",
+      "Doppler drift rate 0.1534 Hz/s consistent with technological origin",
+      "Doppler drift rate 0.1053 Hz/s consistent with technological origin"
     ],
     "_all_methods": [
       "doppler_drift"
@@ -4460,24 +4346,68 @@
     ],
     "_entries": [
       {
-        "obs_id": 330,
+        "obs_id": 320,
         "target_name": "K2-240",
         "ra_deg": 227.849371,
         "dec_deg": -17.8754464,
-        "center_freq_mhz": 9539.7213,
-        "bandwidth_mhz": 466.5392,
-        "snr": 6.4634,
-        "drift_rate_hz_s": 0.117741,
-        "integration_time_s": 300.0,
+        "center_freq_mhz": 5165.1943,
+        "bandwidth_mhz": 254.0358,
+        "snr": 2.9691,
+        "drift_rate_hz_s": 0.029599,
+        "integration_time_s": 120.0,
         "is_injected_anomaly": false,
         "anomaly_type": null,
         "data_type": "radio",
         "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.117741,
+        "abs_drift_rate_hz_s": 0.029599,
         "candidacy_score": 80,
         "reasons": [
           "Exoplanet system nearby: K2-240 b, K2-240 c",
-          "Doppler drift rate 0.1177 Hz/s consistent with technological origin"
+          "Doppler drift rate 0.0296 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.1534 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.1053 Hz/s consistent with technological origin"
+        ]
+      },
+      {
+        "obs_id": 321,
+        "target_name": "K2-240",
+        "ra_deg": 227.849371,
+        "dec_deg": -17.8754464,
+        "center_freq_mhz": 5300.8955,
+        "bandwidth_mhz": 266.7557,
+        "snr": 6.4474,
+        "drift_rate_hz_s": -0.153386,
+        "integration_time_s": 120.0,
+        "is_injected_anomaly": false,
+        "anomaly_type": null,
+        "data_type": "radio",
+        "detection_method": "doppler_drift",
+        "abs_drift_rate_hz_s": 0.153386,
+        "candidacy_score": 80,
+        "reasons": [
+          "Exoplanet system nearby: K2-240 b, K2-240 c",
+          "Doppler drift rate 0.1534 Hz/s consistent with technological origin"
+        ]
+      },
+      {
+        "obs_id": 322,
+        "target_name": "K2-240",
+        "ra_deg": 227.849371,
+        "dec_deg": -17.8754464,
+        "center_freq_mhz": 4297.532,
+        "bandwidth_mhz": 230.9982,
+        "snr": 2.6362,
+        "drift_rate_hz_s": -0.10529,
+        "integration_time_s": 120.0,
+        "is_injected_anomaly": false,
+        "anomaly_type": null,
+        "data_type": "radio",
+        "detection_method": "doppler_drift",
+        "abs_drift_rate_hz_s": 0.10529,
+        "candidacy_score": 80,
+        "reasons": [
+          "Exoplanet system nearby: K2-240 b, K2-240 c",
+          "Doppler drift rate 0.1053 Hz/s consistent with technological origin"
         ]
       }
     ],
@@ -4500,25 +4430,24 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": 340,
+    "obs_id": 330,
     "target_name": "TOI-6000",
     "ra_deg": 292.6062979,
     "dec_deg": 68.1545924,
-    "center_freq_mhz": 8637.0444,
-    "bandwidth_mhz": 361.0349,
-    "snr": 4.1123,
-    "drift_rate_hz_s": -0.029657,
-    "integration_time_s": 600.0,
+    "center_freq_mhz": 9539.7213,
+    "bandwidth_mhz": 466.5392,
+    "snr": 6.4634,
+    "drift_rate_hz_s": 0.117741,
+    "integration_time_s": 300.0,
     "is_injected_anomaly": false,
     "anomaly_type": null,
     "data_type": "radio",
     "detection_method": "doppler_drift",
-    "abs_drift_rate_hz_s": 0.029657,
+    "abs_drift_rate_hz_s": 0.117741,
     "candidacy_score": 80,
     "reasons": [
       "Exoplanet system nearby: TOI-6000 b, TOI-6000 b",
-      "Doppler drift rate 0.0297 Hz/s consistent with technological origin",
-      "Doppler drift rate 0.0782 Hz/s consistent with technological origin"
+      "Doppler drift rate 0.1177 Hz/s consistent with technological origin"
     ],
     "_all_methods": [
       "doppler_drift"
@@ -4528,46 +4457,24 @@
     ],
     "_entries": [
       {
-        "obs_id": 340,
+        "obs_id": 330,
         "target_name": "TOI-6000",
         "ra_deg": 292.6062979,
         "dec_deg": 68.1545924,
-        "center_freq_mhz": 8637.0444,
-        "bandwidth_mhz": 361.0349,
-        "snr": 4.1123,
-        "drift_rate_hz_s": -0.029657,
-        "integration_time_s": 600.0,
-        "is_injected_anomaly": false,
-        "anomaly_type": null,
-        "data_type": "radio",
-        "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.029657,
-        "candidacy_score": 80,
-        "reasons": [
-          "Exoplanet system nearby: TOI-6000 b, TOI-6000 b",
-          "Doppler drift rate 0.0297 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.0782 Hz/s consistent with technological origin"
-        ]
-      },
-      {
-        "obs_id": 341,
-        "target_name": "TOI-6000",
-        "ra_deg": 292.6062979,
-        "dec_deg": 68.1545924,
-        "center_freq_mhz": 3593.4005,
-        "bandwidth_mhz": 393.9573,
-        "snr": 1.5081,
-        "drift_rate_hz_s": 0.078235,
+        "center_freq_mhz": 9539.7213,
+        "bandwidth_mhz": 466.5392,
+        "snr": 6.4634,
+        "drift_rate_hz_s": 0.117741,
         "integration_time_s": 300.0,
         "is_injected_anomaly": false,
         "anomaly_type": null,
         "data_type": "radio",
         "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.078235,
+        "abs_drift_rate_hz_s": 0.117741,
         "candidacy_score": 80,
         "reasons": [
           "Exoplanet system nearby: TOI-6000 b, TOI-6000 b",
-          "Doppler drift rate 0.0782 Hz/s consistent with technological origin"
+          "Doppler drift rate 0.1177 Hz/s consistent with technological origin"
         ]
       }
     ],
@@ -4587,6 +4494,96 @@
     ],
     "image_path": null,
     "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=292.60630&dec=68.15459&format=jpg",
+    "image_cdn_label": "DSS2 Optical"
+  },
+  {
+    "obs_id": 340,
+    "target_name": "TOI-2141",
+    "ra_deg": 258.7623456,
+    "dec_deg": 18.3403449,
+    "center_freq_mhz": 8637.0444,
+    "bandwidth_mhz": 361.0349,
+    "snr": 4.1123,
+    "drift_rate_hz_s": -0.029657,
+    "integration_time_s": 600.0,
+    "is_injected_anomaly": false,
+    "anomaly_type": null,
+    "data_type": "radio",
+    "detection_method": "doppler_drift",
+    "abs_drift_rate_hz_s": 0.029657,
+    "candidacy_score": 80,
+    "reasons": [
+      "Exoplanet system nearby: TOI-2141 c, TOI-2141 b, TOI-2141 b",
+      "Doppler drift rate 0.0297 Hz/s consistent with technological origin",
+      "Doppler drift rate 0.0782 Hz/s consistent with technological origin"
+    ],
+    "_all_methods": [
+      "doppler_drift"
+    ],
+    "_all_dtypes": [
+      "radio"
+    ],
+    "_entries": [
+      {
+        "obs_id": 340,
+        "target_name": "TOI-2141",
+        "ra_deg": 258.7623456,
+        "dec_deg": 18.3403449,
+        "center_freq_mhz": 8637.0444,
+        "bandwidth_mhz": 361.0349,
+        "snr": 4.1123,
+        "drift_rate_hz_s": -0.029657,
+        "integration_time_s": 600.0,
+        "is_injected_anomaly": false,
+        "anomaly_type": null,
+        "data_type": "radio",
+        "detection_method": "doppler_drift",
+        "abs_drift_rate_hz_s": 0.029657,
+        "candidacy_score": 80,
+        "reasons": [
+          "Exoplanet system nearby: TOI-2141 c, TOI-2141 b, TOI-2141 b",
+          "Doppler drift rate 0.0297 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.0782 Hz/s consistent with technological origin"
+        ]
+      },
+      {
+        "obs_id": 341,
+        "target_name": "TOI-2141",
+        "ra_deg": 258.7623456,
+        "dec_deg": 18.3403449,
+        "center_freq_mhz": 3593.4005,
+        "bandwidth_mhz": 393.9573,
+        "snr": 1.5081,
+        "drift_rate_hz_s": 0.078235,
+        "integration_time_s": 300.0,
+        "is_injected_anomaly": false,
+        "anomaly_type": null,
+        "data_type": "radio",
+        "detection_method": "doppler_drift",
+        "abs_drift_rate_hz_s": 0.078235,
+        "candidacy_score": 80,
+        "reasons": [
+          "Exoplanet system nearby: TOI-2141 c, TOI-2141 b, TOI-2141 b",
+          "Doppler drift rate 0.0782 Hz/s consistent with technological origin"
+        ]
+      }
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=258.7623+18.3403&fov=0.5&survey=P/DSS2/color",
+    "survey_label": "DSS2 Optical",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=258.7623+18.3403&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=258.7623+18.3403&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=258.76235&dec=18.34034&format=jpg",
     "image_cdn_label": "DSS2 Optical"
   },
   {
@@ -5259,7 +5256,7 @@
     "abs_drift_rate_hz_s": 0.017961,
     "candidacy_score": 80,
     "reasons": [
-      "Exoplanet system nearby: WASP-8 b, WASP-8 c, WASP-8 b",
+      "Exoplanet system nearby: WASP-8 c, WASP-8 b, WASP-8 b",
       "Doppler drift rate 0.0180 Hz/s consistent with technological origin",
       "Doppler drift rate 0.0521 Hz/s consistent with technological origin"
     ],
@@ -5287,7 +5284,7 @@
         "abs_drift_rate_hz_s": 0.017961,
         "candidacy_score": 80,
         "reasons": [
-          "Exoplanet system nearby: WASP-8 b, WASP-8 c, WASP-8 b",
+          "Exoplanet system nearby: WASP-8 c, WASP-8 b, WASP-8 b",
           "Doppler drift rate 0.0180 Hz/s consistent with technological origin",
           "Doppler drift rate 0.0521 Hz/s consistent with technological origin"
         ]
@@ -5309,7 +5306,7 @@
         "abs_drift_rate_hz_s": 0.052117,
         "candidacy_score": 80,
         "reasons": [
-          "Exoplanet system nearby: WASP-8 b, WASP-8 c, WASP-8 b",
+          "Exoplanet system nearby: WASP-8 c, WASP-8 b, WASP-8 b",
           "Doppler drift rate 0.0521 Hz/s consistent with technological origin"
         ]
       }
@@ -6784,9 +6781,9 @@
   },
   {
     "obs_id": 771,
-    "target_name": "HD 39091",
-    "ra_deg": 84.2992798,
-    "dec_deg": -80.4646041,
+    "target_name": "HD 154345",
+    "ra_deg": 255.6524619,
+    "dec_deg": 47.0855544,
     "center_freq_mhz": 7283.7075,
     "bandwidth_mhz": 182.8082,
     "snr": 3.594,
@@ -6799,7 +6796,7 @@
     "abs_drift_rate_hz_s": 0.022154,
     "candidacy_score": 80,
     "reasons": [
-      "Exoplanet system nearby: HD 39091 b, pi Men c, pi Men c",
+      "Exoplanet system nearby: HD 154345 b, HD 154345 b, HD 154345 b",
       "Doppler drift rate 0.0222 Hz/s consistent with technological origin"
     ],
     "_all_methods": [
@@ -6811,9 +6808,9 @@
     "_entries": [
       {
         "obs_id": 771,
-        "target_name": "HD 39091",
-        "ra_deg": 84.2992798,
-        "dec_deg": -80.4646041,
+        "target_name": "HD 154345",
+        "ra_deg": 255.6524619,
+        "dec_deg": 47.0855544,
         "center_freq_mhz": 7283.7075,
         "bandwidth_mhz": 182.8082,
         "snr": 3.594,
@@ -6826,75 +6823,8 @@
         "abs_drift_rate_hz_s": 0.022154,
         "candidacy_score": 80,
         "reasons": [
-          "Exoplanet system nearby: HD 39091 b, pi Men c, pi Men c",
-          "Doppler drift rate 0.0222 Hz/s consistent with technological origin"
-        ]
-      }
-    ],
-    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=84.2993+-80.4646&fov=0.5&survey=P/DSS2/color",
-    "survey_label": "DSS2 Optical",
-    "multisurvey_links": [
-      {
-        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=84.2993+-80.4646&fov=0.5&survey=P/DSS2/color",
-        "label": "DSS2 Optical",
-        "survey_key": "optical"
-      },
-      {
-        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=84.2993+-80.4646&fov=0.5&survey=P/2MASS/color",
-        "label": "2MASS NIR",
-        "survey_key": "nir"
-      }
-    ],
-    "image_path": null,
-    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=84.29928&dec=-80.46460&format=jpg",
-    "image_cdn_label": "DSS2 Optical"
-  },
-  {
-    "obs_id": 790,
-    "target_name": "HD 154345",
-    "ra_deg": 255.6524619,
-    "dec_deg": 47.0855544,
-    "center_freq_mhz": 5405.5181,
-    "bandwidth_mhz": 233.2377,
-    "snr": 3.83,
-    "drift_rate_hz_s": -0.035095,
-    "integration_time_s": 300.0,
-    "is_injected_anomaly": false,
-    "anomaly_type": null,
-    "data_type": "radio",
-    "detection_method": "doppler_drift",
-    "abs_drift_rate_hz_s": 0.035095,
-    "candidacy_score": 80,
-    "reasons": [
-      "Exoplanet system nearby: HD 154345 b, HD 154345 b, HD 154345 b",
-      "Doppler drift rate 0.0351 Hz/s consistent with technological origin"
-    ],
-    "_all_methods": [
-      "doppler_drift"
-    ],
-    "_all_dtypes": [
-      "radio"
-    ],
-    "_entries": [
-      {
-        "obs_id": 790,
-        "target_name": "HD 154345",
-        "ra_deg": 255.6524619,
-        "dec_deg": 47.0855544,
-        "center_freq_mhz": 5405.5181,
-        "bandwidth_mhz": 233.2377,
-        "snr": 3.83,
-        "drift_rate_hz_s": -0.035095,
-        "integration_time_s": 300.0,
-        "is_injected_anomaly": false,
-        "anomaly_type": null,
-        "data_type": "radio",
-        "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.035095,
-        "candidacy_score": 80,
-        "reasons": [
           "Exoplanet system nearby: HD 154345 b, HD 154345 b, HD 154345 b",
-          "Doppler drift rate 0.0351 Hz/s consistent with technological origin"
+          "Doppler drift rate 0.0222 Hz/s consistent with technological origin"
         ]
       }
     ],
@@ -6917,28 +6847,27 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": 800,
+    "obs_id": 790,
     "target_name": "HD 189733",
     "ra_deg": 300.1821223,
     "dec_deg": 22.7097759,
-    "center_freq_mhz": 3343.1369,
-    "bandwidth_mhz": 228.9962,
-    "snr": 0.869,
-    "drift_rate_hz_s": -0.149664,
-    "integration_time_s": 600.0,
+    "center_freq_mhz": 5405.5181,
+    "bandwidth_mhz": 233.2377,
+    "snr": 3.83,
+    "drift_rate_hz_s": -0.035095,
+    "integration_time_s": 300.0,
     "is_injected_anomaly": false,
     "anomaly_type": null,
     "data_type": "radio",
     "detection_method": "doppler_drift",
-    "abs_drift_rate_hz_s": 0.149664,
+    "abs_drift_rate_hz_s": 0.035095,
     "candidacy_score": 80,
     "reasons": [
       "Exoplanet system nearby: HD 189733 b, HD 189733 b, HD 189733 b",
+      "Doppler drift rate 0.0351 Hz/s consistent with technological origin",
       "Doppler drift rate 0.1497 Hz/s consistent with technological origin",
       "Doppler drift rate 0.0767 Hz/s consistent with technological origin",
-      "Doppler drift rate 0.0549 Hz/s consistent with technological origin",
-      "Doppler drift rate 0.0807 Hz/s consistent with technological origin",
-      "Doppler drift rate 0.1021 Hz/s consistent with technological origin"
+      "Doppler drift rate 0.0549 Hz/s consistent with technological origin"
     ],
     "_all_methods": [
       "doppler_drift"
@@ -6947,6 +6876,30 @@
       "radio"
     ],
     "_entries": [
+      {
+        "obs_id": 790,
+        "target_name": "HD 189733",
+        "ra_deg": 300.1821223,
+        "dec_deg": 22.7097759,
+        "center_freq_mhz": 5405.5181,
+        "bandwidth_mhz": 233.2377,
+        "snr": 3.83,
+        "drift_rate_hz_s": -0.035095,
+        "integration_time_s": 300.0,
+        "is_injected_anomaly": false,
+        "anomaly_type": null,
+        "data_type": "radio",
+        "detection_method": "doppler_drift",
+        "abs_drift_rate_hz_s": 0.035095,
+        "candidacy_score": 80,
+        "reasons": [
+          "Exoplanet system nearby: HD 189733 b, HD 189733 b, HD 189733 b",
+          "Doppler drift rate 0.0351 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.1497 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.0767 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.0549 Hz/s consistent with technological origin"
+        ]
+      },
       {
         "obs_id": 800,
         "target_name": "HD 189733",
@@ -6965,11 +6918,7 @@
         "candidacy_score": 80,
         "reasons": [
           "Exoplanet system nearby: HD 189733 b, HD 189733 b, HD 189733 b",
-          "Doppler drift rate 0.1497 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.0767 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.0549 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.0807 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.1021 Hz/s consistent with technological origin"
+          "Doppler drift rate 0.1497 Hz/s consistent with technological origin"
         ]
       },
       {
@@ -7013,48 +6962,6 @@
           "Exoplanet system nearby: HD 189733 b, HD 189733 b, HD 189733 b",
           "Doppler drift rate 0.0549 Hz/s consistent with technological origin"
         ]
-      },
-      {
-        "obs_id": 820,
-        "target_name": "HD 189733",
-        "ra_deg": 300.1821223,
-        "dec_deg": 22.7097759,
-        "center_freq_mhz": 9269.4087,
-        "bandwidth_mhz": 103.7039,
-        "snr": 4.0104,
-        "drift_rate_hz_s": 0.080701,
-        "integration_time_s": 120.0,
-        "is_injected_anomaly": false,
-        "anomaly_type": null,
-        "data_type": "radio",
-        "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.080701,
-        "candidacy_score": 80,
-        "reasons": [
-          "Exoplanet system nearby: HD 189733 b, HD 189733 b, HD 189733 b",
-          "Doppler drift rate 0.0807 Hz/s consistent with technological origin"
-        ]
-      },
-      {
-        "obs_id": 830,
-        "target_name": "HD 189733",
-        "ra_deg": 300.1821223,
-        "dec_deg": 22.7097759,
-        "center_freq_mhz": 6581.3436,
-        "bandwidth_mhz": 196.6556,
-        "snr": 4.9227,
-        "drift_rate_hz_s": -0.102062,
-        "integration_time_s": 600.0,
-        "is_injected_anomaly": false,
-        "anomaly_type": null,
-        "data_type": "radio",
-        "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.102062,
-        "candidacy_score": 80,
-        "reasons": [
-          "Exoplanet system nearby: HD 189733 b, HD 189733 b, HD 189733 b",
-          "Doppler drift rate 0.1021 Hz/s consistent with technological origin"
-        ]
       }
     ],
     "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=300.1821+22.7098&fov=0.5&survey=P/DSS2/color",
@@ -7076,26 +6983,24 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": 840,
+    "obs_id": 820,
     "target_name": "HD 217107",
     "ra_deg": 344.5647243,
     "dec_deg": -2.3954489,
-    "center_freq_mhz": 1042.6725,
-    "bandwidth_mhz": 441.3478,
-    "snr": 6.6779,
-    "drift_rate_hz_s": 0.05163,
-    "integration_time_s": 600.0,
+    "center_freq_mhz": 9269.4087,
+    "bandwidth_mhz": 103.7039,
+    "snr": 4.0104,
+    "drift_rate_hz_s": 0.080701,
+    "integration_time_s": 120.0,
     "is_injected_anomaly": false,
     "anomaly_type": null,
     "data_type": "radio",
     "detection_method": "doppler_drift",
-    "abs_drift_rate_hz_s": 0.05163,
+    "abs_drift_rate_hz_s": 0.080701,
     "candidacy_score": 80,
     "reasons": [
       "Exoplanet system nearby: HD 217107 b, HD 217107 c, HD 217107 c",
-      "Doppler drift rate 0.0516 Hz/s consistent with technological origin",
-      "Doppler drift rate 0.1015 Hz/s consistent with technological origin",
-      "Doppler drift rate 0.0921 Hz/s consistent with technological origin"
+      "Doppler drift rate 0.0807 Hz/s consistent with technological origin"
     ],
     "_all_methods": [
       "doppler_drift"
@@ -7105,68 +7010,24 @@
     ],
     "_entries": [
       {
-        "obs_id": 840,
+        "obs_id": 820,
         "target_name": "HD 217107",
         "ra_deg": 344.5647243,
         "dec_deg": -2.3954489,
-        "center_freq_mhz": 1042.6725,
-        "bandwidth_mhz": 441.3478,
-        "snr": 6.6779,
-        "drift_rate_hz_s": 0.05163,
-        "integration_time_s": 600.0,
-        "is_injected_anomaly": false,
-        "anomaly_type": null,
-        "data_type": "radio",
-        "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.05163,
-        "candidacy_score": 80,
-        "reasons": [
-          "Exoplanet system nearby: HD 217107 b, HD 217107 c, HD 217107 c",
-          "Doppler drift rate 0.0516 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.1015 Hz/s consistent with technological origin",
-          "Doppler drift rate 0.0921 Hz/s consistent with technological origin"
-        ]
-      },
-      {
-        "obs_id": 841,
-        "target_name": "HD 217107",
-        "ra_deg": 344.5647243,
-        "dec_deg": -2.3954489,
-        "center_freq_mhz": 8699.4239,
-        "bandwidth_mhz": 201.7054,
-        "snr": 2.3405,
-        "drift_rate_hz_s": -0.101507,
-        "integration_time_s": 600.0,
-        "is_injected_anomaly": false,
-        "anomaly_type": null,
-        "data_type": "radio",
-        "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.101507,
-        "candidacy_score": 80,
-        "reasons": [
-          "Exoplanet system nearby: HD 217107 b, HD 217107 c, HD 217107 c",
-          "Doppler drift rate 0.1015 Hz/s consistent with technological origin"
-        ]
-      },
-      {
-        "obs_id": 842,
-        "target_name": "HD 217107",
-        "ra_deg": 344.5647243,
-        "dec_deg": -2.3954489,
-        "center_freq_mhz": 6430.8201,
-        "bandwidth_mhz": 493.8598,
-        "snr": 4.7972,
-        "drift_rate_hz_s": -0.092085,
+        "center_freq_mhz": 9269.4087,
+        "bandwidth_mhz": 103.7039,
+        "snr": 4.0104,
+        "drift_rate_hz_s": 0.080701,
         "integration_time_s": 120.0,
         "is_injected_anomaly": false,
         "anomaly_type": null,
         "data_type": "radio",
         "detection_method": "doppler_drift",
-        "abs_drift_rate_hz_s": 0.092085,
+        "abs_drift_rate_hz_s": 0.080701,
         "candidacy_score": 80,
         "reasons": [
           "Exoplanet system nearby: HD 217107 b, HD 217107 c, HD 217107 c",
-          "Doppler drift rate 0.0921 Hz/s consistent with technological origin"
+          "Doppler drift rate 0.0807 Hz/s consistent with technological origin"
         ]
       }
     ],
@@ -7186,6 +7047,142 @@
     ],
     "image_path": null,
     "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=344.56472&dec=-2.39545&format=jpg",
+    "image_cdn_label": "DSS2 Optical"
+  },
+  {
+    "obs_id": 830,
+    "target_name": "HD 114783",
+    "ra_deg": 198.1818436,
+    "dec_deg": -2.2649921,
+    "center_freq_mhz": 6581.3436,
+    "bandwidth_mhz": 196.6556,
+    "snr": 4.9227,
+    "drift_rate_hz_s": -0.102062,
+    "integration_time_s": 600.0,
+    "is_injected_anomaly": false,
+    "anomaly_type": null,
+    "data_type": "radio",
+    "detection_method": "doppler_drift",
+    "abs_drift_rate_hz_s": 0.102062,
+    "candidacy_score": 80,
+    "reasons": [
+      "Exoplanet system nearby: HD 114783 b, HD 114783 c, HD 114783 c",
+      "Doppler drift rate 0.1021 Hz/s consistent with technological origin",
+      "Doppler drift rate 0.0516 Hz/s consistent with technological origin",
+      "Doppler drift rate 0.1015 Hz/s consistent with technological origin",
+      "Doppler drift rate 0.0921 Hz/s consistent with technological origin"
+    ],
+    "_all_methods": [
+      "doppler_drift"
+    ],
+    "_all_dtypes": [
+      "radio"
+    ],
+    "_entries": [
+      {
+        "obs_id": 830,
+        "target_name": "HD 114783",
+        "ra_deg": 198.1818436,
+        "dec_deg": -2.2649921,
+        "center_freq_mhz": 6581.3436,
+        "bandwidth_mhz": 196.6556,
+        "snr": 4.9227,
+        "drift_rate_hz_s": -0.102062,
+        "integration_time_s": 600.0,
+        "is_injected_anomaly": false,
+        "anomaly_type": null,
+        "data_type": "radio",
+        "detection_method": "doppler_drift",
+        "abs_drift_rate_hz_s": 0.102062,
+        "candidacy_score": 80,
+        "reasons": [
+          "Exoplanet system nearby: HD 114783 b, HD 114783 c, HD 114783 c",
+          "Doppler drift rate 0.1021 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.0516 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.1015 Hz/s consistent with technological origin",
+          "Doppler drift rate 0.0921 Hz/s consistent with technological origin"
+        ]
+      },
+      {
+        "obs_id": 840,
+        "target_name": "HD 114783",
+        "ra_deg": 198.1818436,
+        "dec_deg": -2.2649921,
+        "center_freq_mhz": 1042.6725,
+        "bandwidth_mhz": 441.3478,
+        "snr": 6.6779,
+        "drift_rate_hz_s": 0.05163,
+        "integration_time_s": 600.0,
+        "is_injected_anomaly": false,
+        "anomaly_type": null,
+        "data_type": "radio",
+        "detection_method": "doppler_drift",
+        "abs_drift_rate_hz_s": 0.05163,
+        "candidacy_score": 80,
+        "reasons": [
+          "Exoplanet system nearby: HD 114783 b, HD 114783 c, HD 114783 c",
+          "Doppler drift rate 0.0516 Hz/s consistent with technological origin"
+        ]
+      },
+      {
+        "obs_id": 841,
+        "target_name": "HD 114783",
+        "ra_deg": 198.1818436,
+        "dec_deg": -2.2649921,
+        "center_freq_mhz": 8699.4239,
+        "bandwidth_mhz": 201.7054,
+        "snr": 2.3405,
+        "drift_rate_hz_s": -0.101507,
+        "integration_time_s": 600.0,
+        "is_injected_anomaly": false,
+        "anomaly_type": null,
+        "data_type": "radio",
+        "detection_method": "doppler_drift",
+        "abs_drift_rate_hz_s": 0.101507,
+        "candidacy_score": 80,
+        "reasons": [
+          "Exoplanet system nearby: HD 114783 b, HD 114783 c, HD 114783 c",
+          "Doppler drift rate 0.1015 Hz/s consistent with technological origin"
+        ]
+      },
+      {
+        "obs_id": 842,
+        "target_name": "HD 114783",
+        "ra_deg": 198.1818436,
+        "dec_deg": -2.2649921,
+        "center_freq_mhz": 6430.8201,
+        "bandwidth_mhz": 493.8598,
+        "snr": 4.7972,
+        "drift_rate_hz_s": -0.092085,
+        "integration_time_s": 120.0,
+        "is_injected_anomaly": false,
+        "anomaly_type": null,
+        "data_type": "radio",
+        "detection_method": "doppler_drift",
+        "abs_drift_rate_hz_s": 0.092085,
+        "candidacy_score": 80,
+        "reasons": [
+          "Exoplanet system nearby: HD 114783 b, HD 114783 c, HD 114783 c",
+          "Doppler drift rate 0.0921 Hz/s consistent with technological origin"
+        ]
+      }
+    ],
+    "aladin_url": "https://aladin.u-strasbg.fr/AladinLite/?target=198.1818+-2.2650&fov=0.5&survey=P/DSS2/color",
+    "survey_label": "DSS2 Optical",
+    "multisurvey_links": [
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=198.1818+-2.2650&fov=0.5&survey=P/DSS2/color",
+        "label": "DSS2 Optical",
+        "survey_key": "optical"
+      },
+      {
+        "url": "https://aladin.u-strasbg.fr/AladinLite/?target=198.1818+-2.2650&fov=0.5&survey=P/2MASS/color",
+        "label": "2MASS NIR",
+        "survey_key": "nir"
+      }
+    ],
+    "image_path": null,
+    "image_cdn_url": "https://alasky.u-strasbg.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=500&height=500&fov=0.25&projection=TAN&coordsys=icrs&ra=198.18184&dec=-2.26499&format=jpg",
     "image_cdn_label": "DSS2 Optical"
   },
   {
@@ -11612,7 +11609,7 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": 4464603894224045006,
+    "obs_id": -5461524848079510248,
     "target_name": "TOI-216",
     "ra_deg": 271.2716,
     "dec_deg": -27.6274,
@@ -11637,7 +11634,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 4464603894224045006,
+        "obs_id": -5461524848079510248,
         "target_name": "TOI-216",
         "ra_deg": 271.2716,
         "dec_deg": -27.6274,
@@ -11675,7 +11672,7 @@
     "image_cdn_label": "2MASS NIR"
   },
   {
-    "obs_id": 4600672673999072806,
+    "obs_id": 7292991079443728300,
     "target_name": "SIM_STAR_0000",
     "ra_deg": 311.32713132597115,
     "dec_deg": 42.63630179184708,
@@ -11700,7 +11697,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 4600672673999072806,
+        "obs_id": 7292991079443728300,
         "target_name": "SIM_STAR_0000",
         "ra_deg": 311.32713132597115,
         "dec_deg": 42.63630179184708,
@@ -11738,7 +11735,7 @@
     "image_cdn_label": "2MASS NIR"
   },
   {
-    "obs_id": 9074508000136217537,
+    "obs_id": -2259876909453075439,
     "target_name": "SIM_STAR_0001",
     "ra_deg": 94.12069010993157,
     "dec_deg": -50.73606507378943,
@@ -11763,7 +11760,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 9074508000136217537,
+        "obs_id": -2259876909453075439,
         "target_name": "SIM_STAR_0001",
         "ra_deg": 94.12069010993157,
         "dec_deg": -50.73606507378943,
@@ -11801,7 +11798,7 @@
     "image_cdn_label": "2MASS NIR"
   },
   {
-    "obs_id": -8463665241778962176,
+    "obs_id": -2990805518970482961,
     "target_name": "SIM_STAR_0002",
     "ra_deg": 220.96500877695667,
     "dec_deg": -59.684309564844035,
@@ -11826,7 +11823,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -8463665241778962176,
+        "obs_id": -2990805518970482961,
         "target_name": "SIM_STAR_0002",
         "ra_deg": 220.96500877695667,
         "dec_deg": -59.684309564844035,
@@ -11864,7 +11861,7 @@
     "image_cdn_label": "2MASS NIR"
   },
   {
-    "obs_id": 3316375012426345892,
+    "obs_id": -5039277215840354437,
     "target_name": "SIM_STAR_0003",
     "ra_deg": 354.52925108551995,
     "dec_deg": -25.64440750005955,
@@ -11889,7 +11886,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 3316375012426345892,
+        "obs_id": -5039277215840354437,
         "target_name": "SIM_STAR_0003",
         "ra_deg": 354.52925108551995,
         "dec_deg": -25.64440750005955,
@@ -11927,7 +11924,7 @@
     "image_cdn_label": "2MASS NIR"
   },
   {
-    "obs_id": 1798298166213054141,
+    "obs_id": 5776335436140669904,
     "target_name": "SIM_STAR_0006",
     "ra_deg": 293.04234693004025,
     "dec_deg": -0.2559110000985365,
@@ -11952,7 +11949,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 1798298166213054141,
+        "obs_id": 5776335436140669904,
         "target_name": "SIM_STAR_0006",
         "ra_deg": 293.04234693004025,
         "dec_deg": -0.2559110000985365,
@@ -11990,7 +11987,7 @@
     "image_cdn_label": "2MASS NIR"
   },
   {
-    "obs_id": 9023100790841949823,
+    "obs_id": -1873046972463075145,
     "target_name": "SIM_STAR_0007",
     "ra_deg": 279.60701616031264,
     "dec_deg": 57.50739470274751,
@@ -12015,7 +12012,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 9023100790841949823,
+        "obs_id": -1873046972463075145,
         "target_name": "SIM_STAR_0007",
         "ra_deg": 279.60701616031264,
         "dec_deg": 57.50739470274751,
@@ -12053,7 +12050,7 @@
     "image_cdn_label": "2MASS NIR"
   },
   {
-    "obs_id": -7361043597846042285,
+    "obs_id": -4680019588429176522,
     "target_name": "LHS 1140b",
     "ra_deg": 18.0018,
     "dec_deg": -15.267,
@@ -12087,7 +12084,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -7361043597846042285,
+        "obs_id": -4680019588429176522,
         "target_name": "LHS 1140b",
         "ra_deg": 18.0018,
         "dec_deg": -15.267,
@@ -12134,7 +12131,7 @@
     "image_cdn_label": "2MASS NIR"
   },
   {
-    "obs_id": 2354851389551279346,
+    "obs_id": -4963698595928107619,
     "target_name": "TOI-SIM-0001",
     "ra_deg": 77.37910688223663,
     "dec_deg": -13.701115489296182,
@@ -12168,7 +12165,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 2354851389551279346,
+        "obs_id": -4963698595928107619,
         "target_name": "TOI-SIM-0001",
         "ra_deg": 77.37910688223663,
         "dec_deg": -13.701115489296182,
@@ -12215,7 +12212,7 @@
     "image_cdn_label": "2MASS NIR"
   },
   {
-    "obs_id": 894271704131509273,
+    "obs_id": -2369953701797332059,
     "target_name": "1I/ʻOumuamua",
     "ra_deg": 23.4578,
     "dec_deg": 26.8011,
@@ -12241,7 +12238,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 894271704131509273,
+        "obs_id": -2369953701797332059,
         "target_name": "1I/ʻOumuamua",
         "ra_deg": 23.4578,
         "dec_deg": 26.8011,
@@ -12280,7 +12277,7 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": -6016938691579478164,
+    "obs_id": -2187527712684884365,
     "target_name": "SIM_ISO_0001",
     "ra_deg": 65.56698756830662,
     "dec_deg": 50.50768182417121,
@@ -12306,7 +12303,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -6016938691579478164,
+        "obs_id": -2187527712684884365,
         "target_name": "SIM_ISO_0001",
         "ra_deg": 65.56698756830662,
         "dec_deg": 50.50768182417121,
@@ -12345,7 +12342,7 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": -7280045102710026364,
+    "obs_id": -4928444344364296643,
     "target_name": "SIM_ISO_0002",
     "ra_deg": 7.327420975069443,
     "dec_deg": 33.91410968287196,
@@ -12371,7 +12368,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -7280045102710026364,
+        "obs_id": -4928444344364296643,
         "target_name": "SIM_ISO_0002",
         "ra_deg": 7.327420975069443,
         "dec_deg": 33.91410968287196,
@@ -12410,7 +12407,7 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": 5308885572778968611,
+    "obs_id": 7936691894098730447,
     "target_name": "SIM_ISO_0004",
     "ra_deg": 219.63715039279094,
     "dec_deg": 2.1437694557423725,
@@ -12436,7 +12433,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 5308885572778968611,
+        "obs_id": 7936691894098730447,
         "target_name": "SIM_ISO_0004",
         "ra_deg": 219.63715039279094,
         "dec_deg": 2.1437694557423725,
@@ -12475,7 +12472,7 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": 2775389039178673580,
+    "obs_id": 3463040467416687656,
     "target_name": "J0251.6+0628",
     "ra_deg": 42.9005,
     "dec_deg": 6.471,
@@ -12502,7 +12499,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 2775389039178673580,
+        "obs_id": 3463040467416687656,
         "target_name": "J0251.6+0628",
         "ra_deg": 42.9005,
         "dec_deg": 6.471,
@@ -12542,7 +12539,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -8668323570973931870,
+    "obs_id": 1708835759691909295,
     "target_name": "J0259.0+0552",
     "ra_deg": 44.7519,
     "dec_deg": 5.878,
@@ -12569,7 +12566,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -8668323570973931870,
+        "obs_id": 1708835759691909295,
         "target_name": "J0259.0+0552",
         "ra_deg": 44.7519,
         "dec_deg": 5.878,
@@ -12609,7 +12606,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 7995343700116824296,
+    "obs_id": -56753782031237327,
     "target_name": "J0412.6+2253c",
     "ra_deg": 63.1542,
     "dec_deg": 22.8932,
@@ -12636,7 +12633,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 7995343700116824296,
+        "obs_id": -56753782031237327,
         "target_name": "J0412.6+2253c",
         "ra_deg": 63.1542,
         "dec_deg": 22.8932,
@@ -12676,7 +12673,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 3331790743029964178,
+    "obs_id": -4505728716722236257,
     "target_name": "J0337.5+2423c",
     "ra_deg": 54.3941,
     "dec_deg": 24.3836,
@@ -12703,7 +12700,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 3331790743029964178,
+        "obs_id": -4505728716722236257,
         "target_name": "J0337.5+2423c",
         "ra_deg": 54.3941,
         "dec_deg": 24.3836,
@@ -12743,7 +12740,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -6158761806790767547,
+    "obs_id": 1566496378428290649,
     "target_name": "J0327.3+2355c",
     "ra_deg": 51.8496,
     "dec_deg": 23.9263,
@@ -12770,7 +12767,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -6158761806790767547,
+        "obs_id": 1566496378428290649,
         "target_name": "J0327.3+2355c",
         "ra_deg": 51.8496,
         "dec_deg": 23.9263,
@@ -12810,7 +12807,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -2559902854364022748,
+    "obs_id": 3150519357359769943,
     "target_name": "J0230.3+1713",
     "ra_deg": 37.5976,
     "dec_deg": 17.2224,
@@ -12837,7 +12834,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -2559902854364022748,
+        "obs_id": 3150519357359769943,
         "target_name": "J0230.3+1713",
         "ra_deg": 37.5976,
         "dec_deg": 17.2224,
@@ -12877,7 +12874,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -5411748242401686708,
+    "obs_id": 2007985064611723170,
     "target_name": "J0209.8+2626",
     "ra_deg": 32.464,
     "dec_deg": 26.4335,
@@ -12904,7 +12901,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -5411748242401686708,
+        "obs_id": 2007985064611723170,
         "target_name": "J0209.8+2626",
         "ra_deg": 32.464,
         "dec_deg": 26.4335,
@@ -12944,7 +12941,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -8121648877954099939,
+    "obs_id": -5948438919666575296,
     "target_name": "J0314.2+2419",
     "ra_deg": 48.564,
     "dec_deg": 24.3249,
@@ -12971,7 +12968,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -8121648877954099939,
+        "obs_id": -5948438919666575296,
         "target_name": "J0314.2+2419",
         "ra_deg": 48.564,
         "dec_deg": 24.3249,
@@ -13011,7 +13008,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 1570639065014089904,
+    "obs_id": -6190140798482989592,
     "target_name": "J0314.1+2827",
     "ra_deg": 48.5469,
     "dec_deg": 28.4522,
@@ -13038,7 +13035,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 1570639065014089904,
+        "obs_id": -6190140798482989592,
         "target_name": "J0314.1+2827",
         "ra_deg": 48.5469,
         "dec_deg": 28.4522,
@@ -13078,7 +13075,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 7605952775294065020,
+    "obs_id": 1045121751777334279,
     "target_name": "J0311.3+2940",
     "ra_deg": 47.8296,
     "dec_deg": 29.6762,
@@ -13105,7 +13102,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 7605952775294065020,
+        "obs_id": 1045121751777334279,
         "target_name": "J0311.3+2940",
         "ra_deg": 47.8296,
         "dec_deg": 29.6762,
@@ -13145,7 +13142,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -2742129148109586791,
+    "obs_id": 7998485829349009983,
     "target_name": "J0224.8+2937",
     "ra_deg": 36.2141,
     "dec_deg": 29.6292,
@@ -13172,7 +13169,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -2742129148109586791,
+        "obs_id": 7998485829349009983,
         "target_name": "J0224.8+2937",
         "ra_deg": 36.2141,
         "dec_deg": 29.6292,
@@ -13212,7 +13209,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 5257786187952049266,
+    "obs_id": 8413258485747743190,
     "target_name": "J0300.4+3450",
     "ra_deg": 45.1176,
     "dec_deg": 34.8442,
@@ -13239,7 +13236,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 5257786187952049266,
+        "obs_id": 8413258485747743190,
         "target_name": "J0300.4+3450",
         "ra_deg": 45.1176,
         "dec_deg": 34.8442,
@@ -13279,7 +13276,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 5633433571416229187,
+    "obs_id": 3060480047101378348,
     "target_name": "J0447.2+2446",
     "ra_deg": 71.8014,
     "dec_deg": 24.7701,
@@ -13306,7 +13303,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 5633433571416229187,
+        "obs_id": 3060480047101378348,
         "target_name": "J0447.2+2446",
         "ra_deg": 71.8014,
         "dec_deg": 24.7701,
@@ -13346,7 +13343,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -3873143153502036199,
+    "obs_id": -1439565031988542895,
     "target_name": "J0441.8+2600c",
     "ra_deg": 70.4747,
     "dec_deg": 26.0148,
@@ -13373,7 +13370,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -3873143153502036199,
+        "obs_id": -1439565031988542895,
         "target_name": "J0441.8+2600c",
         "ra_deg": 70.4747,
         "dec_deg": 26.0148,
@@ -13413,7 +13410,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 3894446036684798739,
+    "obs_id": -7974720884005714750,
     "target_name": "J0448.3+2743",
     "ra_deg": 72.0863,
     "dec_deg": 27.7267,
@@ -13440,7 +13437,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 3894446036684798739,
+        "obs_id": -7974720884005714750,
         "target_name": "J0448.3+2743",
         "ra_deg": 72.0863,
         "dec_deg": 27.7267,
@@ -13480,7 +13477,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -4621037804240369270,
+    "obs_id": -1932415893564522080,
     "target_name": "J0453.3+2843",
     "ra_deg": 73.334,
     "dec_deg": 28.7304,
@@ -13507,7 +13504,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -4621037804240369270,
+        "obs_id": -1932415893564522080,
         "target_name": "J0453.3+2843",
         "ra_deg": 73.334,
         "dec_deg": 28.7304,
@@ -13547,7 +13544,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -3984740509726014660,
+    "obs_id": 5682018905339297906,
     "target_name": "J0443.9+2921",
     "ra_deg": 70.9833,
     "dec_deg": 29.3642,
@@ -13574,7 +13571,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -3984740509726014660,
+        "obs_id": 5682018905339297906,
         "target_name": "J0443.9+2921",
         "ra_deg": 70.9833,
         "dec_deg": 29.3642,
@@ -13614,7 +13611,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 2453219837798522093,
+    "obs_id": -2124229769412334610,
     "target_name": "J0436.9+2915",
     "ra_deg": 69.2464,
     "dec_deg": 29.2565,
@@ -13641,7 +13638,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 2453219837798522093,
+        "obs_id": -2124229769412334610,
         "target_name": "J0436.9+2915",
         "ra_deg": 69.2464,
         "dec_deg": 29.2565,
@@ -13681,7 +13678,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 1976856467457043273,
+    "obs_id": -7377410262998216376,
     "target_name": "J0409.2+2542",
     "ra_deg": 62.3144,
     "dec_deg": 25.7022,
@@ -13708,7 +13705,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 1976856467457043273,
+        "obs_id": -7377410262998216376,
         "target_name": "J0409.2+2542",
         "ra_deg": 62.3144,
         "dec_deg": 25.7022,
@@ -13748,7 +13745,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 2628149134950719654,
+    "obs_id": 2771141093275158761,
     "target_name": "J0356.9+3013c",
     "ra_deg": 59.2279,
     "dec_deg": 30.224,
@@ -13775,7 +13772,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 2628149134950719654,
+        "obs_id": 2771141093275158761,
         "target_name": "J0356.9+3013c",
         "ra_deg": 59.2279,
         "dec_deg": 30.224,
@@ -13815,7 +13812,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -5388619301306649577,
+    "obs_id": -5145827172823908282,
     "target_name": "J0424.8+3117",
     "ra_deg": 66.2096,
     "dec_deg": 31.2863,
@@ -13842,7 +13839,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -5388619301306649577,
+        "obs_id": -5145827172823908282,
         "target_name": "J0424.8+3117",
         "ra_deg": 66.2096,
         "dec_deg": 31.2863,
@@ -13882,7 +13879,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 6180203779909914887,
+    "obs_id": 1248333874822427956,
     "target_name": "J0435.5+3232",
     "ra_deg": 68.8755,
     "dec_deg": 32.5492,
@@ -13909,7 +13906,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 6180203779909914887,
+        "obs_id": 1248333874822427956,
         "target_name": "J0435.5+3232",
         "ra_deg": 68.8755,
         "dec_deg": 32.5492,
@@ -13949,7 +13946,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 3085519927394263647,
+    "obs_id": 5657470729421584772,
     "target_name": "J0431.0+3529c",
     "ra_deg": 67.765,
     "dec_deg": 35.4949,
@@ -13976,7 +13973,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 3085519927394263647,
+        "obs_id": 5657470729421584772,
         "target_name": "J0431.0+3529c",
         "ra_deg": 67.765,
         "dec_deg": 35.4949,
@@ -14016,7 +14013,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 856682093082545192,
+    "obs_id": -4940034343489477264,
     "target_name": "J0442.8+3609",
     "ra_deg": 70.7103,
     "dec_deg": 36.164,
@@ -14043,7 +14040,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 856682093082545192,
+        "obs_id": -4940034343489477264,
         "target_name": "J0442.8+3609",
         "ra_deg": 70.7103,
         "dec_deg": 36.164,
@@ -14083,7 +14080,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -8452512666010858307,
+    "obs_id": -815724581931347644,
     "target_name": "J0427.9+3632c",
     "ra_deg": 66.9813,
     "dec_deg": 36.5339,
@@ -14110,7 +14107,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -8452512666010858307,
+        "obs_id": -815724581931347644,
         "target_name": "J0427.9+3632c",
         "ra_deg": 66.9813,
         "dec_deg": 36.5339,
@@ -14150,7 +14147,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -3043400386756189252,
+    "obs_id": 9210235572245413289,
     "target_name": "J0535.0+3615c",
     "ra_deg": 83.7684,
     "dec_deg": 36.2573,
@@ -14177,7 +14174,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -3043400386756189252,
+        "obs_id": 9210235572245413289,
         "target_name": "J0535.0+3615c",
         "ra_deg": 83.7684,
         "dec_deg": 36.2573,
@@ -14217,7 +14214,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 3837870970119030959,
+    "obs_id": -5551669919047456163,
     "target_name": "J0534.0+3746c",
     "ra_deg": 83.5139,
     "dec_deg": 37.7713,
@@ -14244,7 +14241,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 3837870970119030959,
+        "obs_id": -5551669919047456163,
         "target_name": "J0534.0+3746c",
         "ra_deg": 83.5139,
         "dec_deg": 37.7713,
@@ -14284,7 +14281,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -2024552592151364220,
+    "obs_id": -4167760391906164304,
     "target_name": "J0501.7+4459",
     "ra_deg": 75.4394,
     "dec_deg": 44.9917,
@@ -14311,7 +14308,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -2024552592151364220,
+        "obs_id": -4167760391906164304,
         "target_name": "J0501.7+4459",
         "ra_deg": 75.4394,
         "dec_deg": 44.9917,
@@ -14351,7 +14348,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -9004278384461533791,
+    "obs_id": 3070190135126979818,
     "target_name": "J0553.5+4810",
     "ra_deg": 88.3975,
     "dec_deg": 48.1726,
@@ -14378,7 +14375,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -9004278384461533791,
+        "obs_id": 3070190135126979818,
         "target_name": "J0553.5+4810",
         "ra_deg": 88.3975,
         "dec_deg": 48.1726,
@@ -14418,7 +14415,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 5580299831068459278,
+    "obs_id": 729321956895647026,
     "target_name": "J0540.9+5046",
     "ra_deg": 85.2347,
     "dec_deg": 50.7801,
@@ -14445,7 +14442,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 5580299831068459278,
+        "obs_id": 729321956895647026,
         "target_name": "J0540.9+5046",
         "ra_deg": 85.2347,
         "dec_deg": 50.7801,
@@ -14485,7 +14482,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 7500091422966811517,
+    "obs_id": -5481646674628328686,
     "target_name": "J0342.4+3125c",
     "ra_deg": 55.6038,
     "dec_deg": 31.4238,
@@ -14512,7 +14509,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 7500091422966811517,
+        "obs_id": -5481646674628328686,
         "target_name": "J0342.4+3125c",
         "ra_deg": 55.6038,
         "dec_deg": 31.4238,
@@ -14552,7 +14549,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 5213215369955386966,
+    "obs_id": 3955713444228092419,
     "target_name": "J0341.9+3153c",
     "ra_deg": 55.4852,
     "dec_deg": 31.8952,
@@ -14579,7 +14576,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 5213215369955386966,
+        "obs_id": 3955713444228092419,
         "target_name": "J0341.9+3153c",
         "ra_deg": 55.4852,
         "dec_deg": 31.8952,
@@ -14619,7 +14616,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -8775310790345794827,
+    "obs_id": -5060588273299825820,
     "target_name": "J0346.2+3235c",
     "ra_deg": 56.5696,
     "dec_deg": 32.5853,
@@ -14646,7 +14643,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -8775310790345794827,
+        "obs_id": -5060588273299825820,
         "target_name": "J0346.2+3235c",
         "ra_deg": 56.5696,
         "dec_deg": 32.5853,
@@ -14686,7 +14683,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 4885096832709847635,
+    "obs_id": 8658605785521375419,
     "target_name": "J0359.3+3626",
     "ra_deg": 59.8321,
     "dec_deg": 36.4398,
@@ -14713,7 +14710,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 4885096832709847635,
+        "obs_id": 8658605785521375419,
         "target_name": "J0359.3+3626",
         "ra_deg": 59.8321,
         "dec_deg": 36.4398,
@@ -14753,7 +14750,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -6880253586617451486,
+    "obs_id": 7666687842126819419,
     "target_name": "J0349.6+4026",
     "ra_deg": 57.407,
     "dec_deg": 40.4391,
@@ -14780,7 +14777,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -6880253586617451486,
+        "obs_id": 7666687842126819419,
         "target_name": "J0349.6+4026",
         "ra_deg": 57.407,
         "dec_deg": 40.4391,
@@ -14820,7 +14817,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -7607635331490309814,
+    "obs_id": 1532895328858575426,
     "target_name": "J0409.7+4006c",
     "ra_deg": 62.4352,
     "dec_deg": 40.1091,
@@ -14847,7 +14844,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -7607635331490309814,
+        "obs_id": 1532895328858575426,
         "target_name": "J0409.7+4006c",
         "ra_deg": 62.4352,
         "dec_deg": 40.1091,
@@ -14887,7 +14884,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 6345781865402271433,
+    "obs_id": 9124372309693878235,
     "target_name": "J0334.3+4820",
     "ra_deg": 53.5924,
     "dec_deg": 48.3396,
@@ -14914,7 +14911,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 6345781865402271433,
+        "obs_id": 9124372309693878235,
         "target_name": "J0334.3+4820",
         "ra_deg": 53.5924,
         "dec_deg": 48.3396,
@@ -14954,7 +14951,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -4047297937280439865,
+    "obs_id": 6671013034424198719,
     "target_name": "J0540.6+5540",
     "ra_deg": 85.1745,
     "dec_deg": 55.6726,
@@ -14981,7 +14978,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -4047297937280439865,
+        "obs_id": 6671013034424198719,
         "target_name": "J0540.6+5540",
         "ra_deg": 85.1745,
         "dec_deg": 55.6726,
@@ -15021,7 +15018,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 1452399517925066494,
+    "obs_id": -2422480002739038095,
     "target_name": "J0426.5+5434",
     "ra_deg": 66.6306,
     "dec_deg": 54.5704,
@@ -15048,7 +15045,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 1452399517925066494,
+        "obs_id": -2422480002739038095,
         "target_name": "J0426.5+5434",
         "ra_deg": 66.6306,
         "dec_deg": 54.5704,
@@ -15088,7 +15085,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 8872885240556942087,
+    "obs_id": -1749712806889498459,
     "target_name": "J0545.7+6016",
     "ra_deg": 86.4419,
     "dec_deg": 60.2704,
@@ -15115,7 +15112,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 8872885240556942087,
+        "obs_id": -1749712806889498459,
         "target_name": "J0545.7+6016",
         "ra_deg": 86.4419,
         "dec_deg": 60.2704,
@@ -15155,7 +15152,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 7744727554607072951,
+    "obs_id": 1475225126034785546,
     "target_name": "J0533.6+5945",
     "ra_deg": 83.4175,
     "dec_deg": 59.7622,
@@ -15182,7 +15179,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 7744727554607072951,
+        "obs_id": 1475225126034785546,
         "target_name": "J0533.6+5945",
         "ra_deg": 83.4175,
         "dec_deg": 59.7622,
@@ -15222,7 +15219,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -4196671017494118873,
+    "obs_id": -6433702716775943346,
     "target_name": "J0454.4+5943",
     "ra_deg": 73.6107,
     "dec_deg": 59.7171,
@@ -15249,7 +15246,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -4196671017494118873,
+        "obs_id": -6433702716775943346,
         "target_name": "J0454.4+5943",
         "ra_deg": 73.6107,
         "dec_deg": 59.7171,
@@ -15289,7 +15286,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 8052661947736894195,
+    "obs_id": -3648397546260092359,
     "target_name": "J0126.8+2412",
     "ra_deg": 21.7036,
     "dec_deg": 24.21,
@@ -15316,7 +15313,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 8052661947736894195,
+        "obs_id": -3648397546260092359,
         "target_name": "J0126.8+2412",
         "ra_deg": 21.7036,
         "dec_deg": 24.21,
@@ -15356,7 +15353,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 4943132902017996136,
+    "obs_id": 5188419329814946367,
     "target_name": "J0128.4+2614",
     "ra_deg": 22.1077,
     "dec_deg": 26.2372,
@@ -15383,7 +15380,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 4943132902017996136,
+        "obs_id": 5188419329814946367,
         "target_name": "J0128.4+2614",
         "ra_deg": 22.1077,
         "dec_deg": 26.2372,
@@ -15423,7 +15420,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -6194581773979787978,
+    "obs_id": 7977560496455018947,
     "target_name": "J0159.0+3313",
     "ra_deg": 29.7665,
     "dec_deg": 33.2175,
@@ -15450,7 +15447,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -6194581773979787978,
+        "obs_id": 7977560496455018947,
         "target_name": "J0159.0+3313",
         "ra_deg": 29.7665,
         "dec_deg": 33.2175,
@@ -15490,7 +15487,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 528863848764519025,
+    "obs_id": -2607107019789942826,
     "target_name": "J0124.0+3035",
     "ra_deg": 21.0104,
     "dec_deg": 30.5909,
@@ -15517,7 +15514,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 528863848764519025,
+        "obs_id": -2607107019789942826,
         "target_name": "J0124.0+3035",
         "ra_deg": 21.0104,
         "dec_deg": 30.5909,
@@ -15557,7 +15554,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 111466522830947368,
+    "obs_id": 2127776864302271785,
     "target_name": "J0004.0+5715",
     "ra_deg": 1.0017,
     "dec_deg": 57.2578,
@@ -15584,7 +15581,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 111466522830947368,
+        "obs_id": 2127776864302271785,
         "target_name": "J0004.0+5715",
         "ra_deg": 1.0017,
         "dec_deg": 57.2578,
@@ -15624,7 +15621,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -4956295856447814787,
+    "obs_id": 889084210908988368,
     "target_name": "J0039.1+6257",
     "ra_deg": 9.7862,
     "dec_deg": 62.9603,
@@ -15651,7 +15648,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -4956295856447814787,
+        "obs_id": 889084210908988368,
         "target_name": "J0039.1+6257",
         "ra_deg": 9.7862,
         "dec_deg": 62.9603,
@@ -15691,7 +15688,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 6379746927305075659,
+    "obs_id": -3233251299420319229,
     "target_name": "J0017.4+6506",
     "ra_deg": 4.3713,
     "dec_deg": 65.1107,
@@ -15718,7 +15715,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 6379746927305075659,
+        "obs_id": -3233251299420319229,
         "target_name": "J0017.4+6506",
         "ra_deg": 4.3713,
         "dec_deg": 65.1107,
@@ -15758,7 +15755,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 5504377889234487812,
+    "obs_id": 3356974732724653774,
     "target_name": "J0314.1+5033",
     "ra_deg": 48.5489,
     "dec_deg": 50.5572,
@@ -15785,7 +15782,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 5504377889234487812,
+        "obs_id": 3356974732724653774,
         "target_name": "J0314.1+5033",
         "ra_deg": 48.5489,
         "dec_deg": 50.5572,
@@ -15825,7 +15822,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 1360020523509072917,
+    "obs_id": 4978911190192828574,
     "target_name": "J0303.2+5336",
     "ra_deg": 45.823,
     "dec_deg": 53.611,
@@ -15852,7 +15849,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 1360020523509072917,
+        "obs_id": 4978911190192828574,
         "target_name": "J0303.2+5336",
         "ra_deg": 45.823,
         "dec_deg": 53.611,
@@ -15892,7 +15889,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 4989516299997001085,
+    "obs_id": 3641206462006999558,
     "target_name": "J0340.4+5302",
     "ra_deg": 55.1099,
     "dec_deg": 53.0363,
@@ -15919,7 +15916,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 4989516299997001085,
+        "obs_id": 3641206462006999558,
         "target_name": "J0340.4+5302",
         "ra_deg": 55.1099,
         "dec_deg": 53.0363,
@@ -15959,7 +15956,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -3292267038752390875,
+    "obs_id": -6718682190247346103,
     "target_name": "J0330.7+5845",
     "ra_deg": 52.687,
     "dec_deg": 58.7523,
@@ -15986,7 +15983,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -3292267038752390875,
+        "obs_id": -6718682190247346103,
         "target_name": "J0330.7+5845",
         "ra_deg": 52.687,
         "dec_deg": 58.7523,
@@ -16026,7 +16023,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 3205143270503388888,
+    "obs_id": 5362860459557398089,
     "target_name": "J0237.8+5238",
     "ra_deg": 39.4734,
     "dec_deg": 52.6347,
@@ -16053,7 +16050,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 3205143270503388888,
+        "obs_id": 5362860459557398089,
         "target_name": "J0237.8+5238",
         "ra_deg": 39.4734,
         "dec_deg": 52.6347,
@@ -16093,7 +16090,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 9178501840368989520,
+    "obs_id": -2714488582777102432,
     "target_name": "J0235.3+5650",
     "ra_deg": 38.8479,
     "dec_deg": 56.8478,
@@ -16120,7 +16117,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 9178501840368989520,
+        "obs_id": -2714488582777102432,
         "target_name": "J0235.3+5650",
         "ra_deg": 38.8479,
         "dec_deg": 56.8478,
@@ -16160,7 +16157,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -8578808991299219941,
+    "obs_id": 5972200811990550493,
     "target_name": "J0302.7+5717",
     "ra_deg": 45.6915,
     "dec_deg": 57.288,
@@ -16187,7 +16184,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -8578808991299219941,
+        "obs_id": 5972200811990550493,
         "target_name": "J0302.7+5717",
         "ra_deg": 45.6915,
         "dec_deg": 57.288,
@@ -16227,7 +16224,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 985361678898946027,
+    "obs_id": -8843773213138523423,
     "target_name": "J0328.0+6046",
     "ra_deg": 52.0172,
     "dec_deg": 60.7704,
@@ -16254,7 +16251,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 985361678898946027,
+        "obs_id": -8843773213138523423,
         "target_name": "J0328.0+6046",
         "ra_deg": 52.0172,
         "dec_deg": 60.7704,
@@ -16294,7 +16291,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 2354278375348771212,
+    "obs_id": 6836679069157721965,
     "target_name": "J0305.4+5945c",
     "ra_deg": 46.3688,
     "dec_deg": 59.7545,
@@ -16321,7 +16318,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 2354278375348771212,
+        "obs_id": 6836679069157721965,
         "target_name": "J0305.4+5945c",
         "ra_deg": 46.3688,
         "dec_deg": 59.7545,
@@ -16361,7 +16358,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 6364757978368299935,
+    "obs_id": -6773512829160735496,
     "target_name": "J0323.6+6142",
     "ra_deg": 50.9126,
     "dec_deg": 61.7113,
@@ -16388,7 +16385,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 6364757978368299935,
+        "obs_id": -6773512829160735496,
         "target_name": "J0323.6+6142",
         "ra_deg": 50.9126,
         "dec_deg": 61.7113,
@@ -16428,7 +16425,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -2521200382784930426,
+    "obs_id": -2983232989279717240,
     "target_name": "J0414.6+5711",
     "ra_deg": 63.6698,
     "dec_deg": 57.1883,
@@ -16455,7 +16452,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -2521200382784930426,
+        "obs_id": -2983232989279717240,
         "target_name": "J0414.6+5711",
         "ra_deg": 63.6698,
         "dec_deg": 57.1883,
@@ -16495,7 +16492,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 5225770598697799553,
+    "obs_id": -6360772100629906844,
     "target_name": "J0418.0+6302",
     "ra_deg": 64.5102,
     "dec_deg": 63.0385,
@@ -16522,7 +16519,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 5225770598697799553,
+        "obs_id": -6360772100629906844,
         "target_name": "J0418.0+6302",
         "ra_deg": 64.5102,
         "dec_deg": 63.0385,
@@ -16562,7 +16559,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 4513222545740211533,
+    "obs_id": -3166219610819021277,
     "target_name": "J0427.4+6433c",
     "ra_deg": 66.8725,
     "dec_deg": 64.5588,
@@ -16589,7 +16586,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 4513222545740211533,
+        "obs_id": -3166219610819021277,
         "target_name": "J0427.4+6433c",
         "ra_deg": 66.8725,
         "dec_deg": 64.5588,
@@ -16629,7 +16626,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 2235732129182301166,
+    "obs_id": -6577297075985975107,
     "target_name": "J0527.4+6647",
     "ra_deg": 81.8559,
     "dec_deg": 66.7982,
@@ -16656,7 +16653,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 2235732129182301166,
+        "obs_id": -6577297075985975107,
         "target_name": "J0527.4+6647",
         "ra_deg": 81.8559,
         "dec_deg": 66.7982,
@@ -16696,7 +16693,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 5788132415986558316,
+    "obs_id": -7795865449969554213,
     "target_name": "J0455.9+6757",
     "ra_deg": 73.9924,
     "dec_deg": 67.9588,
@@ -16723,7 +16720,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 5788132415986558316,
+        "obs_id": -7795865449969554213,
         "target_name": "J0455.9+6757",
         "ra_deg": 73.9924,
         "dec_deg": 67.9588,
@@ -16763,7 +16760,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -8570704763708486150,
+    "obs_id": -5723082632997241173,
     "target_name": "J0544.7+7124",
     "ra_deg": 86.1822,
     "dec_deg": 71.4065,
@@ -16790,7 +16787,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -8570704763708486150,
+        "obs_id": -5723082632997241173,
         "target_name": "J0544.7+7124",
         "ra_deg": 86.1822,
         "dec_deg": 71.4065,
@@ -16830,7 +16827,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -2365539673693231859,
+    "obs_id": -3370472656421837237,
     "target_name": "J0412.5+6519c",
     "ra_deg": 63.1331,
     "dec_deg": 65.3332,
@@ -16857,7 +16854,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -2365539673693231859,
+        "obs_id": -3370472656421837237,
         "target_name": "J0412.5+6519c",
         "ra_deg": 63.1331,
         "dec_deg": 65.3332,
@@ -16897,7 +16894,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 2331575821584253801,
+    "obs_id": -4472152236756119484,
     "target_name": "J0133.0+5931",
     "ra_deg": 23.2607,
     "dec_deg": 59.5319,
@@ -16924,7 +16921,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 2331575821584253801,
+        "obs_id": -4472152236756119484,
         "target_name": "J0133.0+5931",
         "ra_deg": 23.2607,
         "dec_deg": 59.5319,
@@ -16964,7 +16961,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -2782078707553202682,
+    "obs_id": 7975071117213507578,
     "target_name": "J0144.3+5959",
     "ra_deg": 26.0846,
     "dec_deg": 59.9975,
@@ -16991,7 +16988,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -2782078707553202682,
+        "obs_id": 7975071117213507578,
         "target_name": "J0144.3+5959",
         "ra_deg": 26.0846,
         "dec_deg": 59.9975,
@@ -17031,7 +17028,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -5430590684572086816,
+    "obs_id": -6492078054535386198,
     "target_name": "J0211.5+6219",
     "ra_deg": 32.8999,
     "dec_deg": 62.3234,
@@ -17058,7 +17055,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -5430590684572086816,
+        "obs_id": -6492078054535386198,
         "target_name": "J0211.5+6219",
         "ra_deg": 32.8999,
         "dec_deg": 62.3234,
@@ -17098,7 +17095,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 1625422143242655716,
+    "obs_id": -5496562809319494994,
     "target_name": "J0239.1+6634",
     "ra_deg": 39.784,
     "dec_deg": 66.5796,
@@ -17125,7 +17122,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 1625422143242655716,
+        "obs_id": -5496562809319494994,
         "target_name": "J0239.1+6634",
         "ra_deg": 39.784,
         "dec_deg": 66.5796,
@@ -17165,7 +17162,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -6962832800183703252,
+    "obs_id": 4475430904727048697,
     "target_name": "J0155.7+6642",
     "ra_deg": 28.936,
     "dec_deg": 66.709,
@@ -17192,7 +17189,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -6962832800183703252,
+        "obs_id": 4475430904727048697,
         "target_name": "J0155.7+6642",
         "ra_deg": 28.936,
         "dec_deg": 66.709,
@@ -17232,7 +17229,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -6786267521461267740,
+    "obs_id": 5831371877061579905,
     "target_name": "J0204.7+6656",
     "ra_deg": 31.1953,
     "dec_deg": 66.9372,
@@ -17259,7 +17256,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -6786267521461267740,
+        "obs_id": 5831371877061579905,
         "target_name": "J0204.7+6656",
         "ra_deg": 31.1953,
         "dec_deg": 66.9372,
@@ -17299,7 +17296,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 7127932746732771779,
+    "obs_id": 8487836394588077312,
     "target_name": "J0142.5+6650",
     "ra_deg": 25.6275,
     "dec_deg": 66.8341,
@@ -17326,7 +17323,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 7127932746732771779,
+        "obs_id": 8487836394588077312,
         "target_name": "J0142.5+6650",
         "ra_deg": 25.6275,
         "dec_deg": 66.8341,
@@ -17366,7 +17363,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 6245083589992768698,
+    "obs_id": -6645976371706986793,
     "target_name": "J0057.9+6326",
     "ra_deg": 14.4955,
     "dec_deg": 63.4385,
@@ -17393,7 +17390,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 6245083589992768698,
+        "obs_id": -6645976371706986793,
         "target_name": "J0057.9+6326",
         "ra_deg": 14.4955,
         "dec_deg": 63.4385,
@@ -17433,7 +17430,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -8849336871062369178,
+    "obs_id": -5118516957644783533,
     "target_name": "J0052.1+6444",
     "ra_deg": 13.0433,
     "dec_deg": 64.742,
@@ -17460,7 +17457,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -8849336871062369178,
+        "obs_id": -5118516957644783533,
         "target_name": "J0052.1+6444",
         "ra_deg": 13.0433,
         "dec_deg": 64.742,
@@ -17500,7 +17497,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 683599350566170771,
+    "obs_id": -2313771845838690469,
     "target_name": "J0057.5+6814",
     "ra_deg": 14.379,
     "dec_deg": 68.236,
@@ -17527,7 +17524,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 683599350566170771,
+        "obs_id": -2313771845838690469,
         "target_name": "J0057.5+6814",
         "ra_deg": 14.379,
         "dec_deg": 68.236,
@@ -17567,7 +17564,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 4711335183594190716,
+    "obs_id": 4539244305422455540,
     "target_name": "J0034.6+6438",
     "ra_deg": 8.6619,
     "dec_deg": 64.6393,
@@ -17594,7 +17591,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 4711335183594190716,
+        "obs_id": 4539244305422455540,
         "target_name": "J0034.6+6438",
         "ra_deg": 8.6619,
         "dec_deg": 64.6393,
@@ -17634,7 +17631,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 3665270743738989603,
+    "obs_id": -8708351616076604719,
     "target_name": "J0005.6+6746c",
     "ra_deg": 1.4155,
     "dec_deg": 67.7688,
@@ -17661,7 +17658,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 3665270743738989603,
+        "obs_id": -8708351616076604719,
         "target_name": "J0005.6+6746c",
         "ra_deg": 1.4155,
         "dec_deg": 67.7688,
@@ -17701,7 +17698,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -4921216395309791034,
+    "obs_id": 8903223649864316466,
     "target_name": "J0009.2+6847",
     "ra_deg": 2.3045,
     "dec_deg": 68.7932,
@@ -17728,7 +17725,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -4921216395309791034,
+        "obs_id": 8903223649864316466,
         "target_name": "J0009.2+6847",
         "ra_deg": 2.3045,
         "dec_deg": 68.7932,
@@ -17768,7 +17765,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 8076962550743172811,
+    "obs_id": -5171545795852214019,
     "target_name": "J0008.4+6926",
     "ra_deg": 2.1072,
     "dec_deg": 69.4409,
@@ -17795,7 +17792,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 8076962550743172811,
+        "obs_id": -5171545795852214019,
         "target_name": "J0008.4+6926",
         "ra_deg": 2.1072,
         "dec_deg": 69.4409,
@@ -17835,7 +17832,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -4538966983312475264,
+    "obs_id": -2555577806345795182,
     "target_name": "J0125.3+6820",
     "ra_deg": 21.3273,
     "dec_deg": 68.3413,
@@ -17862,7 +17859,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -4538966983312475264,
+        "obs_id": -2555577806345795182,
         "target_name": "J0125.3+6820",
         "ra_deg": 21.3273,
         "dec_deg": 68.3413,
@@ -17902,7 +17899,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 5182854035564598346,
+    "obs_id": -4181038439855831963,
     "target_name": "J0116.8+6914",
     "ra_deg": 19.2022,
     "dec_deg": 69.2415,
@@ -17929,7 +17926,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 5182854035564598346,
+        "obs_id": -4181038439855831963,
         "target_name": "J0116.8+6914",
         "ra_deg": 19.2022,
         "dec_deg": 69.2415,
@@ -17969,7 +17966,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -7493634177038427984,
+    "obs_id": 4035753099575243133,
     "target_name": "J0058.1+6915",
     "ra_deg": 14.5467,
     "dec_deg": 69.2608,
@@ -17996,7 +17993,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -7493634177038427984,
+        "obs_id": 4035753099575243133,
         "target_name": "J0058.1+6915",
         "ra_deg": 14.5467,
         "dec_deg": 69.2608,
@@ -18036,7 +18033,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -5240350968958620337,
+    "obs_id": 4109062912043552233,
     "target_name": "J0140.3+7054",
     "ra_deg": 25.0833,
     "dec_deg": 70.9042,
@@ -18063,7 +18060,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -5240350968958620337,
+        "obs_id": 4109062912043552233,
         "target_name": "J0140.3+7054",
         "ra_deg": 25.0833,
         "dec_deg": 70.9042,
@@ -18103,7 +18100,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": 1157554682648275280,
+    "obs_id": 8528999040680414760,
     "target_name": "J0257.8+7044",
     "ra_deg": 44.4628,
     "dec_deg": 70.7425,
@@ -18130,7 +18127,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 1157554682648275280,
+        "obs_id": 8528999040680414760,
         "target_name": "J0257.8+7044",
         "ra_deg": 44.4628,
         "dec_deg": 70.7425,
@@ -18170,7 +18167,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -4761840519436775323,
+    "obs_id": 6781449439407766697,
     "target_name": "J0855.0+0720",
     "ra_deg": 133.7625,
     "dec_deg": 7.3464,
@@ -18197,7 +18194,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -4761840519436775323,
+        "obs_id": 6781449439407766697,
         "target_name": "J0855.0+0720",
         "ra_deg": 133.7625,
         "dec_deg": 7.3464,
@@ -18237,7 +18234,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -1407211253599740540,
+    "obs_id": -3436949299201591267,
     "target_name": "J1039.2+3258",
     "ra_deg": 159.8129,
     "dec_deg": 32.9748,
@@ -18264,7 +18261,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -1407211253599740540,
+        "obs_id": -3436949299201591267,
         "target_name": "J1039.2+3258",
         "ra_deg": 159.8129,
         "dec_deg": 32.9748,
@@ -18304,7 +18301,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -6197440592625446635,
+    "obs_id": -1613088055704561517,
     "target_name": "J1106.7+3623",
     "ra_deg": 166.6879,
     "dec_deg": 36.3995,
@@ -18331,7 +18328,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -6197440592625446635,
+        "obs_id": -1613088055704561517,
         "target_name": "J1106.7+3623",
         "ra_deg": 166.6879,
         "dec_deg": 36.3995,
@@ -18371,7 +18368,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -6890595183017114615,
+    "obs_id": -7459226061248292160,
     "target_name": "J1109.8+4406",
     "ra_deg": 167.4603,
     "dec_deg": 44.1019,
@@ -18398,7 +18395,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -6890595183017114615,
+        "obs_id": -7459226061248292160,
         "target_name": "J1109.8+4406",
         "ra_deg": 167.4603,
         "dec_deg": 44.1019,
@@ -18438,7 +18435,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -8224611718026204299,
+    "obs_id": 6019616577931955785,
     "target_name": "J1043.0+5316",
     "ra_deg": 160.7579,
     "dec_deg": 53.2717,
@@ -18465,7 +18462,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -8224611718026204299,
+        "obs_id": 6019616577931955785,
         "target_name": "J1043.0+5316",
         "ra_deg": 160.7579,
         "dec_deg": 53.2717,
@@ -18505,7 +18502,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -6001164131857933947,
+    "obs_id": -850116882556864274,
     "target_name": "J1036.2+5701",
     "ra_deg": 159.0538,
     "dec_deg": 57.0305,
@@ -18532,7 +18529,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -6001164131857933947,
+        "obs_id": -850116882556864274,
         "target_name": "J1036.2+5701",
         "ra_deg": 159.0538,
         "dec_deg": 57.0305,
@@ -18572,7 +18569,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -1694930182234830656,
+    "obs_id": 6110332268592674672,
     "target_name": "J0727.3+2152",
     "ra_deg": 111.8329,
     "dec_deg": 21.8693,
@@ -18599,7 +18596,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -1694930182234830656,
+        "obs_id": 6110332268592674672,
         "target_name": "J0727.3+2152",
         "ra_deg": 111.8329,
         "dec_deg": 21.8693,
@@ -18639,7 +18636,7 @@
     "image_cdn_label": "Fermi γ-ray"
   },
   {
-    "obs_id": -2534867780717647912,
+    "obs_id": 2014270966464966265,
     "target_name": "Kapteyn's Star",
     "ra_deg": 77.14,
     "dec_deg": -44.995,
@@ -18666,7 +18663,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -2534867780717647912,
+        "obs_id": 2014270966464966265,
         "target_name": "Kapteyn's Star",
         "ra_deg": 77.14,
         "dec_deg": -44.995,
@@ -18706,7 +18703,7 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": -5472910779138490403,
+    "obs_id": 1573991490165771190,
     "target_name": "SIM_J0312+1847",
     "ra_deg": 48.12,
     "dec_deg": 18.79,
@@ -18733,7 +18730,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -5472910779138490403,
+        "obs_id": 1573991490165771190,
         "target_name": "SIM_J0312+1847",
         "ra_deg": 48.12,
         "dec_deg": 18.79,
@@ -18773,7 +18770,7 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": -6581109408042520847,
+    "obs_id": -5824548842029081997,
     "target_name": "SIM_J1147-0231",
     "ra_deg": 176.91,
     "dec_deg": -2.52,
@@ -18800,7 +18797,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -6581109408042520847,
+        "obs_id": -5824548842029081997,
         "target_name": "SIM_J1147-0231",
         "ra_deg": 176.91,
         "dec_deg": -2.52,
@@ -18840,7 +18837,7 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": 3658006404901553450,
+    "obs_id": 348761236112904361,
     "target_name": "SIM_J2218+3341",
     "ra_deg": 334.62,
     "dec_deg": 33.69,
@@ -18867,7 +18864,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 3658006404901553450,
+        "obs_id": 348761236112904361,
         "target_name": "SIM_J2218+3341",
         "ra_deg": 334.62,
         "dec_deg": 33.69,
@@ -18907,7 +18904,7 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": 1278311441827543009,
+    "obs_id": 9075310500646225126,
     "target_name": "SIM_J0631+1548",
     "ra_deg": 97.88,
     "dec_deg": 15.81,
@@ -18934,7 +18931,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 1278311441827543009,
+        "obs_id": 9075310500646225126,
         "target_name": "SIM_J0631+1548",
         "ra_deg": 97.88,
         "dec_deg": 15.81,
@@ -18974,7 +18971,7 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": -7266187341112193954,
+    "obs_id": 3662829210964522559,
     "target_name": "CXO J001311.8+634937",
     "ra_deg": 3.299,
     "dec_deg": 63.827,
@@ -19002,7 +18999,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -7266187341112193954,
+        "obs_id": 3662829210964522559,
         "target_name": "CXO J001311.8+634937",
         "ra_deg": 3.299,
         "dec_deg": 63.827,
@@ -19043,7 +19040,7 @@
     "image_cdn_label": "Chandra X-ray"
   },
   {
-    "obs_id": 5649290862527203310,
+    "obs_id": -8951312092060101137,
     "target_name": "CXO J024512.4-001234",
     "ra_deg": 41.302,
     "dec_deg": -0.21,
@@ -19071,7 +19068,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 5649290862527203310,
+        "obs_id": -8951312092060101137,
         "target_name": "CXO J024512.4-001234",
         "ra_deg": 41.302,
         "dec_deg": -0.21,
@@ -19112,7 +19109,7 @@
     "image_cdn_label": "Chandra X-ray"
   },
   {
-    "obs_id": -4780884146320201034,
+    "obs_id": 6823558598008232823,
     "target_name": "CXO J073841.2+653201",
     "ra_deg": 114.672,
     "dec_deg": 65.534,
@@ -19140,7 +19137,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -4780884146320201034,
+        "obs_id": 6823558598008232823,
         "target_name": "CXO J073841.2+653201",
         "ra_deg": 114.672,
         "dec_deg": 65.534,
@@ -19181,7 +19178,7 @@
     "image_cdn_label": "Chandra X-ray"
   },
   {
-    "obs_id": 4567383190880765071,
+    "obs_id": 3669016391304915085,
     "target_name": "CXO J182239.2-181442",
     "ra_deg": 275.663,
     "dec_deg": -18.245,
@@ -19209,7 +19206,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 4567383190880765071,
+        "obs_id": 3669016391304915085,
         "target_name": "CXO J182239.2-181442",
         "ra_deg": 275.663,
         "dec_deg": -18.245,
@@ -19250,7 +19247,7 @@
     "image_cdn_label": "Chandra X-ray"
   },
   {
-    "obs_id": 4940995726545656764,
+    "obs_id": 4236961480588823911,
     "target_name": "CXO J214521.3+122844",
     "ra_deg": 326.339,
     "dec_deg": 12.479,
@@ -19278,7 +19275,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 4940995726545656764,
+        "obs_id": 4236961480588823911,
         "target_name": "CXO J214521.3+122844",
         "ra_deg": 326.339,
         "dec_deg": 12.479,
@@ -19319,7 +19316,7 @@
     "image_cdn_label": "Chandra X-ray"
   },
   {
-    "obs_id": -7374831816122284715,
+    "obs_id": 9145705516628614017,
     "target_name": "4XMM J034428.3-045712",
     "ra_deg": 56.118,
     "dec_deg": -4.953,
@@ -19347,7 +19344,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -7374831816122284715,
+        "obs_id": 9145705516628614017,
         "target_name": "4XMM J034428.3-045712",
         "ra_deg": 56.118,
         "dec_deg": -4.953,
@@ -19388,7 +19385,7 @@
     "image_cdn_label": "Chandra X-ray"
   },
   {
-    "obs_id": -7954795224044375758,
+    "obs_id": 6071109621521988992,
     "target_name": "4XMM J091234.2+303201",
     "ra_deg": 138.143,
     "dec_deg": 30.534,
@@ -19416,7 +19413,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -7954795224044375758,
+        "obs_id": 6071109621521988992,
         "target_name": "4XMM J091234.2+303201",
         "ra_deg": 138.143,
         "dec_deg": 30.534,
@@ -19457,7 +19454,7 @@
     "image_cdn_label": "Chandra X-ray"
   },
   {
-    "obs_id": -7613919674236335239,
+    "obs_id": -6270322827882753839,
     "target_name": "4XMM J143812.7-231456",
     "ra_deg": 219.553,
     "dec_deg": -23.249,
@@ -19485,7 +19482,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -7613919674236335239,
+        "obs_id": -6270322827882753839,
         "target_name": "4XMM J143812.7-231456",
         "ra_deg": 219.553,
         "dec_deg": -23.249,
@@ -19526,7 +19523,7 @@
     "image_cdn_label": "Chandra X-ray"
   },
   {
-    "obs_id": 1927420148765810530,
+    "obs_id": -2028989666142664775,
     "target_name": "4XMM J052211.8-692334",
     "ra_deg": 80.549,
     "dec_deg": -69.393,
@@ -19554,7 +19551,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 1927420148765810530,
+        "obs_id": -2028989666142664775,
         "target_name": "4XMM J052211.8-692334",
         "ra_deg": 80.549,
         "dec_deg": -69.393,
@@ -19595,7 +19592,7 @@
     "image_cdn_label": "Chandra X-ray"
   },
   {
-    "obs_id": -4648163480764472918,
+    "obs_id": -2424280356777275082,
     "target_name": "4XMM J113021.4+052318",
     "ra_deg": 172.589,
     "dec_deg": 5.388,
@@ -19623,7 +19620,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -4648163480764472918,
+        "obs_id": -2424280356777275082,
         "target_name": "4XMM J113021.4+052318",
         "ra_deg": 172.589,
         "dec_deg": 5.388,
@@ -19925,7 +19922,7 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": -7304953969466489737,
+    "obs_id": -4683069737792952926,
     "target_name": "FRB20121102A",
     "ra_deg": 82.9938,
     "dec_deg": 33.148,
@@ -19951,7 +19948,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -7304953969466489737,
+        "obs_id": -4683069737792952926,
         "target_name": "FRB20121102A",
         "ra_deg": 82.9938,
         "dec_deg": 33.148,
@@ -19990,7 +19987,7 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": 8922019638319501803,
+    "obs_id": 4807524717375701610,
     "target_name": "FRB20180916B",
     "ra_deg": 29.5031,
     "dec_deg": 65.7168,
@@ -20016,7 +20013,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 8922019638319501803,
+        "obs_id": 4807524717375701610,
         "target_name": "FRB20180916B",
         "ra_deg": 29.5031,
         "dec_deg": 65.7168,
@@ -20055,7 +20052,7 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": 7821523646789187141,
+    "obs_id": 7073250955754049290,
     "target_name": "FRB20201124A",
     "ra_deg": 77.0117,
     "dec_deg": 26.0603,
@@ -20081,7 +20078,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 7821523646789187141,
+        "obs_id": 7073250955754049290,
         "target_name": "FRB20201124A",
         "ra_deg": 77.0117,
         "dec_deg": 26.0603,
@@ -20120,7 +20117,7 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": 2781465704621435210,
+    "obs_id": 440787239760516069,
     "target_name": "FRB20220912A",
     "ra_deg": 347.2743,
     "dec_deg": 48.7108,
@@ -20146,7 +20143,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 2781465704621435210,
+        "obs_id": 440787239760516069,
         "target_name": "FRB20220912A",
         "ra_deg": 347.2743,
         "dec_deg": 48.7108,
@@ -20185,7 +20182,7 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": 3686337672882658322,
+    "obs_id": 3482605780574056064,
     "target_name": "FRB_SIM_0014",
     "ra_deg": 81.51245377097186,
     "dec_deg": -54.26619336131889,
@@ -20208,7 +20205,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 3686337672882658322,
+        "obs_id": 3482605780574056064,
         "target_name": "FRB_SIM_0014",
         "ra_deg": 81.51245377097186,
         "dec_deg": -54.26619336131889,
@@ -20244,7 +20241,7 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": -1883513455444710986,
+    "obs_id": -7762238507607593954,
     "target_name": "FRB_SIM_0039",
     "ra_deg": 163.80629393486396,
     "dec_deg": -79.78061476927498,
@@ -20267,7 +20264,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -1883513455444710986,
+        "obs_id": -7762238507607593954,
         "target_name": "FRB_SIM_0039",
         "ra_deg": 163.80629393486396,
         "dec_deg": -79.78061476927498,
@@ -20441,7 +20438,7 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": 9105485605264565273,
+    "obs_id": 487965944610610346,
     "target_name": "FRB20190520B",
     "ra_deg": 240.0275,
     "dec_deg": -11.2921,
@@ -20465,7 +20462,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 9105485605264565273,
+        "obs_id": 487965944610610346,
         "target_name": "FRB20190520B",
         "ra_deg": 240.0275,
         "dec_deg": -11.2921,
@@ -20502,7 +20499,7 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": 7999354950180844118,
+    "obs_id": -568847163496125467,
     "target_name": "FRB_SIM_0011",
     "ra_deg": 133.98669812347342,
     "dec_deg": -84.5369470108599,
@@ -20526,7 +20523,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 7999354950180844118,
+        "obs_id": -568847163496125467,
         "target_name": "FRB_SIM_0011",
         "ra_deg": 133.98669812347342,
         "dec_deg": -84.5369470108599,
@@ -20563,7 +20560,7 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": -7939570077387389623,
+    "obs_id": -82914596361719380,
     "target_name": "FRB_SIM_0006",
     "ra_deg": 54.071902465362676,
     "dec_deg": 56.940858687433625,
@@ -20584,7 +20581,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -7939570077387389623,
+        "obs_id": -82914596361719380,
         "target_name": "FRB_SIM_0006",
         "ra_deg": 54.071902465362676,
         "dec_deg": 56.940858687433625,
@@ -20618,7 +20615,7 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": 740416491577548289,
+    "obs_id": -8764107110289740492,
     "target_name": "FRB_SIM_0022",
     "ra_deg": 7.587127599800789,
     "dec_deg": -34.09736453042492,
@@ -20639,7 +20636,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 740416491577548289,
+        "obs_id": -8764107110289740492,
         "target_name": "FRB_SIM_0022",
         "ra_deg": 7.587127599800789,
         "dec_deg": -34.09736453042492,
@@ -20673,7 +20670,7 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": 7988575492654871313,
+    "obs_id": -9118701807790708301,
     "target_name": "FRB_SIM_0024",
     "ra_deg": 225.5802549581236,
     "dec_deg": 53.542471565940005,
@@ -20694,7 +20691,7 @@
     ],
     "_entries": [
       {
-        "obs_id": 7988575492654871313,
+        "obs_id": -9118701807790708301,
         "target_name": "FRB_SIM_0024",
         "ra_deg": 225.5802549581236,
         "dec_deg": 53.542471565940005,
@@ -20728,7 +20725,7 @@
     "image_cdn_label": "DSS2 Optical"
   },
   {
-    "obs_id": -4672981140998812964,
+    "obs_id": 2027477937021105762,
     "target_name": "FRB_SIM_0030",
     "ra_deg": 47.95439124588418,
     "dec_deg": -66.4768357546902,
@@ -20749,7 +20746,7 @@
     ],
     "_entries": [
       {
-        "obs_id": -4672981140998812964,
+        "obs_id": 2027477937021105762,
         "target_name": "FRB_SIM_0030",
         "ra_deg": 47.95439124588418,
         "dec_deg": -66.4768357546902,

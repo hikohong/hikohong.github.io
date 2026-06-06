@@ -1,6 +1,6 @@
 # DeepSignal SETI Candidate Report
 
-**Generated:** 2026-05-31 01:38 UTC
+**Generated:** 2026-06-06 01:32 UTC
 **Pipeline version:** 2.0.0
 
 ## Executive Summary
@@ -95,13 +95,13 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
   - Exoplanet system nearby: 55 Cnc b, 55 Cnc d, 55 Cnc e
   - Doppler drift rate 0.1951 Hz/s consistent with technological origin
 
-### GJ 1214 — Score 80/100
+### HD 136352 — Score 80/100
 
-![GJ 1214 sky field — DSS2 Optical](images/DS-0015_GJ_1214.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=258.8314+4.9607&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=258.8314+4.9607&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=258.8314+4.9607&fov=0.5&survey=P/2MASS/color)*
+![HD 136352 sky field — DSS2 Optical](images/DS-0006_HD_136352.jpg)
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=258.8314°, Dec=4.9607°
+- **Position:** RA=230.4401°, Dec=-48.3188°
 - **Frequency:** 7850.26 MHz
 - **SNR:** 2.7
 - **Bandwidth:** 414.4257 MHz
@@ -110,16 +110,16 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: GJ 1214 b, GJ 1214 b, GJ 1214 b
+  - Exoplanet system nearby: HD 136352 d, HD 136352 d, HD 136352 b
   - Doppler drift rate 0.0853 Hz/s consistent with technological origin
 
-### GJ 1214 — Score 80/100
+### HD 136352 — Score 80/100
 
-![GJ 1214 sky field — DSS2 Optical](images/DS-0015_GJ_1214.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=258.8314+4.9607&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=258.8314+4.9607&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=258.8314+4.9607&fov=0.5&survey=P/2MASS/color)*
+![HD 136352 sky field — DSS2 Optical](images/DS-0006_HD_136352.jpg)
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=258.8314°, Dec=4.9607°
+- **Position:** RA=230.4401°, Dec=-48.3188°
 - **Frequency:** 4337.18 MHz
 - **SNR:** 2.8
 - **Bandwidth:** 470.706 MHz
@@ -128,7 +128,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: GJ 1214 b, GJ 1214 b, GJ 1214 b
+  - Exoplanet system nearby: HD 136352 d, HD 136352 d, HD 136352 b
   - Doppler drift rate 0.1127 Hz/s consistent with technological origin
 
 ### HD 136352 — Score 80/100
@@ -167,13 +167,13 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
   - Exoplanet system nearby: HD 136352 d, HD 136352 d, HD 136352 b
   - Doppler drift rate 0.0155 Hz/s consistent with technological origin
 
-### HD 136352 — Score 80/100
+### TOI-1468 — Score 80/100
 
-![HD 136352 sky field — DSS2 Optical](images/DS-0006_HD_136352.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/2MASS/color)*
+![TOI-1468 sky field — DSS2 Optical](images/DS-0015_TOI-1468.jpg)
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=16.6539+19.2249&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=16.6539+19.2249&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=16.6539+19.2249&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=230.4401°, Dec=-48.3188°
+- **Position:** RA=16.6539°, Dec=19.2249°
 - **Frequency:** 2751.75 MHz
 - **SNR:** 3.3
 - **Bandwidth:** 286.6884 MHz
@@ -182,16 +182,16 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: HD 136352 d, HD 136352 d, HD 136352 b
+  - Exoplanet system nearby: TOI-1468 b, TOI-1468 c, TOI-1468 c
   - Doppler drift rate 0.0413 Hz/s consistent with technological origin
 
-### HD 136352 — Score 80/100
+### TOI-1468 — Score 80/100
 
-![HD 136352 sky field — DSS2 Optical](images/DS-0006_HD_136352.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/2MASS/color)*
+![TOI-1468 sky field — DSS2 Optical](images/DS-0015_TOI-1468.jpg)
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=16.6539+19.2249&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=16.6539+19.2249&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=16.6539+19.2249&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=230.4401°, Dec=-48.3188°
+- **Position:** RA=16.6539°, Dec=19.2249°
 - **Frequency:** 7147.44 MHz
 - **SNR:** 2.2
 - **Bandwidth:** 397.9049 MHz
@@ -200,16 +200,16 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: HD 136352 d, HD 136352 d, HD 136352 b
+  - Exoplanet system nearby: TOI-1468 b, TOI-1468 c, TOI-1468 c
   - Doppler drift rate 0.0512 Hz/s consistent with technological origin
 
-### HD 136352 — Score 80/100
+### TOI-1468 — Score 80/100
 
-![HD 136352 sky field — DSS2 Optical](images/DS-0006_HD_136352.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/2MASS/color)*
+![TOI-1468 sky field — DSS2 Optical](images/DS-0015_TOI-1468.jpg)
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=16.6539+19.2249&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=16.6539+19.2249&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=16.6539+19.2249&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=230.4401°, Dec=-48.3188°
+- **Position:** RA=16.6539°, Dec=19.2249°
 - **Frequency:** 5226.00 MHz
 - **SNR:** 2.6
 - **Bandwidth:** 175.7885 MHz
@@ -218,16 +218,16 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: HD 136352 d, HD 136352 d, HD 136352 b
+  - Exoplanet system nearby: TOI-1468 b, TOI-1468 c, TOI-1468 c
   - Doppler drift rate 0.0840 Hz/s consistent with technological origin
 
-### TOI-1468 — Score 80/100
+### TOI-2018 — Score 80/100
 
-![TOI-1468 sky field — DSS2 Optical](images/DS-0016_TOI-1468.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=16.6539+19.2249&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=16.6539+19.2249&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=16.6539+19.2249&fov=0.5&survey=P/2MASS/color)*
+![TOI-2018 sky field — DSS2 Optical](images/DS-0016_TOI-2018.jpg)
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=229.8374+29.2079&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=229.8374+29.2079&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=229.8374+29.2079&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=16.6539°, Dec=19.2249°
+- **Position:** RA=229.8374°, Dec=29.2079°
 - **Frequency:** 7028.33 MHz
 - **SNR:** 3.6
 - **Bandwidth:** 274.8608 MHz
@@ -236,16 +236,16 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: TOI-1468 b, TOI-1468 c, TOI-1468 c
+  - Exoplanet system nearby: TOI-2018 b, TOI-2018 b
   - Doppler drift rate 0.0666 Hz/s consistent with technological origin
 
-### TOI-2018 — Score 80/100
+### TOI-2427 — Score 80/100
 
-![TOI-2018 sky field — DSS2 Optical](images/DS-0017_TOI-2018.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=229.8374+29.2079&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=229.8374+29.2079&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=229.8374+29.2079&fov=0.5&survey=P/2MASS/color)*
+![TOI-2427 sky field — DSS2 Optical](images/DS-0017_TOI-2427.jpg)
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=229.8374°, Dec=29.2079°
+- **Position:** RA=52.2917°, Dec=-31.3629°
 - **Frequency:** 4487.31 MHz
 - **SNR:** 4.2
 - **Bandwidth:** 215.3312 MHz
@@ -254,16 +254,16 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: TOI-2018 b, TOI-2018 b
+  - Exoplanet system nearby: TOI-2427 b, TOI-2427 b
   - Doppler drift rate 0.0224 Hz/s consistent with technological origin
 
-### TOI-2018 — Score 80/100
+### TOI-2427 — Score 80/100
 
-![TOI-2018 sky field — DSS2 Optical](images/DS-0017_TOI-2018.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=229.8374+29.2079&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=229.8374+29.2079&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=229.8374+29.2079&fov=0.5&survey=P/2MASS/color)*
+![TOI-2427 sky field — DSS2 Optical](images/DS-0017_TOI-2427.jpg)
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=229.8374°, Dec=29.2079°
+- **Position:** RA=52.2917°, Dec=-31.3629°
 - **Frequency:** 2799.17 MHz
 - **SNR:** 3.1
 - **Bandwidth:** 102.9449 MHz
@@ -272,16 +272,16 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: TOI-2018 b, TOI-2018 b
+  - Exoplanet system nearby: TOI-2427 b, TOI-2427 b
   - Doppler drift rate 0.0631 Hz/s consistent with technological origin
 
-### TOI-2427 — Score 80/100
+### TOI-700 — Score 80/100
 
-![TOI-2427 sky field — DSS2 Optical](images/DS-0018_TOI-2427.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/2MASS/color)*
+![TOI-700 sky field — DSS2 Optical](images/DS-0018_TOI-700.jpg)
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=97.0957+-65.5786&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=97.0957+-65.5786&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=97.0957+-65.5786&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=52.2917°, Dec=-31.3629°
+- **Position:** RA=97.0957°, Dec=-65.5786°
 - **Frequency:** 7015.63 MHz
 - **SNR:** 1.2
 - **Bandwidth:** 288.4385 MHz
@@ -290,16 +290,16 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: TOI-2427 b, TOI-2427 b
+  - Exoplanet system nearby: TOI-700 c, TOI-700 d, TOI-700 b
   - Doppler drift rate 0.0335 Hz/s consistent with technological origin
 
-### TOI-2427 — Score 80/100
+### TOI-700 — Score 80/100
 
-![TOI-2427 sky field — DSS2 Optical](images/DS-0018_TOI-2427.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/2MASS/color)*
+![TOI-700 sky field — DSS2 Optical](images/DS-0018_TOI-700.jpg)
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=97.0957+-65.5786&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=97.0957+-65.5786&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=97.0957+-65.5786&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=52.2917°, Dec=-31.3629°
+- **Position:** RA=97.0957°, Dec=-65.5786°
 - **Frequency:** 6712.46 MHz
 - **SNR:** 3.9
 - **Bandwidth:** 321.4318 MHz
@@ -308,16 +308,16 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: TOI-2427 b, TOI-2427 b
+  - Exoplanet system nearby: TOI-700 c, TOI-700 d, TOI-700 b
   - Doppler drift rate 0.0793 Hz/s consistent with technological origin
 
-### TOI-700 — Score 80/100
+### TOI-620 — Score 80/100
 
-![TOI-700 sky field — DSS2 Optical](images/DS-0019_TOI-700.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=97.0957+-65.5786&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=97.0957+-65.5786&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=97.0957+-65.5786&fov=0.5&survey=P/2MASS/color)*
+![TOI-620 sky field — DSS2 Optical](images/DS-0019_TOI-620.jpg)
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=142.1734+-12.1672&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=142.1734+-12.1672&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=142.1734+-12.1672&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=97.0957°, Dec=-65.5786°
+- **Position:** RA=142.1734°, Dec=-12.1672°
 - **Frequency:** 4930.46 MHz
 - **SNR:** 2.5
 - **Bandwidth:** 185.8339 MHz
@@ -326,16 +326,16 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: TOI-700 c, TOI-700 d, TOI-700 b
+  - Exoplanet system nearby: TOI-620 b, TOI-620 b
   - Doppler drift rate 0.1276 Hz/s consistent with technological origin
 
-### TOI-620 — Score 80/100
+### TOI-2136 — Score 80/100
 
-![TOI-620 sky field — DSS2 Optical](images/DS-0020_TOI-620.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=142.1734+-12.1672&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=142.1734+-12.1672&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=142.1734+-12.1672&fov=0.5&survey=P/2MASS/color)*
+![TOI-2136 sky field — DSS2 Optical](images/DS-0020_TOI-2136.jpg)
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=281.1763+36.5631&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=281.1763+36.5631&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=281.1763+36.5631&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=142.1734°, Dec=-12.1672°
+- **Position:** RA=281.1763°, Dec=36.5631°
 - **Frequency:** 1524.72 MHz
 - **SNR:** 2.9
 - **Bandwidth:** 212.5536 MHz
@@ -344,15 +344,15 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: TOI-620 b, TOI-620 b
+  - Exoplanet system nearby: TOI-2136 b, TOI-2136 b, TOI-2136 b
   - Doppler drift rate 0.0690 Hz/s consistent with technological origin
 
-### TOI-2136 — Score 80/100
+### TOI-5720 — Score 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=281.1763+36.5631&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=281.1763+36.5631&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=281.1763+36.5631&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=170.3136+25.2733&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=170.3136+25.2733&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=170.3136+25.2733&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=281.1763°, Dec=36.5631°
+- **Position:** RA=170.3136°, Dec=25.2733°
 - **Frequency:** 1204.41 MHz
 - **SNR:** 1.5
 - **Bandwidth:** 136.0191 MHz
@@ -361,15 +361,15 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: TOI-2136 b, TOI-2136 b, TOI-2136 b
+  - Exoplanet system nearby: TOI-5720 b, TOI-5720 b
   - Doppler drift rate 0.0487 Hz/s consistent with technological origin
 
-### TOI-5720 — Score 80/100
+### TOI-1266 — Score 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=170.3136+25.2733&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=170.3136+25.2733&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=170.3136+25.2733&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=197.9966+65.8337&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=197.9966+65.8337&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=197.9966+65.8337&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=170.3136°, Dec=25.2733°
+- **Position:** RA=197.9966°, Dec=65.8337°
 - **Frequency:** 5509.40 MHz
 - **SNR:** 3.4
 - **Bandwidth:** 160.9248 MHz
@@ -378,15 +378,15 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: TOI-5720 b, TOI-5720 b
+  - Exoplanet system nearby: TOI-1266 b, TOI-1266 c, TOI-1266 c
   - Doppler drift rate 0.0665 Hz/s consistent with technological origin
 
-### TOI-5720 — Score 80/100
+### TOI-1266 — Score 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=170.3136+25.2733&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=170.3136+25.2733&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=170.3136+25.2733&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=197.9966+65.8337&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=197.9966+65.8337&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=197.9966+65.8337&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=170.3136°, Dec=25.2733°
+- **Position:** RA=197.9966°, Dec=65.8337°
 - **Frequency:** 4429.19 MHz
 - **SNR:** 2.6
 - **Bandwidth:** 220.6048 MHz
@@ -395,15 +395,15 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: TOI-5720 b, TOI-5720 b
+  - Exoplanet system nearby: TOI-1266 b, TOI-1266 c, TOI-1266 c
   - Doppler drift rate 0.1687 Hz/s consistent with technological origin
 
-### TOI-5720 — Score 80/100
+### TOI-1266 — Score 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=170.3136+25.2733&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=170.3136+25.2733&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=170.3136+25.2733&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=197.9966+65.8337&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=197.9966+65.8337&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=197.9966+65.8337&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=170.3136°, Dec=25.2733°
+- **Position:** RA=197.9966°, Dec=65.8337°
 - **Frequency:** 2062.05 MHz
 - **SNR:** 3.3
 - **Bandwidth:** 484.7591 MHz
@@ -412,15 +412,15 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: TOI-5720 b, TOI-5720 b
+  - Exoplanet system nearby: TOI-1266 b, TOI-1266 c, TOI-1266 c
   - Doppler drift rate 0.0905 Hz/s consistent with technological origin
 
-### TOI-1266 — Score 80/100
+### HAT-P-11 — Score 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=197.9966+65.8337&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=197.9966+65.8337&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=197.9966+65.8337&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=297.7102+48.0819&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=297.7102+48.0819&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=297.7102+48.0819&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=197.9966°, Dec=65.8337°
+- **Position:** RA=297.7102°, Dec=48.0819°
 - **Frequency:** 9722.59 MHz
 - **SNR:** 3.9
 - **Bandwidth:** 411.5004 MHz
@@ -429,15 +429,15 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: TOI-1266 b, TOI-1266 c, TOI-1266 c
+  - Exoplanet system nearby: HAT-P-11 b, HAT-P-11 b, HAT-P-11 b
   - Doppler drift rate 0.0934 Hz/s consistent with technological origin
 
-### TOI-1266 — Score 80/100
+### HAT-P-11 — Score 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=197.9966+65.8337&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=197.9966+65.8337&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=197.9966+65.8337&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=297.7102+48.0819&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=297.7102+48.0819&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=297.7102+48.0819&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=197.9966°, Dec=65.8337°
+- **Position:** RA=297.7102°, Dec=48.0819°
 - **Frequency:** 3450.17 MHz
 - **SNR:** 2.3
 - **Bandwidth:** 138.5564 MHz
@@ -446,15 +446,15 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: TOI-1266 b, TOI-1266 c, TOI-1266 c
+  - Exoplanet system nearby: HAT-P-11 b, HAT-P-11 b, HAT-P-11 b
   - Doppler drift rate 0.0840 Hz/s consistent with technological origin
 
-### HAT-P-11 — Score 80/100
+### Kepler-42 — Score 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=297.7102+48.0819&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=297.7102+48.0819&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=297.7102+48.0819&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=292.2196+44.6174&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=292.2196+44.6174&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=292.2196+44.6174&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=297.7102°, Dec=48.0819°
+- **Position:** RA=292.2196°, Dec=44.6174°
 - **Frequency:** 3753.61 MHz
 - **SNR:** 2.0
 - **Bandwidth:** 331.6878 MHz
@@ -463,7 +463,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: HAT-P-11 b, HAT-P-11 b, HAT-P-11 b
+  - Exoplanet system nearby: Kepler-1202 b, Kepler-42 d, Kepler-42 b
   - Doppler drift rate 0.1446 Hz/s consistent with technological origin
 
 ### Kepler-42 — Score 80/100
@@ -480,7 +480,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: Kepler-42 b, Kepler-1202 b, Kepler-42 d
+  - Exoplanet system nearby: Kepler-1202 b, Kepler-42 d, Kepler-42 b
   - Doppler drift rate 0.1602 Hz/s consistent with technological origin
 
 ### Kepler-42 — Score 80/100
@@ -497,7 +497,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: Kepler-42 b, Kepler-1202 b, Kepler-42 d
+  - Exoplanet system nearby: Kepler-1202 b, Kepler-42 d, Kepler-42 b
   - Doppler drift rate 0.1359 Hz/s consistent with technological origin
 
 ### Kepler-42 — Score 80/100
@@ -514,15 +514,15 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: Kepler-42 b, Kepler-1202 b, Kepler-42 d
+  - Exoplanet system nearby: Kepler-1202 b, Kepler-42 d, Kepler-42 b
   - Doppler drift rate 0.1189 Hz/s consistent with technological origin
 
-### Kepler-42 — Score 80/100
+### TOI-544 — Score 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=292.2196+44.6174&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=292.2196+44.6174&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=292.2196+44.6174&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=82.2901+-0.3429&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=82.2901+-0.3429&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=82.2901+-0.3429&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=292.2196°, Dec=44.6174°
+- **Position:** RA=82.2901°, Dec=-0.3429°
 - **Frequency:** 9326.08 MHz
 - **SNR:** 1.4
 - **Bandwidth:** 332.4245 MHz
@@ -531,15 +531,16 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: Kepler-42 b, Kepler-1202 b, Kepler-42 d
+  - Exoplanet system nearby: TOI-544 b, TOI-544 b, TOI-544 b
   - Doppler drift rate 0.0635 Hz/s consistent with technological origin
 
-### TOI-544 — Score 80/100
+### HD 235088 — Score 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=82.2901+-0.3429&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=82.2901+-0.3429&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=82.2901+-0.3429&fov=0.5&survey=P/2MASS/color)*
+![HD 235088 sky field — DSS2 Optical](images/DS-0013_HD_235088.jpg)
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=300.6155+53.3774&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=300.6155+53.3774&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=300.6155+53.3774&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=82.2901°, Dec=-0.3429°
+- **Position:** RA=300.6155°, Dec=53.3774°
 - **Frequency:** 9627.03 MHz
 - **SNR:** 3.2
 - **Bandwidth:** 292.9214 MHz
@@ -548,16 +549,15 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: TOI-544 b, TOI-544 b, TOI-544 b
+  - Exoplanet system nearby: HD 235088 b, HD 235088 b, HD 235088 b
   - Doppler drift rate 0.0838 Hz/s consistent with technological origin
 
-### HD 235088 — Score 80/100
+### TOI-5800 — Score 80/100
 
-![HD 235088 sky field — DSS2 Optical](images/DS-0013_HD_235088.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=300.6155+53.3774&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=300.6155+53.3774&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=300.6155+53.3774&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=305.0655+-7.4119&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=305.0655+-7.4119&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=305.0655+-7.4119&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=300.6155°, Dec=53.3774°
+- **Position:** RA=305.0655°, Dec=-7.4119°
 - **Frequency:** 5416.36 MHz
 - **SNR:** 1.7
 - **Bandwidth:** 475.1306 MHz
@@ -566,16 +566,15 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: HD 235088 b, HD 235088 b, HD 235088 b
+  - Exoplanet system nearby: TOI-5800 b, TOI-5800 b, TOI-5800 b
   - Doppler drift rate 0.2132 Hz/s consistent with technological origin
 
-### HD 235088 — Score 80/100
+### TOI-5800 — Score 80/100
 
-![HD 235088 sky field — DSS2 Optical](images/DS-0013_HD_235088.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=300.6155+53.3774&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=300.6155+53.3774&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=300.6155+53.3774&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=305.0655+-7.4119&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=305.0655+-7.4119&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=305.0655+-7.4119&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=300.6155°, Dec=53.3774°
+- **Position:** RA=305.0655°, Dec=-7.4119°
 - **Frequency:** 3984.12 MHz
 - **SNR:** 2.0
 - **Bandwidth:** 308.269 MHz
@@ -584,15 +583,15 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: HD 235088 b, HD 235088 b, HD 235088 b
+  - Exoplanet system nearby: TOI-5800 b, TOI-5800 b, TOI-5800 b
   - Doppler drift rate 0.0141 Hz/s consistent with technological origin
 
-### TOI-5800 — Score 80/100
+### TOI-3884 — Score 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=305.0655+-7.4119&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=305.0655+-7.4119&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=305.0655+-7.4119&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=181.5718+12.5070&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=181.5718+12.5070&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=181.5718+12.5070&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=305.0655°, Dec=-7.4119°
+- **Position:** RA=181.5718°, Dec=12.5070°
 - **Frequency:** 9065.45 MHz
 - **SNR:** 1.6
 - **Bandwidth:** 156.0996 MHz
@@ -601,15 +600,15 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: TOI-5800 b, TOI-5800 b, TOI-5800 b
+  - Exoplanet system nearby: TOI-3884 b, TOI-3884 b, TOI-3884 b
   - Doppler drift rate 0.1675 Hz/s consistent with technological origin
 
-### TOI-5800 — Score 80/100
+### TOI-3884 — Score 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=305.0655+-7.4119&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=305.0655+-7.4119&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=305.0655+-7.4119&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=181.5718+12.5070&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=181.5718+12.5070&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=181.5718+12.5070&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=305.0655°, Dec=-7.4119°
+- **Position:** RA=181.5718°, Dec=12.5070°
 - **Frequency:** 7050.16 MHz
 - **SNR:** 3.1
 - **Bandwidth:** 212.4935 MHz
@@ -618,15 +617,15 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: TOI-5800 b, TOI-5800 b, TOI-5800 b
+  - Exoplanet system nearby: TOI-3884 b, TOI-3884 b, TOI-3884 b
   - Doppler drift rate 0.1768 Hz/s consistent with technological origin
 
-### TOI-3884 — Score 80/100
+### K2-3 — Score 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=181.5718+12.5070&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=181.5718+12.5070&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=181.5718+12.5070&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=172.3354+-1.4551&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=172.3354+-1.4551&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=172.3354+-1.4551&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=181.5718°, Dec=12.5070°
+- **Position:** RA=172.3354°, Dec=-1.4551°
 - **Frequency:** 1969.67 MHz
 - **SNR:** 1.5
 - **Bandwidth:** 466.4047 MHz
@@ -635,15 +634,15 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: TOI-3884 b, TOI-3884 b, TOI-3884 b
+  - Exoplanet system nearby: K2-3 d, K2-3 b, K2-3 c
   - Doppler drift rate 0.0965 Hz/s consistent with technological origin
 
-### TOI-3884 — Score 80/100
+### K2-3 — Score 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=181.5718+12.5070&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=181.5718+12.5070&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=181.5718+12.5070&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=172.3354+-1.4551&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=172.3354+-1.4551&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=172.3354+-1.4551&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=181.5718°, Dec=12.5070°
+- **Position:** RA=172.3354°, Dec=-1.4551°
 - **Frequency:** 4338.30 MHz
 - **SNR:** 4.1
 - **Bandwidth:** 431.9159 MHz
@@ -652,7 +651,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: TOI-3884 b, TOI-3884 b, TOI-3884 b
+  - Exoplanet system nearby: K2-3 d, K2-3 b, K2-3 c
   - Doppler drift rate 0.0903 Hz/s consistent with technological origin
 
 ### K2-3 — Score 80/100
@@ -740,12 +739,12 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
   - Exoplanet system nearby: K2-3 d, K2-3 b, K2-3 c
   - Doppler drift rate 0.1461 Hz/s consistent with technological origin
 
-### K2-3 — Score 80/100
+### Wolf 503 — Score 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=172.3354+-1.4551&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=172.3354+-1.4551&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=172.3354+-1.4551&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=206.8462+-6.1393&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=206.8462+-6.1393&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=206.8462+-6.1393&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=172.3354°, Dec=-1.4551°
+- **Position:** RA=206.8462°, Dec=-6.1393°
 - **Frequency:** 2767.91 MHz
 - **SNR:** 3.7
 - **Bandwidth:** 224.1295 MHz
@@ -754,15 +753,15 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: K2-3 d, K2-3 b, K2-3 c
+  - Exoplanet system nearby: Wolf 503 b, Wolf 503 b, Wolf 503 b
   - Doppler drift rate 0.0395 Hz/s consistent with technological origin
 
-### K2-3 — Score 80/100
+### Wolf 503 — Score 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=172.3354+-1.4551&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=172.3354+-1.4551&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=172.3354+-1.4551&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=206.8462+-6.1393&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=206.8462+-6.1393&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=206.8462+-6.1393&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=172.3354°, Dec=-1.4551°
+- **Position:** RA=206.8462°, Dec=-6.1393°
 - **Frequency:** 7098.93 MHz
 - **SNR:** 2.7
 - **Bandwidth:** 148.733 MHz
@@ -771,15 +770,15 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: K2-3 d, K2-3 b, K2-3 c
+  - Exoplanet system nearby: Wolf 503 b, Wolf 503 b, Wolf 503 b
   - Doppler drift rate 0.0843 Hz/s consistent with technological origin
 
-### Wolf 503 — Score 80/100
+### TOI-674 — Score 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=206.8462+-6.1393&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=206.8462+-6.1393&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=206.8462+-6.1393&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=164.5866+-36.8581&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=164.5866+-36.8581&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=164.5866+-36.8581&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=206.8462°, Dec=-6.1393°
+- **Position:** RA=164.5866°, Dec=-36.8581°
 - **Frequency:** 2797.98 MHz
 - **SNR:** 4.3
 - **Bandwidth:** 421.6498 MHz
@@ -788,15 +787,15 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: Wolf 503 b, Wolf 503 b, Wolf 503 b
+  - Exoplanet system nearby: TOI-674 b, TOI-674 b, TOI-674 b
   - Doppler drift rate 0.1326 Hz/s consistent with technological origin
 
-### Wolf 503 — Score 80/100
+### TOI-674 — Score 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=206.8462+-6.1393&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=206.8462+-6.1393&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=206.8462+-6.1393&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=164.5866+-36.8581&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=164.5866+-36.8581&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=164.5866+-36.8581&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=206.8462°, Dec=-6.1393°
+- **Position:** RA=164.5866°, Dec=-36.8581°
 - **Frequency:** 2113.78 MHz
 - **SNR:** 2.1
 - **Bandwidth:** 471.025 MHz
@@ -805,15 +804,15 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: Wolf 503 b, Wolf 503 b, Wolf 503 b
+  - Exoplanet system nearby: TOI-674 b, TOI-674 b, TOI-674 b
   - Doppler drift rate 0.0328 Hz/s consistent with technological origin
 
-### TOI-674 — Score 80/100
+### HD 191939 — Score 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=164.5866+-36.8581&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=164.5866+-36.8581&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=164.5866+-36.8581&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=302.0256+66.8503&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=302.0256+66.8503&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=302.0256+66.8503&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=164.5866°, Dec=-36.8581°
+- **Position:** RA=302.0256°, Dec=66.8503°
 - **Frequency:** 6965.78 MHz
 - **SNR:** 2.5
 - **Bandwidth:** 482.2493 MHz
@@ -822,15 +821,15 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: TOI-674 b, TOI-674 b, TOI-674 b
+  - Exoplanet system nearby: HD 191939 b, HD 191939 c, HD 191939 e
   - Doppler drift rate 0.0696 Hz/s consistent with technological origin
 
-### HD 191939 — Score 80/100
+### K2-136 — Score 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=302.0256+66.8503&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=302.0256+66.8503&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=302.0256+66.8503&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=67.4129+22.8826&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=67.4129+22.8826&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=67.4129+22.8826&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=302.0256°, Dec=66.8503°
+- **Position:** RA=67.4129°, Dec=22.8826°
 - **Frequency:** 4772.03 MHz
 - **SNR:** 6.9
 - **Bandwidth:** 486.4928 MHz
@@ -839,15 +838,15 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: HD 191939 b, HD 191939 c, HD 191939 e
+  - Exoplanet system nearby: K2-136 c, K2-136 c, K2-136 c
   - Doppler drift rate 0.0853 Hz/s consistent with technological origin
 
-### K2-136 — Score 80/100
+### TOI-757 — Score 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=67.4129+22.8826&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=67.4129+22.8826&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=67.4129+22.8826&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=187.9948+-35.5545&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=187.9948+-35.5545&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=187.9948+-35.5545&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=67.4129°, Dec=22.8826°
+- **Position:** RA=187.9948°, Dec=-35.5545°
 - **Frequency:** 5206.43 MHz
 - **SNR:** 3.2
 - **Bandwidth:** 413.9054 MHz
@@ -856,15 +855,15 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: K2-136 c, K2-136 c, K2-136 c
+  - Exoplanet system nearby: TOI-757 b, TOI-757 b
   - Doppler drift rate 0.1206 Hz/s consistent with technological origin
 
-### K2-136 — Score 80/100
+### TOI-757 — Score 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=67.4129+22.8826&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=67.4129+22.8826&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=67.4129+22.8826&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=187.9948+-35.5545&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=187.9948+-35.5545&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=187.9948+-35.5545&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=67.4129°, Dec=22.8826°
+- **Position:** RA=187.9948°, Dec=-35.5545°
 - **Frequency:** 8809.65 MHz
 - **SNR:** 2.1
 - **Bandwidth:** 341.2429 MHz
@@ -873,7 +872,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: K2-136 c, K2-136 c, K2-136 c
+  - Exoplanet system nearby: TOI-757 b, TOI-757 b
   - Doppler drift rate 0.0877 Hz/s consistent with technological origin
 
 ### TOI-757 — Score 80/100
@@ -893,12 +892,12 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
   - Exoplanet system nearby: TOI-757 b, TOI-757 b
   - Doppler drift rate 0.1287 Hz/s consistent with technological origin
 
-### TOI-757 — Score 80/100
+### Kepler-37 — Score 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=187.9948+-35.5545&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=187.9948+-35.5545&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=187.9948+-35.5545&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=284.0593+44.5184&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=284.0593+44.5184&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=284.0593+44.5184&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=187.9948°, Dec=-35.5545°
+- **Position:** RA=284.0593°, Dec=44.5184°
 - **Frequency:** 8421.98 MHz
 - **SNR:** 2.4
 - **Bandwidth:** 224.1339 MHz
@@ -907,7 +906,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: TOI-757 b, TOI-757 b
+  - Exoplanet system nearby: Kepler-37 c, Kepler-37 c, Kepler-37 d
   - Doppler drift rate 0.0777 Hz/s consistent with technological origin
 
 ### Kepler-37 — Score 80/100
@@ -927,12 +926,12 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
   - Exoplanet system nearby: Kepler-37 c, Kepler-37 c, Kepler-37 d
   - Doppler drift rate 0.0472 Hz/s consistent with technological origin
 
-### Kepler-37 — Score 80/100
+### WASP-107 — Score 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=284.0593+44.5184&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=284.0593+44.5184&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=284.0593+44.5184&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=188.3864+-10.1462&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=188.3864+-10.1462&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=188.3864+-10.1462&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=284.0593°, Dec=44.5184°
+- **Position:** RA=188.3864°, Dec=-10.1462°
 - **Frequency:** 1391.28 MHz
 - **SNR:** 11.1
 - **Bandwidth:** 172.5994 MHz
@@ -941,15 +940,15 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: Kepler-37 c, Kepler-37 c, Kepler-37 d
+  - Exoplanet system nearby: WASP-107 b, WASP-107 c, WASP-107 b
   - Doppler drift rate 0.2093 Hz/s consistent with technological origin
 
-### Kepler-37 — Score 80/100
+### WASP-107 — Score 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=284.0593+44.5184&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=284.0593+44.5184&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=284.0593+44.5184&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=188.3864+-10.1462&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=188.3864+-10.1462&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=188.3864+-10.1462&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=284.0593°, Dec=44.5184°
+- **Position:** RA=188.3864°, Dec=-10.1462°
 - **Frequency:** 6141.09 MHz
 - **SNR:** 1.9
 - **Bandwidth:** 266.505 MHz
@@ -958,15 +957,15 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: Kepler-37 c, Kepler-37 c, Kepler-37 d
+  - Exoplanet system nearby: WASP-107 b, WASP-107 c, WASP-107 b
   - Doppler drift rate 0.1112 Hz/s consistent with technological origin
 
-### WASP-107 — Score 80/100
+### Kepler-138 — Score 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=188.3864+-10.1462&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=188.3864+-10.1462&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=188.3864+-10.1462&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=290.3814+43.2931&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=290.3814+43.2931&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=290.3814+43.2931&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=188.3864°, Dec=-10.1462°
+- **Position:** RA=290.3814°, Dec=43.2931°
 - **Frequency:** 1467.66 MHz
 - **SNR:** 1.1
 - **Bandwidth:** 469.9367 MHz
@@ -975,15 +974,15 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: WASP-107 b, WASP-107 c, WASP-107 b
+  - Exoplanet system nearby: Kepler-716 c, Kepler-138 c, Kepler-138 c
   - Doppler drift rate 0.0927 Hz/s consistent with technological origin
 
-### WASP-107 — Score 80/100
+### Kepler-138 — Score 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=188.3864+-10.1462&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=188.3864+-10.1462&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=188.3864+-10.1462&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=290.3814+43.2931&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=290.3814+43.2931&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=290.3814+43.2931&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=188.3864°, Dec=-10.1462°
+- **Position:** RA=290.3814°, Dec=43.2931°
 - **Frequency:** 8010.97 MHz
 - **SNR:** 2.4
 - **Bandwidth:** 153.8209 MHz
@@ -992,15 +991,15 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: WASP-107 b, WASP-107 c, WASP-107 b
+  - Exoplanet system nearby: Kepler-716 c, Kepler-138 c, Kepler-138 c
   - Doppler drift rate 0.0153 Hz/s consistent with technological origin
 
-### Kepler-138 — Score 80/100
+### K2-240 — Score 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=290.3814+43.2931&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=290.3814+43.2931&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=290.3814+43.2931&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=227.8494+-17.8754&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=227.8494+-17.8754&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=227.8494+-17.8754&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=290.3814°, Dec=43.2931°
+- **Position:** RA=227.8494°, Dec=-17.8754°
 - **Frequency:** 5165.19 MHz
 - **SNR:** 3.0
 - **Bandwidth:** 254.0358 MHz
@@ -1009,15 +1008,15 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: Kepler-716 c, Kepler-138 c, Kepler-138 c
+  - Exoplanet system nearby: K2-240 b, K2-240 c
   - Doppler drift rate 0.0296 Hz/s consistent with technological origin
 
-### Kepler-138 — Score 80/100
+### K2-240 — Score 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=290.3814+43.2931&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=290.3814+43.2931&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=290.3814+43.2931&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=227.8494+-17.8754&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=227.8494+-17.8754&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=227.8494+-17.8754&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=290.3814°, Dec=43.2931°
+- **Position:** RA=227.8494°, Dec=-17.8754°
 - **Frequency:** 5300.90 MHz
 - **SNR:** 6.4
 - **Bandwidth:** 266.7557 MHz
@@ -1026,15 +1025,15 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: Kepler-716 c, Kepler-138 c, Kepler-138 c
+  - Exoplanet system nearby: K2-240 b, K2-240 c
   - Doppler drift rate 0.1534 Hz/s consistent with technological origin
 
-### Kepler-138 — Score 80/100
+### K2-240 — Score 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=290.3814+43.2931&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=290.3814+43.2931&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=290.3814+43.2931&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=227.8494+-17.8754&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=227.8494+-17.8754&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=227.8494+-17.8754&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=290.3814°, Dec=43.2931°
+- **Position:** RA=227.8494°, Dec=-17.8754°
 - **Frequency:** 4297.53 MHz
 - **SNR:** 2.6
 - **Bandwidth:** 230.9982 MHz
@@ -1043,15 +1042,15 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: Kepler-716 c, Kepler-138 c, Kepler-138 c
+  - Exoplanet system nearby: K2-240 b, K2-240 c
   - Doppler drift rate 0.1053 Hz/s consistent with technological origin
 
-### K2-240 — Score 80/100
+### TOI-6000 — Score 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=227.8494+-17.8754&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=227.8494+-17.8754&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=227.8494+-17.8754&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=292.6063+68.1546&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=292.6063+68.1546&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=292.6063+68.1546&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=227.8494°, Dec=-17.8754°
+- **Position:** RA=292.6063°, Dec=68.1546°
 - **Frequency:** 9539.72 MHz
 - **SNR:** 6.5
 - **Bandwidth:** 466.5392 MHz
@@ -1060,15 +1059,15 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: K2-240 b, K2-240 c
+  - Exoplanet system nearby: TOI-6000 b, TOI-6000 b
   - Doppler drift rate 0.1177 Hz/s consistent with technological origin
 
-### TOI-6000 — Score 80/100
+### TOI-2141 — Score 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=292.6063+68.1546&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=292.6063+68.1546&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=292.6063+68.1546&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=258.7623+18.3403&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=258.7623+18.3403&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=258.7623+18.3403&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=292.6063°, Dec=68.1546°
+- **Position:** RA=258.7623°, Dec=18.3403°
 - **Frequency:** 8637.04 MHz
 - **SNR:** 4.1
 - **Bandwidth:** 361.0349 MHz
@@ -1077,15 +1076,15 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: TOI-6000 b, TOI-6000 b
+  - Exoplanet system nearby: TOI-2141 c, TOI-2141 b, TOI-2141 b
   - Doppler drift rate 0.0297 Hz/s consistent with technological origin
 
-### TOI-6000 — Score 80/100
+### TOI-2141 — Score 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=292.6063+68.1546&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=292.6063+68.1546&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=292.6063+68.1546&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=258.7623+18.3403&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=258.7623+18.3403&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=258.7623+18.3403&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=292.6063°, Dec=68.1546°
+- **Position:** RA=258.7623°, Dec=18.3403°
 - **Frequency:** 3593.40 MHz
 - **SNR:** 1.5
 - **Bandwidth:** 393.9573 MHz
@@ -1094,7 +1093,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: TOI-6000 b, TOI-6000 b
+  - Exoplanet system nearby: TOI-2141 c, TOI-2141 b, TOI-2141 b
   - Doppler drift rate 0.0782 Hz/s consistent with technological origin
 
 ### K2-321 — Score 80/100
@@ -1366,7 +1365,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: WASP-8 b, WASP-8 c, WASP-8 b
+  - Exoplanet system nearby: WASP-8 c, WASP-8 b, WASP-8 b
   - Doppler drift rate 0.0180 Hz/s consistent with technological origin
 
 ### WASP-8 — Score 80/100
@@ -1383,7 +1382,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: WASP-8 b, WASP-8 c, WASP-8 b
+  - Exoplanet system nearby: WASP-8 c, WASP-8 b, WASP-8 b
   - Doppler drift rate 0.0521 Hz/s consistent with technological origin
 
 ### HD 118203 — Score 80/100
@@ -2344,12 +2343,12 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
   - Exoplanet system nearby: GJ 3222 b
   - Doppler drift rate 0.0915 Hz/s consistent with technological origin
 
-### HD 39091 — Score 80/100
+### HD 154345 — Score 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=84.2993+-80.4646&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=84.2993+-80.4646&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=84.2993+-80.4646&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=255.6525+47.0856&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=255.6525+47.0856&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=255.6525+47.0856&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=84.2993°, Dec=-80.4646°
+- **Position:** RA=255.6525°, Dec=47.0856°
 - **Frequency:** 7283.71 MHz
 - **SNR:** 3.6
 - **Bandwidth:** 182.8082 MHz
@@ -2358,15 +2357,15 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: HD 39091 b, pi Men c, pi Men c
+  - Exoplanet system nearby: HD 154345 b, HD 154345 b, HD 154345 b
   - Doppler drift rate 0.0222 Hz/s consistent with technological origin
 
-### HD 154345 — Score 80/100
+### HD 189733 — Score 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=255.6525+47.0856&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=255.6525+47.0856&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=255.6525+47.0856&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=300.1821+22.7098&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=300.1821+22.7098&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=300.1821+22.7098&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=255.6525°, Dec=47.0856°
+- **Position:** RA=300.1821°, Dec=22.7098°
 - **Frequency:** 5405.52 MHz
 - **SNR:** 3.8
 - **Bandwidth:** 233.2377 MHz
@@ -2375,7 +2374,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: HD 154345 b, HD 154345 b, HD 154345 b
+  - Exoplanet system nearby: HD 189733 b, HD 189733 b, HD 189733 b
   - Doppler drift rate 0.0351 Hz/s consistent with technological origin
 
 ### HD 189733 — Score 80/100
@@ -2429,12 +2428,12 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
   - Exoplanet system nearby: HD 189733 b, HD 189733 b, HD 189733 b
   - Doppler drift rate 0.0549 Hz/s consistent with technological origin
 
-### HD 189733 — Score 80/100
+### HD 217107 — Score 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=300.1821+22.7098&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=300.1821+22.7098&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=300.1821+22.7098&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=344.5647+-2.3954&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=344.5647+-2.3954&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=344.5647+-2.3954&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=300.1821°, Dec=22.7098°
+- **Position:** RA=344.5647°, Dec=-2.3954°
 - **Frequency:** 9269.41 MHz
 - **SNR:** 4.0
 - **Bandwidth:** 103.7039 MHz
@@ -2443,15 +2442,15 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: HD 189733 b, HD 189733 b, HD 189733 b
+  - Exoplanet system nearby: HD 217107 b, HD 217107 c, HD 217107 c
   - Doppler drift rate 0.0807 Hz/s consistent with technological origin
 
-### HD 189733 — Score 80/100
+### HD 114783 — Score 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=300.1821+22.7098&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=300.1821+22.7098&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=300.1821+22.7098&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=198.1818+-2.2650&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=198.1818+-2.2650&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=198.1818+-2.2650&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=300.1821°, Dec=22.7098°
+- **Position:** RA=198.1818°, Dec=-2.2650°
 - **Frequency:** 6581.34 MHz
 - **SNR:** 4.9
 - **Bandwidth:** 196.6556 MHz
@@ -2460,15 +2459,15 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: HD 189733 b, HD 189733 b, HD 189733 b
+  - Exoplanet system nearby: HD 114783 b, HD 114783 c, HD 114783 c
   - Doppler drift rate 0.1021 Hz/s consistent with technological origin
 
-### HD 217107 — Score 80/100
+### HD 114783 — Score 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=344.5647+-2.3954&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=344.5647+-2.3954&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=344.5647+-2.3954&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=198.1818+-2.2650&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=198.1818+-2.2650&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=198.1818+-2.2650&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=344.5647°, Dec=-2.3954°
+- **Position:** RA=198.1818°, Dec=-2.2650°
 - **Frequency:** 1042.67 MHz
 - **SNR:** 6.7
 - **Bandwidth:** 441.3478 MHz
@@ -2477,15 +2476,15 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: HD 217107 b, HD 217107 c, HD 217107 c
+  - Exoplanet system nearby: HD 114783 b, HD 114783 c, HD 114783 c
   - Doppler drift rate 0.0516 Hz/s consistent with technological origin
 
-### HD 217107 — Score 80/100
+### HD 114783 — Score 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=344.5647+-2.3954&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=344.5647+-2.3954&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=344.5647+-2.3954&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=198.1818+-2.2650&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=198.1818+-2.2650&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=198.1818+-2.2650&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=344.5647°, Dec=-2.3954°
+- **Position:** RA=198.1818°, Dec=-2.2650°
 - **Frequency:** 8699.42 MHz
 - **SNR:** 2.3
 - **Bandwidth:** 201.7054 MHz
@@ -2494,15 +2493,15 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: HD 217107 b, HD 217107 c, HD 217107 c
+  - Exoplanet system nearby: HD 114783 b, HD 114783 c, HD 114783 c
   - Doppler drift rate 0.1015 Hz/s consistent with technological origin
 
-### HD 217107 — Score 80/100
+### HD 114783 — Score 80/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=344.5647+-2.3954&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=344.5647+-2.3954&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=344.5647+-2.3954&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=198.1818+-2.2650&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=198.1818+-2.2650&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=198.1818+-2.2650&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=344.5647°, Dec=-2.3954°
+- **Position:** RA=198.1818°, Dec=-2.2650°
 - **Frequency:** 6430.82 MHz
 - **SNR:** 4.8
 - **Bandwidth:** 493.8598 MHz
@@ -2511,7 +2510,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 **Cross-check evidence:**
 
-  - Exoplanet system nearby: HD 217107 b, HD 217107 c, HD 217107 c
+  - Exoplanet system nearby: HD 114783 b, HD 114783 c, HD 114783 c
   - Doppler drift rate 0.0921 Hz/s consistent with technological origin
 
 ### psi1 Dra B — Score 80/100
@@ -4476,7 +4475,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ### TOI-700 — Score 70/100
 
-![TOI-700 sky field — DSS2 Optical](images/DS-0019_TOI-700.jpg)
+![TOI-700 sky field — DSS2 Optical](images/DS-0018_TOI-700.jpg)
 🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=97.0957+-65.5786&fov=0.5&survey=P/DSS2/color)**
 *Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=97.0957+-65.5786&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=97.0957+-65.5786&fov=0.5&survey=P/2MASS/color)*
 
@@ -6471,13 +6470,13 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
   - Doppler drift rate 0.3868 Hz/s consistent with technological origin
   - High SNR: 39.1
 
-### TOI-2427 — Score 50/100
+### TOI-700 — Score 50/100
 
-![TOI-2427 sky field — DSS2 Optical](images/DS-0018_TOI-2427.jpg)
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/2MASS/color)*
+![TOI-700 sky field — DSS2 Optical](images/DS-0018_TOI-700.jpg)
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=97.0957+-65.5786&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=97.0957+-65.5786&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=97.0957+-65.5786&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=52.2917°, Dec=-31.3629°
+- **Position:** RA=97.0957°, Dec=-65.5786°
 - **Frequency:** 8026.56 MHz
 - **SNR:** 2.0
 - **Bandwidth:** 283.5663 MHz
@@ -6487,15 +6486,15 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 **Cross-check evidence:**
 
   - Frequency in known RFI band: X-band satellite
-  - Exoplanet system nearby: TOI-2427 b, TOI-2427 b
+  - Exoplanet system nearby: TOI-700 c, TOI-700 d, TOI-700 b
   - Doppler drift rate 0.0275 Hz/s consistent with technological origin
 
-### TOI-2136 — Score 50/100
+### TOI-5720 — Score 50/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=281.1763+36.5631&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=281.1763+36.5631&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=281.1763+36.5631&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=170.3136+25.2733&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=170.3136+25.2733&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=170.3136+25.2733&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=281.1763°, Dec=36.5631°
+- **Position:** RA=170.3136°, Dec=25.2733°
 - **Frequency:** 8055.08 MHz
 - **SNR:** 2.3
 - **Bandwidth:** 365.7254 MHz
@@ -6505,15 +6504,15 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 **Cross-check evidence:**
 
   - Frequency in known RFI band: X-band satellite
-  - Exoplanet system nearby: TOI-2136 b, TOI-2136 b, TOI-2136 b
+  - Exoplanet system nearby: TOI-5720 b, TOI-5720 b
   - Doppler drift rate 0.0457 Hz/s consistent with technological origin
 
-### K2-136 — Score 50/100
+### TOI-757 — Score 50/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=67.4129+22.8826&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=67.4129+22.8826&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=67.4129+22.8826&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=187.9948+-35.5545&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=187.9948+-35.5545&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=187.9948+-35.5545&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=67.4129°, Dec=22.8826°
+- **Position:** RA=187.9948°, Dec=-35.5545°
 - **Frequency:** 8171.35 MHz
 - **SNR:** 2.5
 - **Bandwidth:** 193.0563 MHz
@@ -6523,7 +6522,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 **Cross-check evidence:**
 
   - Frequency in known RFI band: X-band satellite
-  - Exoplanet system nearby: K2-136 c, K2-136 c, K2-136 c
+  - Exoplanet system nearby: TOI-757 b, TOI-757 b
   - Doppler drift rate 0.1062 Hz/s consistent with technological origin
 
 ### TOI-757 — Score 50/100
@@ -6544,12 +6543,12 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
   - Exoplanet system nearby: TOI-757 b, TOI-757 b
   - Doppler drift rate 0.0368 Hz/s consistent with technological origin
 
-### TOI-757 — Score 50/100
+### Kepler-37 — Score 50/100
 
-🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=187.9948+-35.5545&fov=0.5&survey=P/DSS2/color)**
-*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=187.9948+-35.5545&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=187.9948+-35.5545&fov=0.5&survey=P/2MASS/color)*
+🔭 **[View in Aladin Sky Atlas (DSS2 Optical)](https://aladin.u-strasbg.fr/AladinLite/?target=284.0593+44.5184&fov=0.5&survey=P/DSS2/color)**
+*Multi-wavelength: [DSS2 Optical](https://aladin.u-strasbg.fr/AladinLite/?target=284.0593+44.5184&fov=0.5&survey=P/DSS2/color) · [2MASS NIR](https://aladin.u-strasbg.fr/AladinLite/?target=284.0593+44.5184&fov=0.5&survey=P/2MASS/color)*
 
-- **Position:** RA=187.9948°, Dec=-35.5545°
+- **Position:** RA=284.0593°, Dec=44.5184°
 - **Frequency:** 2489.79 MHz
 - **SNR:** 2.5
 - **Bandwidth:** 213.888 MHz
@@ -6559,7 +6558,7 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 **Cross-check evidence:**
 
   - Frequency in known RFI band: ISM 2.4 GHz
-  - Exoplanet system nearby: TOI-757 b, TOI-757 b
+  - Exoplanet system nearby: Kepler-37 c, Kepler-37 c, Kepler-37 d
   - Doppler drift rate 0.1375 Hz/s consistent with technological origin
 
 ### alf Cen B — Score 65/100
