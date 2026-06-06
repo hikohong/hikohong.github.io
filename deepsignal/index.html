@@ -749,7 +749,7 @@ function showResult(resolved, pipelineMatches) {
   const p   = pipelineMatches.length ? mergePipelineMatches(pipelineMatches) : {};
   const ra  = (r.ra  != null && !isNaN(r.ra))  ? r.ra  : candidateRa(p);
   const dec = (r.dec != null && !isNaN(r.dec)) ? r.dec : candidateDec(p);
-  const name = r.name || p.target_name || "Unknown";
+  const name = cleanName(r.name || p.target_name || "Unknown");
   const tier = p.tier;
   const score = p.candidacy_score;
   const methods = p._all_methods || (p.detection_method ? [p.detection_method] : []);
