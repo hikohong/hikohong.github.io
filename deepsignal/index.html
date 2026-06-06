@@ -1269,6 +1269,8 @@ function mapShowDetail(idx) {
   const reasons = (c.reasons||[]).slice(0,3).map(r=>
     `<li style="color:#8ab4c8;font-size:.72rem;margin-bottom:2px">${r}</li>`
   ).join("");
+  const imgUrl = ra ? `https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=120&height=120&fov=0.25&projection=TAN&coordsys=icrs&ra=${ra.toFixed(5)}&dec=${dec.toFixed(5)}&format=jpg` : "";
+  const imgHtml = imgUrl ? `<img src="${imgUrl}" width="80" height="80" style="object-fit:cover;border-radius:6px;border:1px solid rgba(125,211,252,.15);flex-shrink:0;background:#0a1a2e" onerror="this.style.display='none'">` : "";
   const links = [
     ra ? `<a class="ext-link" href="https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=${ra.toFixed(4)}+${dec.toFixed(4)}&CooFrame=ICRS&Radius=2&Radius.unit=arcmin" target="_blank" rel="noreferrer">SIMBAD</a>` : "",
     ra ? `<a class="ext-link" href="https://aladin.u-strasbg.fr/AladinLite/?target=${ra.toFixed(4)}+${dec.toFixed(4)}&fov=0.5&survey=P/DSS2/color" target="_blank" rel="noreferrer">Aladin</a>` : "",
@@ -1276,18 +1278,23 @@ function mapShowDetail(idx) {
   const el = document.getElementById("map-detail");
   el.style.display = "block";
   el.innerHTML = `
-    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap">
-      <span style="font-size:.6rem;font-weight:700;padding:2px 8px;border-radius:10px;
-        background:${tbg};color:${tc};border:1px solid ${tc}55;flex-shrink:0">T${tier}</span>
-      <span style="font-size:.92rem;font-weight:700;color:#eef3f8">${c.target_name||"?"}</span>
-      <span style="margin-left:auto;font-family:monospace;font-weight:700;font-size:1.05rem;color:${tc}">${sc.toFixed(0)}</span>
+    <div style="display:flex;gap:10px;align-items:flex-start">
+      ${imgHtml}
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap">
+          <span style="font-size:.6rem;font-weight:700;padding:2px 8px;border-radius:10px;
+            background:${tbg};color:${tc};border:1px solid ${tc}55;flex-shrink:0">T${tier}</span>
+          <span style="font-size:.92rem;font-weight:700;color:#eef3f8">${c.target_name||"?"}</span>
+          <span style="margin-left:auto;font-family:monospace;font-weight:700;font-size:1.05rem;color:${tc}">${sc.toFixed(0)}</span>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:4px">
+          ${mtags}<span class="tag tag-dtype">${(c.data_type||"?").toUpperCase()}</span>
+        </div>
+        ${ra?`<div class="card-coords" style="margin:6px 0">RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}°</div>`:""}
+        ${reasons?`<ul style="padding-left:14px;margin:6px 0 8px;list-style:disc">${reasons}</ul>`:""}
+        ${links?`<div style="display:flex;gap:6px;flex-wrap:wrap;padding-top:8px;border-top:1px solid rgba(125,211,252,.08)">${links}</div>`:""}
+      </div>
     </div>
-    <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:4px">
-      ${mtags}<span class="tag tag-dtype">${(c.data_type||"?").toUpperCase()}</span>
-    </div>
-    ${ra?`<div class="card-coords" style="margin:6px 0">RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}°</div>`:""}
-    ${reasons?`<ul style="padding-left:14px;margin:6px 0 8px;list-style:disc">${reasons}</ul>`:""}
-    ${links?`<div style="display:flex;gap:6px;flex-wrap:wrap;padding-top:8px;border-top:1px solid rgba(125,211,252,.08)">${links}</div>`:""}
   `;
   document.getElementById("map-body").scrollTop = 0;
 }
