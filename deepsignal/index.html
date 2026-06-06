@@ -201,10 +201,10 @@ footer a{color:#4a6a8a;text-decoration:none}
 </div>
 
 <div class="stats">
-  <div class="stat-chip">Pipeline candidates: <strong id="stat-n">247</strong></div>
+  <div class="stat-chip">Pipeline candidates: <strong id="stat-n">80</strong></div>
   <div class="stat-chip">Data sources: <strong>10</strong></div>
   <div class="stat-chip">Detection algorithms: <strong>14</strong></div>
-  <div class="stat-chip">Last updated: <strong>2026-06-06 01:33 UTC</strong></div>
+  <div class="stat-chip">Last updated: <strong>2026-06-06 UTC</strong></div>
 </div>
 
 <div id="result-panel">
@@ -678,7 +678,7 @@ function showResult(resolved, pipelineMatches) {
         ${reasonHtml}
         <div class="result-links">${extLinks}</div>
         <div style="margin-top:12px">
-          <button class="btn-papers" onclick="litOpen('${name.replace(/'/g,"\\'")}')">
+          <button class="btn-papers" onclick="litOpen('${name.replace(/'/g,"\\'")}', '${(methods[0] || "").replace(/'/g, "\\'")}')">
             <span class="papers-dot"></span> Search Literature
           </button>
         </div>
@@ -788,6 +788,7 @@ function renderHighlights() {
     const mtags   = methods.slice(0, 2).map(m => `<span class="tag tag-method" style="font-size:.65rem">${m}</span>`).join("");
 
     const safeN = c.target_name.replace(/'/g, "\\'");
+    const safeMethod = (methods[0] || "").replace(/'/g, "\\'");
     const multi = c.entries.length > 1;
 
     const coordsTxt = (ra != null)
@@ -833,7 +834,7 @@ function renderHighlights() {
         ${reasonsHtml}
         ${extLinksHtml}
         <div style="margin-top:8px" onclick="event.stopPropagation()">
-          <button class="btn-papers" onclick="litOpen('${safeN}')">
+          <button class="btn-papers" onclick="litOpen('${safeN}', '${safeMethod}')">
             <span class="papers-dot"></span> Search Literature
           </button>
         </div>
@@ -904,14 +905,14 @@ async function _loadSolarSystemImage(name) {
 }
 
 // ── Literature Modal ──────────────────────────────────────────────────────────
-function litOpen(targetName) {
+function litOpen(targetName, detectionMethod) {
   document.getElementById("lit-target-name").textContent = targetName;
   document.getElementById("lit-footer-ts").textContent = "";
   document.getElementById("lit-body").innerHTML =
     `<div class="lit-status"><span class="spinner"></span> SCANNING LITERATURE DATABASE…</div>`;
   document.getElementById("lit-overlay").classList.add("open");
   document.body.style.overflow = "hidden";
-  _litFetch(targetName);
+  _litFetch(targetName, detectionMethod || "");
 }
 
 function litClose() {
@@ -973,7 +974,7 @@ function _renderCrossRef(items, elapsed) {
   return statusLine + cards;
 }
 
-async function _litFetch(name) {
+async function _litFetch(name, method) {
   const body   = document.getElementById("lit-body");
   const footer = document.getElementById("lit-footer-ts");
   const t0 = Date.now();
@@ -981,7 +982,8 @@ async function _litFetch(name) {
   // Try Semantic Scholar first
   try {
     const fields = "title,authors,year,abstract,externalIds,url";
-    const url = `https://api.semanticscholar.org/graph/v1/paper/search?query=${encodeURIComponent(name + " astronomy")}&fields=${fields}&limit=10`;
+    const query = method ? `${name} ${method} SETI astronomy` : `${name} astronomy`;
+    const url = `https://api.semanticscholar.org/graph/v1/paper/search?query=${encodeURIComponent(query)}&fields=${fields}&limit=10`;
     const ctrl = _abortFetch(15000);
     const resp = await fetch(url, { headers: { "Accept": "application/json" }, signal: ctrl.signal });
     if (!resp.ok) throw new Error(`S2 HTTP ${resp.status}`);
@@ -999,7 +1001,8 @@ async function _litFetch(name) {
 
   // CrossRef fallback
   try {
-    const url = `https://api.crossref.org/works?query=${encodeURIComponent(name + " astronomy")}&rows=10&sort=relevance&filter=type:journal-article`;
+    const crossQuery = method ? `${name} ${method} SETI astronomy` : `${name} astronomy`;
+    const url = `https://api.crossref.org/works?query=${encodeURIComponent(crossQuery)}&rows=10&sort=relevance&filter=type:journal-article`;
     const ctrl = _abortFetch(15000);
     const resp = await fetch(url, { headers: { "Accept": "application/json" }, signal: ctrl.signal });
     if (!resp.ok) throw new Error(`CrossRef HTTP ${resp.status}`);
