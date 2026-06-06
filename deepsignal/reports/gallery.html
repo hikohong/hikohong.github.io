@@ -13,10 +13,11 @@
   .nav-home{display:inline-flex;align-items:center;gap:8px;color:#dbeafe;text-decoration:none;font-weight:700;font-size:.9rem}
   .nav-mark{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;
              background:linear-gradient(135deg,#7dd3fc,#f97316);color:#06121d;font-size:.65rem;font-weight:900;flex-shrink:0}
-  .nav-links{margin-left:auto;display:flex;gap:8px}
+  .nav-links{display:flex;gap:8px}
   .nav-link{color:#b8c7d8;text-decoration:none;font-size:.85rem;padding:6px 12px;border-radius:5px;
              border:1px solid rgba(219,234,254,.15);transition:border-color 140ms,color 140ms;background:none;cursor:pointer;font-family:inherit}
   .nav-link:hover{color:#7dd3fc;border-color:#7dd3fc}
+  .nav-link.active{color:#7dd3fc;border-color:rgba(125,211,252,.4)}
   .gallery-hdr{padding:24px 24px 0}
   h1{font-size:1.5rem;color:#fff;margin-bottom:4px}
   .subtitle{color:#4a5a6a;font-size:.85rem;margin-bottom:16px}
@@ -204,12 +205,13 @@
     <span class="nav-mark">HH</span>
     <span>Hiko Hong</span>
   </a>
-  <span style="color:#3a4a5a;font-size:.85rem">/ DeepSignal</span>
   <div class="nav-links">
     <a class="nav-link" href="index.html">Search</a>
+    <a class="nav-link active" href="gallery.html">Gallery</a>
     <button class="nav-link" onclick="mapOpen()">Map</button>
     <button class="nav-link" onclick="reportOpen()">Report</button>
   </div>
+  <span style="margin-left:auto;color:#3a4a5a;font-size:.85rem">/ DeepSignal</span>
 </nav>
 <div id="report-overlay" onclick="if(event.target===this)reportClose()">
   <div id="report-modal" role="dialog" aria-modal="true">
@@ -371,7 +373,7 @@
 <div id="sky-tooltip-map"></div>
 <div class="gallery-hdr">
 <h1>DeepSignal — Sky Image Gallery</h1>
-<div class="subtitle">Generated 2026-06-06 15:40 UTC &nbsp;·&nbsp; 64 targets &nbsp;·&nbsp; 64 sky images via Hips2Fits CDN</div>
+<div class="subtitle">Generated 2026-06-06 15:53 UTC &nbsp;·&nbsp; 64 targets &nbsp;·&nbsp; 64 sky images via Hips2Fits CDN</div>
 <div class="stats">
   <div class="stat"><div class="stat-n" style="color:#f59e0b">14</div><div class="stat-l">Tier 1 ≥70</div></div>
   <div class="stat"><div class="stat-n" style="color:#60a5fa">38</div><div class="stat-l">Tier 2 50–69</div></div>
