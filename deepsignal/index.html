@@ -157,7 +157,7 @@ footer a{color:#4a6a8a;text-decoration:none}
 .hist-title{font-size:.72rem;color:#4a5a6a;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
 .hist-wrap{display:flex;gap:2px;align-items:flex-end;height:52px}
 .hb-wrap{display:flex;flex-direction:column;align-items:center;flex:1;height:100%;cursor:default}
-.hb-bar{width:100%;min-height:2px;border-radius:2px 2px 0 0}
+.hb-bar{width:100%;min-height:2px;border-radius:2px 2px 0 0;margin-top:auto}
 .hb-lbl{font-size:.52rem;color:#3a4a5a;margin-top:1px;line-height:1}
 /* ── Sky map ── */
 .sky-section{max-width:900px;margin:0 auto;padding:0 24px 20px}
@@ -236,7 +236,7 @@ footer a{color:#4a6a8a;text-decoration:none}
 </div>
 
 <div class="stats">
-  <div class="stat-chip">Pipeline candidates: <strong id="stat-n">80</strong></div>
+  <div class="stat-chip">Pipeline candidates: <strong id="stat-n">64</strong></div>
   <div class="stat-chip">Data sources: <strong>10</strong></div>
   <div class="stat-chip">Detection algorithms: <strong>14</strong></div>
   <div class="stat-chip">Last updated: <strong>2026-06-06 UTC</strong></div>
@@ -1168,11 +1168,12 @@ function renderSkyMap(data) {
         <text x="2" y="9" fill="#3a4a5a" font-size="6" font-family="monospace">+90°</text>
         <text x="2" y="93" fill="#3a4a5a" font-size="6" font-family="monospace">0°</text>
         <text x="2" y="177" fill="#3a4a5a" font-size="6" font-family="monospace">-90°</text>
-        <circle cx="318" cy="8" r="3" fill="#f59e0b" fill-opacity=".8"/>
-        <text x="324" y="11" fill="#6b7280" font-size="6" font-family="monospace">T1</text>
-        <circle cx="338" cy="8" r="3" fill="#3b82f6" fill-opacity=".8"/>
-        <text x="344" y="11" fill="#6b7280" font-size="6" font-family="monospace">T2</text>
-        <circle cx="356" cy="8" r="3" fill="#6b7280" fill-opacity=".8"/>
+        <circle cx="296" cy="8" r="3" fill="#f59e0b" fill-opacity=".8"/>
+        <text x="302" y="11" fill="#6b7280" font-size="6" font-family="monospace">T1</text>
+        <circle cx="316" cy="8" r="3" fill="#3b82f6" fill-opacity=".8"/>
+        <text x="322" y="11" fill="#6b7280" font-size="6" font-family="monospace">T2</text>
+        <circle cx="340" cy="8" r="3" fill="#6b7280" fill-opacity=".8"/>
+        <text x="346" y="11" fill="#6b7280" font-size="6" font-family="monospace">T3</text>
         ${dots}
       </svg>
     </div>`;
