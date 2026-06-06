@@ -393,7 +393,7 @@ const HIPS2FITS   = "https://alasky.cds.unistra.fr/hips-image-services/hips2fits
 const SESAME_URL  = "https://cdsweb.u-strasbg.fr/cgi-bin/nph-sesame/-ox?";
 const HORIZONS    = "https://ssd.jpl.nasa.gov/api/horizons.api";
 const TIER_COLORS = { 1: "#f59e0b", 2: "#3b82f6", 3: "#6b7280" };
-const cleanName = n => (n || '').replace(/^\*\s+/, '').trim() || n || '?';
+const cleanName = n => (n || '').replace(/^(\*+|[A-Z]{1,5}\*+|NAME)\s+/, '').trim() || n || '?';
 const SS_TYPES = new Set(["Solar System Object","Planet","Dwarf Planet","Moon","Solar System Region","Comet","Asteroid"]);
 const SURVEYS     = [
   { hips: "CDS/P/DSS2/color",        label: "Optical" },
