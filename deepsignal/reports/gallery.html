@@ -373,7 +373,7 @@
 <div id="sky-tooltip-map"></div>
 <div class="gallery-hdr">
 <h1>DeepSignal — Sky Image Gallery</h1>
-<div class="subtitle">Generated 2026-06-06 16:07 UTC &nbsp;·&nbsp; 64 targets &nbsp;·&nbsp; 64 sky images via Hips2Fits CDN</div>
+<div class="subtitle">Generated 2026-06-06 16:10 UTC &nbsp;·&nbsp; 64 targets &nbsp;·&nbsp; 64 sky images via Hips2Fits CDN</div>
 <div class="stats">
   <div class="stat"><div class="stat-n" style="color:#f59e0b">14</div><div class="stat-l">Tier 1 ≥70</div></div>
   <div class="stat"><div class="stat-n" style="color:#60a5fa">38</div><div class="stat-l">Tier 2 50–69</div></div>
@@ -2267,7 +2267,7 @@ async function _litFetch(name, method) {
       <a class="lit-btn" href="https://www.semanticscholar.org/search?q=${encodeURIComponent(name)}&sort=Relevance" target="_blank" rel="noopener">↗ Semantic Scholar</a></div>`;
   }
 }
-document.addEventListener("keydown", e => { if (e.key === "Escape") { reportClose(); litClose(); } });
+document.addEventListener("keydown", e => { if (e.key === "Escape") { mapClose(); litClose(); reportClose(); } });
 // Filter / sort
 let _activeFilter = "all";
 function filterCards() {

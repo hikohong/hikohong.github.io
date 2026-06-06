@@ -1374,7 +1374,7 @@ function reportClose() {
 document.getElementById("q").addEventListener("keydown", e => {
   if (e.key === "Enter") doSearch();
 });
-document.addEventListener("keydown", e => { if (e.key === "Escape") { litClose(); reportClose(); } });
+document.addEventListener("keydown", e => { if (e.key === "Escape") { mapClose(); litClose(); reportClose(); } });
 
 // ── Init ──────────────────────────────────────────────────────────────────────
 loadCatalog();
