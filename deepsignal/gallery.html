@@ -371,7 +371,7 @@
 <div id="sky-tooltip-map"></div>
 <div class="gallery-hdr">
 <h1>DeepSignal — Sky Image Gallery</h1>
-<div class="subtitle">Generated 2026-06-06 14:16 UTC &nbsp;·&nbsp; 64 targets &nbsp;·&nbsp; 64 sky images via Hips2Fits CDN</div>
+<div class="subtitle">Generated 2026-06-06 15:40 UTC &nbsp;·&nbsp; 64 targets &nbsp;·&nbsp; 64 sky images via Hips2Fits CDN</div>
 <div class="stats">
   <div class="stat"><div class="stat-n" style="color:#f59e0b">14</div><div class="stat-l">Tier 1 ≥70</div></div>
   <div class="stat"><div class="stat-n" style="color:#60a5fa">38</div><div class="stat-l">Tier 2 50–69</div></div>
@@ -2364,26 +2364,33 @@ function mapShowDetail(idx) {
   const coords = c.ra
     ? `<div class="card-coords" style="margin:6px 0">RA ${c.ra.toFixed(4)}° &nbsp; Dec ${c.dec.toFixed(4)}°</div>`
     : "";
+  const imgUrl = c.ra ? `https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=120&height=120&fov=0.25&projection=TAN&coordsys=icrs&ra=${c.ra.toFixed(5)}&dec=${c.dec.toFixed(5)}&format=jpg` : "";
+  const imgHtml = imgUrl ? `<img src="${imgUrl}" width="80" height="80" style="object-fit:cover;border-radius:6px;border:1px solid rgba(125,211,252,.15);flex-shrink:0;background:#0a1a2e" onerror="this.style.display='none'">` : "";
   const links = [
     c.ra ? `<a class="ext-link" href="https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=${c.ra.toFixed(4)}+${c.dec.toFixed(4)}&CooFrame=ICRS&Radius=2&Radius.unit=arcmin" target="_blank" rel="noreferrer">SIMBAD</a>` : "",
     c.ra ? `<a class="ext-link" href="https://aladin.u-strasbg.fr/AladinLite/?target=${c.ra.toFixed(4)}+${c.dec.toFixed(4)}&fov=0.5&survey=P/DSS2/color" target="_blank" rel="noreferrer">Aladin</a>` : "",
-    c.id ? `<button class="ext-link" style="cursor:pointer" onclick="mapClose();scrollToCard('#${c.id}')">View in gallery →</button>` : "",
+    c.id ? `<button class="ext-link" style="background:none;color:#7dd3fc;cursor:pointer;font-family:inherit" onclick="mapClose();scrollToCard('#${c.id}')">View in gallery →</button>` : "",
   ].filter(Boolean).join("");
   const el = document.getElementById("map-detail");
   el.style.display = "block";
   el.innerHTML = `
-    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap">
-      <span style="font-size:.6rem;font-weight:700;padding:2px 8px;border-radius:10px;
-        background:${tbg};color:${tc};border:1px solid ${tc}55;flex-shrink:0">T${tier}</span>
-      <span style="font-size:.92rem;font-weight:700;color:#eef3f8">${c.name}</span>
-      <span style="margin-left:auto;font-family:monospace;font-weight:700;font-size:1.05rem;color:${tc}">${c.score.toFixed(0)}</span>
+    <div style="display:flex;gap:10px;align-items:flex-start">
+      ${imgHtml}
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap">
+          <span style="font-size:.6rem;font-weight:700;padding:2px 8px;border-radius:10px;
+            background:${tbg};color:${tc};border:1px solid ${tc}55;flex-shrink:0">T${tier}</span>
+          <span style="font-size:.92rem;font-weight:700;color:#eef3f8">${c.name}</span>
+          <span style="margin-left:auto;font-family:monospace;font-weight:700;font-size:1.05rem;color:${tc}">${c.score.toFixed(0)}</span>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:4px">
+          ${mtags}<span class="tag tag-dtype">${(c.dtype||"?").toUpperCase()}</span>
+        </div>
+        ${coords}
+        ${rlist ? `<ul style="padding-left:14px;margin:6px 0 8px;list-style:disc">${rlist}</ul>` : ""}
+        <div style="display:flex;gap:6px;flex-wrap:wrap;padding-top:8px;border-top:1px solid rgba(125,211,252,.08)">${links}</div>
+      </div>
     </div>
-    <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:4px">
-      ${mtags}<span class="tag tag-dtype">${(c.dtype||"?").toUpperCase()}</span>
-    </div>
-    ${coords}
-    ${rlist ? `<ul style="padding-left:14px;margin:6px 0 8px;list-style:disc">${rlist}</ul>` : ""}
-    <div style="display:flex;gap:6px;flex-wrap:wrap;padding-top:8px;border-top:1px solid rgba(125,211,252,.08)">${links}</div>
   `;
   document.getElementById("map-body").scrollTop = 0;
 }
