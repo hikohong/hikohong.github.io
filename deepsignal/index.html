@@ -394,6 +394,24 @@ const SESAME_URL  = "https://cdsweb.u-strasbg.fr/cgi-bin/nph-sesame/-ox?";
 const HORIZONS    = "https://ssd.jpl.nasa.gov/api/horizons.api";
 const TIER_COLORS = { 1: "#f59e0b", 2: "#3b82f6", 3: "#6b7280" };
 const cleanName = n => (n || '').replace(/^(\*+|[A-Z]{1,5}\*+|NAME)\s+/, '').trim() || n || '?';
+const OTYPE_LABELS = {
+  '*':'Star','**':'Double star','V*':'Variable star','PM*':'High proper-motion star',
+  'HB*':'Horizontal branch star','WD*':'White dwarf','NS':'Neutron star','BH':'Black hole',
+  'dS*':'Delta Scuti variable','BY*':'BY Draconis variable','RRLyr':'RR Lyrae variable',
+  'Cep*':'Cepheid variable','SB*':'Spectroscopic binary','EB*':'Eclipsing binary',
+  'LP*':'Long-period variable','Mi*':'Mira variable','RG*':'Red giant',
+  'sg*':'Evolved supergiant','s*r':'Red supergiant','s*b':'Blue supergiant',
+  'WR*':'Wolf-Rayet star','Be*':'Be star','pMS*':'Pre-main sequence star','TT*':'T Tauri star',
+  'RS*':'RS CVn variable','Al*':'Algol-type eclipsing binary',
+  'SNR':'Supernova remnant','PN':'Planetary nebula','HII':'HII region',
+  'MoC':'Molecular cloud','DNe':'Dark nebula',
+  'Galaxy':'Galaxy','AGN':'Active galactic nucleus','QSO':'Quasar',
+  'BLLac':'BL Lac object','EmG':'Emission-line galaxy',
+  'Psr':'Pulsar','FRB':'Fast Radio Burst',
+  'GlC':'Globular cluster','OpC':'Open cluster','As*':'Stellar association',
+  'X':'X-ray source','UV':'UV source','Radio':'Radio source',
+};
+const oTypeLabel = t => OTYPE_LABELS[t] || t || '';
 const SS_TYPES = new Set(["Solar System Object","Planet","Dwarf Planet","Moon","Solar System Region","Comet","Asteroid"]);
 const SURVEYS     = [
   { hips: "CDS/P/DSS2/color",        label: "Optical" },
@@ -795,7 +813,7 @@ function showResult(resolved, pipelineMatches) {
       <div class="result-img">${imgTag}</div>
       <div class="result-body">
         <div class="result-name">${name}</div>
-        <div class="result-type">${r.type || p.data_type || ""}</div>
+        <div class="result-type">${oTypeLabel(r.type) || p.data_type || ""}</div>
         <div class="result-coords">${coordTxt}</div>
         <div class="result-tags">${tierTag}${methodTags}${dtypeTags}</div>
         ${notInPipeline}
