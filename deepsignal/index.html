@@ -1436,7 +1436,7 @@ document.getElementById("q").addEventListener("keydown", e => {
 document.addEventListener("keydown", e => {
   if (e.key !== "Escape") return;
   const anyOpen = ["map-overlay","lit-overlay","report-overlay"].some(id => document.getElementById(id)?.classList.contains("open"));
-  if (anyOpen) { mapClose(); litClose(); reportClose(); } else { history.back(); }
+  if (anyOpen) { mapClose(); litClose(); reportClose(); }
 });
 
 // ── Sci-Fi Sound Engine ───────────────────────────────────────────────────────
@@ -1453,7 +1453,7 @@ const SFX = (() => {
   });
   function playFile(key, vol = 0.65) {
     if (_muted) return;
-    try { const a = _loaded[key].cloneNode(); a.volume = vol; a.play().catch(() => {}); } catch(e) {}
+    try { const a = new Audio(_loaded[key].src); a.volume = vol; a.play().catch(() => {}); } catch(e) {}
   }
   const ac = () => {
     if (!_ctx) {
@@ -1540,7 +1540,10 @@ const ICON_MUTED = `<svg viewBox="0 0 20 20" width="14" height="14" fill="none" 
 
 function navTo(href) {
   SFX.click();
-  setTimeout(() => { location.href = href; }, 130);
+  try {
+    if (new URL(href, location.href).href === location.href) return;
+  } catch(e) {}
+  setTimeout(() => { location.href = href; }, 350);
 }
 
 function toggleMute() {
