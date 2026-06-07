@@ -778,7 +778,7 @@ function showResult(resolved, pipelineMatches) {
   const panel = document.getElementById("result-panel");
   const card  = document.getElementById("result-card");
   panel.style.display = "block";
-  panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  window.scrollTo({ top: 0, behavior: "smooth" });
 
   if (!resolved && !pipelineMatches.length) {
     card.innerHTML = `<div class="result-notfound">No results found. Try a different name or check spelling.<br><small style="color:#4a5a6a;margin-top:6px;display:block">Tip: Try alternate forms — e.g. "Proxima Cen" → "Proxima Centauri"</small></div>`;
@@ -857,7 +857,7 @@ function showMultipleResults(groups) {
   const panel = document.getElementById("result-panel");
   const card  = document.getElementById("result-card");
   panel.style.display = "block";
-  panel.scrollIntoView({ behavior: "smooth", block: "start" });
+  window.scrollTo({ top: 0, behavior: "smooth" });
 
   const sorted = [...groups].sort((a, b) => (b.candidacy_score || 0) - (a.candidacy_score || 0));
 
@@ -902,7 +902,7 @@ async function doSearch() {
   const card  = document.getElementById("result-card");
   panel.style.display = "block";
   card.innerHTML = `<div class="result-notfound"><span class="spinner"></span>Searching…</div>`;
-  panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  window.scrollTo({ top: 0, behavior: "smooth" });
 
   const pipelineMatches = searchCatalog(q);
   const groups = groupCatalogByTarget(pipelineMatches);
@@ -1447,8 +1447,8 @@ const SFX = (() => {
   ['click','scan','open','close'].forEach(k => {
     const a = new Audio('sounds/' + _WAV[k] + '.wav');
     a.preload = 'auto';
-    a.oncanplaythrough = () => { _loaded[k] = a; };
-    a.onerror = () => {};
+    _loaded[k] = a;
+    a.onerror = () => { delete _loaded[k]; };
     a.load();
   });
   function playFile(key, vol = 0.65) {
