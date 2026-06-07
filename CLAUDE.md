@@ -116,13 +116,22 @@ Images: `DS-{XXXX}_{Target_Name}.jpg`
 
 ## Git Workflow
 
-- **Development branch:** always use `claude/confident-lovelace-NAJyN` (or a new `claude/` branch for new tasks)
+- **Feature branches:** `claude/<slug>` for design/code changes; `claude/update-website-YYYYMMDD` for pipeline publishes
 - **Production:** `master` branch → auto-deploys to GitHub Pages
-- **Never push directly to master** — use PRs
-- **Commit message convention:** imperative mood, describe the change; pipeline commits use "Update DeepSignal public website output"
+- **Never push directly to master** — always PR + squash merge
+- **Commit message convention:** imperative mood; pipeline publishes use "Publish DeepSignal website output YYYY-MM-DD"
+- **After merge:** delete remote branch (`git push origin --delete <branch>`) and local branch (`git branch -d <branch>`), then `git checkout master && git pull origin master`
 
 ```bash
-git push -u origin claude/confident-lovelace-NAJyN
+# Feature work
+git checkout -b claude/<slug>
+git push -u origin claude/<slug>
+
+# Website publish
+BRANCH="claude/update-website-$(date -u +%Y%m%d)"
+git checkout -b $BRANCH
+# ... copy files, commit ...
+git push -u origin $BRANCH
 ```
 
 ---
@@ -158,6 +167,29 @@ Changes to `master` are live at https://hikohong.github.io within ~1 minute.
 
 ---
 
+## SFX Audio Engine
+
+`deepsignal/sounds/` contains WAV files used by both the Search and Gallery pages:
+
+| File | Logical key | Use |
+|------|-------------|-----|
+| `click.wav` | `click` | Nav buttons, card clicks, any interactive tap |
+| `scan.wav` | `scan` | Search initiated |
+| `open2.wav` | `open` | Modal open (Map, Report, Literature) |
+| `close2.wav` | `close` | Modal close |
+
+The engine is embedded in `deepsignal/index.html` and `deepsignal/gallery.html`.
+
+**Critical patterns:**
+- Audio elements stored in `_loaded` immediately on page load (not waiting for `oncanplaythrough`) — prevents silent clicks on fast interactions
+- `playFile`: reuses the preloaded element (`currentTime = 0; a.play()`) — do NOT replace with `new Audio(src)` (unreliable on Mac Safari)
+- `navTo(href)`: calls `SFX.click()`, detects same-page URL to avoid reload, navigates after 350ms delay
+- `mapOpen()` / `reportOpen()` / `litOpen()`: call `SFX.open()` internally — do NOT add extra `SFX.click()` on the trigger buttons
+- ESC key: only closes open modals — does NOT call `history.back()`
+- Paper cards in Literature dialog: entire card is clickable (opens DOI → arXiv → semUrl); `.lit-actions` buttons guard against double-open
+
+---
+
 ## Key JSON Schemas (summary)
 
 ### `deepsignal/anomalies/candidates.json`
@@ -165,7 +197,8 @@ Array of candidate objects. Fields include: `id` (DS-XXXX), `target`, `ra`, `dec
 `score`, `signal_type`, `wavelengths`, `summary`, `images`, `report_url`.
 
 ### `deepsignal/catalog.json`
-Top-level catalog served to the gallery page. Contains metadata + candidate array.
+**Plain JSON array** of candidate objects (NOT a wrapped dict). Published by the pipeline.
+Fields per entry: `obs_id`, `target_name`, `ra_deg`, `dec_deg`, `candidacy_score`, etc.
 
 ### `deepsignal/processed/statistics.json`
 Aggregate counts: total_candidates, by_signal_type, score distributions.
@@ -179,3 +212,6 @@ Aggregate counts: total_candidates, by_signal_type, score distributions.
 - Images are local; do not hotlink external image hosts
 - JSON files use 2-space indentation
 - Keep `deepsignal/reports/` in sync with `deepsignal/` top-level outputs
+- `catalog.json` must remain a plain array (not a wrapped `{"version":…,"candidates":[…]}` dict)
+- `gallery.html` must have 0 `../images/` references (use `images/` relative path)
+- `index.html` must have 0 `{{N_CANDIDATES}}` or `{{UPDATED}}` placeholders after publish
