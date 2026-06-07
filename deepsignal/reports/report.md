@@ -1,11 +1,11 @@
 # DeepSignal SETI Candidate Report
 
-**Generated:** 2026-06-07 13:30 UTC
+**Generated:** 2026-06-07 16:40 UTC
 **Pipeline version:** 2.0.0
 
 ## Executive Summary
 
-The DeepSignal pipeline processed 307 radio telescope observations across 60 astronomical targets. Anomaly detection identified **422 candidates** for cross-referencing.
+The DeepSignal pipeline processed 78 radio telescope observations across 40 astronomical targets. Anomaly detection identified **422 candidates** for cross-referencing.
 
 | Tier | Score Range | Count | Description |
 |------|-------------|-------|-------------|
@@ -15,8 +15,8 @@ The DeepSignal pipeline processed 307 radio telescope observations across 60 ast
 
 ## Signal Statistics
 
-- SNR mean: 3.79  std: 4.78
-- SNR range: [0.44, 49.89]
+- SNR mean: 4.35  std: 5.33
+- SNR range: [1.14, 35.17]
 
 ## Tier 1 — High Priority
 
