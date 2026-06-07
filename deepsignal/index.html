@@ -1285,6 +1285,7 @@ function renderSkyMap(data) {
         <circle cx="334" cy="7" r="1.2" fill="#4a5a6a" fill-opacity=".6"/>
         <text x="338.5" y="9.5" fill="#3a5a7a" font-size="5" font-family="monospace">T3</text>
         ${dots}
+        <g id="map-crosshair"></g>
       </svg>
     </div>`;
   const tip = document.getElementById("sky-tooltip-map");
@@ -1318,6 +1319,33 @@ function mapClose() {
   document.getElementById("map-overlay").classList.remove("open");
   document.body.style.overflow = "";
   document.getElementById("sky-tooltip-map").style.display="none";
+  const g = document.getElementById("map-crosshair");
+  if (g) g.innerHTML = "";
+}
+function _updateMapCrosshair(ra, dec, name, tc) {
+  const g = document.getElementById("map-crosshair");
+  if (!g) return;
+  const cx = ra.toFixed(2), cy = (90 - dec).toFixed(2);
+  const x = parseFloat(cx), y = parseFloat(cy);
+  const r = 7;
+  const lx = x < 40 ? x + 4 : (x > 320 ? x - 4 : x + 3);
+  const ly = y < 15 ? y + 9 : y - 4;
+  const anchor = x > 320 ? "end" : "start";
+  const nm = name.replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  g.innerHTML = `
+    <line x1="0" y1="${cy}" x2="360" y2="${cy}" stroke="${tc}" stroke-width="0.4" stroke-dasharray="2,3" opacity="0.55"/>
+    <line x1="${cx}" y1="0" x2="${cx}" y2="180" stroke="${tc}" stroke-width="0.4" stroke-dasharray="2,3" opacity="0.55"/>
+    <circle cx="${cx}" cy="${cy}" r="5" fill="none" stroke="${tc}" stroke-width="0.6" opacity="0.5">
+      <animate attributeName="r" values="5;12;5" dur="2.2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.6;0;0.6" dur="2.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="${cx}" cy="${cy}" r="2.5" fill="none" stroke="${tc}" stroke-width="0.9" opacity="0.95"/>
+    <path d="M${x-r+2},${y-r} h-2 v2" stroke="${tc}" stroke-width="0.7" fill="none" opacity="0.85"/>
+    <path d="M${x+r-2},${y-r} h2 v2" stroke="${tc}" stroke-width="0.7" fill="none" opacity="0.85"/>
+    <path d="M${x-r},${y+r-2} v2 h2" stroke="${tc}" stroke-width="0.7" fill="none" opacity="0.85"/>
+    <path d="M${x+r},${y+r-2} v2 h-2" stroke="${tc}" stroke-width="0.7" fill="none" opacity="0.85"/>
+    <text x="${lx}" y="${ly}" fill="${tc}" font-size="4.5" font-family="monospace" text-anchor="${anchor}" opacity="0.9">${nm}</text>
+  `;
 }
 function mapShowDetail(idx) {
   const c = catalog[idx];
@@ -1361,6 +1389,7 @@ function mapShowDetail(idx) {
     </div>
   `;
   document.getElementById("map-body").scrollTop = 0;
+  if (ra != null) _updateMapCrosshair(ra, dec, cleanName(c.target_name), tc);
 }
 // ── Copy coordinates ──────────────────────────────────────────────────────────
 function copyCoords(cid, ra, dec) {
