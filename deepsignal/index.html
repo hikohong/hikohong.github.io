@@ -320,7 +320,7 @@ footer a{color:#4a6a8a;text-decoration:none}
 <div class="section">
   <div class="section-head">
     <h2>Top Pipeline Candidates</h2>
-    <a href="gallery.html">View full gallery →</a>
+    <a href="gallery.html" onclick="event.preventDefault(); navTo('gallery.html')">View full gallery →</a>
   </div>
   <div class="filter-bar" id="hl-filter-bar" style="display:none">
     <span class="fb-label">Tier</span>
@@ -1333,7 +1333,7 @@ function mapShowDetail(idx) {
   const links = [
     ra ? `<a class="ext-link" href="https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=${ra.toFixed(4)}+${dec.toFixed(4)}&CooFrame=ICRS&Radius=2&Radius.unit=arcmin" target="_blank" rel="noreferrer">SIMBAD</a>` : "",
     ra ? `<a class="ext-link" href="https://aladin.u-strasbg.fr/AladinLite/?target=${ra.toFixed(4)}+${dec.toFixed(4)}&fov=0.5&survey=P/DSS2/color" target="_blank" rel="noreferrer">Aladin</a>` : "",
-    `<a class="ext-link" href="gallery.html?target=${encodeURIComponent(cleanName(c.target_name))}">View in gallery →</a>`,
+    `<a class="ext-link" href="gallery.html?target=${encodeURIComponent(cleanName(c.target_name))}" onclick="event.preventDefault(); navTo(this.href)">View in gallery →</a>`,
   ].filter(Boolean).join("");
   const el = document.getElementById("map-detail");
   el.style.display = "block";
@@ -1453,7 +1453,9 @@ const SFX = (() => {
   });
   function playFile(key, vol = 0.65) {
     if (_muted) return;
-    try { const a = new Audio(_loaded[key].src); a.volume = vol; a.play().catch(() => {}); } catch(e) {}
+    const a = _loaded[key];
+    if (!a) return;
+    try { a.currentTime = 0; a.volume = vol; a.play().catch(() => {}); } catch(e) {}
   }
   const ac = () => {
     if (!_ctx) {
