@@ -18,6 +18,12 @@
              border:1px solid rgba(219,234,254,.15);transition:border-color 140ms,color 140ms;background:none;cursor:pointer;font-family:inherit}
   .nav-link:hover{color:#7dd3fc;border-color:#7dd3fc}
   .nav-link.active{color:#7dd3fc;border-color:rgba(125,211,252,.4)}
+  .nav-right{margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:2px}
+  .nav-deepsignal{color:#3a4a5a;font-size:.85rem;line-height:1}
+  #mute-btn{background:none;border:none;cursor:pointer;padding:1px 0;color:#3a4a5a;transition:color 150ms,filter 150ms;line-height:1}
+  #mute-btn:hover{color:#7dd3fc;filter:drop-shadow(0 0 6px rgba(125,211,252,.7))}
+  .nav-planet{flex-shrink:0;animation:planet-pulse 4s ease-in-out infinite}
+  @keyframes planet-pulse{0%,100%{filter:drop-shadow(0 0 3px rgba(125,211,252,.35))}50%{filter:drop-shadow(0 0 9px rgba(125,211,252,.85))}}
   .gallery-hdr{padding:24px 24px 0}
   h1{font-size:1.5rem;color:#fff;margin-bottom:4px}
   .subtitle{color:#4a5a6a;font-size:.85rem;margin-bottom:16px}
@@ -201,17 +207,33 @@
 </head>
 <body>
 <nav>
-  <a class="nav-home" href="/">
-    <span class="nav-mark">HH</span>
+  <a class="nav-home" href="/" onclick="SFX.click()">
+    <svg class="nav-planet" viewBox="0 0 32 32" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="nav-plg" cx="35%" cy="30%" r="70%">
+          <stop offset="0%" stop-color="#bfdbfe"/>
+          <stop offset="50%" stop-color="#1e40af"/>
+          <stop offset="100%" stop-color="#060e1e"/>
+        </radialGradient>
+        <clipPath id="nav-rt"><rect x="0" y="0" width="32" height="16"/></clipPath>
+        <clipPath id="nav-rb"><rect x="0" y="16" width="32" height="16"/></clipPath>
+      </defs>
+      <ellipse cx="16" cy="16" rx="14" ry="3.8" fill="none" stroke="#93c5fd" stroke-width="1.3" opacity="0.35" clip-path="url(#nav-rt)" transform="rotate(-18,16,16)"/>
+      <circle cx="16" cy="16" r="10" fill="url(#nav-plg)"/>
+      <ellipse cx="16" cy="16" rx="14" ry="3.8" fill="none" stroke="#7dd3fc" stroke-width="1.8" opacity="0.8" clip-path="url(#nav-rb)" transform="rotate(-18,16,16)"/>
+    </svg>
     <span>Hiko Hong</span>
   </a>
   <div class="nav-links">
-    <a class="nav-link" href="index.html">Search</a>
-    <a class="nav-link active" href="gallery.html">Gallery</a>
-    <button class="nav-link" onclick="mapOpen()">Map</button>
-    <button class="nav-link" onclick="reportOpen()">Report</button>
+    <a class="nav-link" href="index.html" onclick="SFX.click()">Search</a>
+    <a class="nav-link active" href="gallery.html" onclick="SFX.click()">Gallery</a>
+    <button class="nav-link" onclick="SFX.click();mapOpen()">Map</button>
+    <button class="nav-link" onclick="SFX.click();reportOpen()">Report</button>
   </div>
-  <span style="margin-left:auto;color:#3a4a5a;font-size:.85rem">/ DeepSignal</span>
+  <div class="nav-right">
+    <span class="nav-deepsignal">/ DeepSignal</span>
+    <button id="mute-btn" onclick="toggleMute()" title="Toggle sounds"></button>
+  </div>
 </nav>
 <div id="report-overlay" onclick="if(event.target===this)reportClose()">
   <div id="report-modal" role="dialog" aria-modal="true">
@@ -437,7 +459,7 @@
 <div id="sky-tooltip-map"></div>
 <div class="gallery-hdr">
 <h1>DeepSignal — Sky Image Gallery</h1>
-<div class="subtitle">Generated 2026-06-06 16:50 UTC &nbsp;·&nbsp; 64 targets &nbsp;·&nbsp; 64 sky images via Hips2Fits CDN</div>
+<div class="subtitle">Generated 2026-06-07 04:41 UTC &nbsp;·&nbsp; 64 targets &nbsp;·&nbsp; 64 sky images via Hips2Fits CDN</div>
 <div class="stats">
   <div class="stat"><div class="stat-n" style="color:#f59e0b">14</div><div class="stat-l">Tier 1 ≥70</div></div>
   <div class="stat"><div class="stat-n" style="color:#60a5fa">38</div><div class="stat-l">Tier 2 50–69</div></div>
@@ -487,15 +509,15 @@
         </div>
         <div class="card-score">Score: <strong>100</strong>/100</div>
         <div class="card-coords">RA 26.0170° &nbsp; Dec -15.9375° <button class="btn-copy-coords" onclick="copyCoords('card-1',26.01700,-15.93750)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-1">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Known SETI priority target: Tau Ceti</li><li>Doppler drift rate 1.5186 Hz/s consistent with technological origin</li><li>High SNR: 35.2</li><li>Multi-channel confirmation: 2 independent data sources detect this target</li><li>Frequency in known RFI band: X-band satellite TT&C</li><li>Doppler drift rate 0.0879 Hz/s consistent with technological origin</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=Tau%20Ceti" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=26.017&dec=-15.9375&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=26.017&dec=-15.9375&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=26.017+-15.9375&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=26.017+-15.9375&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3ATau%20Ceti&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('Tau Ceti', 'zscore')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-2" data-tier="1" data-methods="optical_laser_pulse" data-dtypes="optical" data-score="100">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=53.2327+-9.4582&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
@@ -514,15 +536,15 @@
         </div>
         <div class="card-score">Score: <strong>100</strong>/100</div>
         <div class="card-coords">RA 53.2327° &nbsp; Dec -9.4582° <button class="btn-copy-coords" onclick="copyCoords('card-2',53.23270,-9.45820)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-2">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Known SETI priority target: Epsilon Eridani</li><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li><li>High SNR: 41.2</li><li>Multi-channel confirmation: 2 independent data sources detect this target</li><li>Doppler drift rate 0.2142 Hz/s consistent with technological origin</li><li>Doppler drift rate 0.1129 Hz/s consistent with technological origin</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=Epsilon%20Eridani" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=53.2327&dec=-9.4582&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=53.2327&dec=-9.4582&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=53.2327+-9.4582&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=53.2327+-9.4582&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3AEpsilon%20Eridani&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('Epsilon Eridani', 'optical laser pulse')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-3" data-tier="1" data-methods="optical_laser_pulse" data-dtypes="optical" data-score="95">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=217.4288+-62.6793&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
@@ -541,15 +563,15 @@
         </div>
         <div class="card-score">Score: <strong>95</strong>/100</div>
         <div class="card-coords">RA 217.4288° &nbsp; Dec -62.6793° <button class="btn-copy-coords" onclick="copyCoords('card-3',217.42880,-62.67930)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-3">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Known SETI priority target: Proxima Centauri</li><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li><li>Multi-channel confirmation: 2 independent data sources detect this target</li><li>Doppler drift rate 0.1951 Hz/s consistent with technological origin</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=Proxima%20Centauri" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=217.4288&dec=-62.6793&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=217.4288&dec=-62.6793&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=217.4288+-62.6793&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=217.4288+-62.6793&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3AProxima%20Centauri&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('Proxima Centauri', 'optical laser pulse')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-4" data-tier="1" data-methods="optical_laser_pulse" data-dtypes="optical" data-score="95">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=316.7282+38.7488&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
@@ -568,15 +590,15 @@
         </div>
         <div class="card-score">Score: <strong>95</strong>/100</div>
         <div class="card-coords">RA 316.7282° &nbsp; Dec 38.7488° <button class="btn-copy-coords" onclick="copyCoords('card-4',316.72820,38.74880)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-4">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Known SETI priority target: 61 Cygni A</li><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li><li>Multi-channel confirmation: 2 independent data sources detect this target</li><li>Doppler drift rate 0.0793 Hz/s consistent with technological origin</li><li>Frequency in known RFI band: S-band weather radar</li><li>Doppler drift rate 1.3272 Hz/s consistent with technological origin</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=61%20Cygni%20A" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=316.7282&dec=38.7488&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=316.7282&dec=38.7488&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=316.7282+38.7488&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=316.7282+38.7488&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3A61%20Cygni%20A&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('61 Cygni A', 'optical laser pulse')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-5" data-tier="1" data-methods="optical_laser_pulse" data-dtypes="optical" data-score="95">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=176.9351+0.8048&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
@@ -595,15 +617,15 @@
         </div>
         <div class="card-score">Score: <strong>95</strong>/100</div>
         <div class="card-coords">RA 176.9351° &nbsp; Dec 0.8048° <button class="btn-copy-coords" onclick="copyCoords('card-5',176.93510,0.80480)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-5">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Known SETI priority target: Ross 128</li><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li><li>Multi-channel confirmation: 2 independent data sources detect this target</li><li>Doppler drift rate 0.0233 Hz/s consistent with technological origin</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=Ross%20128" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=176.9351&dec=0.8048&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=176.9351&dec=0.8048&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=176.9351+0.8048&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=176.9351+0.8048&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3ARoss%20128&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('Ross 128', 'optical laser pulse')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-6" data-tier="1" data-methods="doppler_drift" data-dtypes="radio" data-score="80">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=259.7488+-34.9977&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
@@ -622,15 +644,15 @@
         </div>
         <div class="card-score">Score: <strong>80</strong>/100</div>
         <div class="card-coords">RA 259.7488° &nbsp; Dec -34.9977° <button class="btn-copy-coords" onclick="copyCoords('card-6',259.74880,-34.99770)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-6">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Known SETI priority target: Gliese 667C</li><li>Doppler drift rate 0.0543 Hz/s consistent with technological origin</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=Gliese%20667C" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=259.7488&dec=-34.9977&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=259.7488&dec=-34.9977&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=259.7488+-34.9977&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=259.7488+-34.9977&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3AGliese%20667C&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('Gliese 667C', 'doppler drift')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-7" data-tier="1" data-methods="optical_laser_pulse" data-dtypes="optical" data-score="80">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=279.2347+38.7837&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
@@ -649,15 +671,15 @@
         </div>
         <div class="card-score">Score: <strong>80</strong>/100</div>
         <div class="card-coords">RA 279.2347° &nbsp; Dec 38.7837° <button class="btn-copy-coords" onclick="copyCoords('card-7',279.23470,38.78370)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-7">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li><li>Multi-channel confirmation: 2 independent data sources detect this target</li><li>Doppler drift rate 0.1683 Hz/s consistent with technological origin</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=Vega" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=279.2347&dec=38.7837&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=279.2347&dec=38.7837&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=279.2347+38.7837&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=279.2347+38.7837&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3AVega&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('Vega', 'optical laser pulse')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-8" data-tier="1" data-methods="atmospheric_biosignature" data-dtypes="jwst" data-score="75">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=18.0018+-15.2670&fov=0.5&survey=P/2MASS/color" target="_blank" class="card-img-link">
@@ -676,15 +698,15 @@
         </div>
         <div class="card-score">Score: <strong>75</strong>/100</div>
         <div class="card-coords">RA 18.0018° &nbsp; Dec -15.2670° <button class="btn-copy-coords" onclick="copyCoords('card-8',18.00180,-15.26700)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-8">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=LHS%201140b" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=18.0018&dec=-15.267&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=18.0018&dec=-15.267&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=18.0018+-15.267&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=18.0018+-15.267&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3ALHS%201140b&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('LHS 1140b', 'atmospheric biosignature')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-9" data-tier="1" data-methods="atmospheric_biosignature" data-dtypes="jwst" data-score="75">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=330.7950+18.8840&fov=0.5&survey=P/2MASS/color" target="_blank" class="card-img-link">
@@ -703,15 +725,15 @@
         </div>
         <div class="card-score">Score: <strong>75</strong>/100</div>
         <div class="card-coords">RA 330.7950° &nbsp; Dec 18.8840° <button class="btn-copy-coords" onclick="copyCoords('card-9',330.79500,18.88400)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-9">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=HD%20209458b" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=330.795&dec=18.884&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=330.795&dec=18.884&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=330.795+18.884&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=330.795+18.884&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3AHD%20209458b&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('HD 209458b', 'atmospheric biosignature')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-10" data-tier="1" data-methods="atmospheric_biosignature" data-dtypes="jwst" data-score="75">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=77.3791+-13.7011&fov=0.5&survey=P/2MASS/color" target="_blank" class="card-img-link">
@@ -730,15 +752,15 @@
         </div>
         <div class="card-score">Score: <strong>75</strong>/100</div>
         <div class="card-coords">RA 77.3791° &nbsp; Dec -13.7011° <button class="btn-copy-coords" onclick="copyCoords('card-10',77.37911,-13.70112)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-10">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=TOI-SIM-0001" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=77.37910688223663&dec=-13.701115489296186&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=77.37910688223663&dec=-13.701115489296186&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=77.37910688223663+-13.701115489296186&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=77.37910688223663+-13.701115489296186&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3ATOI-SIM-0001&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('TOI-SIM-0001', 'atmospheric biosignature')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-11" data-tier="1" data-methods="interstellar_trajectory" data-dtypes="interstellar" data-score="75">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=23.4578+26.8011&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
@@ -757,15 +779,15 @@
         </div>
         <div class="card-score">Score: <strong>75</strong>/100</div>
         <div class="card-coords">RA 23.4578° &nbsp; Dec 26.8011° <button class="btn-copy-coords" onclick="copyCoords('card-11',23.45780,26.80110)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-11">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=1I/%CA%BBOumuamua" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=23.4578&dec=26.8011&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=23.4578&dec=26.8011&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=23.4578+26.8011&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=23.4578+26.8011&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3A1I/%CA%BBOumuamua&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('1I/ʻOumuamua', 'interstellar trajectory')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-12" data-tier="1" data-methods="interstellar_trajectory" data-dtypes="interstellar" data-score="75">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=65.5670+50.5077&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
@@ -784,15 +806,15 @@
         </div>
         <div class="card-score">Score: <strong>75</strong>/100</div>
         <div class="card-coords">RA 65.5670° &nbsp; Dec 50.5077° <button class="btn-copy-coords" onclick="copyCoords('card-12',65.56699,50.50768)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-12">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=SIM_ISO_0001" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=65.56698756830662&dec=50.507681824171215&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=65.56698756830662&dec=50.507681824171215&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=65.56698756830662+50.507681824171215&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=65.56698756830662+50.507681824171215&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3ASIM_ISO_0001&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('SIM_ISO_0001', 'interstellar trajectory')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-13" data-tier="1" data-methods="interstellar_trajectory" data-dtypes="interstellar" data-score="75">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=7.3274+33.9141&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
@@ -811,15 +833,15 @@
         </div>
         <div class="card-score">Score: <strong>75</strong>/100</div>
         <div class="card-coords">RA 7.3274° &nbsp; Dec 33.9141° <button class="btn-copy-coords" onclick="copyCoords('card-13',7.32742,33.91411)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-13">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=SIM_ISO_0002" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=7.327420975069443&dec=33.91410968287197&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=7.327420975069443&dec=33.91410968287197&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=7.327420975069443+33.91410968287197&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=7.327420975069443+33.91410968287197&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3ASIM_ISO_0002&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('SIM_ISO_0002', 'interstellar trajectory')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-14" data-tier="1" data-methods="interstellar_trajectory" data-dtypes="interstellar" data-score="75">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=219.6372+2.1438&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
@@ -838,15 +860,15 @@
         </div>
         <div class="card-score">Score: <strong>75</strong>/100</div>
         <div class="card-coords">RA 219.6372° &nbsp; Dec 2.1438° <button class="btn-copy-coords" onclick="copyCoords('card-14',219.63715,2.14377)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-14">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=SIM_ISO_0004" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=219.63715039279094&dec=2.1437694557423725&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=219.63715039279094&dec=2.1437694557423725&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=219.63715039279094+2.1437694557423725&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=219.63715039279094+2.1437694557423725&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3ASIM_ISO_0004&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('SIM_ISO_0004', 'interstellar trajectory')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-15" data-tier="2" data-methods="doppler_drift" data-dtypes="radio" data-score="65">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=89.3360+-60.0161&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
@@ -865,15 +887,15 @@
         </div>
         <div class="card-score">Score: <strong>65</strong>/100</div>
         <div class="card-coords">RA 89.3360° &nbsp; Dec -60.0161° <button class="btn-copy-coords" onclick="copyCoords('card-15',89.33600,-60.01610)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-15">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Doppler drift rate 0.0639 Hz/s consistent with technological origin</li><li>Frequency in known RFI band: X-band satellite TT&C</li><li>Doppler drift rate 0.0871 Hz/s consistent with technological origin</li><li>Frequency in known RFI band: S-band weather radar</li><li>Doppler drift rate 0.0631 Hz/s consistent with technological origin</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=HD%2040307" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=89.336&dec=-60.0161&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=89.336&dec=-60.0161&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=89.336+-60.0161&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=89.336+-60.0161&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3AHD%2040307&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('HD 40307', 'doppler drift')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-16" data-tier="2" data-methods="doppler_drift" data-dtypes="radio" data-score="65">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=330.8400+-56.7867&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
@@ -892,15 +914,15 @@
         </div>
         <div class="card-score">Score: <strong>65</strong>/100</div>
         <div class="card-coords">RA 330.8400° &nbsp; Dec -56.7867° <button class="btn-copy-coords" onclick="copyCoords('card-16',330.84000,-56.78670)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-16">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Doppler drift rate 0.1323 Hz/s consistent with technological origin</li><li>Frequency in known RFI band: DME/TACAN aeronautical navigation</li><li>Doppler drift rate 0.0487 Hz/s consistent with technological origin</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=Epsilon%20Indi%20A" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=330.84&dec=-56.7867&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=330.84&dec=-56.7867&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=330.84+-56.7867&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=330.84+-56.7867&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3AEpsilon%20Indi%20A&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('Epsilon Indi A', 'doppler drift')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-17" data-tier="2" data-methods="doppler_drift" data-dtypes="radio" data-score="65">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=344.4127+-29.6223&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
@@ -919,15 +941,15 @@
         </div>
         <div class="card-score">Score: <strong>65</strong>/100</div>
         <div class="card-coords">RA 344.4127° &nbsp; Dec -29.6223° <button class="btn-copy-coords" onclick="copyCoords('card-17',344.41270,-29.62230)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-17">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Doppler drift rate 0.0356 Hz/s consistent with technological origin</li><li>Doppler drift rate 0.0339 Hz/s consistent with technological origin</li><li>Doppler drift rate 0.0238 Hz/s consistent with technological origin</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=Fomalhaut" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=344.4127&dec=-29.6223&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=344.4127&dec=-29.6223&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=344.4127+-29.6223&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=344.4127+-29.6223&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3AFomalhaut&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('Fomalhaut', 'doppler drift')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-18" data-tier="2" data-methods="lightcurve_anomaly" data-dtypes="tess" data-score="65">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=35.1611+-56.7867&fov=0.5&survey=P/2MASS/color" target="_blank" class="card-img-link">
@@ -946,15 +968,15 @@
         </div>
         <div class="card-score">Score: <strong>65</strong>/100</div>
         <div class="card-coords">RA 35.1611° &nbsp; Dec -56.7867° <button class="btn-copy-coords" onclick="copyCoords('card-18',35.16110,-56.78670)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-18">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=TOI-700" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=35.1611&dec=-56.7867&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=35.1611&dec=-56.7867&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=35.1611+-56.7867&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=35.1611+-56.7867&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3ATOI-700&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('TOI-700', 'lightcurve anomaly')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-19" data-tier="2" data-methods="lightcurve_anomaly" data-dtypes="tess" data-score="65">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=271.2716+-27.6274&fov=0.5&survey=P/2MASS/color" target="_blank" class="card-img-link">
@@ -973,15 +995,15 @@
         </div>
         <div class="card-score">Score: <strong>65</strong>/100</div>
         <div class="card-coords">RA 271.2716° &nbsp; Dec -27.6274° <button class="btn-copy-coords" onclick="copyCoords('card-19',271.27160,-27.62740)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-19">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=TOI-216" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=271.2716&dec=-27.6274&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=271.2716&dec=-27.6274&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=271.2716+-27.6274&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=271.2716+-27.6274&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3ATOI-216&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('TOI-216', 'lightcurve anomaly')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-20" data-tier="2" data-methods="lightcurve_anomaly" data-dtypes="tess" data-score="65">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=311.3271+42.6363&fov=0.5&survey=P/2MASS/color" target="_blank" class="card-img-link">
@@ -1000,15 +1022,15 @@
         </div>
         <div class="card-score">Score: <strong>65</strong>/100</div>
         <div class="card-coords">RA 311.3271° &nbsp; Dec 42.6363° <button class="btn-copy-coords" onclick="copyCoords('card-20',311.32713,42.63630)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-20">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=SIM_STAR_0000" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=311.32713132597115&dec=42.636301791847075&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=311.32713132597115&dec=42.636301791847075&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=311.32713132597115+42.636301791847075&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=311.32713132597115+42.636301791847075&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3ASIM_STAR_0000&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('SIM_STAR_0000', 'lightcurve anomaly')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-21" data-tier="2" data-methods="lightcurve_anomaly" data-dtypes="tess" data-score="65">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=94.1207+-50.7361&fov=0.5&survey=P/2MASS/color" target="_blank" class="card-img-link">
@@ -1027,15 +1049,15 @@
         </div>
         <div class="card-score">Score: <strong>65</strong>/100</div>
         <div class="card-coords">RA 94.1207° &nbsp; Dec -50.7361° <button class="btn-copy-coords" onclick="copyCoords('card-21',94.12069,-50.73607)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-21">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=SIM_STAR_0001" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=94.12069010993157&dec=-50.73606507378943&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=94.12069010993157&dec=-50.73606507378943&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=94.12069010993157+-50.73606507378943&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=94.12069010993157+-50.73606507378943&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3ASIM_STAR_0001&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('SIM_STAR_0001', 'lightcurve anomaly')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-22" data-tier="2" data-methods="lightcurve_anomaly" data-dtypes="tess" data-score="65">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=220.9650+-59.6843&fov=0.5&survey=P/2MASS/color" target="_blank" class="card-img-link">
@@ -1054,15 +1076,15 @@
         </div>
         <div class="card-score">Score: <strong>65</strong>/100</div>
         <div class="card-coords">RA 220.9650° &nbsp; Dec -59.6843° <button class="btn-copy-coords" onclick="copyCoords('card-22',220.96501,-59.68431)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-22">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=SIM_STAR_0002" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=220.96500877695667&dec=-59.684309564844035&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=220.96500877695667&dec=-59.684309564844035&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=220.96500877695667+-59.684309564844035&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=220.96500877695667+-59.684309564844035&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3ASIM_STAR_0002&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('SIM_STAR_0002', 'lightcurve anomaly')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-23" data-tier="2" data-methods="lightcurve_anomaly" data-dtypes="tess" data-score="65">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=354.5293+-25.6444&fov=0.5&survey=P/2MASS/color" target="_blank" class="card-img-link">
@@ -1081,15 +1103,15 @@
         </div>
         <div class="card-score">Score: <strong>65</strong>/100</div>
         <div class="card-coords">RA 354.5293° &nbsp; Dec -25.6444° <button class="btn-copy-coords" onclick="copyCoords('card-23',354.52925,-25.64441)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-23">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=SIM_STAR_0003" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=354.52925108551995&dec=-25.64440750005955&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=354.52925108551995&dec=-25.64440750005955&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=354.52925108551995+-25.64440750005955&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=354.52925108551995+-25.64440750005955&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3ASIM_STAR_0003&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('SIM_STAR_0003', 'lightcurve anomaly')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-24" data-tier="2" data-methods="lightcurve_anomaly" data-dtypes="tess" data-score="65">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=293.0423+-0.2559&fov=0.5&survey=P/2MASS/color" target="_blank" class="card-img-link">
@@ -1108,15 +1130,15 @@
         </div>
         <div class="card-score">Score: <strong>65</strong>/100</div>
         <div class="card-coords">RA 293.0423° &nbsp; Dec -0.2559° <button class="btn-copy-coords" onclick="copyCoords('card-24',293.04235,-0.25591)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-24">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=SIM_STAR_0006" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=293.04234693004025&dec=-0.2559110000985356&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=293.04234693004025&dec=-0.2559110000985356&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=293.04234693004025+-0.2559110000985356&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=293.04234693004025+-0.2559110000985356&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3ASIM_STAR_0006&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('SIM_STAR_0006', 'lightcurve anomaly')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-25" data-tier="2" data-methods="lightcurve_anomaly" data-dtypes="tess" data-score="65">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=279.6070+57.5074&fov=0.5&survey=P/2MASS/color" target="_blank" class="card-img-link">
@@ -1135,15 +1157,15 @@
         </div>
         <div class="card-score">Score: <strong>65</strong>/100</div>
         <div class="card-coords">RA 279.6070° &nbsp; Dec 57.5074° <button class="btn-copy-coords" onclick="copyCoords('card-25',279.60702,57.50739)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-25">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=SIM_STAR_0007" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=279.60701616031264&dec=57.50739470274752&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=279.60701616031264&dec=57.50739470274752&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=279.60701616031264+57.50739470274752&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=279.60701616031264+57.50739470274752&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3ASIM_STAR_0007&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('SIM_STAR_0007', 'lightcurve anomaly')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-26" data-tier="2" data-methods="gamma_unidentified" data-dtypes="fermi" data-score="55">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=43.3500+2.3400&fov=0.5&survey=P/Fermi/color" target="_blank" class="card-img-link">
@@ -1162,15 +1184,15 @@
         </div>
         <div class="card-score">Score: <strong>55</strong>/100</div>
         <div class="card-coords">RA 43.3500° &nbsp; Dec 2.3400° <button class="btn-copy-coords" onclick="copyCoords('card-26',43.35000,2.34000)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-26">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=4FGL%20J0253.4%2B0220" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=43.35&dec=2.34&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=43.35&dec=2.34&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=43.35+2.34&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=43.35+2.34&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3A4FGL%20J0253.4%2B0220&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('4FGL J0253.4+0220', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-27" data-tier="2" data-methods="gamma_unidentified" data-dtypes="fermi" data-score="55">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=80.4900+21.2000&fov=0.5&survey=P/Fermi/color" target="_blank" class="card-img-link">
@@ -1189,15 +1211,15 @@
         </div>
         <div class="card-score">Score: <strong>55</strong>/100</div>
         <div class="card-coords">RA 80.4900° &nbsp; Dec 21.2000° <button class="btn-copy-coords" onclick="copyCoords('card-27',80.49000,21.20000)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-27">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=4FGL%20J0521.9%2B2112" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=80.49&dec=21.2&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=80.49&dec=21.2&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=80.49+21.2&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=80.49+21.2&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3A4FGL%20J0521.9%2B2112&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('4FGL J0521.9+2112', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-28" data-tier="2" data-methods="gamma_unidentified" data-dtypes="fermi" data-score="55">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=170.0000+-22.0800&fov=0.5&survey=P/Fermi/color" target="_blank" class="card-img-link">
@@ -1216,15 +1238,15 @@
         </div>
         <div class="card-score">Score: <strong>55</strong>/100</div>
         <div class="card-coords">RA 170.0000° &nbsp; Dec -22.0800° <button class="btn-copy-coords" onclick="copyCoords('card-28',170.00000,-22.08000)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-28">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=4FGL%20J1120.0-2204" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=170.0&dec=-22.08&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=170.0&dec=-22.08&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=170.0+-22.08&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=170.0+-22.08&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3A4FGL%20J1120.0-2204&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('4FGL J1120.0-2204', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-29" data-tier="2" data-methods="gamma_unidentified" data-dtypes="fermi" data-score="55">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=187.9000+14.1700&fov=0.5&survey=P/Fermi/color" target="_blank" class="card-img-link">
@@ -1243,15 +1265,15 @@
         </div>
         <div class="card-score">Score: <strong>55</strong>/100</div>
         <div class="card-coords">RA 187.9000° &nbsp; Dec 14.1700° <button class="btn-copy-coords" onclick="copyCoords('card-29',187.90000,14.17000)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-29">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=4FGL%20J1231.6%2B1410" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=187.9&dec=14.17&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=187.9&dec=14.17&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=187.9+14.17&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=187.9+14.17&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3A4FGL%20J1231.6%2B1410&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('4FGL J1231.6+1410', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-30" data-tier="2" data-methods="gamma_unidentified" data-dtypes="fermi" data-score="55">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=214.6000+-2.5600&fov=0.5&survey=P/Fermi/color" target="_blank" class="card-img-link">
@@ -1270,15 +1292,15 @@
         </div>
         <div class="card-score">Score: <strong>55</strong>/100</div>
         <div class="card-coords">RA 214.6000° &nbsp; Dec -2.5600° <button class="btn-copy-coords" onclick="copyCoords('card-30',214.60000,-2.56000)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-30">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=4FGL%20J1418.4-0233" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=214.6&dec=-2.56&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=214.6&dec=-2.56&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=214.6+-2.56&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=214.6+-2.56&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3A4FGL%20J1418.4-0233&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('4FGL J1418.4-0233', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-31" data-tier="2" data-methods="gamma_unidentified" data-dtypes="fermi" data-score="55">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=253.4000+39.7500&fov=0.5&survey=P/Fermi/color" target="_blank" class="card-img-link">
@@ -1297,15 +1319,15 @@
         </div>
         <div class="card-score">Score: <strong>55</strong>/100</div>
         <div class="card-coords">RA 253.4000° &nbsp; Dec 39.7500° <button class="btn-copy-coords" onclick="copyCoords('card-31',253.40000,39.75000)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-31">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=4FGL%20J1653.6%2B3945" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=253.4&dec=39.75&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=253.4&dec=39.75&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=253.4+39.75&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=253.4+39.75&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3A4FGL%20J1653.6%2B3945&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('4FGL J1653.6+3945', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-32" data-tier="2" data-methods="gamma_unidentified" data-dtypes="fermi" data-score="55">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=266.0000+-76.3200&fov=0.5&survey=P/Fermi/color" target="_blank" class="card-img-link">
@@ -1324,15 +1346,15 @@
         </div>
         <div class="card-score">Score: <strong>55</strong>/100</div>
         <div class="card-coords">RA 266.0000° &nbsp; Dec -76.3200° <button class="btn-copy-coords" onclick="copyCoords('card-32',266.00000,-76.32000)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-32">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=4FGL%20J1744.1-7619" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=266.0&dec=-76.32&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=266.0&dec=-76.32&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=266.0+-76.32&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=266.0+-76.32&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3A4FGL%20J1744.1-7619&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('4FGL J1744.1-7619', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-33" data-tier="2" data-methods="gamma_unidentified" data-dtypes="fermi" data-score="55">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=277.1000+32.6100&fov=0.5&survey=P/Fermi/color" target="_blank" class="card-img-link">
@@ -1351,15 +1373,15 @@
         </div>
         <div class="card-score">Score: <strong>55</strong>/100</div>
         <div class="card-coords">RA 277.1000° &nbsp; Dec 32.6100° <button class="btn-copy-coords" onclick="copyCoords('card-33',277.10000,32.61000)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-33">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=4FGL%20J1828.4%2B3236" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=277.1&dec=32.61&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=277.1&dec=32.61&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=277.1+32.61&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=277.1+32.61&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3A4FGL%20J1828.4%2B3236&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('4FGL J1828.4+3236', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-34" data-tier="2" data-methods="gamma_unidentified" data-dtypes="fermi" data-score="55">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=298.9000+11.3900&fov=0.5&survey=P/Fermi/color" target="_blank" class="card-img-link">
@@ -1378,15 +1400,15 @@
         </div>
         <div class="card-score">Score: <strong>55</strong>/100</div>
         <div class="card-coords">RA 298.9000° &nbsp; Dec 11.3900° <button class="btn-copy-coords" onclick="copyCoords('card-34',298.90000,11.39000)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-34">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=4FGL%20J1955.4%2B1123" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=298.9&dec=11.39&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=298.9&dec=11.39&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=298.9+11.39&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=298.9+11.39&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3A4FGL%20J1955.4%2B1123&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('4FGL J1955.4+1123', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-35" data-tier="2" data-methods="gamma_unidentified" data-dtypes="fermi" data-score="55">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=312.5000+10.0600&fov=0.5&survey=P/Fermi/color" target="_blank" class="card-img-link">
@@ -1405,15 +1427,15 @@
         </div>
         <div class="card-score">Score: <strong>55</strong>/100</div>
         <div class="card-coords">RA 312.5000° &nbsp; Dec 10.0600° <button class="btn-copy-coords" onclick="copyCoords('card-35',312.50000,10.06000)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-35">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=4FGL%20J2049.9%2B1003" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=312.5&dec=10.06&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=312.5&dec=10.06&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=312.5+10.06&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=312.5+10.06&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3A4FGL%20J2049.9%2B1003&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('4FGL J2049.9+1003', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-36" data-tier="2" data-methods="gamma_unidentified" data-dtypes="fermi" data-score="55">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=329.7000+-30.2300&fov=0.5&survey=P/Fermi/color" target="_blank" class="card-img-link">
@@ -1432,15 +1454,15 @@
         </div>
         <div class="card-score">Score: <strong>55</strong>/100</div>
         <div class="card-coords">RA 329.7000° &nbsp; Dec -30.2300° <button class="btn-copy-coords" onclick="copyCoords('card-36',329.70000,-30.23000)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-36">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=4FGL%20J2158.8-3013" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=329.7&dec=-30.23&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=329.7&dec=-30.23&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=329.7+-30.23&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=329.7+-30.23&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3A4FGL%20J2158.8-3013&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('4FGL J2158.8-3013', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-37" data-tier="2" data-methods="gamma_unidentified" data-dtypes="fermi" data-score="55">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=17.8000+39.1300&fov=0.5&survey=P/Fermi/color" target="_blank" class="card-img-link">
@@ -1459,15 +1481,15 @@
         </div>
         <div class="card-score">Score: <strong>55</strong>/100</div>
         <div class="card-coords">RA 17.8000° &nbsp; Dec 39.1300° <button class="btn-copy-coords" onclick="copyCoords('card-37',17.80000,39.13000)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-37">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=4FGL%20J0111.0%2B3907" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=17.8&dec=39.13&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=17.8&dec=39.13&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=17.8+39.13&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=17.8+39.13&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3A4FGL%20J0111.0%2B3907&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('4FGL J0111.0+3907', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-38" data-tier="2" data-methods="proper_motion_anomaly" data-dtypes="gaia" data-score="55">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=77.1400+-44.9950&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
@@ -1486,15 +1508,15 @@
         </div>
         <div class="card-score">Score: <strong>55</strong>/100</div>
         <div class="card-coords">RA 77.1400° &nbsp; Dec -44.9950° <button class="btn-copy-coords" onclick="copyCoords('card-38',77.14000,-44.99500)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-38">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=Kapteyn%27s%20Star" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=77.14&dec=-44.995&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=77.14&dec=-44.995&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=77.14+-44.995&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=77.14+-44.995&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3AKapteyn%27s%20Star&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('Kapteyn\'s Star', 'proper motion anomaly')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-39" data-tier="2" data-methods="proper_motion_anomaly" data-dtypes="gaia" data-score="55">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=48.1200+18.7900&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
@@ -1513,15 +1535,15 @@
         </div>
         <div class="card-score">Score: <strong>55</strong>/100</div>
         <div class="card-coords">RA 48.1200° &nbsp; Dec 18.7900° <button class="btn-copy-coords" onclick="copyCoords('card-39',48.12000,18.79000)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-39">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=SIM_J0312%2B1847" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=48.12&dec=18.79&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=48.12&dec=18.79&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=48.12+18.79&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=48.12+18.79&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3ASIM_J0312%2B1847&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('SIM_J0312+1847', 'proper motion anomaly')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-40" data-tier="2" data-methods="proper_motion_anomaly" data-dtypes="gaia" data-score="55">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=176.9100+-2.5200&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
@@ -1540,15 +1562,15 @@
         </div>
         <div class="card-score">Score: <strong>55</strong>/100</div>
         <div class="card-coords">RA 176.9100° &nbsp; Dec -2.5200° <button class="btn-copy-coords" onclick="copyCoords('card-40',176.91000,-2.52000)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-40">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=SIM_J1147-0231" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=176.91&dec=-2.52&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=176.91&dec=-2.52&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=176.91+-2.52&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=176.91+-2.52&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3ASIM_J1147-0231&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('SIM_J1147-0231', 'proper motion anomaly')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-41" data-tier="2" data-methods="proper_motion_anomaly" data-dtypes="gaia" data-score="55">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=334.6200+33.6900&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
@@ -1567,15 +1589,15 @@
         </div>
         <div class="card-score">Score: <strong>55</strong>/100</div>
         <div class="card-coords">RA 334.6200° &nbsp; Dec 33.6900° <button class="btn-copy-coords" onclick="copyCoords('card-41',334.62000,33.69000)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-41">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=SIM_J2218%2B3341" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=334.62&dec=33.69&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=334.62&dec=33.69&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=334.62+33.69&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=334.62+33.69&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3ASIM_J2218%2B3341&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('SIM_J2218+3341', 'proper motion anomaly')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-42" data-tier="2" data-methods="proper_motion_anomaly" data-dtypes="gaia" data-score="55">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=97.8800+15.8100&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
@@ -1594,15 +1616,15 @@
         </div>
         <div class="card-score">Score: <strong>55</strong>/100</div>
         <div class="card-coords">RA 97.8800° &nbsp; Dec 15.8100° <button class="btn-copy-coords" onclick="copyCoords('card-42',97.88000,15.81000)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-42">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=SIM_J0631%2B1548" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=97.88&dec=15.81&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=97.88&dec=15.81&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=97.88+15.81&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=97.88+15.81&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3ASIM_J0631%2B1548&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('SIM_J0631+1548', 'proper motion anomaly')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-43" data-tier="2" data-methods="xray_unidentified" data-dtypes="xray" data-score="55">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=3.2990+63.8270&fov=0.5&survey=P/Chandra/ACIS" target="_blank" class="card-img-link">
@@ -1621,15 +1643,15 @@
         </div>
         <div class="card-score">Score: <strong>55</strong>/100</div>
         <div class="card-coords">RA 3.2990° &nbsp; Dec 63.8270° <button class="btn-copy-coords" onclick="copyCoords('card-43',3.29900,63.82700)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-43">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=CXO%20J001311.8%2B634937" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=3.299&dec=63.827&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=3.299&dec=63.827&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=3.299+63.827&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=3.299+63.827&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3ACXO%20J001311.8%2B634937&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('CXO J001311.8+634937', 'xray unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-44" data-tier="2" data-methods="xray_unidentified" data-dtypes="xray" data-score="55">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=41.3020+-0.2100&fov=0.5&survey=P/Chandra/ACIS" target="_blank" class="card-img-link">
@@ -1648,15 +1670,15 @@
         </div>
         <div class="card-score">Score: <strong>55</strong>/100</div>
         <div class="card-coords">RA 41.3020° &nbsp; Dec -0.2100° <button class="btn-copy-coords" onclick="copyCoords('card-44',41.30200,-0.21000)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-44">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=CXO%20J024512.4-001234" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=41.302&dec=-0.21&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=41.302&dec=-0.21&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=41.302+-0.21&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=41.302+-0.21&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3ACXO%20J024512.4-001234&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('CXO J024512.4-001234', 'xray unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-45" data-tier="2" data-methods="xray_unidentified" data-dtypes="xray" data-score="55">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=114.6720+65.5340&fov=0.5&survey=P/Chandra/ACIS" target="_blank" class="card-img-link">
@@ -1675,15 +1697,15 @@
         </div>
         <div class="card-score">Score: <strong>55</strong>/100</div>
         <div class="card-coords">RA 114.6720° &nbsp; Dec 65.5340° <button class="btn-copy-coords" onclick="copyCoords('card-45',114.67200,65.53400)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-45">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=CXO%20J073841.2%2B653201" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=114.672&dec=65.534&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=114.672&dec=65.534&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=114.672+65.534&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=114.672+65.534&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3ACXO%20J073841.2%2B653201&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('CXO J073841.2+653201', 'xray unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-46" data-tier="2" data-methods="xray_unidentified" data-dtypes="xray" data-score="55">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=275.6630+-18.2450&fov=0.5&survey=P/Chandra/ACIS" target="_blank" class="card-img-link">
@@ -1702,15 +1724,15 @@
         </div>
         <div class="card-score">Score: <strong>55</strong>/100</div>
         <div class="card-coords">RA 275.6630° &nbsp; Dec -18.2450° <button class="btn-copy-coords" onclick="copyCoords('card-46',275.66300,-18.24500)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-46">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=CXO%20J182239.2-181442" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=275.663&dec=-18.245&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=275.663&dec=-18.245&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=275.663+-18.245&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=275.663+-18.245&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3ACXO%20J182239.2-181442&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('CXO J182239.2-181442', 'xray unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-47" data-tier="2" data-methods="xray_unidentified" data-dtypes="xray" data-score="55">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=326.3390+12.4790&fov=0.5&survey=P/Chandra/ACIS" target="_blank" class="card-img-link">
@@ -1729,15 +1751,15 @@
         </div>
         <div class="card-score">Score: <strong>55</strong>/100</div>
         <div class="card-coords">RA 326.3390° &nbsp; Dec 12.4790° <button class="btn-copy-coords" onclick="copyCoords('card-47',326.33900,12.47900)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-47">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=CXO%20J214521.3%2B122844" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=326.339&dec=12.479&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=326.339&dec=12.479&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=326.339+12.479&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=326.339+12.479&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3ACXO%20J214521.3%2B122844&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('CXO J214521.3+122844', 'xray unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-48" data-tier="2" data-methods="xray_unidentified" data-dtypes="xray" data-score="55">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=56.1180+-4.9530&fov=0.5&survey=P/Chandra/ACIS" target="_blank" class="card-img-link">
@@ -1756,15 +1778,15 @@
         </div>
         <div class="card-score">Score: <strong>55</strong>/100</div>
         <div class="card-coords">RA 56.1180° &nbsp; Dec -4.9530° <button class="btn-copy-coords" onclick="copyCoords('card-48',56.11800,-4.95300)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-48">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=4XMM%20J034428.3-045712" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=56.118&dec=-4.953&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=56.118&dec=-4.953&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=56.118+-4.953&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=56.118+-4.953&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3A4XMM%20J034428.3-045712&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('4XMM J034428.3-045712', 'xray unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-49" data-tier="2" data-methods="xray_unidentified" data-dtypes="xray" data-score="55">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=138.1430+30.5340&fov=0.5&survey=P/Chandra/ACIS" target="_blank" class="card-img-link">
@@ -1783,15 +1805,15 @@
         </div>
         <div class="card-score">Score: <strong>55</strong>/100</div>
         <div class="card-coords">RA 138.1430° &nbsp; Dec 30.5340° <button class="btn-copy-coords" onclick="copyCoords('card-49',138.14300,30.53400)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-49">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=4XMM%20J091234.2%2B303201" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=138.143&dec=30.534&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=138.143&dec=30.534&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=138.143+30.534&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=138.143+30.534&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3A4XMM%20J091234.2%2B303201&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('4XMM J091234.2+303201', 'xray unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-50" data-tier="2" data-methods="xray_unidentified" data-dtypes="xray" data-score="55">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=219.5530+-23.2490&fov=0.5&survey=P/Chandra/ACIS" target="_blank" class="card-img-link">
@@ -1810,15 +1832,15 @@
         </div>
         <div class="card-score">Score: <strong>55</strong>/100</div>
         <div class="card-coords">RA 219.5530° &nbsp; Dec -23.2490° <button class="btn-copy-coords" onclick="copyCoords('card-50',219.55300,-23.24900)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-50">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=4XMM%20J143812.7-231456" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=219.553&dec=-23.249&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=219.553&dec=-23.249&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=219.553+-23.249&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=219.553+-23.249&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3A4XMM%20J143812.7-231456&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('4XMM J143812.7-231456', 'xray unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-51" data-tier="2" data-methods="xray_unidentified" data-dtypes="xray" data-score="55">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=80.5490+-69.3930&fov=0.5&survey=P/Chandra/ACIS" target="_blank" class="card-img-link">
@@ -1837,15 +1859,15 @@
         </div>
         <div class="card-score">Score: <strong>55</strong>/100</div>
         <div class="card-coords">RA 80.5490° &nbsp; Dec -69.3930° <button class="btn-copy-coords" onclick="copyCoords('card-51',80.54900,-69.39300)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-51">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=4XMM%20J052211.8-692334" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=80.549&dec=-69.393&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=80.549&dec=-69.393&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=80.549+-69.393&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=80.549+-69.393&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3A4XMM%20J052211.8-692334&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('4XMM J052211.8-692334', 'xray unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-52" data-tier="2" data-methods="xray_unidentified" data-dtypes="xray" data-score="55">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=172.5890+5.3880&fov=0.5&survey=P/Chandra/ACIS" target="_blank" class="card-img-link">
@@ -1864,15 +1886,15 @@
         </div>
         <div class="card-score">Score: <strong>55</strong>/100</div>
         <div class="card-coords">RA 172.5890° &nbsp; Dec 5.3880° <button class="btn-copy-coords" onclick="copyCoords('card-52',172.58900,5.38800)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-52">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Ultra-narrowband signal (< 10 Hz) — unlikely natural</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=4XMM%20J113021.4%2B052318" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=172.589&dec=5.388&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=172.589&dec=5.388&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=172.589+5.388&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=172.589+5.388&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3A4XMM%20J113021.4%2B052318&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('4XMM J113021.4+052318', 'xray unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-53" data-tier="3" data-methods="frb_repeater" data-dtypes="frb" data-score="30">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=82.9938+33.1480&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
@@ -1891,15 +1913,15 @@
         </div>
         <div class="card-score">Score: <strong>30</strong>/100</div>
         <div class="card-coords">RA 82.9938° &nbsp; Dec 33.1480° <button class="btn-copy-coords" onclick="copyCoords('card-53',82.99380,33.14800)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-53">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Frequency in known RFI band: UHF TV broadcast</li><li>High SNR: 25.3</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=FRB20121102A" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=82.9938&dec=33.148&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=82.9938&dec=33.148&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=82.9938+33.148&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=82.9938+33.148&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3AFRB20121102A&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('FRB20121102A', 'frb repeater')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-54" data-tier="3" data-methods="frb_repeater+periodic" data-dtypes="frb" data-score="30">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=29.5031+65.7168&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
@@ -1918,15 +1940,15 @@
         </div>
         <div class="card-score">Score: <strong>30</strong>/100</div>
         <div class="card-coords">RA 29.5031° &nbsp; Dec 65.7168° <button class="btn-copy-coords" onclick="copyCoords('card-54',29.50310,65.71680)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-54">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Frequency in known RFI band: UHF TV broadcast</li><li>High SNR: 19.7</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=FRB20180916B" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=29.5031&dec=65.7168&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=29.5031&dec=65.7168&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=29.5031+65.7168&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=29.5031+65.7168&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3AFRB20180916B&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('FRB20180916B', 'frb repeater+periodic')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-55" data-tier="3" data-methods="frb_repeater" data-dtypes="frb" data-score="30">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=77.0117+26.0603&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
@@ -1945,15 +1967,15 @@
         </div>
         <div class="card-score">Score: <strong>30</strong>/100</div>
         <div class="card-coords">RA 77.0117° &nbsp; Dec 26.0603° <button class="btn-copy-coords" onclick="copyCoords('card-55',77.01170,26.06030)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-55">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Frequency in known RFI band: UHF TV broadcast</li><li>High SNR: 32.1</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=FRB20201124A" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=77.0117&dec=26.0603&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=77.0117&dec=26.0603&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=77.0117+26.0603&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=77.0117+26.0603&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3AFRB20201124A&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('FRB20201124A', 'frb repeater')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-56" data-tier="3" data-methods="frb_repeater" data-dtypes="frb" data-score="30">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=347.2743+48.7108&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
@@ -1972,15 +1994,15 @@
         </div>
         <div class="card-score">Score: <strong>30</strong>/100</div>
         <div class="card-coords">RA 347.2743° &nbsp; Dec 48.7108° <button class="btn-copy-coords" onclick="copyCoords('card-56',347.27430,48.71080)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-56">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Frequency in known RFI band: UHF TV broadcast</li><li>High SNR: 28.4</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=FRB20220912A" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=347.2743&dec=48.7108&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=347.2743&dec=48.7108&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=347.2743+48.7108&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=347.2743+48.7108&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3AFRB20220912A&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('FRB20220912A', 'frb repeater')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-57" data-tier="3" data-methods="frb_low_dm_excess" data-dtypes="frb" data-score="30">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=81.5125+-54.2662&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
@@ -1999,15 +2021,15 @@
         </div>
         <div class="card-score">Score: <strong>30</strong>/100</div>
         <div class="card-coords">RA 81.5125° &nbsp; Dec -54.2662° <button class="btn-copy-coords" onclick="copyCoords('card-57',81.51245,-54.26619)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-57">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Frequency in known RFI band: UHF TV broadcast</li><li>High SNR: 15.7</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=FRB_SIM_0014" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=81.51245377097186&dec=-54.26619336131889&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=81.51245377097186&dec=-54.26619336131889&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=81.51245377097186+-54.26619336131889&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=81.51245377097186+-54.26619336131889&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3AFRB_SIM_0014&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('FRB_SIM_0014', 'frb low dm excess')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-58" data-tier="3" data-methods="frb_low_dm_excess" data-dtypes="frb" data-score="30">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=163.8063+-79.7806&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
@@ -2026,15 +2048,15 @@
         </div>
         <div class="card-score">Score: <strong>30</strong>/100</div>
         <div class="card-coords">RA 163.8063° &nbsp; Dec -79.7806° <button class="btn-copy-coords" onclick="copyCoords('card-58',163.80629,-79.78061)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-58">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Frequency in known RFI band: UHF TV broadcast</li><li>High SNR: 18.9</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=FRB_SIM_0039" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=163.80629393486396&dec=-79.78061476927498&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=163.80629393486396&dec=-79.78061476927498&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=163.80629393486396+-79.78061476927498&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=163.80629393486396+-79.78061476927498&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3AFRB_SIM_0039&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('FRB_SIM_0039', 'frb low dm excess')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-59" data-tier="3" data-methods="frb_repeater" data-dtypes="frb" data-score="20">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=240.0275+-11.2921&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
@@ -2053,15 +2075,15 @@
         </div>
         <div class="card-score">Score: <strong>20</strong>/100</div>
         <div class="card-coords">RA 240.0275° &nbsp; Dec -11.2921° <button class="btn-copy-coords" onclick="copyCoords('card-59',240.02750,-11.29210)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-59">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Frequency in known RFI band: UHF TV broadcast</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=FRB20190520B" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=240.0275&dec=-11.2921&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=240.0275&dec=-11.2921&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=240.0275+-11.2921&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=240.0275+-11.2921&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3AFRB20190520B&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('FRB20190520B', 'frb repeater')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-60" data-tier="3" data-methods="frb_repeater" data-dtypes="frb" data-score="20">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=133.9867+-84.5369&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
@@ -2080,15 +2102,15 @@
         </div>
         <div class="card-score">Score: <strong>20</strong>/100</div>
         <div class="card-coords">RA 133.9867° &nbsp; Dec -84.5369° <button class="btn-copy-coords" onclick="copyCoords('card-60',133.98670,-84.53695)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-60">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Frequency in known RFI band: UHF TV broadcast</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=FRB_SIM_0011" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=133.98669812347342&dec=-84.5369470108599&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=133.98669812347342&dec=-84.5369470108599&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=133.98669812347342+-84.5369470108599&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=133.98669812347342+-84.5369470108599&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3AFRB_SIM_0011&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('FRB_SIM_0011', 'frb repeater')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-61" data-tier="3" data-methods="frb_low_dm_excess" data-dtypes="frb" data-score="20">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=54.0719+56.9409&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
@@ -2107,15 +2129,15 @@
         </div>
         <div class="card-score">Score: <strong>20</strong>/100</div>
         <div class="card-coords">RA 54.0719° &nbsp; Dec 56.9409° <button class="btn-copy-coords" onclick="copyCoords('card-61',54.07190,56.94086)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-61">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Frequency in known RFI band: UHF TV broadcast</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=FRB_SIM_0006" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=54.071902465362676&dec=56.94085868743363&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=54.071902465362676&dec=56.94085868743363&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=54.071902465362676+56.94085868743363&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=54.071902465362676+56.94085868743363&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3AFRB_SIM_0006&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('FRB_SIM_0006', 'frb low dm excess')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-62" data-tier="3" data-methods="frb_low_dm_excess" data-dtypes="frb" data-score="20">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=7.5871+-34.0974&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
@@ -2134,15 +2156,15 @@
         </div>
         <div class="card-score">Score: <strong>20</strong>/100</div>
         <div class="card-coords">RA 7.5871° &nbsp; Dec -34.0974° <button class="btn-copy-coords" onclick="copyCoords('card-62',7.58713,-34.09736)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-62">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Frequency in known RFI band: UHF TV broadcast</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=FRB_SIM_0022" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=7.587127599800789&dec=-34.09736453042492&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=7.587127599800789&dec=-34.09736453042492&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=7.587127599800789+-34.09736453042492&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=7.587127599800789+-34.09736453042492&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3AFRB_SIM_0022&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('FRB_SIM_0022', 'frb low dm excess')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-63" data-tier="3" data-methods="frb_low_dm_excess" data-dtypes="frb" data-score="20">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=225.5803+53.5425&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
@@ -2161,15 +2183,15 @@
         </div>
         <div class="card-score">Score: <strong>20</strong>/100</div>
         <div class="card-coords">RA 225.5803° &nbsp; Dec 53.5425° <button class="btn-copy-coords" onclick="copyCoords('card-63',225.58025,53.54247)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-63">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Frequency in known RFI band: UHF TV broadcast</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=FRB_SIM_0024" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=225.5802549581236&dec=53.54247156593999&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=225.5802549581236&dec=53.54247156593999&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=225.5802549581236+53.54247156593999&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=225.5802549581236+53.54247156593999&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3AFRB_SIM_0024&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('FRB_SIM_0024', 'frb low dm excess')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div>
     <div class="card" id="card-64" data-tier="3" data-methods="frb_low_dm_excess" data-dtypes="frb" data-score="20">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=47.9544+-66.4768&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
@@ -2188,20 +2210,21 @@
         </div>
         <div class="card-score">Score: <strong>20</strong>/100</div>
         <div class="card-coords">RA 47.9544° &nbsp; Dec -66.4768° <button class="btn-copy-coords" onclick="copyCoords('card-64',47.95439,-66.47684)" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-card-64">✓</span></div>
-        
+
         <ul class="card-reasons"><li>Frequency in known RFI band: UHF TV broadcast</li></ul>
         <div class="card-ext-links"><a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=FRB_SIM_0030" target="_blank">SIMBAD</a><a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=47.95439124588418&dec=-66.4768357546902&zoom=12" target="_blank">Legacy Survey</a><a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=47.95439124588418&dec=-66.4768357546902&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a><a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=47.95439124588418+-66.4768357546902&-c.rs=2" target="_blank">VizieR</a><a class="ext-link" href="https://sky.esa.int/?target=47.95439124588418+-66.4768357546902&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a><a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3AFRB_SIM_0030&sort=date+desc" target="_blank">NASA ADS</a></div>
         <div style="margin-top:8px">
           <button class="btn-papers" onclick="litOpen('FRB_SIM_0030', 'frb low dm excess')"><span class="papers-dot">◉</span> Search Literature</button>
         </div>
-        
+
       </div>
-      
+
     </div></div>
 <footer>DeepSignal · Sky data via CDS Hips2Fits CDN · No local images required</footer>
 <script defer src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
 <script>
 async function reportOpen() {
+  SFX.open();
   document.getElementById("report-body").innerHTML =
     '<div style="font-family:monospace;font-size:.73rem;color:#3a6a8a;padding:24px"><span class="spinner"></span> LOADING REPORT…</div>';
   document.getElementById("report-footer-ts").textContent = "";
@@ -2225,10 +2248,12 @@ async function reportOpen() {
   }
 }
 function reportClose() {
+  SFX.close();
   document.getElementById("report-overlay").classList.remove("open");
   document.body.style.overflow = "";
 }
 function litOpen(targetName, detectionMethod) {
+  SFX.open();
   document.getElementById("lit-target-name").textContent = targetName;
   document.getElementById("lit-footer-ts").textContent = "";
   document.getElementById("lit-body").innerHTML =
@@ -2238,6 +2263,7 @@ function litOpen(targetName, detectionMethod) {
   _litFetch(targetName, detectionMethod || "");
 }
 function litClose() {
+  SFX.close();
   document.getElementById("lit-overlay").classList.remove("open");
   document.body.style.overflow = "";
 }
@@ -2405,6 +2431,7 @@ const CANDIDATES = [{"id": "card-1", "name": "Tau Ceti", "score": 100, "dtype": 
 })();
 // Map modal
 function mapOpen() {
+  SFX.open();
   document.getElementById("map-overlay").classList.add("open");
   document.body.style.overflow = "hidden";
   // attach tooltips on first open
@@ -2430,6 +2457,7 @@ function mapOpen() {
   });
 }
 function mapClose() {
+  SFX.close();
   document.getElementById("map-overlay").classList.remove("open");
   document.body.style.overflow = "";
   document.getElementById("sky-tooltip-map").style.display="none";
@@ -2479,6 +2507,50 @@ function mapShowDetail(idx) {
   `;
   document.getElementById("map-body").scrollTop = 0;
 }
+// ── Sci-Fi Sound Engine ───────────────────────────────────────────────────────
+const SFX = (() => {
+  let _ctx = null, _muted = localStorage.getItem('sfx-muted') === '1';
+  const ctx = () => {
+    if (!_ctx) _ctx = new (window.AudioContext || window.webkitAudioContext)();
+    if (_ctx.state === 'suspended') _ctx.resume();
+    return _ctx;
+  };
+  function tone(f1, f2, dur, vol = 0.08, type = 'sine', delay = 0) {
+    if (_muted) return;
+    try {
+      const c = ctx(), t = c.currentTime + delay;
+      const o = c.createOscillator(), g = c.createGain();
+      o.type = type; o.frequency.setValueAtTime(f1, t);
+      if (f2 !== f1) o.frequency.exponentialRampToValueAtTime(f2, t + dur);
+      g.gain.setValueAtTime(0, t);
+      g.gain.linearRampToValueAtTime(vol, t + 0.01);
+      g.gain.exponentialRampToValueAtTime(0.001, t + dur);
+      o.connect(g); g.connect(c.destination);
+      o.start(t); o.stop(t + dur + 0.05);
+    } catch(e) {}
+  }
+  return {
+    click: () => tone(700, 350, 0.08, 0.07, 'square'),
+    scan:  () => { tone(300, 1500, 0.28, 0.07); tone(1500, 850, 0.18, 0.05, 'sine', 0.28); },
+    open:  () => { tone(200, 650, 0.18, 0.08); tone(650, 1050, 0.13, 0.06, 'sine', 0.16); },
+    close: () => tone(650, 160, 0.2, 0.08),
+    ping:  () => tone(1400, 1700, 0.1, 0.05),
+    muted: () => _muted,
+    setMuted: v => { _muted = v; localStorage.setItem('sfx-muted', v ? '1' : '0'); },
+  };
+})();
+const ICON_SND   = `<svg viewBox="0 0 20 20" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7H1v6h2l5 4V3L3 7z"/><path d="M13 7a4 4 0 0 1 0 6"/><path d="M16.5 4a8 8 0 0 1 0 12"/></svg>`;
+const ICON_MUTED = `<svg viewBox="0 0 20 20" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7H1v6h2l5 4V3L3 7z"/><line x1="14" y1="7" x2="20" y2="13"/><line x1="20" y1="7" x2="14" y2="13"/></svg>`;
+function toggleMute() {
+  SFX.setMuted(!SFX.muted());
+  const btn = document.getElementById('mute-btn');
+  if (btn) btn.innerHTML = SFX.muted() ? ICON_MUTED : ICON_SND;
+  if (!SFX.muted()) SFX.ping();
+}
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.getElementById('mute-btn');
+  if (btn) btn.innerHTML = SFX.muted() ? ICON_MUTED : ICON_SND;
+});
 </script>
 </body>
 </html>
