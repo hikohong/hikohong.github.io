@@ -1484,7 +1484,7 @@ document.addEventListener("keydown", e => {
 const SFX = (() => {
   let _ctx = null, _muted = localStorage.getItem('sfx-muted') === '1';
   const _loaded = {};
-  const _WAV = {click:'click',scan:'scan',open:'open2',close:'close2'};
+  const _WAV = {click:'click2',scan:'scan',open:'open2',close:'close2'};
   ['click','scan','open','close'].forEach(k => {
     const a = new Audio('sounds/' + _WAV[k] + '.wav');
     a.preload = 'auto';
