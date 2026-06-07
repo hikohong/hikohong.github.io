@@ -1444,9 +1444,10 @@ const SFX = (() => {
   let _ctx = null, _muted = localStorage.getItem('sfx-muted') === '1';
   const _loaded = {};
   ['click','scan','open','close'].forEach(k => {
-    const a = new Audio('sounds/' + k + '.mp3');
+    const a = new Audio('sounds/' + k + '.wav');
     a.preload = 'auto';
     a.oncanplaythrough = () => { _loaded[k] = a; };
+    a.onerror = () => {};
     a.load();
   });
   function playFile(key, vol = 0.65) {
@@ -1454,11 +1455,21 @@ const SFX = (() => {
     try { const a = _loaded[key].cloneNode(); a.volume = vol; a.play().catch(() => {}); } catch(e) {}
   }
   const ac = () => {
-    if (!_ctx) _ctx = new (window.AudioContext || window.webkitAudioContext)();
-    if (_ctx.state === 'suspended') _ctx.resume();
+    if (!_ctx) {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return null;
+      _ctx = new AC();
+    }
+    if (_ctx.state === 'suspended') _ctx.resume().catch(() => {});
     return _ctx;
   };
+  // Pre-warm AudioContext on first pointer interaction (fixes Mac Safari suspended-state issue)
+  document.addEventListener('pointerdown', function _warm() {
+    try { ac(); } catch(e) {}
+    document.removeEventListener('pointerdown', _warm, true);
+  }, true);
   function noise(c, dur, bpFreq, bpQ, vol) {
+    if (!c) return;
     const buf = c.createBuffer(1, c.sampleRate * dur, c.sampleRate);
     const d = buf.getChannelData(0);
     for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
@@ -1469,6 +1480,7 @@ const SFX = (() => {
     src.start(); src.stop(c.currentTime + dur + 0.01);
   }
   function osc(c, f1, f2, dur, vol, type = 'sine', t0 = 0) {
+    if (!c) return;
     const o = c.createOscillator(), g = c.createGain(); const t = c.currentTime + t0;
     o.type = type; o.frequency.setValueAtTime(f1, t);
     if (f2 !== f1) o.frequency.exponentialRampToValueAtTime(f2, t + dur);
@@ -1483,7 +1495,8 @@ const SFX = (() => {
   function sfxScan() {
     if (_muted) return;
     try {
-      const c = ac(), t = c.currentTime;
+      const c = ac(); if (!c) return;
+      const t = c.currentTime;
       const mod = c.createOscillator(), modG = c.createGain(), car = c.createOscillator(), carG = c.createGain();
       mod.frequency.setValueAtTime(6, t); mod.frequency.linearRampToValueAtTime(35, t + 0.48);
       modG.gain.setValueAtTime(180, t); modG.gain.linearRampToValueAtTime(550, t + 0.48);
