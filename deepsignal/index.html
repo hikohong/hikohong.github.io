@@ -301,7 +301,7 @@ footer a{color:#4a6a8a;text-decoration:none}
     <div class="map-body" id="map-body">
       <div id="map-detail" style="display:none;border:1px solid rgba(125,211,252,.2);border-radius:8px;
         background:rgba(0,20,40,.45);padding:14px 16px;margin-bottom:18px;animation:lit-in .15s ease-out;
-        height:148px;overflow-y:auto;box-sizing:border-box;scrollbar-width:thin;scrollbar-color:#1a3a5a transparent"></div>
+        height:210px;overflow:hidden;box-sizing:border-box"></div>
       <div id="hist-section"></div>
       <div id="sky-section"></div>
     </div>
@@ -1248,7 +1248,7 @@ function renderSkyMap(data) {
     const nm  = cleanName(c.target_name||"?").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
     return [
       `<circle cx="${ra.toFixed(2)}" cy="${(90-dec).toFixed(2)}" r="${r}" fill="${col}" fill-opacity="${op}"${fl} class="sky-dot"/>`,
-      `<circle cx="${ra.toFixed(2)}" cy="${(90-dec).toFixed(2)}" r="8" fill="transparent" style="pointer-events:all" class="sky-dot" data-name="${nm}" data-score="${sc}" data-idx="${i}" onclick="mapShowDetail(${i})"/>`
+      `<circle cx="${ra.toFixed(2)}" cy="${(90-dec).toFixed(2)}" r="4" fill="transparent" style="pointer-events:all" class="sky-dot" data-name="${nm}" data-score="${sc}" data-idx="${i}" onclick="mapShowDetail(${i})"/>`
     ].join("");
   }).join("\n");
   sec.innerHTML = `
