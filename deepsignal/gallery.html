@@ -129,7 +129,7 @@
   .lit-close:hover{background:rgba(125,211,252,.12);border-color:#7dd3fc}
   .lit-body{padding:16px 18px;overflow-y:auto;flex:1;scrollbar-width:thin;scrollbar-color:#1a3a5a transparent}
   .lit-status{font-family:monospace;font-size:.73rem;color:#3a6a8a;margin-bottom:14px;letter-spacing:.04em}
-  .lit-paper{border:1px solid rgba(125,211,252,.1);border-radius:8px;padding:13px 15px;margin-bottom:10px;background:rgba(255,255,255,.025);transition:border-color 160ms,background 160ms;position:relative}
+  .lit-paper{border:1px solid rgba(125,211,252,.1);border-radius:8px;padding:13px 15px;margin-bottom:10px;background:rgba(255,255,255,.025);transition:border-color 160ms,background 160ms;position:relative;cursor:pointer}
   .lit-paper:hover{border-color:rgba(125,211,252,.35);background:rgba(125,211,252,.04)}
   .lit-paper-num{position:absolute;top:10px;right:12px;font-family:monospace;font-size:.62rem;color:#2a4a6a}
   .lit-title{font-size:.88rem;font-weight:600;color:#dbeafe;margin-bottom:5px;line-height:1.4;padding-right:30px}
@@ -459,7 +459,7 @@
 <div id="sky-tooltip-map"></div>
 <div class="gallery-hdr">
 <h1>DeepSignal — Sky Image Gallery</h1>
-<div class="subtitle">Generated 2026-06-07 10:20 UTC &nbsp;·&nbsp; 64 targets &nbsp;·&nbsp; 64 sky images via Hips2Fits CDN</div>
+<div class="subtitle">Generated 2026-06-07 11:12 UTC &nbsp;·&nbsp; 64 targets &nbsp;·&nbsp; 64 sky images via Hips2Fits CDN</div>
 <div class="stats">
   <div class="stat"><div class="stat-n" style="color:#f59e0b">14</div><div class="stat-l">Tier 1 ≥70</div></div>
   <div class="stat"><div class="stat-n" style="color:#60a5fa">38</div><div class="stat-l">Tier 2 50–69</div></div>
@@ -2284,13 +2284,15 @@ function _renderS2(papers, elapsed) {
     const arxivId = p.externalIds?.ArXiv;
     const doi = p.externalIds?.DOI;
     const semUrl = p.url || "";
+    const _href = doi ? 'https://doi.org/' + doi : (arxivId ? 'https://arxiv.org/abs/' + arxivId : semUrl);
+    const _click = _href ? ` onclick="if(event.target.closest('.lit-actions'))return; SFX.click(); window.open('${_href}','_blank','noopener')"` : '';
     const links = [
       arxivId ? `<a class="lit-btn" href="https://arxiv.org/abs/${arxivId}" target="_blank" rel="noopener">↗ arXiv:${arxivId}</a>` : "",
       arxivId ? `<a class="lit-btn" href="https://ui.adsabs.harvard.edu/abs/arXiv:${arxivId}" target="_blank" rel="noopener">NASA ADS</a>` : "",
       !arxivId && semUrl ? `<a class="lit-btn" href="${semUrl}" target="_blank" rel="noopener">↗ Semantic Scholar</a>` : "",
       !arxivId && doi ? `<a class="lit-btn" href="https://doi.org/${doi}" target="_blank" rel="noopener">DOI</a>` : "",
     ].filter(Boolean).join("");
-    return `<div class="lit-paper"><div class="lit-paper-num">#${i+1}</div>
+    return `<div class="lit-paper"${_click}><div class="lit-paper-num">#${i+1}</div>
       <div class="lit-title">${title}</div>
       <div class="lit-meta">${authorTxt}${year?" &nbsp;·&nbsp; "+year:""}</div>
       <div class="lit-abstract">${abstract}</div>
@@ -2306,8 +2308,10 @@ function _renderCrossRef(items, elapsed) {
     const authorTxt = allAuth.slice(0,3).map(a=>`${a.given||""} ${a.family||""}`.trim()).join(", ")+(allAuth.length>3?" et al.":"");
     const year = p.issued?.["date-parts"]?.[0]?.[0] ? String(p.issued["date-parts"][0][0]) : "";
     const doi = p.DOI || "";
+    const _href = doi ? 'https://doi.org/' + doi : '';
+    const _click = _href ? ` onclick="if(event.target.closest('.lit-actions'))return; SFX.click(); window.open('${_href}','_blank','noopener')"` : '';
     const links = doi ? `<a class="lit-btn" href="https://doi.org/${doi}" target="_blank" rel="noopener">↗ DOI</a>` : "";
-    return `<div class="lit-paper"><div class="lit-paper-num">#${i+1}</div>
+    return `<div class="lit-paper"${_click}><div class="lit-paper-num">#${i+1}</div>
       <div class="lit-title">${title}</div>
       <div class="lit-meta">${authorTxt}${year?" &nbsp;·&nbsp; "+year:""}</div>
       <div class="lit-actions">${links}</div></div>`;
