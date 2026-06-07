@@ -459,7 +459,7 @@
 <div id="sky-tooltip-map"></div>
 <div class="gallery-hdr">
 <h1>DeepSignal — Sky Image Gallery</h1>
-<div class="subtitle">Generated 2026-06-07 04:41 UTC &nbsp;·&nbsp; 64 targets &nbsp;·&nbsp; 64 sky images via Hips2Fits CDN</div>
+<div class="subtitle">Generated 2026-06-07 07:02 UTC &nbsp;·&nbsp; 64 targets &nbsp;·&nbsp; 64 sky images via Hips2Fits CDN</div>
 <div class="stats">
   <div class="stat"><div class="stat-n" style="color:#f59e0b">14</div><div class="stat-l">Tier 1 ≥70</div></div>
   <div class="stat"><div class="stat-n" style="color:#60a5fa">38</div><div class="stat-l">Tier 2 50–69</div></div>
@@ -2510,6 +2510,17 @@ function mapShowDetail(idx) {
 // ── Sci-Fi Sound Engine ───────────────────────────────────────────────────────
 const SFX = (() => {
   let _ctx = null, _muted = localStorage.getItem('sfx-muted') === '1';
+  const _loaded = {};
+  ['click','scan','open','close'].forEach(k => {
+    const a = new Audio('sounds/' + k + '.mp3');
+    a.preload = 'auto';
+    a.oncanplaythrough = () => { _loaded[k] = a; };
+    a.load();
+  });
+  function playFile(key, vol = 0.65) {
+    if (_muted) return;
+    try { const a = _loaded[key].cloneNode(); a.volume = vol; a.play().catch(() => {}); } catch(e) {}
+  }
   const ctx = () => {
     if (!_ctx) _ctx = new (window.AudioContext || window.webkitAudioContext)();
     if (_ctx.state === 'suspended') _ctx.resume();
@@ -2530,10 +2541,10 @@ const SFX = (() => {
     } catch(e) {}
   }
   return {
-    click: () => tone(700, 350, 0.08, 0.07, 'square'),
-    scan:  () => { tone(300, 1500, 0.28, 0.07); tone(1500, 850, 0.18, 0.05, 'sine', 0.28); },
-    open:  () => { tone(200, 650, 0.18, 0.08); tone(650, 1050, 0.13, 0.06, 'sine', 0.16); },
-    close: () => tone(650, 160, 0.2, 0.08),
+    click: () => _loaded.click ? playFile('click')       : tone(700, 350, 0.08, 0.07, 'square'),
+    scan:  () => _loaded.scan  ? playFile('scan',  0.55) : (tone(300, 1500, 0.28, 0.07), tone(1500, 850, 0.18, 0.05, 'sine', 0.28)),
+    open:  () => _loaded.open  ? playFile('open',  0.55) : (tone(200, 650, 0.18, 0.08), tone(650, 1050, 0.13, 0.06, 'sine', 0.16)),
+    close: () => _loaded.close ? playFile('close', 0.55) : tone(650, 160, 0.2, 0.08),
     ping:  () => tone(1400, 1700, 0.1, 0.05),
     muted: () => _muted,
     setMuted: v => { _muted = v; localStorage.setItem('sfx-muted', v ? '1' : '0'); },
