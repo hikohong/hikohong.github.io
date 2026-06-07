@@ -280,10 +280,10 @@ footer a{color:#4a6a8a;text-decoration:none}
 </div>
 
 <div class="stats">
-  <div class="stat-chip">Pipeline candidates: <strong id="stat-n">244</strong></div>
+  <div class="stat-chip">Pipeline candidates: <strong id="stat-n">80</strong></div>
   <div class="stat-chip">Data sources: <strong>10</strong></div>
   <div class="stat-chip">Detection algorithms: <strong>14</strong></div>
-  <div class="stat-chip">Last updated: <strong>2026-06-07 13:37 UTC</strong></div>
+  <div class="stat-chip">Last updated: <strong>2026-06-07 UTC</strong></div>
 </div>
 
 <!-- Map Modal -->
@@ -1398,29 +1398,35 @@ function filterHighlights() {
 }
 
 // ── Report Modal ──────────────────────────────────────────────────────────────
-async function reportOpen() {
+function reportOpen() {
   SFX.open();
   document.getElementById("report-body").innerHTML =
-    `<div class="lit-status"><span class="spinner"></span> LOADING REPORT…</div>`;
+    `<div class="lit-status"><span class="spinner"></span> SCANNING REPORT DATA…</div>`;
   document.getElementById("report-footer-ts").textContent = "";
   document.getElementById("report-overlay").classList.add("open");
   document.body.style.overflow = "hidden";
+  _reportFetch();
+}
+
+async function _reportFetch() {
+  const body   = document.getElementById("report-body");
+  const footer = document.getElementById("report-footer-ts");
   const t0 = Date.now();
   try {
     const resp = await fetch("report.md");
     if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
     let md = await resp.text();
-    // Strip image tags — may contain broken private-repo links
     md = md.replace(/!\[[^\]]*\]\([^)]*\)/g, "");
     md = md.replace(/<img[^>]*>/gi, "");
+    body.innerHTML = `<div class="lit-status"><span class="spinner"></span> RENDERING REPORT…</div>`;
+    await new Promise(r => setTimeout(r, 0));
     const html = typeof marked !== "undefined"
       ? marked.parse(md)
       : `<pre style="white-space:pre-wrap;color:#b8c7d8;font-size:.82rem">${md.replace(/</g, "&lt;")}</pre>`;
-    document.getElementById("report-footer-ts").textContent =
-      `${((Date.now() - t0) / 1000).toFixed(1)}s`;
-    document.getElementById("report-body").innerHTML = html;
+    footer.textContent = `${((Date.now() - t0) / 1000).toFixed(1)}s`;
+    body.innerHTML = html;
   } catch (err) {
-    document.getElementById("report-body").innerHTML =
+    body.innerHTML =
       `<div class="lit-empty">[ FAILED TO LOAD ]<br>
       <span style="font-size:.72rem">${err.message}</span><br><br>
       <a class="lit-btn" href="report.md" target="_blank" rel="noopener">↗ Open raw report.md</a></div>`;
