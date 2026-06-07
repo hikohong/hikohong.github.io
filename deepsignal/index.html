@@ -17,6 +17,12 @@ nav{display:flex;align-items:center;gap:12px;padding:16px 24px;border-bottom:1px
 .nav-link{color:#b8c7d8;text-decoration:none;font-size:.85rem;padding:6px 12px;border-radius:5px;border:1px solid rgba(219,234,254,.15);transition:border-color 140ms,color 140ms;background:none;cursor:pointer;font-family:inherit}
 .nav-link:hover{color:#7dd3fc;border-color:#7dd3fc}
 .nav-link.active{color:#7dd3fc;border-color:rgba(125,211,252,.4)}
+.nav-right{margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:2px}
+.nav-deepsignal{color:#3a4a5a;font-size:.85rem;line-height:1}
+#mute-btn{background:none;border:none;cursor:pointer;padding:1px 0;color:#3a4a5a;transition:color 150ms,filter 150ms;line-height:1}
+#mute-btn:hover{color:#7dd3fc;filter:drop-shadow(0 0 6px rgba(125,211,252,.7))}
+.nav-planet{flex-shrink:0;animation:planet-pulse 4s ease-in-out infinite}
+@keyframes planet-pulse{0%,100%{filter:drop-shadow(0 0 3px rgba(125,211,252,.35))}50%{filter:drop-shadow(0 0 9px rgba(125,211,252,.85))}}
 
 /* ── Hero ── */
 .hero{padding:48px 24px 32px;text-align:center;background:linear-gradient(180deg,rgba(125,211,252,.06) 0%,transparent 100%)}
@@ -229,17 +235,33 @@ footer a{color:#4a6a8a;text-decoration:none}
 <body>
 
 <nav>
-  <a class="nav-home" href="/">
-    <span class="nav-mark">HH</span>
+  <a class="nav-home" href="/" onclick="SFX.click()">
+    <svg class="nav-planet" viewBox="0 0 32 32" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="nav-plg" cx="35%" cy="30%" r="70%">
+          <stop offset="0%" stop-color="#bfdbfe"/>
+          <stop offset="50%" stop-color="#1e40af"/>
+          <stop offset="100%" stop-color="#060e1e"/>
+        </radialGradient>
+        <clipPath id="nav-rt"><rect x="0" y="0" width="32" height="16"/></clipPath>
+        <clipPath id="nav-rb"><rect x="0" y="16" width="32" height="16"/></clipPath>
+      </defs>
+      <ellipse cx="16" cy="16" rx="14" ry="3.8" fill="none" stroke="#93c5fd" stroke-width="1.3" opacity="0.35" clip-path="url(#nav-rt)" transform="rotate(-18,16,16)"/>
+      <circle cx="16" cy="16" r="10" fill="url(#nav-plg)"/>
+      <ellipse cx="16" cy="16" rx="14" ry="3.8" fill="none" stroke="#7dd3fc" stroke-width="1.8" opacity="0.8" clip-path="url(#nav-rb)" transform="rotate(-18,16,16)"/>
+    </svg>
     <span>Hiko Hong</span>
   </a>
   <div class="nav-links">
-    <a class="nav-link active" href="index.html">Search</a>
-    <a class="nav-link" href="gallery.html">Gallery</a>
-    <button class="nav-link" onclick="mapOpen()">Map</button>
-    <button class="nav-link" onclick="reportOpen()">Report</button>
+    <a class="nav-link active" href="index.html" onclick="SFX.click()">Search</a>
+    <a class="nav-link" href="gallery.html" onclick="SFX.click()">Gallery</a>
+    <button class="nav-link" onclick="SFX.click();mapOpen()">Map</button>
+    <button class="nav-link" onclick="SFX.click();reportOpen()">Report</button>
   </div>
-  <span style="margin-left:auto;color:#3a4a5a;font-size:.85rem">/ DeepSignal</span>
+  <div class="nav-right">
+    <span class="nav-deepsignal">/ DeepSignal</span>
+    <button id="mute-btn" onclick="toggleMute()" title="Toggle sounds"></button>
+  </div>
 </nav>
 
 <div class="hero">
@@ -261,7 +283,7 @@ footer a{color:#4a6a8a;text-decoration:none}
   <div class="stat-chip">Pipeline candidates: <strong id="stat-n">64</strong></div>
   <div class="stat-chip">Data sources: <strong>10</strong></div>
   <div class="stat-chip">Detection algorithms: <strong>14</strong></div>
-  <div class="stat-chip">Last updated: <strong>2026-06-06 UTC</strong></div>
+  <div class="stat-chip">Last updated: <strong>2026-06-07 UTC</strong></div>
 </div>
 
 <!-- Map Modal -->
@@ -874,6 +896,7 @@ function showMultipleResults(groups) {
 async function doSearch() {
   const q = document.getElementById("q").value.trim();
   if (!q) return;
+  SFX.scan();
 
   const panel = document.getElementById("result-panel");
   const card  = document.getElementById("result-card");
@@ -1052,6 +1075,7 @@ async function _loadSolarSystemImage(name) {
 
 // ── Literature Modal ──────────────────────────────────────────────────────────
 function litOpen(targetName, detectionMethod) {
+  SFX.open();
   document.getElementById("lit-target-name").textContent = targetName;
   document.getElementById("lit-footer-ts").textContent = "";
   document.getElementById("lit-body").innerHTML =
@@ -1062,6 +1086,7 @@ function litOpen(targetName, detectionMethod) {
 }
 
 function litClose() {
+  SFX.close();
   document.getElementById("lit-overlay").classList.remove("open");
   document.body.style.overflow = "";
 }
@@ -1280,10 +1305,12 @@ function renderSkyMap(data) {
 
 // ── Map modal ─────────────────────────────────────────────────────────────────
 function mapOpen() {
+  SFX.open();
   document.getElementById("map-overlay").classList.add("open");
   document.body.style.overflow = "hidden";
 }
 function mapClose() {
+  SFX.close();
   document.getElementById("map-overlay").classList.remove("open");
   document.body.style.overflow = "";
   document.getElementById("sky-tooltip-map").style.display="none";
@@ -1368,6 +1395,7 @@ function filterHighlights() {
 
 // ── Report Modal ──────────────────────────────────────────────────────────────
 async function reportOpen() {
+  SFX.open();
   document.getElementById("report-body").innerHTML =
     `<div class="lit-status"><span class="spinner"></span> LOADING REPORT…</div>`;
   document.getElementById("report-footer-ts").textContent = "";
@@ -1396,6 +1424,7 @@ async function reportOpen() {
 }
 
 function reportClose() {
+  SFX.close();
   document.getElementById("report-overlay").classList.remove("open");
   document.body.style.overflow = "";
 }
@@ -1410,8 +1439,55 @@ document.addEventListener("keydown", e => {
   if (anyOpen) { mapClose(); litClose(); reportClose(); } else { history.back(); }
 });
 
+// ── Sci-Fi Sound Engine ───────────────────────────────────────────────────────
+const SFX = (() => {
+  let _ctx = null, _muted = localStorage.getItem('sfx-muted') === '1';
+  const ctx = () => {
+    if (!_ctx) _ctx = new (window.AudioContext || window.webkitAudioContext)();
+    if (_ctx.state === 'suspended') _ctx.resume();
+    return _ctx;
+  };
+  function tone(f1, f2, dur, vol = 0.08, type = 'sine', delay = 0) {
+    if (_muted) return;
+    try {
+      const c = ctx(), t = c.currentTime + delay;
+      const o = c.createOscillator(), g = c.createGain();
+      o.type = type; o.frequency.setValueAtTime(f1, t);
+      if (f2 !== f1) o.frequency.exponentialRampToValueAtTime(f2, t + dur);
+      g.gain.setValueAtTime(0, t);
+      g.gain.linearRampToValueAtTime(vol, t + 0.01);
+      g.gain.exponentialRampToValueAtTime(0.001, t + dur);
+      o.connect(g); g.connect(c.destination);
+      o.start(t); o.stop(t + dur + 0.05);
+    } catch(e) {}
+  }
+  return {
+    click: () => tone(700, 350, 0.08, 0.07, 'square'),
+    scan:  () => { tone(300, 1500, 0.28, 0.07); tone(1500, 850, 0.18, 0.05, 'sine', 0.28); },
+    open:  () => { tone(200, 650, 0.18, 0.08); tone(650, 1050, 0.13, 0.06, 'sine', 0.16); },
+    close: () => tone(650, 160, 0.2, 0.08),
+    ping:  () => tone(1400, 1700, 0.1, 0.05),
+    muted: () => _muted,
+    setMuted: v => { _muted = v; localStorage.setItem('sfx-muted', v ? '1' : '0'); },
+  };
+})();
+
+const ICON_SND   = `<svg viewBox="0 0 20 20" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7H1v6h2l5 4V3L3 7z"/><path d="M13 7a4 4 0 0 1 0 6"/><path d="M16.5 4a8 8 0 0 1 0 12"/></svg>`;
+const ICON_MUTED = `<svg viewBox="0 0 20 20" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7H1v6h2l5 4V3L3 7z"/><line x1="14" y1="7" x2="20" y2="13"/><line x1="20" y1="7" x2="14" y2="13"/></svg>`;
+
+function toggleMute() {
+  SFX.setMuted(!SFX.muted());
+  const btn = document.getElementById('mute-btn');
+  if (btn) btn.innerHTML = SFX.muted() ? ICON_MUTED : ICON_SND;
+  if (!SFX.muted()) SFX.ping();
+}
+
 // ── Init ──────────────────────────────────────────────────────────────────────
 loadCatalog();
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.getElementById('mute-btn');
+  if (btn) btn.innerHTML = SFX.muted() ? ICON_MUTED : ICON_SND;
+});
 </script>
 </body>
 </html>
