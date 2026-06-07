@@ -19,10 +19,11 @@ nav{display:flex;align-items:center;gap:12px;padding:16px 24px;border-bottom:1px
 .nav-link{color:#b8c7d8;text-decoration:none;font-size:.85rem;padding:6px 12px;border-radius:5px;border:1px solid rgba(219,234,254,.15);transition:border-color 140ms,color 140ms;background:none;cursor:pointer;font-family:inherit}
 .nav-link:hover{color:#7dd3fc;border-color:#7dd3fc}
 .nav-link.active{color:#7dd3fc;border-color:rgba(125,211,252,.4)}
-.nav-right{margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:2px}
+.nav-right{margin-left:auto;display:flex;flex-direction:row;align-items:center;gap:8px}
 .nav-deepsignal{color:#3a4a5a;font-size:.85rem;line-height:1}
-#mute-btn{background:none;border:none;cursor:pointer;padding:1px 0;color:#3a4a5a;transition:color 150ms,filter 150ms;line-height:1}
-#mute-btn:hover{color:#7dd3fc;filter:drop-shadow(0 0 6px rgba(125,211,252,.7))}
+#mute-btn{background:none;border:none;cursor:pointer;padding:2px;color:#3a5a6a;transition:color 150ms,filter 150ms;line-height:1}
+#mute-btn.sfx-on{color:#f59e0b;filter:drop-shadow(0 0 5px rgba(245,158,11,.55))}
+#mute-btn:hover{color:#fbbf24;filter:drop-shadow(0 0 8px rgba(251,191,36,.75))}
 .nav-planet{flex-shrink:0;animation:planet-pulse 4s ease-in-out infinite}
 @keyframes planet-pulse{0%,100%{filter:drop-shadow(0 0 3px rgba(125,211,252,.35))}50%{filter:drop-shadow(0 0 9px rgba(125,211,252,.85))}}
 
@@ -261,8 +262,8 @@ footer a{color:#4a6a8a;text-decoration:none}
     <button class="nav-link" onclick="reportOpen()">Report</button>
   </div>
   <div class="nav-right">
-    <span class="nav-deepsignal">/ DeepSignal</span>
     <button id="mute-btn" onclick="toggleMute()" title="Toggle sounds"></button>
+    <span class="nav-deepsignal">/ DeepSignal</span>
   </div>
 </nav>
 
@@ -1580,8 +1581,8 @@ const SFX = (() => {
   };
 })();
 
-const ICON_SND   = `<svg viewBox="0 0 20 20" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7H1v6h2l5 4V3L3 7z"/><path d="M13 7a4 4 0 0 1 0 6"/><path d="M16.5 4a8 8 0 0 1 0 12"/></svg>`;
-const ICON_MUTED = `<svg viewBox="0 0 20 20" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7H1v6h2l5 4V3L3 7z"/><line x1="14" y1="7" x2="20" y2="13"/><line x1="20" y1="7" x2="14" y2="13"/></svg>`;
+const ICON_SND   = `<svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7H1v6h2l5 4V3L3 7z"/><path d="M13 7a4 4 0 0 1 0 6"/><path d="M16.5 4a8 8 0 0 1 0 12"/></svg>`;
+const ICON_MUTED = `<svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7H1v6h2l5 4V3L3 7z"/><line x1="14" y1="7" x2="20" y2="13"/><line x1="20" y1="7" x2="14" y2="13"/></svg>`;
 
 function navTo(href) {
   SFX.click();
@@ -1591,19 +1592,22 @@ function navTo(href) {
   setTimeout(() => { location.href = href; }, 350);
 }
 
+function _syncMuteBtn() {
+  const btn = document.getElementById('mute-btn');
+  if (!btn) return;
+  const muted = SFX.muted();
+  btn.innerHTML = muted ? ICON_MUTED : ICON_SND;
+  btn.classList.toggle('sfx-on', !muted);
+}
 function toggleMute() {
   SFX.setMuted(!SFX.muted());
-  const btn = document.getElementById('mute-btn');
-  if (btn) btn.innerHTML = SFX.muted() ? ICON_MUTED : ICON_SND;
+  _syncMuteBtn();
   if (!SFX.muted()) SFX.ping();
 }
 
 // ── Init ──────────────────────────────────────────────────────────────────────
 loadCatalog();
-document.addEventListener('DOMContentLoaded', () => {
-  const btn = document.getElementById('mute-btn');
-  if (btn) btn.innerHTML = SFX.muted() ? ICON_MUTED : ICON_SND;
-});
+document.addEventListener('DOMContentLoaded', _syncMuteBtn);
 </script>
 </body>
 </html>
