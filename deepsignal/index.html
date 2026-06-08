@@ -73,6 +73,14 @@ nav{display:flex;align-items:center;gap:12px;padding:16px 24px;border-bottom:1px
 .result-links{display:flex;flex-wrap:wrap;gap:8px}
 .ext-link{font-size:.8rem;color:#7dd3fc;text-decoration:none;padding:5px 12px;border:1px solid rgba(125,211,252,.3);border-radius:5px;transition:background 140ms}
 .ext-link:hover{background:rgba(125,211,252,.1)}
+.map-gallery-link{font-size:.82rem;font-weight:600;color:#7dd3fc;border-color:rgba(125,211,252,.5);letter-spacing:.02em}
+.map-gallery-link:hover{background:rgba(125,211,252,.15);border-color:#7dd3fc;box-shadow:0 0 8px rgba(125,211,252,.25)}
+.gal-arr{display:inline-flex;gap:0px;margin-left:3px;font-size:1.2em;line-height:1;vertical-align:middle}
+.gal-arr span{animation:gal-chase 1.4s ease-in-out infinite;opacity:.15}
+.gal-arr span:nth-child(1){animation-delay:0s}
+.gal-arr span:nth-child(2){animation-delay:.22s}
+.gal-arr span:nth-child(3){animation-delay:.44s}
+@keyframes gal-chase{0%,100%{opacity:.15;transform:translateX(0)}40%{opacity:1;transform:translateX(3px)}70%{opacity:.5;transform:translateX(5px)}}
 .result-notfound{padding:16px;color:#7f8c9d;font-size:.9rem;text-align:center}
 .spinner{display:inline-block;width:18px;height:18px;border:2px solid rgba(125,211,252,.3);border-top-color:#7dd3fc;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:6px}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -283,10 +291,10 @@ footer a{color:#4a6a8a;text-decoration:none}
 </div>
 
 <div class="stats">
-  <div class="stat-chip">Pipeline candidates: <strong id="stat-n">169</strong></div>
+  <div class="stat-chip">Pipeline candidates: <strong id="stat-n">80</strong></div>
   <div class="stat-chip">Data sources: <strong>10</strong></div>
   <div class="stat-chip">Detection algorithms: <strong>14</strong></div>
-  <div class="stat-chip">Last updated: <strong>2026-06-08 07:18 UTC</strong></div>
+  <div class="stat-chip">Last updated: <strong>2026-06-08 UTC</strong></div>
 </div>
 
 <!-- Map Modal -->
@@ -1370,7 +1378,7 @@ function mapShowDetail(idx) {
   const links = [
     ra ? `<a class="ext-link" href="https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=${ra.toFixed(4)}+${dec.toFixed(4)}&CooFrame=ICRS&Radius=2&Radius.unit=arcmin" target="_blank" rel="noreferrer">SIMBAD</a>` : "",
     ra ? `<a class="ext-link" href="https://aladin.u-strasbg.fr/AladinLite/?target=${ra.toFixed(4)}+${dec.toFixed(4)}&fov=0.5&survey=P/DSS2/color" target="_blank" rel="noreferrer">Aladin</a>` : "",
-    `<a class="ext-link" href="gallery.html?target=${encodeURIComponent(cleanName(c.target_name))}" onclick="event.preventDefault(); navTo(this.href)">View in gallery →</a>`,
+    `<a class="ext-link map-gallery-link" href="gallery.html?target=${encodeURIComponent(cleanName(c.target_name))}" onclick="event.preventDefault(); navTo(this.href)">View in gallery<span class="gal-arr"><span>›</span><span>›</span><span>›</span></span></a>`,
   ].filter(Boolean).join("");
   const el = document.getElementById("map-detail");
   el.style.display = "block";
