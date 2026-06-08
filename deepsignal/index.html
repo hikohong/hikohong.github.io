@@ -472,6 +472,12 @@ async function loadCatalog() {
     renderHighlights();
     renderHistogram(catalog);
     renderSkyMap(catalog);
+    // Auto-search if ?q= param present (e.g. from gallery "View in search" link)
+    const urlQ = new URLSearchParams(location.search).get('q');
+    if (urlQ) {
+      document.getElementById('q').value = urlQ;
+      doSearch();
+    }
   } catch (_) {}
 }
 
@@ -831,7 +837,7 @@ function showResult(resolved, pipelineMatches) {
 
   const _srName = name.replace(/'/g, "\\'");
   const coordTxt = ra != null
-    ? `RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}° <button class="btn-copy-coords" onclick="copyCoords('result-cc',${ra},${dec})" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-result-cc">✓</span> <button class="btn-map-jump" onclick="event.stopPropagation();mapOpenFromCard(${ra},${dec},'${_srName}',${score||0},${!p.target_name})" title="Show on Map">Map</button>`
+    ? `RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}° <span style="white-space:nowrap;display:inline-flex;align-items:center;gap:3px"><button class="btn-copy-coords" onclick="copyCoords('result-cc',${ra},${dec})" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-result-cc">✓</span><button class="btn-map-jump" onclick="event.stopPropagation();mapOpenFromCard(${ra},${dec},'${_srName}',${score||0},${!p.target_name})" title="Show on Map">Map</button></span>`
     : "";
   const extLinks = [
     ra != null ? `<a class="ext-link" href="${aladInUrl(ra, dec)}" target="_blank">Aladin Lite</a>` : "",
@@ -978,7 +984,7 @@ function renderHighlights() {
     const _cid = `hl-${c.target_name.replace(/[^a-zA-Z0-9]/g,"_")}`;
 
     const coordsTxt = (ra != null)
-      ? `<div class="card-coords">RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}° <button class="btn-copy-coords" onclick="event.stopPropagation();copyCoords('${_cid}',${ra},${dec})" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-${_cid}">✓</span> <button class="btn-map-jump" onclick="event.stopPropagation();mapOpenFromCard(${ra},${dec},'${safeN}',${c.candidacy_score||0},false)" title="Show on Map">Map</button></div>` : "";
+      ? `<div class="card-coords">RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}° <span style="white-space:nowrap;display:inline-flex;align-items:center;gap:3px"><button class="btn-copy-coords" onclick="event.stopPropagation();copyCoords('${_cid}',${ra},${dec})" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-${_cid}">✓</span><button class="btn-map-jump" onclick="event.stopPropagation();mapOpenFromCard(${ra},${dec},'${safeN}',${c.candidacy_score||0},false)" title="Show on Map">Map</button></span></div>` : "";
 
     const allReasons = c._all_reasons || c.reasons || [];
     const reasonsHtml = allReasons.length
@@ -1463,6 +1469,7 @@ function mapOpenFromCard(ra, dec, name, score, isSearchResult) {
         <div style="display:flex;gap:6px;flex-wrap:wrap;padding-top:8px;border-top:1px solid rgba(16,185,129,.15)">
           <a class="ext-link" href="https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=${ra.toFixed(4)}+${dec.toFixed(4)}&CooFrame=ICRS&Radius=2&Radius.unit=arcmin" target="_blank" rel="noreferrer">SIMBAD</a>
           <a class="ext-link" href="https://aladin.u-strasbg.fr/AladinLite/?target=${ra.toFixed(4)}+${dec.toFixed(4)}&fov=0.5&survey=P/DSS2/color" target="_blank" rel="noreferrer">Aladin</a>
+          <button class="ext-link map-gallery-link" style="background:none;cursor:pointer;font-family:inherit" onclick="mapClose();document.getElementById('q').value='${name.replace(/'/g,"\\'")}';window.scrollTo({top:0,behavior:'smooth'});doSearch()">View in search<span class="gal-arr"><span>›</span><span>›</span><span>›</span></span></button>
         </div>
       </div>
     </div>`;
