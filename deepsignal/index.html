@@ -207,10 +207,14 @@ footer a{color:#4a6a8a;text-decoration:none}
 .sky-dot{cursor:pointer;transition:fill-opacity 120ms}
 .sky-dot:hover{fill-opacity:1!important}
 /* ── Copy coords ── */
-.btn-copy-coords{background:none;border:1px solid rgba(219,234,254,.15);color:#4a5a6a;
+.btn-copy-coords{background:none;border:1px solid rgba(219,234,254,.28);color:#6a8a9a;
                  border-radius:3px;padding:0 4px;font-size:.65rem;cursor:pointer;font-family:inherit;
                  transition:color 120ms,border-color 120ms;line-height:1.4;vertical-align:middle}
 .btn-copy-coords:hover{color:#7dd3fc;border-color:rgba(125,211,252,.4)}
+.btn-map-jump{background:none;border:1px solid rgba(16,185,129,.35);color:#10b981;
+              border-radius:3px;padding:0 6px;font-size:.62rem;cursor:pointer;font-family:inherit;
+              transition:color 120ms,border-color 120ms,background 120ms;line-height:1.4;vertical-align:middle;font-weight:600;letter-spacing:.02em}
+.btn-map-jump:hover{color:#34d399;border-color:#10b981;background:rgba(16,185,129,.1)}
 .copy-ok{font-size:.65rem;color:#22c55e;margin-left:2px;opacity:0;transition:opacity 600ms;vertical-align:middle}
 /* ── Permalink highlight ── */
 .card.highlighted{border-color:#7dd3fc!important;box-shadow:0 0 18px rgba(125,211,252,.35)}
@@ -825,8 +829,9 @@ function showResult(resolved, pipelineMatches) {
   const dtypeTags  = dtypes.map(d  => `<span class="tag tag-dtype">${d}</span>`).join("");
   const reasonHtml = reasons.length ? `<ul class="result-reasons">${reasons.map(r => `<li>${r}</li>`).join("")}</ul>` : "";
 
+  const _srName = name.replace(/'/g, "\\'");
   const coordTxt = ra != null
-    ? `RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}° <button class="btn-copy-coords" onclick="copyCoords('result-cc',${ra},${dec})" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-result-cc">✓</span>`
+    ? `RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}° <button class="btn-copy-coords" onclick="copyCoords('result-cc',${ra},${dec})" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-result-cc">✓</span> <button class="btn-map-jump" onclick="event.stopPropagation();mapOpenFromCard(${ra},${dec},'${_srName}',${score||0},${!p.target_name})" title="Show on Map">Map</button>`
     : "";
   const extLinks = [
     ra != null ? `<a class="ext-link" href="${aladInUrl(ra, dec)}" target="_blank">Aladin Lite</a>` : "",
@@ -973,7 +978,7 @@ function renderHighlights() {
     const _cid = `hl-${c.target_name.replace(/[^a-zA-Z0-9]/g,"_")}`;
 
     const coordsTxt = (ra != null)
-      ? `<div class="card-coords">RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}° <button class="btn-copy-coords" onclick="event.stopPropagation();copyCoords('${_cid}',${ra},${dec})" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-${_cid}">✓</span></div>` : "";
+      ? `<div class="card-coords">RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}° <button class="btn-copy-coords" onclick="event.stopPropagation();copyCoords('${_cid}',${ra},${dec})" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-${_cid}">✓</span> <button class="btn-map-jump" onclick="event.stopPropagation();mapOpenFromCard(${ra},${dec},'${safeN}',${c.candidacy_score||0},false)" title="Show on Map">Map</button></div>` : "";
 
     const allReasons = c._all_reasons || c.reasons || [];
     const reasonsHtml = allReasons.length
@@ -1297,6 +1302,7 @@ function renderSkyMap(data) {
         <circle cx="334" cy="7" r="1.2" fill="#4a5a6a" fill-opacity=".6"/>
         <text x="338.5" y="9.5" fill="#3a5a7a" font-size="5" font-family="monospace">T3</text>
         ${dots}
+        <g id="map-custom-dot" pointer-events="none"></g>
         <g id="map-crosshair" pointer-events="none"></g>
       </svg>
     </div>`;
@@ -1333,6 +1339,8 @@ function mapClose() {
   document.getElementById("sky-tooltip-map").style.display="none";
   const g = document.getElementById("map-crosshair");
   if (g) g.innerHTML = "";
+  const gd = document.getElementById("map-custom-dot");
+  if (gd) gd.innerHTML = "";
 }
 function _updateMapCrosshair(ra, dec, name, tc) {
   const g = document.getElementById("map-crosshair");
@@ -1411,6 +1419,55 @@ function copyCoords(cid, ra, dec) {
     const el = document.getElementById("ck-"+cid);
     if (el) { el.style.opacity="1"; setTimeout(()=>el.style.opacity="0", 1800); }
   }).catch(()=>{});
+}
+
+// ── Open Map and jump to a specific target ───────────────────────────────────
+function mapOpenFromCard(ra, dec, name, score, isSearchResult) {
+  mapOpen();
+  // Try to find the existing candidate dot first
+  const idx = catalog.findIndex(c => {
+    const cra = c.ra_deg||c.ra||0, cdec = c.dec_deg||c.dec||0;
+    return Math.abs(cra-ra)<0.05 && Math.abs(cdec-dec)<0.05;
+  });
+  if (!isSearchResult && idx >= 0) {
+    mapShowDetail(idx);
+    return;
+  }
+  // Search-only target or not found — render custom teal dot + detail
+  SFX.scan();
+  const tc = '#10b981', tbg = 'rgba(16,185,129,.12)';
+  const gd = document.getElementById("map-custom-dot");
+  if (gd) {
+    const cx = ra.toFixed(2), cy = (90-dec).toFixed(2);
+    gd.innerHTML = `<circle cx="${cx}" cy="${cy}" r="3" fill="${tc}" opacity="0.95" filter="url(#glow2)">
+      <animate attributeName="r" values="3;7;3" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.95;0.2;0.95" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="${cx}" cy="${cy}" r="2" fill="${tc}" opacity="0.9"/>`;
+  }
+  const imgUrl = ra ? `https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=120&height=120&fov=0.25&projection=TAN&coordsys=icrs&ra=${ra.toFixed(5)}&dec=${dec.toFixed(5)}&format=jpg` : "";
+  const imgHtml = imgUrl ? `<img src="${imgUrl}" width="80" height="80" style="object-fit:cover;border-radius:6px;border:1px solid rgba(16,185,129,.25);flex-shrink:0;background:#0a1a2e" onerror="this.style.display='none'">` : "";
+  const el = document.getElementById("map-detail");
+  el.style.display = "block";
+  el.innerHTML = `
+    <div style="display:flex;gap:10px;align-items:flex-start">
+      ${imgHtml}
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap">
+          <span style="font-size:.6rem;font-weight:700;padding:2px 8px;border-radius:10px;
+            background:${tbg};color:${tc};border:1px solid ${tc}55;flex-shrink:0">⊕ Search</span>
+          <span style="font-size:.92rem;font-weight:700;color:#eef3f8">${name}</span>
+        </div>
+        <div style="margin:4px 0 6px;font-size:.72rem;color:#5a8a7a">Not in current candidate list</div>
+        <div class="card-coords" style="margin:6px 0">RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}°</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;padding-top:8px;border-top:1px solid rgba(16,185,129,.15)">
+          <a class="ext-link" href="https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=${ra.toFixed(4)}+${dec.toFixed(4)}&CooFrame=ICRS&Radius=2&Radius.unit=arcmin" target="_blank" rel="noreferrer">SIMBAD</a>
+          <a class="ext-link" href="https://aladin.u-strasbg.fr/AladinLite/?target=${ra.toFixed(4)}+${dec.toFixed(4)}&fov=0.5&survey=P/DSS2/color" target="_blank" rel="noreferrer">Aladin</a>
+        </div>
+      </div>
+    </div>`;
+  document.getElementById("map-body").scrollTop = 0;
+  _updateMapCrosshair(ra, dec, name, tc);
 }
 
 // ── Highlights filter / sort ──────────────────────────────────────────────────
