@@ -984,7 +984,7 @@ function renderHighlights() {
     const _cid = `hl-${c.target_name.replace(/[^a-zA-Z0-9]/g,"_")}`;
 
     const coordsTxt = (ra != null)
-      ? `<div class="card-coords">RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}° <span style="white-space:nowrap;display:inline-flex;align-items:center;gap:3px"><button class="btn-copy-coords" onclick="event.stopPropagation();copyCoords('${_cid}',${ra},${dec})" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-${_cid}">✓</span><button class="btn-map-jump" onclick="event.stopPropagation();mapOpenFromCard(${ra},${dec},'${safeN}',${c.candidacy_score||0},false)" title="Show on Map">Map</button></span></div>` : "";
+      ? `<div class="card-coords" style="display:flex;align-items:center;gap:4px"><span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}°</span><span style="flex-shrink:0;display:inline-flex;align-items:center;gap:3px"><button class="btn-copy-coords" onclick="event.stopPropagation();copyCoords('${_cid}',${ra},${dec})" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-${_cid}">✓</span><button class="btn-map-jump" onclick="event.stopPropagation();mapOpenFromCard(${ra},${dec},'${safeN}',${c.candidacy_score||0},false)" title="Show on Map">Map</button></span></div>` : "";
 
     const allReasons = c._all_reasons || c.reasons || [];
     const reasonsHtml = allReasons.length
