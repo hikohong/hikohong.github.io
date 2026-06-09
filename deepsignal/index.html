@@ -1205,7 +1205,7 @@ async function _newsFetch(targetName) {
   const t0 = Date.now();
   try {
     const q = targetName || "astrophysics SETI";
-    const url = `https://api.semanticscholar.org/graph/v1/paper/search?query=${encodeURIComponent(q)}&fields=title,abstract,year,externalIds,openAccessPdf&limit=8&sort=publicationDate:desc`;
+    const url = `https://api.semanticscholar.org/graph/v1/paper/search?query=${encodeURIComponent(q)}&fields=title,abstract,year,externalIds,openAccessPdf&limit=8`;
     const ctrl = new AbortController();
     const tid = setTimeout(() => ctrl.abort(), 12000);
     const resp = await fetch(url, { signal: ctrl.signal });
