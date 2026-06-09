@@ -1373,7 +1373,7 @@ async function _newsFetchSFApi() {
 async function _newsFetchGN() {
   const q = _newsTargetFilter
     ? (_newsTargetFilter + ' space astronomy')
-    : 'space astronomy SETI news';
+    : 'space astronomy';
   const rss = 'https://news.google.com/rss/search?q=' + encodeURIComponent(q) + '&hl=en-US&gl=US&ceid=US:en';
 
   function _parseGNItem(title, link, pubDate, desc) {

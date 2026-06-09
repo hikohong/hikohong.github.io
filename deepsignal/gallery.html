@@ -762,7 +762,7 @@
 <div id="sky-tooltip-map"></div>
 <div class="gallery-hdr">
 <h1>DeepSignal — Sky Image Gallery</h1>
-<div class="subtitle">Generated 2026-06-09 14:33 UTC &nbsp;·&nbsp; 169 targets &nbsp;·&nbsp; 169 sky images via Hips2Fits CDN</div>
+<div class="subtitle">Generated 2026-06-09 14:42 UTC &nbsp;·&nbsp; 169 targets &nbsp;·&nbsp; 169 sky images via Hips2Fits CDN</div>
 <div class="stats">
   <div class="stat"><div class="stat-n" style="color:#f59e0b">38</div><div class="stat-l">Tier 1 ≥70</div></div>
   <div class="stat"><div class="stat-n" style="color:#60a5fa">119</div><div class="stat-l">Tier 2 50–69</div></div>
@@ -5566,7 +5566,7 @@ async function _newsFetchSFApi() {
 async function _newsFetchGN() {
   const q = _newsTargetFilter
     ? (_newsTargetFilter + ' space astronomy')
-    : 'space astronomy SETI news';
+    : 'space astronomy';
   const rss = 'https://news.google.com/rss/search?q=' + encodeURIComponent(q) + '&hl=en-US&gl=US&ceid=US:en';
 
   function _parseGNItem(title, link, pubDate, desc) {
