@@ -418,6 +418,7 @@ footer a{color:#4a6a8a;text-decoration:none}
         <a class="lit-btn" id="news-atel-link" href="https://www.astronomerstelegram.org/" target="_blank" rel="noopener">↗ ATel</a>
         <a class="lit-btn" id="news-google-link" href="https://news.google.com/search?q=astronomy" target="_blank" rel="noopener">↗ Google News</a>
         <a class="lit-btn" id="news-apod-link" href="https://apod.nasa.gov/apod/archivepix.html" target="_blank" rel="noopener">↗ APOD</a>
+        <a class="lit-btn" id="news-tns-link" href="https://www.wis-tns.org/search" target="_blank" rel="noopener">↗ TNS</a>
       </div>
     </div>
   </div>
@@ -1182,6 +1183,8 @@ async function newsOpen(targetName) {
     `https://news.google.com/search?q=${enc}${targetName ? "+astronomy" : ""}`;
   document.getElementById("news-apod-link").href =
     targetName ? `https://apod.nasa.gov/cgi-bin/apod/apod_search?tquery=${enc}&otype=ol` : "https://apod.nasa.gov/apod/archivepix.html";
+  document.getElementById("news-tns-link").href =
+    targetName ? `https://www.wis-tns.org/search?search%5Bname%5D=${enc}` : "https://www.wis-tns.org/search";
   document.getElementById("news-overlay").classList.add("open");
   document.body.style.overflow = "hidden";
   await _newsFetch(targetName);
