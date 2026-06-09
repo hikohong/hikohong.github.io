@@ -1247,6 +1247,7 @@ let _newsAllItems = [];
 let _newsSrcFilter = 'all';
 let _newsSortMode = 'date-desc';
 let _newsTargetFilter = null;
+let _newsGNStatus = 'idle'; // 'idle' | 'loading' | 'done' | 'error'
 
 async function _newsFetch(force = false) {
   const body = document.getElementById("news-body");
@@ -1267,6 +1268,7 @@ async function _newsFetch(force = false) {
     _newsGNItems = [];
     _newsAllItems = [..._newsSFItems];
     _newsApplySort();
+    _newsGNStatus = 'loading';
     document.getElementById("news-filter-bar").style.display = 'flex';
     _newsBuildChips();
     const tl = _newsTargetFilter ? _newsTargetFilter.toLowerCase() : null;
@@ -1281,6 +1283,7 @@ async function _newsFetch(force = false) {
       footer.textContent = 'cached · fetching Google News…';
     }
     _newsFetchGN().then(items => {
+      _newsGNStatus = 'done';
       _newsGNItems = items;
       _newsAllItems = [..._newsSFItems, ..._newsGNItems];
       _newsApplySort();
@@ -1288,7 +1291,11 @@ async function _newsFetch(force = false) {
       _newsRender();
       footer.textContent = `cached · ${_newsAllItems.length} items`;
     }).catch(() => {
-      if (!hasSFMatch) _newsRender();
+      _newsGNStatus = 'error';
+      _newsBuildChips();
+      if (!hasSFMatch) {
+        body.innerHTML = `<div class="lit-empty">No Spaceflight News articles mention "${_newsTargetFilter}".<br><span style="font-size:.75rem;opacity:.7">Google News unavailable — try ↗ Google News below.</span></div>`;
+      }
       footer.textContent = `cached · ${_newsSFItems.length} items`;
     });
     return;
@@ -1302,6 +1309,7 @@ async function _newsFetch(force = false) {
   if (_newsSFItems.length) {
     try { localStorage.setItem(_NEWS_LS_KEY, JSON.stringify({ ts: Date.now(), items: _newsSFItems })); } catch(_) {}
   }
+  _newsGNStatus = gnRes.status === 'fulfilled' ? 'done' : 'error';
   _newsGNItems = gnRes.status === 'fulfilled' ? gnRes.value : [];
   _newsAllItems = [..._newsSFItems, ..._newsGNItems];
   _newsApplySort();
@@ -1340,12 +1348,23 @@ async function _newsFetchGN() {
     ? (_newsTargetFilter + ' space astronomy')
     : 'space astronomy SETI news';
   const rss = 'https://news.google.com/rss/search?q=' + encodeURIComponent(q) + '&hl=en-US&gl=US&ceid=US:en';
-  const url = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(rss);
-  const ctrl = new AbortController();
-  const tid = setTimeout(() => ctrl.abort(), 10000);
-  const resp = await fetch(url, { signal: ctrl.signal });
-  clearTimeout(tid);
-  const text = await resp.text();
+  const proxies = [
+    'https://corsproxy.io/?' + encodeURIComponent(rss),
+    'https://api.allorigins.win/raw?url=' + encodeURIComponent(rss),
+  ];
+  let text = '';
+  for (const url of proxies) {
+    try {
+      const ctrl = new AbortController();
+      const tid = setTimeout(() => ctrl.abort(), 10000);
+      const resp = await fetch(url, { signal: ctrl.signal });
+      clearTimeout(tid);
+      if (!resp.ok) continue;
+      const t = await resp.text();
+      if (t && t.includes('<item>')) { text = t; break; }
+    } catch (_) {}
+  }
+  if (!text) throw new Error('GN unavailable');
   const doc = new DOMParser().parseFromString(text, 'application/xml');
   return [...doc.querySelectorAll('item')].slice(0, 15).map(el => {
     const raw = el.querySelector('title')?.textContent || '—';
@@ -1385,9 +1404,17 @@ function _newsBuildChips() {
     ordered = others;
   }
   const sources = ['all', ...ordered];
-  document.getElementById("news-chips").innerHTML = sources.map(s =>
+  let chipsHtml = sources.map(s =>
     `<button class="news-filter-chip${s === _newsSrcFilter ? ' active' : ''}" onclick="_newsSetSource('${s}')">${s === 'all' ? 'All' : (labelsMap[s] || s)}</button>`
   ).join('');
+  if (!hasGN) {
+    if (_newsGNStatus === 'loading') {
+      chipsHtml += '<button class="news-filter-chip" disabled style="opacity:.4;cursor:default">Google News…</button>';
+    } else if (_newsGNStatus === 'error') {
+      chipsHtml += '<button class="news-filter-chip" disabled style="opacity:.4;cursor:default" title="Unavailable — use ↗ below">Google News ✗</button>';
+    }
+  }
+  document.getElementById("news-chips").innerHTML = chipsHtml;
 }
 
 function _newsSetSource(src) {
@@ -1413,6 +1440,7 @@ function _newsForceRefresh() {
   _newsSFItems = [];
   _newsGNItems = [];
   _newsAllItems = [];
+  _newsGNStatus = 'idle';
   const sel = document.getElementById("news-sort");
   if (sel) sel.value = 'date-desc';
   _newsFetch(true);
@@ -1429,7 +1457,17 @@ function _newsRender() {
       (p.snippet || '').toLowerCase().includes(tl)
     );
   }
-  if (!items.length) { body.innerHTML = `<div class="lit-empty">No items match this filter</div>`; return; }
+  if (!items.length) {
+    let emptyMsg = 'No items match this filter';
+    if (_newsTargetFilter && _newsGNStatus === 'error') {
+      emptyMsg = `No Spaceflight News articles mention "${_newsTargetFilter}" — Google News unavailable, try ↗ below`;
+    } else if (_newsTargetFilter && _newsGNStatus === 'loading') {
+      emptyMsg = `No Spaceflight News articles mention "${_newsTargetFilter}" — Google News loading…`;
+    } else if (_newsTargetFilter && _newsGNStatus === 'done') {
+      emptyMsg = `No articles mention "${_newsTargetFilter}"`;
+    }
+    body.innerHTML = `<div class="lit-empty">${emptyMsg}</div>`; return;
+  }
   body.innerHTML = items.map(p => {
     const badge = `<span class="news-src-badge" style="background:rgba(249,115,22,.1);color:#f97316;border:1px solid rgba(249,115,22,.2)">${p.sourceLabel}</span>`;
     const safeLink = p.link.replace(/'/g, '%27');
