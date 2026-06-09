@@ -315,6 +315,7 @@
         <a class="lit-btn" id="news-atel-link" href="https://www.astronomerstelegram.org/" target="_blank" rel="noopener">↗ ATel</a>
         <a class="lit-btn" id="news-google-link" href="https://news.google.com/search?q=astronomy" target="_blank" rel="noopener">↗ Google News</a>
         <a class="lit-btn" id="news-apod-link" href="https://apod.nasa.gov/apod/archivepix.html" target="_blank" rel="noopener">↗ APOD</a>
+        <a class="lit-btn" id="news-tns-link" href="https://www.wis-tns.org/search" target="_blank" rel="noopener">↗ TNS</a>
       </div>
     </div>
   </div>
@@ -724,7 +725,7 @@
 <div id="sky-tooltip-map"></div>
 <div class="gallery-hdr">
 <h1>DeepSignal — Sky Image Gallery</h1>
-<div class="subtitle">Generated 2026-06-09 05:28 UTC &nbsp;·&nbsp; 169 targets &nbsp;·&nbsp; 169 sky images via Hips2Fits CDN</div>
+<div class="subtitle">Generated 2026-06-09 05:33 UTC &nbsp;·&nbsp; 169 targets &nbsp;·&nbsp; 169 sky images via Hips2Fits CDN</div>
 <div class="stats">
   <div class="stat"><div class="stat-n" style="color:#f59e0b">38</div><div class="stat-l">Tier 1 ≥70</div></div>
   <div class="stat"><div class="stat-n" style="color:#60a5fa">119</div><div class="stat-l">Tier 2 50–69</div></div>
@@ -5382,6 +5383,8 @@ async function newsOpen(targetName) {
     'https://news.google.com/search?q=' + enc + (targetName ? "+astronomy" : "");
   document.getElementById("news-apod-link").href =
     targetName ? 'https://apod.nasa.gov/cgi-bin/apod/apod_search?tquery=' + enc + '&otype=ol' : "https://apod.nasa.gov/apod/archivepix.html";
+  document.getElementById("news-tns-link").href =
+    targetName ? 'https://www.wis-tns.org/search?search%5Bname%5D=' + enc : "https://www.wis-tns.org/search";
   document.getElementById("news-overlay").classList.add("open");
   document.body.style.overflow = "hidden";
   await _newsFetch(targetName);
