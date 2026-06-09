@@ -427,7 +427,7 @@ footer a{color:#4a6a8a;text-decoration:none}
     <div class="news-hdr">
       <span style="font-size:1.4rem;opacity:.7;flex-shrink:0">◎</span>
       <div>
-        <div class="news-hdr-eyebrow">⬡ DeepSignal · Space News · NASA / Space.com / S&T</div>
+        <div class="news-hdr-eyebrow">⬡ DeepSignal · Space News · Spaceflight News</div>
         <div class="news-hdr-name" id="news-target-name">Space News</div>
       </div>
       <button class="lit-x" onclick="newsClose()">✕</button>
@@ -1235,14 +1235,9 @@ function newsClose() {
   document.body.style.overflow = "";
 }
 
-// ── Space News: RSS feeds via rss2json ────────────────────────────────────────
+// ── Space News: Spaceflight News API ─────────────────────────────────────────
 const _NEWS_LS_KEY = 'ds_news_v1';
 const _NEWS_TTL = 2 * 60 * 60 * 1000;
-const _NEWS_FEEDS = [
-  { src: 'nasa',  label: 'NASA',      url: 'https://www.nasa.gov/rss/dyn/breaking_news.rss' },
-  { src: 'space', label: 'Space.com', url: 'https://www.space.com/feeds/all' },
-  { src: 'st',    label: 'S&T',       url: 'https://skyandtelescope.org/astronomy-news/feed/' },
-];
 let _newsAllItems = [];
 let _newsSrcFilter = 'all';
 let _newsSortMode = 'date-desc';
@@ -1256,8 +1251,7 @@ async function _newsFetch(force = false) {
       if (cached && (Date.now() - cached.ts) < _NEWS_TTL) {
         _newsAllItems = cached.items;
         _newsApplySort();
-        const bar = document.getElementById("news-filter-bar");
-        bar.style.display = 'flex';
+        document.getElementById("news-filter-bar").style.display = 'flex';
         _newsBuildChips();
         _newsRender();
         footer.textContent = `cached · ${_newsAllItems.length} items`;
@@ -1268,14 +1262,29 @@ async function _newsFetch(force = false) {
   body.innerHTML = `<div class="lit-status"><span class="spinner"></span> LOADING NEWS FEEDS…</div>`;
   _newsAllItems = [];
   const t0 = Date.now();
-  const results = await Promise.allSettled(_NEWS_FEEDS.map(f => _fetchRSS(f)));
-  results.forEach(r => { if (r.status === 'fulfilled') _newsAllItems.push(...r.value); });
+  let _newsErr = '';
+  try {
+    const ctrl = new AbortController();
+    const tid = setTimeout(() => ctrl.abort(), 12000);
+    const resp = await fetch('https://api.spaceflightnewsapi.net/v4/articles/?limit=30&ordering=-published_at', { signal: ctrl.signal });
+    clearTimeout(tid);
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    const data = await resp.json();
+    _newsAllItems = (data.results || []).map(item => ({
+      title: (item.title || '—').replace(/</g, '&lt;'),
+      link: item.url || '#',
+      dateTs: item.published_at ? new Date(item.published_at).getTime() : 0,
+      dateStr: item.published_at ? new Date(item.published_at).toISOString().slice(0, 10) : '',
+      source: (item.news_site || 'other').toLowerCase().replace(/[^a-z0-9]/g, '_'),
+      sourceLabel: item.news_site || 'Unknown',
+      snippet: (item.summary || '').slice(0, 160),
+    }));
+  } catch(e) { _newsErr = e.name === 'AbortError' ? 'timeout' : (e.message || 'fetch failed'); }
   _newsApplySort();
   try { localStorage.setItem(_NEWS_LS_KEY, JSON.stringify({ ts: Date.now(), items: _newsAllItems })); } catch(_) {}
   const elapsed = ((Date.now() - t0) / 1000).toFixed(1);
-  footer.textContent = `${elapsed}s · ${_newsAllItems.length} items`;
-  const bar = document.getElementById("news-filter-bar");
-  bar.style.display = 'flex';
+  footer.textContent = `${elapsed}s · ${_newsAllItems.length} items${_newsErr ? ' · ' + _newsErr : ''}`;
+  document.getElementById("news-filter-bar").style.display = 'flex';
   _newsBuildChips();
   if (!_newsAllItems.length) {
     body.innerHTML = `<div class="lit-empty">Could not load news feeds<br>
@@ -1285,43 +1294,25 @@ async function _newsFetch(force = false) {
   _newsRender();
 }
 
-async function _fetchRSS(feed) {
-  const proxy = 'https://api.rss2json.com/v1/api.json?rss_url=';
-  const ctrl = new AbortController();
-  const tid = setTimeout(() => ctrl.abort(), 10000);
-  const resp = await fetch(proxy + encodeURIComponent(feed.url) + '&count=12', { signal: ctrl.signal });
-  clearTimeout(tid);
-  if (!resp.ok) throw new Error(`RSS ${resp.status}`);
-  const data = await resp.json();
-  return (data.items || []).map(item => ({
-    title: (item.title || '—').replace(/</g, '&lt;'),
-    link: item.link || '#',
-    date: new Date(item.pubDate || 0),
-    dateStr: item.pubDate ? new Date(item.pubDate).toISOString().slice(0, 10) : '',
-    source: feed.src,
-    sourceLabel: feed.label,
-    snippet: (item.description || '').replace(/<[^>]+>/g, '').trim().slice(0, 160),
-  }));
-}
-
 function _newsApplySort() {
-  if (_newsSortMode === 'date-desc') _newsAllItems.sort((a, b) => b.date - a.date);
-  else _newsAllItems.sort((a, b) => a.date - b.date);
+  if (_newsSortMode === 'date-desc') _newsAllItems.sort((a, b) => (b.dateTs || 0) - (a.dateTs || 0));
+  else _newsAllItems.sort((a, b) => (a.dateTs || 0) - (b.dateTs || 0));
 }
 
 function _newsBuildChips() {
-  const labels = { all: 'All', nasa: 'NASA', space: 'Space.com', st: 'S&T' };
+  const labelsMap = Object.fromEntries(_newsAllItems.map(p => [p.source, p.sourceLabel]));
   const sources = ['all', ...[...new Set(_newsAllItems.map(p => p.source))].sort()];
   document.getElementById("news-chips").innerHTML = sources.map(s =>
-    `<button class="news-filter-chip${s === _newsSrcFilter ? ' active' : ''}" onclick="_newsSetSource('${s}')">${labels[s] || s}</button>`
+    `<button class="news-filter-chip${s === _newsSrcFilter ? ' active' : ''}" onclick="_newsSetSource('${s}')">${s === 'all' ? 'All' : (labelsMap[s] || s)}</button>`
   ).join('');
 }
 
 function _newsSetSource(src) {
   _newsSrcFilter = src;
+  const labelsMap = Object.fromEntries(_newsAllItems.map(p => [p.source, p.sourceLabel]));
   document.querySelectorAll('#news-chips .news-filter-chip').forEach(b => {
-    const labels = { all: 'All', nasa: 'NASA', space: 'Space.com', st: 'S&T' };
-    b.classList.toggle('active', b.textContent === (labels[src] || src));
+    const lbl = src === 'all' ? 'All' : (labelsMap[src] || src);
+    b.classList.toggle('active', b.textContent === lbl);
   });
   _newsRender();
 }
@@ -1345,9 +1336,8 @@ function _newsRender() {
   const body = document.getElementById("news-body");
   const items = _newsSrcFilter === 'all' ? _newsAllItems : _newsAllItems.filter(p => p.source === _newsSrcFilter);
   if (!items.length) { body.innerHTML = `<div class="lit-empty">No items match this filter</div>`; return; }
-  const cls = { nasa: 'news-src-nasa', space: 'news-src-space', st: 'news-src-st' };
   body.innerHTML = items.map(p => {
-    const badge = `<span class="news-src-badge ${cls[p.source] || ''}">${p.sourceLabel}</span>`;
+    const badge = `<span class="news-src-badge" style="background:rgba(249,115,22,.1);color:#f97316;border:1px solid rgba(249,115,22,.2)">${p.sourceLabel}</span>`;
     const safeLink = p.link.replace(/'/g, '%27');
     return `<div class="news-item" style="cursor:pointer" onclick="SFX.click();window.open('${safeLink}','_blank','noopener')">
       <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px">${badge}<span class="news-date">${p.dateStr}</span></div>
