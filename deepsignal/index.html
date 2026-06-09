@@ -1371,9 +1371,10 @@ async function _newsFetchSFApi() {
 }
 
 async function _newsFetchGN() {
+  const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
   const q = _newsTargetFilter
     ? (_newsTargetFilter + ' space astronomy')
-    : 'space astronomy';
+    : ('space astronomy after:' + thirtyDaysAgo);
   const rss = 'https://news.google.com/rss/search?q=' + encodeURIComponent(q) + '&hl=en-US&gl=US&ceid=US:en';
 
   function _parseGNItem(title, link, pubDate, desc) {
