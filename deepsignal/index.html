@@ -160,6 +160,25 @@ footer a{color:#4a6a8a;text-decoration:none}
 .btn-papers:hover{background:rgba(125,211,252,.1);border-color:rgba(125,211,252,.4)}
 .btn-papers .papers-dot{font-size:.8rem;line-height:1;color:#7dd3fc;animation:blink 1.8s ease-in-out infinite}
 @keyframes blink{0%,100%{opacity:.3}50%{opacity:1}}
+.btn-news{display:inline-flex;align-items:center;gap:4px;font-size:.68rem;color:#f97316;background:none;border:1px solid rgba(249,115,22,.2);border-radius:4px;padding:2px 8px;cursor:pointer;transition:background 140ms,border-color 140ms;font-family:inherit;white-space:nowrap}
+.btn-news:hover{background:rgba(249,115,22,.08);border-color:rgba(249,115,22,.4)}
+.btn-news .news-dot{font-size:.8rem;line-height:1;color:#f97316;animation:blink 1.8s ease-in-out infinite}
+/* ── News Modal ── */
+#news-overlay{display:none;position:fixed;inset:0;background:rgba(0,5,15,.88);backdrop-filter:blur(6px);z-index:900;align-items:center;justify-content:center}
+#news-overlay.open{display:flex}
+#news-modal{width:min(740px,96vw);max-height:82vh;background:#030c18;border:1px solid rgba(249,115,22,.45);border-radius:12px;box-shadow:0 0 48px rgba(249,115,22,.14),0 0 120px rgba(249,115,22,.06);display:flex;flex-direction:column;overflow:hidden;position:relative;animation:lit-in .18s ease-out}
+#news-modal::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(20,10,0,.15) 3px,rgba(20,10,0,.15) 4px);pointer-events:none;z-index:1}
+.news-hdr{padding:14px 18px;border-bottom:1px solid rgba(249,115,22,.18);display:flex;align-items:center;gap:12px;flex-shrink:0;background:rgba(20,8,0,.5)}
+.news-hdr-eyebrow{font-size:.6rem;color:#f97316;font-family:monospace;letter-spacing:.14em;text-transform:uppercase;opacity:.8;margin-bottom:2px}
+.news-hdr-name{font-size:1.05rem;font-weight:700;color:#eef3f8}
+.news-body{padding:16px 20px;overflow-y:auto;flex:1;scrollbar-width:thin;scrollbar-color:#3a2010 transparent;position:relative;z-index:2}
+.news-footer{padding:10px 18px;border-top:1px solid rgba(249,115,22,.1);font-family:monospace;font-size:.62rem;color:#5a3a1a;flex-shrink:0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
+.news-item{padding:10px 0;border-bottom:1px solid rgba(249,115,22,.08)}
+.news-item:last-child{border-bottom:none}
+.news-title-lnk{color:#e0c0a0;font-size:.82rem;line-height:1.45;text-decoration:none;display:block;margin-bottom:3px}
+.news-title-lnk:hover{color:#f97316}
+.news-src{font-size:.6rem;color:#f97316;font-family:monospace;letter-spacing:.04em;text-transform:uppercase;opacity:.75}
+.news-date{font-size:.62rem;color:#5a4a3a;font-family:monospace;margin-top:2px}
 
 /* ── Filter bar ── */
 .filter-bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
@@ -272,6 +291,7 @@ footer a{color:#4a6a8a;text-decoration:none}
     <a class="nav-link active" href="index.html" onclick="event.preventDefault(); navTo('index.html')">Search</a>
     <a class="nav-link" href="gallery.html" onclick="event.preventDefault(); navTo('gallery.html')">Gallery</a>
     <button class="nav-link" onclick="mapOpen()">Map</button>
+    <button class="nav-link" onclick="newsOpen(null)">News</button>
     <button class="nav-link" onclick="reportOpen()">Report</button>
   </div>
   <div class="nav-right">
@@ -376,6 +396,29 @@ footer a{color:#4a6a8a;text-decoration:none}
     <div class="report-footer">
       <span>report.md</span>
       <span id="report-footer-ts"></span>
+    </div>
+  </div>
+</div>
+
+<!-- ── News Modal ───────────────────────────────────────────────────────────── -->
+<div id="news-overlay" onclick="if(event.target===this)newsClose()">
+  <div id="news-modal" role="dialog" aria-modal="true">
+    <div class="news-hdr">
+      <span style="font-size:1.4rem;opacity:.7;flex-shrink:0">◎</span>
+      <div>
+        <div class="news-hdr-eyebrow">⬡ DeepSignal · Space News · ATel / Google</div>
+        <div class="news-hdr-name" id="news-target-name">Space News</div>
+      </div>
+      <button class="lit-x" onclick="newsClose()">✕</button>
+    </div>
+    <div class="news-body" id="news-body"></div>
+    <div class="news-footer">
+      <span id="news-footer-ts"></span>
+      <div class="lit-actions">
+        <a class="lit-btn" id="news-atel-link" href="https://www.astronomerstelegram.org/" target="_blank" rel="noopener">↗ ATel</a>
+        <a class="lit-btn" id="news-google-link" href="https://news.google.com/search?q=astronomy" target="_blank" rel="noopener">↗ Google News</a>
+        <a class="lit-btn" id="news-apod-link" href="https://apod.nasa.gov/apod/archivepix.html" target="_blank" rel="noopener">↗ APOD</a>
+      </div>
     </div>
   </div>
 </div>
@@ -868,9 +911,12 @@ function showResult(resolved, pipelineMatches) {
         ${scoreTxt}
         ${reasonHtml}
         <div class="result-links">${extLinks}</div>
-        <div style="margin-top:12px">
+        <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
           <button class="btn-papers" onclick="litOpen('${name.replace(/'/g,"\\'")}', '${(methods[0] || "").replace(/'/g, "\\'")}')">
             <span class="papers-dot">◉</span> Search Literature
+          </button>
+          <button class="btn-news" onclick="newsOpen('${name.replace(/'/g,"\\'")}')">
+            <span class="news-dot">◎</span> Space News
           </button>
         </div>
       </div>
@@ -1029,9 +1075,12 @@ function renderHighlights() {
         ${coordsTxt}
         ${reasonsHtml}
         ${extLinksHtml}
-        <div style="margin-top:8px" onclick="event.stopPropagation()">
+        <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap" onclick="event.stopPropagation()">
           <button class="btn-papers" onclick="litOpen('${safeN}', '${safeMethod}')">
             <span class="papers-dot">◉</span> Search Literature
+          </button>
+          <button class="btn-news" onclick="event.stopPropagation();newsOpen('${safeN}')">
+            <span class="news-dot">◎</span> Space News
           </button>
         </div>
         ${countHtml}
@@ -1116,6 +1165,84 @@ function litClose() {
   SFX.close();
   document.getElementById("lit-overlay").classList.remove("open");
   document.body.style.overflow = "";
+}
+
+// ── News Modal ────────────────────────────────────────────────────────────────
+async function newsOpen(targetName) {
+  SFX.open();
+  const title = targetName || "Space News";
+  document.getElementById("news-target-name").textContent = title;
+  document.getElementById("news-footer-ts").textContent = "";
+  document.getElementById("news-body").innerHTML =
+    `<div class="lit-status"><span class="spinner"></span> SCANNING NEWS FEEDS…</div>`;
+  const enc = encodeURIComponent(targetName || "astronomy");
+  document.getElementById("news-atel-link").href =
+    targetName ? `https://www.astronomerstelegram.org/?read&query=${enc}` : "https://www.astronomerstelegram.org/";
+  document.getElementById("news-google-link").href =
+    `https://news.google.com/search?q=${enc}${targetName ? "+astronomy" : ""}`;
+  document.getElementById("news-apod-link").href =
+    targetName ? `https://apod.nasa.gov/cgi-bin/apod/apod_search?tquery=${enc}&otype=ol` : "https://apod.nasa.gov/apod/archivepix.html";
+  document.getElementById("news-overlay").classList.add("open");
+  document.body.style.overflow = "hidden";
+  await _newsFetch(targetName);
+}
+
+function newsClose() {
+  SFX.close();
+  document.getElementById("news-overlay").classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+const _RSS2JSON_NEWS = 'https://api.rss2json.com/v1/api.json?rss_url=';
+const _newsCache = {};
+async function _newsFetch(targetName) {
+  const body = document.getElementById("news-body");
+  const footer = document.getElementById("news-footer-ts");
+  const cacheKey = targetName || "__all__";
+  if (_newsCache[cacheKey]) { body.innerHTML = _newsCache[cacheKey]; footer.textContent = "cached"; return; }
+  const t0 = Date.now();
+  try {
+    const feedUrl = "https://www.astronomerstelegram.org/rss/atel_rss";
+    const ctrl = new AbortController();
+    const tid = setTimeout(() => ctrl.abort(), 12000);
+    const resp = await fetch(_RSS2JSON_NEWS + encodeURIComponent(feedUrl), {
+      headers: { Accept: "application/json" }, signal: ctrl.signal
+    });
+    clearTimeout(tid);
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const data = await resp.json();
+    const allItems = data.items || [];
+    const items = targetName
+      ? allItems.filter(item => item.title.toLowerCase().includes(targetName.toLowerCase()))
+      : allItems.slice(0, 15);
+    const elapsed = ((Date.now() - t0) / 1000).toFixed(1);
+    footer.textContent = `${elapsed}s · The Astronomer's Telegram`;
+    if (items.length) {
+      const html = `<div style="font-size:.7rem;color:#5a4a3a;font-family:monospace;margin-bottom:12px;letter-spacing:.06em">
+        ${targetName ? `${items.length} CIRCULAR${items.length > 1 ? "S" : ""} MENTIONING "${targetName.toUpperCase()}"` : `${items.length} RECENT CIRCULARS`}
+      </div>` + items.map(item => {
+        const desc = item.description ? item.description.replace(/<[^>]+>/g, "").slice(0, 200) : "";
+        return `<div class="news-item">
+          <div class="news-src">ATel</div>
+          <a class="news-title-lnk" href="${item.link}" target="_blank" rel="noopener">${item.title}</a>
+          ${desc ? `<div class="news-date" style="color:#6a5a4a;font-size:.72rem;line-height:1.4">${desc}…</div>` : ""}
+          <div class="news-date">${(item.pubDate || "").slice(0, 10)}</div>
+        </div>`;
+      }).join("");
+      _newsCache[cacheKey] = html;
+      body.innerHTML = html;
+    } else {
+      const html = `<div class="lit-empty">${targetName ? `No ATel circulars found for "<strong>${targetName}</strong>"` : "No recent circulars"}<br>
+        <span style="font-size:.72rem">Use the links below to search external sources</span></div>`;
+      _newsCache[cacheKey] = html;
+      body.innerHTML = html;
+    }
+  } catch(e) {
+    const isAbort = e.name === "AbortError";
+    body.innerHTML = `<div class="lit-empty">${isAbort ? "Request timed out" : "Could not load news feed"}<br>
+      <span style="font-size:.72rem">Use the links below to search external sources</span></div>`;
+    footer.textContent = "error";
+  }
 }
 
 function _abortFetch(ms) {
@@ -1611,8 +1738,8 @@ document.getElementById("q").addEventListener("keydown", e => {
 });
 document.addEventListener("keydown", e => {
   if (e.key !== "Escape") return;
-  const anyOpen = ["map-overlay","lit-overlay","report-overlay"].some(id => document.getElementById(id)?.classList.contains("open"));
-  if (anyOpen) { mapClose(); litClose(); reportClose(); }
+  const anyOpen = ["map-overlay","lit-overlay","report-overlay","news-overlay"].some(id => document.getElementById(id)?.classList.contains("open"));
+  if (anyOpen) { mapClose(); litClose(); reportClose(); newsClose(); }
 });
 
 // ── Sci-Fi Sound Engine ───────────────────────────────────────────────────────
