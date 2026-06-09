@@ -762,7 +762,7 @@
 <div id="sky-tooltip-map"></div>
 <div class="gallery-hdr">
 <h1>DeepSignal — Sky Image Gallery</h1>
-<div class="subtitle">Generated 2026-06-09 12:54 UTC &nbsp;·&nbsp; 169 targets &nbsp;·&nbsp; 169 sky images via Hips2Fits CDN</div>
+<div class="subtitle">Generated 2026-06-09 13:19 UTC &nbsp;·&nbsp; 169 targets &nbsp;·&nbsp; 169 sky images via Hips2Fits CDN</div>
 <div class="stats">
   <div class="stat"><div class="stat-n" style="color:#f59e0b">38</div><div class="stat-l">Tier 1 ≥70</div></div>
   <div class="stat"><div class="stat-n" style="color:#60a5fa">119</div><div class="stat-l">Tier 2 50–69</div></div>
@@ -5567,7 +5567,7 @@ function _newsApplySort() {
 function _newsBuildChips() {
   const labelsMap = Object.fromEntries(_newsAllItems.map(p => [p.source, p.sourceLabel]));
   const others = [...new Set(_newsAllItems.map(p => p.source))].filter(s => s !== 'google_news').sort();
-  const spo = others.indexOf('spacepolicyonline');
+  const spo = others.findIndex(s => s.startsWith('spacepolicyonline'));
   const hasGN = _newsAllItems.some(p => p.source === 'google_news');
   let ordered;
   if (hasGN) {
@@ -5579,7 +5579,7 @@ function _newsBuildChips() {
   }
   const sources = ['all', ...ordered];
   document.getElementById("news-chips").innerHTML = sources.map(s =>
-    '<button class="news-filter-chip' + (s === _newsSrcFilter ? ' active' : '') + '" onclick="_newsSetSource('' + s + '')">' + (s === 'all' ? 'All' : (labelsMap[s] || s)) + '</button>'
+    '<button class="news-filter-chip' + (s === _newsSrcFilter ? ' active' : '') + '" onclick="_newsSetSource(\'' + s + '\')">' + (s === 'all' ? 'All' : (labelsMap[s] || s)) + '</button>'
   ).join('');
 }
 
@@ -5626,7 +5626,7 @@ function _newsRender() {
   body.innerHTML = items.map(p => {
     const badge = '<span class="news-src-badge" style="background:rgba(249,115,22,.1);color:#f97316;border:1px solid rgba(249,115,22,.2)">' + p.sourceLabel + '</span>';
     const safeLink = p.link.replace(/'/g, '%27');
-    return '<div class="news-item" style="cursor:pointer" onclick="SFX.click();window.open('' + safeLink + '','_blank','noopener')">'
+    return '<div class="news-item" style="cursor:pointer" onclick="SFX.click();window.open(\'' + safeLink + '\',\'_blank\',\'noopener\')">'
       + '<div style="display:flex;align-items:center;gap:6px;margin-bottom:3px">' + badge + '<span class="news-date">' + p.dateStr + '</span></div>'
       + '<div style="font-size:.85rem;color:#dbeafe;font-weight:500;line-height:1.4;margin-bottom:3px">' + p.title + '</div>'
       + (p.snippet ? '<div class="news-date" style="line-height:1.4">' + p.snippet + '…</div>' : '')
@@ -5755,7 +5755,7 @@ function _litBuildChips() {
   const labels = { all: 'All', arxiv: 'arXiv', s2: 'S2', oa: 'OA', doi: 'DOI' };
   const sources = ['all', ...[...new Set(_litAllItems.map(p => p.source))].sort()];
   document.getElementById("lit-chips").innerHTML = sources.map(s =>
-    '<button class="filter-chip' + (s === _litSrcFilter ? ' active' : '') + '" onclick="_litSetSource('' + s + '')">' + (labels[s] || s) + '</button>'
+    '<button class="filter-chip' + (s === _litSrcFilter ? ' active' : '') + '" onclick="_litSetSource(\'' + s + '\')">' + (labels[s] || s) + '</button>'
   ).join('');
 }
 
@@ -5782,7 +5782,7 @@ function _litRender() {
     + items.map((p, i) => {
       const badge = '<span class="lit-src-badge lit-src-' + p.source + '">' + p.sourceLabel + '</span>';
       const safeH = (p.href || '').replace(/'/g, '%27');
-      const _click = safeH && safeH !== '#' ? ' onclick="if(event.target.closest('.lit-actions'))return;SFX.click();window.open('' + safeH + '','_blank','noopener')"' : '';
+      const _click = safeH && safeH !== '#' ? ' onclick="if(event.target.closest(\'.lit-actions\'))return;SFX.click();window.open(\'' + safeH + '\',\'_blank\',\'noopener\')"' : '';
       const linkBtns = [
         p.links && p.links.arxiv ? '<a class="lit-btn" href="https://arxiv.org/abs/' + p.links.arxiv + '" target="_blank" rel="noopener">&#x2197; arXiv</a>' : '',
         p.links && p.links.doi   ? '<a class="lit-btn" href="https://doi.org/' + p.links.doi + '" target="_blank" rel="noopener">&#x2197; DOI</a>' : '',
