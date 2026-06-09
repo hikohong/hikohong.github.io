@@ -218,26 +218,6 @@ footer a{color:#4a6a8a;text-decoration:none}
 .copy-ok{font-size:.65rem;color:#22c55e;margin-left:2px;opacity:0;transition:opacity 600ms;vertical-align:middle}
 /* ── Permalink highlight ── */
 .card.highlighted{border-color:#7dd3fc!important;box-shadow:0 0 18px rgba(125,211,252,.35)}
-/* ── Space Context Widget ── */
-.sc-slot{min-height:0}
-.space-ctx{margin:8px 0 4px;border-radius:6px;overflow:hidden;border:1px solid rgba(125,211,252,.12);background:rgba(0,20,40,.3)}
-.space-wiki{display:flex;gap:10px;padding:8px 10px}
-.space-wiki-thumb{width:60px;height:60px;border-radius:4px;object-fit:cover;flex-shrink:0;background:#040d18}
-.space-wiki-text{flex:1;min-width:0}
-.space-wiki-label{font-size:.62rem;color:#7dd3fc;font-family:monospace;letter-spacing:.08em;margin-bottom:3px;text-transform:uppercase}
-.space-wiki-title{font-size:.8rem;font-weight:600;color:#e0e8f0;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.space-wiki-extract{font-size:.73rem;color:#6a8aaa;line-height:1.45;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.space-wiki-link{display:inline-block;margin-top:4px;font-size:.65rem;color:#7dd3fc;text-decoration:none;opacity:.7}
-.space-wiki-link:hover{opacity:1}
-.space-news-hdr{font-size:.62rem;color:#5a8aaa;font-family:monospace;letter-spacing:.08em;padding:6px 10px 2px;border-top:1px solid rgba(219,234,254,.07);text-transform:uppercase}
-.space-news-items{padding:0 6px 6px}
-.space-news-item{padding:5px 4px;border-bottom:1px solid rgba(219,234,254,.05);display:flex;flex-direction:column;gap:2px}
-.space-news-item:last-child{border-bottom:none}
-.space-news-badge{font-size:.58rem;color:#f97316;font-family:monospace;letter-spacing:.04em;text-transform:uppercase;opacity:.8}
-.space-news-title{font-size:.74rem;color:#c8d8e8;line-height:1.35;text-decoration:none;display:block}
-.space-news-title:hover{color:#7dd3fc}
-.space-news-date{font-size:.62rem;color:#3a5a7a;font-family:monospace}
-.space-ctx-loading{padding:10px;text-align:center;font-size:.68rem;color:#3a5a7a;font-family:monospace}
 /* ── Report Modal ── */
 #report-overlay{display:none;position:fixed;inset:0;background:rgba(0,5,15,.88);backdrop-filter:blur(6px);z-index:900;align-items:center;justify-content:center}
 #report-overlay.open{display:flex}
@@ -868,6 +848,7 @@ function showResult(resolved, pipelineMatches) {
     ra != null ? `<a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=${ra}+${dec}&-c.rs=2" target="_blank">VizieR</a>` : "",
     ra != null ? `<a class="ext-link" href="https://sky.esa.int/?target=${ra}+${dec}&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a>` : "",
     `<a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3A${encodeURIComponent(name)}&sort=date+desc" target="_blank">NASA ADS</a>`,
+    `<a class="ext-link" href="https://en.wikipedia.org/wiki/${encodeURIComponent(name)}" target="_blank">Wikipedia</a>`,
     isSS ? `<a class="ext-link" href="https://ssd.jpl.nasa.gov/horizons/app.html#/" target="_blank">JPL Horizons</a>` : "",
   ].filter(Boolean).join("");
 
@@ -891,11 +872,9 @@ function showResult(resolved, pipelineMatches) {
             <span class="papers-dot">◉</span> Search Literature
           </button>
         </div>
-        <div class="sc-slot" id="sc-result"></div>
       </div>
     </div>`;
   if (isSS) _loadSolarSystemImage(name);
-  _loadSpaceCtx('sc-result', name);
 }
 
 // ── Show multiple pipeline matches as selectable cards ────────────────────────
@@ -1021,6 +1000,7 @@ function renderHighlights() {
         <a class="card-ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=${ra}+${dec}&-c.rs=2" target="_blank">VizieR</a>
         <a class="card-ext-link" href="https://sky.esa.int/?target=${ra}+${dec}&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a>
         <a class="card-ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3A${encodeURIComponent(c.target_name)}&sort=date+desc" target="_blank">NASA ADS</a>
+        <a class="card-ext-link" href="https://en.wikipedia.org/wiki/${encodeURIComponent(c.target_name)}" target="_blank">Wikipedia</a>
       </div>` : "";
 
     const countHtml = multi
@@ -1053,16 +1033,11 @@ function renderHighlights() {
             <span class="papers-dot">◉</span> Search Literature
           </button>
         </div>
-        <div class="sc-slot" id="sc-hl-${_cid}" data-target="${c.target_name.replace(/"/g,'&quot;')}"></div>
         ${countHtml}
       </div>
       ${multi ? `<div class="card-detections">${detectionRows}</div>` : ""}
     </div>`;
   }).join("");
-  // Lazy-load space context for visible highlight cards
-  requestAnimationFrame(() => {
-    document.querySelectorAll('#highlights .sc-slot[data-target]').forEach(el => _hlScObserver.observe(el));
-  });
 }
 
 function toggleCard(el, name) {
@@ -1076,87 +1051,6 @@ function selectCandidate(name) {
   doSearch();
 }
 
-// ── Space Context Widget (Wikipedia summary + Space News) ─────────────────────
-const _wikiCache = {};
-const _spaceNewsCache = {data: null, fetching: false};
-const _SPACE_FEEDS = [
-  {url:'https://www.nasa.gov/feed/', badge:'NASA'},
-  {url:'https://www.esa.int/rssfeed/Our_Activities/Space_Science', badge:'ESA'},
-  {url:'https://www.jpl.nasa.gov/rss/news.xml', badge:'JPL'},
-];
-const _RSS2JSON = 'https://api.rss2json.com/v1/api.json?rss_url=';
-async function _fetchWikiSummary(name) {
-  if (_wikiCache[name] !== undefined) return _wikiCache[name];
-  try {
-    const resp = await fetch(
-      'https://en.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(name),
-      {headers:{Accept:'application/json'}}
-    );
-    if (!resp.ok) { _wikiCache[name]=null; return null; }
-    const data = await resp.json();
-    if (data.type==='disambiguation') { _wikiCache[name]=null; return null; }
-    _wikiCache[name]=data; return data;
-  } catch { _wikiCache[name]=null; return null; }
-}
-async function _fetchSpaceNews() {
-  if (_spaceNewsCache.data) return _spaceNewsCache.data;
-  if (_spaceNewsCache.fetching) {
-    for (let i=0;i<80;i++) {
-      await new Promise(r=>setTimeout(r,100));
-      if (_spaceNewsCache.data) return _spaceNewsCache.data;
-    }
-    return [];
-  }
-  _spaceNewsCache.fetching=true;
-  const all=[];
-  for (const feed of _SPACE_FEEDS) {
-    try {
-      const r=await fetch(_RSS2JSON+encodeURIComponent(feed.url),{headers:{Accept:'application/json'}});
-      if (!r.ok) continue;
-      const d=await r.json();
-      if (d.status!=='ok') continue;
-      (d.items||[]).slice(0,5).forEach(item=>{
-        all.push({badge:feed.badge,title:item.title||'',link:item.link||'',date:(item.pubDate||'').slice(0,10)});
-      });
-    } catch {}
-  }
-  all.sort((a,b)=>b.date.localeCompare(a.date));
-  _spaceNewsCache.data=all.slice(0,10);
-  return _spaceNewsCache.data;
-}
-async function _loadSpaceCtx(containerId, targetName) {
-  const el=document.getElementById(containerId);
-  if (!el||el._scLoaded) return;
-  el._scLoaded=true;
-  el.innerHTML='<div class="space-ctx-loading"><span class="spinner"></span></div>';
-  const [wiki,news]=await Promise.all([_fetchWikiSummary(targetName),_fetchSpaceNews()]);
-  let html='';
-  if (wiki?.extract) {
-    const thumb=wiki.thumbnail?.source||'';
-    const wUrl=wiki.content_urls?.desktop?.page||'https://en.wikipedia.org/wiki/'+encodeURIComponent(targetName);
-    html+='<div class="space-ctx"><div class="space-wiki">';
-    if (thumb) html+=`<img class="space-wiki-thumb" src="${thumb}" alt="${wiki.title}" onerror="this.style.display='none'">`;
-    html+=`<div class="space-wiki-text"><div class="space-wiki-label">◈ Wikipedia</div><div class="space-wiki-title">${wiki.title}</div><div class="space-wiki-extract">${wiki.extract.slice(0,280)}</div><a class="space-wiki-link" href="${wUrl}" target="_blank" rel="noopener">↗ Full article</a></div></div>`;
-    if (news.length) {
-      html+='<div class="space-news-hdr">▸ Latest Space News</div><div class="space-news-items">';
-      news.slice(0,5).forEach(n=>{
-        const st=n.title.replace(/</g,'&lt;').replace(/>/g,'&gt;');
-        html+=`<div class="space-news-item"><span class="space-news-badge">${n.badge}</span><a class="space-news-title" href="${n.link}" target="_blank" rel="noopener">${st}</a><span class="space-news-date">${n.date}</span></div>`;
-      });
-      html+='</div>';
-    }
-    html+='</div>';
-  }
-  el.innerHTML=html;
-}
-const _hlScObserver = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if (e.isIntersecting) {
-      _hlScObserver.unobserve(e.target);
-      _loadSpaceCtx(e.target.id, e.target.dataset.target);
-    }
-  });
-},{rootMargin:'300px'});
 // ── NASA Images API for solar system objects ──────────────────────────────────
 // Disambiguated Wikipedia titles for solar system objects
 const SS_WIKI_TITLE = {
