@@ -427,7 +427,7 @@ footer a{color:#4a6a8a;text-decoration:none}
     <div class="news-hdr">
       <span style="font-size:1.4rem;opacity:.7;flex-shrink:0">◎</span>
       <div>
-        <div class="news-hdr-eyebrow">⬡ DeepSignal · Space News · Spaceflight News</div>
+        <div class="news-hdr-eyebrow">⬡ DeepSignal · Space News · Spaceflight News · Google News</div>
         <div class="news-hdr-name" id="news-target-name">Space News</div>
       </div>
       <button class="lit-x" onclick="newsClose()">✕</button>
@@ -1211,7 +1211,9 @@ function litClose() {
 // ── News Modal ────────────────────────────────────────────────────────────────
 async function newsOpen(targetName) {
   SFX.open();
-  document.getElementById("news-target-name").textContent = "Space News";
+  _newsTargetFilter = targetName || null;
+  _newsSrcFilter = 'all';
+  document.getElementById("news-target-name").textContent = targetName || "Space News";
   document.getElementById("news-footer-ts").textContent = "";
   document.getElementById("news-body").innerHTML =
     `<div class="lit-status"><span class="spinner"></span> LOADING NEWS FEEDS…</div>`;
@@ -1236,55 +1238,75 @@ function newsClose() {
   document.body.style.overflow = "";
 }
 
-// ── Space News: Spaceflight News API ─────────────────────────────────────────
+// ── Space News: Spaceflight News API + Google News ───────────────────────────
 const _NEWS_LS_KEY = 'ds_news_v1';
 const _NEWS_TTL = 2 * 60 * 60 * 1000;
+let _newsSFItems = [];
+let _newsGNItems = [];
 let _newsAllItems = [];
 let _newsSrcFilter = 'all';
 let _newsSortMode = 'date-desc';
+let _newsTargetFilter = null;
 
 async function _newsFetch(force = false) {
   const body = document.getElementById("news-body");
   const footer = document.getElementById("news-footer-ts");
+  body.innerHTML = `<div class="lit-status"><span class="spinner"></span> LOADING NEWS FEEDS…</div>`;
+
+  // Try SF cache first
+  let sfFromCache = false;
   if (!force) {
     try {
-      const cached = JSON.parse(localStorage.getItem(_NEWS_LS_KEY) || 'null');
-      if (cached && (Date.now() - cached.ts) < _NEWS_TTL) {
-        _newsAllItems = cached.items;
-        _newsApplySort();
-        document.getElementById("news-filter-bar").style.display = 'flex';
-        _newsBuildChips();
-        _newsRender();
-        footer.textContent = `cached · ${_newsAllItems.length} items`;
-        return;
-      }
+      const c = JSON.parse(localStorage.getItem(_NEWS_LS_KEY) || 'null');
+      if (c && (Date.now() - c.ts) < _NEWS_TTL) { _newsSFItems = c.items; sfFromCache = true; }
     } catch(_) {}
   }
-  body.innerHTML = `<div class="lit-status"><span class="spinner"></span> LOADING NEWS FEEDS…</div>`;
-  _newsAllItems = [];
+
+  if (sfFromCache) {
+    // Show SF immediately; load GN in background
+    _newsGNItems = [];
+    _newsAllItems = [..._newsSFItems];
+    _newsApplySort();
+    document.getElementById("news-filter-bar").style.display = 'flex';
+    _newsBuildChips();
+    const tl = _newsTargetFilter ? _newsTargetFilter.toLowerCase() : null;
+    const hasSFMatch = !tl || _newsAllItems.some(p =>
+      (p.title || '').toLowerCase().includes(tl) || (p.snippet || '').toLowerCase().includes(tl)
+    );
+    if (hasSFMatch) {
+      _newsRender();
+      footer.textContent = `cached · ${_newsSFItems.length} items · fetching Google News…`;
+    } else {
+      body.innerHTML = `<div class="lit-status"><span class="spinner"></span> Searching Google News for "${_newsTargetFilter}"…</div>`;
+      footer.textContent = 'cached · fetching Google News…';
+    }
+    _newsFetchGN().then(items => {
+      _newsGNItems = items;
+      _newsAllItems = [..._newsSFItems, ..._newsGNItems];
+      _newsApplySort();
+      _newsBuildChips();
+      _newsRender();
+      footer.textContent = `cached · ${_newsAllItems.length} items`;
+    }).catch(() => {
+      if (!hasSFMatch) _newsRender();
+      footer.textContent = `cached · ${_newsSFItems.length} items`;
+    });
+    return;
+  }
+
+  // No cache or force: fetch both in parallel
   const t0 = Date.now();
-  let _newsErr = '';
-  try {
-    const ctrl = new AbortController();
-    const tid = setTimeout(() => ctrl.abort(), 12000);
-    const resp = await fetch('https://api.spaceflightnewsapi.net/v4/articles/?limit=30&ordering=-published_at', { signal: ctrl.signal });
-    clearTimeout(tid);
-    if (!resp.ok) throw new Error('HTTP ' + resp.status);
-    const data = await resp.json();
-    _newsAllItems = (data.results || []).map(item => ({
-      title: (item.title || '—').replace(/</g, '&lt;'),
-      link: item.url || '#',
-      dateTs: item.published_at ? new Date(item.published_at).getTime() : 0,
-      dateStr: item.published_at ? new Date(item.published_at).toISOString().slice(0, 10) : '',
-      source: (item.news_site || 'other').toLowerCase().replace(/[^a-z0-9]/g, '_'),
-      sourceLabel: item.news_site || 'Unknown',
-      snippet: (item.summary || '').slice(0, 160),
-    }));
-  } catch(e) { _newsErr = e.name === 'AbortError' ? 'timeout' : (e.message || 'fetch failed'); }
+  const [sfRes, gnRes] = await Promise.allSettled([_newsFetchSFApi(), _newsFetchGN()]);
+  _newsSFItems = sfRes.status === 'fulfilled' ? sfRes.value : [];
+  const sfErr = sfRes.status === 'rejected' ? (sfRes.reason?.message || 'fetch failed') : '';
+  if (_newsSFItems.length) {
+    try { localStorage.setItem(_NEWS_LS_KEY, JSON.stringify({ ts: Date.now(), items: _newsSFItems })); } catch(_) {}
+  }
+  _newsGNItems = gnRes.status === 'fulfilled' ? gnRes.value : [];
+  _newsAllItems = [..._newsSFItems, ..._newsGNItems];
   _newsApplySort();
-  try { localStorage.setItem(_NEWS_LS_KEY, JSON.stringify({ ts: Date.now(), items: _newsAllItems })); } catch(_) {}
   const elapsed = ((Date.now() - t0) / 1000).toFixed(1);
-  footer.textContent = `${elapsed}s · ${_newsAllItems.length} items${_newsErr ? ' · ' + _newsErr : ''}`;
+  footer.textContent = `${elapsed}s · ${_newsAllItems.length} items${sfErr ? ' · ' + sfErr : ''}`;
   document.getElementById("news-filter-bar").style.display = 'flex';
   _newsBuildChips();
   if (!_newsAllItems.length) {
@@ -1295,6 +1317,55 @@ async function _newsFetch(force = false) {
   _newsRender();
 }
 
+async function _newsFetchSFApi() {
+  const ctrl = new AbortController();
+  const tid = setTimeout(() => ctrl.abort(), 12000);
+  const resp = await fetch('https://api.spaceflightnewsapi.net/v4/articles/?limit=30&ordering=-published_at', { signal: ctrl.signal });
+  clearTimeout(tid);
+  if (!resp.ok) throw new Error('HTTP ' + resp.status);
+  const data = await resp.json();
+  return (data.results || []).map(item => ({
+    title: (item.title || '—').replace(/</g, '&lt;'),
+    link: item.url || '#',
+    dateTs: item.published_at ? new Date(item.published_at).getTime() : 0,
+    dateStr: item.published_at ? new Date(item.published_at).toISOString().slice(0, 10) : '',
+    source: (item.news_site || 'other').toLowerCase().replace(/[^a-z0-9]/g, '_'),
+    sourceLabel: item.news_site || 'Unknown',
+    snippet: (item.summary || '').slice(0, 160),
+  }));
+}
+
+async function _newsFetchGN() {
+  const q = _newsTargetFilter
+    ? (_newsTargetFilter + ' space astronomy')
+    : 'space astronomy SETI news';
+  const rss = 'https://news.google.com/rss/search?q=' + encodeURIComponent(q) + '&hl=en-US&gl=US&ceid=US:en';
+  const url = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(rss);
+  const ctrl = new AbortController();
+  const tid = setTimeout(() => ctrl.abort(), 10000);
+  const resp = await fetch(url, { signal: ctrl.signal });
+  clearTimeout(tid);
+  const text = await resp.text();
+  const doc = new DOMParser().parseFromString(text, 'application/xml');
+  return [...doc.querySelectorAll('item')].slice(0, 15).map(el => {
+    const raw = el.querySelector('title')?.textContent || '—';
+    const title = raw.replace(/ - [^-]{1,60}$/, '').replace(/</g, '&lt;');
+    const link = el.querySelector('link')?.textContent?.trim() || '#';
+    const pub = el.querySelector('pubDate')?.textContent || '';
+    const dateTs = pub ? new Date(pub).getTime() : 0;
+    const desc = (el.querySelector('description')?.textContent || '').replace(/<[^>]+>/g, '').trim();
+    return {
+      title,
+      link,
+      dateTs,
+      dateStr: dateTs ? new Date(dateTs).toISOString().slice(0, 10) : '',
+      source: 'google_news',
+      sourceLabel: 'Google News',
+      snippet: desc.slice(0, 160),
+    };
+  });
+}
+
 function _newsApplySort() {
   if (_newsSortMode === 'date-desc') _newsAllItems.sort((a, b) => (b.dateTs || 0) - (a.dateTs || 0));
   else _newsAllItems.sort((a, b) => (a.dateTs || 0) - (b.dateTs || 0));
@@ -1302,7 +1373,18 @@ function _newsApplySort() {
 
 function _newsBuildChips() {
   const labelsMap = Object.fromEntries(_newsAllItems.map(p => [p.source, p.sourceLabel]));
-  const sources = ['all', ...[...new Set(_newsAllItems.map(p => p.source))].sort()];
+  const others = [...new Set(_newsAllItems.map(p => p.source))].filter(s => s !== 'google_news').sort();
+  const spo = others.indexOf('spacepolicyonline');
+  const hasGN = _newsAllItems.some(p => p.source === 'google_news');
+  let ordered;
+  if (hasGN) {
+    ordered = spo >= 0
+      ? [...others.slice(0, spo + 1), 'google_news', ...others.slice(spo + 1)]
+      : [...others, 'google_news'];
+  } else {
+    ordered = others;
+  }
+  const sources = ['all', ...ordered];
   document.getElementById("news-chips").innerHTML = sources.map(s =>
     `<button class="news-filter-chip${s === _newsSrcFilter ? ' active' : ''}" onclick="_newsSetSource('${s}')">${s === 'all' ? 'All' : (labelsMap[s] || s)}</button>`
   ).join('');
@@ -1328,6 +1410,9 @@ function _newsForceRefresh() {
   try { localStorage.removeItem(_NEWS_LS_KEY); } catch(_) {}
   _newsSrcFilter = 'all';
   _newsSortMode = 'date-desc';
+  _newsSFItems = [];
+  _newsGNItems = [];
+  _newsAllItems = [];
   const sel = document.getElementById("news-sort");
   if (sel) sel.value = 'date-desc';
   _newsFetch(true);
@@ -1335,7 +1420,15 @@ function _newsForceRefresh() {
 
 function _newsRender() {
   const body = document.getElementById("news-body");
-  const items = _newsSrcFilter === 'all' ? _newsAllItems : _newsAllItems.filter(p => p.source === _newsSrcFilter);
+  let items = _newsSrcFilter === 'all' ? _newsAllItems : _newsAllItems.filter(p => p.source === _newsSrcFilter);
+  if (_newsTargetFilter) {
+    const tl = _newsTargetFilter.toLowerCase();
+    items = items.filter(p =>
+      p.source === 'google_news' ||
+      (p.title || '').toLowerCase().includes(tl) ||
+      (p.snippet || '').toLowerCase().includes(tl)
+    );
+  }
   if (!items.length) { body.innerHTML = `<div class="lit-empty">No items match this filter</div>`; return; }
   body.innerHTML = items.map(p => {
     const badge = `<span class="news-src-badge" style="background:rgba(249,115,22,.1);color:#f97316;border:1px solid rgba(249,115,22,.2)">${p.sourceLabel}</span>`;
