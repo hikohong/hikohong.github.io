@@ -1122,6 +1122,27 @@ function _abortFetch(ms) {
   return ctrl;
 }
 
+// Relevance filter for academic paper results — same idea as _is_astro_relevant() in Python
+const _ASTRO_PAPER_TERMS = [
+  'star','stellar','galaxy','galactic','nebula','pulsar','quasar','exoplanet',
+  'planet','planetary','orbit','telescope','observatory','spectrum','spectroscopy',
+  'photometric','radial velocity','transit','radio','seti','technosignature',
+  'biosignature','extraterrestrial','interstellar','cosmic','infrared','ultraviolet',
+  'gamma-ray','x-ray','gravitational','redshift','doppler','frb','fast radio burst',
+  'neutron','supernova','asteroid','comet','solar','astrophysics','astronomy',
+  'astronomer','cosmology','parsec','light-year','hubble','jwst','chandra','fermi',
+  'tess','kepler','gaia','wise','spitzer','magnetar','black hole','dark matter',
+  'milky way','andromeda','quasar','blazar','agn','white dwarf','brown dwarf',
+];
+function _isRelevantPaper(title, abstract, targetName) {
+  const tl = (title || '').toLowerCase();
+  const ab = (abstract || '').toLowerCase();
+  const nm = (targetName || '').toLowerCase();
+  if (nm.length > 2 && tl.includes(nm)) return true;
+  const text = tl + ' ' + ab;
+  return _ASTRO_PAPER_TERMS.some(t => text.includes(t));
+}
+
 function _renderS2(papers, elapsed) {
   const statusLine = `<div class="lit-status">▸ ${papers.length} record${papers.length>1?"s":""} · Semantic Scholar · sorted by relevance · ${elapsed}s</div>`;
   const cards = papers.map((p, i) => {
@@ -1187,7 +1208,7 @@ async function _litFetch(name, method) {
     const resp = await fetch(url, { headers: { "Accept": "application/json" }, signal: ctrl.signal });
     if (!resp.ok) throw new Error(`S2 HTTP ${resp.status}`);
     const data = await resp.json();
-    const papers = data.data || [];
+    const papers = (data.data || []).filter(p => _isRelevantPaper(p.title, p.abstract, name));
     const elapsed = ((Date.now() - t0) / 1000).toFixed(1);
     footer.textContent = `${elapsed}s · Semantic Scholar`;
 
@@ -1206,7 +1227,7 @@ async function _litFetch(name, method) {
     const resp = await fetch(url, { headers: { "Accept": "application/json" }, signal: ctrl.signal });
     if (!resp.ok) throw new Error(`CrossRef HTTP ${resp.status}`);
     const data = await resp.json();
-    const items = data.message?.items || [];
+    const items = (data.message?.items || []).filter(p => _isRelevantPaper((p.title||[])[0], (p.abstract||[]).join(' '), name));
     const elapsed = ((Date.now() - t0) / 1000).toFixed(1);
     footer.textContent = `${elapsed}s · CrossRef`;
 
