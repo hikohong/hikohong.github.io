@@ -406,7 +406,7 @@ footer a{color:#4a6a8a;text-decoration:none}
     <div class="news-hdr">
       <span style="font-size:1.4rem;opacity:.7;flex-shrink:0">◎</span>
       <div>
-        <div class="news-hdr-eyebrow">⬡ DeepSignal · Space News · arXiv / ATel</div>
+        <div class="news-hdr-eyebrow">⬡ DeepSignal · Space News · S2 / ATel</div>
         <div class="news-hdr-name" id="news-target-name">Space News</div>
       </div>
       <button class="lit-x" onclick="newsClose()">✕</button>
@@ -1204,37 +1204,39 @@ async function _newsFetch(targetName) {
   if (_newsCache[cacheKey]) { body.innerHTML = _newsCache[cacheKey]; footer.textContent = "cached"; return; }
   const t0 = Date.now();
   try {
-    const q = targetName ? `all:"${targetName}"` : `cat:astro-ph`;
-    const url = `https://export.arxiv.org/api/query?search_query=${encodeURIComponent(q)}&sortBy=submittedDate&sortOrder=descending&max_results=8`;
+    const q = targetName || "astrophysics SETI";
+    const url = `https://api.semanticscholar.org/graph/v1/paper/search?query=${encodeURIComponent(q)}&fields=title,abstract,year,externalIds,openAccessPdf&limit=8&sort=publicationDate:desc`;
     const ctrl = new AbortController();
     const tid = setTimeout(() => ctrl.abort(), 12000);
     const resp = await fetch(url, { signal: ctrl.signal });
     clearTimeout(tid);
     if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-    const text = await resp.text();
-    const xml = (new DOMParser()).parseFromString(text, 'text/xml');
-    const entries = [...xml.querySelectorAll('entry')];
+    const data = await resp.json();
+    const papers = data.data || [];
     const elapsed = ((Date.now() - t0) / 1000).toFixed(1);
-    footer.textContent = `${elapsed}s · arXiv`;
-    if (entries.length) {
+    footer.textContent = `${elapsed}s · S2`;
+    if (papers.length) {
       const html = `<div style="font-size:.7rem;color:#5a4a3a;font-family:monospace;margin-bottom:12px;letter-spacing:.06em">
-        ${entries.length} RECENT PREPRINT${entries.length > 1 ? "S" : ""}${targetName ? ` · ${targetName.toUpperCase()}` : " · ASTROPHYSICS"}
-      </div>` + entries.map(e => {
-        const title = e.querySelector('title')?.textContent?.trim() || '—';
-        const summary = (e.querySelector('summary')?.textContent?.trim() || '').slice(0, 180);
-        const date = (e.querySelector('published')?.textContent || '').slice(0, 10);
-        const link = e.querySelector('link[rel="alternate"]')?.getAttribute('href') || e.querySelector('id')?.textContent?.trim() || '';
+        ${papers.length} RECENT PAPER${papers.length > 1 ? "S" : ""}${targetName ? ` · ${targetName.toUpperCase()}` : " · ASTROPHYSICS"}
+      </div>` + papers.map(p => {
+        const title = p.title || '—';
+        const abstract = (p.abstract || '').slice(0, 180);
+        const year = p.year || '';
+        const arxivId = p.externalIds?.ArXiv;
+        const link = arxivId ? `https://arxiv.org/abs/${arxivId}`
+          : (p.openAccessPdf?.url || `https://www.semanticscholar.org/paper/${p.paperId}`);
+        const src = arxivId ? 'arXiv' : 'S2';
         return `<div class="news-item">
-          <div class="news-src">arXiv</div>
+          <div class="news-src">${src}</div>
           <a class="news-title-lnk" href="${link}" target="_blank" rel="noopener">${title}</a>
-          ${summary ? `<div class="news-date" style="color:#6a5a4a;font-size:.72rem;line-height:1.4">${summary}…</div>` : ''}
-          <div class="news-date">${date}</div>
+          ${abstract ? `<div class="news-date" style="color:#6a5a4a;font-size:.72rem;line-height:1.4">${abstract}…</div>` : ''}
+          <div class="news-date">${year}</div>
         </div>`;
       }).join('');
       _newsCache[cacheKey] = html;
       body.innerHTML = html;
     } else {
-      const html = `<div class="lit-empty">${targetName ? `No recent preprints found for "<strong>${targetName}</strong>"` : "No recent preprints"}<br>
+      const html = `<div class="lit-empty">${targetName ? `No papers found for "<strong>${targetName}</strong>"` : "No recent papers"}<br>
         <span style="font-size:.72rem">Use the links below to search external sources</span></div>`;
       _newsCache[cacheKey] = html;
       body.innerHTML = html;
