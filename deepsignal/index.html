@@ -1227,6 +1227,7 @@ async function newsOpen(targetName) {
   document.getElementById("news-overlay").classList.add("open");
   document.body.style.overflow = "hidden";
   await _newsFetch();
+  if (!_newsAllItems.length) await _newsFetch(true);
 }
 
 function newsClose() {
