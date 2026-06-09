@@ -298,7 +298,7 @@ footer a{color:#4a6a8a;text-decoration:none}
   <div class="stat-chip">Pipeline candidates: <strong id="stat-n">169</strong></div>
   <div class="stat-chip">Data sources: <strong>10</strong></div>
   <div class="stat-chip">Detection algorithms: <strong>14</strong></div>
-  <div class="stat-chip">Last updated: <strong>2026-06-08 UTC</strong></div>
+  <div class="stat-chip">Last updated: <strong>2026-06-09 UTC</strong></div>
 </div>
 
 <!-- Map Modal -->
@@ -458,6 +458,7 @@ const SURVEYS     = [
 ];
 
 let catalog = [];
+let _searchTargetCache = null;
 
 // ── Load catalog.json on startup ──────────────────────────────────────────────
 async function loadCatalog() {
@@ -1342,6 +1343,7 @@ function mapClose() {
   SFX.close();
   document.getElementById("map-overlay").classList.remove("open");
   document.body.style.overflow = "";
+  _searchTargetCache = null;
   document.getElementById("sky-tooltip-map").style.display="none";
   const g = document.getElementById("map-crosshair");
   if (g) g.innerHTML = "";
@@ -1428,6 +1430,36 @@ function copyCoords(cid, ra, dec) {
 }
 
 // ── Open Map and jump to a specific target ───────────────────────────────────
+function mapShowSearchTarget() {
+  if (!_searchTargetCache) return;
+  SFX.scan();
+  const {ra, dec, name} = _searchTargetCache;
+  const tc = '#10b981', tbg = 'rgba(16,185,129,.12)';
+  const imgUrl = ra ? `https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=120&height=120&fov=0.25&projection=TAN&coordsys=icrs&ra=${ra.toFixed(5)}&dec=${dec.toFixed(5)}&format=jpg` : "";
+  const imgHtml = imgUrl ? `<img src="${imgUrl}" width="80" height="80" style="object-fit:cover;border-radius:6px;border:1px solid rgba(16,185,129,.25);flex-shrink:0;background:#0a1a2e" onerror="this.style.display='none'">` : "";
+  const el = document.getElementById("map-detail");
+  el.style.display = "block";
+  el.innerHTML = `
+    <div style="display:flex;gap:10px;align-items:flex-start">
+      ${imgHtml}
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap">
+          <span style="font-size:.6rem;font-weight:700;padding:2px 8px;border-radius:10px;
+            background:${tbg};color:${tc};border:1px solid ${tc}55;flex-shrink:0">⊕ Search</span>
+          <span style="font-size:.92rem;font-weight:700;color:#eef3f8">${name}</span>
+        </div>
+        <div style="margin:4px 0 6px;font-size:.72rem;color:#5a8a7a">Not in current candidate list</div>
+        <div class="card-coords" style="margin:6px 0">RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}°</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;padding-top:8px;border-top:1px solid rgba(16,185,129,.15)">
+          <a class="ext-link" href="https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=${ra.toFixed(4)}+${dec.toFixed(4)}&CooFrame=ICRS&Radius=2&Radius.unit=arcmin" target="_blank" rel="noreferrer">SIMBAD</a>
+          <a class="ext-link" href="https://aladin.u-strasbg.fr/AladinLite/?target=${ra.toFixed(4)}+${dec.toFixed(4)}&fov=0.5&survey=P/DSS2/color" target="_blank" rel="noreferrer">Aladin</a>
+          <button class="ext-link map-gallery-link" style="background:none;cursor:pointer;font-family:inherit" onclick="mapClose();document.getElementById('q').value=_searchTargetCache&&_searchTargetCache.name||'';window.scrollTo({top:0,behavior:'smooth'});doSearch()">View in search<span class="gal-arr"><span>›</span><span>›</span><span>›</span></span></button>
+        </div>
+      </div>
+    </div>`;
+  document.getElementById("map-body").scrollTop = 0;
+  _updateMapCrosshair(ra, dec, name, tc);
+}
 function mapOpenFromCard(ra, dec, name, score, isSearchResult) {
   mapOpen();
   // Try to find the existing candidate dot first
@@ -1436,10 +1468,13 @@ function mapOpenFromCard(ra, dec, name, score, isSearchResult) {
     return Math.abs(cra-ra)<0.05 && Math.abs(cdec-dec)<0.05;
   });
   if (!isSearchResult && idx >= 0) {
-    mapShowDetail(idx);
+    _searchTargetCache = null;
+    // rAF ensures the overlay is painted before SVG crosshair is drawn
+    requestAnimationFrame(() => mapShowDetail(idx));
     return;
   }
   // Search-only target or not found — render custom teal dot + detail
+  _searchTargetCache = {ra, dec, name};
   SFX.scan();
   const tc = '#10b981', tbg = 'rgba(16,185,129,.12)';
   const gd = document.getElementById("map-custom-dot");
@@ -1449,7 +1484,8 @@ function mapOpenFromCard(ra, dec, name, score, isSearchResult) {
       <animate attributeName="r" values="3;7;3" dur="2s" repeatCount="indefinite"/>
       <animate attributeName="opacity" values="0.95;0.2;0.95" dur="2s" repeatCount="indefinite"/>
     </circle>
-    <circle cx="${cx}" cy="${cy}" r="2" fill="${tc}" opacity="0.9"/>`;
+    <circle cx="${cx}" cy="${cy}" r="2" fill="${tc}" opacity="0.9"/>
+    <circle cx="${cx}" cy="${cy}" r="6" fill="transparent" style="pointer-events:all;cursor:pointer" onclick="mapShowSearchTarget()"/>`;
   }
   const imgUrl = ra ? `https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=120&height=120&fov=0.25&projection=TAN&coordsys=icrs&ra=${ra.toFixed(5)}&dec=${dec.toFixed(5)}&format=jpg` : "";
   const imgHtml = imgUrl ? `<img src="${imgUrl}" width="80" height="80" style="object-fit:cover;border-radius:6px;border:1px solid rgba(16,185,129,.25);flex-shrink:0;background:#0a1a2e" onerror="this.style.display='none'">` : "";

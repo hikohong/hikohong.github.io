@@ -687,7 +687,7 @@
 <div id="sky-tooltip-map"></div>
 <div class="gallery-hdr">
 <h1>DeepSignal — Sky Image Gallery</h1>
-<div class="subtitle">Generated 2026-06-08 18:14 UTC &nbsp;·&nbsp; 169 targets &nbsp;·&nbsp; 169 sky images via Hips2Fits CDN</div>
+<div class="subtitle">Generated 2026-06-09 01:46 UTC &nbsp;·&nbsp; 169 targets &nbsp;·&nbsp; 169 sky images via Hips2Fits CDN</div>
 <div class="stats">
   <div class="stat"><div class="stat-n" style="color:#f59e0b">38</div><div class="stat-l">Tier 1 ≥70</div></div>
   <div class="stat"><div class="stat-n" style="color:#60a5fa">119</div><div class="stat-l">Tier 2 50–69</div></div>
@@ -5431,6 +5431,7 @@ document.addEventListener("keydown", e => {
 });
 // Filter / sort
 let _activeFilter = "all";
+let _searchTargetCache = null;
 function filterCards() {
   const tier = _activeFilter;
   const method = document.getElementById("fb-method").value;
@@ -5473,13 +5474,45 @@ function copyCoords(cid, ra, dec) {
     if (el) { el.style.opacity="1"; setTimeout(()=>el.style.opacity="0", 1800); }
   }).catch(()=>{});
 }
+function mapShowSearchTarget() {
+  if (!_searchTargetCache) return;
+  SFX.scan();
+  const {ra, dec, name} = _searchTargetCache;
+  const tc = '#10b981', tbg = 'rgba(16,185,129,.12)';
+  const imgUrl = ra ? `https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=120&height=120&fov=0.25&projection=TAN&coordsys=icrs&ra=${ra.toFixed(5)}&dec=${dec.toFixed(5)}&format=jpg` : "";
+  const imgHtml = imgUrl ? `<img src="${imgUrl}" width="80" height="80" style="object-fit:cover;border-radius:6px;border:1px solid rgba(16,185,129,.25);flex-shrink:0;background:#0a1a2e" onerror="this.style.display='none'">` : "";
+  const el = document.getElementById("map-detail");
+  el.style.display = "block";
+  el.innerHTML = `
+    <div style="display:flex;gap:10px;align-items:flex-start">
+      ${imgHtml}
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap">
+          <span style="font-size:.6rem;font-weight:700;padding:2px 8px;border-radius:10px;
+            background:${tbg};color:${tc};border:1px solid ${tc}55;flex-shrink:0">⊕ Search</span>
+          <span style="font-size:.92rem;font-weight:700;color:#eef3f8">${name}</span>
+        </div>
+        <div style="margin:4px 0 6px;font-size:.72rem;color:#5a8a7a">Not in current candidate list</div>
+        <div class="card-coords" style="margin:6px 0">RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}°</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;padding-top:8px;border-top:1px solid rgba(16,185,129,.15)">
+          <a class="ext-link" href="https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=${ra.toFixed(4)}+${dec.toFixed(4)}&CooFrame=ICRS&Radius=2&Radius.unit=arcmin" target="_blank" rel="noreferrer">SIMBAD</a>
+          <a class="ext-link" href="https://aladin.u-strasbg.fr/AladinLite/?target=${ra.toFixed(4)}+${dec.toFixed(4)}&fov=0.5&survey=P/DSS2/color" target="_blank" rel="noreferrer">Aladin</a>
+          <button class="ext-link map-gallery-link" style="background:none;cursor:pointer;font-family:inherit" onclick="mapClose();navTo('index.html?q='+encodeURIComponent(name))">View in search<span class="gal-arr"><span>›</span><span>›</span><span>›</span></span></button>
+        </div>
+      </div>
+    </div>`;
+  document.getElementById("map-body").scrollTop = 0;
+  _updateMapCrosshair(ra, dec, name, tc);
+}
 function mapOpenFromCard(ra, dec, name, score, isSearchResult) {
   mapOpen();
   const idx = CANDIDATES.findIndex(c => Math.abs(c.ra-ra)<0.05 && Math.abs(c.dec-dec)<0.05);
   if (!isSearchResult && idx >= 0) {
-    mapShowDetail(idx);
+    _searchTargetCache = null;
+    requestAnimationFrame(() => mapShowDetail(idx));
     return;
   }
+  _searchTargetCache = {ra, dec, name};
   SFX.scan();
   const tc = '#10b981', tbg = 'rgba(16,185,129,.12)';
   const gd = document.getElementById("map-custom-dot");
@@ -5489,7 +5522,8 @@ function mapOpenFromCard(ra, dec, name, score, isSearchResult) {
       <animate attributeName="r" values="3;7;3" dur="2s" repeatCount="indefinite"/>
       <animate attributeName="opacity" values="0.95;0.2;0.95" dur="2s" repeatCount="indefinite"/>
     </circle>
-    <circle cx="${cx}" cy="${cy}" r="2" fill="${tc}" opacity="0.9"/>`;
+    <circle cx="${cx}" cy="${cy}" r="2" fill="${tc}" opacity="0.9"/>
+    <circle cx="${cx}" cy="${cy}" r="6" fill="transparent" style="pointer-events:all;cursor:pointer" onclick="mapShowSearchTarget()"/>`;
   }
   const imgUrl = ra ? `https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=120&height=120&fov=0.25&projection=TAN&coordsys=icrs&ra=${ra.toFixed(5)}&dec=${dec.toFixed(5)}&format=jpg` : "";
   const imgHtml = imgUrl ? `<img src="${imgUrl}" width="80" height="80" style="object-fit:cover;border-radius:6px;border:1px solid rgba(16,185,129,.25);flex-shrink:0;background:#0a1a2e" onerror="this.style.display='none'">` : "";
@@ -5570,6 +5604,7 @@ function mapClose() {
   SFX.close();
   document.getElementById("map-overlay").classList.remove("open");
   document.body.style.overflow = "";
+  _searchTargetCache = null;
   document.getElementById("sky-tooltip-map").style.display="none";
   const g = document.getElementById("map-crosshair");
   if (g) g.innerHTML = "";
