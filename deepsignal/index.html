@@ -1229,7 +1229,7 @@ async function _litFetch(name, method) {
     const resp = await fetch(url, { headers: { "Accept": "application/json" }, signal: ctrl.signal });
     if (!resp.ok) throw new Error(`CrossRef HTTP ${resp.status}`);
     const data = await resp.json();
-    const items = (data.message?.items || []).filter(p => _isRelevantPaper((p.title||[])[0], (p.abstract||[]).join(' '), name));
+    const items = (data.message?.items || []).filter(p => _isRelevantPaper((p.title||[])[0], Array.isArray(p.abstract) ? p.abstract.join(' ') : (p.abstract || ''), name));
     const elapsed = ((Date.now() - t0) / 1000).toFixed(1);
     footer.textContent = `${elapsed}s · CrossRef`;
 
