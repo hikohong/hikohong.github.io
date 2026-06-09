@@ -1348,6 +1348,34 @@ async function _newsFetchGN() {
     ? (_newsTargetFilter + ' space astronomy')
     : 'space astronomy SETI news';
   const rss = 'https://news.google.com/rss/search?q=' + encodeURIComponent(q) + '&hl=en-US&gl=US&ceid=US:en';
+
+  function _parseGNItem(title, link, pubDate, description) {
+    const t = (title || '—').replace(/ - [^-]{1,60}$/, '').replace(/</g, '&lt;');
+    const dateTs = pubDate ? new Date(pubDate.replace(' ', 'T') + (pubDate.includes('T') ? '' : 'Z')).getTime() : 0;
+    return {
+      title: t, link: link || '#', dateTs,
+      dateStr: dateTs ? new Date(dateTs).toISOString().slice(0, 10) : '',
+      source: 'google_news', sourceLabel: 'Google News',
+      snippet: (description || '').replace(/<[^>]+>/g, '').trim().slice(0, 160),
+    };
+  }
+
+  // 1. rss2json.com — dedicated RSS→JSON service with CORS, works where raw proxies fail
+  try {
+    const ctrl = new AbortController();
+    const tid = setTimeout(() => ctrl.abort(), 13000);
+    const resp = await fetch('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(rss), { signal: ctrl.signal });
+    clearTimeout(tid);
+    if (resp.ok) {
+      const data = await resp.json();
+      if (data.status === 'ok' && data.items && data.items.length) {
+        return data.items.slice(0, 15).map(el =>
+          _parseGNItem(el.title, el.link, el.pubDate, el.description));
+      }
+    }
+  } catch (_) {}
+
+  // 2. Raw RSS via CORS proxies (fallback)
   const proxies = [
     'https://corsproxy.io/?' + encodeURIComponent(rss),
     'https://api.allorigins.win/raw?url=' + encodeURIComponent(rss),
@@ -1366,23 +1394,12 @@ async function _newsFetchGN() {
   }
   if (!text) throw new Error('GN unavailable');
   const doc = new DOMParser().parseFromString(text, 'application/xml');
-  return [...doc.querySelectorAll('item')].slice(0, 15).map(el => {
-    const raw = el.querySelector('title')?.textContent || '—';
-    const title = raw.replace(/ - [^-]{1,60}$/, '').replace(/</g, '&lt;');
-    const link = el.querySelector('link')?.textContent?.trim() || '#';
-    const pub = el.querySelector('pubDate')?.textContent || '';
-    const dateTs = pub ? new Date(pub).getTime() : 0;
-    const desc = (el.querySelector('description')?.textContent || '').replace(/<[^>]+>/g, '').trim();
-    return {
-      title,
-      link,
-      dateTs,
-      dateStr: dateTs ? new Date(dateTs).toISOString().slice(0, 10) : '',
-      source: 'google_news',
-      sourceLabel: 'Google News',
-      snippet: desc.slice(0, 160),
-    };
-  });
+  return [...doc.querySelectorAll('item')].slice(0, 15).map(el => _parseGNItem(
+    el.querySelector('title')?.textContent,
+    el.querySelector('link')?.textContent?.trim(),
+    el.querySelector('pubDate')?.textContent,
+    (el.querySelector('description')?.textContent || '').replace(/<[^>]+>/g, '').trim()
+  ));
 }
 
 function _newsApplySort() {
