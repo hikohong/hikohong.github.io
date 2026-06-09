@@ -1271,17 +1271,8 @@ async function _newsFetch(force = false) {
     _newsGNStatus = 'loading';
     document.getElementById("news-filter-bar").style.display = 'flex';
     _newsBuildChips();
-    const tl = _newsTargetFilter ? _newsTargetFilter.toLowerCase() : null;
-    const hasSFMatch = !tl || _newsAllItems.some(p =>
-      (p.title || '').toLowerCase().includes(tl) || (p.snippet || '').toLowerCase().includes(tl)
-    );
-    if (hasSFMatch) {
-      _newsRender();
-      footer.textContent = `cached · ${_newsSFItems.length} items · fetching Google News…`;
-    } else {
-      body.innerHTML = `<div class="lit-status"><span class="spinner"></span> Searching Google News for "${_newsTargetFilter}"…</div>`;
-      footer.textContent = 'cached · fetching Google News…';
-    }
+    _newsRender();
+    footer.textContent = `cached · ${_newsSFItems.length} items · fetching Google News…`;
     _newsFetchGN().then(items => {
       _newsGNStatus = 'done';
       _newsGNItems = items;
@@ -1293,9 +1284,7 @@ async function _newsFetch(force = false) {
     }).catch(() => {
       _newsGNStatus = 'error';
       _newsBuildChips();
-      if (!hasSFMatch) {
-        body.innerHTML = `<div class="lit-empty">No Spaceflight News articles mention "${_newsTargetFilter}".<br><span style="font-size:.75rem;opacity:.7">Google News unavailable — try ↗ Google News below.</span></div>`;
-      }
+      _newsRender();
       footer.textContent = `cached · ${_newsSFItems.length} items`;
     });
     return;
@@ -1349,57 +1338,56 @@ async function _newsFetchGN() {
     : 'space astronomy SETI news';
   const rss = 'https://news.google.com/rss/search?q=' + encodeURIComponent(q) + '&hl=en-US&gl=US&ceid=US:en';
 
-  function _parseGNItem(title, link, pubDate, description) {
+  function _parseGNItem(title, link, pubDate, desc) {
     const t = (title || '—').replace(/ - [^-]{1,60}$/, '').replace(/</g, '&lt;');
-    const dateTs = pubDate ? new Date(pubDate.replace(' ', 'T') + (pubDate.includes('T') ? '' : 'Z')).getTime() : 0;
+    const pd = (pubDate || '').replace(' ', 'T');
+    const dateTs = pd ? new Date(pd.includes('T') ? pd : pd + 'Z').getTime() : 0;
     return {
       title: t, link: link || '#', dateTs,
       dateStr: dateTs ? new Date(dateTs).toISOString().slice(0, 10) : '',
       source: 'google_news', sourceLabel: 'Google News',
-      snippet: (description || '').replace(/<[^>]+>/g, '').trim().slice(0, 160),
+      snippet: (desc || '').replace(/<[^>]+>/g, '').trim().slice(0, 160),
     };
   }
 
-  // 1. rss2json.com — dedicated RSS→JSON service with CORS, works where raw proxies fail
-  try {
+  async function _tryRss2json() {
     const ctrl = new AbortController();
     const tid = setTimeout(() => ctrl.abort(), 13000);
     const resp = await fetch('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(rss), { signal: ctrl.signal });
     clearTimeout(tid);
-    if (resp.ok) {
-      const data = await resp.json();
-      if (data.status === 'ok' && data.items && data.items.length) {
-        return data.items.slice(0, 15).map(el =>
-          _parseGNItem(el.title, el.link, el.pubDate, el.description));
-      }
-    }
-  } catch (_) {}
-
-  // 2. Raw RSS via CORS proxies (fallback)
-  const proxies = [
-    'https://corsproxy.io/?' + encodeURIComponent(rss),
-    'https://api.allorigins.win/raw?url=' + encodeURIComponent(rss),
-  ];
-  let text = '';
-  for (const url of proxies) {
-    try {
-      const ctrl = new AbortController();
-      const tid = setTimeout(() => ctrl.abort(), 10000);
-      const resp = await fetch(url, { signal: ctrl.signal });
-      clearTimeout(tid);
-      if (!resp.ok) continue;
-      const t = await resp.text();
-      if (t && t.includes('<item>')) { text = t; break; }
-    } catch (_) {}
+    if (!resp.ok) throw new Error('http');
+    const data = await resp.json();
+    if (data.status !== 'ok' || !data.items || !data.items.length) throw new Error('empty');
+    return data.items.slice(0, 15).map(el => _parseGNItem(el.title, el.link, el.pubDate, el.description));
   }
-  if (!text) throw new Error('GN unavailable');
-  const doc = new DOMParser().parseFromString(text, 'application/xml');
-  return [...doc.querySelectorAll('item')].slice(0, 15).map(el => _parseGNItem(
-    el.querySelector('title')?.textContent,
-    el.querySelector('link')?.textContent?.trim(),
-    el.querySelector('pubDate')?.textContent,
-    (el.querySelector('description')?.textContent || '').replace(/<[^>]+>/g, '').trim()
-  ));
+
+  async function _tryProxy(url) {
+    const ctrl = new AbortController();
+    const tid = setTimeout(() => ctrl.abort(), 12000);
+    const resp = await fetch(url, { signal: ctrl.signal });
+    clearTimeout(tid);
+    if (!resp.ok) throw new Error('http');
+    const t = await resp.text();
+    if (!t || !t.includes('<item>')) throw new Error('no items');
+    const doc = new DOMParser().parseFromString(t, 'application/xml');
+    return [...doc.querySelectorAll('item')].slice(0, 15).map(el => _parseGNItem(
+      el.querySelector('title')?.textContent,
+      el.querySelector('link')?.textContent?.trim(),
+      el.querySelector('pubDate')?.textContent,
+      (el.querySelector('description')?.textContent || '').replace(/<[^>]+>/g, '').trim()
+    ));
+  }
+
+  // Run all three in parallel — first success wins (Promise.any)
+  try {
+    return await Promise.any([
+      _tryRss2json(),
+      _tryProxy('https://corsproxy.io/?' + encodeURIComponent(rss)),
+      _tryProxy('https://api.allorigins.win/raw?url=' + encodeURIComponent(rss)),
+    ]);
+  } catch (_) {
+    throw new Error('GN unavailable');
+  }
 }
 
 function _newsApplySort() {
