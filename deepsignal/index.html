@@ -1374,7 +1374,7 @@ function _newsApplySort() {
 function _newsBuildChips() {
   const labelsMap = Object.fromEntries(_newsAllItems.map(p => [p.source, p.sourceLabel]));
   const others = [...new Set(_newsAllItems.map(p => p.source))].filter(s => s !== 'google_news').sort();
-  const spo = others.indexOf('spacepolicyonline');
+  const spo = others.findIndex(s => s.startsWith('spacepolicyonline'));
   const hasGN = _newsAllItems.some(p => p.source === 'google_news');
   let ordered;
   if (hasGN) {
