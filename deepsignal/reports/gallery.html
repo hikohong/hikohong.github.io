@@ -303,7 +303,7 @@
     <div class="news-hdr">
       <span style="font-size:1.4rem;opacity:.7;flex-shrink:0">◎</span>
       <div>
-        <div class="news-hdr-eyebrow">⬡ DeepSignal · Space News · ATel / Google</div>
+        <div class="news-hdr-eyebrow">⬡ DeepSignal · Space News · arXiv / ATel</div>
         <div class="news-hdr-name" id="news-target-name">Space News</div>
       </div>
       <button class="lit-x" onclick="newsClose()">✕</button>
@@ -724,7 +724,7 @@
 <div id="sky-tooltip-map"></div>
 <div class="gallery-hdr">
 <h1>DeepSignal — Sky Image Gallery</h1>
-<div class="subtitle">Generated 2026-06-09 05:02 UTC &nbsp;·&nbsp; 169 targets &nbsp;·&nbsp; 169 sky images via Hips2Fits CDN</div>
+<div class="subtitle">Generated 2026-06-09 05:28 UTC &nbsp;·&nbsp; 169 targets &nbsp;·&nbsp; 169 sky images via Hips2Fits CDN</div>
 <div class="stats">
   <div class="stat"><div class="stat-n" style="color:#f59e0b">38</div><div class="stat-l">Tier 1 ≥70</div></div>
   <div class="stat"><div class="stat-n" style="color:#60a5fa">119</div><div class="stat-l">Tier 2 50–69</div></div>
@@ -5391,7 +5391,6 @@ function newsClose() {
   document.getElementById("news-overlay").classList.remove("open");
   document.body.style.overflow = "";
 }
-const _RSS2JSON_NEWS = 'https://api.rss2json.com/v1/api.json?rss_url=';
 const _newsCache = {};
 async function _newsFetch(targetName) {
   const body = document.getElementById("news-body");
@@ -5400,42 +5399,44 @@ async function _newsFetch(targetName) {
   if (_newsCache[cacheKey]) { body.innerHTML = _newsCache[cacheKey]; footer.textContent = "cached"; return; }
   const t0 = Date.now();
   try {
-    const feedUrl = "https://www.astronomerstelegram.org/rss/atel_rss";
+    const q = targetName ? 'all:"' + targetName + '"' : 'cat:astro-ph';
+    const url = 'https://export.arxiv.org/api/query?search_query=' + encodeURIComponent(q) + '&sortBy=submittedDate&sortOrder=descending&max_results=8';
     const ctrl = new AbortController();
     const tid = setTimeout(() => ctrl.abort(), 12000);
-    const resp = await fetch(_RSS2JSON_NEWS + encodeURIComponent(feedUrl), {
-      headers: { Accept: "application/json" }, signal: ctrl.signal
-    });
+    const resp = await fetch(url, { signal: ctrl.signal });
     clearTimeout(tid);
     if (!resp.ok) throw new Error('HTTP ' + resp.status);
-    const data = await resp.json();
-    const allItems = data.items || [];
-    const items = targetName
-      ? allItems.filter(item => item.title.toLowerCase().includes(targetName.toLowerCase()))
-      : allItems.slice(0, 15);
+    const text = await resp.text();
+    const xml = (new DOMParser()).parseFromString(text, 'text/xml');
+    const entries = [...xml.querySelectorAll('entry')];
     const elapsed = ((Date.now() - t0) / 1000).toFixed(1);
-    footer.textContent = elapsed + 's · The Astronomer's Telegram';
-    if (items.length) {
+    footer.textContent = elapsed + 's · arXiv';
+    if (entries.length) {
       let html = '<div style="font-size:.7rem;color:#5a4a3a;font-family:monospace;margin-bottom:12px;letter-spacing:.06em">'
-        + (targetName ? items.length + ' CIRCULAR' + (items.length > 1 ? 'S' : '') + ' MENTIONING "' + targetName.toUpperCase() + '"' : items.length + ' RECENT CIRCULARS')
+        + entries.length + ' RECENT PREPRINT' + (entries.length > 1 ? 'S' : '') + (targetName ? ' · ' + targetName.toUpperCase() : ' · ASTROPHYSICS')
         + '</div>';
-      items.forEach(item => {
-        const desc = item.description ? item.description.replace(/<[^>]+>/g, '').slice(0, 200) : '';
-        html += '<div class="news-item"><div class="news-src">ATel</div>'
-          + '<a class="news-title-lnk" href="' + item.link + '" target="_blank" rel="noopener">' + item.title + '</a>'
-          + (desc ? '<div class="news-date" style="color:#6a5a4a;font-size:.72rem;line-height:1.4">' + desc + '…</div>' : '')
-          + '<div class="news-date">' + (item.pubDate || '').slice(0, 10) + '</div></div>';
+      entries.forEach(e => {
+        const title = e.querySelector('title') ? e.querySelector('title').textContent.trim() : '—';
+        const summary = (e.querySelector('summary') ? e.querySelector('summary').textContent.trim() : '').slice(0, 180);
+        const date = (e.querySelector('published') ? e.querySelector('published').textContent : '').slice(0, 10);
+        const linkEl = e.querySelector('link[rel="alternate"]');
+        const idEl = e.querySelector('id');
+        const link = linkEl ? linkEl.getAttribute('href') : (idEl ? idEl.textContent.trim() : '');
+        html += '<div class="news-item"><div class="news-src">arXiv</div>'
+          + '<a class="news-title-lnk" href="' + link + '" target="_blank" rel="noopener">' + title + '</a>'
+          + (summary ? '<div class="news-date" style="color:#6a5a4a;font-size:.72rem;line-height:1.4">' + summary + '…</div>' : '')
+          + '<div class="news-date">' + date + '</div></div>';
       });
       _newsCache[cacheKey] = html;
       body.innerHTML = html;
     } else {
-      const html = '<div class="lit-empty">' + (targetName ? 'No ATel circulars found for "<strong>' + targetName + '</strong>"' : 'No recent circulars') + '<br><span style="font-size:.72rem">Use the links below to search external sources</span></div>';
+      const html = '<div class="lit-empty">' + (targetName ? 'No recent preprints found for "<strong>' + targetName + '</strong>"' : 'No recent preprints') + '<br><span style="font-size:.72rem">Use the links below to search external sources</span></div>';
       _newsCache[cacheKey] = html;
       body.innerHTML = html;
     }
   } catch(e) {
     const isAbort = e.name === "AbortError";
-    body.innerHTML = '<div class="lit-empty">' + (isAbort ? "Request timed out" : "Could not load news feed") + '<br><span style="font-size:.72rem">Use the links below to search external sources</span></div>';
+    body.innerHTML = '<div class="lit-empty">' + (isAbort ? "Request timed out" : "Could not load feed") + '<br><span style="font-size:.72rem">Use the links below to search external sources</span></div>';
     footer.textContent = "error";
   }
 }
