@@ -406,7 +406,7 @@ footer a{color:#4a6a8a;text-decoration:none}
     <div class="news-hdr">
       <span style="font-size:1.4rem;opacity:.7;flex-shrink:0">◎</span>
       <div>
-        <div class="news-hdr-eyebrow">⬡ DeepSignal · Space News · S2 / ATel</div>
+        <div class="news-hdr-eyebrow">⬡ DeepSignal · Space News · OA / ATel</div>
         <div class="news-hdr-name" id="news-target-name">Space News</div>
       </div>
       <button class="lit-x" onclick="newsClose()">✕</button>
@@ -1205,31 +1205,30 @@ async function _newsFetch(targetName) {
   const t0 = Date.now();
   try {
     const q = targetName || "astrophysics SETI";
-    const url = `https://api.semanticscholar.org/graph/v1/paper/search?query=${encodeURIComponent(q)}&fields=title,abstract,year,externalIds,openAccessPdf&limit=8&sort=publicationDate:desc`;
+    const url = `https://api.openalex.org/works?search=${encodeURIComponent(q)}&per_page=8&select=title,publication_year,doi,open_access,primary_location`;
     const ctrl = new AbortController();
     const tid = setTimeout(() => ctrl.abort(), 12000);
     const resp = await fetch(url, { signal: ctrl.signal });
     clearTimeout(tid);
     if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
     const data = await resp.json();
-    const papers = data.data || [];
+    const papers = data.results || [];
     const elapsed = ((Date.now() - t0) / 1000).toFixed(1);
-    footer.textContent = `${elapsed}s · S2`;
+    footer.textContent = `${elapsed}s · OA`;
     if (papers.length) {
       const html = `<div style="font-size:.7rem;color:#5a4a3a;font-family:monospace;margin-bottom:12px;letter-spacing:.06em">
-        ${papers.length} RECENT PAPER${papers.length > 1 ? "S" : ""}${targetName ? ` · ${targetName.toUpperCase()}` : " · ASTROPHYSICS"}
+        ${papers.length} PAPER${papers.length > 1 ? "S" : ""}${targetName ? ` · ${targetName.toUpperCase()}` : " · ASTROPHYSICS"}
       </div>` + papers.map(p => {
-        const title = p.title || '—';
-        const abstract = (p.abstract || '').slice(0, 180);
-        const year = p.year || '';
-        const arxivId = p.externalIds?.ArXiv;
-        const link = arxivId ? `https://arxiv.org/abs/${arxivId}`
-          : (p.openAccessPdf?.url || `https://www.semanticscholar.org/paper/${p.paperId}`);
-        const src = arxivId ? 'arXiv' : 'S2';
+        const title = (p.title || '—').replace(/</g, '&lt;');
+        const year = p.publication_year || '';
+        const oaUrl = p.open_access && p.open_access.oa_url;
+        const landingUrl = p.primary_location && p.primary_location.landing_page_url;
+        const link = oaUrl || landingUrl || p.doi || '#';
+        const isArxiv = link && link.includes('arxiv.org');
+        const src = isArxiv ? 'arXiv' : 'OA';
         return `<div class="news-item">
           <div class="news-src">${src}</div>
           <a class="news-title-lnk" href="${link}" target="_blank" rel="noopener">${title}</a>
-          ${abstract ? `<div class="news-date" style="color:#6a5a4a;font-size:.72rem;line-height:1.4">${abstract}…</div>` : ''}
           <div class="news-date">${year}</div>
         </div>`;
       }).join('');
