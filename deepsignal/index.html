@@ -93,6 +93,11 @@ nav{display:flex;align-items:center;gap:12px;padding:16px 24px;border-bottom:1px
 .section-head a{font-size:.82rem;color:#7dd3fc;text-decoration:none;margin-left:auto}
 .section-head a:hover{text-decoration:underline}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.skel{border:1px solid rgba(219,234,254,.08);border-radius:10px;overflow:hidden;background:rgba(255,255,255,.025);pointer-events:none}
+.skel-img{height:140px;background:linear-gradient(90deg,rgba(255,255,255,.03) 0%,rgba(255,255,255,.07) 50%,rgba(255,255,255,.03) 100%);background-size:200% 100%;animation:shimmer 1.6s ease-in-out infinite}
+.skel-body{padding:12px 14px;display:flex;flex-direction:column;gap:8px}
+.skel-line{border-radius:4px;background:linear-gradient(90deg,rgba(255,255,255,.04) 0%,rgba(255,255,255,.09) 50%,rgba(255,255,255,.04) 100%);background-size:200% 100%;animation:shimmer 1.6s ease-in-out infinite}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 .card{background:rgba(255,255,255,.04);border:1px solid rgba(219,234,254,.12);border-radius:10px;overflow:hidden;text-decoration:none;color:inherit;transition:border-color 140ms,transform 140ms;display:block;cursor:pointer}
 .card:hover{border-color:rgba(125,211,252,.45);transform:translateY(-2px)}
 .card-img{position:relative;height:140px;background:#040d18;overflow:hidden}
@@ -393,7 +398,14 @@ footer a{color:#4a6a8a;text-decoration:none}
     </select>
     <span class="fb-count" id="hl-count"></span>
   </div>
-  <div class="grid" id="highlights"></div>
+  <div class="grid" id="highlights">
+    <div class="skel"><div class="skel-img"></div><div class="skel-body"><div class="skel-line" style="height:13px;width:65%"></div><div class="skel-line" style="height:10px;width:85%"></div><div class="skel-line" style="height:10px;width:50%"></div></div></div>
+    <div class="skel"><div class="skel-img"></div><div class="skel-body"><div class="skel-line" style="height:13px;width:55%"></div><div class="skel-line" style="height:10px;width:80%"></div><div class="skel-line" style="height:10px;width:45%"></div></div></div>
+    <div class="skel"><div class="skel-img"></div><div class="skel-body"><div class="skel-line" style="height:13px;width:70%"></div><div class="skel-line" style="height:10px;width:75%"></div><div class="skel-line" style="height:10px;width:60%"></div></div></div>
+    <div class="skel"><div class="skel-img"></div><div class="skel-body"><div class="skel-line" style="height:13px;width:60%"></div><div class="skel-line" style="height:10px;width:90%"></div><div class="skel-line" style="height:10px;width:40%"></div></div></div>
+    <div class="skel"><div class="skel-img"></div><div class="skel-body"><div class="skel-line" style="height:13px;width:75%"></div><div class="skel-line" style="height:10px;width:70%"></div><div class="skel-line" style="height:10px;width:55%"></div></div></div>
+    <div class="skel"><div class="skel-img"></div><div class="skel-body"><div class="skel-line" style="height:13px;width:50%"></div><div class="skel-line" style="height:10px;width:85%"></div><div class="skel-line" style="height:10px;width:65%"></div></div></div>
+  </div>
 </div>
 
 <footer>
@@ -545,7 +557,7 @@ let _searchTargetCache = null;
 // ── Load catalog.json on startup ──────────────────────────────────────────────
 async function loadCatalog() {
   try {
-    const r = await fetch("catalog.json");
+    const r = await fetch("catalog.json?_=" + Date.now());
     if (!r.ok) return;
     const data = await r.json();
     catalog = Array.isArray(data) ? data : (Array.isArray(data.candidates) ? data.candidates : []);
@@ -1504,8 +1516,10 @@ function _newsRender() {
   let items = _newsSrcFilter === 'all' ? _newsAllItems : _newsAllItems.filter(p => p.source === _newsSrcFilter);
   if (_newsTargetFilter) {
     const tl = _newsTargetFilter.toLowerCase();
+    const _rssKeys = new Set(_NEWS_RSS_SOURCES.map(s => s.key));
     items = items.filter(p =>
       p.source === 'google_news' ||
+      !_rssKeys.has(p.source) ||
       (p.title || '').toLowerCase().includes(tl) ||
       (p.snippet || '').toLowerCase().includes(tl)
     );
