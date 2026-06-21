@@ -25,7 +25,9 @@
   .nav-deepsignal{color:#3a4a5a;font-size:.85rem;line-height:1;white-space:nowrap}
   #mute-btn{background:none;border:none;cursor:pointer;padding:2px;color:#6b7e90;transition:color 150ms,filter 150ms;line-height:1}
   #mute-btn.sfx-on{color:#f59e0b;filter:drop-shadow(0 0 5px rgba(245,158,11,.55))}
-  #mute-btn:hover{color:#fbbf24;filter:drop-shadow(0 0 8px rgba(251,191,36,.75))}
+  #mute-btn.sfx-muted{color:#f59e0b;animation:mute-flash 1.1s ease-in-out infinite}
+  #mute-btn:hover{color:#fbbf24;filter:drop-shadow(0 0 8px rgba(251,191,36,.75));animation:none}
+  @keyframes mute-flash{0%,100%{opacity:1;filter:drop-shadow(0 0 6px rgba(245,158,11,.7))}50%{opacity:.25;filter:none}}
   .nav-planet{flex-shrink:0;animation:planet-pulse 4s ease-in-out infinite}
   @keyframes planet-pulse{0%,100%{filter:drop-shadow(0 0 3px rgba(125,211,252,.35))}50%{filter:drop-shadow(0 0 9px rgba(125,211,252,.85))}}
   .gallery-hdr{padding:24px 24px 0}
@@ -8358,7 +8360,7 @@ function _updateMapCrosshair(ra, dec, name, tc) {
 }
 // ── Sci-Fi Sound Engine ───────────────────────────────────────────────────────
 const SFX = (() => {
-  let _ctx = null, _muted = localStorage.getItem('sfx-muted') === '1';
+  let _ctx = null, _muted = localStorage.getItem('sfx-muted') !== '0';
   const _loaded = {};
   const _WAV = {click:'click2',scan:'scan',open:'open2',close:'close2'};
   ['click','scan','open','close'].forEach(k => {
@@ -8469,6 +8471,7 @@ function _syncMuteBtn() {
   const muted = SFX.muted();
   btn.innerHTML = muted ? ICON_MUTED : ICON_SND;
   btn.classList.toggle('sfx-on', !muted);
+  btn.classList.toggle('sfx-muted', muted);
 }
 function toggleMute() {
   SFX.setMuted(!SFX.muted());
