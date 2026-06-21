@@ -347,7 +347,7 @@ footer a{color:#4a6a8a;text-decoration:none}
   <div class="stat-chip">Pipeline candidates: <strong id="stat-n">244</strong></div>
   <div class="stat-chip">Data sources: <strong>10</strong></div>
   <div class="stat-chip">Detection algorithms: <strong>14</strong></div>
-  <div class="stat-chip">Last updated: <strong>2026-06-14 09:39 UTC</strong></div>
+  <div class="stat-chip">Last updated: <strong>2026-06-21 07:38 UTC</strong></div>
 </div>
 
 <!-- Map Modal -->
@@ -2116,7 +2116,7 @@ document.addEventListener("keydown", e => {
 
 // ── Sci-Fi Sound Engine ───────────────────────────────────────────────────────
 const SFX = (() => {
-  let _ctx = null, _muted = true;
+  let _ctx = null, _muted = true;  // muted by default on every page load
   const _loaded = {};
   const _WAV = {click:'click2',scan:'scan',open:'open2',close:'close2'};
   ['click','scan','open','close'].forEach(k => {

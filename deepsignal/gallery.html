@@ -914,7 +914,7 @@
 <div id="sky-tooltip-map"></div>
 <div class="gallery-hdr">
 <h1>DeepSignal — Sky Image Gallery</h1>
-<div class="subtitle">Generated 2026-06-14 09:36 UTC &nbsp;·&nbsp; 244 targets &nbsp;·&nbsp; 244 sky images via Hips2Fits CDN</div>
+<div class="subtitle">Generated 2026-06-21 07:37 UTC &nbsp;·&nbsp; 244 targets &nbsp;·&nbsp; 244 sky images via Hips2Fits CDN</div>
 <div class="stats">
   <div class="stat"><div class="stat-n" style="color:#f59e0b">104</div><div class="stat-l">Tier 1 ≥70</div></div>
   <div class="stat"><div class="stat-n" style="color:#60a5fa">128</div><div class="stat-l">Tier 2 50–69</div></div>
@@ -8360,7 +8360,7 @@ function _updateMapCrosshair(ra, dec, name, tc) {
 }
 // ── Sci-Fi Sound Engine ───────────────────────────────────────────────────────
 const SFX = (() => {
-  let _ctx = null, _muted = true;
+  let _ctx = null, _muted = true;  // muted by default on every page load
   const _loaded = {};
   const _WAV = {click:'click2',scan:'scan',open:'open2',close:'close2'};
   ['click','scan','open','close'].forEach(k => {
