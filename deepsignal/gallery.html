@@ -8360,7 +8360,7 @@ function _updateMapCrosshair(ra, dec, name, tc) {
 }
 // ── Sci-Fi Sound Engine ───────────────────────────────────────────────────────
 const SFX = (() => {
-  let _ctx = null, _muted = true;  // muted by default on every page load
+  let _ctx = null, _muted = localStorage.getItem('sfx-muted') !== '0';  // muted by default; choice persists across pages
   const _loaded = {};
   const _WAV = {click:'click2',scan:'scan',open:'open2',close:'close2'};
   ['click','scan','open','close'].forEach(k => {
@@ -8478,6 +8478,9 @@ function toggleMute() {
   _syncMuteBtn();
   if (!SFX.muted()) SFX.ping();
 }
+window.addEventListener('storage', e => {
+  if (e.key === 'sfx-muted') { SFX.setMuted(e.newValue === '1'); _syncMuteBtn(); }
+});
 document.addEventListener('DOMContentLoaded', _syncMuteBtn);
 </script>
 </body>
