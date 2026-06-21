@@ -347,7 +347,7 @@ footer a{color:#4a6a8a;text-decoration:none}
   <div class="stat-chip">Pipeline candidates: <strong id="stat-n">244</strong></div>
   <div class="stat-chip">Data sources: <strong>10</strong></div>
   <div class="stat-chip">Detection algorithms: <strong>14</strong></div>
-  <div class="stat-chip">Last updated: <strong>2026-06-14 09:39 UTC</strong></div>
+  <div class="stat-chip">Last updated: <strong>2026-06-10 03:43 UTC</strong></div>
 </div>
 
 <!-- Map Modal -->
@@ -1268,51 +1268,15 @@ const _NEWS_RSS_SOURCES = [
   { key: 'astronomy_mag', label: 'Astronomy Mag', url: 'https://astronomy.com/feed/' },
 ];
 
-// Fetch an RSS feed through multiple CORS proxies — first success wins.
-// rss2json (JSON) → corsproxy.io (raw XML) → allorigins (raw XML). Without the
-// fallbacks, any feed that relies on rss2json alone dies when its free tier is
-// rate-limited, which is why only Google News (which already raced 3 proxies)
-// used to survive. Returns raw {title, link, pubDate, description} entries.
-async function _fetchRssViaProxies(rssUrl, limit = 15) {
-  async function viaRss2json() {
-    const ctrl = new AbortController();
-    const tid = setTimeout(() => ctrl.abort(), 13000);
-    const resp = await fetch('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(rssUrl), { signal: ctrl.signal });
-    clearTimeout(tid);
-    if (!resp.ok) throw new Error('http');
-    const data = await resp.json();
-    if (data.status !== 'ok' || !data.items || !data.items.length) throw new Error('empty');
-    return data.items.slice(0, limit).map(el => ({
-      title: el.title, link: el.link, pubDate: el.pubDate,
-      description: el.description || el.content || '',
-    }));
-  }
-  async function viaRawProxy(proxyUrl) {
-    const ctrl = new AbortController();
-    const tid = setTimeout(() => ctrl.abort(), 12000);
-    const resp = await fetch(proxyUrl, { signal: ctrl.signal });
-    clearTimeout(tid);
-    if (!resp.ok) throw new Error('http');
-    const t = await resp.text();
-    if (!t || !t.includes('<item>')) throw new Error('no items');
-    const doc = new DOMParser().parseFromString(t, 'application/xml');
-    return [...doc.querySelectorAll('item')].slice(0, limit).map(el => ({
-      title: el.querySelector('title')?.textContent,
-      link: el.querySelector('link')?.textContent?.trim(),
-      pubDate: el.querySelector('pubDate')?.textContent,
-      description: el.querySelector('description')?.textContent || '',
-    }));
-  }
-  return await Promise.any([
-    viaRss2json(),
-    viaRawProxy('https://corsproxy.io/?' + encodeURIComponent(rssUrl)),
-    viaRawProxy('https://api.allorigins.win/raw?url=' + encodeURIComponent(rssUrl)),
-  ]);
-}
-
 async function _fetchRssGeneric(rssUrl, sourceKey, sourceLabel) {
-  const raw = await _fetchRssViaProxies(rssUrl, 10);
-  return raw.map(el => {
+  const ctrl = new AbortController();
+  const tid = setTimeout(() => ctrl.abort(), 13000);
+  const resp = await fetch('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(rssUrl), { signal: ctrl.signal });
+  clearTimeout(tid);
+  if (!resp.ok) throw new Error('http');
+  const data = await resp.json();
+  if (data.status !== 'ok' || !data.items || !data.items.length) throw new Error('empty');
+  return data.items.slice(0, 10).map(el => {
     const pd = (el.pubDate || '').replace(' ', 'T');
     const dateTs = pd ? new Date(pd.includes('T') ? pd : pd + 'Z').getTime() : 0;
     return {
@@ -1322,7 +1286,7 @@ async function _fetchRssGeneric(rssUrl, sourceKey, sourceLabel) {
       dateStr: dateTs ? new Date(dateTs).toISOString().slice(0, 10) : '',
       source: sourceKey,
       sourceLabel,
-      snippet: (el.description || '').replace(/<[^>]+>/g, '').trim().slice(0, 160),
+      snippet: (el.description || el.content || '').replace(/<[^>]+>/g, '').trim().slice(0, 160),
     };
   });
 }
@@ -1403,32 +1367,12 @@ function _newsFetch(force = false) {
 }
 
 async function _newsFetchSFApi() {
-  const apiUrl = 'https://api.spaceflightnewsapi.net/v4/articles/?limit=30&ordering=-published_at';
-  async function viaDirect() {
-    const ctrl = new AbortController();
-    const tid = setTimeout(() => ctrl.abort(), 12000);
-    const resp = await fetch(apiUrl, { signal: ctrl.signal });
-    clearTimeout(tid);
-    if (!resp.ok) throw new Error('HTTP ' + resp.status);
-    return await resp.json();
-  }
-  async function viaProxy(proxyUrl) {
-    const ctrl = new AbortController();
-    const tid = setTimeout(() => ctrl.abort(), 12000);
-    const resp = await fetch(proxyUrl, { signal: ctrl.signal });
-    clearTimeout(tid);
-    if (!resp.ok) throw new Error('http');
-    const data = JSON.parse(await resp.text());
-    if (!data.results) throw new Error('empty');
-    return data;
-  }
-  // Race the direct API against two CORS proxies so a single endpoint outage,
-  // CORS change, or regional block no longer wipes out all Spaceflight news.
-  const data = await Promise.any([
-    viaDirect(),
-    viaProxy('https://corsproxy.io/?' + encodeURIComponent(apiUrl)),
-    viaProxy('https://api.allorigins.win/raw?url=' + encodeURIComponent(apiUrl)),
-  ]);
+  const ctrl = new AbortController();
+  const tid = setTimeout(() => ctrl.abort(), 12000);
+  const resp = await fetch('https://api.spaceflightnewsapi.net/v4/articles/?limit=30&ordering=-published_at', { signal: ctrl.signal });
+  clearTimeout(tid);
+  if (!resp.ok) throw new Error('HTTP ' + resp.status);
+  const data = await resp.json();
   return (data.results || []).map(item => ({
     title: (item.title || '—').replace(/</g, '&lt;'),
     link: item.url || '#',
@@ -1459,11 +1403,41 @@ async function _newsFetchGN() {
     };
   }
 
-  // Shared multi-proxy fetch (rss2json → corsproxy → allorigins, first wins),
-  // then apply Google-News-specific title cleanup.
+  async function _tryRss2json() {
+    const ctrl = new AbortController();
+    const tid = setTimeout(() => ctrl.abort(), 13000);
+    const resp = await fetch('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(rss), { signal: ctrl.signal });
+    clearTimeout(tid);
+    if (!resp.ok) throw new Error('http');
+    const data = await resp.json();
+    if (data.status !== 'ok' || !data.items || !data.items.length) throw new Error('empty');
+    return data.items.slice(0, 15).map(el => _parseGNItem(el.title, el.link, el.pubDate, el.description));
+  }
+
+  async function _tryProxy(url) {
+    const ctrl = new AbortController();
+    const tid = setTimeout(() => ctrl.abort(), 12000);
+    const resp = await fetch(url, { signal: ctrl.signal });
+    clearTimeout(tid);
+    if (!resp.ok) throw new Error('http');
+    const t = await resp.text();
+    if (!t || !t.includes('<item>')) throw new Error('no items');
+    const doc = new DOMParser().parseFromString(t, 'application/xml');
+    return [...doc.querySelectorAll('item')].slice(0, 15).map(el => _parseGNItem(
+      el.querySelector('title')?.textContent,
+      el.querySelector('link')?.textContent?.trim(),
+      el.querySelector('pubDate')?.textContent,
+      (el.querySelector('description')?.textContent || '').replace(/<[^>]+>/g, '').trim()
+    ));
+  }
+
+  // Run all three in parallel — first success wins (Promise.any)
   try {
-    const raw = await _fetchRssViaProxies(rss, 15);
-    return raw.map(el => _parseGNItem(el.title, el.link, el.pubDate, el.description));
+    return await Promise.any([
+      _tryRss2json(),
+      _tryProxy('https://corsproxy.io/?' + encodeURIComponent(rss)),
+      _tryProxy('https://api.allorigins.win/raw?url=' + encodeURIComponent(rss)),
+    ]);
   } catch (_) {
     throw new Error('GN unavailable');
   }
@@ -1545,9 +1519,6 @@ function _newsRender() {
   if (_newsTargetFilter) {
     const tl = _newsTargetFilter.toLowerCase();
     const _rssKeys = new Set(_NEWS_RSS_SOURCES.map(s => s.key));
-    // GN items: already target-specific (query contained the target name) — pass all.
-    // SF API items (space_com, nasa_gov, etc.): general space news context — pass all.
-    // RSS sources (sky_telescope, astronomy_mag): only if they mention the target.
     items = items.filter(p =>
       p.source === 'google_news' ||
       !_rssKeys.has(p.source) ||
@@ -2066,7 +2037,7 @@ function filterHighlights() {
 function reportOpen() {
   SFX.open();
   document.getElementById("report-body").innerHTML =
-    `<div class="lit-status"><span class="spinner"></span> LOADING REPORT…</div>`;
+    `<div class="lit-status"><span class="spinner"></span> SCANNING REPORT DATA…</div>`;
   document.getElementById("report-footer-ts").textContent = "";
   document.getElementById("report-overlay").classList.add("open");
   document.body.style.overflow = "hidden";
