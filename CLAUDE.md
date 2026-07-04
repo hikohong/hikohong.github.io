@@ -101,6 +101,7 @@ Commits landing from the upstream pipeline use the message pattern:
 | Green | `#10b981` | Map button + modal chrome only |
 | Silver | `#94a3b8` | Auxiliary entry-point buttons only (e.g. `.btn-news` card button) — NOT modal chrome |
 | Orange | `#f97316` | Reserved for urgent/alert states ONLY |
+| Avionics green | `#3fe08f` | NAVCON HUD instrument layer ONLY (telemetry bar, corner brackets, self-test panel, radar sweep, sensor ticks, reticle) — never content/modal chrome |
 
 ### Homepage (`index.html`) structure
 - Signature bar (HH monogram + name)
