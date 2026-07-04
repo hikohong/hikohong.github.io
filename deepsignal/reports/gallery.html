@@ -274,13 +274,16 @@ body{padding-bottom:30px}
 @keyframes hud-blink{0%,100%{opacity:1}50%{opacity:.35}}
 #hud-msg{margin-left:auto;color:#3a5a7a;overflow:hidden;text-overflow:ellipsis;min-width:0}
 @media(max-width:680px){.hud-hide-sm{display:none!important}}
-#boot-ov{position:fixed;inset:0;z-index:2000;background:#050d19;display:flex;align-items:center;justify-content:center;transition:opacity .5s;cursor:pointer}
-#boot-ov.off{opacity:0;pointer-events:none}
-#boot-box{font-family:monospace;font-size:clamp(.66rem,2.3vw,.84rem);color:#7dd3fc;width:min(520px,88vw);text-shadow:0 0 8px rgba(125,211,252,.4)}
-#boot-box div{min-height:1.55em;white-space:pre-wrap}
-.b-ok{color:#10b981}
-.b-dim{color:#3a6a9a}
-#boot-skip{margin-top:16px;font-size:.58rem;color:#2a4a6a;letter-spacing:.18em;animation:hud-blink 1.6s infinite;font-family:monospace}
+/* self-test mini panel — floats over the live page, auto-dismisses when checks pass */
+#boot-ov{position:fixed;right:14px;bottom:44px;z-index:70;width:min(330px,calc(100vw - 28px));background:rgba(4,11,22,.93);border:1px solid rgba(125,211,252,.5);border-radius:8px;box-shadow:0 0 26px rgba(125,211,252,.16);backdrop-filter:blur(8px);font-family:monospace;cursor:pointer;transition:opacity .5s,transform .5s;overflow:hidden}
+#boot-ov.off{opacity:0;transform:translateY(10px);pointer-events:none}
+#boot-hdr{display:flex;align-items:center;gap:7px;padding:7px 11px;font-size:.58rem;letter-spacing:.16em;color:#7dd3fc;border-bottom:1px solid rgba(125,211,252,.18);background:rgba(0,20,40,.5)}
+#boot-box{padding:8px 11px 10px;font-size:.6rem;letter-spacing:.06em}
+#boot-box div{display:flex;justify-content:space-between;gap:10px;min-height:1.6em;align-items:baseline}
+.b-lbl{color:#3a6a9a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.b-ok{color:#10b981;white-space:nowrap}
+.b-pend{color:#2a4a6a;white-space:nowrap;animation:hud-blink 1.2s infinite}
+.b-fail{color:#f97316;white-space:nowrap}
 .card{position:relative}
 .card.tilting{transition:none!important;border-color:rgba(125,211,252,.55)!important}
 .card::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .25s;background:radial-gradient(230px circle at var(--mx,50%) var(--my,50%),rgba(125,211,252,.13),transparent 65%);z-index:3}
@@ -296,7 +299,7 @@ body{padding-bottom:30px}
 .result-img::after{content:'';position:absolute;left:50%;top:50%;width:54px;height:54px;margin:-27px 0 0 -27px;border:1px solid rgba(125,211,252,.6);border-radius:50%;box-shadow:0 0 12px rgba(125,211,252,.3);pointer-events:none;z-index:2;animation:hud-blink 3.2s ease-in-out infinite}
 .result-img::before{content:'';position:absolute;left:50%;top:50%;width:82px;height:82px;margin:-41px 0 0 -41px;pointer-events:none;z-index:2;opacity:.75;background-image:linear-gradient(#7dd3fc,#7dd3fc),linear-gradient(#7dd3fc,#7dd3fc),linear-gradient(#7dd3fc,#7dd3fc),linear-gradient(#7dd3fc,#7dd3fc);background-position:left center,right center,center top,center bottom;background-size:13px 1px,13px 1px,1px 13px,1px 13px;background-repeat:no-repeat}
 .nav-link:active,.search-btn:active,button:active{transform:translateY(1px) scale(.98)}
-@media (prefers-reduced-motion:reduce){#boot-ov{display:none}.card.tilting{transform:none!important}.card:hover .card-img::after{animation:none;opacity:0}}
+@media (prefers-reduced-motion:reduce){.b-pend{animation:none}.card.tilting{transform:none!important}.card:hover .card-img::after{animation:none;opacity:0}}
 </style>
 </head>
 <body>
@@ -304,7 +307,7 @@ body{padding-bottom:30px}
 <div id="navcon-vig" aria-hidden="true"></div>
 <div class="hud-corner hud-tl" aria-hidden="true"></div><div class="hud-corner hud-tr" aria-hidden="true"></div>
 <div class="hud-corner hud-bl" aria-hidden="true"></div><div class="hud-corner hud-br" aria-hidden="true"></div>
-<div id="boot-ov" aria-hidden="true"><div><div id="boot-box"></div><div id="boot-skip">▸ CLICK TO SKIP</div></div></div>
+<div id="boot-ov" role="status" title="Click to dismiss"><div id="boot-hdr"><span class="hud-dot"></span>NAVCON // SELF-TEST</div><div id="boot-box"></div></div>
 
 <nav>
   <a class="nav-home" href="/" onclick="event.preventDefault(); navTo('/')" >
@@ -974,7 +977,7 @@ body{padding-bottom:30px}
 <div id="sky-tooltip-map"></div>
 <div class="gallery-hdr">
 <h1>DeepSignal — Sky Image Gallery</h1>
-<div class="subtitle">Generated 2026-07-04 04:19 UTC &nbsp;·&nbsp; 244 targets &nbsp;·&nbsp; 244 sky images via Hips2Fits CDN</div>
+<div class="subtitle">Generated 2026-07-04 04:35 UTC &nbsp;·&nbsp; 244 targets &nbsp;·&nbsp; 244 sky images via Hips2Fits CDN</div>
 <div class="stats">
   <div class="stat"><div class="stat-n" style="color:#f59e0b">104</div><div class="stat-l">Tier 1 ≥70</div></div>
   <div class="stat"><div class="stat-n" style="color:#60a5fa">128</div><div class="stat-l">Tier 2 50–69</div></div>
@@ -8549,7 +8552,7 @@ window.addEventListener('storage', e => {
 document.addEventListener('DOMContentLoaded', _syncMuteBtn);
 </script>
 <script>
-/* ══ NAVCON — spaceship HUD engine (starfield, radar, boot, live telemetry, tilt) ══ */
+/* ══ NAVCON — spaceship HUD engine (starfield, radar, self-test, live telemetry, tilt) ══ */
 (function(){
   var RM = false, CAN_HOVER = true;
   try { RM = matchMedia('(prefers-reduced-motion: reduce)').matches; } catch(e) {}
@@ -8683,47 +8686,79 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
   }
   setInterval(nextMsg, 7000);
   window.NAVCON = { op: op };
+  nextMsg();
 
-  /* ── boot sequence (once per browser session) ── */
+  /* ── self-test mini panel: REAL checks, floats over the live page,
+        auto-dismisses once every check has resolved (once per session) ── */
   var ov = $('boot-ov');
-  var BOOT = [
-    ['DEEPSIGNAL // NAVCON v2.7 — DEEP-SPACE SURVEY CONSOLE', '', 1],
-    ['> POWER BUS ................. ', 'ONLINE'],
-    ['> SENSOR ARRAY .............. ', 'CALIBRATED'],
-    ['> PARALLEL UPLINK ARRAY ..... ', 'READY'],
-    ['> SIMBAD TAP UPLINK ......... ', 'LINKED'],
-    ['> CANDIDATE CATALOG ......... ', 'LOADED'],
-    ['> RADAR SWEEP ............... ', 'ACTIVE'],
-    ['> ALL SYSTEMS ............... ', 'NOMINAL']
-  ];
   var seen = false;
   try { seen = !!sessionStorage.getItem('ds-boot'); } catch(e) {}
-  function killBoot(){
-    if (!ov || ov._done) return;
-    ov._done = 1;
-    ov.classList.add('off');
-    setTimeout(function(){ if (ov.parentNode) ov.parentNode.removeChild(ov); }, 550);
-    nextMsg();
-  }
-  if (!ov || RM || seen) {
-    if (ov && ov.parentNode) ov.parentNode.removeChild(ov);
-    nextMsg();
-  } else {
+  if (ov && seen) { ov.parentNode.removeChild(ov); ov = null; }
+  if (ov) {
     try { sessionStorage.setItem('ds-boot', '1'); } catch(e) {}
-    ov.addEventListener('click', killBoot);
-    addEventListener('keydown', killBoot);
-    var box = $('boot-box'), li = 0;
-    var it = setInterval(function(){
-      if (ov._done) { clearInterval(it); return; }
-      if (li >= BOOT.length) { clearInterval(it); setTimeout(killBoot, 700); return; }
-      var row = BOOT[li++], d = document.createElement('div');
-      var a = document.createElement('span'), b = document.createElement('span');
-      a.textContent = row[0]; b.textContent = row[1];
-      if (!row[2]) a.className = 'b-dim';
-      b.className = 'b-ok';
-      d.appendChild(a); d.appendChild(b);
-      box.appendChild(d);
+    var box = $('boot-box'), rows = {}, pend = { cat: 1, simbad: 1 };
+    var addRow = function(key, label, status, cls){
+      var d = document.createElement('div');
+      var a = document.createElement('span'); a.className = 'b-lbl'; a.textContent = label;
+      var b = document.createElement('span'); b.className = cls; b.textContent = status;
+      d.appendChild(a); d.appendChild(b); box.appendChild(d);
+      rows[key] = b;
+    };
+    var setRow = function(key, status, cls){
+      if (rows[key]) { rows[key].textContent = status; rows[key].className = cls; }
+      delete pend[key];
+    };
+    /* subsystems that exist client-side are marked instantly (no fake network claims) */
+    addRow('pwr', 'POWER BUS', 'ONLINE', 'b-ok');
+    addRow('arr', 'PARALLEL UPLINK ARRAY', 'READY', 'b-ok');
+    addRow('radar', 'RADAR SWEEP', RM ? 'STANDBY' : 'ACTIVE', 'b-ok');
+    /* REAL check 1 — candidate catalog actually loaded */
+    addRow('cat', 'CANDIDATE CATALOG', 'LOADING…', 'b-pend');
+    /* REAL check 2 — SIMBAD TAP answers a minimal live query */
+    addRow('simbad', 'SIMBAD TAP UPLINK', 'PINGING…', 'b-pend');
+
+    var catTries = 0;
+    var catT = setInterval(function(){
+      catTries++;
+      var st = window._dsCatalogState;
+      if (st) {  /* search page publishes real fetch state */
+        if (st.status === 'ok') { setRow('cat', 'LOADED · ' + st.n + ' TGT', 'b-ok'); clearInterval(catT); }
+        else if (st.status === 'fail') { setRow('cat', 'OFFLINE', 'b-fail'); clearInterval(catT); }
+        else if (catTries > 60) { setRow('cat', 'TIMEOUT', 'b-fail'); clearInterval(catT); }
+      } else {   /* gallery page: catalog is baked into the DOM as cards */
+        var n = document.querySelectorAll('.card').length;
+        if (n) { setRow('cat', 'LOADED · ' + n + ' TGT', 'b-ok'); clearInterval(catT); }
+        else if (catTries > 60) { setRow('cat', 'TIMEOUT', 'b-fail'); clearInterval(catT); }
+      }
     }, 250);
+
+    (function(){
+      var fin = false;
+      var t = setTimeout(function(){ if (!fin) { fin = true; setRow('simbad', 'DEGRADED', 'b-fail'); } }, 8000);
+      fetch('https://simbad.cds.unistra.fr/simbad/sim-tap/sync?request=doQuery&lang=adql&format=json&query=' +
+            encodeURIComponent('SELECT TOP 1 oid FROM basic'))
+        .then(function(r){
+          if (fin) return; fin = true; clearTimeout(t);
+          setRow('simbad', r.ok ? 'LINKED' : 'HTTP ' + r.status, r.ok ? 'b-ok' : 'b-fail');
+        })
+        .catch(function(){
+          if (fin) return; fin = true; clearTimeout(t);
+          setRow('simbad', 'UNREACHABLE', 'b-fail');
+        });
+    })();
+
+    var killBoot = function(){
+      if (!ov || ov._done) return;
+      ov._done = 1;
+      ov.classList.add('off');
+      setTimeout(function(){ if (ov.parentNode) ov.parentNode.removeChild(ov); }, 600);
+    };
+    ov.addEventListener('click', killBoot);
+    var watch = setInterval(function(){
+      if (ov._done) { clearInterval(watch); return; }
+      if (!Object.keys(pend).length) { clearInterval(watch); setTimeout(killBoot, 1600); }
+    }, 250);
+    setTimeout(killBoot, 25000); /* hard cap — never lingers */
   }
 
   /* ── card tilt + cursor-tracking glow (event delegation) ── */
