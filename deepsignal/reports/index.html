@@ -297,6 +297,7 @@ footer a{color:#4a6a8a;text-decoration:none}
 /* ══ NAVCON — spaceship HUD engine ══ */
 body{padding-bottom:30px}
 #navcon-sky{position:fixed;inset:0;z-index:-1;pointer-events:none}
+#navcon-vig{position:fixed;inset:0;z-index:45;pointer-events:none;background:radial-gradient(ellipse at center,transparent 60%,rgba(2,8,18,.42) 100%),repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,10,26,.045) 3px,rgba(0,10,26,.045) 4px)}
 .hud-corner{position:fixed;width:24px;height:24px;z-index:50;pointer-events:none;opacity:.55}
 .hud-corner::before,.hud-corner::after{content:'';position:absolute;background:#7dd3fc;box-shadow:0 0 6px rgba(125,211,252,.7)}
 .hud-corner::before{width:100%;height:2px}
@@ -323,12 +324,23 @@ body{padding-bottom:30px}
 .card.tilting{transition:none!important;border-color:rgba(125,211,252,.55)!important}
 .card::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .25s;background:radial-gradient(230px circle at var(--mx,50%) var(--my,50%),rgba(125,211,252,.13),transparent 65%);z-index:3}
 .card.tilting::after{opacity:1}
+/* sensor-feed chrome on sky imagery (overlay only — never alters the data) */
+.card-img::before{content:'';position:absolute;inset:6px;pointer-events:none;z-index:2;opacity:.4;transition:opacity .2s;background-image:linear-gradient(#7dd3fc,#7dd3fc),linear-gradient(#7dd3fc,#7dd3fc),linear-gradient(#7dd3fc,#7dd3fc),linear-gradient(#7dd3fc,#7dd3fc),linear-gradient(#7dd3fc,#7dd3fc),linear-gradient(#7dd3fc,#7dd3fc),linear-gradient(#7dd3fc,#7dd3fc),linear-gradient(#7dd3fc,#7dd3fc);background-position:top left,top left,top right,top right,bottom left,bottom left,bottom right,bottom right;background-size:10px 1.5px,1.5px 10px,10px 1.5px,1.5px 10px,10px 1.5px,1.5px 10px,10px 1.5px,1.5px 10px;background-repeat:no-repeat}
+.card:hover .card-img::before{opacity:.95}
+.card-img::after{content:'';position:absolute;left:0;right:0;top:-20%;height:16%;pointer-events:none;z-index:2;background:linear-gradient(180deg,transparent,rgba(125,211,252,.12),transparent);opacity:0}
+.card:hover .card-img::after{opacity:1;animation:feed-scan 1.7s linear infinite}
+@keyframes feed-scan{from{top:-20%}to{top:104%}}
+/* targeting reticle on the resolved-target image (cutout is centered on RA/Dec) */
+.result-img{position:relative}
+.result-img::after{content:'';position:absolute;left:50%;top:50%;width:54px;height:54px;margin:-27px 0 0 -27px;border:1px solid rgba(125,211,252,.6);border-radius:50%;box-shadow:0 0 12px rgba(125,211,252,.3);pointer-events:none;z-index:2;animation:hud-blink 3.2s ease-in-out infinite}
+.result-img::before{content:'';position:absolute;left:50%;top:50%;width:82px;height:82px;margin:-41px 0 0 -41px;pointer-events:none;z-index:2;opacity:.75;background-image:linear-gradient(#7dd3fc,#7dd3fc),linear-gradient(#7dd3fc,#7dd3fc),linear-gradient(#7dd3fc,#7dd3fc),linear-gradient(#7dd3fc,#7dd3fc);background-position:left center,right center,center top,center bottom;background-size:13px 1px,13px 1px,1px 13px,1px 13px;background-repeat:no-repeat}
 .nav-link:active,.search-btn:active,button:active{transform:translateY(1px) scale(.98)}
-@media (prefers-reduced-motion:reduce){#boot-ov{display:none}.card.tilting{transform:none!important}}
+@media (prefers-reduced-motion:reduce){#boot-ov{display:none}.card.tilting{transform:none!important}.card:hover .card-img::after{animation:none;opacity:0}}
 </style>
 </head>
 <body>
 <canvas id="navcon-sky" aria-hidden="true"></canvas>
+<div id="navcon-vig" aria-hidden="true"></div>
 <div class="hud-corner hud-tl" aria-hidden="true"></div><div class="hud-corner hud-tr" aria-hidden="true"></div>
 <div class="hud-corner hud-bl" aria-hidden="true"></div><div class="hud-corner hud-br" aria-hidden="true"></div>
 <div id="boot-ov" aria-hidden="true"><div><div id="boot-box"></div><div id="boot-skip">▸ CLICK TO SKIP</div></div></div>
@@ -371,6 +383,7 @@ body{padding-bottom:30px}
   <span class="hud-seg hud-hide-sm">MJD <span class="hud-val" id="hud-mjd">-----.---</span></span>
   <span class="hud-seg hud-hide-sm">SRC <span class="hud-val">10/10</span></span>
   <span class="hud-seg">TGT <span class="hud-val" id="hud-tgt">--</span></span>
+  <span class="hud-seg hud-hide-sm">FEEDS <span class="hud-val" id="hud-feeds">--</span></span>
   <span id="hud-msg"></span>
 </div>
 
@@ -611,6 +624,7 @@ async function loadCatalog() {
     const data = await r.json();
     catalog = Array.isArray(data) ? data : (Array.isArray(data.candidates) ? data.candidates : []);
     document.getElementById("stat-n").textContent = catalog.length;
+    window.NAVCON && NAVCON.op('CATALOG SYNCED — ' + catalog.length + ' TARGETS');
     const mc = document.getElementById("map-hdr-count");
     if (mc) mc.textContent = catalog.length + " candidates";
     renderHighlights();
@@ -969,7 +983,7 @@ function showResult(resolved, pipelineMatches) {
   } else {
     const imgSrc = ra != null ? skyUrl(ra, dec) : "";
     imgTag = imgSrc
-      ? `<img src="${imgSrc}" alt="Sky cutout of ${name}" loading="lazy" onerror="this.style.display='none'">`
+      ? `<img src="${imgSrc}" alt="Sky cutout of ${name}" loading="lazy" decoding="async" onerror="this.style.display='none'">`
       : `<div style="width:220px;height:220px;display:grid;place-items:center;color:#3a4a5a;font-size:.8rem">No image</div>`;
   }
 
@@ -1037,7 +1051,7 @@ function showMultipleResults(groups) {
     const ra    = candidateRa(c);
     const dec   = candidateDec(c);
     const img   = (ra != null && !isNaN(ra))
-      ? `<img src="${skyUrl(ra, dec, 0.5)}" alt="${name}" loading="lazy" onerror="this.style.display='none'">`
+      ? `<img src="${skyUrl(ra, dec, 0.5)}" alt="${name}" loading="lazy" decoding="async" onerror="this.style.display='none'">`
       : "";
     const tc      = TIER_COLORS[c.tier] || "#6b7280";
     const badge   = c.tier ? `<span class="tier-badge" style="background:${tc}">Tier ${c.tier}</span>` : "";
@@ -1084,25 +1098,26 @@ async function doSearch() {
     return;
   }
 
-  let resolved = null;
+  // Launch ALL external resolvers in PARALLEL, then take the highest-priority
+  // hit (Sesame > Horizons > SIMBAD exact > local table > SIMBAD fuzzy).
+  // Worst-case wait drops from the SUM of the resolver timeouts to the MAX.
+  const _race = (tag, fn) =>
+    fn(q).then(r => r || null).catch(e => { console.warn(tag + " failed:", e.message); return null; });
+  window.NAVCON && NAVCON.op('RESOLVING "' + q + '" — 4 PARALLEL UPLINKS');
+  const pSesame   = _race("Sesame", resolveSesame);
+  const pHorizons = _race("Horizons", resolveHorizons);
+  const pSimbad   = _race("SIMBAD exact", resolveSimbad);
+  const pFuzzy    = _race("SIMBAD fuzzy", resolveSimbadFuzzy);
 
-  // 1. Sesame (meta-resolver: SIMBAD + NED + VizieR)
-  try { resolved = await resolveSesame(q); } catch (e) { console.warn("Sesame failed:", e.message); }
-  // 2. JPL Horizons (solar system live ephemeris)
-  if (!resolved) {
-    try { resolved = await resolveHorizons(q); } catch (e) { console.warn("Horizons failed:", e.message); }
-  }
-  // 3. SIMBAD exact
-  if (!resolved) {
-    try { resolved = await resolveSimbad(q); } catch (e) { console.warn("SIMBAD exact failed:", e.message); }
-  }
-  // 4. Local table (exact + substring)
+  let resolved = await pSesame;
+  if (!resolved) resolved = await pHorizons;
+  if (!resolved) resolved = await pSimbad;
   if (!resolved) resolved = resolveLocalTarget(q);
-  // 5. SIMBAD fuzzy LIKE
-  if (!resolved) {
-    try { resolved = await resolveSimbadFuzzy(q); } catch (e) { console.warn("SIMBAD fuzzy failed:", e.message); }
-  }
+  if (!resolved) resolved = await pFuzzy;
 
+  window.NAVCON && NAVCON.op(resolved
+    ? 'TARGET LOCK — ' + (resolved.name || q)
+    : 'NO LOCK — "' + q + '" NOT FOUND');
   showResult(resolved, pipelineMatches);
 }
 
@@ -1119,7 +1134,7 @@ function renderHighlights() {
     const ra  = candidateRa(c);
     const dec = candidateDec(c);
     const img = ra != null
-      ? `<img src="${skyUrl(ra, dec, 0.5)}" alt="${c.target_name}" loading="lazy" onerror="this.style.display='none'">`
+      ? `<img src="${skyUrl(ra, dec, 0.5)}" alt="${c.target_name}" loading="lazy" decoding="async" onerror="this.style.display='none'">`
       : "";
     const tc    = TIER_COLORS[c.tier] || "#6b7280";
     const badge = c.tier ? `<span class="tier-badge" style="background:${tc}">Tier ${c.tier}</span>` : "";
@@ -1251,6 +1266,7 @@ async function _loadSolarSystemImage(name) {
 // ── Literature Modal ──────────────────────────────────────────────────────────
 function litOpen(targetName, detectionMethod) {
   SFX.open();
+  window.NAVCON && NAVCON.op('SCANNING LITERATURE — ARXIV / ADS UPLINK');
   _litSrcFilter = 'all';
   _litSortMode = 'date-desc';
   document.getElementById("lit-filter-bar").style.display = 'none';
@@ -1272,6 +1288,7 @@ function litClose() {
 // ── News Modal ────────────────────────────────────────────────────────────────
 async function newsOpen(targetName) {
   SFX.open();
+  window.NAVCON && NAVCON.op('STREAMING NEWS — PARALLEL FEED UPLINK');
   _newsTargetFilter = targetName || null;
   _newsSrcFilter = 'all';
   document.getElementById("news-target-name").textContent = targetName || "Space News";
@@ -2112,6 +2129,7 @@ function filterHighlights() {
 // ── Report Modal ──────────────────────────────────────────────────────────────
 function reportOpen() {
   SFX.open();
+  window.NAVCON && NAVCON.op('DECRYPTING MISSION REPORT');
   document.getElementById("report-body").innerHTML =
     `<div class="lit-status"><span class="spinner"></span> LOADING REPORT…</div>`;
   document.getElementById("report-footer-ts").textContent = "";
@@ -2294,7 +2312,7 @@ loadCatalog();
 document.addEventListener('DOMContentLoaded', _syncMuteBtn);
 </script>
 <script>
-/* ══ NAVCON — spaceship HUD engine (starfield, radar, boot, telemetry, tilt) ══ */
+/* ══ NAVCON — spaceship HUD engine (starfield, radar, boot, live telemetry, tilt) ══ */
 (function(){
   var RM = false, CAN_HOVER = true;
   try { RM = matchMedia('(prefers-reduced-motion: reduce)').matches; } catch(e) {}
@@ -2365,7 +2383,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     requestAnimationFrame(frame);
   }
 
-  /* ── decode (scramble-in) text effect ── */
+  /* ── decode (scramble-in) effect — HUD telemetry line ONLY, never page content ── */
   var GLYPH = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$%&<>/|=+*';
   function decodeTo(el, txt){
     if (!el) return;
@@ -2382,11 +2400,11 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     }, 30);
   }
 
-  /* ── HUD clock: UTC / GMST / MJD / target count ── */
+  /* ── HUD clock: UTC / GMST / MJD / target count / live image feeds ── */
   function pad(n){ return (n < 10 ? '0' : '') + n; }
   function tick(){
     var d = new Date();
-    var utc = $('hud-utc'), gm = $('hud-gmst'), mj = $('hud-mjd'), tg = $('hud-tgt');
+    var utc = $('hud-utc'), gm = $('hud-gmst'), mj = $('hud-mjd'), tg = $('hud-tgt'), fd = $('hud-feeds');
     if (utc) utc.textContent = pad(d.getUTCHours()) + ':' + pad(d.getUTCMinutes()) + ':' + pad(d.getUTCSeconds());
     var jd = d.getTime() / 864e5 + 2440587.5, T = (jd - 2451545) / 36525;
     var g = (280.46061837 + 360.98564736629 * (jd - 2451545) + 3.87933e-4 * T * T) % 360;
@@ -2400,32 +2418,42 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       if (!v || !/^[0-9]+$/.test(v)) v = String(document.querySelectorAll('.card').length || '--');
       tg.textContent = v;
     }
+    if (fd) {
+      var imgs = document.querySelectorAll('.card-img img, .result-img img');
+      if (imgs.length) {
+        var done = 0;
+        for (var k = 0; k < imgs.length; k++) if (imgs[k].complete) done++;
+        fd.textContent = done + '/' + imgs.length;
+      } else fd.textContent = '--';
+    }
   }
   tick(); setInterval(tick, 1000);
 
-  /* ── rotating telemetry messages ── */
+  /* ── live ops feed: real events preempt the idle rotation ── */
   var MSGS = [
     'RECEIVER ARRAY LOCKED', 'SIMBAD TAP UPLINK STABLE', 'HIPS2FITS IMAGERY CACHE OK',
     'MONITORING 10 DEEP-SKY SOURCES', '14 DETECTION ALGORITHMS ACTIVE',
     'NO ANOMALOUS DRIFT DETECTED', 'DOPPLER COMPENSATION ENGAGED', 'AWAITING OPERATOR INPUT'
   ];
-  var mi = 0;
-  function nextMsg(){ decodeTo($('hud-msg'), MSGS[mi++ % MSGS.length]); }
-  setInterval(nextMsg, 7000);
-
-  /* ── decode page headers once boot completes ── */
-  function decorate(){
-    nextMsg();
-    var els = document.querySelectorAll('h1, .eyebrow');
-    for (var i = 0; i < els.length; i++) decodeTo(els[i], els[i].textContent);
+  var mi = 0, busyUntil = 0;
+  function op(msg){
+    busyUntil = Date.now() + 6000;
+    decodeTo($('hud-msg'), String(msg).toUpperCase());
   }
+  function nextMsg(){
+    if (Date.now() < busyUntil) return;
+    decodeTo($('hud-msg'), MSGS[mi++ % MSGS.length]);
+  }
+  setInterval(nextMsg, 7000);
+  window.NAVCON = { op: op };
 
   /* ── boot sequence (once per browser session) ── */
   var ov = $('boot-ov');
   var BOOT = [
-    ['DEEPSIGNAL // NAVCON v2.6 — DEEP-SPACE SURVEY CONSOLE', '', 1],
+    ['DEEPSIGNAL // NAVCON v2.7 — DEEP-SPACE SURVEY CONSOLE', '', 1],
     ['> POWER BUS ................. ', 'ONLINE'],
     ['> SENSOR ARRAY .............. ', 'CALIBRATED'],
+    ['> PARALLEL UPLINK ARRAY ..... ', 'READY'],
     ['> SIMBAD TAP UPLINK ......... ', 'LINKED'],
     ['> CANDIDATE CATALOG ......... ', 'LOADED'],
     ['> RADAR SWEEP ............... ', 'ACTIVE'],
@@ -2438,11 +2466,11 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     ov._done = 1;
     ov.classList.add('off');
     setTimeout(function(){ if (ov.parentNode) ov.parentNode.removeChild(ov); }, 550);
-    decorate();
+    nextMsg();
   }
   if (!ov || RM || seen) {
     if (ov && ov.parentNode) ov.parentNode.removeChild(ov);
-    decorate();
+    nextMsg();
   } else {
     try { sessionStorage.setItem('ds-boot', '1'); } catch(e) {}
     ov.addEventListener('click', killBoot);
