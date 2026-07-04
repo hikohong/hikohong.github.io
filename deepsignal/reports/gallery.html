@@ -254,9 +254,46 @@
   .copy-ok{font-size:.65rem;color:#22c55e;margin-left:2px;opacity:0;transition:opacity 600ms;vertical-align:middle}
   /* Permalink highlight */
   .card.highlighted{border-color:#7dd3fc!important;box-shadow:0 0 18px rgba(125,211,252,.35);transform:translateY(-2px)}
+
+/* ══ NAVCON — spaceship HUD engine ══ */
+body{padding-bottom:30px}
+#navcon-sky{position:fixed;inset:0;z-index:-1;pointer-events:none}
+.hud-corner{position:fixed;width:24px;height:24px;z-index:50;pointer-events:none;opacity:.55}
+.hud-corner::before,.hud-corner::after{content:'';position:absolute;background:#7dd3fc;box-shadow:0 0 6px rgba(125,211,252,.7)}
+.hud-corner::before{width:100%;height:2px}
+.hud-corner::after{width:2px;height:100%}
+.hud-tl{top:6px;left:6px}.hud-tl::before,.hud-tl::after{top:0;left:0}
+.hud-tr{top:6px;right:6px}.hud-tr::before{top:0;right:0}.hud-tr::after{top:0;right:0}
+.hud-bl{bottom:32px;left:6px}.hud-bl::before{bottom:0;left:0}.hud-bl::after{bottom:0;left:0}
+.hud-br{bottom:32px;right:6px}.hud-br::before{bottom:0;right:0}.hud-br::after{bottom:0;right:0}
+#hud-status{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;align-items:center;gap:16px;padding:6px 20px;font-family:monospace;font-size:.6rem;letter-spacing:.1em;color:#4a6a8a;border-top:1px solid rgba(125,211,252,.14);background:rgba(5,12,22,.88);backdrop-filter:blur(6px);white-space:nowrap;overflow:hidden}
+.hud-seg{display:inline-flex;align-items:center;gap:5px;flex-shrink:0}
+.hud-val{color:#7dd3fc;text-shadow:0 0 6px rgba(125,211,252,.35)}
+.hud-dot{width:5px;height:5px;border-radius:50%;background:#10b981;box-shadow:0 0 5px #10b981;animation:hud-blink 2.4s ease-in-out infinite;flex-shrink:0}
+@keyframes hud-blink{0%,100%{opacity:1}50%{opacity:.35}}
+#hud-msg{margin-left:auto;color:#3a5a7a;overflow:hidden;text-overflow:ellipsis;min-width:0}
+@media(max-width:680px){.hud-hide-sm{display:none!important}}
+#boot-ov{position:fixed;inset:0;z-index:2000;background:#050d19;display:flex;align-items:center;justify-content:center;transition:opacity .5s;cursor:pointer}
+#boot-ov.off{opacity:0;pointer-events:none}
+#boot-box{font-family:monospace;font-size:clamp(.66rem,2.3vw,.84rem);color:#7dd3fc;width:min(520px,88vw);text-shadow:0 0 8px rgba(125,211,252,.4)}
+#boot-box div{min-height:1.55em;white-space:pre-wrap}
+.b-ok{color:#10b981}
+.b-dim{color:#3a6a9a}
+#boot-skip{margin-top:16px;font-size:.58rem;color:#2a4a6a;letter-spacing:.18em;animation:hud-blink 1.6s infinite;font-family:monospace}
+.card{position:relative}
+.card.tilting{transition:none!important;border-color:rgba(125,211,252,.55)!important}
+.card::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .25s;background:radial-gradient(230px circle at var(--mx,50%) var(--my,50%),rgba(125,211,252,.13),transparent 65%);z-index:3}
+.card.tilting::after{opacity:1}
+.nav-link:active,.search-btn:active,button:active{transform:translateY(1px) scale(.98)}
+@media (prefers-reduced-motion:reduce){#boot-ov{display:none}.card.tilting{transform:none!important}}
 </style>
 </head>
 <body>
+<canvas id="navcon-sky" aria-hidden="true"></canvas>
+<div class="hud-corner hud-tl" aria-hidden="true"></div><div class="hud-corner hud-tr" aria-hidden="true"></div>
+<div class="hud-corner hud-bl" aria-hidden="true"></div><div class="hud-corner hud-br" aria-hidden="true"></div>
+<div id="boot-ov" aria-hidden="true"><div><div id="boot-box"></div><div id="boot-skip">▸ CLICK TO SKIP</div></div></div>
+
 <nav>
   <a class="nav-home" href="/" onclick="event.preventDefault(); navTo('/')" >
     <svg class="nav-planet" viewBox="0 0 32 32" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
@@ -287,6 +324,16 @@
     <span class="nav-deepsignal">/ DeepSignal</span>
   </div>
 </nav>
+<div id="hud-status" aria-hidden="true">
+  <span class="hud-seg"><span class="hud-dot"></span>SYS <span class="hud-val">NOMINAL</span></span>
+  <span class="hud-seg">UTC <span class="hud-val" id="hud-utc">--:--:--</span></span>
+  <span class="hud-seg hud-hide-sm">GMST <span class="hud-val" id="hud-gmst">--:--:--</span></span>
+  <span class="hud-seg hud-hide-sm">MJD <span class="hud-val" id="hud-mjd">-----.---</span></span>
+  <span class="hud-seg hud-hide-sm">SRC <span class="hud-val">10/10</span></span>
+  <span class="hud-seg">TGT <span class="hud-val" id="hud-tgt">--</span></span>
+  <span id="hud-msg"></span>
+</div>
+
 <div id="report-overlay" onclick="if(event.target===this)reportClose()">
   <div id="report-modal" role="dialog" aria-modal="true">
     <div class="report-hdr">
@@ -914,7 +961,7 @@
 <div id="sky-tooltip-map"></div>
 <div class="gallery-hdr">
 <h1>DeepSignal — Sky Image Gallery</h1>
-<div class="subtitle">Generated 2026-06-21 07:37 UTC &nbsp;·&nbsp; 244 targets &nbsp;·&nbsp; 244 sky images via Hips2Fits CDN</div>
+<div class="subtitle">Generated 2026-07-04 03:26 UTC &nbsp;·&nbsp; 244 targets &nbsp;·&nbsp; 244 sky images via Hips2Fits CDN</div>
 <div class="stats">
   <div class="stat"><div class="stat-n" style="color:#f59e0b">104</div><div class="stat-l">Tier 1 ≥70</div></div>
   <div class="stat"><div class="stat-n" style="color:#60a5fa">128</div><div class="stat-l">Tier 2 50–69</div></div>
@@ -8478,10 +8525,202 @@ function toggleMute() {
   _syncMuteBtn();
   if (!SFX.muted()) SFX.ping();
 }
+// Keep mute state in sync across pages/tabs of this site (localStorage shared per-origin)
 window.addEventListener('storage', e => {
   if (e.key === 'sfx-muted') { SFX.setMuted(e.newValue === '1'); _syncMuteBtn(); }
 });
 document.addEventListener('DOMContentLoaded', _syncMuteBtn);
+</script>
+<script>
+/* ══ NAVCON — spaceship HUD engine (starfield, radar, boot, telemetry, tilt) ══ */
+(function(){
+  var RM = false, CAN_HOVER = true;
+  try { RM = matchMedia('(prefers-reduced-motion: reduce)').matches; } catch(e) {}
+  try { CAN_HOVER = matchMedia('(hover: hover)').matches; } catch(e) {}
+  var $ = function(id){ return document.getElementById(id); };
+
+  /* ── starfield + radar sweep background ── */
+  var cv = $('navcon-sky');
+  if (cv && cv.getContext) {
+    var cx = cv.getContext('2d');
+    var W, H, stars = [], pings = [];
+    var mx = 0, my = 0, tmx = 0, tmy = 0, sweep = 0;
+    var resize = function(){
+      W = cv.width = innerWidth; H = cv.height = innerHeight;
+      var n = Math.min(180, Math.round(W * H / 9500));
+      stars = [];
+      for (var i = 0; i < n; i++) stars.push({
+        x: Math.random() * W, y: Math.random() * H,
+        z: Math.random() * .8 + .2, r: Math.random() * 1.2 + .4,
+        p: Math.random() * 6.28
+      });
+    };
+    addEventListener('resize', resize); resize();
+    addEventListener('mousemove', function(e){
+      tmx = e.clientX / W - .5; tmy = e.clientY / H - .5;
+    }, {passive: true});
+    var frame = function(t){
+      cx.clearRect(0, 0, W, H);
+      mx += (tmx - mx) * .04; my += (tmy - my) * .04;
+      for (var i = 0; i < stars.length; i++) {
+        var s = stars[i];
+        var tw = RM ? 1 : (.55 + .45 * Math.sin(t / 900 + s.p));
+        var x = ((s.x - mx * 46 * s.z) % W + W) % W;
+        var y = ((s.y - my * 46 * s.z) % H + H) % H;
+        cx.globalAlpha = .55 * s.z * tw;
+        cx.fillStyle = s.z > .72 ? '#cfeaff' : '#7dd3fc';
+        cx.beginPath(); cx.arc(x, y, s.r, 0, 6.29); cx.fill();
+      }
+      cx.globalAlpha = 1;
+      if (!RM) {
+        sweep += .0015;
+        var cpx = W * .5, cpy = H * .42, R = Math.hypot(W, H) * .65;
+        if (cx.createConicGradient) {
+          var g = cx.createConicGradient(sweep, cpx, cpy);
+          g.addColorStop(0, 'rgba(125,211,252,.05)');
+          g.addColorStop(.1, 'rgba(125,211,252,0)');
+          g.addColorStop(1, 'rgba(125,211,252,0)');
+          cx.fillStyle = g;
+          cx.beginPath(); cx.moveTo(cpx, cpy);
+          cx.arc(cpx, cpy, R, sweep - .02, sweep + .55);
+          cx.closePath(); cx.fill();
+        }
+        if (Math.random() < .005 && pings.length < 3)
+          pings.push({x: Math.random() * W, y: Math.random() * H * .85, r: 2, a: .5});
+        for (var j = pings.length - 1; j >= 0; j--) {
+          var p = pings[j];
+          p.r += 1.1; p.a *= .968;
+          if (p.a < .015) { pings.splice(j, 1); continue; }
+          cx.strokeStyle = 'rgba(125,211,252,' + p.a.toFixed(3) + ')';
+          cx.lineWidth = 1;
+          cx.beginPath(); cx.arc(p.x, p.y, p.r, 0, 6.29); cx.stroke();
+          cx.fillStyle = 'rgba(125,211,252,' + (p.a * .8).toFixed(3) + ')';
+          cx.beginPath(); cx.arc(p.x, p.y, 1.6, 0, 6.29); cx.fill();
+        }
+        requestAnimationFrame(frame);
+      }
+    };
+    requestAnimationFrame(frame);
+  }
+
+  /* ── decode (scramble-in) text effect ── */
+  var GLYPH = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$%&<>/|=+*';
+  function decodeTo(el, txt){
+    if (!el) return;
+    if (RM) { el.textContent = txt; return; }
+    if (el._dec) clearInterval(el._dec);
+    var f = 0, total = Math.max(8, Math.min(26, txt.length));
+    el._dec = setInterval(function(){
+      f++;
+      var keep = Math.round(f * txt.length / total), out = '';
+      for (var i = 0; i < txt.length; i++)
+        out += (i < keep || txt[i] === ' ') ? txt[i] : GLYPH[Math.random() * GLYPH.length | 0];
+      el.textContent = out;
+      if (f >= total) { el.textContent = txt; clearInterval(el._dec); el._dec = null; }
+    }, 30);
+  }
+
+  /* ── HUD clock: UTC / GMST / MJD / target count ── */
+  function pad(n){ return (n < 10 ? '0' : '') + n; }
+  function tick(){
+    var d = new Date();
+    var utc = $('hud-utc'), gm = $('hud-gmst'), mj = $('hud-mjd'), tg = $('hud-tgt');
+    if (utc) utc.textContent = pad(d.getUTCHours()) + ':' + pad(d.getUTCMinutes()) + ':' + pad(d.getUTCSeconds());
+    var jd = d.getTime() / 864e5 + 2440587.5, T = (jd - 2451545) / 36525;
+    var g = (280.46061837 + 360.98564736629 * (jd - 2451545) + 3.87933e-4 * T * T) % 360;
+    if (g < 0) g += 360;
+    var gs = Math.floor(g / 15 * 3600);
+    if (gm) gm.textContent = pad(Math.floor(gs / 3600)) + ':' + pad(Math.floor(gs / 60) % 60) + ':' + pad(gs % 60);
+    if (mj) mj.textContent = (jd - 2400000.5).toFixed(3);
+    if (tg) {
+      var n = $('stat-n');
+      var v = n ? n.textContent.trim() : '';
+      if (!v || !/^[0-9]+$/.test(v)) v = String(document.querySelectorAll('.card').length || '--');
+      tg.textContent = v;
+    }
+  }
+  tick(); setInterval(tick, 1000);
+
+  /* ── rotating telemetry messages ── */
+  var MSGS = [
+    'RECEIVER ARRAY LOCKED', 'SIMBAD TAP UPLINK STABLE', 'HIPS2FITS IMAGERY CACHE OK',
+    'MONITORING 10 DEEP-SKY SOURCES', '14 DETECTION ALGORITHMS ACTIVE',
+    'NO ANOMALOUS DRIFT DETECTED', 'DOPPLER COMPENSATION ENGAGED', 'AWAITING OPERATOR INPUT'
+  ];
+  var mi = 0;
+  function nextMsg(){ decodeTo($('hud-msg'), MSGS[mi++ % MSGS.length]); }
+  setInterval(nextMsg, 7000);
+
+  /* ── decode page headers once boot completes ── */
+  function decorate(){
+    nextMsg();
+    var els = document.querySelectorAll('h1, .eyebrow');
+    for (var i = 0; i < els.length; i++) decodeTo(els[i], els[i].textContent);
+  }
+
+  /* ── boot sequence (once per browser session) ── */
+  var ov = $('boot-ov');
+  var BOOT = [
+    ['DEEPSIGNAL // NAVCON v2.6 — DEEP-SPACE SURVEY CONSOLE', '', 1],
+    ['> POWER BUS ................. ', 'ONLINE'],
+    ['> SENSOR ARRAY .............. ', 'CALIBRATED'],
+    ['> SIMBAD TAP UPLINK ......... ', 'LINKED'],
+    ['> CANDIDATE CATALOG ......... ', 'LOADED'],
+    ['> RADAR SWEEP ............... ', 'ACTIVE'],
+    ['> ALL SYSTEMS ............... ', 'NOMINAL']
+  ];
+  var seen = false;
+  try { seen = !!sessionStorage.getItem('ds-boot'); } catch(e) {}
+  function killBoot(){
+    if (!ov || ov._done) return;
+    ov._done = 1;
+    ov.classList.add('off');
+    setTimeout(function(){ if (ov.parentNode) ov.parentNode.removeChild(ov); }, 550);
+    decorate();
+  }
+  if (!ov || RM || seen) {
+    if (ov && ov.parentNode) ov.parentNode.removeChild(ov);
+    decorate();
+  } else {
+    try { sessionStorage.setItem('ds-boot', '1'); } catch(e) {}
+    ov.addEventListener('click', killBoot);
+    addEventListener('keydown', killBoot);
+    var box = $('boot-box'), li = 0;
+    var it = setInterval(function(){
+      if (ov._done) { clearInterval(it); return; }
+      if (li >= BOOT.length) { clearInterval(it); setTimeout(killBoot, 700); return; }
+      var row = BOOT[li++], d = document.createElement('div');
+      var a = document.createElement('span'), b = document.createElement('span');
+      a.textContent = row[0]; b.textContent = row[1];
+      if (!row[2]) a.className = 'b-dim';
+      b.className = 'b-ok';
+      d.appendChild(a); d.appendChild(b);
+      box.appendChild(d);
+    }, 250);
+  }
+
+  /* ── card tilt + cursor-tracking glow (event delegation) ── */
+  var tiltEl = null;
+  if (CAN_HOVER && !RM) {
+    document.addEventListener('mousemove', function(e){
+      var c = e.target && e.target.closest ? e.target.closest('.card') : null;
+      if (c !== tiltEl) {
+        if (tiltEl) { tiltEl.classList.remove('tilting'); tiltEl.style.transform = ''; }
+        tiltEl = c;
+        if (c) c.classList.add('tilting');
+      }
+      if (!c) return;
+      var r = c.getBoundingClientRect();
+      var px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
+      c.style.setProperty('--mx', (px * 100).toFixed(1) + '%');
+      c.style.setProperty('--my', (py * 100).toFixed(1) + '%');
+      c.style.transform = 'perspective(700px) rotateX(' + ((.5 - py) * 4).toFixed(2) + 'deg) rotateY(' + ((px - .5) * 4).toFixed(2) + 'deg)';
+    }, {passive: true});
+    document.documentElement.addEventListener('mouseleave', function(){
+      if (tiltEl) { tiltEl.classList.remove('tilting'); tiltEl.style.transform = ''; tiltEl = null; }
+    });
+  }
+})();
 </script>
 </body>
 </html>
