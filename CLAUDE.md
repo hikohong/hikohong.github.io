@@ -87,11 +87,20 @@ Commits landing from the upstream pipeline use the message pattern:
 
 ## Site Design
 
-- **Color palette:** `#08111f` (deep navy background), `#eef3f8` (light text), `#7dd3fc` (sky blue accent), `#f97316` (orange accent)
+- **Color palette:** `#08111f` (deep navy background), `#eef3f8` (light text), `#7dd3fc` (sky blue accent), `#f97316` (orange accent), `#94a3b8` (silver auxiliary), `#10b981` (green Map)
 - **Font:** system-ui / -apple-system / "Segoe UI" / sans-serif
 - **Layout:** CSS Grid, `min(1080px, 100%)` centered shell, responsive tiles
 - **No framework, no build step** — pure HTML/CSS/JS, static files only
 - **Favicon:** `assets/deepsignal-web-icon.jpg`
+
+### Modal color hierarchy
+
+| Color | Hex | Usage |
+|-------|-----|-------|
+| Blue | `#7dd3fc` | Primary interactive; **all modal chrome** (border/glow/header/filter chips/links) — News modal matches Report/Map dialog |
+| Green | `#10b981` | Map button + modal chrome only |
+| Silver | `#94a3b8` | Auxiliary entry-point buttons only (e.g. `.btn-news` card button) — NOT modal chrome |
+| Orange | `#f97316` | Reserved for urgent/alert states ONLY |
 
 ### Homepage (`index.html`) structure
 - Signature bar (HH monogram + name)
@@ -140,6 +149,15 @@ git push -u origin $BRANCH
 
 GitHub Pages serves `master` branch root directly. No build step needed.
 Changes to `master` are live at https://hikohong.github.io within ~1 minute.
+
+### Deploy troubleshooting — 401 "Requires authentication" failure
+
+The built-in `pages build and deployment` workflow occasionally fails at the **Deploy** step with a 401 error after the build succeeds. This is a transient GitHub infrastructure issue.
+
+**Fix:**
+1. Use `rerun_failed_jobs` on the failed run (via MCP GitHub tools).
+2. If the re-run stays in `queued` for more than ~2 minutes, push a trivial change through a new PR (e.g. trailing newline in README.md). The fresh merge triggers a new clean run that succeeds.
+3. Never push directly to master — always use a PR.
 
 ---
 
