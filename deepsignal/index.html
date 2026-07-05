@@ -334,6 +334,11 @@ body{padding-bottom:30px}
 .result-img{position:relative}
 .result-img::after{content:'';position:absolute;left:50%;top:50%;width:54px;height:54px;margin:-27px 0 0 -27px;border:1px solid rgba(63,224,143,.65);border-radius:50%;box-shadow:0 0 12px rgba(63,224,143,.35);pointer-events:none;z-index:2;animation:hud-blink 3.2s ease-in-out infinite}
 .result-img::before{content:'';position:absolute;left:50%;top:50%;width:82px;height:82px;margin:-41px 0 0 -41px;pointer-events:none;z-index:2;opacity:.75;background-image:linear-gradient(#3fe08f,#3fe08f),linear-gradient(#3fe08f,#3fe08f),linear-gradient(#3fe08f,#3fe08f),linear-gradient(#3fe08f,#3fe08f);background-position:left center,right center,center top,center bottom;background-size:13px 1px,13px 1px,1px 13px,1px 13px;background-repeat:no-repeat}
+/* epoch integrity tags — every image/coordinate declares its time frame */
+.img-epoch{position:absolute;left:6px;bottom:6px;z-index:2;pointer-events:none;font-family:monospace;font-size:.52rem;letter-spacing:.08em;color:#8fa4b8;background:rgba(4,11,22,.78);border:1px solid rgba(143,164,184,.32);border-radius:3px;padding:2px 5px;white-space:nowrap}
+.img-epoch-live{color:#3fe08f;border-color:rgba(63,224,143,.42);text-shadow:0 0 5px rgba(63,224,143,.35)}
+.coord-epoch{font-family:monospace;font-size:.56rem;letter-spacing:.07em;color:#8fa4b8;border:1px solid rgba(143,164,184,.3);border-radius:3px;padding:1px 5px;margin-right:6px;white-space:nowrap;vertical-align:middle}
+.coord-epoch-live{color:#3fe08f;border-color:rgba(63,224,143,.42);text-shadow:0 0 5px rgba(63,224,143,.35)}
 .nav-link:active,.search-btn:active,button:active{transform:translateY(1px) scale(.98)}
 @media (prefers-reduced-motion:reduce){.b-pend{animation:none}.card.tilting{transform:none!important}}
 </style>
@@ -983,13 +988,15 @@ function showResult(resolved, pipelineMatches) {
   const reasons = (p.reasons || []).slice(0, 4);
 
   const isSS = r.solar_system || SS_TYPES.has(r.type || "") || false;
+  // Epoch integrity: every image declares its time frame — live-first for moving
+  // objects; archival survey imagery is labeled with its plate epoch.
   let imgTag;
   if (isSS) {
-    imgTag = `<div id="result-img-box" style="width:220px;height:220px;display:grid;place-items:center;color:#3a4a5a;font-family:monospace;font-size:.72rem">Loading…</div>`;
+    imgTag = `<div id="result-img-box" style="width:220px;height:220px;display:grid;place-items:center;color:#3a4a5a;font-family:monospace;font-size:.72rem">Loading…</div><span class="img-epoch">REFERENCE IMAGE · NOT SKY VIEW</span>`;
   } else {
     const imgSrc = ra != null ? skyUrl(ra, dec) : "";
     imgTag = imgSrc
-      ? `<img src="${imgSrc}" alt="Sky cutout of ${name}" loading="lazy" decoding="async" onerror="this.style.display='none'">`
+      ? `<img src="${imgSrc}" alt="Sky cutout of ${name}" loading="lazy" decoding="async" onerror="this.style.display='none'"><span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>`
       : `<div style="width:220px;height:220px;display:grid;place-items:center;color:#3a4a5a;font-size:.8rem">No image</div>`;
   }
 
@@ -1000,19 +1007,33 @@ function showResult(resolved, pipelineMatches) {
   const reasonHtml = reasons.length ? `<ul class="result-reasons">${reasons.map(r => `<li>${r}</li>`).join("")}</ul>` : "";
 
   const _srName = name.replace(/'/g, "\\'");
+  // Coordinate frame is declared honestly: moving objects show a LIVE ephemeris
+  // timestamp (JPL Horizons, queried just now); fixed objects are J2000 catalog.
+  const epochTag = isSS
+    ? `<span class="coord-epoch coord-epoch-live">● LIVE EPHEMERIS ${new Date().toISOString().slice(0, 16).replace("T", " ")}Z</span>`
+    : `<span class="coord-epoch">J2000 CATALOG FRAME</span>`;
   const coordTxt = ra != null
-    ? `RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}° <span style="white-space:nowrap;display:inline-flex;align-items:center;gap:3px"><button class="btn-copy-coords" onclick="copyCoords('result-cc',${ra},${dec})" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-result-cc">✓</span><button class="btn-map-jump" onclick="event.stopPropagation();mapOpenFromCard(${ra},${dec},'${_srName}',${score||0},${!p.target_name})" title="Show on Map">Map</button></span>`
+    ? `${epochTag}RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}° <span style="white-space:nowrap;display:inline-flex;align-items:center;gap:3px"><button class="btn-copy-coords" onclick="copyCoords('result-cc',${ra},${dec})" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-result-cc">✓</span><button class="btn-map-jump" onclick="event.stopPropagation();mapOpenFromCard(${ra},${dec},'${_srName}',${score||0},${!p.target_name})" title="Show on Map">Map</button></span>`
     : "";
+  // Deep-sky survey/catalog links are meaningless for moving solar-system
+  // bodies (archival plates can never contain them) — swap in LIVE tools instead.
+  const _ssKey = name.toLowerCase().replace(/[^a-z]/g, "");
+  const SS_LIVE_SLUG = { mercury:"mercury", venus:"venus", mars:"mars", jupiter:"jupiter",
+    saturn:"saturn", uranus:"uranus", neptune:"neptune", pluto:"pluto", moon:"moon", sun:"sun" };
+  const SS_NASA_PAGE = { mercury:"mercury", venus:"venus", mars:"mars", jupiter:"jupiter",
+    saturn:"saturn", uranus:"uranus", neptune:"neptune", pluto:"dwarf-planets/pluto", moon:"moon", sun:"sun" };
   const extLinks = [
-    ra != null ? `<a class="ext-link" href="${aladInUrl(ra, dec)}" target="_blank">Aladin Lite</a>` : "",
-    `<a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=${encodeURIComponent(name)}" target="_blank">SIMBAD</a>`,
-    ra != null ? `<a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=${ra}&dec=${dec}&zoom=12" target="_blank">Legacy Survey</a>` : "",
-    ra != null ? `<a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=${ra}&dec=${dec}&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a>` : "",
-    ra != null ? `<a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=${ra}+${dec}&-c.rs=2" target="_blank">VizieR</a>` : "",
-    ra != null ? `<a class="ext-link" href="https://sky.esa.int/?target=${ra}+${dec}&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a>` : "",
+    isSS ? `<a class="ext-link" href="https://theskylive.com/planetarium${SS_LIVE_SLUG[_ssKey] ? "?obj=" + SS_LIVE_SLUG[_ssKey] : ""}" target="_blank" rel="noopener">● Live Sky View</a>` : "",
+    isSS ? `<a class="ext-link" href="https://science.nasa.gov/${SS_NASA_PAGE[_ssKey] || "solar-system"}/" target="_blank" rel="noopener">NASA</a>` : "",
+    isSS ? `<a class="ext-link" href="https://ssd.jpl.nasa.gov/horizons/app.html#/" target="_blank">JPL Horizons</a>` : "",
+    !isSS && ra != null ? `<a class="ext-link" href="${aladInUrl(ra, dec)}" target="_blank">Aladin Lite</a>` : "",
+    !isSS ? `<a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=${encodeURIComponent(name)}" target="_blank">SIMBAD</a>` : "",
+    !isSS && ra != null ? `<a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=${ra}&dec=${dec}&zoom=12" target="_blank">Legacy Survey</a>` : "",
+    !isSS && ra != null ? `<a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=${ra}&dec=${dec}&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a>` : "",
+    !isSS && ra != null ? `<a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=${ra}+${dec}&-c.rs=2" target="_blank">VizieR</a>` : "",
+    !isSS && ra != null ? `<a class="ext-link" href="https://sky.esa.int/?target=${ra}+${dec}&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a>` : "",
     `<a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3A${encodeURIComponent(name)}&sort=date+desc" target="_blank">NASA ADS</a>`,
     `<a class="ext-link" href="https://en.wikipedia.org/wiki/${encodeURIComponent(name)}" target="_blank">Wikipedia</a>`,
-    isSS ? `<a class="ext-link" href="https://ssd.jpl.nasa.gov/horizons/app.html#/" target="_blank">JPL Horizons</a>` : "",
   ].filter(Boolean).join("");
 
   const notInPipeline = !p.target_name
@@ -1067,7 +1088,7 @@ function showMultipleResults(groups) {
       ? `<div class="card-coords">RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}°</div>` : "";
     const safeN   = name.replace(/'/g, "\\'");
     return `<div class="card" onclick="selectCandidate('${safeN}')">
-      <div class="card-img">${img}${badge}</div>
+      <div class="card-img">${img}${badge}<span class="img-epoch">ARCHIVAL · DSS2</span></div>
       <div class="card-body">
         <div class="card-name">${name}</div>
         <div class="card-tags">${mtags}</div>
@@ -1187,7 +1208,7 @@ function renderHighlights() {
       : `selectCandidate('${safeN}')`;
 
     return `<div class="card" id="${_cid}" data-tier="${c.tier||3}" data-score="${c.candidacy_score||0}" onclick="${onclick}">
-      <div class="card-img">${img}${badge}</div>
+      <div class="card-img">${img}${badge}<span class="img-epoch">ARCHIVAL · DSS2</span></div>
       <div class="card-body">
         <div class="card-name">${cleanName(c.target_name)}</div>
         <div class="card-tags">${mtags}</div>
