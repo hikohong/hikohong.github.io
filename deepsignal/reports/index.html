@@ -611,7 +611,7 @@ const OTYPE_LABELS = {
   'X':'X-ray source','UV':'UV source','Radio':'Radio source',
 };
 const oTypeLabel = t => OTYPE_LABELS[t] || t || '';
-const SS_TYPES = new Set(["Solar System Object","Planet","Dwarf Planet","Moon","Solar System Region","Comet","Asteroid"]);
+const SS_TYPES = new Set(["Solar System Object","Planet","Dwarf Planet","Moon","Solar System Region","Comet","Asteroid","Interstellar","Interstellar Object"]);
 const SURVEYS     = [
   { hips: "CDS/P/DSS2/color",        label: "Optical" },
   { hips: "CDS/P/2MASS/K",           label: "NIR" },
@@ -655,8 +655,20 @@ function skyUrl(ra, dec, fov = 0.25, survey = SURVEYS[0].hips) {
   return `${HIPS2FITS}?hips=${encodeURIComponent(survey)}&ra=${ra}&dec=${dec}&fov=${fov}&width=300&height=300&projection=TAN&format=jpg`;
 }
 
-function aladInUrl(ra, dec) {
-  return `https://aladin.u-strasbg.fr/AladinLite/?target=${ra}+${dec}&fov=0.5&survey=P/DSS2/color`;
+// Newest-imagery-first: Pan-STARRS DR1 (2010–14 CCD survey) where it has
+// coverage (dec > -30°), DSS2 photographic plates (1985–2002) elsewhere.
+// Returned epoch tags keep every displayed image honestly dated, and the
+// Aladin survey id keeps external views on the SAME imagery epoch.
+function skySurvey(dec) {
+  return (dec != null && dec > -29.5)
+    ? { hips: "CDS/P/PanSTARRS/DR1/color-z-zg-g", aladin: "P/PanSTARRS/DR1/color-z-zg-g",
+        tag: "ARCHIVAL · Pan-STARRS 2010–14", short: "Pan-STARRS ·2010–14" }
+    : { hips: "CDS/P/DSS2/color", aladin: "P/DSS2/color",
+        tag: "ARCHIVAL · DSS2 1985–2002", short: "DSS2 ·\u201985–02" };
+}
+
+function aladInUrl(ra, dec, survey = "P/DSS2/color") {
+  return `https://aladin.u-strasbg.fr/AladinLite/?target=${ra}+${dec}&fov=0.5&survey=${survey}`;
 }
 
 function candidateRa(c) {
@@ -988,15 +1000,16 @@ function showResult(resolved, pipelineMatches) {
   const reasons = (p.reasons || []).slice(0, 4);
 
   const isSS = r.solar_system || SS_TYPES.has(r.type || "") || false;
+  const _rsv = skySurvey(dec);  // newest survey with coverage at this declination
   // Epoch integrity: every image declares its time frame — live-first for moving
   // objects; archival survey imagery is labeled with its plate epoch.
   let imgTag;
   if (isSS) {
     imgTag = `<div id="result-img-box" style="width:220px;height:220px;display:grid;place-items:center;color:#3a4a5a;font-family:monospace;font-size:.72rem">Loading…</div><span class="img-epoch">REFERENCE IMAGE · NOT SKY VIEW</span>`;
   } else {
-    const imgSrc = ra != null ? skyUrl(ra, dec) : "";
+    const imgSrc = ra != null ? skyUrl(ra, dec, 0.25, _rsv.hips) : "";
     imgTag = imgSrc
-      ? `<img src="${imgSrc}" alt="Sky cutout of ${name}" loading="lazy" decoding="async" onerror="this.style.display='none'"><span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>`
+      ? `<img src="${imgSrc}" alt="Sky cutout of ${name}" loading="lazy" decoding="async" onerror="this.style.display='none'"><span class="img-epoch">${_rsv.tag}</span>`
       : `<div style="width:220px;height:220px;display:grid;place-items:center;color:#3a4a5a;font-size:.8rem">No image</div>`;
   }
 
@@ -1009,8 +1022,11 @@ function showResult(resolved, pipelineMatches) {
   const _srName = name.replace(/'/g, "\\'");
   // Coordinate frame is declared honestly: moving objects show a LIVE ephemeris
   // timestamp (JPL Horizons, queried just now); fixed objects are J2000 catalog.
-  const epochTag = isSS
+  const isLiveEphem = isSS && r.source === "JPL Horizons";
+  const epochTag = isLiveEphem
     ? `<span class="coord-epoch coord-epoch-live">● LIVE EPHEMERIS ${new Date().toISOString().slice(0, 16).replace("T", " ")}Z</span>`
+    : isSS
+    ? `<span class="coord-epoch" title="Moving object resolved from a static fallback table — live ephemeris unavailable right now">CATALOG SNAPSHOT · MOVING BODY</span>`
     : `<span class="coord-epoch">J2000 CATALOG FRAME</span>`;
   const coordTxt = ra != null
     ? `${epochTag}RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}° <span style="white-space:nowrap;display:inline-flex;align-items:center;gap:3px"><button class="btn-copy-coords" onclick="copyCoords('result-cc',${ra},${dec})" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-result-cc">✓</span><button class="btn-map-jump" onclick="event.stopPropagation();mapOpenFromCard(${ra},${dec},'${_srName}',${score||0},${!p.target_name})" title="Show on Map">Map</button></span>`
@@ -1026,12 +1042,12 @@ function showResult(resolved, pipelineMatches) {
     isSS ? `<a class="ext-link" href="https://theskylive.com/planetarium${SS_LIVE_SLUG[_ssKey] ? "?obj=" + SS_LIVE_SLUG[_ssKey] : ""}" target="_blank" rel="noopener">● Live Sky View</a>` : "",
     isSS ? `<a class="ext-link" href="https://science.nasa.gov/${SS_NASA_PAGE[_ssKey] || "solar-system"}/" target="_blank" rel="noopener">NASA</a>` : "",
     isSS ? `<a class="ext-link" href="https://ssd.jpl.nasa.gov/horizons/app.html#/" target="_blank">JPL Horizons</a>` : "",
-    !isSS && ra != null ? `<a class="ext-link" href="${aladInUrl(ra, dec)}" target="_blank">Aladin Lite</a>` : "",
-    !isSS ? `<a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=${encodeURIComponent(name)}" target="_blank">SIMBAD</a>` : "",
-    !isSS && ra != null ? `<a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=${ra}&dec=${dec}&zoom=12" target="_blank">Legacy Survey</a>` : "",
+    !isSS && ra != null ? `<a class="ext-link" href="${aladInUrl(ra, dec, _rsv.aladin)}" target="_blank">Aladin Lite <span style="opacity:.55">${_rsv.short}</span></a>` : "",
+    !isSS ? `<a class="ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=${encodeURIComponent(name)}" target="_blank" title="Catalog database — not imagery">SIMBAD</a>` : "",
+    !isSS && ra != null ? `<a class="ext-link" href="https://www.legacysurvey.org/viewer?ra=${ra}&dec=${dec}&zoom=12" target="_blank">Legacy Survey <span style="opacity:.55">·2014–19</span></a>` : "",
     !isSS && ra != null ? `<a class="ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=${ra}&dec=${dec}&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a>` : "",
     !isSS && ra != null ? `<a class="ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=${ra}+${dec}&-c.rs=2" target="_blank">VizieR</a>` : "",
-    !isSS && ra != null ? `<a class="ext-link" href="https://sky.esa.int/?target=${ra}+${dec}&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a>` : "",
+    !isSS && ra != null ? `<a class="ext-link" href="https://sky.esa.int/?target=${ra}+${dec}&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky <span style="opacity:.55">·DSS2 '85–02</span></a>` : "",
     `<a class="ext-link" href="https://ui.adsabs.harvard.edu/search/q=object%3A${encodeURIComponent(name)}&sort=date+desc" target="_blank">NASA ADS</a>`,
     `<a class="ext-link" href="https://en.wikipedia.org/wiki/${encodeURIComponent(name)}" target="_blank">Wikipedia</a>`,
   ].filter(Boolean).join("");
@@ -1078,7 +1094,7 @@ function showMultipleResults(groups) {
     const ra    = candidateRa(c);
     const dec   = candidateDec(c);
     const img   = (ra != null && !isNaN(ra))
-      ? `<img src="${skyUrl(ra, dec, 0.5)}" alt="${name}" loading="lazy" decoding="async" onerror="this.style.display='none'">`
+      ? `<img src="${skyUrl(ra, dec, 0.5, skySurvey(dec).hips)}" alt="${name}" loading="lazy" decoding="async" onerror="this.style.display='none'">`
       : "";
     const tc      = TIER_COLORS[c.tier] || "#6b7280";
     const badge   = c.tier ? `<span class="tier-badge" style="background:${tc}">Tier ${c.tier}</span>` : "";
@@ -1088,7 +1104,7 @@ function showMultipleResults(groups) {
       ? `<div class="card-coords">RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}°</div>` : "";
     const safeN   = name.replace(/'/g, "\\'");
     return `<div class="card" onclick="selectCandidate('${safeN}')">
-      <div class="card-img">${img}${badge}<span class="img-epoch">ARCHIVAL · DSS2</span></div>
+      <div class="card-img">${img}${badge}<span class="img-epoch">${skySurvey(dec).short}</span></div>
       <div class="card-body">
         <div class="card-name">${name}</div>
         <div class="card-tags">${mtags}</div>
@@ -1161,7 +1177,7 @@ function renderHighlights() {
     const ra  = candidateRa(c);
     const dec = candidateDec(c);
     const img = ra != null
-      ? `<img src="${skyUrl(ra, dec, 0.5)}" alt="${c.target_name}" loading="lazy" decoding="async" onerror="this.style.display='none'">`
+      ? `<img src="${skyUrl(ra, dec, 0.5, skySurvey(dec).hips)}" alt="${c.target_name}" loading="lazy" decoding="async" onerror="this.style.display='none'">`
       : "";
     const tc    = TIER_COLORS[c.tier] || "#6b7280";
     const badge = c.tier ? `<span class="tier-badge" style="background:${tc}">Tier ${c.tier}</span>` : "";
@@ -1181,9 +1197,9 @@ function renderHighlights() {
       ? `<ul class="card-reasons">${allReasons.slice(0, 5).map(r => `<li>${r}</li>`).join("")}</ul>` : "";
 
     const extLinksHtml = ra != null ? `<div class="card-ext-links" onclick="event.stopPropagation()">
-        <a class="card-ext-link" href="${aladInUrl(ra, dec)}" target="_blank">Aladin Lite</a>
+        <a class="card-ext-link" href="${aladInUrl(ra, dec, skySurvey(dec).aladin)}" target="_blank">Aladin Lite <span style="opacity:.55">${skySurvey(dec).short}</span></a>
         <a class="card-ext-link" href="https://simbad.u-strasbg.fr/simbad/sim-id?Ident=${encodeURIComponent(c.target_name)}" target="_blank">SIMBAD</a>
-        <a class="card-ext-link" href="https://www.legacysurvey.org/viewer?ra=${ra}&dec=${dec}&zoom=12" target="_blank">Legacy Survey</a>
+        <a class="card-ext-link" href="https://www.legacysurvey.org/viewer?ra=${ra}&dec=${dec}&zoom=12" target="_blank">Legacy Survey <span style="opacity:.55">·2014–19</span></a>
         <a class="card-ext-link" href="https://ned.ipac.caltech.edu/conesearch?search_type=Near+Position+Search&ra=${ra}&dec=${dec}&radius=2.0&in_csys=Equatorial&in_equinox=J2000&out_csys=Equatorial&out_equinox=J2000" target="_blank">NED</a>
         <a class="card-ext-link" href="https://vizier.cds.unistra.fr/viz-bin/VizieR?-c=${ra}+${dec}&-c.rs=2" target="_blank">VizieR</a>
         <a class="card-ext-link" href="https://sky.esa.int/?target=${ra}+${dec}&hips=DSS2+color&fov=0.5" target="_blank">ESA Sky</a>
@@ -1208,7 +1224,7 @@ function renderHighlights() {
       : `selectCandidate('${safeN}')`;
 
     return `<div class="card" id="${_cid}" data-tier="${c.tier||3}" data-score="${c.candidacy_score||0}" onclick="${onclick}">
-      <div class="card-img">${img}${badge}<span class="img-epoch">ARCHIVAL · DSS2</span></div>
+      <div class="card-img">${img}${badge}<span class="img-epoch">${skySurvey(dec).short}</span></div>
       <div class="card-body">
         <div class="card-name">${cleanName(c.target_name)}</div>
         <div class="card-tags">${mtags}</div>
