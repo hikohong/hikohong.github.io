@@ -42,12 +42,15 @@ jobs:
         with:
           path: .
 
+      # The transient Pages-infra failure usually succeeds on an immediate
+      # second attempt — retry once inside the same run, and keep the job
+      # GREEN when the retry lands (continue-on-error + outcome check).
       - name: Deploy to GitHub Pages
         id: deployment
+        continue-on-error: true
         uses: actions/deploy-pages@v4
 
-      # The transient 401 usually succeeds on an immediate second attempt —
-      # retry once inside the same run instead of requiring a manual re-kick.
       - name: Retry deploy once on failure
-        if: failure()
+        id: deployment_retry
+        if: steps.deployment.outcome == 'failure'
         uses: actions/deploy-pages@v4
