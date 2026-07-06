@@ -355,6 +355,11 @@ window._svFallback = function(img){
       img.setAttribute('data-svchain', JSON.stringify(chain));
       var p = img.parentElement, ep = p && p.querySelector('.img-epoch');
       if (ep) ep.textContent = nx.tag;
+      if (nx.aladin && img.closest) {
+        var a = img.closest('a');
+        if (a && a.href && a.href.indexOf('survey=') !== -1)
+          a.href = a.href.replace(/survey=[^&]*/, 'survey=' + encodeURIComponent(nx.aladin));
+      }
       img.src = nx.url;
       return;
     }
@@ -696,7 +701,7 @@ function skyChain(dec) {
 function skySurvey(dec) { return skyChain(dec)[0]; }
 // fallback payload: every rung below the top, pre-resolved to concrete URLs
 function skyChainRest(ra, dec, fov) {
-  return JSON.stringify(skyChain(dec).slice(1).map(s => ({ url: skyUrl(ra, dec, fov, s.hips), tag: s.tag })));
+  return JSON.stringify(skyChain(dec).slice(1).map(s => ({ url: skyUrl(ra, dec, fov, s.hips), tag: s.tag, aladin: s.aladin })));
 }
 
 function aladInUrl(ra, dec, survey = "P/DSS2/color") {
@@ -1136,7 +1141,7 @@ function showMultipleResults(groups) {
       ? `<div class="card-coords">RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}°</div>` : "";
     const safeN   = name.replace(/'/g, "\\'");
     return `<div class="card" onclick="selectCandidate('${safeN}')">
-      <div class="card-img">${img}${badge}<span class="img-epoch">${skySurvey(dec).short}</span></div>
+      <div class="card-img">${img}${badge}${img ? `<span class="img-epoch">${skySurvey(dec).short}</span>` : ""}</div>
       <div class="card-body">
         <div class="card-name">${name}</div>
         <div class="card-tags">${mtags}</div>
@@ -1256,7 +1261,7 @@ function renderHighlights() {
       : `selectCandidate('${safeN}')`;
 
     return `<div class="card" id="${_cid}" data-tier="${c.tier||3}" data-score="${c.candidacy_score||0}" onclick="${onclick}">
-      <div class="card-img">${img}${badge}<span class="img-epoch">${skySurvey(dec).short}</span></div>
+      <div class="card-img">${img}${badge}${img ? `<span class="img-epoch">${skySurvey(dec).short}</span>` : ""}</div>
       <div class="card-body">
         <div class="card-name">${cleanName(c.target_name)}</div>
         <div class="card-tags">${mtags}</div>
