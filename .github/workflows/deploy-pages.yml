@@ -1,0 +1,53 @@
+# Custom GitHub Pages deployment — replaces the built-in "pages build and
+# deployment" workflow, which intermittently fails its Deploy step with a
+# transient 401 and cannot be re-run reliably.
+#
+# The site is pure static HTML/CSS/JS (no Jekyll needed), so we upload the
+# repo root directly as the Pages artifact. Requires Settings → Pages →
+# Source = "GitHub Actions" (configure-pages below attempts to switch it
+# automatically on first run).
+name: Deploy Pages
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure Pages (switch source to GitHub Actions if needed)
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      # The transient 401 usually succeeds on an immediate second attempt —
+      # retry once inside the same run instead of requiring a manual re-kick.
+      - name: Retry deploy once on failure
+        if: failure()
+        uses: actions/deploy-pages@v4

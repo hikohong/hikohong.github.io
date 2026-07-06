@@ -300,6 +300,7 @@ body{padding-bottom:30px}
 .img-epoch-live{color:#3fe08f;border-color:rgba(63,224,143,.42);text-shadow:0 0 5px rgba(63,224,143,.35)}
 .coord-epoch{font-family:monospace;font-size:.56rem;letter-spacing:.07em;color:#8fa4b8;border:1px solid rgba(143,164,184,.3);border-radius:3px;padding:1px 5px;margin-right:6px;white-space:nowrap;vertical-align:middle}
 .coord-epoch-live{color:#3fe08f;border-color:rgba(63,224,143,.42);text-shadow:0 0 5px rgba(63,224,143,.35)}
+.hud-warn{color:#f97316!important;text-shadow:0 0 6px rgba(249,115,22,.45)!important}
 .nav-link:active,.search-btn:active,button:active{transform:translateY(1px) scale(.98)}
 @media (prefers-reduced-motion:reduce){.b-pend{animation:none}.card.tilting{transform:none!important}}
 </style>
@@ -376,6 +377,8 @@ window._svFallback = function(img){
   <span class="hud-seg hud-hide-sm">SRC <span class="hud-val">10/10</span></span>
   <span class="hud-seg">TGT <span class="hud-val" id="hud-tgt">--</span></span>
   <span class="hud-seg hud-hide-sm">FEEDS <span class="hud-val" id="hud-feeds">--</span></span>
+  <span class="hud-seg hud-hide-sm">AGE <span class="hud-val" id="hud-age">--</span></span>
+  <span class="hud-seg" id="hud-track-seg" style="display:none">⌖ <span class="hud-val" id="hud-track">--</span></span>
   <span id="hud-msg"></span>
 </div>
 
@@ -1006,7 +1009,7 @@ window._svFallback = function(img){
 <div id="sky-tooltip-map"></div>
 <div class="gallery-hdr">
 <h1>DeepSignal — Sky Image Gallery</h1>
-<div class="subtitle">Generated 2026-07-06 06:34 UTC &nbsp;·&nbsp; 244 targets &nbsp;·&nbsp; 244 sky images via Hips2Fits CDN</div>
+<div class="subtitle">Generated <span id="gen-ts">2026-07-06 10:21 UTC</span> &nbsp;·&nbsp; 244 targets &nbsp;·&nbsp; 244 sky images via Hips2Fits CDN</div>
 <div class="stats">
   <div class="stat"><div class="stat-n" style="color:#f59e0b">104</div><div class="stat-l">Tier 1 ≥70</div></div>
   <div class="stat"><div class="stat-n" style="color:#60a5fa">128</div><div class="stat-l">Tier 2 50–69</div></div>
@@ -8927,8 +8930,47 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
         fd.textContent = done + '/' + imgs.length;
       } else fd.textContent = '--';
     }
+    var ag = $('hud-age');
+    if (ag) {
+      if (ag._src === undefined) {
+        var u = $('stat-updated') || $('gen-ts');
+        ag._src = u ? (Date.parse(u.textContent.trim().replace(' UTC', 'Z').replace(' ', 'T')) || 0) : 0;
+      }
+      if (ag._src) {
+        var days = Math.floor((Date.now() - ag._src) / 864e5);
+        ag.textContent = days + 'd';
+        ag.classList.toggle('hud-warn', days > 14);
+      } else ag.textContent = '--';
+    }
+    var tr = $('hud-track');
+    if (tr && trackTgt) {
+      if (obsLat == null) tr.textContent = 'ACQUIRING FIX…';
+      else {
+        var lst = (g + obsLon) % 360; if (lst < 0) lst += 360;
+        var H = (lst - trackTgt.ra) * Math.PI / 180;
+        var phi = obsLat * Math.PI / 180, de = trackTgt.dec * Math.PI / 180;
+        var alt = Math.asin(Math.sin(phi) * Math.sin(de) + Math.cos(phi) * Math.cos(de) * Math.cos(H)) * 180 / Math.PI;
+        var az = Math.atan2(-Math.sin(H), Math.tan(de) * Math.cos(phi) - Math.sin(phi) * Math.cos(H)) * 180 / Math.PI;
+        if (az < 0) az += 360;
+        tr.textContent = String(trackTgt.name).toUpperCase() + ' ALT ' + (alt >= 0 ? '+' : '') + alt.toFixed(1) + '° AZ ' + az.toFixed(0) + '°' + (alt > 0 ? ' · UP' : ' · BELOW HORIZON');
+        tr.classList.toggle('hud-warn', alt <= 0);
+      }
+    }
   }
   tick(); setInterval(tick, 1000);
+
+  /* ── live target tracking: alt/az of the locked target from the operator's
+        real location (geolocation is only requested via NAVCON.track) ── */
+  var obsLat = null, obsLon = null, trackTgt = null;
+  function _ensureGeo(){
+    if (obsLat != null) return;
+    try {
+      navigator.geolocation.getCurrentPosition(function(pos){
+        obsLat = pos.coords.latitude; obsLon = pos.coords.longitude;
+      }, function(){ op('GEOLOCATION DENIED — TRACKING OFFLINE'); },
+      { maximumAge: 600000, timeout: 8000 });
+    } catch(e) {}
+  }
 
   /* ── live ops feed: real events preempt the idle rotation ── */
   var MSGS = [
@@ -8946,7 +8988,12 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     decodeTo($('hud-msg'), MSGS[mi++ % MSGS.length]);
   }
   setInterval(nextMsg, 7000);
-  window.NAVCON = { op: op };
+  window.NAVCON = { op: op, track: function(name, ra, dec){
+    trackTgt = { name: name, ra: ra, dec: dec };
+    op('TRACKING ' + String(name).toUpperCase() + ' — ACQUIRING POSITION FIX');
+    _ensureGeo();
+    var seg = $('hud-track-seg'); if (seg) seg.style.display = '';
+  } };
   nextMsg();
 
   /* ── self-test mini panel: REAL checks, floats over the live page,
