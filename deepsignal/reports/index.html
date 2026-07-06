@@ -294,6 +294,12 @@ footer a{color:#4a6a8a;text-decoration:none}
 .report-body hr{border:none;border-top:1px solid rgba(219,234,254,.12);margin:1.5em 0}
 .report-footer{padding:10px 18px;border-top:1px solid rgba(125,211,252,.1);font-family:monospace;font-size:.62rem;color:#1a3a5a;flex-shrink:0;display:flex;justify-content:space-between;position:relative;z-index:2}
 
+/* survey switcher chips on the result image (avionics instrument layer) */
+.sv-chips{position:absolute;right:6px;bottom:6px;z-index:3;display:flex;gap:3px}
+.sv-chip{font-family:monospace;font-size:.52rem;letter-spacing:.05em;padding:2px 6px;border-radius:3px;border:1px solid rgba(63,224,143,.3);background:rgba(3,14,10,.8);color:#3a7a5a;cursor:pointer;transition:color 120ms,border-color 120ms}
+.sv-chip:hover{color:#3fe08f}
+.sv-chip.on{color:#3fe08f;border-color:rgba(63,224,143,.75);text-shadow:0 0 5px rgba(63,224,143,.4)}
+
 /* ══ NAVCON — spaceship HUD engine ══ */
 body{padding-bottom:30px}
 #navcon-sky{position:fixed;inset:0;z-index:-1;pointer-events:none}
@@ -1050,9 +1056,14 @@ function showResult(resolved, pipelineMatches) {
     imgTag = `<div id="result-img-box" style="width:220px;height:220px;display:grid;place-items:center;color:#3a4a5a;font-family:monospace;font-size:.72rem">Loading…</div><span class="img-epoch">WIKIMEDIA REF · NOT SKY VIEW</span>`;
   } else {
     const imgSrc = ra != null ? skyUrl(ra, dec, 0.25, _rsv.hips) : "";
-    const _bOld = skyChain(dec).slice(-1)[0];
+    const _chainAll = skyChain(dec);
+    const _bOld = _chainAll.slice(-1)[0];
+    const _svAll = JSON.stringify(_chainAll.map(s => ({ url: skyUrl(ra, dec, 0.25, s.hips), tag: s.tag, aladin: s.aladin, short: s.short })));
+    const svChips = imgSrc && _chainAll.length > 1
+      ? `<div class="sv-chips">${_chainAll.map((s, i) => `<button class="sv-chip${i === 0 ? " on" : ""}" onclick="switchSurvey(this,${i})" title="${s.tag}">${s.short.split(" ·")[0]}</button>`).join("")}</div>`
+      : "";
     imgTag = imgSrc
-      ? `<img src="${imgSrc}" alt="Sky cutout of ${name}" loading="lazy" decoding="async" data-svchain='${skyChainRest(ra, dec, 0.25)}' data-blink-a="${imgSrc}" data-blink-atag="${_rsv.tag}" data-blink-b="${skyUrl(ra, dec, 0.25, _bOld.hips)}" data-blink-btag="${_bOld.tag}" onerror="_svFallback(this)"><span class="img-epoch">${_rsv.tag}</span>`
+      ? `<img src="${imgSrc}" alt="Sky cutout of ${name}" loading="lazy" decoding="async" data-svchain='${skyChainRest(ra, dec, 0.25)}' data-svall='${_svAll}' data-blink-a="${imgSrc}" data-blink-atag="${_rsv.tag}" data-blink-b="${skyUrl(ra, dec, 0.25, _bOld.hips)}" data-blink-btag="${_bOld.tag}" onerror="_svFallback(this)"><span class="img-epoch">${_rsv.tag}</span>${svChips}`
       : `<div style="width:220px;height:220px;display:grid;place-items:center;color:#3a4a5a;font-size:.8rem">No image</div>`;
   }
 
@@ -1227,6 +1238,38 @@ function toggleBlink(btn) {
   const pa = new Image(); pa.onload = () => arm(true); pa.onerror = () => arm(false); pa.src = aUrl;
   const pb = new Image(); pb.onload = () => arm(true); pb.onerror = () => arm(false); pb.src = bUrl;
   setTimeout(() => { if (btn.disabled) { btn.disabled = false; btn.textContent = "◉ Blink"; } }, 12000);
+}
+
+// ── Manual survey switcher: operator picks the imagery source; image, epoch
+// tag, Aladin link and blink baseline all follow the ACTUAL displayed survey ──
+function switchSurvey(btn, idx) {
+  const img = document.querySelector(".result-img img");
+  const ep  = document.querySelector(".result-img .img-epoch");
+  if (!img) return;
+  SFX.click();
+  if (window._blinkTimer) {
+    clearInterval(window._blinkTimer); window._blinkTimer = null;
+    const bb = document.getElementById("blink-btn");
+    if (bb) bb.textContent = "◉ Blink";
+  }
+  let all = [];
+  try { all = JSON.parse(img.getAttribute("data-svall") || "[]"); } catch (e) {}
+  const s = all[idx];
+  if (!s) return;
+  img.onload = null;
+  img.setAttribute("data-svchain", "[]");  // manual pick: show exactly this survey
+  img.style.display = "";
+  if (ep) { ep.style.display = ""; ep.textContent = s.tag; }
+  img.src = s.url;
+  img.dataset.blinkA = s.url; img.dataset.blinkAtag = s.tag;
+  const a = document.querySelector('.result-links a[href*="survey="]');
+  if (a) {
+    a.href = a.href.replace(/survey=[^&]*/, "survey=" + encodeURIComponent(s.aladin));
+    const sp = a.querySelector("span");
+    if (sp) sp.textContent = s.short;
+  }
+  document.querySelectorAll(".result-img .sv-chip").forEach((c, i) => c.classList.toggle("on", i === idx));
+  window.NAVCON && NAVCON.op("IMAGERY SOURCE — " + s.tag.replace("ARCHIVAL · ", ""));
 }
 
 async function doSearch() {
