@@ -1184,19 +1184,49 @@ function toggleBlink(btn) {
   SFX.click();
   if (window._blinkTimer) {
     clearInterval(window._blinkTimer); window._blinkTimer = null;
+    img.onload = null;
     img.src = img.dataset.blinkA;
     if (ep) ep.textContent = img.dataset.blinkAtag;
     btn.textContent = "◉ Blink";
     return;
   }
-  let flip = false;
-  btn.textContent = "■ Stop";
-  window.NAVCON && NAVCON.op("BLINK COMPARATOR — " + img.dataset.blinkAtag.replace("ARCHIVAL · ", "") + " vs " + img.dataset.blinkBtag.replace("ARCHIVAL · ", ""));
-  window._blinkTimer = setInterval(() => {
-    flip = !flip;
-    img.src = flip ? img.dataset.blinkB : img.dataset.blinkA;
-    if (ep) ep.textContent = flip ? img.dataset.blinkBtag : img.dataset.blinkAtag;
-  }, 700);
+  // Frame A = whatever is CURRENTLY displayed (the fallback ladder may have
+  // stepped the image down since render); frame B = the oldest rung.
+  const aUrl = img.src, aTag = ep ? ep.textContent : img.dataset.blinkAtag;
+  const bUrl = img.dataset.blinkB, bTag = img.dataset.blinkBtag;
+  img.dataset.blinkA = aUrl; img.dataset.blinkAtag = aTag;
+  if (!bUrl || aUrl === bUrl) {
+    window.NAVCON && NAVCON.op("BLINK UNAVAILABLE — SINGLE EPOCH ONLY");
+    return;
+  }
+  // Preload BOTH frames before blinking, and switch the epoch tag ONLY when
+  // the incoming frame has actually finished loading (img.onload) — the tag
+  // and the pixels stay in lockstep, never ahead of each other.
+  btn.disabled = true;
+  btn.textContent = "⏳ SYNC…";
+  let done = 0, failed = false;
+  const arm = ok => {
+    done++; if (!ok) failed = true;
+    if (done < 2) return;
+    if (failed) {
+      btn.disabled = false; btn.textContent = "◉ Blink";
+      window.NAVCON && NAVCON.op("BLINK UNAVAILABLE — FRAME LOAD FAILED");
+      return;
+    }
+    btn.disabled = false;
+    btn.textContent = "■ Stop";
+    window.NAVCON && NAVCON.op("BLINK — " + aTag.replace("ARCHIVAL · ", "") + " vs " + bTag.replace("ARCHIVAL · ", ""));
+    let flip = false;
+    window._blinkTimer = setInterval(() => {
+      flip = !flip;
+      const tag = flip ? bTag : aTag;
+      img.onload = () => { if (ep) ep.textContent = tag; };
+      img.src = flip ? bUrl : aUrl;  // both cached → onload fires immediately
+    }, 700);
+  };
+  const pa = new Image(); pa.onload = () => arm(true); pa.onerror = () => arm(false); pa.src = aUrl;
+  const pb = new Image(); pb.onload = () => arm(true); pb.onerror = () => arm(false); pb.src = bUrl;
+  setTimeout(() => { if (btn.disabled) { btn.disabled = false; btn.textContent = "◉ Blink"; } }, 12000);
 }
 
 async function doSearch() {
