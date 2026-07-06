@@ -344,6 +344,28 @@ body{padding-bottom:30px}
 </style>
 </head>
 <body>
+<script>
+/* imagery fallback ladder — defined BEFORE any <img> so onerror always resolves:
+   newest survey first, step down on failure, retag with the source actually shown */
+window._svFallback = function(img){
+  try {
+    var chain = JSON.parse(img.getAttribute('data-svchain') || '[]');
+    if (chain.length) {
+      var nx = chain.shift();
+      img.setAttribute('data-svchain', JSON.stringify(chain));
+      var p = img.parentElement, ep = p && p.querySelector('.img-epoch');
+      if (ep) ep.textContent = nx.tag;
+      img.src = nx.url;
+      return;
+    }
+  } catch(e) {}
+  img.style.display = 'none';
+  var p2 = img.parentElement, ep2 = p2 && p2.querySelector('.img-epoch');
+  if (ep2) ep2.style.display = 'none';
+  var s = img.nextElementSibling;
+  if (s && s.tagName === 'SPAN' && s.style.display === 'none') s.style.display = 'flex';
+};
+</script>
 <canvas id="navcon-sky" aria-hidden="true"></canvas>
 <div id="navcon-vig" aria-hidden="true"></div>
 <div class="hud-corner hud-tl" aria-hidden="true"></div><div class="hud-corner hud-tr" aria-hidden="true"></div>
@@ -659,12 +681,22 @@ function skyUrl(ra, dec, fov = 0.25, survey = SURVEYS[0].hips) {
 // coverage (dec > -30°), DSS2 photographic plates (1985–2002) elsewhere.
 // Returned epoch tags keep every displayed image honestly dated, and the
 // Aladin survey id keeps external views on the SAME imagery epoch.
-function skySurvey(dec) {
-  return (dec != null && dec > -29.5)
-    ? { hips: "CDS/P/PanSTARRS/DR1/color-z-zg-g", aladin: "P/PanSTARRS/DR1/color-z-zg-g",
-        tag: "ARCHIVAL · Pan-STARRS 2010–14", short: "Pan-STARRS ·2010–14" }
-    : { hips: "CDS/P/DSS2/color", aladin: "P/DSS2/color",
-        tag: "ARCHIVAL · DSS2 1985–2002", short: "DSS2 ·\u201985–02" };
+function skyChain(dec) {
+  const c = [];
+  if (dec != null && dec > -28)
+    c.push({ hips: "CDS/P/ZTF/DR7/color", aladin: "P/ZTF/DR7/color",
+             tag: "ARCHIVAL · ZTF 2018–23", short: "ZTF ·2018–23" });
+  if (dec != null && dec > -29.5)
+    c.push({ hips: "CDS/P/PanSTARRS/DR1/color-z-zg-g", aladin: "P/PanSTARRS/DR1/color-z-zg-g",
+             tag: "ARCHIVAL · Pan-STARRS 2010–14", short: "Pan-STARRS ·2010–14" });
+  c.push({ hips: "CDS/P/DSS2/color", aladin: "P/DSS2/color",
+           tag: "ARCHIVAL · DSS2 1985–2002", short: "DSS2 ·\u201985–02" });
+  return c;
+}
+function skySurvey(dec) { return skyChain(dec)[0]; }
+// fallback payload: every rung below the top, pre-resolved to concrete URLs
+function skyChainRest(ra, dec, fov) {
+  return JSON.stringify(skyChain(dec).slice(1).map(s => ({ url: skyUrl(ra, dec, fov, s.hips), tag: s.tag })));
 }
 
 function aladInUrl(ra, dec, survey = "P/DSS2/color") {
@@ -1005,11 +1037,11 @@ function showResult(resolved, pipelineMatches) {
   // objects; archival survey imagery is labeled with its plate epoch.
   let imgTag;
   if (isSS) {
-    imgTag = `<div id="result-img-box" style="width:220px;height:220px;display:grid;place-items:center;color:#3a4a5a;font-family:monospace;font-size:.72rem">Loading…</div><span class="img-epoch">REFERENCE IMAGE · NOT SKY VIEW</span>`;
+    imgTag = `<div id="result-img-box" style="width:220px;height:220px;display:grid;place-items:center;color:#3a4a5a;font-family:monospace;font-size:.72rem">Loading…</div><span class="img-epoch">WIKIMEDIA REF · NOT SKY VIEW</span>`;
   } else {
     const imgSrc = ra != null ? skyUrl(ra, dec, 0.25, _rsv.hips) : "";
     imgTag = imgSrc
-      ? `<img src="${imgSrc}" alt="Sky cutout of ${name}" loading="lazy" decoding="async" onerror="this.style.display='none'"><span class="img-epoch">${_rsv.tag}</span>`
+      ? `<img src="${imgSrc}" alt="Sky cutout of ${name}" loading="lazy" decoding="async" data-svchain='${skyChainRest(ra, dec, 0.25)}' onerror="_svFallback(this)"><span class="img-epoch">${_rsv.tag}</span>`
       : `<div style="width:220px;height:220px;display:grid;place-items:center;color:#3a4a5a;font-size:.8rem">No image</div>`;
   }
 
@@ -1094,7 +1126,7 @@ function showMultipleResults(groups) {
     const ra    = candidateRa(c);
     const dec   = candidateDec(c);
     const img   = (ra != null && !isNaN(ra))
-      ? `<img src="${skyUrl(ra, dec, 0.5, skySurvey(dec).hips)}" alt="${name}" loading="lazy" decoding="async" onerror="this.style.display='none'">`
+      ? `<img src="${skyUrl(ra, dec, 0.5, skySurvey(dec).hips)}" alt="${name}" loading="lazy" decoding="async" data-svchain='${skyChainRest(ra, dec, 0.5)}' onerror="_svFallback(this)">`
       : "";
     const tc      = TIER_COLORS[c.tier] || "#6b7280";
     const badge   = c.tier ? `<span class="tier-badge" style="background:${tc}">Tier ${c.tier}</span>` : "";
@@ -1177,7 +1209,7 @@ function renderHighlights() {
     const ra  = candidateRa(c);
     const dec = candidateDec(c);
     const img = ra != null
-      ? `<img src="${skyUrl(ra, dec, 0.5, skySurvey(dec).hips)}" alt="${c.target_name}" loading="lazy" decoding="async" onerror="this.style.display='none'">`
+      ? `<img src="${skyUrl(ra, dec, 0.5, skySurvey(dec).hips)}" alt="${c.target_name}" loading="lazy" decoding="async" data-svchain='${skyChainRest(ra, dec, 0.5)}' onerror="_svFallback(this)">`
       : "";
     const tc    = TIER_COLORS[c.tier] || "#6b7280";
     const badge = c.tier ? `<span class="tier-badge" style="background:${tc}">Tier ${c.tier}</span>` : "";
