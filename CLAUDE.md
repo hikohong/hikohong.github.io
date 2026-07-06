@@ -151,9 +151,18 @@ git push -u origin $BRANCH
 GitHub Pages serves `master` branch root directly. No build step needed.
 Changes to `master` are live at https://hikohong.github.io within ~1 minute.
 
-### Deploy troubleshooting — 401 "Requires authentication" failure
+### Custom deploy workflow (preferred path)
 
-The built-in `pages build and deployment` workflow occasionally fails at the **Deploy** step with a 401 error after the build succeeds. This is a transient GitHub infrastructure issue.
+`.github/workflows/deploy-pages.yml` deploys the repo root directly via
+`actions/upload-pages-artifact` + `actions/deploy-pages`, with an automatic
+in-run retry for the transient 401. Requires Settings → Pages → Source =
+"GitHub Actions" (`configure-pages` with `enablement: true` attempts the
+switch automatically). Once active, the built-in `pages build and deployment`
+workflow stops running.
+
+### Deploy troubleshooting — 401 "Requires authentication" failure (legacy workflow)
+
+The built-in `pages build and deployment` workflow occasionally fails at the **Deploy** step with a 401 error after the build succeeds. This is a transient GitHub infrastructure issue (hit 3 of 5 merges in July 2026 — hence the custom workflow above).
 
 **Fix:**
 1. Use `rerun_failed_jobs` on the failed run (via MCP GitHub tools).

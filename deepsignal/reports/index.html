@@ -339,6 +339,7 @@ body{padding-bottom:30px}
 .img-epoch-live{color:#3fe08f;border-color:rgba(63,224,143,.42);text-shadow:0 0 5px rgba(63,224,143,.35)}
 .coord-epoch{font-family:monospace;font-size:.56rem;letter-spacing:.07em;color:#8fa4b8;border:1px solid rgba(143,164,184,.3);border-radius:3px;padding:1px 5px;margin-right:6px;white-space:nowrap;vertical-align:middle}
 .coord-epoch-live{color:#3fe08f;border-color:rgba(63,224,143,.42);text-shadow:0 0 5px rgba(63,224,143,.35)}
+.hud-warn{color:#f97316!important;text-shadow:0 0 6px rgba(249,115,22,.45)!important}
 .nav-link:active,.search-btn:active,button:active{transform:translateY(1px) scale(.98)}
 @media (prefers-reduced-motion:reduce){.b-pend{animation:none}.card.tilting{transform:none!important}}
 </style>
@@ -416,6 +417,8 @@ window._svFallback = function(img){
   <span class="hud-seg hud-hide-sm">SRC <span class="hud-val">10/10</span></span>
   <span class="hud-seg">TGT <span class="hud-val" id="hud-tgt">--</span></span>
   <span class="hud-seg hud-hide-sm">FEEDS <span class="hud-val" id="hud-feeds">--</span></span>
+  <span class="hud-seg hud-hide-sm">AGE <span class="hud-val" id="hud-age">--</span></span>
+  <span class="hud-seg" id="hud-track-seg" style="display:none">⌖ <span class="hud-val" id="hud-track">--</span></span>
   <span id="hud-msg"></span>
 </div>
 
@@ -439,7 +442,7 @@ window._svFallback = function(img){
   <div class="stat-chip">Pipeline candidates: <strong id="stat-n">244</strong></div>
   <div class="stat-chip">Data sources: <strong>10</strong></div>
   <div class="stat-chip">Detection algorithms: <strong>14</strong></div>
-  <div class="stat-chip">Last updated: <strong>2026-06-21 07:38 UTC</strong></div>
+  <div class="stat-chip">Last updated: <strong id="stat-updated">2026-06-21 07:38 UTC</strong></div>
 </div>
 
 <!-- Map Modal -->
@@ -687,6 +690,8 @@ function skyUrl(ra, dec, fov = 0.25, survey = SURVEYS[0].hips) {
 // Returned epoch tags keep every displayed image honestly dated, and the
 // Aladin survey id keeps external views on the SAME imagery epoch.
 function skyChain(dec) {
+  // Rubin/LSST slot: when Vera Rubin Observatory publishes public HiPS
+  // (2024+ imagery, continuously refreshed), insert it ABOVE ZTF here.
   const c = [];
   if (dec != null && dec > -28)
     c.push({ hips: "CDS/P/ZTF/DR7/color", aladin: "P/ZTF/DR7/color",
@@ -1045,8 +1050,9 @@ function showResult(resolved, pipelineMatches) {
     imgTag = `<div id="result-img-box" style="width:220px;height:220px;display:grid;place-items:center;color:#3a4a5a;font-family:monospace;font-size:.72rem">Loading…</div><span class="img-epoch">WIKIMEDIA REF · NOT SKY VIEW</span>`;
   } else {
     const imgSrc = ra != null ? skyUrl(ra, dec, 0.25, _rsv.hips) : "";
+    const _bOld = skyChain(dec).slice(-1)[0];
     imgTag = imgSrc
-      ? `<img src="${imgSrc}" alt="Sky cutout of ${name}" loading="lazy" decoding="async" data-svchain='${skyChainRest(ra, dec, 0.25)}' onerror="_svFallback(this)"><span class="img-epoch">${_rsv.tag}</span>`
+      ? `<img src="${imgSrc}" alt="Sky cutout of ${name}" loading="lazy" decoding="async" data-svchain='${skyChainRest(ra, dec, 0.25)}' data-blink-a="${imgSrc}" data-blink-atag="${_rsv.tag}" data-blink-b="${skyUrl(ra, dec, 0.25, _bOld.hips)}" data-blink-btag="${_bOld.tag}" onerror="_svFallback(this)"><span class="img-epoch">${_rsv.tag}</span>`
       : `<div style="width:220px;height:220px;display:grid;place-items:center;color:#3a4a5a;font-size:.8rem">No image</div>`;
   }
 
@@ -1066,7 +1072,7 @@ function showResult(resolved, pipelineMatches) {
     ? `<span class="coord-epoch" title="Moving object resolved from a static fallback table — live ephemeris unavailable right now">CATALOG SNAPSHOT · MOVING BODY</span>`
     : `<span class="coord-epoch">J2000 CATALOG FRAME</span>`;
   const coordTxt = ra != null
-    ? `${epochTag}RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}° <span style="white-space:nowrap;display:inline-flex;align-items:center;gap:3px"><button class="btn-copy-coords" onclick="copyCoords('result-cc',${ra},${dec})" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-result-cc">✓</span><button class="btn-map-jump" onclick="event.stopPropagation();mapOpenFromCard(${ra},${dec},'${_srName}',${score||0},${!p.target_name})" title="Show on Map">Map</button></span>`
+    ? `${epochTag}RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}° <span style="white-space:nowrap;display:inline-flex;align-items:center;gap:3px"><button class="btn-copy-coords" onclick="copyCoords('result-cc',${ra},${dec})" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-result-cc">✓</span><button class="btn-map-jump" onclick="event.stopPropagation();mapOpenFromCard(${ra},${dec},'${_srName}',${score||0},${!p.target_name})" title="Show on Map">Map</button><button class="btn-map-jump" onclick="SFX.click();window.NAVCON&&NAVCON.track('${_srName}',${ra},${dec})" title="Live altitude/azimuth of this target from your location (asks for geolocation once)">⌖ Track</button>${(!isSS && skyChain(dec).length > 1) ? `<button class="btn-map-jump" id="blink-btn" onclick="toggleBlink(this)" title="Blink newest vs oldest survey epoch — watch high proper-motion stars move">◉ Blink</button>` : ""}</span>`
     : "";
   // Deep-sky survey/catalog links are meaningless for moving solar-system
   // bodies (archival plates can never contain them) — swap in LIVE tools instead.
@@ -1115,6 +1121,16 @@ function showResult(resolved, pipelineMatches) {
       </div>
     </div>`;
   if (isSS) _loadSolarSystemImage(name);
+
+  // Auto-track: if the operator has already granted geolocation, start live
+  // alt/az tracking of the locked target without prompting again.
+  if (ra != null && navigator.permissions && navigator.permissions.query) {
+    try {
+      navigator.permissions.query({ name: "geolocation" }).then(st => {
+        if (st.state === "granted" && window.NAVCON) NAVCON.track(name, ra, dec);
+      }).catch(() => {});
+    } catch (e) {}
+  }
 }
 
 // ── Show multiple pipeline matches as selectable cards ────────────────────────
@@ -1158,7 +1174,33 @@ function showMultipleResults(groups) {
 }
 
 // ── Main search handler ───────────────────────────────────────────────────────
+// ── Blink comparator: flip the result cutout between the newest and oldest
+// survey epochs — proper motion of nearby stars becomes visible to the eye ──
+window._blinkTimer = null;
+function toggleBlink(btn) {
+  const img = document.querySelector(".result-img img");
+  const ep  = document.querySelector(".result-img .img-epoch");
+  if (!img) return;
+  SFX.click();
+  if (window._blinkTimer) {
+    clearInterval(window._blinkTimer); window._blinkTimer = null;
+    img.src = img.dataset.blinkA;
+    if (ep) ep.textContent = img.dataset.blinkAtag;
+    btn.textContent = "◉ Blink";
+    return;
+  }
+  let flip = false;
+  btn.textContent = "■ Stop";
+  window.NAVCON && NAVCON.op("BLINK COMPARATOR — " + img.dataset.blinkAtag.replace("ARCHIVAL · ", "") + " vs " + img.dataset.blinkBtag.replace("ARCHIVAL · ", ""));
+  window._blinkTimer = setInterval(() => {
+    flip = !flip;
+    img.src = flip ? img.dataset.blinkB : img.dataset.blinkA;
+    if (ep) ep.textContent = flip ? img.dataset.blinkBtag : img.dataset.blinkAtag;
+  }, 700);
+}
+
 async function doSearch() {
+  if (window._blinkTimer) { clearInterval(window._blinkTimer); window._blinkTimer = null; }
   const q = document.getElementById("q").value.trim();
   if (!q) return;
   SFX.scan();
@@ -2494,8 +2536,47 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
         fd.textContent = done + '/' + imgs.length;
       } else fd.textContent = '--';
     }
+    var ag = $('hud-age');
+    if (ag) {
+      if (ag._src === undefined) {
+        var u = $('stat-updated') || $('gen-ts');
+        ag._src = u ? (Date.parse(u.textContent.trim().replace(' UTC', 'Z').replace(' ', 'T')) || 0) : 0;
+      }
+      if (ag._src) {
+        var days = Math.floor((Date.now() - ag._src) / 864e5);
+        ag.textContent = days + 'd';
+        ag.classList.toggle('hud-warn', days > 14);
+      } else ag.textContent = '--';
+    }
+    var tr = $('hud-track');
+    if (tr && trackTgt) {
+      if (obsLat == null) tr.textContent = 'ACQUIRING FIX…';
+      else {
+        var lst = (g + obsLon) % 360; if (lst < 0) lst += 360;
+        var H = (lst - trackTgt.ra) * Math.PI / 180;
+        var phi = obsLat * Math.PI / 180, de = trackTgt.dec * Math.PI / 180;
+        var alt = Math.asin(Math.sin(phi) * Math.sin(de) + Math.cos(phi) * Math.cos(de) * Math.cos(H)) * 180 / Math.PI;
+        var az = Math.atan2(-Math.sin(H), Math.tan(de) * Math.cos(phi) - Math.sin(phi) * Math.cos(H)) * 180 / Math.PI;
+        if (az < 0) az += 360;
+        tr.textContent = String(trackTgt.name).toUpperCase() + ' ALT ' + (alt >= 0 ? '+' : '') + alt.toFixed(1) + '° AZ ' + az.toFixed(0) + '°' + (alt > 0 ? ' · UP' : ' · BELOW HORIZON');
+        tr.classList.toggle('hud-warn', alt <= 0);
+      }
+    }
   }
   tick(); setInterval(tick, 1000);
+
+  /* ── live target tracking: alt/az of the locked target from the operator's
+        real location (geolocation is only requested via NAVCON.track) ── */
+  var obsLat = null, obsLon = null, trackTgt = null;
+  function _ensureGeo(){
+    if (obsLat != null) return;
+    try {
+      navigator.geolocation.getCurrentPosition(function(pos){
+        obsLat = pos.coords.latitude; obsLon = pos.coords.longitude;
+      }, function(){ op('GEOLOCATION DENIED — TRACKING OFFLINE'); },
+      { maximumAge: 600000, timeout: 8000 });
+    } catch(e) {}
+  }
 
   /* ── live ops feed: real events preempt the idle rotation ── */
   var MSGS = [
@@ -2513,7 +2594,12 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     decodeTo($('hud-msg'), MSGS[mi++ % MSGS.length]);
   }
   setInterval(nextMsg, 7000);
-  window.NAVCON = { op: op };
+  window.NAVCON = { op: op, track: function(name, ra, dec){
+    trackTgt = { name: name, ra: ra, dec: dec };
+    op('TRACKING ' + String(name).toUpperCase() + ' — ACQUIRING POSITION FIX');
+    _ensureGeo();
+    var seg = $('hud-track-seg'); if (seg) seg.style.display = '';
+  } };
   nextMsg();
 
   /* ── self-test mini panel: REAL checks, floats over the live page,
