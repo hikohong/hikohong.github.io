@@ -345,6 +345,7 @@ body{padding-bottom:30px}
 .sv-chip{font-family:monospace;font-size:.52rem;letter-spacing:.05em;padding:2px 6px;border-radius:3px;border:1px solid rgba(63,224,143,.3);background:rgba(3,14,10,.8);color:#3a7a5a;cursor:pointer;transition:color 120ms,border-color 120ms;line-height:1.4}
 .sv-chip:hover{color:#3fe08f}
 .sv-chip.on{color:#3fe08f;border-color:rgba(63,224,143,.75);text-shadow:0 0 5px rgba(63,224,143,.4)}
+.sv-chip:disabled{opacity:.35;cursor:default}
 .hud-warn{color:#f97316!important;text-shadow:0 0 6px rgba(249,115,22,.45)!important}
 .nav-link:active,.search-btn:active,button:active{transform:translateY(1px) scale(.98)}
 @media (prefers-reduced-motion:reduce){.b-pend{animation:none}.card.tilting{transform:none!important}}
@@ -411,9 +412,14 @@ window._svPick = function(btn, idx){
       if (sp && s.short) sp.textContent = s.short;
     }
   }
+  window._svChipsSet(scope, idx);
+  window.NAVCON && NAVCON.op('IMAGERY SOURCE — ' + s.tag.replace('ARCHIVAL · ', ''));
+};
+
+/* highlight the chip matching the frame currently displayed */
+window._svChipsSet = function(scope, idx){
   var chips = scope.querySelectorAll('.sv-chip[data-idx]');
   for (var i = 0; i < chips.length; i++) chips[i].classList.toggle('on', chips[i].getAttribute('data-idx') == String(idx));
-  window.NAVCON && NAVCON.op('IMAGERY SOURCE — ' + s.tag.replace('ARCHIVAL · ', ''));
 };
 
 /* generic multi-epoch blink: preloads EVERY rung, then cycles all loadable
@@ -430,7 +436,7 @@ window._svBlink = function(btn){
     btn.textContent = btn.getAttribute('data-play') || '◉';
     if (img._blinkHome) {
       var h = img._blinkHome;
-      img.onload = function(){ if (ep) ep.textContent = h.tag; };
+      img.onload = function(){ if (ep) ep.textContent = h.tag; window._svChipsSet(scope, h.idx); };
       img.src = h.url;
     }
     return;
@@ -438,6 +444,8 @@ window._svBlink = function(btn){
   var all = [];
   try { all = JSON.parse(img.getAttribute('data-svall') || '[]'); } catch(e) {}
   if (all.length < 2) { window.NAVCON && NAVCON.op('BLINK UNAVAILABLE — SINGLE EPOCH ONLY'); return; }
+  var homeIdx = 0;
+  for (var hI = 0; hI < all.length; hI++) if (all[hI].url === img.src) { homeIdx = hI; break; }
   btn.disabled = true;
   var playLbl = btn.getAttribute('data-play') || btn.textContent;
   btn.setAttribute('data-play', playLbl);
@@ -452,13 +460,14 @@ window._svBlink = function(btn){
   function done(){
     if (--pending > 0) return;
     btn.disabled = false;
-    var frames = all.filter(function(_, i){ return ok[i]; });
+    var frames = [];
+    all.forEach(function(s, fi){ if (ok[fi]) frames.push({ s: s, i: fi }); });
     if (frames.length < 2) {
       btn.textContent = playLbl;
       window.NAVCON && NAVCON.op('BLINK UNAVAILABLE — FRAMES FAILED TO LOAD');
       return;
     }
-    img._blinkHome = { url: img.src, tag: ep ? ep.textContent : '' };
+    img._blinkHome = { url: img.src, tag: ep ? ep.textContent : '', idx: homeIdx };
     btn.classList.add('on');
     btn.textContent = btn.getAttribute('data-stop') || '■';
     window.NAVCON && NAVCON.op('BLINK — CYCLING ' + frames.length + ' EPOCHS');
@@ -466,9 +475,9 @@ window._svBlink = function(btn){
     img._blinkT = setInterval(function(){
       if (!img.isConnected) { clearInterval(img._blinkT); img._blinkT = null; return; }
       i = (i + 1) % frames.length;
-      var s = frames[i];
-      img.onload = function(){ if (ep) ep.textContent = s.tag; };
-      img.src = s.url;
+      var f = frames[i];
+      img.onload = function(){ if (ep) ep.textContent = f.s.tag; window._svChipsSet(scope, f.i); };
+      img.src = f.s.url;
     }, 800);
   }
 };
@@ -816,10 +825,10 @@ function skyAll(ra, dec, fov) {
 // switcher chips + blink toggle, rendered on any image with 2+ available rungs
 function svChipsHtml(dec) {
   const c = skyChain(dec);
-  if (c.length < 2) return "";
+  const blinkable = c.length > 1;
   return `<div class="sv-chips">${c.map((s, i) =>
     `<button class="sv-chip${i === 0 ? " on" : ""}" data-idx="${i}" onclick="event.preventDefault();event.stopPropagation();_svPick(this,${i})" title="${s.tag}">${s.short.split(" ·")[0]}</button>`).join("")
-  }<button class="sv-chip sv-blink" onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Blink all epochs — watch proper motion">◉</button></div>`;
+  }<button class="sv-chip sv-blink"${blinkable ? "" : " disabled"} onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="${blinkable ? "Blink all epochs — watch proper motion" : "Single epoch at this declination — nothing to blink"}">◉</button></div>`;
 }
 
 function aladInUrl(ra, dec, survey = "P/DSS2/color") {

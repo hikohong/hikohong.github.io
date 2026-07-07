@@ -305,6 +305,7 @@ body{padding-bottom:30px}
 .sv-chip{font-family:monospace;font-size:.52rem;letter-spacing:.05em;padding:2px 6px;border-radius:3px;border:1px solid rgba(63,224,143,.3);background:rgba(3,14,10,.8);color:#3a7a5a;cursor:pointer;transition:color 120ms,border-color 120ms;line-height:1.4}
 .sv-chip:hover{color:#3fe08f}
 .sv-chip.on{color:#3fe08f;border-color:rgba(63,224,143,.75);text-shadow:0 0 5px rgba(63,224,143,.4)}
+.sv-chip:disabled{opacity:.35;cursor:default}
 .hud-warn{color:#f97316!important;text-shadow:0 0 6px rgba(249,115,22,.45)!important}
 .nav-link:active,.search-btn:active,button:active{transform:translateY(1px) scale(.98)}
 @media (prefers-reduced-motion:reduce){.b-pend{animation:none}.card.tilting{transform:none!important}}
@@ -371,9 +372,14 @@ window._svPick = function(btn, idx){
       if (sp && s.short) sp.textContent = s.short;
     }
   }
+  window._svChipsSet(scope, idx);
+  window.NAVCON && NAVCON.op('IMAGERY SOURCE — ' + s.tag.replace('ARCHIVAL · ', ''));
+};
+
+/* highlight the chip matching the frame currently displayed */
+window._svChipsSet = function(scope, idx){
   var chips = scope.querySelectorAll('.sv-chip[data-idx]');
   for (var i = 0; i < chips.length; i++) chips[i].classList.toggle('on', chips[i].getAttribute('data-idx') == String(idx));
-  window.NAVCON && NAVCON.op('IMAGERY SOURCE — ' + s.tag.replace('ARCHIVAL · ', ''));
 };
 
 /* generic multi-epoch blink: preloads EVERY rung, then cycles all loadable
@@ -390,7 +396,7 @@ window._svBlink = function(btn){
     btn.textContent = btn.getAttribute('data-play') || '◉';
     if (img._blinkHome) {
       var h = img._blinkHome;
-      img.onload = function(){ if (ep) ep.textContent = h.tag; };
+      img.onload = function(){ if (ep) ep.textContent = h.tag; window._svChipsSet(scope, h.idx); };
       img.src = h.url;
     }
     return;
@@ -398,6 +404,8 @@ window._svBlink = function(btn){
   var all = [];
   try { all = JSON.parse(img.getAttribute('data-svall') || '[]'); } catch(e) {}
   if (all.length < 2) { window.NAVCON && NAVCON.op('BLINK UNAVAILABLE — SINGLE EPOCH ONLY'); return; }
+  var homeIdx = 0;
+  for (var hI = 0; hI < all.length; hI++) if (all[hI].url === img.src) { homeIdx = hI; break; }
   btn.disabled = true;
   var playLbl = btn.getAttribute('data-play') || btn.textContent;
   btn.setAttribute('data-play', playLbl);
@@ -412,13 +420,14 @@ window._svBlink = function(btn){
   function done(){
     if (--pending > 0) return;
     btn.disabled = false;
-    var frames = all.filter(function(_, i){ return ok[i]; });
+    var frames = [];
+    all.forEach(function(s, fi){ if (ok[fi]) frames.push({ s: s, i: fi }); });
     if (frames.length < 2) {
       btn.textContent = playLbl;
       window.NAVCON && NAVCON.op('BLINK UNAVAILABLE — FRAMES FAILED TO LOAD');
       return;
     }
-    img._blinkHome = { url: img.src, tag: ep ? ep.textContent : '' };
+    img._blinkHome = { url: img.src, tag: ep ? ep.textContent : '', idx: homeIdx };
     btn.classList.add('on');
     btn.textContent = btn.getAttribute('data-stop') || '■';
     window.NAVCON && NAVCON.op('BLINK — CYCLING ' + frames.length + ' EPOCHS');
@@ -426,9 +435,9 @@ window._svBlink = function(btn){
     img._blinkT = setInterval(function(){
       if (!img.isConnected) { clearInterval(img._blinkT); img._blinkT = null; return; }
       i = (i + 1) % frames.length;
-      var s = frames[i];
-      img.onload = function(){ if (ep) ep.textContent = s.tag; };
-      img.src = s.url;
+      var f = frames[i];
+      img.onload = function(){ if (ep) ep.textContent = f.s.tag; window._svChipsSet(scope, f.i); };
+      img.src = f.s.url;
     }, 800);
   }
 };
@@ -1109,7 +1118,7 @@ window._svBlink = function(btn){
 <div id="sky-tooltip-map"></div>
 <div class="gallery-hdr">
 <h1>DeepSignal — Sky Image Gallery</h1>
-<div class="subtitle">Generated <span id="gen-ts">2026-07-07 01:28 UTC</span> &nbsp;·&nbsp; 244 targets &nbsp;·&nbsp; 244 sky images via Hips2Fits CDN</div>
+<div class="subtitle">Generated <span id="gen-ts">2026-07-07 02:41 UTC</span> &nbsp;·&nbsp; 244 targets &nbsp;·&nbsp; 244 sky images via Hips2Fits CDN</div>
 <div class="stats">
   <div class="stat"><div class="stat-n" style="color:#f59e0b">104</div><div class="stat-l">Tier 1 ≥70</div></div>
   <div class="stat"><div class="stat-n" style="color:#60a5fa">128</div><div class="stat-l">Tier 2 50–69</div></div>
@@ -1177,7 +1186,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#f59e0b;color:#000">Tier 1 · 100</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=259.74880&dec=-34.99770&format=jpg" alt="Gliese 667C — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=259.74880&dec=-34.99770&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=259.7488+-34.9977&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=259.7488+-34.9977&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -1206,7 +1215,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#f59e0b;color:#000">Tier 1 · 100</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=217.42880&dec=-62.67930&format=jpg" alt="Proxima Centauri — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=217.42880&dec=-62.67930&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=217.4288+-62.6793&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=217.4288+-62.6793&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -1351,7 +1360,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#f59e0b;color:#000">Tier 1 · 90</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=230.44011&dec=-48.31882&format=jpg" alt="HD 136352 — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=230.44011&dec=-48.31882&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=230.4401+-48.3188&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -1380,7 +1389,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#f59e0b;color:#000">Tier 1 · 90</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=97.09572&dec=-65.57861&format=jpg" alt="TOI-700 — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=97.09572&dec=-65.57861&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=97.0957+-65.5786&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=97.0957+-65.5786&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -1409,7 +1418,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#f59e0b;color:#000">Tier 1 · 90</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=330.87140&dec=-56.79690&format=jpg" alt="eps Ind A — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=330.87140&dec=-56.79690&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=330.8714+-56.7969&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=330.8714+-56.7969&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -1554,7 +1563,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#f59e0b;color:#000">Tier 1 · 80</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=329.33325&dec=-37.76414&format=jpg" alt="HD 208487 — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=329.33325&dec=-37.76414&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=329.3332+-37.7641&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=329.3332+-37.7641&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -1670,7 +1679,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#f59e0b;color:#000">Tier 1 · 80</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=52.29173&dec=-31.36287&format=jpg" alt="TOI-2427 — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=52.29173&dec=-31.36287&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=52.2917+-31.3629&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -1960,7 +1969,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#f59e0b;color:#000">Tier 1 · 80</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=164.58656&dec=-36.85811&format=jpg" alt="TOI-674 — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=164.58656&dec=-36.85811&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=164.5866+-36.8581&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=164.5866+-36.8581&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -2047,7 +2056,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#f59e0b;color:#000">Tier 1 · 80</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=187.99484&dec=-35.55445&format=jpg" alt="TOI-757 — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=187.99484&dec=-35.55445&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=187.9948+-35.5545&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=187.9948+-35.5545&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -2395,7 +2404,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#f59e0b;color:#000">Tier 1 · 80</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=359.90087&dec=-35.03133&format=jpg" alt="WASP-8 — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=359.90087&dec=-35.03133&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=359.9009+-35.0313&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=359.9009+-35.0313&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -2482,7 +2491,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#f59e0b;color:#000">Tier 1 · 80</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=49.99977&dec=-43.06665&format=jpg" alt="HD 20794 — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=49.99977&dec=-43.06665&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=49.9998+-43.0667&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=49.9998+-43.0667&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -2569,7 +2578,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#f59e0b;color:#000">Tier 1 · 80</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=266.03616&dec=-51.83488&format=jpg" alt="HD 160691 — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=266.03616&dec=-51.83488&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=266.0362+-51.8349&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=266.0362+-51.8349&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -2598,7 +2607,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#f59e0b;color:#000">Tier 1 · 80</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=40.64172&dec=-50.79935&format=jpg" alt="HR 810 — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=40.64172&dec=-50.79935&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=40.6417+-50.7993&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=40.6417+-50.7993&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -2627,7 +2636,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#f59e0b;color:#000">Tier 1 · 80</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=25.62335&dec=-53.74129&format=jpg" alt="HD 10647 — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=25.62335&dec=-53.74129&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=25.6234+-53.7413&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=25.6234+-53.7413&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -2685,7 +2694,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#f59e0b;color:#000">Tier 1 · 80</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=301.39596&dec=-67.32380&format=jpg" alt="HD 189567 — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=301.39596&dec=-67.32380&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=301.3960+-67.3238&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=301.3960+-67.3238&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -2743,7 +2752,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#f59e0b;color:#000">Tier 1 · 80</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=50.89725&dec=-40.07623&format=jpg" alt="GJ 3222 — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=50.89725&dec=-40.07623&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=50.8972+-40.0762&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=50.8972+-40.0762&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -2946,7 +2955,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#f59e0b;color:#000">Tier 1 · 80</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=228.81039&dec=-70.52033&format=jpg" alt="HD 134606 — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=228.81039&dec=-70.52033&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=228.8104+-70.5203&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=228.8104+-70.5203&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -3004,7 +3013,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#f59e0b;color:#000">Tier 1 · 80</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=197.66521&dec=-35.05618&format=jpg" alt="HD 114386 — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=197.66521&dec=-35.05618&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=197.6652+-35.0562&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=197.6652+-35.0562&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -3033,7 +3042,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#f59e0b;color:#000">Tier 1 · 80</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=33.17807&dec=-53.74376&format=jpg" alt="HD 13808 — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=33.17807&dec=-53.74376&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=33.1781+-53.7438&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=33.1781+-53.7438&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -3178,7 +3187,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#f59e0b;color:#000">Tier 1 · 80</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=54.92819&dec=-52.91623&format=jpg" alt="HD 23079 — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=54.92819&dec=-52.91623&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=54.9282+-52.9162&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=54.9282+-52.9162&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -3207,7 +3216,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#f59e0b;color:#000">Tier 1 · 80</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=102.50427&dec=-60.24868&format=jpg" alt="HR 2562 — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=102.50427&dec=-60.24868&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=102.5043+-60.2487&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=102.5043+-60.2487&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -3352,7 +3361,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#f59e0b;color:#000">Tier 1 · 80</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=164.85634&dec=-56.62356&format=jpg" alt="HD 95338 — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=164.85634&dec=-56.62356&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=164.8563+-56.6236&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=164.8563+-56.6236&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -3381,7 +3390,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#f59e0b;color:#000">Tier 1 · 80</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=276.95619&dec=-29.81679&format=jpg" alt="HD 169830 — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=276.95619&dec=-29.81679&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=276.9562+-29.8168&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=276.9562+-29.8168&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -3439,7 +3448,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#f59e0b;color:#000">Tier 1 · 80</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=84.26053&dec=-73.69981&format=jpg" alt="HD 38283 — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=84.26053&dec=-73.69981&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=84.2605+-73.6998&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=84.2605+-73.6998&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -3468,7 +3477,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#f59e0b;color:#000">Tier 1 · 80</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=55.45903&dec=-62.76727&format=jpg" alt="HD 23472 — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=55.45903&dec=-62.76727&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=55.4590+-62.7673&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=55.4590+-62.7673&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -3555,7 +3564,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#f59e0b;color:#000">Tier 1 · 80</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=310.43642&dec=-75.35150&format=jpg" alt="HD 196067 — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=310.43642&dec=-75.35150&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=310.4364+-75.3515&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=310.4364+-75.3515&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -3613,7 +3622,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#f59e0b;color:#000">Tier 1 · 80</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=66.28752&dec=-64.07869&format=jpg" alt="HD 28471 — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=66.28752&dec=-64.07869&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=66.2875+-64.0787&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=66.2875+-64.0787&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -3642,7 +3651,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#f59e0b;color:#000">Tier 1 · 80</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=354.91547&dec=-69.19604&format=jpg" alt="DS Tuc A — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=354.91547&dec=-69.19604&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=354.9155+-69.1960&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=354.9155+-69.1960&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -3729,7 +3738,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#f59e0b;color:#000">Tier 1 · 80</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=343.57238&dec=-43.01023&format=jpg" alt="HIP 113103 — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=343.57238&dec=-43.01023&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=343.5724+-43.0102&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=343.5724+-43.0102&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -3816,7 +3825,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#f59e0b;color:#000">Tier 1 · 80</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=106.55910&dec=-47.58782&format=jpg" alt="TOI-500 — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=106.55910&dec=-47.58782&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=106.5591+-47.5878&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=106.5591+-47.5878&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -3903,7 +3912,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#f59e0b;color:#000">Tier 1 · 80</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=338.98372&dec=-59.86483&format=jpg" alt="HD 213885 — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=338.98372&dec=-59.86483&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=338.9837+-59.8648&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=338.9837+-59.8648&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -4164,7 +4173,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#3b82f6;color:#000">Tier 2 · 65</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=219.91413&dec=-60.83947&format=jpg" alt="alf Cen B — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=219.91413&dec=-60.83947&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=219.9141+-60.8395&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=219.9141+-60.8395&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -4193,7 +4202,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#3b82f6;color:#000">Tier 2 · 65</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=89.33600&dec=-60.01610&format=jpg" alt="HD 40307 — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=89.33600&dec=-60.01610&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=89.3360+-60.0161&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=89.3360+-60.0161&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -4222,7 +4231,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#3b82f6;color:#000">Tier 2 · 65</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=344.41270&dec=-29.62230&format=jpg" alt="Fomalhaut — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=344.41270&dec=-29.62230&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=344.4127+-29.6223&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=344.4127+-29.6223&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -4309,7 +4318,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#3b82f6;color:#000">Tier 2 · 65</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=94.12069&dec=-50.73607&format=jpg" alt="SIM_STAR_0001 — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=94.12069&dec=-50.73607&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=94.1207+-50.7361&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=94.1207+-50.7361&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a></div>
@@ -4338,7 +4347,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#3b82f6;color:#000">Tier 2 · 65</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=220.96501&dec=-59.68431&format=jpg" alt="SIM_STAR_0002 — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=220.96501&dec=-59.68431&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=220.9650+-59.6843&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=220.9650+-59.6843&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a></div>
@@ -7122,7 +7131,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#3b82f6;color:#000">Tier 2 · 55</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=77.14000&dec=-44.99500&format=jpg" alt="Kapteyn's Star — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=77.14000&dec=-44.99500&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=77.1400+-44.9950&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=77.1400+-44.9950&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -7499,7 +7508,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#3b82f6;color:#000">Tier 2 · 55</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=80.54900&dec=-69.39300&format=jpg" alt="4XMM J052211.8-692334 — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=80.54900&dec=-69.39300&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=80.5490+-69.3930&fov=0.5&survey=P/Chandra/ACIS" target="_blank" class="survey-btn">Chandra X-ray</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=80.5490+-69.3930&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a></div>
@@ -7760,7 +7769,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#3b82f6;color:#000">Tier 2 · 50</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=343.66396&dec=-70.07340&format=jpg" alt="HD 216437 — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=343.66396&dec=-70.07340&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=343.6640+-70.0734&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=343.6640+-70.0734&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -7818,7 +7827,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#3b82f6;color:#000">Tier 2 · 50</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=32.53469&dec=-31.07063&format=jpg" alt="TOI-262 — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=32.53469&dec=-31.07063&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=32.5347+-31.0706&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=32.5347+-31.0706&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -7992,7 +8001,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 30</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=81.51245&dec=-54.26619&format=jpg" alt="FRB_SIM_0014 — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=81.51245&dec=-54.26619&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=81.5125+-54.2662&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=81.5125+-54.2662&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -8021,7 +8030,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 30</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=163.80629&dec=-79.78061&format=jpg" alt="FRB_SIM_0039 — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=163.80629&dec=-79.78061&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=163.8063+-79.7806&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=163.8063+-79.7806&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -8079,7 +8088,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 20</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=133.98670&dec=-84.53695&format=jpg" alt="FRB_SIM_0011 — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=133.98670&dec=-84.53695&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=133.9867+-84.5369&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=133.9867+-84.5369&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -8137,7 +8146,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 20</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=7.58713&dec=-34.09736&format=jpg" alt="FRB_SIM_0022 — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=7.58713&dec=-34.09736&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=7.5871+-34.0974&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=7.5871+-34.0974&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
@@ -8195,7 +8204,7 @@ window._svBlink = function(btn){
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 20</span>
           <img src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=47.95439&dec=-66.47684&format=jpg" alt="FRB_SIM_0030 — DSS2 Optical" loading="lazy" decoding="async" data-svchain='[]' data-svall='[{"url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=300&height=300&fov=0.25&projection=TAN&coordsys=icrs&ra=47.95439&dec=-66.47684&format=jpg", "tag": "ARCHIVAL · DSS2 1985–2002", "aladin": "P/DSS2/color", "short": "DSS2 1985–2002"}]' style="width:100%;height:100%;object-fit:cover;display:block;" onerror="_svFallback(this)"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#4a5a6a;font-size:13px;flex-direction:column;gap:6px;"><span style="font-size:2rem;">🔭</span><span style="font-size:.75rem;">DSS2 Optical</span></span>
           <span class="img-epoch">ARCHIVAL · DSS2 1985–2002</span>
-
+          <div class="sv-chips"><button class="sv-chip on" data-idx="0" onclick="event.preventDefault();event.stopPropagation();_svPick(this,0)" title="ARCHIVAL · DSS2 1985–2002">DSS2</button><button class="sv-chip sv-blink" disabled onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Single epoch at this declination — nothing to blink">◉</button></div>
         </div>
       </a>
       <div class="survey-row"><a href="https://aladin.u-strasbg.fr/AladinLite/?target=47.9544+-66.4768&fov=0.5&survey=P/DSS2/color" target="_blank" class="survey-btn">DSS2 Optical</a><a href="https://aladin.u-strasbg.fr/AladinLite/?target=47.9544+-66.4768&fov=0.5&survey=P/2MASS/color" target="_blank" class="survey-btn">2MASS NIR</a></div>
