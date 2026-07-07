@@ -294,11 +294,6 @@ footer a{color:#4a6a8a;text-decoration:none}
 .report-body hr{border:none;border-top:1px solid rgba(219,234,254,.12);margin:1.5em 0}
 .report-footer{padding:10px 18px;border-top:1px solid rgba(125,211,252,.1);font-family:monospace;font-size:.62rem;color:#1a3a5a;flex-shrink:0;display:flex;justify-content:space-between;position:relative;z-index:2}
 
-/* survey switcher chips on the result image (avionics instrument layer) */
-.sv-chips{position:absolute;right:6px;bottom:6px;z-index:3;display:flex;gap:3px}
-.sv-chip{font-family:monospace;font-size:.52rem;letter-spacing:.05em;padding:2px 6px;border-radius:3px;border:1px solid rgba(63,224,143,.3);background:rgba(3,14,10,.8);color:#3a7a5a;cursor:pointer;transition:color 120ms,border-color 120ms}
-.sv-chip:hover{color:#3fe08f}
-.sv-chip.on{color:#3fe08f;border-color:rgba(63,224,143,.75);text-shadow:0 0 5px rgba(63,224,143,.4)}
 
 /* ══ NAVCON — spaceship HUD engine ══ */
 body{padding-bottom:30px}
@@ -345,6 +340,11 @@ body{padding-bottom:30px}
 .img-epoch-live{color:#3fe08f;border-color:rgba(63,224,143,.42);text-shadow:0 0 5px rgba(63,224,143,.35)}
 .coord-epoch{font-family:monospace;font-size:.56rem;letter-spacing:.07em;color:#8fa4b8;border:1px solid rgba(143,164,184,.3);border-radius:3px;padding:1px 5px;margin-right:6px;white-space:nowrap;vertical-align:middle}
 .coord-epoch-live{color:#3fe08f;border-color:rgba(63,224,143,.42);text-shadow:0 0 5px rgba(63,224,143,.35)}
+/* survey switcher chips + blink toggle on every image (instrument layer) */
+.sv-chips{position:absolute;right:6px;bottom:6px;z-index:3;display:flex;gap:3px}
+.sv-chip{font-family:monospace;font-size:.52rem;letter-spacing:.05em;padding:2px 6px;border-radius:3px;border:1px solid rgba(63,224,143,.3);background:rgba(3,14,10,.8);color:#3a7a5a;cursor:pointer;transition:color 120ms,border-color 120ms;line-height:1.4}
+.sv-chip:hover{color:#3fe08f}
+.sv-chip.on{color:#3fe08f;border-color:rgba(63,224,143,.75);text-shadow:0 0 5px rgba(63,224,143,.4)}
 .hud-warn{color:#f97316!important;text-shadow:0 0 6px rgba(249,115,22,.45)!important}
 .nav-link:active,.search-btn:active,button:active{transform:translateY(1px) scale(.98)}
 @media (prefers-reduced-motion:reduce){.b-pend{animation:none}.card.tilting{transform:none!important}}
@@ -376,6 +376,101 @@ window._svFallback = function(img){
   if (ep2) ep2.style.display = 'none';
   var s = img.nextElementSibling;
   if (s && s.tagName === 'SPAN' && s.style.display === 'none') s.style.display = 'flex';
+};
+
+/* generic survey picker — works on any card/result image; image, epoch tag,
+   enclosing Aladin link and chip states all follow the survey ACTUALLY shown */
+window._svPick = function(btn, idx){
+  var scope = btn.closest ? (btn.closest('.card-img, .result-img') || document.querySelector('.result-img')) : null;
+  if (!scope) return;
+  var img = scope.querySelector('img'), ep = scope.querySelector('.img-epoch');
+  if (!img) return;
+  try { SFX.click(); } catch(e) {}
+  if (img._blinkT) {
+    clearInterval(img._blinkT); img._blinkT = null;
+    var bb = scope.querySelector('.sv-blink');
+    if (bb) { bb.classList.remove('on'); bb.textContent = bb.getAttribute('data-play') || '◉'; }
+  }
+  var all = [];
+  try { all = JSON.parse(img.getAttribute('data-svall') || '[]'); } catch(e) {}
+  var s = all[idx];
+  if (!s) return;
+  img.onload = null;
+  img.setAttribute('data-svchain', '[]');
+  img.style.display = '';
+  if (ep) { ep.style.display = ''; ep.textContent = s.tag; }
+  img.src = s.url;
+  var a = img.closest('a');
+  if (a && a.href && a.href.indexOf('survey=') !== -1)
+    a.href = a.href.replace(/survey=[^&]*/, 'survey=' + encodeURIComponent(s.aladin));
+  if (scope.classList.contains('result-img')) {
+    var rl = document.querySelector('.result-links a[href*="survey="]');
+    if (rl) {
+      rl.href = rl.href.replace(/survey=[^&]*/, 'survey=' + encodeURIComponent(s.aladin));
+      var sp = rl.querySelector('span');
+      if (sp && s.short) sp.textContent = s.short;
+    }
+  }
+  var chips = scope.querySelectorAll('.sv-chip[data-idx]');
+  for (var i = 0; i < chips.length; i++) chips[i].classList.toggle('on', chips[i].getAttribute('data-idx') == String(idx));
+  window.NAVCON && NAVCON.op('IMAGERY SOURCE — ' + s.tag.replace('ARCHIVAL · ', ''));
+};
+
+/* generic multi-epoch blink: preloads EVERY rung, then cycles all loadable
+   frames at 0.8s; the tag switches inside img.onload — lockstep guaranteed */
+window._svBlink = function(btn){
+  var scope = btn.closest ? (btn.closest('.card-img, .result-img') || document.querySelector('.result-img')) : null;
+  if (!scope) return;
+  var img = scope.querySelector('img'), ep = scope.querySelector('.img-epoch');
+  if (!img) return;
+  try { SFX.click(); } catch(e) {}
+  if (img._blinkT) {
+    clearInterval(img._blinkT); img._blinkT = null;
+    btn.classList.remove('on');
+    btn.textContent = btn.getAttribute('data-play') || '◉';
+    if (img._blinkHome) {
+      var h = img._blinkHome;
+      img.onload = function(){ if (ep) ep.textContent = h.tag; };
+      img.src = h.url;
+    }
+    return;
+  }
+  var all = [];
+  try { all = JSON.parse(img.getAttribute('data-svall') || '[]'); } catch(e) {}
+  if (all.length < 2) { window.NAVCON && NAVCON.op('BLINK UNAVAILABLE — SINGLE EPOCH ONLY'); return; }
+  btn.disabled = true;
+  var playLbl = btn.getAttribute('data-play') || btn.textContent;
+  btn.setAttribute('data-play', playLbl);
+  btn.textContent = '⏳';
+  var ok = new Array(all.length), pending = all.length;
+  all.forEach(function(s, i){
+    var im = new Image();
+    im.onload = function(){ ok[i] = true; done(); };
+    im.onerror = function(){ ok[i] = false; done(); };
+    im.src = s.url;
+  });
+  function done(){
+    if (--pending > 0) return;
+    btn.disabled = false;
+    var frames = all.filter(function(_, i){ return ok[i]; });
+    if (frames.length < 2) {
+      btn.textContent = playLbl;
+      window.NAVCON && NAVCON.op('BLINK UNAVAILABLE — FRAMES FAILED TO LOAD');
+      return;
+    }
+    img._blinkHome = { url: img.src, tag: ep ? ep.textContent : '' };
+    btn.classList.add('on');
+    btn.textContent = btn.getAttribute('data-stop') || '■';
+    window.NAVCON && NAVCON.op('BLINK — CYCLING ' + frames.length + ' EPOCHS');
+    var i = 0;
+    img._blinkT = setInterval(function(){
+      if (!img.isConnected) { clearInterval(img._blinkT); img._blinkT = null; return; }
+      i = (i + 1) % frames.length;
+      var s = frames[i];
+      img.onload = function(){ if (ep) ep.textContent = s.tag; };
+      img.src = s.url;
+    }, 800);
+  }
 };
 </script>
 <canvas id="navcon-sky" aria-hidden="true"></canvas>
@@ -713,6 +808,18 @@ function skySurvey(dec) { return skyChain(dec)[0]; }
 // fallback payload: every rung below the top, pre-resolved to concrete URLs
 function skyChainRest(ra, dec, fov) {
   return JSON.stringify(skyChain(dec).slice(1).map(s => ({ url: skyUrl(ra, dec, fov, s.hips), tag: s.tag, aladin: s.aladin })));
+}
+// full ladder payload for the survey switcher / multi-epoch blink
+function skyAll(ra, dec, fov) {
+  return JSON.stringify(skyChain(dec).map(s => ({ url: skyUrl(ra, dec, fov, s.hips), tag: s.tag, aladin: s.aladin, short: s.short })));
+}
+// switcher chips + blink toggle, rendered on any image with 2+ available rungs
+function svChipsHtml(dec) {
+  const c = skyChain(dec);
+  if (c.length < 2) return "";
+  return `<div class="sv-chips">${c.map((s, i) =>
+    `<button class="sv-chip${i === 0 ? " on" : ""}" data-idx="${i}" onclick="event.preventDefault();event.stopPropagation();_svPick(this,${i})" title="${s.tag}">${s.short.split(" ·")[0]}</button>`).join("")
+  }<button class="sv-chip sv-blink" onclick="event.preventDefault();event.stopPropagation();_svBlink(this)" title="Blink all epochs — watch proper motion">◉</button></div>`;
 }
 
 function aladInUrl(ra, dec, survey = "P/DSS2/color") {
@@ -1056,14 +1163,8 @@ function showResult(resolved, pipelineMatches) {
     imgTag = `<div id="result-img-box" style="width:220px;height:220px;display:grid;place-items:center;color:#3a4a5a;font-family:monospace;font-size:.72rem">Loading…</div><span class="img-epoch">WIKIMEDIA REF · NOT SKY VIEW</span>`;
   } else {
     const imgSrc = ra != null ? skyUrl(ra, dec, 0.25, _rsv.hips) : "";
-    const _chainAll = skyChain(dec);
-    const _bOld = _chainAll.slice(-1)[0];
-    const _svAll = JSON.stringify(_chainAll.map(s => ({ url: skyUrl(ra, dec, 0.25, s.hips), tag: s.tag, aladin: s.aladin, short: s.short })));
-    const svChips = imgSrc && _chainAll.length > 1
-      ? `<div class="sv-chips">${_chainAll.map((s, i) => `<button class="sv-chip${i === 0 ? " on" : ""}" onclick="switchSurvey(this,${i})" title="${s.tag}">${s.short.split(" ·")[0]}</button>`).join("")}</div>`
-      : "";
     imgTag = imgSrc
-      ? `<img src="${imgSrc}" alt="Sky cutout of ${name}" loading="lazy" decoding="async" data-svchain='${skyChainRest(ra, dec, 0.25)}' data-svall='${_svAll}' data-blink-a="${imgSrc}" data-blink-atag="${_rsv.tag}" data-blink-b="${skyUrl(ra, dec, 0.25, _bOld.hips)}" data-blink-btag="${_bOld.tag}" onerror="_svFallback(this)"><span class="img-epoch">${_rsv.tag}</span>${svChips}`
+      ? `<img src="${imgSrc}" alt="Sky cutout of ${name}" loading="lazy" decoding="async" data-svchain='${skyChainRest(ra, dec, 0.25)}' data-svall='${skyAll(ra, dec, 0.25)}' onerror="_svFallback(this)"><span class="img-epoch">${_rsv.tag}</span>${svChipsHtml(dec)}`
       : `<div style="width:220px;height:220px;display:grid;place-items:center;color:#3a4a5a;font-size:.8rem">No image</div>`;
   }
 
@@ -1083,7 +1184,7 @@ function showResult(resolved, pipelineMatches) {
     ? `<span class="coord-epoch" title="Moving object resolved from a static fallback table — live ephemeris unavailable right now">CATALOG SNAPSHOT · MOVING BODY</span>`
     : `<span class="coord-epoch">J2000 CATALOG FRAME</span>`;
   const coordTxt = ra != null
-    ? `${epochTag}RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}° <span style="white-space:nowrap;display:inline-flex;align-items:center;gap:3px"><button class="btn-copy-coords" onclick="copyCoords('result-cc',${ra},${dec})" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-result-cc">✓</span><button class="btn-map-jump" onclick="event.stopPropagation();mapOpenFromCard(${ra},${dec},'${_srName}',${score||0},${!p.target_name})" title="Show on Map">Map</button><button class="btn-map-jump" onclick="SFX.click();window.NAVCON&&NAVCON.track('${_srName}',${ra},${dec})" title="Live altitude/azimuth of this target from your location (asks for geolocation once)">⌖ Track</button>${(!isSS && skyChain(dec).length > 1) ? `<button class="btn-map-jump" id="blink-btn" onclick="toggleBlink(this)" title="Blink newest vs oldest survey epoch — watch high proper-motion stars move">◉ Blink</button>` : ""}</span>`
+    ? `${epochTag}RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}° <span style="white-space:nowrap;display:inline-flex;align-items:center;gap:3px"><button class="btn-copy-coords" onclick="copyCoords('result-cc',${ra},${dec})" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-result-cc">✓</span><button class="btn-map-jump" onclick="event.stopPropagation();mapOpenFromCard(${ra},${dec},'${_srName}',${score||0},${!p.target_name})" title="Show on Map">Map</button><button class="btn-map-jump" onclick="SFX.click();window.NAVCON&&NAVCON.track('${_srName}',${ra},${dec})" title="Live altitude/azimuth of this target from your location (asks for geolocation once)">⌖ Track</button></span>`
     : "";
   // Deep-sky survey/catalog links are meaningless for moving solar-system
   // bodies (archival plates can never contain them) — swap in LIVE tools instead.
@@ -1158,7 +1259,7 @@ function showMultipleResults(groups) {
     const ra    = candidateRa(c);
     const dec   = candidateDec(c);
     const img   = (ra != null && !isNaN(ra))
-      ? `<img src="${skyUrl(ra, dec, 0.5, skySurvey(dec).hips)}" alt="${name}" loading="lazy" decoding="async" data-svchain='${skyChainRest(ra, dec, 0.5)}' onerror="_svFallback(this)">`
+      ? `<img src="${skyUrl(ra, dec, 0.5, skySurvey(dec).hips)}" alt="${name}" loading="lazy" decoding="async" data-svchain='${skyChainRest(ra, dec, 0.5)}' data-svall='${skyAll(ra, dec, 0.5)}' onerror="_svFallback(this)">`
       : "";
     const tc      = TIER_COLORS[c.tier] || "#6b7280";
     const badge   = c.tier ? `<span class="tier-badge" style="background:${tc}">Tier ${c.tier}</span>` : "";
@@ -1168,7 +1269,7 @@ function showMultipleResults(groups) {
       ? `<div class="card-coords">RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}°</div>` : "";
     const safeN   = name.replace(/'/g, "\\'");
     return `<div class="card" onclick="selectCandidate('${safeN}')">
-      <div class="card-img">${img}${badge}${img ? `<span class="img-epoch">${skySurvey(dec).short}</span>` : ""}</div>
+      <div class="card-img">${img}${badge}${img ? `<span class="img-epoch">${skySurvey(dec).short}</span>${svChipsHtml(dec)}` : ""}</div>
       <div class="card-body">
         <div class="card-name">${name}</div>
         <div class="card-tags">${mtags}</div>
@@ -1185,95 +1286,7 @@ function showMultipleResults(groups) {
 }
 
 // ── Main search handler ───────────────────────────────────────────────────────
-// ── Blink comparator: flip the result cutout between the newest and oldest
-// survey epochs — proper motion of nearby stars becomes visible to the eye ──
-window._blinkTimer = null;
-function toggleBlink(btn) {
-  const img = document.querySelector(".result-img img");
-  const ep  = document.querySelector(".result-img .img-epoch");
-  if (!img) return;
-  SFX.click();
-  if (window._blinkTimer) {
-    clearInterval(window._blinkTimer); window._blinkTimer = null;
-    img.onload = null;
-    img.src = img.dataset.blinkA;
-    if (ep) ep.textContent = img.dataset.blinkAtag;
-    btn.textContent = "◉ Blink";
-    return;
-  }
-  // Frame A = whatever is CURRENTLY displayed (the fallback ladder may have
-  // stepped the image down since render); frame B = the oldest rung.
-  const aUrl = img.src, aTag = ep ? ep.textContent : img.dataset.blinkAtag;
-  const bUrl = img.dataset.blinkB, bTag = img.dataset.blinkBtag;
-  img.dataset.blinkA = aUrl; img.dataset.blinkAtag = aTag;
-  if (!bUrl || aUrl === bUrl) {
-    window.NAVCON && NAVCON.op("BLINK UNAVAILABLE — SINGLE EPOCH ONLY");
-    return;
-  }
-  // Preload BOTH frames before blinking, and switch the epoch tag ONLY when
-  // the incoming frame has actually finished loading (img.onload) — the tag
-  // and the pixels stay in lockstep, never ahead of each other.
-  btn.disabled = true;
-  btn.textContent = "⏳ SYNC…";
-  let done = 0, failed = false;
-  const arm = ok => {
-    done++; if (!ok) failed = true;
-    if (done < 2) return;
-    if (failed) {
-      btn.disabled = false; btn.textContent = "◉ Blink";
-      window.NAVCON && NAVCON.op("BLINK UNAVAILABLE — FRAME LOAD FAILED");
-      return;
-    }
-    btn.disabled = false;
-    btn.textContent = "■ Stop";
-    window.NAVCON && NAVCON.op("BLINK — " + aTag.replace("ARCHIVAL · ", "") + " vs " + bTag.replace("ARCHIVAL · ", ""));
-    let flip = false;
-    window._blinkTimer = setInterval(() => {
-      flip = !flip;
-      const tag = flip ? bTag : aTag;
-      img.onload = () => { if (ep) ep.textContent = tag; };
-      img.src = flip ? bUrl : aUrl;  // both cached → onload fires immediately
-    }, 700);
-  };
-  const pa = new Image(); pa.onload = () => arm(true); pa.onerror = () => arm(false); pa.src = aUrl;
-  const pb = new Image(); pb.onload = () => arm(true); pb.onerror = () => arm(false); pb.src = bUrl;
-  setTimeout(() => { if (btn.disabled) { btn.disabled = false; btn.textContent = "◉ Blink"; } }, 12000);
-}
-
-// ── Manual survey switcher: operator picks the imagery source; image, epoch
-// tag, Aladin link and blink baseline all follow the ACTUAL displayed survey ──
-function switchSurvey(btn, idx) {
-  const img = document.querySelector(".result-img img");
-  const ep  = document.querySelector(".result-img .img-epoch");
-  if (!img) return;
-  SFX.click();
-  if (window._blinkTimer) {
-    clearInterval(window._blinkTimer); window._blinkTimer = null;
-    const bb = document.getElementById("blink-btn");
-    if (bb) bb.textContent = "◉ Blink";
-  }
-  let all = [];
-  try { all = JSON.parse(img.getAttribute("data-svall") || "[]"); } catch (e) {}
-  const s = all[idx];
-  if (!s) return;
-  img.onload = null;
-  img.setAttribute("data-svchain", "[]");  // manual pick: show exactly this survey
-  img.style.display = "";
-  if (ep) { ep.style.display = ""; ep.textContent = s.tag; }
-  img.src = s.url;
-  img.dataset.blinkA = s.url; img.dataset.blinkAtag = s.tag;
-  const a = document.querySelector('.result-links a[href*="survey="]');
-  if (a) {
-    a.href = a.href.replace(/survey=[^&]*/, "survey=" + encodeURIComponent(s.aladin));
-    const sp = a.querySelector("span");
-    if (sp) sp.textContent = s.short;
-  }
-  document.querySelectorAll(".result-img .sv-chip").forEach((c, i) => c.classList.toggle("on", i === idx));
-  window.NAVCON && NAVCON.op("IMAGERY SOURCE — " + s.tag.replace("ARCHIVAL · ", ""));
-}
-
 async function doSearch() {
-  if (window._blinkTimer) { clearInterval(window._blinkTimer); window._blinkTimer = null; }
   const q = document.getElementById("q").value.trim();
   if (!q) return;
   SFX.scan();
@@ -1329,7 +1342,7 @@ function renderHighlights() {
     const ra  = candidateRa(c);
     const dec = candidateDec(c);
     const img = ra != null
-      ? `<img src="${skyUrl(ra, dec, 0.5, skySurvey(dec).hips)}" alt="${c.target_name}" loading="lazy" decoding="async" data-svchain='${skyChainRest(ra, dec, 0.5)}' onerror="_svFallback(this)">`
+      ? `<img src="${skyUrl(ra, dec, 0.5, skySurvey(dec).hips)}" alt="${c.target_name}" loading="lazy" decoding="async" data-svchain='${skyChainRest(ra, dec, 0.5)}' data-svall='${skyAll(ra, dec, 0.5)}' onerror="_svFallback(this)">`
       : "";
     const tc    = TIER_COLORS[c.tier] || "#6b7280";
     const badge = c.tier ? `<span class="tier-badge" style="background:${tc}">Tier ${c.tier}</span>` : "";
@@ -1376,7 +1389,7 @@ function renderHighlights() {
       : `selectCandidate('${safeN}')`;
 
     return `<div class="card" id="${_cid}" data-tier="${c.tier||3}" data-score="${c.candidacy_score||0}" onclick="${onclick}">
-      <div class="card-img">${img}${badge}${img ? `<span class="img-epoch">${skySurvey(dec).short}</span>` : ""}</div>
+      <div class="card-img">${img}${badge}${img ? `<span class="img-epoch">${skySurvey(dec).short}</span>${svChipsHtml(dec)}` : ""}</div>
       <div class="card-body">
         <div class="card-name">${cleanName(c.target_name)}</div>
         <div class="card-tags">${mtags}</div>
@@ -2621,6 +2634,10 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
         ag.classList.toggle('hud-warn', days > 14);
       } else ag.textContent = '--';
     }
+    if (_pfIO) {
+      var fresh = document.querySelectorAll('.card-img img:not([data-pf]), .result-img img:not([data-pf])');
+      for (var q = 0; q < fresh.length; q++) { fresh[q].setAttribute('data-pf', '1'); _pfIO.observe(fresh[q]); }
+    }
     var tr = $('hud-track');
     if (tr && trackTgt) {
       if (obsLat == null) tr.textContent = 'ACQUIRING FIX…';
@@ -2636,6 +2653,28 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       }
     }
   }
+  /* ── background prefetch: when a card image nears the viewport, preload its
+        alternate survey frames during browser idle time — switching/blinking
+        is then instant, without downloading all rungs for every target ── */
+  var _pfIO = ('IntersectionObserver' in window) ? new IntersectionObserver(function(entries){
+    for (var i = 0; i < entries.length; i++) {
+      if (!entries[i].isIntersecting) continue;
+      var im = entries[i].target;
+      _pfIO.unobserve(im);
+      (function(img){
+        var run = function(){
+          try {
+            JSON.parse(img.getAttribute('data-svall') || '[]').forEach(function(s){
+              if (img.src !== s.url) { var p = new Image(); p.src = s.url; }
+            });
+          } catch(e) {}
+        };
+        if (window.requestIdleCallback) requestIdleCallback(run, { timeout: 5000 });
+        else setTimeout(run, 900);
+      })(im);
+    }
+  }, { rootMargin: '250px' }) : null;
+
   tick(); setInterval(tick, 1000);
 
   /* ── live target tracking: alt/az of the locked target from the operator's
