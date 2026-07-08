@@ -347,6 +347,35 @@ body{padding-bottom:30px}
 .sv-chip.on{color:#3fe08f;border-color:rgba(63,224,143,.75);text-shadow:0 0 5px rgba(63,224,143,.4)}
 .sv-chip:disabled{opacity:.35;cursor:default}
 .hud-warn{color:#f97316!important;text-shadow:0 0 6px rgba(249,115,22,.45)!important}
+/* NAVCON PRO — scope, CAS, CDU, journal, AR, watchlist */
+.hud-btn{font-family:monospace;font-size:.6rem;letter-spacing:.1em;color:#3fe08f;background:rgba(63,224,143,.08);border:1px solid rgba(63,224,143,.4);border-radius:3px;padding:2px 7px;cursor:pointer;line-height:1.4}
+.hud-btn:hover{background:rgba(63,224,143,.18)}
+#cas-panel{position:fixed;top:74px;right:10px;z-index:56;display:flex;flex-direction:column;gap:4px;align-items:flex-end}
+.cas-light{font-family:monospace;font-size:.58rem;letter-spacing:.12em;padding:3px 9px;border-radius:3px;cursor:pointer;background:rgba(10,6,2,.85)}
+.cas-amber{color:#f5a623;border:1px solid rgba(245,166,35,.6)}
+.cas-red{color:#ff5f56;border:1px solid rgba(255,95,86,.6)}
+.cas-new{animation:hud-blink .9s step-end infinite}
+.pro-hdr{display:flex;align-items:center;gap:8px;padding:8px 12px;font-family:monospace;font-size:.62rem;letter-spacing:.14em;color:#3fe08f;border-bottom:1px solid rgba(63,224,143,.25);background:rgba(0,30,18,.5)}
+.pro-x{margin-left:auto;background:none;border:1px solid rgba(63,224,143,.4);border-radius:3px;color:#3fe08f;cursor:pointer;font-size:.7rem;padding:1px 7px}
+.j-t{font-family:monospace;font-size:.56rem;color:#3a7a5a;letter-spacing:.08em}
+#scope-ov{position:fixed;inset:0;z-index:920;background:rgba(0,5,10,.82);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center}
+#scope-box{background:rgba(3,14,10,.95);border:1px solid rgba(63,224,143,.5);border-radius:10px;box-shadow:0 0 40px rgba(63,224,143,.18);overflow:hidden}
+#scope-cv{display:block;max-width:88vw;max-height:68vh;cursor:crosshair}
+#scope-foot{padding:7px 12px}
+#journal-ov{position:fixed;right:12px;bottom:44px;z-index:910;width:min(460px,calc(100vw - 24px));max-height:46vh;display:flex;flex-direction:column;background:rgba(3,14,10,.95);border:1px solid rgba(63,224,143,.5);border-radius:8px;box-shadow:0 0 26px rgba(63,224,143,.15);overflow:hidden}
+#journal-body{overflow-y:auto;padding:8px 12px;font-family:monospace;font-size:.6rem;color:#3fe08f;scrollbar-width:thin;line-height:1.7}
+#cdu-ov{position:fixed;left:50%;transform:translateX(-50%);bottom:70px;z-index:930;display:flex;align-items:center;gap:8px;width:min(640px,calc(100vw - 30px));background:rgba(3,14,10,.96);border:1px solid rgba(63,224,143,.55);border-radius:6px;padding:9px 12px;box-shadow:0 0 30px rgba(63,224,143,.2)}
+.cdu-p{font-family:monospace;color:#3fe08f;font-size:.7rem;letter-spacing:.1em}
+#cdu-in{flex:1;background:none;border:none;outline:none;color:#7dffb8;font-family:monospace;font-size:.72rem;letter-spacing:.06em}
+#cdu-in::placeholder{color:#2a5a42;font-size:.58rem}
+.pin-btn{position:absolute;top:6px;right:6px;z-index:4;font-size:.72rem;line-height:1;padding:3px 5px;border-radius:3px;border:1px solid rgba(63,224,143,.35);background:rgba(3,14,10,.8);color:#3a7a5a;cursor:pointer}
+.pin-btn.on{color:#f5a623;border-color:rgba(245,166,35,.6)}
+.card.kfocus{outline:2px solid rgba(63,224,143,.8);outline-offset:2px}
+#ar-ov{position:fixed;left:12px;right:12px;bottom:44px;z-index:930;background:rgba(3,14,10,.96);border:1px solid rgba(63,224,143,.55);border-radius:10px;box-shadow:0 0 30px rgba(63,224,143,.2);overflow:hidden}
+#ar-main{display:flex;flex-direction:column;align-items:center;gap:6px;padding:16px}
+#ar-az,#ar-alt{font-family:monospace;font-size:1.5rem;color:#3fe08f;text-shadow:0 0 10px rgba(63,224,143,.5)}
+#ar-state{font-family:monospace;font-size:.7rem;color:#3a7a5a;letter-spacing:.14em;margin-top:4px}
+#ar-state.ar-on{color:#7dffb8;text-shadow:0 0 10px rgba(63,224,143,.7)}
 .nav-link:active,.search-btn:active,button:active{transform:translateY(1px) scale(.98)}
 @media (prefers-reduced-motion:reduce){.b-pend{animation:none}.card.tilting{transform:none!important}}
 </style>
@@ -519,8 +548,9 @@ window._svBlink = function(btn){
     <span class="nav-deepsignal">/ DeepSignal</span>
   </div>
 </nav>
-<div id="hud-status" aria-hidden="true">
+<div id="hud-status">
   <span class="hud-seg"><span class="hud-dot"></span>SYS <span class="hud-val">NOMINAL</span></span>
+  <span class="hud-seg"><button class="hud-btn" id="hud-scope-btn" title="Tactical scope — plot all candidates on your local sky">◉ SCOPE</button></span>
   <span class="hud-seg">UTC <span class="hud-val" id="hud-utc">--:--:--</span></span>
   <span class="hud-seg hud-hide-sm">GMST <span class="hud-val" id="hud-gmst">--:--:--</span></span>
   <span class="hud-seg hud-hide-sm">MJD <span class="hud-val" id="hud-mjd">-----.---</span></span>
@@ -529,6 +559,8 @@ window._svBlink = function(btn){
   <span class="hud-seg hud-hide-sm">FEEDS <span class="hud-val" id="hud-feeds">--</span></span>
   <span class="hud-seg hud-hide-sm">AGE <span class="hud-val" id="hud-age">--</span></span>
   <span class="hud-seg" id="hud-track-seg" style="display:none">⌖ <span class="hud-val" id="hud-track">--</span></span>
+  <span class="hud-seg" id="hud-watch-seg" style="display:none">★ <span class="hud-val" id="hud-watch">--</span></span>
+  <span class="hud-seg"><button class="hud-btn" id="hud-ar-btn" style="display:none" title="AR finder — point your phone at the tracked target">▲ AR</button></span>
   <span id="hud-msg"></span>
 </div>
 
@@ -2607,6 +2639,12 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
 
   /* ── HUD clock: UTC / GMST / MJD / target count / live image feeds ── */
   function pad(n){ return (n < 10 ? '0' : '') + n; }
+  function gmstDeg(d){
+    var jd = d.getTime() / 864e5 + 2440587.5, T = (jd - 2451545) / 36525;
+    var g = (280.46061837 + 360.98564736629 * (jd - 2451545) + 3.87933e-4 * T * T) % 360;
+    return g < 0 ? g + 360 : g;
+  }
+  var _staleDays = null, _lastAlt = null, _feedsDone = 0, _feedsTotal = 0, _loadT = Date.now(), _journal = [];
   function tick(){
     var d = new Date();
     var utc = $('hud-utc'), gm = $('hud-gmst'), mj = $('hud-mjd'), tg = $('hud-tgt'), fd = $('hud-feeds');
@@ -2628,6 +2666,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       if (imgs.length) {
         var done = 0;
         for (var k = 0; k < imgs.length; k++) if (imgs[k].complete) done++;
+        _feedsDone = done; _feedsTotal = imgs.length;
         fd.textContent = done + '/' + imgs.length;
       } else fd.textContent = '--';
     }
@@ -2639,6 +2678,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       }
       if (ag._src) {
         var days = Math.floor((Date.now() - ag._src) / 864e5);
+        _staleDays = days;
         ag.textContent = days + 'd';
         ag.classList.toggle('hud-warn', days > 14);
       } else ag.textContent = '--';
@@ -2657,10 +2697,21 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
         var alt = Math.asin(Math.sin(phi) * Math.sin(de) + Math.cos(phi) * Math.cos(de) * Math.cos(H)) * 180 / Math.PI;
         var az = Math.atan2(-Math.sin(H), Math.tan(de) * Math.cos(phi) - Math.sin(phi) * Math.cos(H)) * 180 / Math.PI;
         if (az < 0) az += 360;
-        tr.textContent = String(trackTgt.name).toUpperCase() + ' ALT ' + (alt >= 0 ? '+' : '') + alt.toFixed(1) + '° AZ ' + az.toFixed(0) + '°' + (alt > 0 ? ' · UP' : ' · BELOW HORIZON');
+        _lastAlt = alt;
+        var rs = trackTgt._rs;
+        if (!rs || rs.exp < Date.now()) rs = trackTgt._rs = riseSet(trackTgt.ra, trackTgt.dec);
+        var sfx = '';
+        if (rs.never) sfx = ' · NEVER RISES HERE';
+        else if (rs.circumpolar) sfx = ' · CIRCUMPOLAR';
+        else if (alt > 0 && rs.set) sfx = ' · SETS ' + _fmtZ(rs.set);
+        else if (alt <= 0 && rs.rise) sfx = ' · RISES ' + _fmtZ(rs.rise);
+        tr.textContent = String(trackTgt.name).toUpperCase() + ' ALT ' + (alt >= 0 ? '+' : '') + alt.toFixed(1) + '° AZ ' + az.toFixed(0) + '°' + (alt > 0 ? ' · UP' : ' · BELOW HORIZON') + sfx;
         tr.classList.toggle('hud-warn', alt <= 0);
       }
     }
+    try { _casUpdate(); _watchTick(); _pinDecorate(); } catch(e) {}  /* first tick runs before module vars init */
+    var arB = $('hud-ar-btn');
+    if (arB) arB.style.display = (trackTgt && window.DeviceOrientationEvent && ('ontouchstart' in window)) ? '' : 'none';
   }
   /* ── background prefetch: when a card image nears the viewport, preload its
         alternate survey frames during browser idle time — switching/blinking
@@ -2709,6 +2760,11 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
   function op(msg){
     busyUntil = Date.now() + 6000;
     decodeTo($('hud-msg'), String(msg).toUpperCase());
+    try {
+      _journal.push({ t: new Date(), m: String(msg).toUpperCase() });
+      if (_journal.length > 300) _journal.shift();
+      _jRender();
+    } catch(e) {}
   }
   function nextMsg(){
     if (Date.now() < busyUntil) return;
@@ -2769,15 +2825,17 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
 
     (function(){
       var fin = false;
-      var t = setTimeout(function(){ if (!fin) { fin = true; setRow('simbad', 'DEGRADED', 'b-fail'); } }, 8000);
+      var t = setTimeout(function(){ if (!fin) { fin = true; try { sessionStorage.setItem('ds-simbad', 'fail'); } catch(e2) {} setRow('simbad', 'DEGRADED', 'b-fail'); } }, 8000);
       fetch('https://simbad.cds.unistra.fr/simbad/sim-tap/sync?request=doQuery&lang=adql&format=json&query=' +
             encodeURIComponent('SELECT TOP 1 oid FROM basic'))
         .then(function(r){
           if (fin) return; fin = true; clearTimeout(t);
+          try { sessionStorage.setItem('ds-simbad', r.ok ? 'ok' : 'fail'); } catch(e2) {}
           setRow('simbad', r.ok ? 'LINKED' : 'HTTP ' + r.status, r.ok ? 'b-ok' : 'b-fail');
         })
         .catch(function(){
           if (fin) return; fin = true; clearTimeout(t);
+          try { sessionStorage.setItem('ds-simbad', 'fail'); } catch(e2) {}
           setRow('simbad', 'UNREACHABLE', 'b-fail');
         });
     })();
@@ -2795,6 +2853,428 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     }, 250);
     setTimeout(killBoot, 25000); /* hard cap — never lingers */
   }
+
+  /* ═══ NAVCON PRO — tactical scope · CAS annunciator · CDU · watchlist · ops journal · AR finder ═══ */
+
+  /* targets from the live page: catalog var on Search, card DOM on Gallery */
+  function _navTargets(){
+    var out = [], seen = {};
+    function push(name, ra, dec, score, el){
+      if (!name || ra == null || dec == null || seen[name]) return;
+      seen[name] = 1;
+      out.push({ name: name, ra: +ra, dec: +dec, score: +score || 0, el: el || null });
+    }
+    try {
+      if (typeof catalog !== 'undefined' && catalog && catalog.length) {
+        for (var i = 0; i < catalog.length; i++) {
+          var c = catalog[i];
+          var ra = c.ra_deg != null ? c.ra_deg : (c.coordinates ? c.coordinates.ra_deg : null);
+          var de = c.dec_deg != null ? c.dec_deg : (c.coordinates ? c.coordinates.dec_deg : null);
+          push(c.target_name, ra, de, c.candidacy_score);
+        }
+      }
+    } catch(e) {}
+    try {
+      var cards = document.querySelectorAll('.card');
+      for (var j = 0; j < cards.length; j++) {
+        var nm = cards[j].querySelector('.card-name'), cc = cards[j].querySelector('.card-coords');
+        if (!nm || !cc) continue;
+        var m = cc.textContent.match(/RA\s*(-?[\d.]+)°[\s\S]*?Dec\s*(-?[\d.]+)°/);
+        if (!m) continue;
+        push(nm.textContent.trim(), parseFloat(m[1]), parseFloat(m[2]), cards[j].getAttribute('data-score'), cards[j]);
+      }
+    } catch(e) {}
+    return out;
+  }
+
+  function _altazOf(ra, dec, d){
+    if (obsLat == null) return null;
+    var lst = (gmstDeg(d || new Date()) + obsLon) % 360; if (lst < 0) lst += 360;
+    var H = (lst - ra) * Math.PI / 180, phi = obsLat * Math.PI / 180, de = dec * Math.PI / 180;
+    var alt = Math.asin(Math.sin(phi) * Math.sin(de) + Math.cos(phi) * Math.cos(de) * Math.cos(H)) * 180 / Math.PI;
+    var az = Math.atan2(-Math.sin(H), Math.tan(de) * Math.cos(phi) - Math.sin(phi) * Math.cos(H)) * 180 / Math.PI;
+    if (az < 0) az += 360;
+    return { alt: alt, az: az };
+  }
+
+  /* rise / transit / set forecast: numeric 24 h scan, cached 10 min */
+  function riseSet(ra, dec){
+    var res = { exp: Date.now() + 600000 };
+    if (obsLat == null) return res;
+    var now = new Date(), prev = null, maxAlt = -90;
+    for (var m = 0; m <= 1440; m += 4) {
+      var aa = _altazOf(ra, dec, new Date(now.getTime() + m * 60000));
+      if (aa.alt > maxAlt) maxAlt = aa.alt;
+      if (prev != null) {
+        if (prev <= 0 && aa.alt > 0 && !res.rise) res.rise = new Date(now.getTime() + m * 60000);
+        if (prev > 0 && aa.alt <= 0 && !res.set) res.set = new Date(now.getTime() + m * 60000);
+      }
+      prev = aa.alt;
+    }
+    res.never = maxAlt <= 0;
+    res.circumpolar = !res.never && !res.rise && !res.set;
+    return res;
+  }
+  function _fmtZ(t){ return pad(t.getUTCHours()) + ':' + pad(t.getUTCMinutes()) + 'Z'; }
+
+  /* ── ops journal (flight recorder): every NAVCON.op event, timestamped ── */
+  function _esc(s){ return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+  function _jRender(){
+    var b = document.getElementById('journal-body');
+    if (!b) return;
+    var h = '';
+    for (var i = _journal.length - 1; i >= 0; i--)
+      h += '<div><span class="j-t">' + _journal[i].t.toISOString().slice(11, 19) + 'Z&nbsp;</span>' + _esc(_journal[i].m) + '</div>';
+    b.innerHTML = h || '<div class="j-t">NO EVENTS LOGGED THIS SESSION</div>';
+  }
+  function _jToggle(){
+    var ov = document.getElementById('journal-ov');
+    if (ov) { ov.remove(); return; }
+    ov = document.createElement('div');
+    ov.id = 'journal-ov';
+    ov.innerHTML = '<div class="pro-hdr">▤ OPS JOURNAL — SESSION EVENT LOG<button class="pro-x" id="journal-x">✕</button></div><div id="journal-body"></div>';
+    document.body.appendChild(ov);
+    document.getElementById('journal-x').addEventListener('click', _jToggle);
+    _jRender();
+  }
+  (function(){
+    var hm = $('hud-msg');
+    if (hm) { hm.style.cursor = 'pointer'; hm.title = 'Ops journal — click to open'; hm.addEventListener('click', _jToggle); }
+  })();
+
+  /* ── CAS annunciator: amber/red lights for REAL conditions, click = acknowledge ── */
+  var _casAck = {};
+  var _CAS = [
+    { id: 'STALE', lbl: 'DATA STALE', lvl: 'amber',
+      test: function(){ return _staleDays != null && _staleDays > 14; } },
+    { id: 'LINK', lbl: 'SIMBAD LINK', lvl: 'red',
+      test: function(){ try { return sessionStorage.getItem('ds-simbad') === 'fail'; } catch(e) { return false; } } },
+    { id: 'HORIZON', lbl: 'TGT BELOW HORIZON', lvl: 'amber',
+      test: function(){ return !!(trackTgt && _lastAlt != null && _lastAlt <= 0); } },
+    { id: 'FEEDS', lbl: 'FEEDS DEGRADED', lvl: 'amber',
+      test: function(){ return (Date.now() - _loadT > 45000) && _feedsTotal > 10 && (_feedsDone / _feedsTotal) < 0.5; } }
+  ];
+  function _casUpdate(){
+    var panel = document.getElementById('cas-panel');
+    if (!panel) {
+      panel = document.createElement('div');
+      panel.id = 'cas-panel';
+      document.body.appendChild(panel);
+    }
+    for (var i = 0; i < _CAS.length; i++) {
+      var c = _CAS[i], el = document.getElementById('cas-' + c.id), on = false;
+      try { on = !!c.test(); } catch(e) {}
+      if (on && !el) {
+        el = document.createElement('button');
+        el.id = 'cas-' + c.id;
+        el.className = 'cas-light cas-' + c.lvl + (_casAck[c.id] ? '' : ' cas-new');
+        el.textContent = c.lbl;
+        el.title = 'Click to acknowledge';
+        (function(cid, ee){
+          ee.addEventListener('click', function(){
+            _casAck[cid] = 1;
+            ee.classList.remove('cas-new');
+            try { SFX.click(); } catch(e) {}
+            op('CAS ACKNOWLEDGED — ' + cid);
+          });
+        })(c.id, el);
+        panel.appendChild(el);
+        if (!_casAck[c.id]) op('CAS ALERT — ' + c.lbl);
+      } else if (!on && el) {
+        el.remove();
+        delete _casAck[c.id];
+      }
+    }
+  }
+
+  /* ── watchlist: pin targets, HUD cycles their live alt/az ── */
+  function _wlGet(){ try { return JSON.parse(localStorage.getItem('ds-watchlist') || '[]'); } catch(e) { return []; } }
+  function _wlSet(l){ try { localStorage.setItem('ds-watchlist', JSON.stringify(l.slice(0, 12))); } catch(e) {} }
+  window._wlToggle = function(name, ra, dec){
+    var l = _wlGet(), i = -1;
+    for (var k = 0; k < l.length; k++) if (l[k].name === name) i = k;
+    if (i >= 0) { l.splice(i, 1); op('WATCHLIST — REMOVED ' + name); }
+    else { l.push({ name: name, ra: ra, dec: dec }); op('WATCHLIST — ADDED ' + name); }
+    _wlSet(l);
+    try { SFX.click(); } catch(e) {}
+    _pinSync();
+  };
+  function _pinSync(){
+    var l = _wlGet(), names = {};
+    for (var i = 0; i < l.length; i++) names[l[i].name] = 1;
+    var pins = document.querySelectorAll('.pin-btn');
+    for (var j = 0; j < pins.length; j++) {
+      var on = !!names[pins[j].getAttribute('data-name')];
+      pins[j].classList.toggle('on', on);
+      pins[j].textContent = on ? '★' : '☆';
+    }
+  }
+  function _pinDecorate(){
+    var scopes = document.querySelectorAll('.card-img:not([data-pinned]), .result-img:not([data-pinned])');
+    if (!scopes.length) return;
+    for (var i = 0; i < scopes.length; i++) {
+      var sc = scopes[i];
+      sc.setAttribute('data-pinned', '1');
+      var root = sc.closest('.card') || sc.closest('.result-inner') || sc.parentElement;
+      var nmEl = root && (root.querySelector('.card-name') || root.querySelector('.result-name'));
+      var ccEl = root && (root.querySelector('.card-coords') || root.querySelector('.result-coords'));
+      if (!nmEl || !ccEl) continue;
+      var m = ccEl.textContent.match(/RA\s*(-?[\d.]+)°[\s\S]*?Dec\s*(-?[\d.]+)°/);
+      if (!m) continue;
+      var b = document.createElement('button');
+      b.className = 'pin-btn';
+      b.setAttribute('data-name', nmEl.textContent.trim());
+      b.title = 'Watchlist — HUD tracks pinned targets live';
+      b.textContent = '☆';
+      (function(n, ra, de){
+        b.addEventListener('click', function(ev){ ev.preventDefault(); ev.stopPropagation(); window._wlToggle(n, ra, de); });
+      })(nmEl.textContent.trim(), parseFloat(m[1]), parseFloat(m[2]));
+      sc.appendChild(b);
+    }
+    _pinSync();
+  }
+  var _wlIdx = 0, _wlN = 0;
+  function _watchTick(){
+    var seg = document.getElementById('hud-watch-seg'), v = document.getElementById('hud-watch');
+    if (!seg || !v) return;
+    var l = _wlGet();
+    if (!l.length) { seg.style.display = 'none'; return; }
+    seg.style.display = '';
+    if (++_wlN % 5 === 0) _wlIdx++;
+    var w = l[_wlIdx % l.length];
+    var aa = _altazOf(w.ra, w.dec);
+    v.textContent = (l.length > 1 ? ((_wlIdx % l.length) + 1) + '/' + l.length + ' ' : '') +
+      w.name.toUpperCase() + (aa ? ' ' + (aa.alt >= 0 ? '+' : '') + aa.alt.toFixed(0) + '°' : '');
+    v.classList.toggle('hud-warn', !!(aa && aa.alt <= 0));
+  }
+
+  /* ── tactical scope: candidates plotted on YOUR sky (zenith center, horizon rim) ── */
+  var _scopeOn = false, _scopeRAF = null;
+  function _scopeToggle(){
+    var ov = document.getElementById('scope-ov');
+    if (ov) {
+      _scopeOn = false;
+      if (_scopeRAF) cancelAnimationFrame(_scopeRAF);
+      ov.remove();
+      try { SFX.close(); } catch(e) {}
+      return;
+    }
+    try { SFX.open(); } catch(e) {}
+    op('TACTICAL SCOPE — PLOTTING CANDIDATES ON LOCAL SKY');
+    ov = document.createElement('div');
+    ov.id = 'scope-ov';
+    ov.innerHTML = '<div id="scope-box"><div class="pro-hdr">◉ TACTICAL SCOPE — LOCAL SKY PLOT<button class="pro-x" id="scope-x">✕</button></div>' +
+      '<canvas id="scope-cv" width="520" height="520"></canvas><div id="scope-foot" class="j-t">—</div></div>';
+    ov.addEventListener('click', function(ev){ if (ev.target === ov) _scopeToggle(); });
+    document.body.appendChild(ov);
+    document.getElementById('scope-x').addEventListener('click', _scopeToggle);
+    _scopeOn = true;
+    if (obsLat == null) _ensureGeo();
+    var tgts = _navTargets(), blips = [], sweepA = 0;
+    var cv = document.getElementById('scope-cv'), c2 = cv.getContext('2d');
+    cv.addEventListener('click', function(ev){
+      var r = cv.getBoundingClientRect();
+      var x = (ev.clientX - r.left) * (cv.width / r.width), y = (ev.clientY - r.top) * (cv.height / r.height);
+      var best = null, bd = 15;
+      for (var i = 0; i < blips.length; i++) {
+        var d = Math.hypot(blips[i].x - x, blips[i].y - y);
+        if (d < bd) { bd = d; best = blips[i]; }
+      }
+      if (!best) return;
+      try { SFX.click(); } catch(e) {}
+      op('SCOPE SELECT — ' + best.t.name.toUpperCase());
+      _scopeToggle();
+      if (best.t.el) {
+        best.t.el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        best.t.el.classList.add('kfocus');
+        (function(el){ setTimeout(function(){ el.classList.remove('kfocus'); }, 3200); })(best.t.el);
+      } else if (typeof selectCandidate === 'function') selectCandidate(best.t.name);
+    });
+    function draw(){
+      if (!_scopeOn) return;
+      var W2 = cv.width, C = W2 / 2, R = C - 26;
+      c2.clearRect(0, 0, W2, W2);
+      c2.strokeStyle = 'rgba(63,224,143,.35)';
+      c2.lineWidth = 1;
+      c2.beginPath(); c2.arc(C, C, R, 0, 6.29); c2.stroke();
+      c2.beginPath(); c2.arc(C, C, R * 2 / 3, 0, 6.29); c2.stroke();
+      c2.beginPath(); c2.arc(C, C, R / 3, 0, 6.29); c2.stroke();
+      c2.beginPath(); c2.moveTo(C - R, C); c2.lineTo(C + R, C); c2.moveTo(C, C - R); c2.lineTo(C, C + R); c2.stroke();
+      c2.fillStyle = '#3fe08f';
+      c2.font = '11px monospace';
+      c2.textAlign = 'center';
+      c2.fillText('N', C, C - R - 8);
+      c2.fillText('S', C, C + R + 16);
+      c2.fillText('E', C + R + 12, C + 4);
+      c2.fillText('W', C - R - 12, C + 4);
+      var foot = document.getElementById('scope-foot');
+      if (obsLat == null) {
+        c2.fillStyle = '#f97316';
+        c2.fillText('AWAITING POSITION FIX — ALLOW GEOLOCATION', C, C);
+        if (foot) foot.textContent = 'GEOLOCATION REQUIRED FOR LOCAL-SKY PLOT';
+      } else {
+        sweepA += 0.012;
+        if (c2.createConicGradient) {
+          var g2 = c2.createConicGradient(sweepA, C, C);
+          g2.addColorStop(0, 'rgba(63,224,143,.16)');
+          g2.addColorStop(.08, 'rgba(63,224,143,0)');
+          g2.addColorStop(1, 'rgba(63,224,143,0)');
+          c2.fillStyle = g2;
+          c2.beginPath(); c2.moveTo(C, C); c2.arc(C, C, R, sweepA - .02, sweepA + .5); c2.closePath(); c2.fill();
+        }
+        blips = [];
+        var up = 0, d0 = new Date();
+        for (var i = 0; i < tgts.length; i++) {
+          var aa = _altazOf(tgts[i].ra, tgts[i].dec, d0);
+          if (!aa || aa.alt <= 0) continue;
+          up++;
+          var rr = R * (90 - aa.alt) / 90, th = (aa.az - 90) * Math.PI / 180;
+          var x = C + rr * Math.cos(th), y = C + rr * Math.sin(th);
+          blips.push({ x: x, y: y, t: tgts[i] });
+          var rel = ((Math.atan2(y - C, x - C) - sweepA) % 6.283 + 6.283) % 6.283;
+          var hot = rel < .5 || rel > 5.78;
+          c2.fillStyle = tgts[i].score >= 70 ? (hot ? '#ffd479' : 'rgba(245,158,11,.85)') : (hot ? '#7dffb8' : 'rgba(63,224,143,.65)');
+          c2.beginPath(); c2.arc(x, y, tgts[i].score >= 70 ? 3.4 : 2.4, 0, 6.29); c2.fill();
+        }
+        if (foot) foot.textContent = up + ' OF ' + tgts.length + ' TARGETS ABOVE YOUR HORIZON · ZENITH AT CENTER · CLICK A BLIP TO OPEN';
+      }
+      _scopeRAF = requestAnimationFrame(draw);
+    }
+    _scopeRAF = requestAnimationFrame(draw);
+  }
+  (function(){
+    var sb = document.getElementById('hud-scope-btn');
+    if (sb) sb.addEventListener('click', _scopeToggle);
+  })();
+
+  /* ── AR finder: point the device at the tracked target (mobile; CDU "AR" anywhere) ── */
+  var _arActive = false, _arL = null;
+  function _arToggle(){
+    var ov = document.getElementById('ar-ov');
+    if (ov) {
+      ov.remove();
+      _arActive = false;
+      if (_arL) { window.removeEventListener('deviceorientation', _arL); _arL = null; }
+      try { SFX.close(); } catch(e) {}
+      return;
+    }
+    if (!trackTgt) return op('AR FINDER — TRACK A TARGET FIRST');
+    if (!window.DeviceOrientationEvent) return op('AR FINDER — NO ORIENTATION SENSOR');
+    function start(){
+      try { SFX.open(); } catch(e) {}
+      op('AR FINDER — POINT DEVICE AT ' + String(trackTgt.name).toUpperCase());
+      var o = document.createElement('div');
+      o.id = 'ar-ov';
+      o.innerHTML = '<div class="pro-hdr">▲ AR FINDER — ' + _esc(String(trackTgt.name).toUpperCase()) + '<button class="pro-x" id="ar-x">✕</button></div>' +
+        '<div id="ar-main"><div id="ar-az">—</div><div id="ar-alt"></div><div id="ar-state">WAITING FOR COMPASS…</div></div>' +
+        '<div class="j-t" style="padding:0 14px 10px">HOLD DEVICE UPRIGHT · FOLLOW ARROWS TO 0°</div>';
+      document.body.appendChild(o);
+      document.getElementById('ar-x').addEventListener('click', _arToggle);
+      _arActive = true;
+      _arL = function(e){
+        if (!_arActive || !trackTgt) return;
+        var st = document.getElementById('ar-state'), azEl = document.getElementById('ar-az'), altEl = document.getElementById('ar-alt');
+        var aa = _altazOf(trackTgt.ra, trackTgt.dec);
+        if (!aa) { if (st) st.textContent = 'ALLOW GEOLOCATION FOR TARGET VECTOR'; _ensureGeo(); return; }
+        var head = (e.webkitCompassHeading != null) ? e.webkitCompassHeading : ((e.absolute && e.alpha != null) ? (360 - e.alpha) : null);
+        if (head == null) { if (st) st.textContent = 'COMPASS UNAVAILABLE ON THIS DEVICE'; return; }
+        var pitch = (e.beta != null) ? (e.beta - 90) : null;
+        var dAz = ((aa.az - head + 540) % 360) - 180;
+        var dAlt = (pitch != null) ? (aa.alt - pitch) : null;
+        if (azEl) azEl.textContent = (dAz > 0 ? 'RIGHT ► ' : '◄ LEFT ') + Math.abs(dAz).toFixed(0) + '°';
+        if (altEl) altEl.textContent = dAlt == null ? '' : ((dAlt > 0 ? 'UP ▲ ' : 'DOWN ▼ ') + Math.abs(dAlt).toFixed(0) + '°');
+        var onT = Math.abs(dAz) < 5 && dAlt != null && Math.abs(dAlt) < 5;
+        if (st) { st.textContent = onT ? '◎ ON TARGET' : 'TRACKING…'; st.classList.toggle('ar-on', onT); }
+      };
+      window.addEventListener('deviceorientation', _arL);
+    }
+    if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+      DeviceOrientationEvent.requestPermission()
+        .then(function(r){ if (r === 'granted') start(); else op('AR FINDER — SENSOR PERMISSION DENIED'); })
+        .catch(function(){ op('AR FINDER — SENSOR PERMISSION ERROR'); });
+    } else start();
+  }
+  (function(){
+    var ab = document.getElementById('hud-ar-btn');
+    if (ab) ab.addEventListener('click', _arToggle);
+  })();
+
+  /* ── CDU command line ("/") + card keyboard ops (J/K/B/1-3) ── */
+  function _cduToggle(){
+    var ov = document.getElementById('cdu-ov');
+    if (ov) { ov.remove(); return; }
+    ov = document.createElement('div');
+    ov.id = 'cdu-ov';
+    ov.innerHTML = '<span class="cdu-p">NAVCON&gt;</span><input id="cdu-in" autocomplete="off" spellcheck="false" placeholder="TRK &lt;name&gt; · SCOPE · MAP · NEWS · REPORT · SRC ZTF|PAN|DSS · BLINK · LOG · AR · FIND &lt;query&gt;">';
+    document.body.appendChild(ov);
+    var inp = document.getElementById('cdu-in');
+    inp.focus();
+    inp.addEventListener('keydown', function(ev){
+      ev.stopPropagation();
+      if (ev.key === 'Escape') { ov.remove(); return; }
+      if (ev.key !== 'Enter') return;
+      var v = inp.value.trim();
+      ov.remove();
+      if (v) _cduExec(v);
+    });
+  }
+  function _cduExec(v){
+    op('CDU — ' + v.toUpperCase());
+    var m = v.match(/^(\S+)\s*(.*)$/);
+    if (!m) return;
+    var verb = m[1].toUpperCase(), arg = m[2].trim();
+    if (verb === 'SCOPE') return _scopeToggle();
+    if (verb === 'LOG') return _jToggle();
+    if (verb === 'AR') return _arToggle();
+    if (verb === 'MAP' && typeof mapOpen === 'function') return mapOpen();
+    if (verb === 'NEWS' && typeof newsOpen === 'function') return newsOpen(null);
+    if (verb === 'REPORT' && typeof reportOpen === 'function') return reportOpen();
+    if (verb === 'BLINK') {
+      var bb = document.querySelector('.result-img .sv-blink:not([disabled])') || document.querySelector('.card.kfocus .sv-blink:not([disabled])');
+      if (bb) return window._svBlink(bb);
+      return op('BLINK — NO BLINKABLE IMAGE IN VIEW');
+    }
+    if (verb === 'SRC') {
+      var chips = document.querySelectorAll('.result-img .sv-chip[data-idx]');
+      for (var i = 0; i < chips.length; i++)
+        if (chips[i].textContent.toUpperCase().indexOf(arg.toUpperCase().slice(0, 3)) === 0)
+          return window._svPick(chips[i], +chips[i].getAttribute('data-idx'));
+      return op('SRC — SURVEY NOT AVAILABLE HERE');
+    }
+    if (verb === 'TRK' && arg) {
+      var ts = _navTargets();
+      for (var k = 0; k < ts.length; k++)
+        if (ts[k].name.toUpperCase().indexOf(arg.toUpperCase()) !== -1)
+          return window.NAVCON.track(ts[k].name, ts[k].ra, ts[k].dec);
+      return op('TRK — TARGET NOT IN CURRENT VIEW');
+    }
+    var q = verb === 'FIND' ? arg : v;
+    if (!q) return;
+    var qEl = document.getElementById('q');
+    if (qEl && typeof doSearch === 'function') { qEl.value = q; doSearch(); }
+    else location.href = 'index.html?q=' + encodeURIComponent(q);
+  }
+  var _kIdx = -1;
+  function _kMove(d){
+    var cs = document.querySelectorAll('.card');
+    if (!cs.length) return;
+    if (_kIdx >= 0 && _kIdx < cs.length) cs[_kIdx].classList.remove('kfocus');
+    _kIdx = Math.max(0, Math.min(cs.length - 1, _kIdx + d));
+    cs[_kIdx].classList.add('kfocus');
+    cs[_kIdx].scrollIntoView({ block: 'center', behavior: 'smooth' });
+    try { SFX.click(); } catch(e) {}
+  }
+  document.addEventListener('keydown', function(ev){
+    var t = ev.target, tag = t && t.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || (t && t.isContentEditable)) return;
+    if (ev.key === '/') { ev.preventDefault(); _cduToggle(); return; }
+    if (ev.key === 'j' || ev.key === 'k') { ev.preventDefault(); _kMove(ev.key === 'j' ? 1 : -1); return; }
+    var cs = document.querySelectorAll('.card');
+    var f = (_kIdx >= 0 && _kIdx < cs.length) ? cs[_kIdx] : null;
+    if (!f) return;
+    if (ev.key === 'b') { var bb = f.querySelector('.sv-blink:not([disabled])'); if (bb) window._svBlink(bb); }
+    else if (ev.key >= '1' && ev.key <= '3') { var ch = f.querySelector('.sv-chip[data-idx="' + (+ev.key - 1) + '"]'); if (ch) window._svPick(ch, +ev.key - 1); }
+  });
 
   /* ── card tilt + cursor-tracking glow (event delegation) ── */
   var tiltEl = null;
