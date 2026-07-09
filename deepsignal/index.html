@@ -360,8 +360,14 @@ body{padding-bottom:30px}
 .j-t{font-family:monospace;font-size:.56rem;color:#3a7a5a;letter-spacing:.08em}
 #scope-ov{position:fixed;inset:0;z-index:920;background:rgba(0,5,10,.82);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center}
 #scope-box{background:rgba(3,14,10,.95);border:1px solid rgba(63,224,143,.5);border-radius:10px;box-shadow:0 0 40px rgba(63,224,143,.18);overflow:hidden}
-#scope-cv{display:block;max-width:88vw;max-height:68vh;cursor:crosshair}
-#scope-foot{padding:7px 12px}
+#scope-box{width:min(94vw,560px)}
+#scope-cv{display:block;width:min(86vw,56vh,520px);height:min(86vw,56vh,520px);margin:8px auto 0;cursor:crosshair}
+#scope-foot{padding:7px 12px;text-align:center}
+#scope-info{border-top:1px solid rgba(63,224,143,.2);padding:8px 12px}
+.si-row{display:flex;align-items:center;gap:8px;margin:4px 0;flex-wrap:wrap}
+.si-chip{font-family:monospace;font-size:.55rem;letter-spacing:.08em;padding:2px 8px;border-radius:9px;border:1px solid;white-space:nowrap}
+.si-name{font-family:monospace;font-size:.8rem;color:#eef3f8;font-weight:700}
+#scope-info .pro-x{margin-left:auto}
 #journal-ov{position:fixed;right:12px;bottom:44px;z-index:910;width:min(460px,calc(100vw - 24px));max-height:46vh;display:flex;flex-direction:column;background:rgba(3,14,10,.95);border:1px solid rgba(63,224,143,.5);border-radius:8px;box-shadow:0 0 26px rgba(63,224,143,.15);overflow:hidden}
 #journal-body{overflow-y:auto;padding:8px 12px;font-family:monospace;font-size:.6rem;color:#3fe08f;scrollbar-width:thin;line-height:1.7}
 #cdu-ov{position:fixed;left:50%;transform:translateX(-50%);bottom:70px;z-index:930;display:flex;align-items:center;gap:8px;width:min(640px,calc(100vw - 30px));background:rgba(3,14,10,.96);border:1px solid rgba(63,224,143,.55);border-radius:6px;padding:9px 12px;box-shadow:0 0 30px rgba(63,224,143,.2)}
@@ -3048,48 +3054,156 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     v.classList.toggle('hud-warn', !!(aa && aa.alt <= 0));
   }
 
-  /* ── tactical scope: candidates plotted on YOUR sky (zenith center, horizon rim) ── */
-  var _scopeOn = false, _scopeRAF = null;
+  /* ── solar-system ephemeris (Schlyter low-precision, scope-grade accuracy):
+        geocentric RA/Dec of Sun, Moon, all planets incl. Pluto, computed NOW ── */
+  function _ssBodies(){
+    var d = Date.now() / 86400000 - 10956.0;
+    var RD = Math.PI / 180;
+    function rev(x){ x %= 360; return x < 0 ? x + 360 : x; }
+    function helio(N, i, w, a, e, M){
+      var E = M + (1 / RD) * e * Math.sin(M * RD) * (1 + e * Math.cos(M * RD));
+      for (var k = 0; k < 5; k++) E = E - (E - (1 / RD) * e * Math.sin(E * RD) - M) / (1 - e * Math.cos(E * RD));
+      var xv = a * (Math.cos(E * RD) - e), yv = a * Math.sqrt(1 - e * e) * Math.sin(E * RD);
+      var v = Math.atan2(yv, xv), r = Math.sqrt(xv * xv + yv * yv);
+      var lon = v + w * RD;
+      return {
+        x: r * (Math.cos(N * RD) * Math.cos(lon) - Math.sin(N * RD) * Math.sin(lon) * Math.cos(i * RD)),
+        y: r * (Math.sin(N * RD) * Math.cos(lon) + Math.cos(N * RD) * Math.sin(lon) * Math.cos(i * RD)),
+        z: r * Math.sin(lon) * Math.sin(i * RD)
+      };
+    }
+    var ws = rev(282.9404 + 4.70935e-5 * d), Ms = rev(356.0470 + 0.9856002585 * d), es = 0.016709 - 1.151e-9 * d;
+    var Es = Ms + (1 / RD) * es * Math.sin(Ms * RD) * (1 + es * Math.cos(Ms * RD));
+    var xvs = Math.cos(Es * RD) - es, yvs = Math.sqrt(1 - es * es) * Math.sin(Es * RD);
+    var lons = Math.atan2(yvs, xvs) + ws * RD, rrs = Math.sqrt(xvs * xvs + yvs * yvs);
+    var sun = { x: rrs * Math.cos(lons), y: rrs * Math.sin(lons), z: 0 };
+    var out = [], ecl = (23.4393 - 3.563e-7 * d) * RD;
+    function pushEq(name, g){
+      var xe = g.x, ye = g.y * Math.cos(ecl) - g.z * Math.sin(ecl), ze = g.y * Math.sin(ecl) + g.z * Math.cos(ecl);
+      out.push({ name: name, ra: rev(Math.atan2(ye, xe) / RD), dec: Math.atan2(ze, Math.sqrt(xe * xe + ye * ye)) / RD, ss: true });
+    }
+    pushEq('Sun', sun);
+    pushEq('Moon', helio(rev(125.1228 - 0.0529538083 * d), 5.1454, rev(318.0634 + 0.1643573223 * d), 60.2666, 0.0549, rev(115.3654 + 13.0649929509 * d)));
+    var EL = [
+      ['Mercury', 48.3313 + 3.24587e-5 * d, 7.0047 + 5e-8 * d, 29.1241 + 1.01444e-5 * d, 0.387098, 0.205635 + 5.59e-10 * d, 168.6562 + 4.0923344368 * d],
+      ['Venus', 76.6799 + 2.4659e-5 * d, 3.3946 + 2.75e-8 * d, 54.8910 + 1.38374e-5 * d, 0.723330, 0.006773 - 1.302e-9 * d, 48.0052 + 1.6021302244 * d],
+      ['Mars', 49.5574 + 2.11081e-5 * d, 1.8497 - 1.78e-8 * d, 286.5016 + 2.92961e-5 * d, 1.523688, 0.093405 + 2.516e-9 * d, 18.6021 + 0.5240207766 * d],
+      ['Jupiter', 100.4542 + 2.76854e-5 * d, 1.3030 - 1.557e-7 * d, 273.8777 + 1.64505e-5 * d, 5.20256, 0.048498 + 4.469e-9 * d, 19.8950 + 0.0830853001 * d],
+      ['Saturn', 113.6634 + 2.3898e-5 * d, 2.4886 - 1.081e-7 * d, 339.3939 + 2.97661e-5 * d, 9.55475, 0.055546 - 9.499e-9 * d, 316.9670 + 0.0334442282 * d],
+      ['Uranus', 74.0005 + 1.3978e-5 * d, 0.7733 + 1.9e-8 * d, 96.6612 + 3.0565e-5 * d, 19.18171, 0.047318 + 7.45e-9 * d, 142.5905 + 0.011725806 * d],
+      ['Neptune', 131.7806 + 3.0173e-5 * d, 1.7700 - 2.55e-7 * d, 272.8461 - 6.027e-6 * d, 30.05826, 0.008606 + 2.15e-9 * d, 260.2471 + 0.005995147 * d]
+    ];
+    for (var p = 0; p < EL.length; p++) {
+      var h = helio(rev(EL[p][1]), EL[p][2], rev(EL[p][3]), EL[p][4], EL[p][5], rev(EL[p][6]));
+      pushEq(EL[p][0], { x: h.x + sun.x, y: h.y + sun.y, z: h.z + sun.z });
+    }
+    var S = (50.03 + 0.033459652 * d) * RD, P = (238.95 + 0.003968789 * d) * RD;
+    var lonp = (238.9508 + 0.00400703 * d
+      - 19.799 * Math.sin(P) + 19.848 * Math.cos(P) + 0.897 * Math.sin(2 * P) - 4.956 * Math.cos(2 * P)
+      + 0.610 * Math.sin(3 * P) + 1.211 * Math.cos(3 * P) - 0.341 * Math.sin(4 * P) - 0.190 * Math.cos(4 * P)
+      + 0.128 * Math.sin(5 * P) - 0.034 * Math.cos(5 * P) - 0.038 * Math.sin(6 * P) + 0.031 * Math.cos(6 * P)
+      + 0.020 * Math.sin(S - P) - 0.010 * Math.cos(S - P)) * RD;
+    var latp = (-3.9082
+      - 5.453 * Math.sin(P) - 14.975 * Math.cos(P) + 3.527 * Math.sin(2 * P) + 1.673 * Math.cos(2 * P)
+      - 1.051 * Math.sin(3 * P) + 0.328 * Math.cos(3 * P) + 0.179 * Math.sin(4 * P) - 0.292 * Math.cos(4 * P)
+      + 0.019 * Math.sin(5 * P) + 0.100 * Math.cos(5 * P) - 0.031 * Math.sin(6 * P) - 0.026 * Math.cos(6 * P)
+      + 0.011 * Math.cos(S - P)) * RD;
+    var rp = 40.72 + 6.68 * Math.sin(P) + 6.90 * Math.cos(P) - 1.11 * Math.sin(2 * P) - 0.421 * Math.cos(2 * P)
+      - 0.140 * Math.sin(3 * P) + 0.079 * Math.cos(3 * P) + 0.037 * Math.sin(4 * P) - 0.020 * Math.cos(4 * P)
+      + 0.009 * Math.sin(5 * P) - 0.005 * Math.cos(5 * P);
+    pushEq('Pluto', { x: rp * Math.cos(lonp) * Math.cos(latp) + sun.x, y: rp * Math.sin(lonp) * Math.cos(latp) + sun.y, z: rp * Math.sin(latp) + sun.z });
+    return out;
+  }
+
+  /* ── tactical scope v2: Map palette, in-scope detail panel, live solar system ── */
+  var _scopeOn = false, _scopeRAF = null, _scopeSel = null;
+  var _TIERC = { 1: '#f59e0b', 2: '#3b82f6', 3: '#4a5a6a' };   /* = Map dot palette */
+  var _SSGREEN = '#10b981';                                     /* = Map search-target green */
+  function _tierOf(score){ return score >= 70 ? 1 : score >= 50 ? 2 : 3; }
+  window._scopeClearSel = function(){ _scopeSel = null; _scopeInfo(); };
+  window._scopeOpenSel = function(){
+    if (!_scopeSel) return;
+    var t = _scopeSel;
+    _scopeToggle();
+    if (t.el) {
+      t.el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      t.el.classList.add('kfocus');
+      setTimeout(function(){ t.el.classList.remove('kfocus'); }, 3200);
+    } else if (!t.ss && typeof selectCandidate === 'function') selectCandidate(t.name);
+    else {
+      var qEl = document.getElementById('q');
+      if (qEl && typeof doSearch === 'function') { qEl.value = t.name; doSearch(); }
+      else location.href = 'index.html?q=' + encodeURIComponent(t.name);
+    }
+  };
+  window._scopeTrackSel = function(){
+    if (_scopeSel) window.NAVCON.track(_scopeSel.name, _scopeSel.ra, _scopeSel.dec);
+  };
+  function _scopeInfo(){
+    var el = document.getElementById('scope-info');
+    if (!el) return;
+    if (!_scopeSel) { el.style.display = 'none'; el.innerHTML = ''; return; }
+    var t = _scopeSel;
+    var col = t.ss ? _SSGREEN : _TIERC[_tierOf(t.score)];
+    var chip = t.ss ? '⊕ SOLAR SYSTEM · LIVE EPHEMERIS' : 'TIER ' + _tierOf(t.score) + ' · SCORE ' + t.score;
+    el.style.display = 'block';
+    el.innerHTML =
+      '<div class="si-row"><span class="si-chip" style="color:' + col + ';border-color:' + col + '88;background:' + col + '22">' + chip + '</span>' +
+      '<span class="si-name">' + _esc(t.name) + '</span>' +
+      '<button class="pro-x" onclick="_scopeClearSel()" title="Clear selection">✕</button></div>' +
+      '<div class="si-row j-t" id="si-live">—</div>' +
+      '<div class="si-row"><button class="btn-map-jump" onclick="_scopeOpenSel()">OPEN</button>' +
+      '<button class="btn-map-jump" onclick="_scopeTrackSel()">⌖ TRACK</button></div>';
+    _scopeLive();
+  }
+  function _scopeLive(){
+    var li = document.getElementById('si-live');
+    if (!li || !_scopeSel) return;
+    var t = _scopeSel, aa = _altazOf(t.ra, t.dec);
+    li.textContent = (aa ? 'ALT ' + (aa.alt >= 0 ? '+' : '') + aa.alt.toFixed(1) + '° · AZ ' + aa.az.toFixed(0) + '° · ' : '') +
+      (t.ss ? 'RA ' + t.ra.toFixed(2) + '° DEC ' + t.dec.toFixed(2) + '° (NOW)' : 'J2000 RA ' + t.ra.toFixed(2) + '° DEC ' + t.dec.toFixed(2) + '°');
+  }
   function _scopeToggle(){
     var ov = document.getElementById('scope-ov');
     if (ov) {
       _scopeOn = false;
       if (_scopeRAF) cancelAnimationFrame(_scopeRAF);
+      _scopeSel = null;
       ov.remove();
       try { SFX.close(); } catch(e) {}
       return;
     }
     try { SFX.open(); } catch(e) {}
-    op('TACTICAL SCOPE — PLOTTING CANDIDATES ON LOCAL SKY');
+    op('TACTICAL SCOPE — PLOTTING CANDIDATES + SOLAR SYSTEM ON LOCAL SKY');
     ov = document.createElement('div');
     ov.id = 'scope-ov';
     ov.innerHTML = '<div id="scope-box"><div class="pro-hdr">◉ TACTICAL SCOPE — LOCAL SKY PLOT<button class="pro-x" id="scope-x">✕</button></div>' +
-      '<canvas id="scope-cv" width="520" height="520"></canvas><div id="scope-foot" class="j-t">—</div></div>';
+      '<canvas id="scope-cv" width="520" height="520"></canvas><div id="scope-info" style="display:none"></div><div id="scope-foot" class="j-t">—</div></div>';
     ov.addEventListener('click', function(ev){ if (ev.target === ov) _scopeToggle(); });
     document.body.appendChild(ov);
     document.getElementById('scope-x').addEventListener('click', _scopeToggle);
     _scopeOn = true;
     if (obsLat == null) _ensureGeo();
-    var tgts = _navTargets(), blips = [], sweepA = 0;
+    var tgts = _navTargets(), blips = [], sweepA = 0, ssCache = _ssBodies(), ssT = Date.now(), fN = 0;
     var cv = document.getElementById('scope-cv'), c2 = cv.getContext('2d');
     cv.addEventListener('click', function(ev){
       var r = cv.getBoundingClientRect();
       var x = (ev.clientX - r.left) * (cv.width / r.width), y = (ev.clientY - r.top) * (cv.height / r.height);
-      var best = null, bd = 15;
+      var best = null, bd = 16;
       for (var i = 0; i < blips.length; i++) {
-        var d = Math.hypot(blips[i].x - x, blips[i].y - y);
-        if (d < bd) { bd = d; best = blips[i]; }
+        var dd = Math.hypot(blips[i].x - x, blips[i].y - y);
+        if (dd < bd) { bd = dd; best = blips[i]; }
       }
       if (!best) return;
       try { SFX.click(); } catch(e) {}
+      _scopeSel = best.t;
       op('SCOPE SELECT — ' + best.t.name.toUpperCase());
-      _scopeToggle();
-      if (best.t.el) {
-        best.t.el.scrollIntoView({ block: 'center', behavior: 'smooth' });
-        best.t.el.classList.add('kfocus');
-        (function(el){ setTimeout(function(){ el.classList.remove('kfocus'); }, 3200); })(best.t.el);
-      } else if (typeof selectCandidate === 'function') selectCandidate(best.t.name);
+      _scopeInfo();
     });
+    function plot(C, R, aa){
+      var rr = R * (90 - aa.alt) / 90, th = (aa.az - 90) * Math.PI / 180;
+      return { x: C + rr * Math.cos(th), y: C + rr * Math.sin(th) };
+    }
     function draw(){
       if (!_scopeOn) return;
       var W2 = cv.width, C = W2 / 2, R = C - 26;
@@ -3122,21 +3236,51 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
           c2.fillStyle = g2;
           c2.beginPath(); c2.moveTo(C, C); c2.arc(C, C, R, sweepA - .02, sweepA + .5); c2.closePath(); c2.fill();
         }
+        if (Date.now() - ssT > 60000) { ssCache = _ssBodies(); ssT = Date.now(); }
         blips = [];
-        var up = 0, d0 = new Date();
-        for (var i = 0; i < tgts.length; i++) {
-          var aa = _altazOf(tgts[i].ra, tgts[i].dec, d0);
+        var up = 0, upSS = 0, d0 = new Date(), i, aa, pxy;
+        for (i = 0; i < tgts.length; i++) {
+          aa = _altazOf(tgts[i].ra, tgts[i].dec, d0);
           if (!aa || aa.alt <= 0) continue;
           up++;
-          var rr = R * (90 - aa.alt) / 90, th = (aa.az - 90) * Math.PI / 180;
-          var x = C + rr * Math.cos(th), y = C + rr * Math.sin(th);
-          blips.push({ x: x, y: y, t: tgts[i] });
-          var rel = ((Math.atan2(y - C, x - C) - sweepA) % 6.283 + 6.283) % 6.283;
+          pxy = plot(C, R, aa);
+          blips.push({ x: pxy.x, y: pxy.y, t: tgts[i] });
+          var rel = ((Math.atan2(pxy.y - C, pxy.x - C) - sweepA) % 6.283 + 6.283) % 6.283;
           var hot = rel < .5 || rel > 5.78;
-          c2.fillStyle = tgts[i].score >= 70 ? (hot ? '#ffd479' : 'rgba(245,158,11,.85)') : (hot ? '#7dffb8' : 'rgba(63,224,143,.65)');
-          c2.beginPath(); c2.arc(x, y, tgts[i].score >= 70 ? 3.4 : 2.4, 0, 6.29); c2.fill();
+          var tier = _tierOf(tgts[i].score);
+          c2.globalAlpha = hot ? 1 : (tier === 3 ? .5 : .85);
+          c2.fillStyle = _TIERC[tier];
+          c2.beginPath(); c2.arc(pxy.x, pxy.y, tier === 1 ? 3.4 : tier === 2 ? 2.8 : 2.2, 0, 6.29); c2.fill();
         }
-        if (foot) foot.textContent = up + ' OF ' + tgts.length + ' TARGETS ABOVE YOUR HORIZON · ZENITH AT CENTER · CLICK A BLIP TO OPEN';
+        c2.globalAlpha = 1;
+        c2.font = '9px monospace';
+        c2.textAlign = 'left';
+        for (i = 0; i < ssCache.length; i++) {
+          aa = _altazOf(ssCache[i].ra, ssCache[i].dec, d0);
+          if (!aa || aa.alt <= 0) continue;
+          upSS++;
+          pxy = plot(C, R, aa);
+          blips.push({ x: pxy.x, y: pxy.y, t: ssCache[i] });
+          c2.fillStyle = _SSGREEN;
+          c2.shadowColor = _SSGREEN; c2.shadowBlur = 6;
+          c2.beginPath(); c2.arc(pxy.x, pxy.y, 3.6, 0, 6.29); c2.fill();
+          c2.shadowBlur = 0;
+          c2.fillText(ssCache[i].name.toUpperCase(), pxy.x + 6, pxy.y - 5);
+        }
+        c2.textAlign = 'center';
+        if (_scopeSel) {
+          aa = _altazOf(_scopeSel.ra, _scopeSel.dec, d0);
+          if (aa && aa.alt > 0) {
+            pxy = plot(C, R, aa);
+            c2.strokeStyle = _scopeSel.ss ? _SSGREEN : _TIERC[_tierOf(_scopeSel.score)];
+            c2.lineWidth = 1.5;
+            var pr = 8 + 2 * Math.sin(Date.now() / 260);
+            c2.beginPath(); c2.arc(pxy.x, pxy.y, pr, 0, 6.29); c2.stroke();
+          }
+          if (fN % 45 === 0) _scopeLive();
+        }
+        fN++;
+        if (foot) foot.textContent = up + '/' + tgts.length + ' CANDIDATES + ' + upSS + ' SOLAR-SYSTEM BODIES ABOVE HORIZON · TAP A BLIP';
       }
       _scopeRAF = requestAnimationFrame(draw);
     }
