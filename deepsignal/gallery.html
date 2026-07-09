@@ -361,7 +361,12 @@ body{padding-bottom:30px}
 .si-col{flex:1;min-width:0}
 #trklist-ov{position:fixed;right:12px;bottom:44px;z-index:915;width:min(420px,calc(100vw - 24px));max-height:50vh;display:flex;flex-direction:column;background:rgba(3,14,10,.95);border:1px solid rgba(63,224,143,.5);border-radius:8px;box-shadow:0 0 26px rgba(63,224,143,.15);overflow:hidden}
 #trk-body{overflow-y:auto;padding:8px 12px;scrollbar-width:thin}
-.th-row{display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid rgba(63,224,143,.08)}
+.th-row{display:flex;flex-direction:column;gap:2px;padding:6px 0;border-bottom:1px solid rgba(63,224,143,.08)}
+.th-main{display:flex;align-items:center;gap:8px}
+.th-sub{display:flex;gap:6px;font-family:monospace;font-size:.54rem;letter-spacing:.08em}
+.th-type{color:#7da6c4}
+.th-sys{color:#5a9a72}
+.th-sep{color:#3a5a4a}
 .th-name{font-family:monospace;font-size:.7rem;color:#eef3f8;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .th-up{font-family:monospace;font-size:.6rem;color:#3fe08f;white-space:nowrap}
 .th-dn{font-family:monospace;font-size:.6rem;color:#f97316;white-space:nowrap}
@@ -1195,7 +1200,7 @@ window._svBlink = function(btn){
 <div id="sky-tooltip-map"></div>
 <div class="gallery-hdr">
 <h1>DeepSignal — Sky Image Gallery</h1>
-<div class="subtitle">Generated <span id="gen-ts">2026-07-09 16:26 UTC</span> &nbsp;·&nbsp; 244 targets &nbsp;·&nbsp; 244 sky images via Hips2Fits CDN</div>
+<div class="subtitle">Generated <span id="gen-ts">2026-07-09 16:48 UTC</span> &nbsp;·&nbsp; 244 targets &nbsp;·&nbsp; 244 sky images via Hips2Fits CDN</div>
 <div class="stats">
   <div class="stat"><div class="stat-n" style="color:#f59e0b">104</div><div class="stat-l">Tier 1 ≥70</div></div>
   <div class="stat"><div class="stat-n" style="color:#60a5fa">128</div><div class="stat-l">Tier 2 50–69</div></div>
@@ -9878,6 +9883,17 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     if (l[i]) window.NAVCON.track(l[i].name, l[i].ra, l[i].dec);
     _thRender();
   };
+  /* classify a target by name: solar-system precise, FRB / interstellar / galaxy
+     by pattern, otherwise Star in the Milky Way (SETI candidates are nearby stars) */
+  function _classify(name){
+    var nm = String(name), key = nm.toLowerCase().replace(/[^a-z0-9]/g, '');
+    var SS = { sun:'Star', moon:'Moon', mercury:'Planet', venus:'Planet', earth:'Planet', mars:'Planet', jupiter:'Planet', saturn:'Planet', uranus:'Planet', neptune:'Planet', pluto:'Dwarf Planet' };
+    if (SS[key]) return { type: SS[key], sys: 'Solar System' };
+    if (/^(1i|2i|3i|oumuamua|borisov|atlas)/.test(key) || /interstellar/i.test(nm)) return { type: 'Interstellar Object', sys: 'Interstellar' };
+    if (/^frb/i.test(nm)) return { type: 'Fast Radio Burst', sys: 'Extragalactic' };
+    if (/(^m ?\d{1,3}(|$)|^ngc ?\d|galaxy|andromeda)/i.test(nm)) return { type: 'Galaxy / DSO', sys: nm };
+    return { type: 'Star', sys: 'Milky Way' };
+  }
   function _thRender(){
     var b = document.getElementById('trk-body');
     if (!b) return;
@@ -9890,9 +9906,11 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
         ? '<span class="' + (aa.alt > 0 ? 'th-up' : 'th-dn') + '">' + (aa.alt >= 0 ? '+' : '') + aa.alt.toFixed(0) + '° ' + (aa.alt > 0 ? 'UP' : 'DOWN') + '</span>'
         : '';
       var cur = (trackTgt && trackTgt.name === l[i].name) ? '<span class="th-cur">● LIVE</span>' : '';
-      h += '<div class="th-row"><span class="th-name">' + _esc(l[i].name) + '</span>' + cur + live +
+      var cls = _classify(l[i].name);
+      h += '<div class="th-row"><div class="th-main"><span class="th-name">' + _esc(l[i].name) + '</span>' + cur + live +
         '<button class="btn-map-jump" onclick="_thTrack(' + i + ')" title="Track this target">⌖</button>' +
-        '<button class="pro-x" onclick="_thDel(' + i + ')" title="Remove">✕</button></div>';
+        '<button class="pro-x" onclick="_thDel(' + i + ')" title="Remove">✕</button></div>' +
+        '<div class="th-sub"><span class="th-type">' + _esc(cls.type.toUpperCase()) + '</span><span class="th-sep">·</span><span class="th-sys">' + _esc(cls.sys.toUpperCase()) + '</span></div></div>';
     }
     b.innerHTML = h;
   }
@@ -10011,8 +10029,10 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     if (!_scopeSel) { el.style.display = 'none'; el.innerHTML = ''; return; }
     var t = _scopeSel;
     var trk = _thHas(t.name);
-    var col = t.ss ? _SSWHITE : (trk ? _SSGREEN : _TIERC[_tierOf(t.score)]);
-    var chip = t.ss ? '⊕ SOLAR SYSTEM · LIVE EPHEMERIS' : (trk ? '★ TRACKED · TIER ' + _tierOf(t.score) : 'TIER ' + _tierOf(t.score) + ' · SCORE ' + t.score);
+    var col = trk ? _SSGREEN : (t.ss ? _SSWHITE : _TIERC[_tierOf(t.score)]);
+    var chip = t.ss
+      ? (trk ? '★ TRACKED · SOLAR SYSTEM' : '⊕ SOLAR SYSTEM · LIVE EPHEMERIS')
+      : (trk ? '★ TRACKED · TIER ' + _tierOf(t.score) : 'TIER ' + _tierOf(t.score) + ' · SCORE ' + t.score);
     /* newest-survey sky cutout at the target position — shown for every target
        incl. solar-system bodies (for movers it is the current background star field) */
     var img = (t.ra == null) ? '' :
@@ -10149,8 +10169,9 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
           upSS++;
           pxy = plot(C, R, aa);
           blips.push({ x: pxy.x, y: pxy.y, t: ssCache[i] });
-          c2.fillStyle = _SSWHITE;
-          c2.shadowColor = _SSWHITE; c2.shadowBlur = 6;
+          var _ssc = draw._trk[ssCache[i].name] ? _SSGREEN : _SSWHITE;
+          c2.fillStyle = _ssc;
+          c2.shadowColor = _ssc; c2.shadowBlur = 6;
           c2.beginPath(); c2.arc(pxy.x, pxy.y, 3.6, 0, 6.29); c2.fill();
           c2.shadowBlur = 0;
           c2.fillText(ssCache[i].name.toUpperCase(), pxy.x + 6, pxy.y - 5);
@@ -10160,7 +10181,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
           aa = _altazOf(_scopeSel.ra, _scopeSel.dec, d0);
           if (aa && aa.alt > 0) {
             pxy = plot(C, R, aa);
-            c2.strokeStyle = _scopeSel.ss ? _SSWHITE : (draw._trk && draw._trk[_scopeSel.name] ? _SSGREEN : _TIERC[_tierOf(_scopeSel.score)]);
+            c2.strokeStyle = (draw._trk && draw._trk[_scopeSel.name]) ? _SSGREEN : (_scopeSel.ss ? _SSWHITE : _TIERC[_tierOf(_scopeSel.score)]);
             c2.lineWidth = 1.5;
             var pr = 8 + 2 * Math.sin(Date.now() / 260);
             c2.beginPath(); c2.arc(pxy.x, pxy.y, pr, 0, 6.29); c2.stroke();
