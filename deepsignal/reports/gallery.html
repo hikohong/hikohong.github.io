@@ -310,7 +310,7 @@ body{padding-bottom:30px}
 /* NAVCON PRO — scope, CAS, CDU, journal, AR, watchlist */
 .hud-btn{font-family:monospace;font-size:.6rem;letter-spacing:.1em;color:#3fe08f;background:rgba(63,224,143,.08);border:1px solid rgba(63,224,143,.4);border-radius:3px;padding:2px 7px;cursor:pointer;line-height:1.4}
 .hud-btn:hover{background:rgba(63,224,143,.18)}
-.btn-track{background:none;border:1px solid rgba(16,185,129,.4);color:#10b981;border-radius:5px;padding:3px 9px;font-size:.7rem;cursor:pointer;font-family:inherit;white-space:nowrap;transition:background .15s,color .15s,border-color .15s;line-height:1.5}
+.btn-track{background:none;border:1px solid rgba(16,185,129,.4);color:#10b981;border-radius:3px;padding:0 6px;font-size:.62rem;font-weight:600;letter-spacing:.02em;cursor:pointer;font-family:inherit;white-space:nowrap;vertical-align:middle;transition:background .15s,color .15s,border-color .15s;line-height:1.4}
 .btn-track:hover{border-color:#10b981;background:rgba(16,185,129,.12)}
 .btn-track.on{background:#10b981;color:#04140c;border-color:#10b981;font-weight:700}
 .btn-track.on:hover{background:#34d399}
@@ -318,6 +318,26 @@ body{padding-bottom:30px}
 #cas-explain .pro-hdr{color:#f5a623;border-bottom-color:rgba(245,166,35,.3);background:rgba(40,26,6,.5)}
 #cas-explain .pro-x{border-color:rgba(245,166,35,.4);color:#f5a623}
 .cas-desc{padding:10px 12px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:.76rem;line-height:1.55;color:#f5d9a8}
+/* bottom-left collapsible system-status / notification centre */
+.hud-sys{cursor:pointer;border:none;background:none;font:inherit;color:inherit;padding:0;display:inline-flex;align-items:center;gap:5px;letter-spacing:inherit}
+#hud-sys.sys-alert,#hud-sys.sys-alert .hud-val{color:#f5a623}
+#hud-sys.sys-red,#hud-sys.sys-red .hud-val{color:#ff5f56}
+#hud-sys.sys-alert #hud-sys-dot{background:#f5a623;box-shadow:0 0 5px #f5a623}
+#hud-sys.sys-red #hud-sys-dot{background:#ff5f56;box-shadow:0 0 5px #ff5f56}
+#sys-notices{position:fixed;left:8px;bottom:34px;z-index:62;width:min(430px,calc(100vw - 20px));max-height:52vh;display:flex;flex-direction:column;background:rgba(5,12,22,.97);border:1px solid rgba(63,224,143,.4);border-radius:8px;box-shadow:0 0 26px rgba(0,0,0,.55);overflow:hidden}
+#sysn-body{overflow-y:auto;padding:6px;scrollbar-width:thin}
+.sys-notice{display:flex;align-items:baseline;gap:8px;width:100%;text-align:left;background:none;border:none;border-radius:5px;padding:7px 9px;cursor:pointer;font-family:inherit}
+.sys-notice:hover{background:rgba(255,255,255,.05)}
+.sn-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;align-self:center}
+.sys-amber .sn-dot{background:#f5a623;box-shadow:0 0 5px #f5a623}
+.sys-red .sn-dot{background:#ff5f56;box-shadow:0 0 5px #ff5f56}
+.sys-ok .sn-dot{background:#10b981;box-shadow:0 0 5px #10b981}
+.sn-lbl{font-family:monospace;font-size:.6rem;letter-spacing:.08em;flex-shrink:0}
+.sys-amber .sn-lbl{color:#f5a623}
+.sys-red .sn-lbl{color:#ff5f56}
+.sn-desc{font-size:.68rem;color:#8ea6bc;line-height:1.4}
+.sys-notice.sys-ok{color:#3fe08f;font-family:monospace;font-size:.6rem;letter-spacing:.08em;cursor:default}
+.sys-notice.sys-ok:hover{background:none}
 #cas-panel{position:fixed;top:74px;right:10px;z-index:56;display:flex;flex-direction:column;gap:4px;align-items:flex-end}
 .cas-light{font-family:monospace;font-size:.58rem;letter-spacing:.12em;padding:3px 9px;border-radius:3px;cursor:pointer;background:rgba(10,6,2,.85)}
 .cas-amber{color:#f5a623;border:1px solid rgba(245,166,35,.6)}
@@ -532,7 +552,7 @@ window._svBlink = function(btn){
   </div>
 </nav>
 <div id="hud-status">
-  <span class="hud-seg"><span class="hud-dot"></span>SYS <span class="hud-val">NOMINAL</span></span>
+  <button class="hud-seg hud-sys" id="hud-sys" title="System status — tap for active notifications"><span class="hud-dot" id="hud-sys-dot"></span><span id="hud-sys-txt">SYS <span class="hud-val">NOMINAL</span></span></button>
   <span class="hud-seg"><button class="hud-btn" id="hud-scope-btn" title="Tactical scope — plot all candidates on your local sky">◉ SCOPE</button></span>
   <span class="hud-seg"><button class="hud-btn" id="hud-trk-btn" title="Tracking list — every target you have tracked, with live altitude">⌖ LIST</button></span>
   <span class="hud-seg">UTC <span class="hud-val" id="hud-utc">--:--:--</span></span>
@@ -1175,7 +1195,7 @@ window._svBlink = function(btn){
 <div id="sky-tooltip-map"></div>
 <div class="gallery-hdr">
 <h1>DeepSignal — Sky Image Gallery</h1>
-<div class="subtitle">Generated <span id="gen-ts">2026-07-09 10:14 UTC</span> &nbsp;·&nbsp; 244 targets &nbsp;·&nbsp; 244 sky images via Hips2Fits CDN</div>
+<div class="subtitle">Generated <span id="gen-ts">2026-07-09 16:04 UTC</span> &nbsp;·&nbsp; 244 targets &nbsp;·&nbsp; 244 sky images via Hips2Fits CDN</div>
 <div class="stats">
   <div class="stat"><div class="stat-n" style="color:#f59e0b">104</div><div class="stat-l">Tier 1 ≥70</div></div>
   <div class="stat"><div class="stat-n" style="color:#60a5fa">128</div><div class="stat-l">Tier 2 50–69</div></div>
@@ -9622,7 +9642,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
   })();
 
   /* ── CAS annunciator: amber/red lights for REAL conditions, click = acknowledge ── */
-  var _casAck = {};
+  var _casAck = {}, _sysActive = [];
   var _CAS = [
     { id: 'STALE', lbl: 'DATA STALE', lvl: 'amber',
       desc: 'The pipeline catalog was last refreshed over 14 days ago. Re-run the DeepSignal pipeline to update the candidate list.',
@@ -9649,37 +9669,91 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
   }
   function _casUpdate(){
     var panel = document.getElementById('cas-panel');
-    if (!panel) {
-      panel = document.createElement('div');
-      panel.id = 'cas-panel';
-      document.body.appendChild(panel);
-    }
+    if (!panel) { panel = document.createElement('div'); panel.id = 'cas-panel'; document.body.appendChild(panel); }
+    var active = [];
     for (var i = 0; i < _CAS.length; i++) {
       var c = _CAS[i], el = document.getElementById('cas-' + c.id), on = false;
       try { on = !!c.test(); } catch(e) {}
-      if (on && !el) {
-        el = document.createElement('button');
-        el.id = 'cas-' + c.id;
-        el.className = 'cas-light cas-' + c.lvl + (_casAck[c.id] ? '' : ' cas-new');
-        el.textContent = c.lbl;
-        el.title = c.desc + '  (tap for details / acknowledge)';
-        (function(cid, ee, lbl, desc){
-          ee.addEventListener('click', function(){
-            _casAck[cid] = 1;
-            ee.classList.remove('cas-new');
-            try { SFX.click(); } catch(e) {}
-            _casExplain(lbl, desc);
-            op('CAS — ' + lbl + ': ' + desc);
-          });
-        })(c.id, el, c.lbl, c.desc);
-        panel.appendChild(el);
-        if (!_casAck[c.id]) op('CAS ALERT — ' + c.lbl + ': ' + c.desc);
-      } else if (!on && el) {
-        el.remove();
+      if (on) {
+        active.push(c);
+        /* top-right pop-up: only while un-acknowledged — tap dismisses it there
+           but the alert stays in the bottom-left status centre */
+        if (!_casAck[c.id] && !el) {
+          el = document.createElement('button');
+          el.id = 'cas-' + c.id;
+          el.className = 'cas-light cas-' + c.lvl + ' cas-new';
+          el.textContent = c.lbl;
+          el.title = c.desc + '  (tap for details / dismiss)';
+          (function(cid, ee, lbl, desc){
+            ee.addEventListener('click', function(){
+              _casAck[cid] = 1;
+              if (ee.parentNode) ee.remove();
+              try { SFX.click(); } catch(e) {}
+              _casExplain(lbl, desc);
+              op('CAS — ' + lbl + ': ' + desc);
+            });
+          })(c.id, el, c.lbl, c.desc);
+          panel.appendChild(el);
+          op('CAS ALERT — ' + c.lbl + ': ' + c.desc);
+        } else if (_casAck[c.id] && el) {
+          el.remove();
+        }
+      } else {
+        if (el) el.remove();
         delete _casAck[c.id];
       }
     }
+    _sysUpdate(active);
   }
+  function _sysUpdate(active){
+    _sysActive = active;
+    var seg = document.getElementById('hud-sys'), txt = document.getElementById('hud-sys-txt');
+    if (!seg) return;
+    var n = active.length, red = false;
+    for (var i = 0; i < active.length; i++) if (active[i].lvl === 'red') red = true;
+    if (n === 0) {
+      seg.classList.remove('sys-alert', 'sys-red');
+      if (txt) txt.innerHTML = 'SYS <span class="hud-val">NOMINAL</span>';
+    } else {
+      seg.classList.add('sys-alert');
+      seg.classList.toggle('sys-red', red);
+      if (txt) txt.innerHTML = 'SYS <span class="hud-val">' + n + ' ALERT' + (n > 1 ? 'S' : '') + '</span>';
+    }
+    if (document.getElementById('sys-notices')) _sysRenderNotices();
+  }
+  function _sysRenderNotices(){
+    var ov = document.getElementById('sys-notices');
+    if (!ov) return;
+    var a = _sysActive || [];
+    var h = '<div class="pro-hdr">◔ SYSTEM STATUS<button class="pro-x" id="sysn-x">✕</button></div><div id="sysn-body">';
+    if (!a.length) {
+      h += '<div class="sys-notice sys-ok"><span class="sn-dot"></span>ALL SYSTEMS NOMINAL — NO ACTIVE ALERTS</div>';
+    } else {
+      for (var i = 0; i < a.length; i++)
+        h += '<button class="sys-notice sys-' + (a[i].lvl === 'red' ? 'red' : 'amber') + '" data-casid="' + a[i].id + '">' +
+          '<span class="sn-dot"></span><span class="sn-lbl">' + a[i].lbl + '</span><span class="sn-desc">' + _esc(a[i].desc) + '</span></button>';
+    }
+    h += '</div>';
+    ov.innerHTML = h;
+    document.getElementById('sysn-x').addEventListener('click', _sysToggleNotices);
+  }
+  function _sysToggleNotices(){
+    var ov = document.getElementById('sys-notices');
+    if (ov) { ov.remove(); return; }
+    try { SFX.click(); } catch(e) {}
+    ov = document.createElement('div');
+    ov.id = 'sys-notices';
+    ov.addEventListener('click', function(ev){
+      var b = ev.target && ev.target.closest ? ev.target.closest('.sys-notice[data-casid]') : null;
+      if (!b) return;
+      var id = b.getAttribute('data-casid'), c = null;
+      for (var i = 0; i < _CAS.length; i++) if (_CAS[i].id === id) c = _CAS[i];
+      if (c) { _casAck[c.id] = 1; var tr = document.getElementById('cas-' + c.id); if (tr) tr.remove(); _casExplain(c.lbl, c.desc); }
+    });
+    document.body.appendChild(ov);
+    _sysRenderNotices();
+  }
+  (function(){ var s = document.getElementById('hud-sys'); if (s) s.addEventListener('click', _sysToggleNotices); })();
 
   /* ── watchlist: pin targets, HUD cycles their live alt/az ── */
   function _wlGet(){ try { return JSON.parse(localStorage.getItem('ds-watchlist') || '[]'); } catch(e) { return []; } }
@@ -9917,6 +9991,14 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     if (qEl && typeof doSearch === 'function') { qEl.value = n; doSearch(); }
     else location.href = 'index.html?q=' + encodeURIComponent(n);
   };
+  window._scopeMap = function(){
+    if (!_scopeSel) return;
+    var t = _scopeSel;
+    op('SHOW ON MAP — ' + String(t.name).toUpperCase());
+    _scopeToggle();
+    if (typeof mapOpenFromCard === 'function') mapOpenFromCard(t.ra, t.dec, t.name, t.ss ? 0 : (t.score || 0), false);
+    else if (typeof mapOpen === 'function') mapOpen();
+  };
   function _scopeInfo(){
     var el = document.getElementById('scope-info');
     if (!el) return;
@@ -9937,7 +10019,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       '<span class="si-name">' + _esc(t.name) + '</span>' +
       '<button class="pro-x" onclick="_scopeClearSel()" title="Clear selection">✕</button></div>' +
       '<div class="si-row j-t" id="si-live">—</div>' +
-      '<div class="si-row">' + _trackBtn(t.name, t.ra, t.dec, 'TRACK') +
+      '<div class="si-row"><button class="btn-map-jump" onclick="_scopeMap()" title="Show this target on the Map page">⊕ Map</button>' + _trackBtn(t.name, t.ra, t.dec, 'TRACK') +
       '<button class="btn-map-jump" onclick="_scopeDetail()" title="Open full details on the Search page">↗ DETAIL</button></div>' +
       '</div></div>';
     _scopeLive();
