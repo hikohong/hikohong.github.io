@@ -368,6 +368,16 @@ body{padding-bottom:30px}
 .si-chip{font-family:monospace;font-size:.55rem;letter-spacing:.08em;padding:2px 8px;border-radius:9px;border:1px solid;white-space:nowrap}
 .si-name{font-family:monospace;font-size:.8rem;color:#eef3f8;font-weight:700}
 #scope-info .pro-x{margin-left:auto}
+.si-wrap{display:flex;gap:10px;align-items:flex-start}
+.si-img{width:74px;height:74px;object-fit:cover;border-radius:6px;border:1px solid rgba(63,224,143,.3);background:#040d18;flex-shrink:0}
+.si-col{flex:1;min-width:0}
+#trklist-ov{position:fixed;right:12px;bottom:44px;z-index:915;width:min(420px,calc(100vw - 24px));max-height:50vh;display:flex;flex-direction:column;background:rgba(3,14,10,.95);border:1px solid rgba(63,224,143,.5);border-radius:8px;box-shadow:0 0 26px rgba(63,224,143,.15);overflow:hidden}
+#trk-body{overflow-y:auto;padding:8px 12px;scrollbar-width:thin}
+.th-row{display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid rgba(63,224,143,.08)}
+.th-name{font-family:monospace;font-size:.7rem;color:#eef3f8;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.th-up{font-family:monospace;font-size:.6rem;color:#3fe08f;white-space:nowrap}
+.th-dn{font-family:monospace;font-size:.6rem;color:#f97316;white-space:nowrap}
+.th-cur{font-family:monospace;font-size:.55rem;color:#3fe08f;letter-spacing:.1em;animation:hud-blink 2s infinite;white-space:nowrap}
 #journal-ov{position:fixed;right:12px;bottom:44px;z-index:910;width:min(460px,calc(100vw - 24px));max-height:46vh;display:flex;flex-direction:column;background:rgba(3,14,10,.95);border:1px solid rgba(63,224,143,.5);border-radius:8px;box-shadow:0 0 26px rgba(63,224,143,.15);overflow:hidden}
 #journal-body{overflow-y:auto;padding:8px 12px;font-family:monospace;font-size:.6rem;color:#3fe08f;scrollbar-width:thin;line-height:1.7}
 #cdu-ov{position:fixed;left:50%;transform:translateX(-50%);bottom:70px;z-index:930;display:flex;align-items:center;gap:8px;width:min(640px,calc(100vw - 30px));background:rgba(3,14,10,.96);border:1px solid rgba(63,224,143,.55);border-radius:6px;padding:9px 12px;box-shadow:0 0 30px rgba(63,224,143,.2)}
@@ -557,6 +567,7 @@ window._svBlink = function(btn){
 <div id="hud-status">
   <span class="hud-seg"><span class="hud-dot"></span>SYS <span class="hud-val">NOMINAL</span></span>
   <span class="hud-seg"><button class="hud-btn" id="hud-scope-btn" title="Tactical scope — plot all candidates on your local sky">◉ SCOPE</button></span>
+  <span class="hud-seg"><button class="hud-btn" id="hud-trk-btn" title="Tracking list — every target you have tracked, with live altitude">⌖ LIST</button></span>
   <span class="hud-seg">UTC <span class="hud-val" id="hud-utc">--:--:--</span></span>
   <span class="hud-seg hud-hide-sm">GMST <span class="hud-val" id="hud-gmst">--:--:--</span></span>
   <span class="hud-seg hud-hide-sm">MJD <span class="hud-val" id="hud-mjd">-----.---</span></span>
@@ -2715,7 +2726,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
         tr.classList.toggle('hud-warn', alt <= 0);
       }
     }
-    try { _casUpdate(); _watchTick(); _pinDecorate(); } catch(e) {}  /* first tick runs before module vars init */
+    try { _casUpdate(); _watchTick(); _pinDecorate(); if (document.getElementById('trk-body')) _thRender(); } catch(e) {}  /* first tick runs before module vars init */
     var arB = $('hud-ar-btn');
     if (arB) arB.style.display = (trackTgt && window.DeviceOrientationEvent && ('ontouchstart' in window)) ? '' : 'none';
   }
@@ -2781,6 +2792,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     trackTgt = { name: name, ra: ra, dec: dec };
     op('TRACKING ' + String(name).toUpperCase() + ' — ACQUIRING POSITION FIX');
     _ensureGeo();
+    try { _thAdd(name, ra, dec); } catch(e) {}
     var seg = $('hud-track-seg'); if (seg) seg.style.display = '';
   } };
   nextMsg();
@@ -3054,6 +3066,61 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     v.classList.toggle('hud-warn', !!(aa && aa.alt <= 0));
   }
 
+  /* ── tracking list: every target the operator has TRACKed, with live altitude ── */
+  function _thGet(){ try { return JSON.parse(localStorage.getItem('ds-track-list') || '[]'); } catch(e) { return []; } }
+  function _thSet(l){ try { localStorage.setItem('ds-track-list', JSON.stringify(l.slice(0, 20))); } catch(e) {} }
+  function _thAdd(name, ra, dec){
+    var l = _thGet();
+    for (var i = l.length - 1; i >= 0; i--) if (l[i].name === name) l.splice(i, 1);
+    l.unshift({ name: name, ra: ra, dec: dec, t: Date.now() });
+    _thSet(l);
+  }
+  window._thDel = function(i){
+    var l = _thGet();
+    l.splice(i, 1);
+    _thSet(l);
+    _thRender();
+    try { SFX.click(); } catch(e) {}
+  };
+  window._thTrack = function(i){
+    var l = _thGet();
+    if (l[i]) window.NAVCON.track(l[i].name, l[i].ra, l[i].dec);
+    _thRender();
+  };
+  function _thRender(){
+    var b = document.getElementById('trk-body');
+    if (!b) return;
+    var l = _thGet();
+    if (!l.length) { b.innerHTML = '<div class="j-t" style="padding:6px 0">NO TRACKED TARGETS YET — USE ⌖ TRACK ON ANY TARGET</div>'; return; }
+    var h = '';
+    for (var i = 0; i < l.length; i++) {
+      var aa = _altazOf(l[i].ra, l[i].dec);
+      var live = aa
+        ? '<span class="' + (aa.alt > 0 ? 'th-up' : 'th-dn') + '">' + (aa.alt >= 0 ? '+' : '') + aa.alt.toFixed(0) + '° ' + (aa.alt > 0 ? 'UP' : 'DOWN') + '</span>'
+        : '';
+      var cur = (trackTgt && trackTgt.name === l[i].name) ? '<span class="th-cur">● LIVE</span>' : '';
+      h += '<div class="th-row"><span class="th-name">' + _esc(l[i].name) + '</span>' + cur + live +
+        '<button class="btn-map-jump" onclick="_thTrack(' + i + ')" title="Track this target">⌖</button>' +
+        '<button class="pro-x" onclick="_thDel(' + i + ')" title="Remove">✕</button></div>';
+    }
+    b.innerHTML = h;
+  }
+  function _thToggle(){
+    var ov = document.getElementById('trklist-ov');
+    if (ov) { ov.remove(); return; }
+    try { SFX.open(); } catch(e) {}
+    ov = document.createElement('div');
+    ov.id = 'trklist-ov';
+    ov.innerHTML = '<div class="pro-hdr">⌖ TRACKING LIST — LIVE ALTITUDE<button class="pro-x" id="trk-x">✕</button></div><div id="trk-body"></div>';
+    document.body.appendChild(ov);
+    document.getElementById('trk-x').addEventListener('click', _thToggle);
+    _thRender();
+  }
+  (function(){
+    var tb = document.getElementById('hud-trk-btn');
+    if (tb) tb.addEventListener('click', _thToggle);
+  })();
+
   /* ── solar-system ephemeris (Schlyter low-precision, scope-grade accuracy):
         geocentric RA/Dec of Sun, Moon, all planets incl. Pluto, computed NOW ── */
   function _ssBodies(){
@@ -3121,21 +3188,6 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
   var _SSGREEN = '#10b981';                                     /* = Map search-target green */
   function _tierOf(score){ return score >= 70 ? 1 : score >= 50 ? 2 : 3; }
   window._scopeClearSel = function(){ _scopeSel = null; _scopeInfo(); };
-  window._scopeOpenSel = function(){
-    if (!_scopeSel) return;
-    var t = _scopeSel;
-    _scopeToggle();
-    if (t.el) {
-      t.el.scrollIntoView({ block: 'center', behavior: 'smooth' });
-      t.el.classList.add('kfocus');
-      setTimeout(function(){ t.el.classList.remove('kfocus'); }, 3200);
-    } else if (!t.ss && typeof selectCandidate === 'function') selectCandidate(t.name);
-    else {
-      var qEl = document.getElementById('q');
-      if (qEl && typeof doSearch === 'function') { qEl.value = t.name; doSearch(); }
-      else location.href = 'index.html?q=' + encodeURIComponent(t.name);
-    }
-  };
   window._scopeTrackSel = function(){
     if (_scopeSel) window.NAVCON.track(_scopeSel.name, _scopeSel.ra, _scopeSel.dec);
   };
@@ -3146,14 +3198,21 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     var t = _scopeSel;
     var col = t.ss ? _SSGREEN : _TIERC[_tierOf(t.score)];
     var chip = t.ss ? '⊕ SOLAR SYSTEM · LIVE EPHEMERIS' : 'TIER ' + _tierOf(t.score) + ' · SCORE ' + t.score;
+    /* Map-style detail card, fully in place: sky thumbnail (fixed targets only —
+       archival cutouts cannot contain movers), chip, name, live readout, TRACK */
+    var img = t.ss ? '' :
+      '<img class="si-img" alt="" src="https://alasky.cds.unistra.fr/hips-image-services/hips2fits' +
+      '?hips=CDS%2FP%2FDSS2%2Fcolor&width=100&height=100&fov=0.25&projection=TAN&coordsys=icrs' +
+      '&ra=' + t.ra.toFixed(5) + '&dec=' + t.dec.toFixed(5) + '&format=jpg" onerror="this.hidden=true">';
     el.style.display = 'block';
     el.innerHTML =
+      '<div class="si-wrap">' + img + '<div class="si-col">' +
       '<div class="si-row"><span class="si-chip" style="color:' + col + ';border-color:' + col + '88;background:' + col + '22">' + chip + '</span>' +
       '<span class="si-name">' + _esc(t.name) + '</span>' +
       '<button class="pro-x" onclick="_scopeClearSel()" title="Clear selection">✕</button></div>' +
       '<div class="si-row j-t" id="si-live">—</div>' +
-      '<div class="si-row"><button class="btn-map-jump" onclick="_scopeOpenSel()">OPEN</button>' +
-      '<button class="btn-map-jump" onclick="_scopeTrackSel()">⌖ TRACK</button></div>';
+      '<div class="si-row"><button class="btn-map-jump" onclick="_scopeTrackSel()">⌖ TRACK</button></div>' +
+      '</div></div>';
     _scopeLive();
   }
   function _scopeLive(){
@@ -3369,6 +3428,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     var verb = m[1].toUpperCase(), arg = m[2].trim();
     if (verb === 'SCOPE') return _scopeToggle();
     if (verb === 'LOG') return _jToggle();
+    if (verb === 'LIST') return _thToggle();
     if (verb === 'AR') return _arToggle();
     if (verb === 'MAP' && typeof mapOpen === 'function') return mapOpen();
     if (verb === 'NEWS' && typeof newsOpen === 'function') return newsOpen(null);
