@@ -350,6 +350,14 @@ body{padding-bottom:30px}
 /* NAVCON PRO — scope, CAS, CDU, journal, AR, watchlist */
 .hud-btn{font-family:monospace;font-size:.6rem;letter-spacing:.1em;color:#3fe08f;background:rgba(63,224,143,.08);border:1px solid rgba(63,224,143,.4);border-radius:3px;padding:2px 7px;cursor:pointer;line-height:1.4}
 .hud-btn:hover{background:rgba(63,224,143,.18)}
+.btn-track{background:none;border:1px solid rgba(16,185,129,.4);color:#10b981;border-radius:5px;padding:3px 9px;font-size:.7rem;cursor:pointer;font-family:inherit;white-space:nowrap;transition:background .15s,color .15s,border-color .15s;line-height:1.5}
+.btn-track:hover{border-color:#10b981;background:rgba(16,185,129,.12)}
+.btn-track.on{background:#10b981;color:#04140c;border-color:#10b981;font-weight:700}
+.btn-track.on:hover{background:#34d399}
+#cas-explain{position:fixed;top:112px;right:10px;z-index:58;width:min(300px,calc(100vw - 24px));background:rgba(20,12,4,.96);border:1px solid rgba(245,166,35,.6);border-radius:8px;box-shadow:0 0 26px rgba(245,166,35,.18);overflow:hidden}
+#cas-explain .pro-hdr{color:#f5a623;border-bottom-color:rgba(245,166,35,.3);background:rgba(40,26,6,.5)}
+#cas-explain .pro-x{border-color:rgba(245,166,35,.4);color:#f5a623}
+.cas-desc{padding:10px 12px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:.76rem;line-height:1.55;color:#f5d9a8}
 #cas-panel{position:fixed;top:74px;right:10px;z-index:56;display:flex;flex-direction:column;gap:4px;align-items:flex-end}
 .cas-light{font-family:monospace;font-size:.58rem;letter-spacing:.12em;padding:3px 9px;border-radius:3px;cursor:pointer;background:rgba(10,6,2,.85)}
 .cas-amber{color:#f5a623;border:1px solid rgba(245,166,35,.6)}
@@ -1242,7 +1250,7 @@ function showResult(resolved, pipelineMatches) {
     ? `<span class="coord-epoch" title="Moving object resolved from a static fallback table — live ephemeris unavailable right now">CATALOG SNAPSHOT · MOVING BODY</span>`
     : `<span class="coord-epoch">J2000 CATALOG FRAME</span>`;
   const coordTxt = ra != null
-    ? `${epochTag}RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}° <span style="white-space:nowrap;display:inline-flex;align-items:center;gap:3px"><button class="btn-copy-coords" onclick="copyCoords('result-cc',${ra},${dec})" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-result-cc">✓</span><button class="btn-map-jump" onclick="event.stopPropagation();mapOpenFromCard(${ra},${dec},'${_srName}',${score||0},${!p.target_name})" title="Show on Map">Map</button><button class="btn-map-jump" onclick="SFX.click();window.NAVCON&&NAVCON.track('${_srName}',${ra},${dec})" title="Live altitude/azimuth of this target from your location (asks for geolocation once)">⌖ Track</button></span>`
+    ? `${epochTag}RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}° <span style="white-space:nowrap;display:inline-flex;align-items:center;gap:3px"><button class="btn-copy-coords" onclick="copyCoords('result-cc',${ra},${dec})" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-result-cc">✓</span><button class="btn-map-jump" onclick="event.stopPropagation();mapOpenFromCard(${ra},${dec},'${_srName}',${score||0},${!p.target_name})" title="Show on Map">Map</button>${_trackBtn(name, ra, dec, 'Track')}</span>`
     : "";
   // Deep-sky survey/catalog links are meaningless for moving solar-system
   // bodies (archival plates can never contain them) — swap in LIVE tools instead.
@@ -1324,7 +1332,7 @@ function showMultipleResults(groups) {
     const methods = (c._all_methods || []).filter(Boolean);
     const mtags   = methods.slice(0, 2).map(m => `<span class="tag tag-method" style="font-size:.65rem" title="${_MD[m]||m}">${m}</span>`).join("");
     const coordsTxt = (ra != null && !isNaN(ra))
-      ? `<div class="card-coords">RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}°</div>` : "";
+      ? `<div class="card-coords" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}° ${_trackBtn(name, ra, dec, 'Track')}</div>` : "";
     const safeN   = name.replace(/'/g, "\\'");
     return `<div class="card" onclick="selectCandidate('${safeN}')">
       <div class="card-img">${img}${badge}${img ? `<span class="img-epoch">${skySurvey(dec).short}</span>${svChipsHtml(dec)}` : ""}</div>
@@ -1413,7 +1421,7 @@ function renderHighlights() {
     const _cid = `hl-${c.target_name.replace(/[^a-zA-Z0-9]/g,"_")}`;
 
     const coordsTxt = (ra != null)
-      ? `<div class="card-coords" style="display:flex;align-items:center;gap:4px"><span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}°</span><span style="flex-shrink:0;display:inline-flex;align-items:center;gap:3px"><button class="btn-copy-coords" onclick="event.stopPropagation();copyCoords('${_cid}',${ra},${dec})" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-${_cid}">✓</span><button class="btn-map-jump" onclick="event.stopPropagation();mapOpenFromCard(${ra},${dec},'${safeN}',${c.candidacy_score||0},false)" title="Show on Map">Map</button></span></div>` : "";
+      ? `<div class="card-coords" style="display:flex;align-items:center;gap:4px"><span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">RA ${ra.toFixed(4)}° &nbsp; Dec ${dec.toFixed(4)}°</span><span style="flex-shrink:0;display:inline-flex;align-items:center;gap:3px"><button class="btn-copy-coords" onclick="event.stopPropagation();copyCoords('${_cid}',${ra},${dec})" title="Copy RA/Dec">⎘</button><span class="copy-ok" id="ck-${_cid}">✓</span><button class="btn-map-jump" onclick="event.stopPropagation();mapOpenFromCard(${ra},${dec},'${safeN}',${c.candidacy_score||0},false)" title="Show on Map">Map</button>${_trackBtn(c.target_name, ra, dec, 'Track')}</span></div>` : "";
 
     const allReasons = c._all_reasons || c.reasons || [];
     const reasonsHtml = allReasons.length
@@ -2245,6 +2253,7 @@ function mapShowDetail(idx) {
   const imgUrl = ra ? `https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=120&height=120&fov=0.25&projection=TAN&coordsys=icrs&ra=${ra.toFixed(5)}&dec=${dec.toFixed(5)}&format=jpg` : "";
   const imgHtml = imgUrl ? `<img src="${imgUrl}" width="80" height="80" style="object-fit:cover;border-radius:6px;border:1px solid rgba(125,211,252,.15);flex-shrink:0;background:#0a1a2e" onerror="this.style.display='none'">` : "";
   const links = [
+    ra ? _trackBtn(cleanName(c.target_name), ra, dec, 'Track') : "",
     ra ? `<a class="ext-link" href="https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=${ra.toFixed(4)}+${dec.toFixed(4)}&CooFrame=ICRS&Radius=2&Radius.unit=arcmin" target="_blank" rel="noreferrer">SIMBAD</a>` : "",
     ra ? `<a class="ext-link" href="https://aladin.u-strasbg.fr/AladinLite/?target=${ra.toFixed(4)}+${dec.toFixed(4)}&fov=0.5&survey=P/DSS2/color" target="_blank" rel="noreferrer">Aladin</a>` : "",
     `<a class="ext-link map-gallery-link" href="gallery.html?target=${encodeURIComponent(cleanName(c.target_name))}" onclick="event.preventDefault(); navTo(this.href)">View in gallery<span class="gal-arr"><span>›</span><span>›</span><span>›</span></span></a>`,
@@ -2726,7 +2735,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
         tr.classList.toggle('hud-warn', alt <= 0);
       }
     }
-    try { _casUpdate(); _watchTick(); _pinDecorate(); if (document.getElementById('trk-body')) _thRender(); } catch(e) {}  /* first tick runs before module vars init */
+    try { _casUpdate(); _watchTick(); _pinDecorate(); if (window._trkSyncBtns) _trkSyncBtns(); if (document.getElementById('trk-body')) _thRender(); } catch(e) {}  /* first tick runs before module vars init */
     var arB = $('hud-ar-btn');
     if (arB) arB.style.display = (trackTgt && window.DeviceOrientationEvent && ('ontouchstart' in window)) ? '' : 'none';
   }
@@ -2792,7 +2801,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     trackTgt = { name: name, ra: ra, dec: dec };
     op('TRACKING ' + String(name).toUpperCase() + ' — ACQUIRING POSITION FIX');
     _ensureGeo();
-    try { _thAdd(name, ra, dec); } catch(e) {}
+    try { _thAdd(name, ra, dec); if (window._trkSyncBtns) _trkSyncBtns(); } catch(e) {}
     var seg = $('hud-track-seg'); if (seg) seg.style.display = '';
   } };
   nextMsg();
@@ -2964,14 +2973,28 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
   var _casAck = {};
   var _CAS = [
     { id: 'STALE', lbl: 'DATA STALE', lvl: 'amber',
+      desc: 'The pipeline catalog was last refreshed over 14 days ago. Re-run the DeepSignal pipeline to update the candidate list.',
       test: function(){ return _staleDays != null && _staleDays > 14; } },
     { id: 'LINK', lbl: 'SIMBAD LINK', lvl: 'red',
+      desc: 'The SIMBAD star catalog did not answer the startup self-test. External name / coordinate lookups may fail right now.',
       test: function(){ try { return sessionStorage.getItem('ds-simbad') === 'fail'; } catch(e) { return false; } } },
     { id: 'HORIZON', lbl: 'TGT BELOW HORIZON', lvl: 'amber',
+      desc: 'The target you are tracking is currently below your local horizon — it is not observable from your location right now.',
       test: function(){ return !!(trackTgt && _lastAlt != null && _lastAlt <= 0); } },
     { id: 'FEEDS', lbl: 'FEEDS DEGRADED', lvl: 'amber',
+      desc: 'More than half of the sky-image feeds failed to load. Check your network connection or try refreshing.',
       test: function(){ return (Date.now() - _loadT > 45000) && _feedsTotal > 10 && (_feedsDone / _feedsTotal) < 0.5; } }
   ];
+  function _casExplain(lbl, desc){
+    var ov = document.getElementById('cas-explain');
+    if (ov) ov.remove();
+    ov = document.createElement('div');
+    ov.id = 'cas-explain';
+    ov.innerHTML = '<div class="pro-hdr">⚠ ' + _esc(lbl) + '<button class="pro-x" id="casx-x">✕</button></div><div class="cas-desc">' + _esc(desc) + '</div>';
+    document.body.appendChild(ov);
+    document.getElementById('casx-x').addEventListener('click', function(){ if (ov.parentNode) ov.remove(); });
+    setTimeout(function(){ if (ov.parentNode) ov.remove(); }, 10000);
+  }
   function _casUpdate(){
     var panel = document.getElementById('cas-panel');
     if (!panel) {
@@ -2987,17 +3010,18 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
         el.id = 'cas-' + c.id;
         el.className = 'cas-light cas-' + c.lvl + (_casAck[c.id] ? '' : ' cas-new');
         el.textContent = c.lbl;
-        el.title = 'Click to acknowledge';
-        (function(cid, ee){
+        el.title = c.desc + '  (tap for details / acknowledge)';
+        (function(cid, ee, lbl, desc){
           ee.addEventListener('click', function(){
             _casAck[cid] = 1;
             ee.classList.remove('cas-new');
             try { SFX.click(); } catch(e) {}
-            op('CAS ACKNOWLEDGED — ' + cid);
+            _casExplain(lbl, desc);
+            op('CAS — ' + lbl + ': ' + desc);
           });
-        })(c.id, el);
+        })(c.id, el, c.lbl, c.desc);
         panel.appendChild(el);
-        if (!_casAck[c.id]) op('CAS ALERT — ' + c.lbl);
+        if (!_casAck[c.id]) op('CAS ALERT — ' + c.lbl + ': ' + c.desc);
       } else if (!on && el) {
         el.remove();
         delete _casAck[c.id];
@@ -3075,6 +3099,47 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     l.unshift({ name: name, ra: ra, dec: dec, t: Date.now() });
     _thSet(l);
   }
+  function _thHas(name){ var l = _thGet(); for (var i = 0; i < l.length; i++) if (l[i].name === name) return true; return false; }
+  function _escAttr(s){ return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;'); }
+  /* unified Track button — identical look + selected state everywhere (Search, Gallery, Map, scope) */
+  window._trackBtn = function(name, ra, dec, label){
+    label = label || 'Track';
+    var on = _thHas(name);
+    return '<button class="btn-track' + (on ? ' on' : '') + '" data-trk-name="' + _escAttr(name) +
+      '" data-ra="' + ra + '" data-dec="' + dec + '" data-label="' + _escAttr(label) +
+      '" title="Add / remove from your tracking list — live altitude shown in the HUD">' +
+      (on ? '✓ ' : '⌖ ') + label + '</button>';
+  };
+  window._trkSyncBtns = function(){
+    var bs = document.querySelectorAll('.btn-track[data-trk-name]');
+    for (var i = 0; i < bs.length; i++) {
+      var on = _thHas(bs[i].getAttribute('data-trk-name'));
+      if (bs[i].classList.contains('on') === on) continue;
+      bs[i].classList.toggle('on', on);
+      var lb = bs[i].getAttribute('data-label') || 'Track';
+      bs[i].textContent = (on ? '✓ ' : '⌖ ') + lb;
+    }
+  };
+  window._trackToggle = function(name, ra, dec){
+    if (_thHas(name)) {
+      var l = _thGet();
+      for (var k = l.length - 1; k >= 0; k--) if (l[k].name === name) l.splice(k, 1);
+      _thSet(l);
+      if (trackTgt && trackTgt.name === name) { trackTgt = null; var seg = $('hud-track-seg'); if (seg) seg.style.display = 'none'; }
+      op('TRACK LIST — REMOVED ' + String(name).toUpperCase());
+      try { SFX.click(); } catch(e) {}
+    } else {
+      window.NAVCON.track(name, ra, dec);
+    }
+    _trkSyncBtns();
+    if (document.getElementById('trk-body')) _thRender();
+  };
+  document.addEventListener('click', function(ev){
+    var b = ev.target && ev.target.closest ? ev.target.closest('.btn-track[data-trk-name]') : null;
+    if (!b) return;
+    ev.preventDefault(); ev.stopPropagation();
+    window._trackToggle(b.getAttribute('data-trk-name'), parseFloat(b.getAttribute('data-ra')), parseFloat(b.getAttribute('data-dec')));
+  }, true);
   window._thDel = function(i){
     var l = _thGet();
     l.splice(i, 1);
@@ -3191,6 +3256,15 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
   window._scopeTrackSel = function(){
     if (_scopeSel) window.NAVCON.track(_scopeSel.name, _scopeSel.ra, _scopeSel.dec);
   };
+  window._scopeDetail = function(){
+    if (!_scopeSel) return;
+    var n = _scopeSel.name;
+    op('OPENING DETAIL — ' + String(n).toUpperCase());
+    _scopeToggle();
+    var qEl = document.getElementById('q');
+    if (qEl && typeof doSearch === 'function') { qEl.value = n; doSearch(); }
+    else location.href = 'index.html?q=' + encodeURIComponent(n);
+  };
   function _scopeInfo(){
     var el = document.getElementById('scope-info');
     if (!el) return;
@@ -3211,7 +3285,8 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       '<span class="si-name">' + _esc(t.name) + '</span>' +
       '<button class="pro-x" onclick="_scopeClearSel()" title="Clear selection">✕</button></div>' +
       '<div class="si-row j-t" id="si-live">—</div>' +
-      '<div class="si-row"><button class="btn-map-jump" onclick="_scopeTrackSel()">⌖ TRACK</button></div>' +
+      '<div class="si-row">' + _trackBtn(t.name, t.ra, t.dec, 'TRACK') +
+      '<button class="btn-map-jump" onclick="_scopeDetail()" title="Open full details on the Search page">↗ DETAIL</button></div>' +
       '</div></div>';
     _scopeLive();
   }
