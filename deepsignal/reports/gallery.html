@@ -1200,7 +1200,7 @@ window._svBlink = function(btn){
 <div id="sky-tooltip-map"></div>
 <div class="gallery-hdr">
 <h1>DeepSignal — Sky Image Gallery</h1>
-<div class="subtitle">Generated <span id="gen-ts">2026-07-10 05:32 UTC</span> &nbsp;·&nbsp; 244 targets &nbsp;·&nbsp; 244 sky images via Hips2Fits CDN</div>
+<div class="subtitle">Generated <span id="gen-ts">2026-07-10 13:07 UTC</span> &nbsp;·&nbsp; 244 targets &nbsp;·&nbsp; 244 sky images via Hips2Fits CDN</div>
 <div class="stats">
   <div class="stat"><div class="stat-n" style="color:#f59e0b">104</div><div class="stat-l">Tier 1 ≥70</div></div>
   <div class="stat"><div class="stat-n" style="color:#60a5fa">128</div><div class="stat-l">Tier 2 50–69</div></div>
@@ -8884,6 +8884,29 @@ document.addEventListener("keydown", e => {
 // Filter / sort
 let _activeFilter = "all";
 let _searchTargetCache = null;
+// Solar-system detection + Wikipedia thumbnail loader — gives the Map the same
+// representative photo the scope and Search card use (a sky cutout at a moving
+// body's stale coords is meaningless). Shared source of truth: window._SS_WIKI.
+function _isSolarSystem(name){
+  var m = window._SS_WIKI || {};
+  return !!m[String(name || "").toLowerCase().replace(/[^a-z]/g, "")];
+}
+function _ssThumbInto(name, imgId){
+  var el = document.getElementById(imgId);
+  if (!el) return;
+  var m = window._SS_WIKI || {}, key = String(name).toLowerCase().replace(/[^a-z]/g, "");
+  var title = m[key] || name;
+  fetch("https://en.wikipedia.org/w/api.php?action=query&titles=" + encodeURIComponent(title) +
+        "&prop=pageimages&pithumbsize=240&format=json&origin=*")
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      var pg = (d && d.query && d.query.pages) || {}, thumb = null;
+      for (var k in pg) { if (pg[k] && pg[k].thumbnail) { thumb = pg[k].thumbnail.source; break; } }
+      if (thumb) { el.src = thumb; el.style.objectFit = "contain"; el.style.background = "#040d18"; }
+      else { el.style.display = "none"; }
+    })
+    .catch(function(){ el.style.display = "none"; });
+}
 function filterCards() {
   const tier = _activeFilter;
   const method = document.getElementById("fb-method").value;
@@ -8932,8 +8955,12 @@ function mapShowSearchTarget() {
   SFX.scan();
   const {ra, dec, name} = _searchTargetCache;
   const tc = '#10b981', tbg = 'rgba(16,185,129,.12)';
-  const imgUrl = ra ? `https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=${encodeURIComponent(_bestHips(dec))}&width=120&height=120&fov=0.25&projection=TAN&coordsys=icrs&ra=${ra.toFixed(5)}&dec=${dec.toFixed(5)}&format=jpg` : "";
-  const imgHtml = imgUrl ? `<img src="${imgUrl}" width="80" height="80" style="object-fit:cover;border-radius:6px;border:1px solid rgba(16,185,129,.25);flex-shrink:0;background:#0a1a2e" onerror="this.style.display='none'">` : "";
+  const isSS = _isSolarSystem(name);
+  if (isSS) requestAnimationFrame(function(){ _ssThumbInto(name, 'map-thumb'); });
+  const imgUrl = (!isSS && ra) ? `https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=${encodeURIComponent(_bestHips(dec))}&width=120&height=120&fov=0.25&projection=TAN&coordsys=icrs&ra=${ra.toFixed(5)}&dec=${dec.toFixed(5)}&format=jpg` : "";
+  const imgHtml = isSS
+    ? `<img id="map-thumb" width="80" height="80" alt="${name}" style="object-fit:contain;border-radius:6px;border:1px solid rgba(16,185,129,.25);flex-shrink:0;background:#040d18">`
+    : (imgUrl ? `<img src="${imgUrl}" width="80" height="80" style="object-fit:cover;border-radius:6px;border:1px solid rgba(16,185,129,.25);flex-shrink:0;background:#0a1a2e" onerror="this.style.display='none'">` : "");
   const el = document.getElementById("map-detail");
   el.style.display = "block";
   el.innerHTML = `
@@ -8978,8 +9005,12 @@ function mapOpenFromCard(ra, dec, name, score, isSearchResult) {
     <circle cx="${cx}" cy="${cy}" r="2" fill="${tc}" opacity="0.9"/>
     <circle cx="${cx}" cy="${cy}" r="6" fill="transparent" style="pointer-events:all;cursor:pointer" onclick="mapShowSearchTarget()"/>`;
   }
-  const imgUrl = ra ? `https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=${encodeURIComponent(_bestHips(dec))}&width=120&height=120&fov=0.25&projection=TAN&coordsys=icrs&ra=${ra.toFixed(5)}&dec=${dec.toFixed(5)}&format=jpg` : "";
-  const imgHtml = imgUrl ? `<img src="${imgUrl}" width="80" height="80" style="object-fit:cover;border-radius:6px;border:1px solid rgba(16,185,129,.25);flex-shrink:0;background:#0a1a2e" onerror="this.style.display='none'">` : "";
+  const isSS = _isSolarSystem(name);
+  if (isSS) requestAnimationFrame(function(){ _ssThumbInto(name, 'map-thumb'); });
+  const imgUrl = (!isSS && ra) ? `https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=${encodeURIComponent(_bestHips(dec))}&width=120&height=120&fov=0.25&projection=TAN&coordsys=icrs&ra=${ra.toFixed(5)}&dec=${dec.toFixed(5)}&format=jpg` : "";
+  const imgHtml = isSS
+    ? `<img id="map-thumb" width="80" height="80" alt="${name}" style="object-fit:contain;border-radius:6px;border:1px solid rgba(16,185,129,.25);flex-shrink:0;background:#040d18">`
+    : (imgUrl ? `<img src="${imgUrl}" width="80" height="80" style="object-fit:cover;border-radius:6px;border:1px solid rgba(16,185,129,.25);flex-shrink:0;background:#0a1a2e" onerror="this.style.display='none'">` : "");
   const el = document.getElementById("map-detail");
   el.style.display = "block";
   el.innerHTML = `
@@ -9080,8 +9111,13 @@ function mapShowDetail(idx) {
   const coords = c.ra
     ? `<div class="card-coords" style="margin:6px 0">RA ${c.ra.toFixed(4)}° &nbsp; Dec ${c.dec.toFixed(4)}°</div>`
     : "";
-  const imgUrl = c.ra ? `https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=${encodeURIComponent(_bestHips(c.dec))}&width=120&height=120&fov=0.25&projection=TAN&coordsys=icrs&ra=${c.ra.toFixed(5)}&dec=${c.dec.toFixed(5)}&format=jpg` : "";
-  const imgHtml = imgUrl ? `<img src="${imgUrl}" width="80" height="80" style="object-fit:cover;border-radius:6px;border:1px solid rgba(125,211,252,.15);flex-shrink:0;background:#0a1a2e" onerror="this.style.display='none'">` : "";
+  const nm = c.name;
+  const isSS = _isSolarSystem(nm);
+  if (isSS) requestAnimationFrame(function(){ _ssThumbInto(nm, 'map-thumb'); });
+  const imgUrl = (!isSS && c.ra) ? `https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=${encodeURIComponent(_bestHips(c.dec))}&width=120&height=120&fov=0.25&projection=TAN&coordsys=icrs&ra=${c.ra.toFixed(5)}&dec=${c.dec.toFixed(5)}&format=jpg` : "";
+  const imgHtml = isSS
+    ? `<img id="map-thumb" width="80" height="80" alt="${nm}" style="object-fit:contain;border-radius:6px;border:1px solid rgba(125,211,252,.15);flex-shrink:0;background:#040d18">`
+    : (imgUrl ? `<img src="${imgUrl}" width="80" height="80" style="object-fit:cover;border-radius:6px;border:1px solid rgba(125,211,252,.15);flex-shrink:0;background:#0a1a2e" onerror="this.style.display='none'">` : "");
   const links = [
     c.ra ? _trackBtn(c.name, c.ra, c.dec, 'Track') : "",
     c.ra ? `<a class="ext-link" href="https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=${c.ra.toFixed(4)}+${c.dec.toFixed(4)}&CooFrame=ICRS&Radius=2&Radius.unit=arcmin" target="_blank" rel="noreferrer">SIMBAD</a>` : "",
@@ -10074,6 +10110,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     ceres:'Ceres (dwarf planet)', io:'Io (moon)', europa:'Europa (moon)', ganymede:'Ganymede (moon)',
     callisto:'Callisto (moon)', titan:'Titan (moon)', enceladus:'Enceladus', triton:'Triton (moon)',
     charon:'Charon (moon)', eris:'Eris (dwarf planet)', makemake:'Makemake', haumea:'Haumea' };
+  try { window._SS_WIKI = _SS_WIKI; } catch(e) {}
   function _ssWikiInto(name, imgId){
     var key = String(name).toLowerCase().replace(/[^a-z]/g, ''), title = _SS_WIKI[key] || name;
     try {
