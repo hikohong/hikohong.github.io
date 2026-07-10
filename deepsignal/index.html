@@ -60,9 +60,12 @@ nav{display:flex;align-items:center;gap:12px;padding:16px 24px;border-bottom:1px
 .result-img img{width:220px;height:220px;object-fit:cover;display:block}
 @media(max-width:600px){.result-img img{width:100%;height:200px}}
 /* solar-system reference photo: fill the same frame as the sky view, centered
-   on the default black background, contained (never cropped) */
-#result-img-box{width:220px;height:220px;display:grid;place-items:center;background:#040d18}
-#result-img-box img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;display:block}
+   on the default black background, contained (never cropped).
+   NOTE: iOS Safari does not resolve percentage max-height inside a grid box —
+   the image renders at natural size and bursts the frame — so the img is
+   absolutely positioned to fill the frame and object-fit:contain letterboxes it. */
+#result-img-box{position:relative;width:220px;height:220px;display:grid;place-items:center;background:#040d18}
+#result-img-box img{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:contain}
 @media(max-width:600px){#result-img-box{width:100%;height:200px}}
 .result-body{padding:20px}
 .result-name{font-size:1.3rem;font-weight:700;margin-bottom:6px}
