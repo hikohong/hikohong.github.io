@@ -366,7 +366,7 @@
 
         <div class="pulse-row">
           <div class="pulse-dot"></div>
-          <span class="pulse-text">244 candidates &nbsp;·&nbsp; 422 detections &nbsp;·&nbsp; 14 algorithms &nbsp;·&nbsp; 10 data sources</span>
+          <span class="pulse-text" id="pulse-stats">244 candidates &nbsp;·&nbsp; 422 detections &nbsp;·&nbsp; 14 algorithms &nbsp;·&nbsp; 10 data sources</span>
         </div>
 
         <div class="actions">
@@ -430,6 +430,23 @@
         sf.appendChild(el);
       }
     })();
+  </script>
+  <script>
+  /* Self-updating headline counts — derive from the published catalog so the
+     homepage can never drift out of sync with Search / Gallery again.
+     candidates = unique deduplicated objects; detections = raw signal records
+     (same object seen by multiple algorithms). Static text is the fallback. */
+  (function(){
+    var el = document.getElementById('pulse-stats');
+    if (!el || !window.fetch) return;
+    fetch('deepsignal/catalog.json').then(function(r){ return r.json(); }).then(function(c){
+      if (!Array.isArray(c) || !c.length) return;
+      var det = 0;
+      for (var i = 0; i < c.length; i++) { var e = c[i]._entries; det += Array.isArray(e) ? e.length : 1; }
+      el.innerHTML = c.length + ' candidates  ·  ' + det +
+        ' detections  ·  14 algorithms  ·  10 data sources';
+    }).catch(function(){});
+  })();
   </script>
 </body>
 </html>
