@@ -386,7 +386,7 @@ body{padding-bottom:30px}
 #ar-state{font-family:monospace;font-size:.7rem;color:#3a7a5a;letter-spacing:.14em;margin-top:4px}
 #ar-state.ar-on{color:#7dffb8;text-shadow:0 0 10px rgba(63,224,143,.7)}
 .nav-link:active,.search-btn:active,button:active{transform:translateY(1px) scale(.98)}
-@media (prefers-reduced-motion:reduce){.b-pend{animation:none}.card.tilting{transform:none!important}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}.card.tilting{transform:none!important}}
 </style>
 </head>
 <body>
@@ -1200,7 +1200,7 @@ window._svBlink = function(btn){
 <div id="sky-tooltip-map"></div>
 <div class="gallery-hdr">
 <h1>DeepSignal — Sky Image Gallery</h1>
-<div class="subtitle">Generated <span id="gen-ts">2026-07-10 00:17 UTC</span> &nbsp;·&nbsp; 244 targets &nbsp;·&nbsp; 244 sky images via Hips2Fits CDN</div>
+<div class="subtitle">Generated <span id="gen-ts">2026-07-10 05:32 UTC</span> &nbsp;·&nbsp; 244 targets &nbsp;·&nbsp; 244 sky images via Hips2Fits CDN</div>
 <div class="stats">
   <div class="stat"><div class="stat-n" style="color:#f59e0b">104</div><div class="stat-l">Tier 1 ≥70</div></div>
   <div class="stat"><div class="stat-n" style="color:#60a5fa">128</div><div class="stat-l">Tier 2 50–69</div></div>
@@ -9268,6 +9268,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
 (function(){
   var RM = false, CAN_HOVER = true;
   try { RM = matchMedia('(prefers-reduced-motion: reduce)').matches; } catch(e) {}
+  try { window._RM = RM; } catch(e) {}
   try { CAN_HOVER = matchMedia('(hover: hover)').matches; } catch(e) {}
   var $ = function(id){ return document.getElementById(id); };
 
@@ -9394,12 +9395,8 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     if (tr && trackTgt) {
       if (obsLat == null) tr.textContent = 'ACQUIRING FIX…';
       else {
-        var lst = (g + obsLon) % 360; if (lst < 0) lst += 360;
-        var H = (lst - trackTgt.ra) * Math.PI / 180;
-        var phi = obsLat * Math.PI / 180, de = trackTgt.dec * Math.PI / 180;
-        var alt = Math.asin(Math.sin(phi) * Math.sin(de) + Math.cos(phi) * Math.cos(de) * Math.cos(H)) * 180 / Math.PI;
-        var az = Math.atan2(-Math.sin(H), Math.tan(de) * Math.cos(phi) - Math.sin(phi) * Math.cos(H)) * 180 / Math.PI;
-        if (az < 0) az += 360;
+        var _hz = _altazOf(trackTgt.ra, trackTgt.dec, d) || { alt: 0, az: 0 };
+        var alt = _hz.alt, az = _hz.az;
         _lastAlt = alt;
         var rs = trackTgt._rs;
         if (!rs || rs.exp < Date.now()) rs = trackTgt._rs = riseSet(trackTgt.ra, trackTgt.dec);
@@ -9442,15 +9439,49 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
 
   /* ── live target tracking: alt/az of the locked target from the operator's
         real location (geolocation is only requested via NAVCON.track) ── */
-  var obsLat = null, obsLon = null, trackTgt = null;
+  var obsLat = null, obsLon = null, obsSrc = null, trackTgt = null, _geoWatch = null;
+  /* restore last-known position so the scope works instantly on reload and while
+     a fresh fix is still resolving */
+  try {
+    var _svPos = JSON.parse(localStorage.getItem('ds-obs') || 'null');
+    if (_svPos && isFinite(_svPos.lat) && isFinite(_svPos.lon)) { obsLat = _svPos.lat; obsLon = _svPos.lon; obsSrc = 'SAVED'; }
+  } catch(e) {}
+  function _obsLabel(){
+    if (obsLat == null) return 'POSITION: — · TAP TO SET';
+    var la = Math.abs(obsLat).toFixed(2) + (obsLat >= 0 ? '°N' : '°S');
+    var lo = Math.abs(obsLon).toFixed(2) + (obsLon >= 0 ? '°E' : '°W');
+    return 'OBS ' + la + ' ' + lo + ' · ' + (obsSrc || 'GPS');
+  }
+  function _setObs(lat, lon, src){
+    obsLat = lat; obsLon = lon; obsSrc = src || 'GPS';
+    try { localStorage.setItem('ds-obs', JSON.stringify({ lat: lat, lon: lon })); } catch(e) {}
+    try { var el = document.getElementById('scope-geo'); if (el) el.textContent = _obsLabel(); } catch(e) {}
+  }
   function _ensureGeo(){
-    if (obsLat != null) return;
+    /* live position: watchPosition keeps bearings correct as the operator moves
+       anywhere on Earth — not frozen at the first fix. Denial keeps saved/manual. */
+    if (_geoWatch != null) return;
     try {
-      navigator.geolocation.getCurrentPosition(function(pos){
-        obsLat = pos.coords.latitude; obsLon = pos.coords.longitude;
-      }, function(){ op('GEOLOCATION DENIED — TRACKING OFFLINE'); },
-      { maximumAge: 600000, timeout: 8000 });
+      _geoWatch = navigator.geolocation.watchPosition(function(pos){
+        _setObs(pos.coords.latitude, pos.coords.longitude, 'GPS');
+      }, function(){ if (obsLat == null) op('GEOLOCATION UNAVAILABLE — USING SAVED / MANUAL POSITION'); },
+      { enableHighAccuracy: false, maximumAge: 300000, timeout: 10000 });
     } catch(e) {}
+  }
+  function _setManualObs(str){
+    var parts = String(str).split(/[ ,]+/).map(parseFloat).filter(function(x){ return isFinite(x); });
+    if (parts.length >= 2 && parts[0] >= -90 && parts[0] <= 90 && parts[1] >= -180 && parts[1] <= 180) {
+      _setObs(parts[0], parts[1], 'MANUAL');
+      op('OBSERVER POSITION SET — ' + _obsLabel());
+      return true;
+    }
+    op('INVALID POSITION — USE  lat, lon  (e.g. 25.03, 121.56)');
+    return false;
+  }
+  function _promptObs(){
+    var cur = (obsLat != null) ? (obsLat.toFixed(4) + ', ' + obsLon.toFixed(4)) : '';
+    var v = prompt('Observer position — latitude, longitude (decimal degrees):', cur);
+    if (v != null && String(v).trim()) _setManualObs(v);
   }
 
   /* ── live ops feed: real events preempt the idle rotation ── */
@@ -9598,22 +9629,35 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     var alt = Math.asin(Math.sin(phi) * Math.sin(de) + Math.cos(phi) * Math.cos(de) * Math.cos(H)) * 180 / Math.PI;
     var az = Math.atan2(-Math.sin(H), Math.tan(de) * Math.cos(phi) - Math.sin(phi) * Math.cos(H)) * 180 / Math.PI;
     if (az < 0) az += 360;
+    /* atmospheric refraction (Saemundsson): true altitude → apparent altitude, so
+       "above the horizon" and rise/set reflect what is actually visible (~0.5° lift
+       at the horizon). Baked in here so every up/down test stays consistent. */
+    if (alt > -2 && alt < 89.9) alt += (1.02 / Math.tan((alt + 10.3 / (alt + 5.11)) * Math.PI / 180)) / 60;
     return { alt: alt, az: az };
   }
 
   /* rise / transit / set forecast: numeric 24 h scan, cached 10 min */
+  function _bisectCross(ra, dec, t0, t1){
+    /* refine an apparent-altitude=0 crossing between t0 and t1 to ~second precision */
+    var s0 = _altazOf(ra, dec, new Date(t0)).alt > 0;
+    for (var k = 0; k < 24 && (t1 - t0) > 1000; k++) {
+      var tm = (t0 + t1) / 2, sm = _altazOf(ra, dec, new Date(tm)).alt > 0;
+      if (sm === s0) t0 = tm; else t1 = tm;
+    }
+    return (t0 + t1) / 2;
+  }
   function riseSet(ra, dec){
     var res = { exp: Date.now() + 600000 };
     if (obsLat == null) return res;
-    var now = new Date(), prev = null, maxAlt = -90;
+    var now = new Date(), t0 = now.getTime(), prev = null, prevT = t0, maxAlt = -90;
     for (var m = 0; m <= 1440; m += 4) {
-      var aa = _altazOf(ra, dec, new Date(now.getTime() + m * 60000));
+      var t = t0 + m * 60000, aa = _altazOf(ra, dec, new Date(t));
       if (aa.alt > maxAlt) maxAlt = aa.alt;
       if (prev != null) {
-        if (prev <= 0 && aa.alt > 0 && !res.rise) res.rise = new Date(now.getTime() + m * 60000);
-        if (prev > 0 && aa.alt <= 0 && !res.set) res.set = new Date(now.getTime() + m * 60000);
+        if (prev <= 0 && aa.alt > 0 && !res.rise) res.rise = new Date(_bisectCross(ra, dec, prevT, t));
+        if (prev > 0 && aa.alt <= 0 && !res.set) res.set = new Date(_bisectCross(ra, dec, prevT, t));
       }
-      prev = aa.alt;
+      prev = aa.alt; prevT = t;
     }
     res.never = maxAlt <= 0;
     res.circumpolar = !res.never && !res.rise && !res.set;
@@ -10099,12 +10143,16 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     ov = document.createElement('div');
     ov.id = 'scope-ov';
     ov.innerHTML = '<div id="scope-box"><div class="pro-hdr">◉ TACTICAL SCOPE — LOCAL SKY PLOT<button class="pro-x" id="scope-x">✕</button></div>' +
-      '<canvas id="scope-cv" width="520" height="520"></canvas><div id="scope-info" style="display:none"></div><div id="scope-foot" class="j-t">—</div></div>';
+      '<canvas id="scope-cv" width="520" height="520"></canvas><div id="scope-info" style="display:none"></div>' +
+      '<div id="scope-geo" class="j-t" title="Star positions are J2000 catalog coordinates (no precession applied — about 0.4° in 2026); solar-system bodies use live ephemeris. Click to set your observing position manually.">—</div>' +
+      '<div id="scope-foot" class="j-t">—</div></div>';
     ov.addEventListener('click', function(ev){ if (ev.target === ov) _scopeToggle(); });
     document.body.appendChild(ov);
     document.getElementById('scope-x').addEventListener('click', _scopeToggle);
+    var _geoEl = document.getElementById('scope-geo');
+    if (_geoEl) { _geoEl.textContent = _obsLabel(); _geoEl.style.cursor = 'pointer'; _geoEl.addEventListener('click', _promptObs); }
     _scopeOn = true;
-    if (obsLat == null) _ensureGeo();
+    _ensureGeo();
     var tgts = _navTargets(), blips = [], sweepA = 0, ssCache = _ssBodies(), ssT = Date.now(), fN = 0;
     var cv = document.getElementById('scope-cv'), c2 = cv.getContext('2d');
     cv.addEventListener('click', function(ev){
@@ -10127,6 +10175,10 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     }
     function draw(){
       if (!_scopeOn) return;
+      _scopeRAF = requestAnimationFrame(draw);
+      var _nt = Date.now();
+      if (draw._last && (_nt - draw._last) < 33) return;   // cap heavy redraw at ~30 fps (battery / CPU)
+      draw._last = _nt;
       var W2 = cv.width, C = W2 / 2, R = C - 26;
       c2.clearRect(0, 0, W2, W2);
       c2.strokeStyle = 'rgba(63,224,143,.35)';
@@ -10148,8 +10200,8 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
         c2.fillText('AWAITING POSITION FIX — ALLOW GEOLOCATION', C, C);
         if (foot) foot.textContent = 'GEOLOCATION REQUIRED FOR LOCAL-SKY PLOT';
       } else {
-        sweepA += 0.012;
-        if (c2.createConicGradient) {
+        sweepA += 0.024;
+        if (!window._RM && c2.createConicGradient) {
           var g2 = c2.createConicGradient(sweepA, C, C);
           g2.addColorStop(0, 'rgba(63,224,143,.16)');
           g2.addColorStop(.08, 'rgba(63,224,143,0)');
@@ -10240,7 +10292,6 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
         fN++;
         if (foot) foot.textContent = up + '/' + tgts.length + ' CANDIDATES · ' + trkUp + '/' + trkTot + ' TRACKED UP' + (trkDown ? ' (' + trkDown + ' BELOW HORIZON)' : '') + ' · ' + upSS + ' SOLAR-SYSTEM · WHITE=PLANETS GREEN=TRACKED · TAP A BLIP';
       }
-      _scopeRAF = requestAnimationFrame(draw);
     }
     _scopeRAF = requestAnimationFrame(draw);
   }

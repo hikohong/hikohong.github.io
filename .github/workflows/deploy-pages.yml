@@ -11,6 +11,8 @@ name: Deploy Pages
 on:
   push:
     branches: [master]
+  pull_request:
+    branches: [master]
   workflow_dispatch:
 
 permissions:
@@ -23,7 +25,24 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # Browserless smoke test — syntax-check inline JS and content invariants.
+  # Runs on PRs too, so regressions are caught before merge (not just at deploy).
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Validate web pages (inline JS + invariants)
+        run: node .github/scripts/validate-web.mjs
+
   deploy:
+    needs: validate
+    # PRs validate but never deploy — only push to master / manual dispatch publish.
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
