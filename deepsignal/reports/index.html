@@ -3507,9 +3507,9 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
         }
         if (Date.now() - ssT > 60000) { ssCache = _ssBodies(); ssT = Date.now(); }
         /* tracked-name set, refreshed ~2x/sec */
-        if (!draw._trk || fN % 30 === 0) { draw._trk = {}; var _tl = _thGet(); for (var _z = 0; _z < _tl.length; _z++) draw._trk[_tl[_z].name] = 1; }
+        if (!draw._trk || fN % 30 === 0) { draw._trk = {}; draw._trkList = _thGet(); for (var _z = 0; _z < draw._trkList.length; _z++) draw._trk[draw._trkList[_z].name] = 1; }
         blips = [];
-        var up = 0, upSS = 0, upTrk = 0, d0 = new Date(), i, aa, pxy;
+        var up = 0, upSS = 0, d0 = new Date(), i, aa, pxy, plotted = {};
         c2.font = '9px monospace';
         for (i = 0; i < tgts.length; i++) {
           aa = _altazOf(tgts[i].ra, tgts[i].dec, d0);
@@ -3517,9 +3517,9 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
           up++;
           pxy = plot(C, R, aa);
           blips.push({ x: pxy.x, y: pxy.y, t: tgts[i] });
+          plotted[tgts[i].name] = 1;
           if (draw._trk[tgts[i].name]) {
             /* on the tracking list → highlight green + label */
-            upTrk++;
             c2.globalAlpha = 1;
             c2.fillStyle = _SSGREEN; c2.shadowColor = _SSGREEN; c2.shadowBlur = 6;
             c2.beginPath(); c2.arc(pxy.x, pxy.y, 3.6, 0, 6.29); c2.fill();
@@ -3543,12 +3543,35 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
           upSS++;
           pxy = plot(C, R, aa);
           blips.push({ x: pxy.x, y: pxy.y, t: ssCache[i] });
+          plotted[ssCache[i].name] = 1;
           var _ssc = draw._trk[ssCache[i].name] ? _SSGREEN : _SSWHITE;
           c2.fillStyle = _ssc;
           c2.shadowColor = _ssc; c2.shadowBlur = 6;
           c2.beginPath(); c2.arc(pxy.x, pxy.y, 3.6, 0, 6.29); c2.fill();
           c2.shadowBlur = 0;
           c2.fillText(ssCache[i].name.toUpperCase(), pxy.x + 6, pxy.y - 5);
+        }
+        /* tracked-target census — count EVERY entry on the Tracking List so the
+           footer matches the list. Tracked candidates / solar-system bodies were
+           already drawn above (recorded in `plotted`); any other tracked target
+           (e.g. a searched star that isn't a pipeline candidate) is plotted here
+           from its stored coords. Below-horizon tracked targets cannot sit on a
+           local-sky dome — they are tallied so the operator knows why. */
+        var _tl2 = draw._trkList || [], trkTot = _tl2.length, trkUp = 0, trkDown = 0, _e, _nm, _a2;
+        for (i = 0; i < _tl2.length; i++) {
+          _e = _tl2[i]; _nm = _e.name;
+          if (plotted[_nm]) { trkUp++; continue; }
+          _a2 = (_e.ra != null && !isNaN(+_e.ra)) ? _altazOf(+_e.ra, +_e.dec, d0) : null;
+          if (_a2 && _a2.alt > 0) {
+            trkUp++;
+            pxy = plot(C, R, _a2);
+            blips.push({ x: pxy.x, y: pxy.y, t: { name: _nm, ra: +_e.ra, dec: +_e.dec } });
+            c2.fillStyle = _SSGREEN; c2.shadowColor = _SSGREEN; c2.shadowBlur = 6;
+            c2.beginPath(); c2.arc(pxy.x, pxy.y, 3.6, 0, 6.29); c2.fill();
+            c2.shadowBlur = 0;
+            c2.fillText(_nm.toUpperCase(), pxy.x + 6, pxy.y - 5);
+            plotted[_nm] = 1;
+          } else { trkDown++; }
         }
         c2.textAlign = 'center';
         if (_scopeSel) {
@@ -3563,7 +3586,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
           if (fN % 45 === 0) _scopeLive();
         }
         fN++;
-        if (foot) foot.textContent = up + '/' + tgts.length + ' CANDIDATES (' + upTrk + ' TRACKED) + ' + upSS + ' SOLAR-SYSTEM · WHITE=PLANETS GREEN=TRACKED · TAP A BLIP';
+        if (foot) foot.textContent = up + '/' + tgts.length + ' CANDIDATES · ' + trkUp + '/' + trkTot + ' TRACKED UP' + (trkDown ? ' (' + trkDown + ' BELOW HORIZON)' : '') + ' · ' + upSS + ' SOLAR-SYSTEM · WHITE=PLANETS GREEN=TRACKED · TAP A BLIP';
       }
       _scopeRAF = requestAnimationFrame(draw);
     }
