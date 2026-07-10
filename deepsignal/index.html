@@ -59,6 +59,11 @@ nav{display:flex;align-items:center;gap:12px;padding:16px 24px;border-bottom:1px
 .result-img{background:#040d18}
 .result-img img{width:220px;height:220px;object-fit:cover;display:block}
 @media(max-width:600px){.result-img img{width:100%;height:200px}}
+/* solar-system reference photo: fill the same frame as the sky view, centered
+   on the default black background, contained (never cropped) */
+#result-img-box{width:220px;height:220px;display:grid;place-items:center;background:#040d18}
+#result-img-box img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;display:block}
+@media(max-width:600px){#result-img-box{width:100%;height:200px}}
 .result-body{padding:20px}
 .result-name{font-size:1.3rem;font-weight:700;margin-bottom:6px}
 .result-type{color:#7dd3fc;font-size:.85rem;margin-bottom:10px}
@@ -1251,7 +1256,7 @@ function showResult(resolved, pipelineMatches) {
   // objects; archival survey imagery is labeled with its plate epoch.
   let imgTag;
   if (isSS) {
-    imgTag = `<div id="result-img-box" style="width:220px;height:220px;display:grid;place-items:center;color:#3a4a5a;font-family:monospace;font-size:.72rem">Loading…</div><span class="img-epoch">WIKIMEDIA REF · NOT SKY VIEW</span>`;
+    imgTag = `<div id="result-img-box" style="color:#3a4a5a;font-family:monospace;font-size:.72rem">Loading…</div><span class="img-epoch">WIKIMEDIA REF · NOT SKY VIEW</span>`;
   } else {
     const imgSrc = ra != null ? skyUrl(ra, dec, 0.25, _rsv.hips) : "";
     imgTag = imgSrc
@@ -1557,8 +1562,7 @@ async function _loadSolarSystemImage(name) {
     const pages = Object.values(data?.query?.pages || {});
     const thumb = pages[0]?.thumbnail?.source;
     if (!thumb) { box.textContent = "No image"; return; }
-    box.style.cssText = "";
-    box.innerHTML = `<img src="${thumb}" alt="${name}" style="width:220px;height:220px;object-fit:contain;background:#040d18;display:block" onerror="this.parentNode.textContent='No image'">`;
+    box.innerHTML = `<img src="${thumb}" alt="${name}" onerror="this.parentNode.textContent='No image'">`;
   } catch (e) { box.textContent = "No image"; }
 }
 
