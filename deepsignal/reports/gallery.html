@@ -348,7 +348,8 @@ body{padding-bottom:30px}
 .j-t{font-family:monospace;font-size:.56rem;color:#3a7a5a;letter-spacing:.08em}
 #scope-ov{position:fixed;inset:0;z-index:920;background:rgba(0,5,10,.82);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center}
 #scope-box{background:rgba(3,14,10,.95);border:1px solid rgba(63,224,143,.5);border-radius:10px;box-shadow:0 0 40px rgba(63,224,143,.18);overflow:hidden}
-#scope-box{width:min(94vw,560px)}
+#scope-box{max-width:96vw;max-height:96vh}
+/* canvas size is set by JS (_scopeFit) to the largest square that fits the viewport; the min() below is only a pre-JS fallback */
 #scope-cv{display:block;width:min(86vw,56vh,520px);height:min(86vw,56vh,520px);margin:8px auto 0;cursor:crosshair}
 #scope-foot{padding:7px 12px;text-align:center}
 #scope-info{border-top:1px solid rgba(63,224,143,.2);padding:8px 12px}
@@ -661,7 +662,7 @@ window._svBlink = function(btn){
     <div class="map-body" id="map-body">
       <div id="map-detail" style="display:none;border:1px solid rgba(125,211,252,.2);border-radius:8px;
         background:rgba(0,20,40,.45);padding:14px 16px;margin-bottom:18px;animation:lit-in .15s ease-out;
-        height:210px;overflow:hidden;box-sizing:border-box"></div>
+        box-sizing:border-box"></div>
       <div class="hist-title">Score distribution (0–100)</div>
       <div class="hist-wrap"><div class="hb-wrap" title="0–9: 0"><div class="hb-bar" style="height:0%;background:#374151"></div><div class="hb-lbl"></div></div><div class="hb-wrap" title="10–19: 0"><div class="hb-bar" style="height:0%;background:#374151"></div><div class="hb-lbl"></div></div><div class="hb-wrap" title="20–29: 6"><div class="hb-bar" style="height:5%;background:#374151"></div><div class="hb-lbl">6</div></div><div class="hb-wrap" title="30–39: 6"><div class="hb-bar" style="height:5%;background:#374151"></div><div class="hb-lbl">6</div></div><div class="hb-wrap" title="40–49: 0"><div class="hb-bar" style="height:0%;background:#374151"></div><div class="hb-lbl"></div></div><div class="hb-wrap" title="50–59: 118"><div class="hb-bar" style="height:100%;background:#3b82f6"></div><div class="hb-lbl">118</div></div><div class="hb-wrap" title="60–69: 10"><div class="hb-bar" style="height:8%;background:#3b82f6"></div><div class="hb-lbl">10</div></div><div class="hb-wrap" title="70–79: 6"><div class="hb-bar" style="height:5%;background:#f59e0b"></div><div class="hb-lbl">6</div></div><div class="hb-wrap" title="80–89: 85"><div class="hb-bar" style="height:72%;background:#f59e0b"></div><div class="hb-lbl">85</div></div><div class="hb-wrap" title="90–99: 8"><div class="hb-bar" style="height:6%;background:#f59e0b"></div><div class="hb-lbl">8</div></div><div class="hb-wrap" title="100: 5"><div class="hb-bar" style="height:4%;background:#f59e0b"></div><div class="hb-lbl">5</div></div></div>
       <div class="sky-title" style="margin-top:18px">Sky coverage — RA/Dec equirectangular &nbsp;<span style="opacity:.5;font-weight:400">(click dot for details)</span></div>
@@ -1200,7 +1201,7 @@ window._svBlink = function(btn){
 <div id="sky-tooltip-map"></div>
 <div class="gallery-hdr">
 <h1>DeepSignal — Sky Image Gallery</h1>
-<div class="subtitle">Generated <span id="gen-ts">2026-07-10 13:07 UTC</span> &nbsp;·&nbsp; 244 targets &nbsp;·&nbsp; 244 sky images via Hips2Fits CDN</div>
+<div class="subtitle">Generated <span id="gen-ts">2026-07-11 01:23 UTC</span> &nbsp;·&nbsp; 244 targets &nbsp;·&nbsp; 244 sky images via Hips2Fits CDN</div>
 <div class="stats">
   <div class="stat"><div class="stat-n" style="color:#f59e0b">104</div><div class="stat-l">Tier 1 ≥70</div></div>
   <div class="stat"><div class="stat-n" style="color:#60a5fa">128</div><div class="stat-l">Tier 2 50–69</div></div>
@@ -10072,7 +10073,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
   }
 
   /* ── tactical scope v2: Map palette, in-scope detail panel, live solar system ── */
-  var _scopeOn = false, _scopeRAF = null, _scopeSel = null;
+  var _scopeOn = false, _scopeRAF = null, _scopeSel = null, _scopeResize = null;
   var _TIERC = { 1: '#f59e0b', 2: '#3b82f6', 3: '#4a5a6a' };   /* = Map dot palette */
   var _SSGREEN = '#10b981';   /* now: TRACK-LIST highlight colour */
   var _SSWHITE = '#eef3f8';   /* solar-system bodies (white family) */
@@ -10170,6 +10171,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     if (ov) {
       _scopeOn = false;
       if (_scopeRAF) cancelAnimationFrame(_scopeRAF);
+      if (_scopeResize) { window.removeEventListener('resize', _scopeResize); _scopeResize = null; }
       _scopeSel = null;
       ov.remove();
       try { SFX.close(); } catch(e) {}
@@ -10192,6 +10194,19 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     _ensureGeo();
     var tgts = _navTargets(), blips = [], sweepA = 0, ssCache = _ssBodies(), ssT = Date.now(), fN = 0;
     var cv = document.getElementById('scope-cv'), c2 = cv.getContext('2d');
+    /* size the plot to the largest square that fits the viewport (keeps the 1:1
+       aspect), and re-fit live on resize — so a big desktop screen gets a big
+       scope instead of a fixed 520px one. Buffer = display size → stays crisp. */
+    function _scopeFit(){
+      var s = Math.min(window.innerWidth * 0.94, window.innerHeight - 176);
+      s = Math.max(280, Math.round(s));
+      if (cv.width !== s) { cv.width = s; cv.height = s; }
+      cv.style.width = s + 'px'; cv.style.height = s + 'px';
+      if (typeof draw === 'function') draw._last = 0;
+    }
+    _scopeFit();
+    _scopeResize = function(){ _scopeFit(); };
+    window.addEventListener('resize', _scopeResize);
     cv.addEventListener('click', function(ev){
       var r = cv.getBoundingClientRect();
       var x = (ev.clientX - r.left) * (cv.width / r.width), y = (ev.clientY - r.top) * (cv.height / r.height);
