@@ -3553,8 +3553,11 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
        aspect), and re-fit live on resize — so a big desktop screen gets a big
        scope instead of a fixed 520px one. Buffer = display size → stays crisp. */
     function _scopeFit(){
-      var s = Math.min(window.innerWidth * 0.94, window.innerHeight - 176);
-      s = Math.max(280, Math.round(s));
+      /* reserve height for the header, the selection INFO panel (shown below the
+         canvas when a blip is tapped) and the geo/footer lines, so nothing clips
+         once a target is selected */
+      var s = Math.min(window.innerWidth * 0.94, window.innerHeight - 260);
+      s = Math.max(260, Math.round(s));
       if (cv.width !== s) { cv.width = s; cv.height = s; }
       cv.style.width = s + 'px'; cv.style.height = s + 'px';
       if (typeof draw === 'function') draw._last = 0;
