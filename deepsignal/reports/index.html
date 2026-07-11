@@ -56,13 +56,15 @@ nav{display:flex;align-items:center;gap:12px;padding:16px 24px;border-bottom:1px
 .result-card{background:rgba(255,255,255,.05);border:1px solid rgba(125,211,252,.3);border-radius:12px;overflow:hidden}
 .result-inner{display:grid;grid-template-columns:220px 1fr;gap:0}
 @media(max-width:600px){.result-inner{grid-template-columns:1fr}}
-/* sky cutout: fixed square frame (does not stretch to the tall body row),
-   image contained (never cropped) and centered on the default black background.
-   iOS-Safari-safe: absolute-fill + object-fit rather than percentage max-height. */
+/* sky cutout: fixed frame that does not stretch to the tall body row. The image
+   is a starfield with the target centred, so it FILLS the frame (object-fit:cover)
+   and the frame itself crops per orientation (square on desktop/landscape,
+   full-width band in portrait) — the original image is never distorted, just
+   cropped by the UI. Absolute-fill keeps it reliable on iOS Safari. */
 .result-img{position:relative;width:220px;height:220px;background:#040d18;overflow:hidden}
-.result-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block}
+.result-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 @media(max-width:600px){.result-img{width:100%;height:200px}}
-/* solar-system reference photo: same frame, contained + centered on black */
+/* solar-system reference PHOTO: contain (show the whole disc, never crop a planet) */
 #result-img-box{position:relative;width:220px;height:220px;display:grid;place-items:center;background:#040d18;overflow:hidden}
 #result-img-box img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
 @media(max-width:600px){#result-img-box{width:100%;height:200px}}
