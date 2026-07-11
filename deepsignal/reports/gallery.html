@@ -1201,7 +1201,7 @@ window._svBlink = function(btn){
 <div id="sky-tooltip-map"></div>
 <div class="gallery-hdr">
 <h1>DeepSignal — Sky Image Gallery</h1>
-<div class="subtitle">Generated <span id="gen-ts">2026-07-11 01:23 UTC</span> &nbsp;·&nbsp; 244 targets &nbsp;·&nbsp; 244 sky images via Hips2Fits CDN</div>
+<div class="subtitle">Generated <span id="gen-ts">2026-07-11 01:31 UTC</span> &nbsp;·&nbsp; 244 targets &nbsp;·&nbsp; 244 sky images via Hips2Fits CDN</div>
 <div class="stats">
   <div class="stat"><div class="stat-n" style="color:#f59e0b">104</div><div class="stat-l">Tier 1 ≥70</div></div>
   <div class="stat"><div class="stat-n" style="color:#60a5fa">128</div><div class="stat-l">Tier 2 50–69</div></div>
@@ -10198,8 +10198,11 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
        aspect), and re-fit live on resize — so a big desktop screen gets a big
        scope instead of a fixed 520px one. Buffer = display size → stays crisp. */
     function _scopeFit(){
-      var s = Math.min(window.innerWidth * 0.94, window.innerHeight - 176);
-      s = Math.max(280, Math.round(s));
+      /* reserve height for the header, the selection INFO panel (shown below the
+         canvas when a blip is tapped) and the geo/footer lines, so nothing clips
+         once a target is selected */
+      var s = Math.min(window.innerWidth * 0.94, window.innerHeight - 260);
+      s = Math.max(260, Math.round(s));
       if (cv.width !== s) { cv.width = s; cv.height = s; }
       cv.style.width = s + 'px'; cv.style.height = s + 'px';
       if (typeof draw === 'function') draw._last = 0;
