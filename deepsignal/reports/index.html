@@ -56,13 +56,15 @@ nav{display:flex;align-items:center;gap:12px;padding:16px 24px;border-bottom:1px
 .result-card{background:rgba(255,255,255,.05);border:1px solid rgba(125,211,252,.3);border-radius:12px;overflow:hidden}
 .result-inner{display:grid;grid-template-columns:220px 1fr;gap:0}
 @media(max-width:600px){.result-inner{grid-template-columns:1fr}}
-.result-img{background:#040d18}
-.result-img img{width:220px;height:220px;object-fit:cover;display:block}
-@media(max-width:600px){.result-img img{width:100%;height:200px}}
-/* solar-system reference photo: fill the same frame as the sky view, centered
-   on the default black background, contained (never cropped) */
-#result-img-box{width:220px;height:220px;display:grid;place-items:center;background:#040d18}
-#result-img-box img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;display:block}
+/* sky cutout: fixed square frame (does not stretch to the tall body row),
+   image contained (never cropped) and centered on the default black background.
+   iOS-Safari-safe: absolute-fill + object-fit rather than percentage max-height. */
+.result-img{position:relative;width:220px;height:220px;background:#040d18;overflow:hidden}
+.result-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block}
+@media(max-width:600px){.result-img{width:100%;height:200px}}
+/* solar-system reference photo: same frame, contained + centered on black */
+#result-img-box{position:relative;width:220px;height:220px;display:grid;place-items:center;background:#040d18;overflow:hidden}
+#result-img-box img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
 @media(max-width:600px){#result-img-box{width:100%;height:200px}}
 .result-body{padding:20px}
 .result-name{font-size:1.3rem;font-weight:700;margin-bottom:6px}
