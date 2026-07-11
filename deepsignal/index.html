@@ -60,12 +60,9 @@ nav{display:flex;align-items:center;gap:12px;padding:16px 24px;border-bottom:1px
 .result-img img{width:220px;height:220px;object-fit:cover;display:block}
 @media(max-width:600px){.result-img img{width:100%;height:200px}}
 /* solar-system reference photo: fill the same frame as the sky view, centered
-   on the default black background, contained (never cropped).
-   NOTE: iOS Safari does not resolve percentage max-height inside a grid box —
-   the image renders at natural size and bursts the frame — so the img is
-   absolutely positioned to fill the frame and object-fit:contain letterboxes it. */
-#result-img-box{position:relative;width:220px;height:220px;display:grid;place-items:center;background:#040d18}
-#result-img-box img{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:contain}
+   on the default black background, contained (never cropped) */
+#result-img-box{width:220px;height:220px;display:grid;place-items:center;background:#040d18}
+#result-img-box img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;display:block}
 @media(max-width:600px){#result-img-box{width:100%;height:200px}}
 .result-body{padding:20px}
 .result-name{font-size:1.3rem;font-weight:700;margin-bottom:6px}
@@ -396,7 +393,9 @@ body{padding-bottom:30px}
 .j-t{font-family:monospace;font-size:.56rem;color:#3a7a5a;letter-spacing:.08em}
 #scope-ov{position:fixed;inset:0;z-index:920;background:rgba(0,5,10,.82);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center}
 #scope-box{background:rgba(3,14,10,.95);border:1px solid rgba(63,224,143,.5);border-radius:10px;box-shadow:0 0 40px rgba(63,224,143,.18);overflow:hidden}
-#scope-box{width:min(94vw,560px)}
+#scope-box{max-width:96vw;max-height:96vh}
+/* canvas size is set by JS (_scopeFit) to the largest square that fits the
+   viewport; the min() below is only a pre-JS fallback */
 #scope-cv{display:block;width:min(86vw,56vh,520px);height:min(86vw,56vh,520px);margin:8px auto 0;cursor:crosshair}
 #scope-foot{padding:7px 12px;text-align:center}
 #scope-info{border-top:1px solid rgba(63,224,143,.2);padding:8px 12px}
@@ -660,7 +659,7 @@ window._svBlink = function(btn){
     <div class="map-body" id="map-body">
       <div id="map-detail" style="display:none;border:1px solid rgba(125,211,252,.2);border-radius:8px;
         background:rgba(0,20,40,.45);padding:14px 16px;margin-bottom:18px;animation:lit-in .15s ease-out;
-        height:210px;overflow:hidden;box-sizing:border-box"></div>
+        box-sizing:border-box"></div>
       <div id="hist-section"></div>
       <div id="sky-section"></div>
     </div>
@@ -3429,7 +3428,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
   }
 
   /* ── tactical scope v2: Map palette, in-scope detail panel, live solar system ── */
-  var _scopeOn = false, _scopeRAF = null, _scopeSel = null;
+  var _scopeOn = false, _scopeRAF = null, _scopeSel = null, _scopeResize = null;
   var _TIERC = { 1: '#f59e0b', 2: '#3b82f6', 3: '#4a5a6a' };   /* = Map dot palette */
   var _SSGREEN = '#10b981';   /* now: TRACK-LIST highlight colour */
   var _SSWHITE = '#eef3f8';   /* solar-system bodies (white family) */
@@ -3527,6 +3526,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     if (ov) {
       _scopeOn = false;
       if (_scopeRAF) cancelAnimationFrame(_scopeRAF);
+      if (_scopeResize) { window.removeEventListener('resize', _scopeResize); _scopeResize = null; }
       _scopeSel = null;
       ov.remove();
       try { SFX.close(); } catch(e) {}
@@ -3549,6 +3549,19 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     _ensureGeo();
     var tgts = _navTargets(), blips = [], sweepA = 0, ssCache = _ssBodies(), ssT = Date.now(), fN = 0;
     var cv = document.getElementById('scope-cv'), c2 = cv.getContext('2d');
+    /* size the plot to the largest square that fits the viewport (keeps the 1:1
+       aspect), and re-fit live on resize — so a big desktop screen gets a big
+       scope instead of a fixed 520px one. Buffer = display size → stays crisp. */
+    function _scopeFit(){
+      var s = Math.min(window.innerWidth * 0.94, window.innerHeight - 176);
+      s = Math.max(280, Math.round(s));
+      if (cv.width !== s) { cv.width = s; cv.height = s; }
+      cv.style.width = s + 'px'; cv.style.height = s + 'px';
+      if (typeof draw === 'function') draw._last = 0;
+    }
+    _scopeFit();
+    _scopeResize = function(){ _scopeFit(); };
+    window.addEventListener('resize', _scopeResize);
     cv.addEventListener('click', function(ev){
       var r = cv.getBoundingClientRect();
       var x = (ev.clientX - r.left) * (cv.width / r.width), y = (ev.clientY - r.top) * (cv.height / r.height);
