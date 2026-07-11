@@ -390,6 +390,9 @@ body{padding-bottom:30px}
 .cas-new{animation:hud-blink .9s step-end infinite}
 .pro-hdr{display:flex;align-items:center;gap:8px;padding:8px 12px;font-family:monospace;font-size:.62rem;letter-spacing:.14em;color:#3fe08f;border-bottom:1px solid rgba(63,224,143,.25);background:rgba(0,30,18,.5)}
 .pro-x{margin-left:auto;background:none;border:1px solid rgba(63,224,143,.4);border-radius:3px;color:#3fe08f;cursor:pointer;font-size:.7rem;padding:1px 7px}
+.trk-sort{margin-left:auto;background:rgba(3,14,10,.9);color:#3fe08f;border:1px solid rgba(63,224,143,.4);border-radius:5px;font-family:monospace;font-size:.58rem;letter-spacing:.06em;padding:3px 6px;cursor:pointer}
+.trk-sort:hover{border-color:#3fe08f}
+.trk-sort option{background:#03140a;color:#cfeee0}
 .j-t{font-family:monospace;font-size:.56rem;color:#3a7a5a;letter-spacing:.08em}
 #scope-ov{position:fixed;inset:0;z-index:920;background:rgba(0,5,10,.82);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center}
 #scope-box{background:rgba(3,14,10,.95);border:1px solid rgba(63,224,143,.5);border-radius:10px;box-shadow:0 0 40px rgba(63,224,143,.18);overflow:hidden}
@@ -3330,20 +3333,32 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     if (/(^m ?\d{1,3}(\b|$)|^ngc ?\d|galaxy|andromeda)/i.test(nm)) return { type: 'Galaxy / DSO', sys: nm };
     return { type: 'Star', sys: 'Milky Way' };
   }
+  function _thSortMode(){ try { return localStorage.getItem('ds-track-sort') || 'alt'; } catch(e) { return 'alt'; } }
   function _thRender(){
     var b = document.getElementById('trk-body');
     if (!b) return;
     var l = _thGet();
     if (!l.length) { b.innerHTML = '<div class="j-t" style="padding:6px 0">NO TRACKED TARGETS YET — USE ⌖ TRACK ON ANY TARGET</div>'; return; }
-    var h = '';
+    /* build rows keeping the ORIGINAL index (row buttons index into the stored
+       list), then reorder a copy by the saved sort mode */
+    var rows = [];
     for (var i = 0; i < l.length; i++) {
-      var aa = _altazOf(l[i].ra, l[i].dec);
+      var aa0 = _altazOf(l[i].ra, l[i].dec);
+      rows.push({ e: l[i], i: i, aa: aa0, alt: aa0 ? aa0.alt : -999, cls: _classify(l[i].name) });
+    }
+    var mode = _thSortMode();
+    if (mode === 'alt') rows.sort(function(a, c){ return c.alt - a.alt; });
+    else if (mode === 'name') rows.sort(function(a, c){ return String(a.e.name).localeCompare(String(c.e.name)); });
+    else if (mode === 'type') rows.sort(function(a, c){ var t = a.cls.type.localeCompare(c.cls.type); return t !== 0 ? t : (c.alt - a.alt); });
+    /* 'added' keeps the stored order (most-recently tracked first) */
+    var h = '';
+    for (var r = 0; r < rows.length; r++) {
+      var row = rows[r], aa = row.aa, i = row.i, cls = row.cls;
       var live = aa
         ? '<span class="' + (aa.alt > 0 ? 'th-up' : 'th-dn') + '">' + (aa.alt >= 0 ? '+' : '') + aa.alt.toFixed(0) + '° ' + (aa.alt > 0 ? 'UP' : 'DOWN') + '</span>'
         : '';
-      var cur = (trackTgt && trackTgt.name === l[i].name) ? '<span class="th-cur">● LIVE</span>' : '';
-      var cls = _classify(l[i].name);
-      h += '<div class="th-row"><div class="th-main"><span class="th-name">' + _esc(l[i].name) + '</span>' + cur + live +
+      var cur = (trackTgt && trackTgt.name === row.e.name) ? '<span class="th-cur">● LIVE</span>' : '';
+      h += '<div class="th-row"><div class="th-main"><span class="th-name">' + _esc(row.e.name) + '</span>' + cur + live +
         '<button class="btn-map-jump" onclick="_thTrack(' + i + ')" title="Track this target">⌖</button>' +
         '<button class="pro-x" onclick="_thDel(' + i + ')" title="Remove">✕</button></div>' +
         '<div class="th-sub"><span class="th-type">' + _esc(cls.type.toUpperCase()) + '</span><span class="th-sep">·</span><span class="th-sys">' + _esc(cls.sys.toUpperCase()) + '</span></div></div>';
@@ -3352,13 +3367,26 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
   }
   function _thToggle(){
     var ov = document.getElementById('trklist-ov');
-    if (ov) { ov.remove(); return; }
+    if (ov) { ov.remove(); try { SFX.close(); } catch(e) {} return; }
     try { SFX.open(); } catch(e) {}
     ov = document.createElement('div');
     ov.id = 'trklist-ov';
-    ov.innerHTML = '<div class="pro-hdr">⌖ TRACKING LIST — LIVE ALTITUDE<button class="pro-x" id="trk-x">✕</button></div><div id="trk-body"></div>';
+    ov.innerHTML = '<div class="pro-hdr">⌖ TRACKING LIST — LIVE ALTITUDE' +
+      '<select id="trk-sort" class="trk-sort" title="Sort tracking list">' +
+      '<option value="alt">ALT ↓</option><option value="name">NAME A–Z</option>' +
+      '<option value="added">RECENT</option><option value="type">TYPE</option></select>' +
+      '<button class="pro-x" id="trk-x">✕</button></div><div id="trk-body"></div>';
     document.body.appendChild(ov);
     document.getElementById('trk-x').addEventListener('click', _thToggle);
+    var _ss = document.getElementById('trk-sort');
+    if (_ss) {
+      _ss.value = _thSortMode();
+      _ss.addEventListener('change', function(){
+        try { localStorage.setItem('ds-track-sort', _ss.value); } catch(e) {}
+        try { SFX.click(); } catch(e) {}
+        _thRender();
+      });
+    }
     _thRender();
   }
   (function(){
