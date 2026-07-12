@@ -408,6 +408,14 @@ body{padding-bottom:30px}
 .trk-sort{margin-left:auto;background:rgba(3,14,10,.9);color:#3fe08f;border:1px solid rgba(63,224,143,.4);border-radius:5px;font-family:monospace;font-size:.58rem;letter-spacing:.06em;padding:3px 6px;cursor:pointer}
 .trk-sort:hover{border-color:#3fe08f}
 .trk-sort option{background:#03140a;color:#cfeee0}
+/* ── NAVCON PRO-3: chart / plan / QRH / transient / tune overlays ── */
+.p3-ov{position:fixed;inset:0;z-index:935;background:rgba(0,5,10,.82);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center}
+.p3-box{width:min(94vw,700px);max-height:88vh;overflow-y:auto;background:rgba(3,14,10,.96);border:1px solid rgba(63,224,143,.5);border-radius:10px;box-shadow:0 0 40px rgba(63,224,143,.18);scrollbar-width:thin}
+.p3-body{padding:10px 14px;font-family:monospace;font-size:.68rem;color:#9fd4bb}
+#ac-cv{display:block;max-width:100%;background:#03140a;border:1px solid rgba(63,224,143,.2);border-radius:6px}
+.tune-chip{color:#3fe08f;font-family:monospace;font-size:.72rem}
+.th-obs{cursor:pointer}
+#grid .card{content-visibility:auto;contain-intrinsic-size:auto 430px}
 /* ── NAVCON PRO-2: NVG mode, observability chips, time-scrub, systems page, disposition ── */
 html.nvg body{background:#0d0202}
 html.nvg body>*{filter:sepia(1) hue-rotate(-48deg) saturate(3.4) brightness(.78) contrast(1.05)}
@@ -1378,6 +1386,7 @@ function showResult(resolved, pipelineMatches) {
       </div>
     </div>`;
   if (isSS) _loadSolarSystemImage(name);
+  else if (ra != null && !isNaN(ra)) _simbadEnrich(name, ra, dec);
 
   // Auto-track: if the operator has already granted geolocation, start live
   // alt/az tracking of the locked target without prompting again.
@@ -1613,6 +1622,35 @@ async function _loadSolarSystemImage(name) {
     if (!thumb) { box.textContent = "No image"; return; }
     box.innerHTML = `<img src="${thumb}" alt="${name}" onerror="this.parentNode.textContent='No image'">`;
   } catch (e) { box.textContent = "No image"; }
+}
+
+// SIMBAD context line for the locked target: object type / spectral type /
+// parallax distance — quiet analyst enrichment, fail-silent.
+async function _simbadEnrich(name, ra, dec) {
+  try {
+    const q = "SELECT TOP 1 otype_txt, sp_type, plx_value FROM basic WHERE CONTAINS(POINT('ICRS', ra, dec), CIRCLE('ICRS', " + (+ra).toFixed(5) + ", " + (+dec).toFixed(5) + ", 0.006)) = 1";
+    const r = await fetch("https://simbad.cds.unistra.fr/simbad/sim-tap/sync?request=doQuery&lang=adql&format=json&query=" + encodeURIComponent(q));
+    if (!r.ok) return;
+    const d = await r.json();
+    const row = d && d.data && d.data[0];
+    if (!row) return;
+    const bits = [];
+    if (row[0]) bits.push(String(row[0]));
+    if (row[1]) bits.push("SP " + row[1]);
+    if (row[2] != null && +row[2] > 0) bits.push((1000 / +row[2]).toFixed(1) + " pc");
+    if (!bits.length) return;
+    const cardEl = document.getElementById("result-card");
+    const nameEl = cardEl && cardEl.querySelector(".result-name");
+    if (!nameEl || nameEl.textContent.trim() !== String(name)) return;
+    if (document.getElementById("simbad-enrich")) return;
+    const anchor = cardEl.querySelector(".result-coords");
+    if (!anchor) return;
+    const div = document.createElement("div");
+    div.id = "simbad-enrich";
+    div.style.cssText = "font-family:monospace;font-size:.68rem;color:#5a8aaa;margin:-6px 0 10px";
+    div.textContent = "SIMBAD: " + bits.join(" · ");
+    anchor.parentNode.insertBefore(div, anchor.nextSibling);
+  } catch (e) {}
 }
 
 // Solar-system detection + Wikipedia thumbnail loader — gives the Map the same
@@ -3119,10 +3157,11 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     if (ov) { ov.remove(); return; }
     ov = document.createElement('div');
     ov.id = 'journal-ov';
-    ov.innerHTML = '<div class="pro-hdr">▤ OPS JOURNAL — SESSION EVENT LOG<button class="pro-x" id="journal-exp" title="FDR export — download journal, tracking list and dispositions as JSON">⤓ FDR</button><button class="pro-x" id="journal-x" style="margin-left:8px">✕</button></div><div id="journal-body"></div>';
+    ov.innerHTML = '<div class="pro-hdr">▤ OPS JOURNAL — SESSION EVENT LOG<button class="pro-x" id="journal-imp" title="FDR import — replay a previously exported session log">⤒</button><button class="pro-x" id="journal-exp" style="margin-left:8px" title="FDR export — download journal, tracking list and dispositions as JSON">⤓ FDR</button><button class="pro-x" id="journal-x" style="margin-left:8px">✕</button></div><div id="journal-body"></div>';
     document.body.appendChild(ov);
     document.getElementById('journal-x').addEventListener('click', _jToggle);
     document.getElementById('journal-exp').addEventListener('click', function(){ window._fdrExport(); });
+    document.getElementById('journal-imp').addEventListener('click', function(){ window._fdrImport(); });
     _jRender();
   }
   (function(){
@@ -3364,9 +3403,9 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     return w;
   }
   function _fmtHM(t){ var d = new Date(t); return pad(d.getHours()) + ':' + pad(d.getMinutes()); }
-  function _obsChip(w){
+  function _obsChip(w, idx){
     if (!w || w.score == null) return '';
-    return '<span class="th-obs' + (w.score < 30 ? ' obs-lo' : '') + '" title="Observability tonight: altitude x darkness x moon x cloud">OBS ' + w.score + '</span>';
+    return '<span class="th-obs' + (w.score < 30 ? ' obs-lo' : '') + '"' + (idx != null ? ' onclick="event.stopPropagation();_altChart(' + idx + ')"' : '') + ' title="Observability tonight — tap for the 24 h altitude chart">OBS ' + w.score + '</span>';
   }
   function _obsSub(w){
     if (!w || !w.from) return '';
@@ -3419,13 +3458,14 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       var alt = _altAt(+e2.ra, +e2.dec, nowT), prev = _aosPrev[e2.name];
       _aosPrev[e2.name] = alt;
       if (prev == null) continue;
-      if (alt <= 15) _aosMuteUntil[e2.name] = 0;
-      if (prev <= 20 && alt > 20 && !(_aosMuteUntil[e2.name] > nowT)) {
+      var thr = _aosDeg();
+      if (alt <= thr - 5) _aosMuteUntil[e2.name] = 0;
+      if (prev <= thr && alt > thr && !(_aosMuteUntil[e2.name] > nowT)) {
         _aosMuteUntil[e2.name] = nowT + 6 * 3600000;
-        op('AOS — ' + String(e2.name).toUpperCase() + ' RISING ABOVE +20°');
+        op('AOS — ' + String(e2.name).toUpperCase() + ' RISING ABOVE +' + thr + '°');
         _voice('Target rising: ' + e2.name);
         if (_aosOn() && typeof Notification !== 'undefined' && Notification.permission === 'granted') {
-          try { new Notification('DEEPSIGNAL — AOS', { body: e2.name + ' is rising above +20° at your location.' }); } catch(e) {}
+          try { new Notification('DEEPSIGNAL — AOS', { body: e2.name + ' is rising above +' + thr + '° at your location.' }); } catch(e) {}
         }
       }
     }
@@ -3511,6 +3551,8 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     ];
     for (i = 0; i < buses.length; i++)
       h += '<div class="sd-row"><span class="sd-name">' + buses[i][0] + '</span><span class="sd-bar"></span><span class="sd-val sd-wait" id="' + buses[i][1] + '">…</span></div>';
+    h += '<div class="sd-h">TRANSIENT WATCH</div>';
+    h += '<div class="sd-row"><span class="sd-name">ZTF ALERTS</span><span class="sd-bar"></span><button class="trk-bell" style="width:auto" onclick="_trxToggle()">OPEN</button></div>';
     body.innerHTML = h;
     function mark(id, ok, ms){
       var el = document.getElementById(id);
@@ -3642,6 +3684,291 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
         navigator.serviceWorker.register('sw.js').catch(function(){});
     } catch(e) {}
     try { window._issTick = _issTick; window._issState = function(){ return { pos: _issPos, near: _satNear }; }; window._obsWindow = _obsWindow; } catch(e) {}
+  })();
+
+  /* ══ NAVCON PRO-3: altitude chart, mission plan, QRH, FDR import, share link,
+        transient watch (ALeRCE), MFD, adjustable AOS threshold ══ */
+  function _aosDeg(){
+    try { var v = parseFloat(localStorage.getItem('ds-aos-deg')); return (isFinite(v) && v >= 5 && v <= 60) ? v : 20; } catch(e) { return 20; }
+  }
+  function _p3Overlay(id, title, bodyHtml){
+    var old = document.getElementById(id);
+    if (old) { old.remove(); try { SFX.close(); } catch(e) {} return null; }
+    try { SFX.open(); } catch(e) {}
+    var ov = document.createElement('div');
+    ov.id = id;
+    ov.className = 'p3-ov';
+    ov.innerHTML = '<div class="p3-box"><div class="pro-hdr">' + title + '<button class="pro-x p3-x">✕</button></div><div class="p3-body">' + bodyHtml + '</div></div>';
+    ov.addEventListener('click', function(ev){ if (ev.target === ov) { ov.remove(); try { SFX.close(); } catch(e) {} } });
+    document.body.appendChild(ov);
+    ov.querySelector('.p3-x').addEventListener('click', function(){ ov.remove(); try { SFX.close(); } catch(e) {} });
+    return ov;
+  }
+  function _fmtDur(ms){ var m = Math.round(ms / 60000); return Math.floor(m / 60) + 'h' + pad(m % 60); }
+
+  /* ── altitude-vs-time chart (airmass chart): 24 h curve with darkness bands,
+        moon track, AOS threshold and the BEST window shaded ── */
+  window._altChart = function(i){
+    var l = _thGet(), e = l[i];
+    if (!e || e.ra == null) return;
+    var w = _obsWindow(+e.ra, +e.dec);
+    var smNow = _sunMoonEq(Date.now());
+    var hdr = '⛰ ' + _esc(String(e.name).toUpperCase()) + ' — 24 H ALTITUDE / OBSERVABILITY';
+    var sub = 'OBS ' + (w.score != null ? w.score : '—') +
+      (w.from ? ' · BEST ' + _fmtHM(w.from) + '–' + _fmtHM(w.to) : ' · NO WINDOW ≥30') +
+      ' · MOON ' + Math.round(smNow.illum * 100) + '%' +
+      (w.cloud != null ? ' · CLOUD ' + Math.round(w.cloud * 100) + '%' : '');
+    var ov = _p3Overlay('ac-ov', hdr, '<div class="j-t" style="margin-bottom:6px">' + sub + '</div><canvas id="ac-cv" width="640" height="260"></canvas>' +
+      '<div class="j-t" style="margin-top:4px">GREEN = TARGET · GREY = MOON · DARK BAND = ASTRONOMICAL NIGHT · DASH = AOS +' + _aosDeg() + '°</div>');
+    if (!ov) return;
+    var cv = document.getElementById('ac-cv');
+    var wpx = Math.min(640, Math.floor(window.innerWidth * 0.86));
+    cv.width = wpx; cv.style.width = wpx + 'px';
+    var c = cv.getContext('2d'), W = cv.width, H = cv.height, now = Date.now();
+    function X(t){ return (t - now) / 86400000 * W; }
+    function Y(alt){ return H - ((alt + 90) / 180) * H; }
+    /* darkness bands + BEST shading */
+    for (var m = 0; m < 1440; m += 15) {
+      var t = now + m * 60000, sm = _sunMoonEq(t), sa = _altAt(sm.sun.ra, sm.sun.dec, t);
+      c.fillStyle = sa < -18 ? 'rgba(2,10,6,.95)' : sa < -12 ? 'rgba(8,22,14,.9)' : sa < 0 ? 'rgba(20,32,24,.85)' : 'rgba(46,52,40,.7)';
+      c.fillRect(X(t), 0, W / 96 + 1, H);
+    }
+    if (w.from) { c.fillStyle = 'rgba(63,224,143,.14)'; c.fillRect(X(w.from), 0, X(w.to) - X(w.from), H); }
+    /* horizon + AOS threshold */
+    c.strokeStyle = 'rgba(238,243,248,.5)'; c.lineWidth = 1;
+    c.beginPath(); c.moveTo(0, Y(0)); c.lineTo(W, Y(0)); c.stroke();
+    c.strokeStyle = 'rgba(63,224,143,.5)'; c.setLineDash([4, 4]);
+    c.beginPath(); c.moveTo(0, Y(_aosDeg())); c.lineTo(W, Y(_aosDeg())); c.stroke();
+    c.setLineDash([]);
+    /* moon + target curves */
+    function curve(fRa, fDec, style, width){
+      c.strokeStyle = style; c.lineWidth = width; c.beginPath();
+      for (var m2 = 0; m2 <= 1440; m2 += 10) {
+        var t2 = now + m2 * 60000, ra2 = fRa(t2), de2 = fDec(t2);
+        var a2 = _altAt(ra2, de2, t2);
+        if (m2 === 0) c.moveTo(X(t2), Y(a2)); else c.lineTo(X(t2), Y(a2));
+      }
+      c.stroke();
+    }
+    curve(function(t3){ return _sunMoonEq(t3).moon.ra; }, function(t3){ return _sunMoonEq(t3).moon.dec; }, 'rgba(180,190,200,.45)', 1.2);
+    curve(function(){ return +e.ra; }, function(){ return +e.dec; }, '#3fe08f', 2);
+    /* hour ticks */
+    c.fillStyle = 'rgba(63,224,143,.7)'; c.font = '9px monospace'; c.textAlign = 'center';
+    for (var hh = 0; hh <= 24; hh += 4) {
+      var th = now + hh * 3600000;
+      c.fillText(pad(new Date(th).getHours()) + ':00', X(th), H - 4);
+    }
+    op('ALTITUDE CHART — ' + String(e.name).toUpperCase());
+  };
+
+  /* ── mission plan: tonight's tracking list ordered by best window ── */
+  window._thPlan = function(){
+    var l = _thGet();
+    if (!l.length) { op('MISSION PLAN — TRACKING LIST EMPTY'); return; }
+    var smNow = _sunMoonEq(Date.now());
+    var rows = [], none = [];
+    for (var i = 0; i < l.length; i++) {
+      var w = _obsWindow(+l[i].ra, +l[i].dec);
+      if (w && w.from) rows.push({ e: l[i], w: w }); else none.push(l[i].name);
+    }
+    rows.sort(function(a, b){ return a.w.from - b.w.from; });
+    var h = '<div class="j-t" style="margin-bottom:8px">MOON ' + Math.round(smNow.illum * 100) + '% · ' + rows.length + ' TARGET' + (rows.length === 1 ? '' : 'S') + ' SCHEDULABLE TONIGHT · ORDERED BY WINDOW START</div>';
+    for (var r = 0; r < rows.length; r++) {
+      var q = rows[r], ov2 = (r > 0 && q.w.from < rows[r - 1].w.to);
+      h += '<div class="sd-row"><span class="sd-name" style="width:150px">' + _esc(q.e.name) + '</span>' +
+        '<span style="flex:1;color:#3fe08f">' + _fmtHM(q.w.from) + ' – ' + _fmtHM(q.w.to) + ' (' + _fmtDur(q.w.to - q.w.from) + ')' + (ov2 ? ' <span style="color:#f5a623">⧉ OVERLAP</span>' : '') + '</span>' +
+        '<span class="sd-val">OBS ' + q.w.score + '</span></div>';
+    }
+    if (none.length) h += '<div class="sd-h">NO WINDOW TONIGHT</div><div class="j-t">' + _esc(none.join(' · ')) + '</div>';
+    _p3Overlay('plan-ov', '▦ MISSION PLAN — TONIGHT', h);
+    op('MISSION PLAN — ' + rows.length + ' WINDOWS SCHEDULED');
+  };
+
+  /* ── share: carry the tracking list in the URL fragment (no backend) ── */
+  window._thShare = function(){
+    try {
+      var l = _thGet().map(function(e){ return [e.name, e.ra, e.dec]; });
+      var url = location.href.split('#')[0] + '#trk=' + btoa(unescape(encodeURIComponent(JSON.stringify(l))));
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).catch(function(){});
+      op('SHARE LINK COPIED — ' + l.length + ' TARGETS IN URL');
+      prompt('Share this link — opening it merges these ' + l.length + ' targets into the tracking list:', url);
+    } catch(e) { op('SHARE FAILED'); }
+  };
+  function _thMergeFromHash(){
+    try {
+      var m = location.hash.match(/[#&]trk=([^&]+)/);
+      if (!m) return;
+      var arr = JSON.parse(decodeURIComponent(escape(atob(m[1]))));
+      var added = 0;
+      for (var i = 0; i < arr.length && i < 20; i++) {
+        var nm = String(arr[i][0]).slice(0, 60);
+        if (!_thHas(nm)) { _thAdd(nm, +arr[i][1], +arr[i][2]); added++; }
+      }
+      if (added) { op('HANDOFF — MERGED ' + added + ' SHARED TARGET' + (added > 1 ? 'S' : '') + ' INTO TRACKING LIST'); if (window._trkSyncBtns) _trkSyncBtns(); }
+      history.replaceState(null, '', location.pathname + location.search);
+    } catch(e) {}
+  }
+
+  /* ── QRH: interactive observing checklist ── */
+  var _QRH = [
+    'POSITION FIX — geolocation or manual lat/lon set',
+    'TRACKING LIST — targets loaded, TONIGHT sort reviewed',
+    'MISSION PLAN — windows checked for overlap',
+    'CLOUD COVER — forecast reviewed for observing site',
+    'AOS ALERTS — bell armed, threshold set',
+    'NVG MODE — on 20 min before dark adaptation',
+    'SCOPE SURVEY — time-scrub rehearsal completed',
+    'JOURNAL — session note logged'
+  ];
+  window._qrhToggle = function(){
+    var st = {};
+    try { st = JSON.parse(localStorage.getItem('ds-qrh') || '{}'); } catch(e) {}
+    var h = '';
+    for (var i = 0; i < _QRH.length; i++)
+      h += '<label class="sd-row" style="cursor:pointer"><input type="checkbox" data-qi="' + i + '"' + (st[i] ? ' checked' : '') + ' style="accent-color:#3fe08f">' +
+        '<span style="flex:1;color:' + (st[i] ? '#3fe08f' : '#9fd4bb') + '">' + _QRH[i] + '</span></label>';
+    h += '<div style="margin-top:8px"><button class="trk-bell" style="width:auto" id="qrh-reset">RESET ALL</button></div>';
+    var ov = _p3Overlay('qrh-ov', '✓ QRH — OBSERVING CHECKLIST', h);
+    if (!ov) return;
+    ov.addEventListener('change', function(ev){
+      var cb = ev.target;
+      if (!cb || cb.getAttribute('data-qi') == null) return;
+      var s2 = {}; try { s2 = JSON.parse(localStorage.getItem('ds-qrh') || '{}'); } catch(e) {}
+      if (cb.checked) s2[cb.getAttribute('data-qi')] = 1; else delete s2[cb.getAttribute('data-qi')];
+      try { localStorage.setItem('ds-qrh', JSON.stringify(s2)); } catch(e) {}
+      cb.nextElementSibling.style.color = cb.checked ? '#3fe08f' : '#9fd4bb';
+      try { SFX.click(); } catch(e) {}
+    });
+    var rb = document.getElementById('qrh-reset');
+    if (rb) rb.addEventListener('click', function(){ try { localStorage.removeItem('ds-qrh'); } catch(e) {} ov.remove(); window._qrhToggle(); });
+  };
+
+  /* ── FDR import: replay a previously exported session log into the journal ── */
+  window._fdrImport = function(){
+    var inp = document.createElement('input');
+    inp.type = 'file'; inp.accept = 'application/json,.json';
+    inp.addEventListener('change', function(){
+      var f = inp.files && inp.files[0];
+      if (!f) return;
+      var rd = new FileReader();
+      rd.onload = function(){
+        try {
+          var d = JSON.parse(rd.result);
+          var js = (d && d.journal) || [];
+          for (var i = 0; i < js.length && i < 400; i++)
+            _journal.push({ t: new Date(js[i].t), m: '[REPLAY] ' + String(js[i].m).slice(0, 200) });
+          op('FDR REPLAY — ' + Math.min(js.length, 400) + ' EVENTS LOADED FROM ' + (d.exportedAt || 'ARCHIVE').slice(0, 10));
+          _jRender();
+        } catch(e) { op('FDR REPLAY — INVALID FILE'); }
+      };
+      rd.readAsText(f);
+    });
+    inp.click();
+  };
+
+  /* ── transient watch: latest ZTF alerts via the public ALeRCE broker API.
+        Rows within 5 deg of a tracked target are highlighted (fail-silent). ── */
+  window._trxToggle = function(){
+    var ov = _p3Overlay('trx-ov', '◉ TRANSIENT WATCH — LATEST ZTF ALERTS (ALeRCE)', '<div class="j-t" id="trx-body">QUERYING BROKER…</div>');
+    if (!ov) return;
+    op('TRANSIENT WATCH — QUERYING ALERCE BROKER');
+    try {
+      fetch('https://api.alerce.online/ztf/v1/objects/?page_size=15&order_by=lastmjd&order_mode=DESC')
+        .then(function(r){ return r.json(); })
+        .then(function(d){
+          var el = document.getElementById('trx-body');
+          if (!el) return;
+          var items = (d && (d.items || d.results)) || [];
+          if (!items.length) { el.textContent = 'NO ALERT DATA — BROKER UNREACHABLE OR EMPTY RESPONSE'; return; }
+          var l = _thGet(), h = '', nearAny = false;
+          for (var i = 0; i < items.length; i++) {
+            var o = items[i], ra = o.meanra, dec = o.meandec;
+            var age = (o.lastmjd != null) ? ((Date.now() - (o.lastmjd - 40587) * 86400000) / 86400000) : null;
+            var near = false;
+            if (ra != null) for (var k = 0; k < l.length; k++)
+              if (l[k].ra != null && _sep(ra, dec, +l[k].ra, +l[k].dec) < 5) { near = true; nearAny = true; break; }
+            h += '<div class="sd-row' + (near ? '" style="background:rgba(245,166,35,.08)' : '') + '">' +
+              '<a class="sd-name" style="width:130px;color:#3fe08f;text-decoration:none" target="_blank" rel="noopener" href="https://alerce.online/object/' + encodeURIComponent(o.oid) + '">' + _esc(o.oid || '?') + '</a>' +
+              '<span style="flex:1">' + _esc(o.class_name || o.classearly || 'unclassified') + (ra != null ? ' · RA ' + (+ra).toFixed(2) + '° DEC ' + (+dec).toFixed(2) + '°' : '') + (near ? ' · <span style="color:#f5a623">⚠ NEAR TRACKED TARGET</span>' : '') + '</span>' +
+              '<span class="sd-val">' + (age != null ? (age < 1 ? Math.round(age * 24) + 'h' : Math.round(age) + 'd') : '—') + '</span></div>';
+          }
+          el.innerHTML = h;
+          if (nearAny) { op('TRANSIENT WATCH — ALERT WITHIN 5° OF A TRACKED TARGET'); _voice('Transient near tracked target'); }
+        })
+        .catch(function(){ var el = document.getElementById('trx-body'); if (el) el.textContent = 'BROKER UNREACHABLE — CHECK CONNECTION'; });
+    } catch(e) {}
+  };
+
+  /* ── MFD lite: bring up the working set in one action ── */
+  window._mfdToggle = function(){
+    op('MFD — SCOPE + TRACKING LIST');
+    if (!document.getElementById('scope-ov')) _scopeToggle();
+    if (!document.getElementById('trklist-ov')) _thToggle();
+  };
+
+  /* ── TUNE: analyst re-ranking with custom weights (gallery page; the pipeline
+        score is untouched — cards get a T-score chip and reorder live) ── */
+  window._tuneToggle = function(){
+    var cat = null;
+    try { cat = (typeof CANDIDATES !== 'undefined') ? CANDIDATES : null; } catch(e) {}
+    var grid = document.getElementById('grid');
+    if (!cat || !grid) { op('TUNE — AVAILABLE ON THE GALLERY PAGE'); return; }
+    var Wt = { multi: 8, drift: 10, narrow: 10, nonradio: 6 };
+    try { var sv = JSON.parse(localStorage.getItem('ds-tune') || 'null'); if (sv) Wt = sv; } catch(e) {}
+    function slider(k, lbl, max){
+      return '<div class="sd-row"><span class="sd-name" style="width:190px">' + lbl + '</span>' +
+        '<input type="range" data-k="' + k + '" min="0" max="' + max + '" step="1" value="' + Wt[k] + '" style="flex:1;accent-color:#3fe08f">' +
+        '<span class="sd-val" id="tune-v-' + k + '">' + Wt[k] + '</span></div>';
+    }
+    var h = '<div class="j-t" style="margin-bottom:6px">RE-RANK THE CANDIDATES WITH YOUR OWN WEIGHTS — PIPELINE SCORE UNCHANGED; ORDER + T-SCORE CHIP UPDATE LIVE</div>' +
+      slider('multi', 'MULTI-METHOD BONUS (per extra)', 15) +
+      slider('drift', 'DOPPLER-DRIFT BONUS', 25) +
+      slider('narrow', 'NARROWBAND BONUS', 25) +
+      slider('nonradio', 'NON-RADIO CHANNEL BONUS', 25) +
+      '<div style="margin-top:8px;display:flex;gap:8px"><button class="trk-bell" style="width:auto" id="tune-apply">APPLY + RE-RANK</button>' +
+      '<button class="trk-bell" style="width:auto" id="tune-reset">RESET ORDER</button></div>';
+    var ov = _p3Overlay('tune-ov', '⚖ TUNE — CUSTOM RE-RANKING', h);
+    if (!ov) return;
+    ov.addEventListener('input', function(ev){
+      var s = ev.target, k = s.getAttribute && s.getAttribute('data-k');
+      if (!k) return;
+      Wt[k] = +s.value;
+      var v = document.getElementById('tune-v-' + k);
+      if (v) v.textContent = s.value;
+    });
+    function tScore(c){
+      var s = +c.score || 0, ms = c.methods || [];
+      s += Wt.multi * Math.max(0, ms.length - 1);
+      if (ms.indexOf('doppler_drift') >= 0) s += Wt.drift;
+      if (ms.indexOf('narrowband') >= 0) s += Wt.narrow;
+      if (c.dtype && c.dtype !== 'radio') s += Wt.nonradio;
+      return Math.round(s);
+    }
+    document.getElementById('tune-apply').addEventListener('click', function(){
+      try { localStorage.setItem('ds-tune', JSON.stringify(Wt)); } catch(e) {}
+      var order = cat.map(function(c){ return { id: c.id, t: tScore(c) }; }).sort(function(a, b){ return b.t - a.t; });
+      for (var i = 0; i < order.length; i++) {
+        var el = document.getElementById(order[i].id);
+        if (!el) continue;
+        grid.appendChild(el);
+        var chip = el.querySelector('.tune-chip');
+        if (!chip) { chip = document.createElement('span'); chip.className = 'tune-chip'; var sc = el.querySelector('.card-score'); if (sc) sc.appendChild(chip); }
+        chip.textContent = ' → T ' + order[i].t;
+      }
+      op('TUNE — RE-RANKED ' + order.length + ' CANDIDATES BY T-SCORE');
+      try { SFX.click(); } catch(e) {}
+    });
+    document.getElementById('tune-reset').addEventListener('click', function(){
+      for (var i = 0; i < cat.length; i++) {
+        var el = document.getElementById(cat[i].id);
+        if (el) { grid.appendChild(el); var ch = el.querySelector('.tune-chip'); if (ch) ch.remove(); }
+      }
+      op('TUNE — PIPELINE ORDER RESTORED');
+    });
+  };
+
+  (function(){
+    _thMergeFromHash();
   })();
 
   /* ── watchlist: pin targets, HUD cycles their live alt/az ── */
@@ -3804,7 +4131,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
         ? '<span class="' + (aa.alt > 0 ? 'th-up' : 'th-dn') + '">' + (aa.alt >= 0 ? '+' : '') + aa.alt.toFixed(0) + '° ' + (aa.alt > 0 ? 'UP' : 'DOWN') + '</span>'
         : '';
       var cur = (trackTgt && trackTgt.name === row.e.name) ? '<span class="th-cur">● LIVE</span>' : '';
-      h += '<div class="th-row"><div class="th-main"><span class="th-name">' + _esc(row.e.name) + '</span>' + cur + live + _obsChip(row.w) +
+      h += '<div class="th-row"><div class="th-main"><span class="th-name">' + _esc(row.e.name) + '</span>' + cur + live + _obsChip(row.w, row.i) +
         '<button class="btn-map-jump" onclick="_thTrack(' + i + ')" title="Track this target">⌖</button>' +
         '<button class="pro-x" onclick="_thDel(' + i + ')" title="Remove">✕</button></div>' +
         '<div class="th-sub"><span class="th-type">' + _esc(cls.type.toUpperCase()) + '</span><span class="th-sep">·</span><span class="th-sys">' + _esc(cls.sys.toUpperCase()) + '</span>' + _obsSub(row.w) + '</div></div>';
@@ -3821,7 +4148,9 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       '<select id="trk-sort" class="trk-sort" title="Sort tracking list">' +
       '<option value="alt">ALT ↓</option><option value="tonight">TONIGHT</option><option value="name">NAME A–Z</option>' +
       '<option value="added">RECENT</option><option value="type">TYPE</option></select>' +
-      '<button class="trk-bell off" id="trk-bell" title="AOS alerts — notify when a tracked target rises above +20°" onclick="_aosBell()">🔕</button>' +
+      '<button class="trk-bell" title="Mission plan — schedule tonight from this list" onclick="_thPlan()">▦</button>' +
+      '<button class="trk-bell" title="Share — copy a link that carries this tracking list" onclick="_thShare()">⇪</button>' +
+      '<button class="trk-bell off" id="trk-bell" title="AOS alerts — notify when a tracked target rises (CDU: AOS <deg> to set threshold)" onclick="_aosBell()">🔕</button>' +
       '<button class="pro-x" id="trk-x">✕</button></div><div id="trk-body"></div>';
     document.body.appendChild(ov);
     document.getElementById('trk-x').addEventListener('click', _thToggle);
@@ -4289,7 +4618,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     if (ov) { ov.remove(); return; }
     ov = document.createElement('div');
     ov.id = 'cdu-ov';
-    ov.innerHTML = '<span class="cdu-p">NAVCON&gt;</span><input id="cdu-in" autocomplete="off" spellcheck="false" placeholder="TRK &lt;name&gt; · SCOPE · MAP · SYS · NVG · VOICE · EXPORT · SRC ZTF|PAN|DSS · BLINK · LOG · AR · FIND &lt;query&gt;">';
+    ov.innerHTML = '<span class="cdu-p">NAVCON&gt;</span><input id="cdu-in" autocomplete="off" spellcheck="false" placeholder="TRK &lt;name&gt; · SCOPE · MAP · SYS · TRX · PLAN · QRH · TUNE · MFD · NVG · VOICE · AOS &lt;deg&gt; · EXPORT · IMPORT · SHARE · SRC · BLINK · LOG · AR · FIND">';
     document.body.appendChild(ov);
     var inp = document.getElementById('cdu-in');
     inp.focus();
@@ -4315,7 +4644,20 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     if (verb === 'SYS') return _sdToggle();
     if (verb === 'VOICE') return window._voiceToggle();
     if (verb === 'EXPORT') return window._fdrExport();
-    if (verb === 'AOS') return window._aosBell();
+    if (verb === 'IMPORT') return window._fdrImport();
+    if (verb === 'QRH') return window._qrhToggle();
+    if (verb === 'TRX') return window._trxToggle();
+    if (verb === 'PLAN') return window._thPlan();
+    if (verb === 'MFD') return window._mfdToggle();
+    if (verb === 'SHARE') return window._thShare();
+    if (verb === 'TUNE') return window._tuneToggle();
+    if (verb === 'AOS') {
+      if (arg && !isNaN(parseFloat(arg))) {
+        try { localStorage.setItem('ds-aos-deg', String(Math.max(5, Math.min(60, parseFloat(arg))))); } catch(e) {}
+        return op('AOS THRESHOLD SET — +' + _aosDeg() + '°');
+      }
+      return window._aosBell();
+    }
     if (verb === 'MAP' && typeof mapOpen === 'function') return mapOpen();
     if (verb === 'NEWS' && typeof newsOpen === 'function') return newsOpen(null);
     if (verb === 'REPORT' && typeof reportOpen === 'function') return reportOpen();

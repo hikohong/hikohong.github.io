@@ -39,6 +39,14 @@ jobs:
       - name: Validate web pages (inline JS + invariants)
         run: node .github/scripts/validate-web.mjs
 
+      # Runtime regression gate: both pages must boot the NAVCON console with
+      # zero page errors in a real headless chromium before anything deploys.
+      - name: E2E smoke (headless chromium)
+        run: |
+          npm i --no-save --no-audit --no-fund playwright@1.49.1
+          npx playwright install --with-deps chromium
+          node .github/scripts/e2e-smoke.mjs
+
   deploy:
     needs: validate
     # PRs validate but never deploy — only push to master / manual dispatch publish.
