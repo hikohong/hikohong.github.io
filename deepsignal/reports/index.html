@@ -17,6 +17,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 
 /* ── Nav ── */
 nav{display:flex;align-items:center;gap:12px;padding:16px 24px;border-bottom:1px solid rgba(219,234,254,.10);background:rgba(8,17,31,.92);position:sticky;top:0;z-index:10;backdrop-filter:blur(8px)}
+/* the nav row scrolls by itself on narrow screens; the PAGE never pans sideways —
+   without this, a nav wider than the phone viewport makes the whole page
+   horizontally draggable and the main content keeps sliding out of view */
+html,body{overflow-x:hidden;max-width:100vw}
+nav{overflow-x:auto;overflow-y:hidden;scrollbar-width:none;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y}
+nav::-webkit-scrollbar{display:none}
+nav>*{flex-shrink:0}
+.nav-link{white-space:nowrap}
 .nav-home{display:inline-flex;align-items:center;gap:8px;color:#dbeafe;text-decoration:none;font-weight:700;font-size:.9rem}
 .nav-mark{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#7dd3fc,#f97316);color:#06121d;font-size:.65rem;font-weight:900;flex-shrink:0}
 .nav-links{display:flex;gap:8px}
