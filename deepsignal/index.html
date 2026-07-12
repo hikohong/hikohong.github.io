@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#08111f">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
 <meta name="format-detection" content="telephone=no">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
@@ -397,6 +400,33 @@ body{padding-bottom:30px}
 .trk-sort{margin-left:auto;background:rgba(3,14,10,.9);color:#3fe08f;border:1px solid rgba(63,224,143,.4);border-radius:5px;font-family:monospace;font-size:.58rem;letter-spacing:.06em;padding:3px 6px;cursor:pointer}
 .trk-sort:hover{border-color:#3fe08f}
 .trk-sort option{background:#03140a;color:#cfeee0}
+/* ── NAVCON PRO-2: NVG mode, observability chips, time-scrub, systems page, disposition ── */
+html.nvg body{background:#0d0202}
+html.nvg body>*{filter:sepia(1) hue-rotate(-48deg) saturate(3.4) brightness(.78) contrast(1.05)}
+.th-obs{font-family:monospace;font-size:.6rem;padding:1px 6px;border-radius:8px;border:1px solid rgba(63,224,143,.35);color:#3fe08f;white-space:nowrap}
+.th-obs.obs-lo{color:#5a6a7a;border-color:rgba(90,106,122,.4)}
+.th-win{color:#2f7a55;white-space:nowrap}
+.trk-bell{background:none;border:1px solid rgba(63,224,143,.4);border-radius:5px;color:#3fe08f;cursor:pointer;font-size:.62rem;padding:2px 6px;line-height:1.2}
+.trk-bell.off{color:#3a5a4a;border-color:rgba(63,224,143,.18)}
+#scope-tbar{display:flex;align-items:center;gap:8px;padding:4px 14px 0}
+#scope-t{flex:1;accent-color:#3fe08f;height:14px;min-width:0}
+#scope-tlabel{font-family:monospace;font-size:.58rem;color:#3fe08f;letter-spacing:.08em;white-space:nowrap;min-width:88px;text-align:right}
+#scope-now{background:none;border:1px solid rgba(63,224,143,.4);border-radius:3px;color:#3fe08f;cursor:pointer;font-family:monospace;font-size:.55rem;padding:1px 6px}
+.sim-chip{margin-left:8px;color:#f5a623;border:1px solid rgba(245,166,35,.5);border-radius:8px;padding:0 6px;font-size:.55rem;letter-spacing:.08em;display:none}
+#sd-ov{position:fixed;inset:0;z-index:930;background:rgba(0,5,10,.82);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center}
+#sd-box{width:min(94vw,640px);max-height:88vh;overflow-y:auto;background:rgba(3,14,10,.96);border:1px solid rgba(63,224,143,.5);border-radius:10px;box-shadow:0 0 40px rgba(63,224,143,.18);scrollbar-width:thin}
+#sd-body{padding:10px 14px;font-family:monospace;font-size:.68rem;color:#9fd4bb}
+.sd-row{display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid rgba(63,224,143,.08)}
+.sd-name{width:112px;color:#cfeee0;letter-spacing:.06em;flex-shrink:0}
+.sd-bar{flex:1;height:6px;background:rgba(63,224,143,.08);border-radius:3px;overflow:hidden}
+.sd-fill{display:block;height:100%;background:rgba(63,224,143,.55)}
+.sd-val{width:78px;text-align:right;color:#3fe08f;flex-shrink:0}
+.sd-h{margin:10px 0 4px;color:#3fe08f;letter-spacing:.12em;font-size:.6rem}
+.sd-ok{color:#3fe08f}.sd-fail{color:#f97316}.sd-wait{color:#5a6a7a}
+.btn-dispo{background:none;border:1px solid rgba(148,163,184,.35);color:#94a3b8;border-radius:5px;cursor:pointer;font-family:monospace;font-size:.6rem;letter-spacing:.06em;padding:2px 8px;line-height:1.5}
+.btn-dispo.d-rev{color:#7dd3fc;border-color:rgba(125,211,252,.45)}
+.btn-dispo.d-flag{color:#f5a623;border-color:rgba(245,166,35,.5)}
+.btn-dispo.d-dis{color:#5a6a7a;border-color:rgba(90,106,122,.4);text-decoration:line-through}
 .j-t{font-family:monospace;font-size:.56rem;color:#3a7a5a;letter-spacing:.08em}
 #scope-ov{position:fixed;inset:0;z-index:920;background:rgba(0,5,10,.82);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center}
 #scope-box{background:rgba(3,14,10,.95);border:1px solid rgba(63,224,143,.5);border-radius:10px;box-shadow:0 0 40px rgba(63,224,143,.18);overflow:hidden}
@@ -625,6 +655,7 @@ window._svBlink = function(btn){
   <span class="hud-seg" id="hud-track-seg" style="display:none">⌖ <span class="hud-val" id="hud-track">--</span></span>
   <span class="hud-seg" id="hud-watch-seg" style="display:none">★ <span class="hud-val" id="hud-watch">--</span></span>
   <span class="hud-seg"><button class="hud-btn" id="hud-ar-btn" style="display:none" title="AR finder — point your phone at the tracked target">▲ AR</button></span>
+  <span class="hud-seg hud-hide-sm"><button class="hud-btn" id="hud-nvg-btn" title="Night-vision mode — red low-brightness palette for dark adaptation">☾ NVG</button></span>
   <span id="hud-msg"></span>
 </div>
 
@@ -1327,7 +1358,8 @@ function showResult(resolved, pipelineMatches) {
         ${scoreTxt}
         ${reasonHtml}
         <div class="result-links">${extLinks}</div>
-        <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+        <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+          ${window._dispoBtn ? window._dispoBtn(name) : ""}
           <button class="btn-papers" onclick="litOpen('${name.replace(/'/g,"\\'")}', '${(methods[0] || "").replace(/'/g, "\\'")}')">
             <span class="papers-dot">◉</span> Search Literature
           </button>
@@ -2808,7 +2840,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
         tr.classList.toggle('hud-warn', alt <= 0);
       }
     }
-    try { _casUpdate(); _watchTick(); _pinDecorate(); if (window._trkSyncBtns) _trkSyncBtns(); if (document.getElementById('trk-body')) _thRender(); } catch(e) {}  /* first tick runs before module vars init */
+    try { _casUpdate(); _watchTick(); _pinDecorate(); _aosTick(); if (window._trkSyncBtns) _trkSyncBtns(); if (document.getElementById('trk-body')) _thRender(); } catch(e) {}  /* first tick runs before module vars init */
     var arB = $('hud-ar-btn');
     if (arB) arB.style.display = (trackTgt && window.DeviceOrientationEvent && ('ontouchstart' in window)) ? '' : 'none';
   }
@@ -3079,9 +3111,10 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     if (ov) { ov.remove(); return; }
     ov = document.createElement('div');
     ov.id = 'journal-ov';
-    ov.innerHTML = '<div class="pro-hdr">▤ OPS JOURNAL — SESSION EVENT LOG<button class="pro-x" id="journal-x">✕</button></div><div id="journal-body"></div>';
+    ov.innerHTML = '<div class="pro-hdr">▤ OPS JOURNAL — SESSION EVENT LOG<button class="pro-x" id="journal-exp" title="FDR export — download journal, tracking list and dispositions as JSON">⤓ FDR</button><button class="pro-x" id="journal-x" style="margin-left:8px">✕</button></div><div id="journal-body"></div>';
     document.body.appendChild(ov);
     document.getElementById('journal-x').addEventListener('click', _jToggle);
+    document.getElementById('journal-exp').addEventListener('click', function(){ window._fdrExport(); });
     _jRender();
   }
   (function(){
@@ -3103,7 +3136,13 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       test: function(){ return !!(trackTgt && _lastAlt != null && _lastAlt <= 0); } },
     { id: 'FEEDS', lbl: 'FEEDS DEGRADED', lvl: 'amber',
       desc: 'More than half of the sky-image feeds failed to load. Check your network connection or try refreshing.',
-      test: function(){ return (Date.now() - _loadT > 45000) && _feedsTotal > 10 && (_feedsDone / _feedsTotal) < 0.5; } }
+      test: function(){ return (Date.now() - _loadT > 45000) && _feedsTotal > 10 && (_feedsDone / _feedsTotal) < 0.5; } },
+    { id: 'OFFLINE', lbl: 'OFFLINE MODE', lvl: 'amber',
+      desc: 'No network connection — running on cached data. Live catalog lookups, sky imagery and probes are unavailable until the connection returns.',
+      test: function(){ return navigator.onLine === false; } },
+    { id: 'SAT', lbl: 'SAT TRANSIT', lvl: 'amber',
+      desc: 'The ISS is currently passing within 10° of a tracked target that is above your horizon — expect RFI in radio bands during the transit.',
+      test: function(){ return !!_satNear; } }
   ];
   function _casExplain(lbl, desc){
     var ov = document.getElementById('cas-explain');
@@ -3202,6 +3241,400 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     _sysRenderNotices();
   }
   (function(){ var s = document.getElementById('hud-sys'); if (s) s.addEventListener('click', _sysToggleNotices); })();
+
+  /* ══ NAVCON PRO-2: observability planner, AOS alerts, NVG, systems page,
+        disposition workflow, ISS advisory, voice callouts, FDR export ══ */
+  var _scopeDt = 0, _satNear = false, _issPos = null, _issT = 0;
+  var _obsCache = {}, _cloudCache = null, _aosPrev = {}, _aosMuteUntil = {}, _aosLastRun = 0, _voicePrevCas = {};
+
+  /* ── sun + moon equatorial position at an arbitrary time (Schlyter, same
+        model as _ssBodies) + moon illuminated fraction ── */
+  function _sunMoonEq(t){
+    var d = t / 86400000 - 10956.0, RD = Math.PI / 180;
+    function rev(x){ x %= 360; return x < 0 ? x + 360 : x; }
+    var ecl = (23.4393 - 3.563e-7 * d) * RD;
+    var ws = rev(282.9404 + 4.70935e-5 * d), Ms = rev(356.0470 + 0.9856002585 * d), es = 0.016709 - 1.151e-9 * d;
+    var Es = Ms + (1 / RD) * es * Math.sin(Ms * RD) * (1 + es * Math.cos(Ms * RD));
+    var xv = Math.cos(Es * RD) - es, yv = Math.sqrt(1 - es * es) * Math.sin(Es * RD);
+    var lonS = Math.atan2(yv, xv) + ws * RD, rS = Math.sqrt(xv * xv + yv * yv);
+    var xs = rS * Math.cos(lonS), ys = rS * Math.sin(lonS);
+    var yeS = ys * Math.cos(ecl), zeS = ys * Math.sin(ecl);
+    var sun = { ra: rev(Math.atan2(yeS, xs) / RD), dec: Math.atan2(zeS, Math.sqrt(xs * xs + yeS * yeS)) / RD };
+    var N = rev(125.1228 - 0.0529538083 * d), inc = 5.1454, w = rev(318.0634 + 0.1643573223 * d);
+    var a = 60.2666, e = 0.0549, M = rev(115.3654 + 13.0649929509 * d);
+    var E = M + (1 / RD) * e * Math.sin(M * RD) * (1 + e * Math.cos(M * RD));
+    for (var k = 0; k < 5; k++) E = E - (E - (1 / RD) * e * Math.sin(E * RD) - M) / (1 - e * Math.cos(E * RD));
+    var xv2 = a * (Math.cos(E * RD) - e), yv2 = a * Math.sqrt(1 - e * e) * Math.sin(E * RD);
+    var v = Math.atan2(yv2, xv2), r = Math.sqrt(xv2 * xv2 + yv2 * yv2), lon = v + w * RD;
+    var xg = r * (Math.cos(N * RD) * Math.cos(lon) - Math.sin(N * RD) * Math.sin(lon) * Math.cos(inc * RD));
+    var yg = r * (Math.sin(N * RD) * Math.cos(lon) + Math.cos(N * RD) * Math.sin(lon) * Math.cos(inc * RD));
+    var zg = r * Math.sin(lon) * Math.sin(inc * RD);
+    var yeM = yg * Math.cos(ecl) - zg * Math.sin(ecl), zeM = yg * Math.sin(ecl) + zg * Math.cos(ecl);
+    var moon = { ra: rev(Math.atan2(yeM, xg) / RD), dec: Math.atan2(zeM, Math.sqrt(xg * xg + yeM * yeM)) / RD };
+    var elong = _sep(sun.ra, sun.dec, moon.ra, moon.dec);
+    return { sun: sun, moon: moon, illum: (1 - Math.cos(elong * RD)) / 2 };
+  }
+  function _sep(ra1, dec1, ra2, dec2){
+    var RD = Math.PI / 180;
+    var c = Math.sin(dec1 * RD) * Math.sin(dec2 * RD) + Math.cos(dec1 * RD) * Math.cos(dec2 * RD) * Math.cos((ra1 - ra2) * RD);
+    return Math.acos(Math.max(-1, Math.min(1, c))) / RD;
+  }
+  function _altAt(ra, dec, t){
+    var aa = _altazOf(ra, dec, new Date(t));
+    return aa ? aa.alt : -90;
+  }
+
+  /* ── cloud cover (Open-Meteo, free / no key / CORS). Cached 1 h per position;
+        fail-silent — the observability score just skips the cloud factor. ── */
+  function _cloudLoad(){
+    if (obsLat == null) return;
+    var key = obsLat.toFixed(1) + ',' + obsLon.toFixed(1);
+    if (_cloudCache && _cloudCache.key === key && Date.now() - _cloudCache.at < 3600000) return;
+    if (_cloudCache && _cloudCache.pending) return;
+    _cloudCache = { key: key, at: Date.now(), pending: true, t0: 0, vals: null };
+    try {
+      fetch('https://api.open-meteo.com/v1/forecast?latitude=' + obsLat.toFixed(3) + '&longitude=' + obsLon.toFixed(3) +
+            '&hourly=cloud_cover&forecast_days=2&timezone=UTC')
+        .then(function(r){ return r.json(); })
+        .then(function(d){
+          if (!d || !d.hourly || !d.hourly.time || !d.hourly.cloud_cover) { _cloudCache.pending = false; return; }
+          _cloudCache.t0 = Date.parse(d.hourly.time[0] + (d.hourly.time[0].indexOf('Z') < 0 ? 'Z' : ''));
+          _cloudCache.vals = d.hourly.cloud_cover;
+          _cloudCache.pending = false;
+          _obsCache = {};
+          if (document.getElementById('trk-body')) _thRender();
+        })
+        .catch(function(){ if (_cloudCache) _cloudCache.pending = false; });
+    } catch(e) { if (_cloudCache) _cloudCache.pending = false; }
+  }
+  function _cloudAt(t){
+    if (!_cloudCache || !_cloudCache.vals || !_cloudCache.t0) return null;
+    var idx = Math.round((t - _cloudCache.t0) / 3600000);
+    if (idx < 0 || idx >= _cloudCache.vals.length) return null;
+    var v = _cloudCache.vals[idx];
+    return (v == null || isNaN(v)) ? null : v / 100;
+  }
+
+  /* ── observability window: scan the next 24 h and score each 15-min step by
+        target altitude x darkness (sun < -12 deg) x moon penalty x cloud factor.
+        Returns the best contiguous window plus its peak score. Cached 10 min. ── */
+  function _obsWindow(ra, dec){
+    if (obsLat == null || ra == null || isNaN(+ra)) return { score: null };
+    var key = (+ra).toFixed(2) + '_' + (+dec).toFixed(2) + '_' + obsLat.toFixed(1);
+    var hit = _obsCache[key];
+    if (hit && Date.now() - hit.at < 600000) return hit.w;
+    var now = Date.now(), best = 0, from = null, to = null, curFrom = null, bestFrom = null, bestTo = null, bestCloud = null;
+    for (var m = 0; m <= 1440; m += 15) {
+      var t = now + m * 60000, s = 0, cl = null;
+      var sm = _sunMoonEq(t);
+      var sunAlt = _altAt(sm.sun.ra, sm.sun.dec, t);
+      if (sunAlt < -12) {
+        var alt = _altAt(ra, dec, t);
+        if (alt > 10) {
+          var altF = Math.min(1, (alt - 10) / 50);
+          var moonAlt = _altAt(sm.moon.ra, sm.moon.dec, t), moonF = 1;
+          if (moonAlt > 0) {
+            var sep = _sep(ra, dec, sm.moon.ra, sm.moon.dec);
+            moonF = Math.max(0.25, Math.min(1, (sep - 20) / 60)) * (1 - 0.45 * sm.illum);
+          }
+          cl = _cloudAt(t);
+          var cloudF = (cl == null) ? 1 : Math.max(0.05, 1 - 0.85 * cl);
+          s = Math.round(100 * altF * moonF * cloudF);
+        }
+      }
+      if (s >= 30) {
+        if (curFrom == null) curFrom = t;
+        if (s > best) { best = s; bestCloud = cl; }
+      } else if (curFrom != null) {
+        if (bestFrom == null || (t - curFrom) > (bestTo - bestFrom)) { bestFrom = curFrom; bestTo = t; }
+        curFrom = null;
+      }
+    }
+    if (curFrom != null && (bestFrom == null || (now + 1440 * 60000 - curFrom) > (bestTo - bestFrom))) { bestFrom = curFrom; bestTo = now + 1440 * 60000; }
+    var w = { score: best, from: bestFrom, to: bestTo, cloud: bestCloud };
+    _obsCache[key] = { at: Date.now(), w: w };
+    return w;
+  }
+  function _fmtHM(t){ var d = new Date(t); return pad(d.getHours()) + ':' + pad(d.getMinutes()); }
+  function _obsChip(w){
+    if (!w || w.score == null) return '';
+    return '<span class="th-obs' + (w.score < 30 ? ' obs-lo' : '') + '" title="Observability tonight: altitude x darkness x moon x cloud">OBS ' + w.score + '</span>';
+  }
+  function _obsSub(w){
+    if (!w || !w.from) return '';
+    var s = '<span class="th-sep">&middot;</span><span class="th-win">BEST ' + _fmtHM(w.from) + '–' + _fmtHM(w.to) + '</span>';
+    if (w.cloud != null) s += '<span class="th-sep">&middot;</span><span class="th-win">CLOUD ' + Math.round(w.cloud * 100) + '%</span>';
+    return s;
+  }
+
+  /* ── AOS alerts: notify when a tracked target rises above +20 deg ── */
+  function _aosOn(){ try { return localStorage.getItem('ds-aos') === '1'; } catch(e) { return false; } }
+  window._aosBell = function(){
+    var want = !_aosOn();
+    if (want && typeof Notification !== 'undefined' && Notification.permission === 'default') {
+      Notification.requestPermission().then(function(p){
+        if (p === 'granted') { try { localStorage.setItem('ds-aos', '1'); } catch(e) {} op('AOS ALERTS ARMED — +20° RISE NOTIFICATIONS ON'); }
+        else op('AOS — NOTIFICATIONS BLOCKED BY BROWSER');
+        _aosBellSync();
+      });
+      return;
+    }
+    try { localStorage.setItem('ds-aos', want ? '1' : '0'); } catch(e) {}
+    op(want ? 'AOS ALERTS ARMED — +20° RISE NOTIFICATIONS ON' : 'AOS ALERTS OFF');
+    try { SFX.click(); } catch(e) {}
+    _aosBellSync();
+  };
+  function _aosBellSync(){
+    var b = document.getElementById('trk-bell');
+    if (b) { var on = _aosOn(); b.classList.toggle('off', !on); b.textContent = on ? '🔔' : '🔕'; }
+  }
+  function _aosTick(){
+    var nowT = Date.now();
+    if (nowT - _aosLastRun < 30000) return;
+    _aosLastRun = nowT;
+    /* voice hook: call out newly-active CAS lights */
+    try {
+      var cur = {};
+      for (var c = 0; c < (_sysActive || []).length; c++) {
+        cur[_sysActive[c].id] = 1;
+        if (!_voicePrevCas[_sysActive[c].id]) _voice(_sysActive[c].lbl);
+      }
+      _voicePrevCas = cur;
+    } catch(e) {}
+    if (obsLat == null) return;
+    _cloudLoad();
+    if (_scopeOn) _issTick();
+    var l = _thGet();
+    for (var i = 0; i < l.length; i++) {
+      var e2 = l[i];
+      if (e2.ra == null || isNaN(+e2.ra)) continue;
+      var alt = _altAt(+e2.ra, +e2.dec, nowT), prev = _aosPrev[e2.name];
+      _aosPrev[e2.name] = alt;
+      if (prev == null) continue;
+      if (alt <= 15) _aosMuteUntil[e2.name] = 0;
+      if (prev <= 20 && alt > 20 && !(_aosMuteUntil[e2.name] > nowT)) {
+        _aosMuteUntil[e2.name] = nowT + 6 * 3600000;
+        op('AOS — ' + String(e2.name).toUpperCase() + ' RISING ABOVE +20°');
+        _voice('Target rising: ' + e2.name);
+        if (_aosOn() && typeof Notification !== 'undefined' && Notification.permission === 'granted') {
+          try { new Notification('DEEPSIGNAL — AOS', { body: e2.name + ' is rising above +20° at your location.' }); } catch(e) {}
+        }
+      }
+    }
+  }
+
+  /* ── voice callouts (GPWS-style, default OFF, CDU: VOICE) ── */
+  function _voice(msg){
+    try {
+      if (localStorage.getItem('ds-voice') !== '1') return;
+      if (!window.speechSynthesis) return;
+      var u = new SpeechSynthesisUtterance(String(msg));
+      u.lang = 'en-US'; u.rate = 0.95; u.volume = 0.9;
+      speechSynthesis.speak(u);
+    } catch(e) {}
+  }
+  window._voiceToggle = function(){
+    var on = false;
+    try { on = localStorage.getItem('ds-voice') === '1'; localStorage.setItem('ds-voice', on ? '0' : '1'); } catch(e) {}
+    op(on ? 'VOICE CALLOUTS OFF' : 'VOICE CALLOUTS ON');
+    if (!on) _voice('Voice callouts armed');
+  };
+
+  /* ── NVG night-vision mode: red low-brightness palette for dark adaptation.
+        Filter is applied per top-level element (body>*), NOT on html/body,
+        so position:fixed overlays keep their viewport anchoring. ── */
+  function _nvgApply(){
+    var on = false;
+    try { on = localStorage.getItem('ds-nvg') === '1'; } catch(e) {}
+    document.documentElement.classList.toggle('nvg', on);
+    var b = document.getElementById('hud-nvg-btn');
+    if (b) b.style.color = on ? '#ff6a4a' : '';
+  }
+  window._nvgToggle = function(){
+    var on = false;
+    try { on = localStorage.getItem('ds-nvg') === '1'; localStorage.setItem('ds-nvg', on ? '0' : '1'); } catch(e) {}
+    op(on ? 'NVG MODE OFF — STANDARD PALETTE' : 'NVG MODE ON — DARK-ADAPTATION PALETTE');
+    try { SFX.click(); } catch(e) {}
+    _nvgApply();
+  };
+
+  /* ── systems SD page (ECAM-style): catalog stats per source + live bus probes ── */
+  function _sdToggle(){
+    var ov = document.getElementById('sd-ov');
+    if (ov) { ov.remove(); try { SFX.close(); } catch(e) {} return; }
+    try { SFX.open(); } catch(e) {}
+    op('SYSTEMS PAGE — DATA SOURCES + EXTERNAL BUS PROBES');
+    ov = document.createElement('div');
+    ov.id = 'sd-ov';
+    ov.innerHTML = '<div id="sd-box"><div class="pro-hdr">◧ SYSTEMS — DATA SOURCES / EXTERNAL BUSES<button class="pro-x" id="sd-x">✕</button></div><div id="sd-body">…</div></div>';
+    ov.addEventListener('click', function(ev){ if (ev.target === ov) _sdToggle(); });
+    document.body.appendChild(ov);
+    document.getElementById('sd-x').addEventListener('click', _sdToggle);
+    _sdRender();
+  }
+  function _sdRender(){
+    var body = document.getElementById('sd-body');
+    if (!body) return;
+    var cat = [];
+    try { cat = (typeof CANDIDATES !== 'undefined' && CANDIDATES) || (typeof catalog !== 'undefined' && catalog) || []; } catch(e) {}
+    var byType = {}, det = 0, i;
+    for (i = 0; i < cat.length; i++) {
+      var c = cat[i];
+      var dts = c._all_dtypes || c.dtypes || (c.data_type ? [c.data_type] : (c.dtype ? [c.dtype] : []));
+      if (!dts.length) dts = ['unknown'];
+      for (var j = 0; j < dts.length; j++) byType[dts[j]] = (byType[dts[j]] || 0) + 1;
+      var en = c._entries;
+      det += (en && en.length) ? en.length : 1;
+    }
+    var h = '<div class="sd-h">CATALOG</div>';
+    h += '<div class="sd-row"><span class="sd-name">CANDIDATES</span><span class="sd-bar"></span><span class="sd-val">' + cat.length + '</span></div>';
+    h += '<div class="sd-row"><span class="sd-name">DETECTIONS</span><span class="sd-bar"></span><span class="sd-val">' + det + '</span></div>';
+    h += '<div class="sd-row"><span class="sd-name">DATA AGE</span><span class="sd-bar"></span><span class="sd-val">' + (_staleDays != null ? _staleDays + 'd' : '—') + '</span></div>';
+    h += '<div class="sd-h">SOURCES — CANDIDATES PER DATA TYPE</div>';
+    var keys = [], mx = 1;
+    for (var k in byType) { keys.push(k); if (byType[k] > mx) mx = byType[k]; }
+    keys.sort(function(a, b){ return byType[b] - byType[a]; });
+    for (i = 0; i < keys.length; i++)
+      h += '<div class="sd-row"><span class="sd-name">' + _esc(keys[i].toUpperCase()) + '</span><span class="sd-bar"><span class="sd-fill" style="width:' + Math.round(100 * byType[keys[i]] / mx) + '%"></span></span><span class="sd-val">' + byType[keys[i]] + '</span></div>';
+    h += '<div class="sd-h">EXTERNAL BUSES — LIVE PROBES</div>';
+    var buses = [
+      ['SIMBAD TAP', 'sd-b-simbad'], ['HIPS2FITS', 'sd-b-hips'],
+      ['WIKIPEDIA', 'sd-b-wiki'], ['OPEN-METEO', 'sd-b-meteo']
+    ];
+    for (i = 0; i < buses.length; i++)
+      h += '<div class="sd-row"><span class="sd-name">' + buses[i][0] + '</span><span class="sd-bar"></span><span class="sd-val sd-wait" id="' + buses[i][1] + '">…</span></div>';
+    body.innerHTML = h;
+    function mark(id, ok, ms){
+      var el = document.getElementById(id);
+      if (!el) return;
+      el.className = 'sd-val ' + (ok ? 'sd-ok' : 'sd-fail');
+      el.textContent = ok ? ('PASS ' + ms + 'ms') : 'FAIL';
+    }
+    function probeFetch(id, url){
+      var t0 = Date.now();
+      try {
+        fetch(url).then(function(r){ mark(id, r.ok, Date.now() - t0); }).catch(function(){ mark(id, false, 0); });
+      } catch(e) { mark(id, false, 0); }
+    }
+    probeFetch('sd-b-simbad', 'https://simbad.cds.unistra.fr/simbad/sim-tap/sync?request=doQuery&lang=adql&format=json&query=' + encodeURIComponent('SELECT TOP 1 main_id FROM basic'));
+    probeFetch('sd-b-wiki', 'https://en.wikipedia.org/w/api.php?action=query&titles=Mars&prop=pageimages&pithumbsize=50&format=json&origin=*');
+    probeFetch('sd-b-meteo', 'https://api.open-meteo.com/v1/forecast?latitude=0&longitude=0&hourly=cloud_cover&forecast_days=1');
+    (function(){
+      var t0 = Date.now(), im = new Image();
+      im.onload = function(){ mark('sd-b-hips', true, Date.now() - t0); };
+      im.onerror = function(){ mark('sd-b-hips', false, 0); };
+      im.src = 'https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=32&height=32&fov=0.2&projection=TAN&coordsys=icrs&ra=10&dec=10&format=jpg&_=' + t0;
+    })();
+  }
+  try { window._sdToggle = _sdToggle; } catch(e) {}
+
+  /* ── candidate disposition workflow: NONE -> REVIEWED -> FLAGGED -> DISMISSED ── */
+  var _D_LBL = { '': '▢ TRIAGE', rev: '✔ REVIEWED', flag: '⚑ FLAGGED', dis: '✕ DISMISSED' };
+  var _D_CLS = { '': '', rev: ' d-rev', flag: ' d-flag', dis: ' d-dis' };
+  function _dMap(){ try { return JSON.parse(localStorage.getItem('ds-dispo') || '{}'); } catch(e) { return {}; } }
+  window._dispoBtn = function(name){
+    var st = _dMap()[name] || '';
+    return '<button class="btn-dispo' + _D_CLS[st] + '" data-dname="' + _escAttr(name) + '" onclick="event.stopPropagation();_dispoCycle(this)" title="Operator disposition — cycle triage state">' + _D_LBL[st] + '</button>';
+  };
+  window._dispoCycle = function(btn){
+    var name = btn.getAttribute('data-dname');
+    var order = ['', 'rev', 'flag', 'dis'];
+    var m = _dMap();
+    var next = order[(order.indexOf(m[name] || '') + 1) % order.length];
+    if (next) m[name] = next; else delete m[name];
+    try { localStorage.setItem('ds-dispo', JSON.stringify(m)); } catch(e) {}
+    btn.className = 'btn-dispo' + _D_CLS[next];
+    btn.innerHTML = _D_LBL[next];
+    op('DISPOSITION — ' + String(name).toUpperCase() + ' ' + (_D_LBL[next].split(' ')[1] || 'CLEARED'));
+    try { SFX.click(); } catch(e) {}
+  };
+
+  /* ── ISS transit advisory (wheretheiss.at, free / CORS). Plotted on the scope
+        when above the local horizon; CAS 'SAT TRANSIT' when within 10 deg of an
+        up tracked target (RFI risk). Fail-silent. ── */
+  function _issTick(){
+    if (obsLat == null) return;
+    if (Date.now() - _issT < 60000) return;
+    _issT = Date.now();
+    try {
+      fetch('https://api.wheretheiss.at/v1/satellites/25544')
+        .then(function(r){ return r.json(); })
+        .then(function(d){
+          if (!d || d.latitude == null) return;
+          var RD = Math.PI / 180, R = 6371, r2 = R + (d.altitude || 420);
+          var f1 = obsLat * RD, l1 = obsLon * RD, f2 = d.latitude * RD, l2 = d.longitude * RD;
+          var ox = R * Math.cos(f1) * Math.cos(l1), oy = R * Math.cos(f1) * Math.sin(l1), oz = R * Math.sin(f1);
+          var sx = r2 * Math.cos(f2) * Math.cos(l2), sy = r2 * Math.cos(f2) * Math.sin(l2), sz = r2 * Math.sin(f2);
+          var dx = sx - ox, dy = sy - oy, dz = sz - oz;
+          var e2 = -Math.sin(l1) * dx + Math.cos(l1) * dy;
+          var n2 = -Math.sin(f1) * Math.cos(l1) * dx - Math.sin(f1) * Math.sin(l1) * dy + Math.cos(f1) * dz;
+          var u2 = Math.cos(f1) * Math.cos(l1) * dx + Math.cos(f1) * Math.sin(l1) * dy + Math.sin(f1) * dz;
+          var rng = Math.sqrt(dx * dx + dy * dy + dz * dz);
+          _issPos = { el: Math.asin(u2 / rng) / RD, az: ((Math.atan2(e2, n2) / RD) + 360) % 360, ts: Date.now() };
+          var near = false;
+          if (_issPos.el > 0) {
+            var l = _thGet();
+            for (var i = 0; i < l.length; i++) {
+              if (l[i].ra == null) continue;
+              var aa = _altazOf(+l[i].ra, +l[i].dec);
+              if (!aa || aa.alt <= 0) continue;
+              var RD2 = Math.PI / 180;
+              var cs = Math.sin(aa.alt * RD2) * Math.sin(_issPos.el * RD2) + Math.cos(aa.alt * RD2) * Math.cos(_issPos.el * RD2) * Math.cos((aa.az - _issPos.az) * RD2);
+              if (Math.acos(Math.max(-1, Math.min(1, cs))) / RD2 < 10) { near = true; break; }
+            }
+          }
+          if (near && !_satNear) { op('SAT TRANSIT — ISS WITHIN 10° OF A TRACKED TARGET'); _voice('Satellite transit'); }
+          _satNear = near;
+        })
+        .catch(function(){});
+    } catch(e) {}
+  }
+
+  /* ── FDR export: journal + tracking list + dispositions as a JSON download ── */
+  window._fdrExport = function(){
+    try {
+      var out = {
+        exportedAt: new Date().toISOString(),
+        observer: (obsLat != null) ? { lat: obsLat, lon: obsLon, source: obsSrc } : null,
+        trackList: _thGet(),
+        dispositions: _dMap(),
+        journal: _journal.map(function(j){ return { t: j.t.toISOString(), m: j.m }; })
+      };
+      var blob = new Blob([JSON.stringify(out, null, 2)], { type: 'application/json' });
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'deepsignal-fdr-' + new Date().toISOString().slice(0, 10) + '.json';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function(){ URL.revokeObjectURL(a.href); }, 5000);
+      op('FDR EXPORT — SESSION LOG DOWNLOADED');
+    } catch(e) { op('FDR EXPORT FAILED'); }
+  };
+
+  /* ── PRO-2 init: NVG restore, HUD buttons, systems-page entry points, SW ── */
+  (function(){
+    _nvgApply();
+    /* restore saved disposition states on server-rendered cards (gallery) */
+    try {
+      var dm = _dMap(), dbs = document.querySelectorAll('.btn-dispo[data-dname]');
+      for (var i2 = 0; i2 < dbs.length; i2++) {
+        var st2 = dm[dbs[i2].getAttribute('data-dname')] || '';
+        if (st2) { dbs[i2].className = 'btn-dispo' + _D_CLS[st2]; dbs[i2].innerHTML = _D_LBL[st2]; }
+      }
+    } catch(e) {}
+    var nb = document.getElementById('hud-nvg-btn');
+    if (nb) nb.addEventListener('click', window._nvgToggle);
+    var fd = document.getElementById('hud-feeds');
+    if (fd && fd.parentElement) {
+      fd.parentElement.style.cursor = 'pointer';
+      fd.parentElement.title = 'Systems page — data sources + external bus probes';
+      fd.parentElement.addEventListener('click', _sdToggle);
+    }
+    try {
+      if ('serviceWorker' in navigator && location.protocol === 'https:')
+        navigator.serviceWorker.register('sw.js').catch(function(){});
+    } catch(e) {}
+    try { window._issTick = _issTick; window._issState = function(){ return { pos: _issPos, near: _satNear }; }; window._obsWindow = _obsWindow; } catch(e) {}
+  })();
 
   /* ── watchlist: pin targets, HUD cycles their live alt/az ── */
   function _wlGet(){ try { return JSON.parse(localStorage.getItem('ds-watchlist') || '[]'); } catch(e) { return []; } }
@@ -3348,10 +3781,11 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     var rows = [];
     for (var i = 0; i < l.length; i++) {
       var aa0 = _altazOf(l[i].ra, l[i].dec);
-      rows.push({ e: l[i], i: i, aa: aa0, alt: aa0 ? aa0.alt : -999, cls: _classify(l[i].name) });
+      rows.push({ e: l[i], i: i, aa: aa0, alt: aa0 ? aa0.alt : -999, cls: _classify(l[i].name), w: _obsWindow(+l[i].ra, +l[i].dec) });
     }
     var mode = _thSortMode();
-    if (mode === 'alt') rows.sort(function(a, c){ return c.alt - a.alt; });
+    if (mode === 'tonight') rows.sort(function(a, c){ return ((c.w && c.w.score) || 0) - ((a.w && a.w.score) || 0); });
+    else if (mode === 'alt') rows.sort(function(a, c){ return c.alt - a.alt; });
     else if (mode === 'name') rows.sort(function(a, c){ return String(a.e.name).localeCompare(String(c.e.name)); });
     else if (mode === 'type') rows.sort(function(a, c){ var t = a.cls.type.localeCompare(c.cls.type); return t !== 0 ? t : (c.alt - a.alt); });
     /* 'added' keeps the stored order (most-recently tracked first) */
@@ -3362,10 +3796,10 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
         ? '<span class="' + (aa.alt > 0 ? 'th-up' : 'th-dn') + '">' + (aa.alt >= 0 ? '+' : '') + aa.alt.toFixed(0) + '° ' + (aa.alt > 0 ? 'UP' : 'DOWN') + '</span>'
         : '';
       var cur = (trackTgt && trackTgt.name === row.e.name) ? '<span class="th-cur">● LIVE</span>' : '';
-      h += '<div class="th-row"><div class="th-main"><span class="th-name">' + _esc(row.e.name) + '</span>' + cur + live +
+      h += '<div class="th-row"><div class="th-main"><span class="th-name">' + _esc(row.e.name) + '</span>' + cur + live + _obsChip(row.w) +
         '<button class="btn-map-jump" onclick="_thTrack(' + i + ')" title="Track this target">⌖</button>' +
         '<button class="pro-x" onclick="_thDel(' + i + ')" title="Remove">✕</button></div>' +
-        '<div class="th-sub"><span class="th-type">' + _esc(cls.type.toUpperCase()) + '</span><span class="th-sep">·</span><span class="th-sys">' + _esc(cls.sys.toUpperCase()) + '</span></div></div>';
+        '<div class="th-sub"><span class="th-type">' + _esc(cls.type.toUpperCase()) + '</span><span class="th-sep">·</span><span class="th-sys">' + _esc(cls.sys.toUpperCase()) + '</span>' + _obsSub(row.w) + '</div></div>';
     }
     b.innerHTML = h;
   }
@@ -3377,11 +3811,14 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     ov.id = 'trklist-ov';
     ov.innerHTML = '<div class="pro-hdr">⌖ TRACKING LIST — LIVE ALTITUDE' +
       '<select id="trk-sort" class="trk-sort" title="Sort tracking list">' +
-      '<option value="alt">ALT ↓</option><option value="name">NAME A–Z</option>' +
+      '<option value="alt">ALT ↓</option><option value="tonight">TONIGHT</option><option value="name">NAME A–Z</option>' +
       '<option value="added">RECENT</option><option value="type">TYPE</option></select>' +
+      '<button class="trk-bell off" id="trk-bell" title="AOS alerts — notify when a tracked target rises above +20°" onclick="_aosBell()">🔕</button>' +
       '<button class="pro-x" id="trk-x">✕</button></div><div id="trk-body"></div>';
     document.body.appendChild(ov);
     document.getElementById('trk-x').addEventListener('click', _thToggle);
+    _aosBellSync();
+    _cloudLoad();
     var _ss = document.getElementById('trk-sort');
     if (_ss) {
       _ss.value = _thSortMode();
@@ -3400,8 +3837,8 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
 
   /* ── solar-system ephemeris (Schlyter low-precision, scope-grade accuracy):
         geocentric RA/Dec of Sun, Moon, all planets incl. Pluto, computed NOW ── */
-  function _ssBodies(){
-    var d = Date.now() / 86400000 - 10956.0;
+  function _ssBodies(when){
+    var d = (when != null ? when : Date.now()) / 86400000 - 10956.0;
     var RD = Math.PI / 180;
     function rev(x){ x %= 360; return x < 0 ? x + 360 : x; }
     function helio(N, i, w, a, e, M){
@@ -3560,6 +3997,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       if (_scopeRAF) cancelAnimationFrame(_scopeRAF);
       if (_scopeResize) { window.removeEventListener('resize', _scopeResize); _scopeResize = null; }
       _scopeSel = null;
+      _scopeDt = 0;
       ov.remove();
       try { SFX.close(); } catch(e) {}
       return;
@@ -3568,8 +4006,10 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     op('TACTICAL SCOPE — PLOTTING CANDIDATES + SOLAR SYSTEM ON LOCAL SKY');
     ov = document.createElement('div');
     ov.id = 'scope-ov';
-    ov.innerHTML = '<div id="scope-box"><div class="pro-hdr">◉ TACTICAL SCOPE — LOCAL SKY PLOT<button class="pro-x" id="scope-x">✕</button></div>' +
-      '<canvas id="scope-cv" width="520" height="520"></canvas><div id="scope-info" style="display:none"></div>' +
+    ov.innerHTML = '<div id="scope-box"><div class="pro-hdr">◉ TACTICAL SCOPE — LOCAL SKY PLOT<span class="sim-chip" id="scope-sim">SIM</span><button class="pro-x" id="scope-x">✕</button></div>' +
+      '<canvas id="scope-cv" width="520" height="520"></canvas>' +
+      '<div id="scope-tbar" title="Time scrub — preview the sky up to 24 h ahead"><input id="scope-t" type="range" min="0" max="24" step="0.25" value="0"><span id="scope-tlabel">NOW</span><button id="scope-now">NOW</button></div>' +
+      '<div id="scope-info" style="display:none"></div>' +
       '<div id="scope-geo" class="j-t" title="Star positions are J2000 catalog coordinates (no precession applied — about 0.4° in 2026); solar-system bodies use live ephemeris. Click to set your observing position manually.">—</div>' +
       '<div id="scope-foot" class="j-t">—</div></div>';
     ov.addEventListener('click', function(ev){ if (ev.target === ov) _scopeToggle(); });
@@ -3588,8 +4028,8 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       /* reserve height for the header, the selection INFO panel (shown below the
          canvas when a blip is tapped) and the geo/footer lines, so nothing clips
          once a target is selected */
-      var s = Math.min(window.innerWidth * 0.94, window.innerHeight - 260);
-      s = Math.max(260, Math.round(s));
+      var s = Math.min(window.innerWidth * 0.94, window.innerHeight - 286);
+      s = Math.max(250, Math.round(s));
       if (cv.width !== s) { cv.width = s; cv.height = s; }
       cv.style.width = s + 'px'; cv.style.height = s + 'px';
       if (typeof draw === 'function') draw._last = 0;
@@ -3597,6 +4037,23 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     _scopeFit();
     _scopeResize = function(){ _scopeFit(); };
     window.addEventListener('resize', _scopeResize);
+    /* time scrub: preview the local sky up to 24 h ahead (mission rehearsal).
+       The SIM chip + amber label make the predictive mode unmistakable. */
+    _scopeDt = 0;
+    (function(){
+      var tS = document.getElementById('scope-t'), tL = document.getElementById('scope-tlabel');
+      var tN = document.getElementById('scope-now'), tC = document.getElementById('scope-sim');
+      function tSync(){
+        _scopeDt = parseFloat(tS.value) || 0;
+        var when = new Date(Date.now() + _scopeDt * 3600e3);
+        tL.textContent = _scopeDt ? ('T+' + String(_scopeDt) + 'H · ' + pad(when.getHours()) + ':' + pad(when.getMinutes())) : 'NOW';
+        tL.style.color = _scopeDt ? '#f5a623' : '';
+        if (tC) tC.style.display = _scopeDt ? 'inline-block' : 'none';
+        if (typeof draw === 'function') draw._last = 0;
+      }
+      tS.addEventListener('input', tSync);
+      tN.addEventListener('click', function(){ tS.value = 0; tSync(); try { SFX.click(); } catch(e) {} });
+    })();
     cv.addEventListener('click', function(ev){
       var r = cv.getBoundingClientRect();
       var x = (ev.clientX - r.left) * (cv.width / r.width), y = (ev.clientY - r.top) * (cv.height / r.height);
@@ -3651,11 +4108,12 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
           c2.fillStyle = g2;
           c2.beginPath(); c2.moveTo(C, C); c2.arc(C, C, R, sweepA - .02, sweepA + .5); c2.closePath(); c2.fill();
         }
-        if (Date.now() - ssT > 60000) { ssCache = _ssBodies(); ssT = Date.now(); }
+        var d0 = _scopeDt ? new Date(Date.now() + _scopeDt * 3600e3) : new Date();
+        if (Date.now() - ssT > 60000 || draw._dt !== _scopeDt) { draw._dt = _scopeDt; ssCache = _ssBodies(d0.getTime()); ssT = Date.now(); }
         /* tracked-name set, refreshed ~2x/sec */
         if (!draw._trk || fN % 30 === 0) { draw._trk = {}; draw._trkList = _thGet(); for (var _z = 0; _z < draw._trkList.length; _z++) draw._trk[draw._trkList[_z].name] = 1; }
         blips = [];
-        var up = 0, upSS = 0, d0 = new Date(), i, aa, pxy, plotted = {};
+        var up = 0, upSS = 0, i, aa, pxy, plotted = {};
         c2.font = '9px monospace';
         for (i = 0; i < tgts.length; i++) {
           aa = _altazOf(tgts[i].ra, tgts[i].dec, d0);
@@ -3719,8 +4177,31 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
             plotted[_nm] = 1;
           } else { trkDown++; }
         }
+        /* ISS blip (live only — a satellite position cannot be time-scrubbed) */
+        if (!_scopeDt && _issPos && Date.now() - _issPos.ts < 300000 && _issPos.el > 0) {
+          pxy = plot(C, R, { alt: _issPos.el, az: _issPos.az });
+          c2.fillStyle = '#f5a623'; c2.shadowColor = '#f5a623'; c2.shadowBlur = 6;
+          c2.fillRect(pxy.x - 3, pxy.y - 3, 6, 6);
+          c2.shadowBlur = 0;
+          c2.fillText('ISS', pxy.x + 6, pxy.y - 5);
+        }
         c2.textAlign = 'center';
         if (_scopeSel) {
+          /* predicted path: the selected target's next 6 h, sampled every 30 min */
+          var tk = _scopeSel.name + '|' + _scopeDt + '|' + C + '|' + Math.floor(Date.now() / 600000);
+          if (draw._trailKey !== tk) {
+            draw._trailKey = tk; draw._trail = [];
+            if (_scopeSel.ra != null) for (var q2 = 1; q2 <= 12; q2++) {
+              var ta = _altazOf(_scopeSel.ra, _scopeSel.dec, new Date(d0.getTime() + q2 * 1800e3));
+              draw._trail.push(ta && ta.alt > 0 ? plot(C, R, ta) : null);
+            }
+          }
+          if (draw._trail) {
+            c2.globalAlpha = .5; c2.fillStyle = '#3fe08f';
+            for (var q3 = 0; q3 < draw._trail.length; q3++)
+              if (draw._trail[q3]) { c2.beginPath(); c2.arc(draw._trail[q3].x, draw._trail[q3].y, 1.2, 0, 6.29); c2.fill(); }
+            c2.globalAlpha = 1;
+          }
           aa = _altazOf(_scopeSel.ra, _scopeSel.dec, d0);
           if (aa && aa.alt > 0) {
             pxy = plot(C, R, aa);
@@ -3732,7 +4213,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
           if (fN % 45 === 0) _scopeLive();
         }
         fN++;
-        if (foot) foot.textContent = up + '/' + tgts.length + ' CANDIDATES · ' + trkUp + '/' + trkTot + ' TRACKED UP' + (trkDown ? ' (' + trkDown + ' BELOW HORIZON)' : '') + ' · ' + upSS + ' SOLAR-SYSTEM · WHITE=PLANETS GREEN=TRACKED · TAP A BLIP';
+        if (foot) foot.textContent = (_scopeDt ? 'SIM T+' + _scopeDt + 'H · ' : '') + up + '/' + tgts.length + ' CANDIDATES · ' + trkUp + '/' + trkTot + ' TRACKED UP' + (trkDown ? ' (' + trkDown + ' BELOW HORIZON)' : '') + ' · ' + upSS + ' SOLAR-SYSTEM · WHITE=PLANETS GREEN=TRACKED · TAP A BLIP';
       }
     }
     _scopeRAF = requestAnimationFrame(draw);
@@ -3800,7 +4281,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     if (ov) { ov.remove(); return; }
     ov = document.createElement('div');
     ov.id = 'cdu-ov';
-    ov.innerHTML = '<span class="cdu-p">NAVCON&gt;</span><input id="cdu-in" autocomplete="off" spellcheck="false" placeholder="TRK &lt;name&gt; · SCOPE · MAP · NEWS · REPORT · SRC ZTF|PAN|DSS · BLINK · LOG · AR · FIND &lt;query&gt;">';
+    ov.innerHTML = '<span class="cdu-p">NAVCON&gt;</span><input id="cdu-in" autocomplete="off" spellcheck="false" placeholder="TRK &lt;name&gt; · SCOPE · MAP · SYS · NVG · VOICE · EXPORT · SRC ZTF|PAN|DSS · BLINK · LOG · AR · FIND &lt;query&gt;">';
     document.body.appendChild(ov);
     var inp = document.getElementById('cdu-in');
     inp.focus();
@@ -3822,6 +4303,11 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     if (verb === 'LOG') return _jToggle();
     if (verb === 'LIST') return _thToggle();
     if (verb === 'AR') return _arToggle();
+    if (verb === 'NVG') return window._nvgToggle();
+    if (verb === 'SYS') return _sdToggle();
+    if (verb === 'VOICE') return window._voiceToggle();
+    if (verb === 'EXPORT') return window._fdrExport();
+    if (verb === 'AOS') return window._aosBell();
     if (verb === 'MAP' && typeof mapOpen === 'function') return mapOpen();
     if (verb === 'NEWS' && typeof newsOpen === 'function') return newsOpen(null);
     if (verb === 'REPORT' && typeof reportOpen === 'function') return reportOpen();
