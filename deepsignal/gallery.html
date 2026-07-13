@@ -278,13 +278,16 @@ body{padding-bottom:30px}
 .hud-tr{top:6px;right:6px}.hud-tr::before{top:0;right:0}.hud-tr::after{top:0;right:0}
 .hud-bl{bottom:32px;left:6px}.hud-bl::before{bottom:0;left:0}.hud-bl::after{bottom:0;left:0}
 .hud-br{bottom:32px;right:6px}.hud-br::before{bottom:0;right:0}.hud-br::after{bottom:0;right:0}
-#hud-status{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;align-items:center;gap:16px;padding:6px 20px;font-family:monospace;font-size:.6rem;letter-spacing:.1em;color:#3f7a5c;border-top:1px solid rgba(63,224,143,.18);background:rgba(4,13,10,.88);backdrop-filter:blur(6px);white-space:nowrap;overflow:hidden}
+#hud-status{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;align-items:center;gap:16px;padding:6px 20px;font-family:monospace;font-size:.6rem;letter-spacing:.1em;color:#3f7a5c;border-top:1px solid rgba(63,224,143,.18);background:rgba(4,13,10,.88);backdrop-filter:blur(6px);white-space:nowrap;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;-webkit-overflow-scrolling:touch;touch-action:pan-x}
+#hud-status::-webkit-scrollbar{display:none}
+#hud-status>*{flex-shrink:0}
 .hud-seg{display:inline-flex;align-items:center;gap:5px;flex-shrink:0}
 .hud-val{color:#3fe08f;text-shadow:0 0 6px rgba(63,224,143,.4)}
 .hud-dot{width:5px;height:5px;border-radius:50%;background:#10b981;box-shadow:0 0 5px #10b981;animation:hud-blink 2.4s ease-in-out infinite;flex-shrink:0}
 @keyframes hud-blink{0%,100%{opacity:1}50%{opacity:.35}}
 #hud-msg{margin-left:auto;color:#2f7a55;overflow:hidden;text-overflow:ellipsis;min-width:0}
-@media(max-width:680px){.hud-hide-sm{display:none!important}}
+/* .hud-hide-sm segments are no longer hidden on phones — the HUD bar scrolls
+   horizontally, so every readout stays reachable by swipe */
 /* self-test mini panel — floats over the live page, auto-dismisses when checks pass */
 #boot-ov{position:fixed;right:14px;bottom:44px;z-index:70;width:min(330px,calc(100vw - 28px));background:rgba(3,14,10,.93);border:1px solid rgba(63,224,143,.5);border-radius:8px;box-shadow:0 0 26px rgba(63,224,143,.15);backdrop-filter:blur(8px);font-family:monospace;cursor:pointer;transition:opacity .5s,transform .5s;overflow:hidden}
 #boot-ov.off{opacity:0;transform:translateY(10px);pointer-events:none}
@@ -329,6 +332,9 @@ body{padding-bottom:30px}
 #cas-explain .pro-hdr{color:#f5a623;border-bottom-color:rgba(245,166,35,.3);background:rgba(40,26,6,.5)}
 #cas-explain .pro-x{border-color:rgba(245,166,35,.4);color:#f5a623}
 .cas-desc{padding:10px 12px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:.76rem;line-height:1.55;color:#f5d9a8}
+.cas-sec{margin:9px 0 2px;font-family:monospace;font-size:.58rem;letter-spacing:.14em;color:#f5a623;opacity:.85}
+.cas-desc .cas-sec:first-child{margin-top:0}
+.cas-ico{font-size:1.05rem;line-height:1;margin-right:2px}
 /* bottom-left collapsible system-status / notification centre */
 .hud-sys{cursor:pointer;border:none;background:none;font:inherit;color:inherit;padding:0;display:inline-flex;align-items:center;gap:5px;letter-spacing:inherit}
 #hud-sys.sys-alert,#hud-sys.sys-alert .hud-val{color:#f5a623}
@@ -1251,7 +1257,7 @@ window._svBlink = function(btn){
 <div id="sky-tooltip-map"></div>
 <div class="gallery-hdr">
 <h1>DeepSignal — Sky Image Gallery</h1>
-<div class="subtitle">Generated <span id="gen-ts">2026-07-12 14:22 UTC</span> &nbsp;·&nbsp; 244 targets &nbsp;·&nbsp; 244 sky images via Hips2Fits CDN</div>
+<div class="subtitle">Generated <span id="gen-ts">2026-07-13 00:54 UTC</span> &nbsp;·&nbsp; 244 targets &nbsp;·&nbsp; 244 sky images via Hips2Fits CDN</div>
 <div class="stats">
   <div class="stat"><div class="stat-n" style="color:#f59e0b">104</div><div class="stat-l">Tier 1 ≥70</div></div>
   <div class="stat"><div class="stat-n" style="color:#60a5fa">128</div><div class="stat-l">Tier 2 50–69</div></div>
@@ -10027,35 +10033,79 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
   /* ── CAS annunciator: amber/red lights for REAL conditions, click = acknowledge ── */
   var _casAck = {}, _sysActive = [];
   var _CAS = [
-    { id: 'STALE', lbl: 'DATA STALE', lvl: 'amber',
-      desc: 'The pipeline catalog was last refreshed over 14 days ago. Re-run the DeepSignal pipeline to update the candidate list.',
+    { id: 'STALE', lbl: 'DATA STALE', lvl: 'amber', icon: '🕑',
+      desc: 'The pipeline catalog was last refreshed over 14 days ago.',
+      why: 'The candidate catalog on this site was generated more than 14 days ago, so scores, imagery links and statistics may lag behind the live sky. The pipeline normally republishes daily at 02:00 UTC.',
+      fix: 'No action needed to keep browsing — the data stays fully usable. To refresh: wait for the next scheduled publish, or run /update-website from the DeepSignal CLI. The AGE readout in the bottom HUD shows the current data age.',
       test: function(){ return _staleDays != null && _staleDays > 14; } },
-    { id: 'LINK', lbl: 'SIMBAD LINK', lvl: 'red',
-      desc: 'The SIMBAD star catalog did not answer the startup self-test. External name / coordinate lookups may fail right now.',
+    { id: 'LINK', lbl: 'SIMBAD LINK', lvl: 'red', icon: '📡',
+      desc: 'The SIMBAD star catalog did not answer the startup self-test.',
+      why: 'The boot self-test could not reach the SIMBAD TAP service (CDS Strasbourg). Either your connection is blocking it or the service is down. Name lookups, object types and distances come from this bus.',
+      fix: 'Open the SYS page (tap FEEDS) and re-probe the external buses. If only SIMBAD fails, the service is likely down — searches still work by coordinates and cached data. Reload the page once your connection recovers.',
       test: function(){ try { return sessionStorage.getItem('ds-simbad') === 'fail'; } catch(e) { return false; } } },
-    { id: 'HORIZON', lbl: 'TGT BELOW HORIZON', lvl: 'amber',
-      desc: 'The target you are tracking is currently below your local horizon — it is not observable from your location right now.',
+    { id: 'HORIZON', lbl: 'TGT BELOW HORIZON', lvl: 'amber', icon: '⛰',
+      desc: 'The tracked target is currently below your local horizon.',
+      why: 'The target you are LIVE-tracking has a negative altitude at your position right now — the Earth is between you and it. This is geometry, not a fault.',
+      fix: 'Tap the OBS chip in the Tracking List for its 24 h altitude chart and BEST window, or arm the 🔔 AOS alert to be notified the moment it rises above your threshold.',
       test: function(){ return !!(trackTgt && _lastAlt != null && _lastAlt <= 0); } },
-    { id: 'FEEDS', lbl: 'FEEDS DEGRADED', lvl: 'amber',
-      desc: 'More than half of the sky-image feeds failed to load. Check your network connection or try refreshing.',
+    { id: 'FEEDS', lbl: 'FEEDS DEGRADED', lvl: 'amber', icon: '🖼',
+      desc: 'More than half of the sky-image feeds failed to load.',
+      why: 'Over 50% of the Hips2Fits sky-cutout requests failed — usually a slow or filtered network, or a CDN hiccup at CDS. Candidate data and scores are unaffected; only the imagery layer is degraded.',
+      fix: 'Check the HIPS2FITS probe on the SYS page (tap FEEDS). If it passes now, simply refresh the page; if it fails, wait a few minutes — the client retries surveys down the epoch ladder automatically.',
       test: function(){ return (Date.now() - _loadT > 45000) && _feedsTotal > 10 && (_feedsDone / _feedsTotal) < 0.5; } },
-    { id: 'OFFLINE', lbl: 'OFFLINE MODE', lvl: 'amber',
-      desc: 'No network connection — running on cached data. Live catalog lookups, sky imagery and probes are unavailable until the connection returns.',
+    { id: 'OFFLINE', lbl: 'OFFLINE MODE', lvl: 'amber', icon: '📴',
+      desc: 'No network connection — running on cached data.',
+      why: 'The browser reports the device is offline. The console keeps operating from the service-worker cache (reversionary mode), but live buses — SIMBAD, sky imagery, cloud forecast, ISS feed, transient alerts — are unreachable.',
+      fix: 'Everything cached keeps working; tracking math runs fully offline. Reconnect to restore live lookups — the light clears automatically when the connection returns.',
       test: function(){ return navigator.onLine === false; } },
-    { id: 'SAT', lbl: 'SAT TRANSIT', lvl: 'amber',
-      desc: 'The ISS is currently passing within 10° of a tracked target that is above your horizon — expect RFI in radio bands during the transit.',
+    { id: 'SAT', lbl: 'SAT TRANSIT', lvl: 'amber', icon: '🛰',
+      desc: 'The ISS is passing within 10° of a tracked target.',
+      why: 'The live ISS feed shows the station inside a 10° cone around one of your up tracked targets. Satellites are strong broadband radio sources — a real observation now risks RFI contamination in radio bands.',
+      fix: 'Wait a few minutes — a pass crosses the sky quickly. The scope shows the ISS as an amber square; the light clears as soon as the separation exceeds 10°.',
       test: function(){ return !!_satNear; } }
   ];
-  function _casExplain(lbl, desc){
+  function _casExplain(c){
     var ov = document.getElementById('cas-explain');
     if (ov) ov.remove();
     ov = document.createElement('div');
     ov.id = 'cas-explain';
-    ov.innerHTML = '<div class="pro-hdr">⚠ ' + _esc(lbl) + '<button class="pro-x" id="casx-x">✕</button></div><div class="cas-desc">' + _esc(desc) + '</div>';
+    ov.innerHTML = '<div class="pro-hdr"><span class="cas-ico">' + (c.icon || '⚠') + '</span>' + _esc(c.lbl) + '<button class="pro-x" id="casx-x">✕</button></div>' +
+      '<div class="cas-desc"><div class="cas-sec">WHY</div><div>' + _esc(c.why || c.desc) + '</div>' +
+      '<div class="cas-sec">ACTION</div><div>' + _esc(c.fix || '—') + '</div></div>';
     document.body.appendChild(ov);
     document.getElementById('casx-x').addEventListener('click', function(){ if (ov.parentNode) ov.remove(); });
-    setTimeout(function(){ if (ov.parentNode) ov.remove(); }, 10000);
+    setTimeout(function(){ if (ov.parentNode) ov.remove(); }, 20000);
   }
+  /* ── universal dismissal: ESC closes the topmost NAVCON panel; tapping outside
+        a docked (backdrop-less) panel closes it — same feel as Map / Scope ── */
+  var _DOCKED = ['cas-explain', 'sys-notices', 'trklist-ov', 'journal-ov'];
+  document.addEventListener('keydown', function(ev){
+    if (ev.key !== 'Escape') return;
+    var t = ev.target, tg = t && t.tagName;
+    if (tg === 'INPUT' || tg === 'TEXTAREA' || (t && t.isContentEditable)) return;
+    var order = ['cas-explain', 'ac-ov', 'plan-ov', 'qrh-ov', 'trx-ov', 'tune-ov', 'sd-ov', 'sys-notices', 'trklist-ov', 'journal-ov', 'scope-ov'];
+    for (var i = 0; i < order.length; i++) {
+      var el = document.getElementById(order[i]);
+      if (!el) continue;
+      ev.stopPropagation();
+      if (order[i] === 'scope-ov') { _scopeToggle(); return; }
+      if (order[i] === 'trklist-ov') { _thToggle(); return; }
+      el.remove();
+      if (order[i] !== 'cas-explain') { try { SFX.close(); } catch(e) {} }
+      return;
+    }
+  }, true);
+  document.addEventListener('pointerdown', function(ev){
+    for (var i = 0; i < _DOCKED.length; i++) {
+      var el = document.getElementById(_DOCKED[i]);
+      if (!el || el.contains(ev.target)) continue;
+      /* taps on the HUD bar / CAS lights keep their own toggle semantics */
+      if (ev.target.closest && ev.target.closest('#hud-status, #cas-panel')) continue;
+      if (_DOCKED[i] === 'trklist-ov') { _thToggle(); continue; }
+      el.remove();
+      if (_DOCKED[i] !== 'cas-explain') { try { SFX.close(); } catch(e) {} }
+    }
+  }, true);
   function _casUpdate(){
     var panel = document.getElementById('cas-panel');
     if (!panel) { panel = document.createElement('div'); panel.id = 'cas-panel'; document.body.appendChild(panel); }
@@ -10073,15 +10123,15 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
           el.className = 'cas-light cas-' + c.lvl + ' cas-new';
           el.textContent = c.lbl;
           el.title = c.desc + '  (tap for details / dismiss)';
-          (function(cid, ee, lbl, desc){
+          (function(cid, ee, cc){
             ee.addEventListener('click', function(){
               _casAck[cid] = 1;
               if (ee.parentNode) ee.remove();
               try { SFX.click(); } catch(e) {}
-              _casExplain(lbl, desc);
-              op('CAS — ' + lbl + ': ' + desc);
+              _casExplain(cc);
+              op('CAS — ' + cc.lbl + ': ' + cc.desc);
             });
-          })(c.id, el, c.lbl, c.desc);
+          })(c.id, el, c);
           panel.appendChild(el);
           op('CAS ALERT — ' + c.lbl + ': ' + c.desc);
         } else if (_casAck[c.id] && el) {
@@ -10137,7 +10187,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       if (!b) return;
       var id = b.getAttribute('data-casid'), c = null;
       for (var i = 0; i < _CAS.length; i++) if (_CAS[i].id === id) c = _CAS[i];
-      if (c) { _casAck[c.id] = 1; var tr = document.getElementById('cas-' + c.id); if (tr) tr.remove(); _casExplain(c.lbl, c.desc); }
+      if (c) { _casAck[c.id] = 1; var tr = document.getElementById('cas-' + c.id); if (tr) tr.remove(); _casExplain(c); }
     });
     document.body.appendChild(ov);
     _sysRenderNotices();
