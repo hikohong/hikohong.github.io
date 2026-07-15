@@ -47,6 +47,16 @@ jobs:
           npx playwright install --with-deps chromium
           node .github/scripts/e2e-smoke.mjs
 
+      # Full regression suites (65 checks) — advisory: a flake here must not
+      # block the deploy, but a red step is visible in the run for follow-up.
+      - name: Full regression suites (advisory)
+        continue-on-error: true
+        run: |
+          for f in .github/scripts/e2e-full/*.mjs; do
+            echo "== $f =="
+            node "$f" || echo "ADVISORY FAIL: $f"
+          done
+
   deploy:
     needs: validate
     # PRs validate but never deploy — only push to master / manual dispatch publish.
