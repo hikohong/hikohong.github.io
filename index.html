@@ -445,6 +445,16 @@
       for (var i = 0; i < c.length; i++) { var e = c[i]._entries; det += Array.isArray(e) ? e.length : 1; }
       el.innerHTML = c.length + ' candidates  ·  ' + det +
         ' detections  ·  14 algorithms  ·  10 data sources';
+      // run diff: how many candidates are new vs the previous publish
+      fetch('deepsignal/catalog.prev.json').then(function(r){ return r.ok ? r.json() : null; }).then(function(prev){
+        if (!prev || !prev.length) return;
+        var k = function(x){ return String(x).toLowerCase().replace(/[^a-z0-9]/g, ''); };
+        var seen = {};
+        for (var j = 0; j < prev.length; j++) seen[k(prev[j].target_name || prev[j].name || '')] = 1;
+        var nNew = 0;
+        for (var q = 0; q < c.length; q++) if (!seen[k(c[q].target_name || c[q].name || '')]) nNew++;
+        if (nNew) el.innerHTML += '  ·  <span style="color:#10b981">+' + nNew + ' new this run</span>';
+      }).catch(function(){});
     }).catch(function(){});
   })();
   </script>
