@@ -241,6 +241,8 @@
   .map-detail-name{font-size:.95rem;font-weight:700;color:#eef3f8}
   /* Histogram */
   .hist-title{font-size:.6rem;color:#5a8aaa;font-family:monospace;letter-spacing:.08em;margin-bottom:8px}
+  #hist-section{display:none;position:absolute;z-index:6;top:54px;right:14px;width:min(440px,86%);background:#010c18;border:1px solid #7dd3fc;border-radius:8px;padding:12px 14px;box-shadow:0 0 30px rgba(125,211,252,.2)}
+  #hist-section.open{display:block}
   .hist-wrap{display:flex;gap:3px;align-items:flex-end;height:36px}
   .hb-wrap{display:flex;flex-direction:column;align-items:center;flex:1;height:100%;cursor:default}
   .hb-bar{width:60%;min-height:1px;border-radius:1px 1px 0 0;margin-top:auto}
@@ -716,14 +718,17 @@ window._svBlink = function(btn){
         <div class="map-hdr-name">Spatial &amp; Score Distribution</div>
       </div>
       <span style="margin-left:auto;font-family:monospace;font-size:.62rem;color:#5a8aaa">244 candidates</span>
+      <button class="map-close" title="Score distribution (0-100) — tap to toggle" onclick="SFX.click();document.getElementById('hist-section').classList.toggle('open')">📊</button>
       <button class="map-close" onclick="mapClose()" aria-label="Close">✕</button>
     </div>
     <div class="map-body" id="map-body">
       <div id="map-detail" style="display:none;border:1px solid rgba(125,211,252,.2);border-radius:8px;
         background:rgba(0,20,40,.45);padding:14px 16px;margin-bottom:18px;animation:lit-in .15s ease-out;
         box-sizing:border-box"></div>
+      <div id="hist-section">
       <div class="hist-title">Score distribution (0–100)</div>
       <div class="hist-wrap"><div class="hb-wrap" title="0–9: 0"><div class="hb-bar" style="height:0%;background:#374151"></div><div class="hb-lbl"></div></div><div class="hb-wrap" title="10–19: 0"><div class="hb-bar" style="height:0%;background:#374151"></div><div class="hb-lbl"></div></div><div class="hb-wrap" title="20–29: 6"><div class="hb-bar" style="height:5%;background:#374151"></div><div class="hb-lbl">6</div></div><div class="hb-wrap" title="30–39: 6"><div class="hb-bar" style="height:5%;background:#374151"></div><div class="hb-lbl">6</div></div><div class="hb-wrap" title="40–49: 0"><div class="hb-bar" style="height:0%;background:#374151"></div><div class="hb-lbl"></div></div><div class="hb-wrap" title="50–59: 118"><div class="hb-bar" style="height:100%;background:#3b82f6"></div><div class="hb-lbl">118</div></div><div class="hb-wrap" title="60–69: 10"><div class="hb-bar" style="height:8%;background:#3b82f6"></div><div class="hb-lbl">10</div></div><div class="hb-wrap" title="70–79: 6"><div class="hb-bar" style="height:5%;background:#f59e0b"></div><div class="hb-lbl">6</div></div><div class="hb-wrap" title="80–89: 85"><div class="hb-bar" style="height:72%;background:#f59e0b"></div><div class="hb-lbl">85</div></div><div class="hb-wrap" title="90–99: 8"><div class="hb-bar" style="height:6%;background:#f59e0b"></div><div class="hb-lbl">8</div></div><div class="hb-wrap" title="100: 5"><div class="hb-bar" style="height:4%;background:#f59e0b"></div><div class="hb-lbl">5</div></div></div>
+      </div>
       <div class="sky-title" style="margin-top:18px">Sky coverage — RA/Dec equirectangular &nbsp;<span style="opacity:.5;font-weight:400">(click dot for details)</span></div>
       <div class="sky-svg-wrap">
         <svg viewBox="0 0 360 180" width="100%" preserveAspectRatio="xMidYMid meet" style="display:block">
@@ -1260,7 +1265,7 @@ window._svBlink = function(btn){
 <div id="sky-tooltip-map"></div>
 <div class="gallery-hdr">
 <h1>DeepSignal — Sky Image Gallery</h1>
-<div class="subtitle">Generated <span id="gen-ts">2026-07-15 02:16 UTC</span> &nbsp;·&nbsp; 244 targets &nbsp;·&nbsp; 244 sky images via Hips2Fits CDN</div>
+<div class="subtitle">Generated <span id="gen-ts">2026-07-16 05:29 UTC</span> &nbsp;·&nbsp; 244 targets &nbsp;·&nbsp; 244 sky images via Hips2Fits CDN</div>
 <div class="stats">
   <div class="stat"><div class="stat-n" style="color:#f59e0b">104</div><div class="stat-l">Tier 1 ≥70</div></div>
   <div class="stat"><div class="stat-n" style="color:#60a5fa">128</div><div class="stat-l">Tier 2 50–69</div></div>
@@ -10960,6 +10965,37 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       '&body=' + encodeURIComponent(body), '_blank', 'noopener');
     op('ISSUE REPORT — OPENING GITHUB');
   };
+  /* Map uses the scope colour system: white = live solar system, green =
+     tracked targets (labels included), tier colours otherwise. Redrawn on
+     every Map open so positions and the tracking list stay current. */
+  function _mapDecorate(){
+    var gd = document.getElementById('map-custom-dot');
+    if (!gd || !gd.ownerSVGElement) return;
+    var svg = gd.ownerSVGElement;
+    var g = document.getElementById('navcon-map-layer');
+    if (!g) {
+      g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      g.id = 'navcon-map-layer';
+      svg.insertBefore(g, gd);
+    }
+    var h = '', i;
+    var ss = _ssBodies();
+    for (i = 0; i < ss.length; i++)
+      h += '<circle cx="' + ss[i].ra.toFixed(2) + '" cy="' + (90 - ss[i].dec).toFixed(2) + '" r="1.6" fill="#eef3f8" opacity="0.95"/>' +
+           '<text x="' + (ss[i].ra + 2).toFixed(2) + '" y="' + (90 - ss[i].dec - 1.5).toFixed(2) + '" font-size="3" fill="#eef3f8" opacity="0.8" font-family="monospace">' + _esc(ss[i].name.toUpperCase()) + '</text>';
+    var l = _thGet();
+    for (i = 0; i < l.length; i++) {
+      if (l[i].ra == null || isNaN(+l[i].ra)) continue;
+      h += '<circle cx="' + (+l[i].ra).toFixed(2) + '" cy="' + (90 - (+l[i].dec)).toFixed(2) + '" r="1.9" fill="#10b981" opacity="0.95"/>' +
+           '<text x="' + (+l[i].ra + 2).toFixed(2) + '" y="' + (90 - (+l[i].dec) + 3.5).toFixed(2) + '" font-size="3" fill="#10b981" opacity="0.9" font-family="monospace">' + _esc(String(l[i].name).toUpperCase()) + '</text>';
+    }
+    g.innerHTML = h;
+  }
+  try {
+    var _omo = window.mapOpen;
+    if (typeof _omo === 'function') window.mapOpen = function(){ _omo.apply(this, arguments); setTimeout(_mapDecorate, 60); };
+  } catch(e) {}
+
   (function(){
     window.addEventListener('error', function(ev){
       try { _jsErrs.push(String(ev.message).slice(0, 120)); if (_jsErrs.length > 5) _jsErrs.shift();
@@ -11428,6 +11464,13 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       }
       tS.addEventListener('input', tSync);
       tN.addEventListener('click', function(){ tS.value = 0; tSync(); try { SFX.click(); } catch(e) {} });
+      /* trackpad side-swipe / mouse tilt-wheel scrubs the timeline */
+      ov.addEventListener('wheel', function(ev){
+        if (Math.abs(ev.deltaX) <= Math.abs(ev.deltaY)) return;
+        ev.preventDefault();
+        tS.value = Math.max(0, Math.min(24, (parseFloat(tS.value) || 0) + ev.deltaX * 0.02));
+        tSync();
+      }, { passive: false });
     })();
     cv.addEventListener('click', function(ev){
       var r = cv.getBoundingClientRect();
