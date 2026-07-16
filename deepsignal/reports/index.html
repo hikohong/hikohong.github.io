@@ -264,6 +264,8 @@ footer a{color:#4a6a8a;text-decoration:none}
   pointer-events:none;z-index:1000;display:none;white-space:nowrap;font-family:monospace}
 /* ── Histogram ── */
 .hist-title{font-size:.6rem;color:#5a8aaa;font-family:monospace;letter-spacing:.08em;margin-bottom:8px}
+#hist-section{display:none;position:absolute;z-index:6;top:54px;right:14px;width:min(440px,86%);background:#010c18;border:1px solid #7dd3fc;border-radius:8px;padding:12px 14px;box-shadow:0 0 30px rgba(125,211,252,.2)}
+#hist-section.open{display:block}
 .hist-wrap{display:flex;gap:3px;align-items:flex-end;height:36px}
 .hb-wrap{display:flex;flex-direction:column;align-items:center;flex:1;height:100%;cursor:default}
 .hb-bar{width:60%;min-height:1px;border-radius:1px 1px 0 0;margin-top:auto}
@@ -717,6 +719,7 @@ window._svBlink = function(btn){
         <div class="map-hdr-name">Spatial &amp; Score Distribution</div>
       </div>
       <span id="map-hdr-count" style="margin-left:auto;font-family:monospace;font-size:.62rem;color:#5a8aaa"></span>
+      <button class="map-close" title="Score distribution (0-100) — tap to toggle" onclick="SFX.click();document.getElementById('hist-section').classList.toggle('open')">📊</button>
       <button class="map-close" onclick="mapClose()" aria-label="Close">✕</button>
     </div>
     <div class="map-body" id="map-body">
@@ -4105,6 +4108,37 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       '&body=' + encodeURIComponent(body), '_blank', 'noopener');
     op('ISSUE REPORT — OPENING GITHUB');
   };
+  /* Map uses the scope colour system: white = live solar system, green =
+     tracked targets (labels included), tier colours otherwise. Redrawn on
+     every Map open so positions and the tracking list stay current. */
+  function _mapDecorate(){
+    var gd = document.getElementById('map-custom-dot');
+    if (!gd || !gd.ownerSVGElement) return;
+    var svg = gd.ownerSVGElement;
+    var g = document.getElementById('navcon-map-layer');
+    if (!g) {
+      g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      g.id = 'navcon-map-layer';
+      svg.insertBefore(g, gd);
+    }
+    var h = '', i;
+    var ss = _ssBodies();
+    for (i = 0; i < ss.length; i++)
+      h += '<circle cx="' + ss[i].ra.toFixed(2) + '" cy="' + (90 - ss[i].dec).toFixed(2) + '" r="1.6" fill="#eef3f8" opacity="0.95"/>' +
+           '<text x="' + (ss[i].ra + 2).toFixed(2) + '" y="' + (90 - ss[i].dec - 1.5).toFixed(2) + '" font-size="3" fill="#eef3f8" opacity="0.8" font-family="monospace">' + _esc(ss[i].name.toUpperCase()) + '</text>';
+    var l = _thGet();
+    for (i = 0; i < l.length; i++) {
+      if (l[i].ra == null || isNaN(+l[i].ra)) continue;
+      h += '<circle cx="' + (+l[i].ra).toFixed(2) + '" cy="' + (90 - (+l[i].dec)).toFixed(2) + '" r="1.9" fill="#10b981" opacity="0.95"/>' +
+           '<text x="' + (+l[i].ra + 2).toFixed(2) + '" y="' + (90 - (+l[i].dec) + 3.5).toFixed(2) + '" font-size="3" fill="#10b981" opacity="0.9" font-family="monospace">' + _esc(String(l[i].name).toUpperCase()) + '</text>';
+    }
+    g.innerHTML = h;
+  }
+  try {
+    var _omo = window.mapOpen;
+    if (typeof _omo === 'function') window.mapOpen = function(){ _omo.apply(this, arguments); setTimeout(_mapDecorate, 60); };
+  } catch(e) {}
+
   (function(){
     window.addEventListener('error', function(ev){
       try { _jsErrs.push(String(ev.message).slice(0, 120)); if (_jsErrs.length > 5) _jsErrs.shift();
@@ -4573,6 +4607,13 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       }
       tS.addEventListener('input', tSync);
       tN.addEventListener('click', function(){ tS.value = 0; tSync(); try { SFX.click(); } catch(e) {} });
+      /* trackpad side-swipe / mouse tilt-wheel scrubs the timeline */
+      ov.addEventListener('wheel', function(ev){
+        if (Math.abs(ev.deltaX) <= Math.abs(ev.deltaY)) return;
+        ev.preventDefault();
+        tS.value = Math.max(0, Math.min(24, (parseFloat(tS.value) || 0) + ev.deltaX * 0.02));
+        tSync();
+      }, { passive: false });
     })();
     cv.addEventListener('click', function(ev){
       var r = cv.getBoundingClientRect();
