@@ -388,9 +388,9 @@ html.nvg body>*{filter:sepia(1) hue-rotate(-48deg) saturate(3.4) brightness(.78)
 .trk-bell.off{color:#3a5a4a;border-color:rgba(63,224,143,.18)}
 #scope-tbar{display:flex;align-items:center;gap:8px;padding:4px 14px 0}
 #scope-t{flex:1;accent-color:#3fe08f;height:14px;min-width:0}
-#scope-tlabel{font-family:monospace;font-size:.58rem;color:#3fe08f;letter-spacing:.08em;white-space:nowrap;min-width:88px;text-align:right}
+#scope-tlabel{font-family:monospace;font-size:.58rem;color:#3fe08f;letter-spacing:.08em;white-space:nowrap;width:136px;flex-shrink:0;text-align:right}
 #scope-now{background:none;border:1px solid rgba(63,224,143,.4);border-radius:3px;color:#3fe08f;cursor:pointer;font-family:monospace;font-size:.55rem;padding:1px 6px}
-.sim-chip{margin-left:8px;color:#f5a623;border:1px solid rgba(245,166,35,.5);border-radius:8px;padding:0 6px;font-size:.55rem;letter-spacing:.08em;display:none}
+.sim-chip{margin-left:8px;color:#f5a623;border:1px solid rgba(245,166,35,.5);border-radius:8px;padding:0 6px;font-size:.55rem;letter-spacing:.08em;display:inline-block;visibility:hidden}
 #sd-ov{position:fixed;inset:0;z-index:930;background:rgba(0,5,10,.82);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center}
 #sd-box{width:min(94vw,640px);max-height:88vh;overflow-y:auto;background:rgba(3,14,10,.96);border:1px solid rgba(63,224,143,.5);border-radius:10px;box-shadow:0 0 40px rgba(63,224,143,.18);scrollbar-width:thin}
 #sd-body{padding:10px 14px;font-family:monospace;font-size:.68rem;color:#9fd4bb}
@@ -411,7 +411,7 @@ html.nvg body>*{filter:sepia(1) hue-rotate(-48deg) saturate(3.4) brightness(.78)
 #scope-box{max-width:96vw;max-height:96vh}
 /* canvas size is set by JS (_scopeFit) to the largest square that fits the viewport; the min() below is only a pre-JS fallback */
 #scope-cv{display:block;width:min(86vw,56vh,520px);height:min(86vw,56vh,520px);margin:8px auto 0;cursor:crosshair}
-#scope-foot{padding:7px 12px;text-align:center}
+#scope-foot{padding:7px 12px;text-align:center;min-height:2.9em}
 #scope-info{border-top:1px solid rgba(63,224,143,.2);padding:8px 12px}
 .si-row{display:flex;align-items:center;gap:8px;margin:4px 0;flex-wrap:wrap}
 .si-chip{font-family:monospace;font-size:.55rem;letter-spacing:.08em;padding:2px 8px;border-radius:9px;border:1px solid;white-space:nowrap}
@@ -1265,7 +1265,7 @@ window._svBlink = function(btn){
 <div id="sky-tooltip-map"></div>
 <div class="gallery-hdr">
 <h1>DeepSignal — Sky Image Gallery</h1>
-<div class="subtitle">Generated <span id="gen-ts">2026-07-17 10:14 UTC</span> &nbsp;·&nbsp; 244 targets &nbsp;·&nbsp; 244 sky images via Hips2Fits CDN</div>
+<div class="subtitle">Generated <span id="gen-ts">2026-07-17 15:22 UTC</span> &nbsp;·&nbsp; 244 targets &nbsp;·&nbsp; 244 sky images via Hips2Fits CDN</div>
 <div class="stats">
   <div class="stat"><div class="stat-n" style="color:#f59e0b">104</div><div class="stat-l">Tier 1 ≥70</div></div>
   <div class="stat"><div class="stat-n" style="color:#60a5fa">128</div><div class="stat-l">Tier 2 50–69</div></div>
@@ -11430,7 +11430,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     ov.id = 'scope-ov';
     ov.innerHTML = '<div id="scope-box"><div class="pro-hdr">◉ TACTICAL SCOPE — LOCAL SKY PLOT<span class="sim-chip" id="scope-sim">SIM</span><button class="pro-x" id="scope-x">✕</button></div>' +
       '<canvas id="scope-cv" width="520" height="520"></canvas>' +
-      '<div id="scope-tbar" title="Time scrub — preview the sky up to 24 h ahead"><input id="scope-t" type="range" min="0" max="24" step="0.25" value="0"><span id="scope-tlabel">NOW</span><button id="scope-now">NOW</button></div>' +
+      '<div id="scope-tbar" title="Time scrub — preview the sky up to 24 h ahead"><input id="scope-t" type="range" min="0" max="24" step="any" value="0"><span id="scope-tlabel">NOW</span><button id="scope-now">NOW</button></div>' +
       '<div id="scope-info" style="display:none"></div>' +
       '<div id="scope-geo" class="j-t" title="Star positions are J2000 catalog coordinates (no precession applied — about 0.4° in 2026); solar-system bodies use live ephemeris. Click to set your observing position manually.">—</div>' +
       '<div id="scope-foot" class="j-t">—</div></div>';
@@ -11468,20 +11468,28 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       function tSync(){
         _scopeDt = parseFloat(tS.value) || 0;
         var when = new Date(Date.now() + _scopeDt * 3600e3);
-        tL.textContent = _scopeDt ? ('T+' + String(_scopeDt) + 'H · ' + pad(when.getHours()) + ':' + pad(when.getMinutes())) : 'NOW';
+        tL.textContent = _scopeDt ? ('T+' + (Math.round(_scopeDt * 10) / 10) + 'H · ' + pad(when.getHours()) + ':' + pad(when.getMinutes())) : 'NOW';
         tL.style.color = _scopeDt ? '#f5a623' : '';
-        if (tC) tC.style.display = _scopeDt ? 'inline-block' : 'none';
+        if (tC) tC.style.visibility = _scopeDt ? 'visible' : 'hidden';
         if (typeof draw === 'function') draw._last = 0;
       }
       tS.addEventListener('input', tSync);
       tN.addEventListener('click', function(){ tS.value = 0; tSync(); try { SFX.click(); } catch(e) {} });
-      /* trackpad side-swipe / mouse tilt-wheel scrubs the timeline */
+      /* trackpad side-swipe / mouse tilt-wheel scrubs the timeline: ANY
+         horizontal component moves the axis, and a float accumulator (not the
+         slider's 0.25 step) keeps small trackpad deltas from being swallowed. */
+      var wAcc = null;
       ov.addEventListener('wheel', function(ev){
-        if (Math.abs(ev.deltaX) <= Math.abs(ev.deltaY)) return;
+        var dx = ev.deltaX;
+        if (!dx) return;
+        if (ev.deltaMode === 1) dx *= 16;
         ev.preventDefault();
-        tS.value = Math.max(0, Math.min(24, (parseFloat(tS.value) || 0) + ev.deltaX * 0.02));
+        if (wAcc == null) wAcc = parseFloat(tS.value) || 0;
+        wAcc = Math.max(0, Math.min(24, wAcc + dx * 0.02));
+        tS.value = wAcc;
         tSync();
       }, { passive: false });
+      tS.addEventListener('input', function(){ wAcc = null; });
     })();
     cv.addEventListener('click', function(ev){
       var r = cv.getBoundingClientRect();
@@ -11642,7 +11650,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
           if (fN % 45 === 0) _scopeLive();
         }
         fN++;
-        if (foot) foot.textContent = (_scopeDt ? 'SIM T+' + _scopeDt + 'H · ' : '') + up + '/' + tgts.length + ' CANDIDATES · ' + trkUp + '/' + trkTot + ' TRACKED UP' + (trkDown ? ' (' + trkDown + ' BELOW HORIZON)' : '') + ' · ' + upSS + ' SOLAR-SYSTEM · WHITE=PLANETS GREEN=TRACKED · TAP A BLIP';
+        if (foot) foot.textContent = (_scopeDt ? 'SIM T+' + (Math.round(_scopeDt * 10) / 10) + 'H · ' : '') + up + '/' + tgts.length + ' CANDIDATES · ' + trkUp + '/' + trkTot + ' TRACKED UP' + (trkDown ? ' (' + trkDown + ' BELOW HORIZON)' : '') + ' · ' + upSS + ' SOLAR-SYSTEM · WHITE=PLANETS GREEN=TRACKED · TAP A BLIP';
       }
     }
     _scopeRAF = requestAnimationFrame(draw);
