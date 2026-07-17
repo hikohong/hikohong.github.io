@@ -461,7 +461,7 @@ html.nvg body>*{filter:sepia(1) hue-rotate(-48deg) saturate(3.4) brightness(.78)
 /* canvas size is set by JS (_scopeFit) to the largest square that fits the
    viewport; the min() below is only a pre-JS fallback */
 #scope-cv{display:block;width:min(86vw,56vh,520px);height:min(86vw,56vh,520px);margin:8px auto 0;cursor:crosshair}
-#scope-foot{padding:7px 12px;text-align:center;min-height:2.9em}
+#scope-foot{padding:7px 12px;text-align:center;height:4em;overflow:hidden;display:flex;align-items:center;justify-content:center}
 #scope-info{border-top:1px solid rgba(63,224,143,.2);padding:8px 12px}
 .si-row{display:flex;align-items:center;gap:8px;margin:4px 0;flex-wrap:wrap}
 .si-chip{font-family:monospace;font-size:.55rem;letter-spacing:.08em;padding:2px 8px;border-radius:9px;border:1px solid;white-space:nowrap}
@@ -4597,6 +4597,10 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       s = Math.max(250, Math.round(s));
       if (cv.width !== s) { cv.width = s; cv.height = s; }
       cv.style.width = s + 'px'; cv.style.height = s + 'px';
+      /* lock the box width to the canvas: otherwise the box tracks the widest
+         text line and jitters as the footer text changes while scrubbing */
+      var bx = document.getElementById('scope-box');
+      if (bx) bx.style.width = (s + 2) + 'px';
       if (typeof draw === 'function') draw._last = 0;
     }
     _scopeFit();
