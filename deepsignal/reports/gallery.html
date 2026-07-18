@@ -381,6 +381,27 @@ body{padding-bottom:30px}
 /* ── NAVCON PRO-2: NVG mode, observability chips, time-scrub, systems page, disposition ── */
 html.nvg body{background:#0d0202}
 html.nvg body>*{filter:sepia(1) hue-rotate(-48deg) saturate(3.4) brightness(.78) contrast(1.05)}
+/* ── NAVCON PRO-5: red mode, weather strip, almanac, light curve, FOV, kiosk, sparklines ── */
+html.red body{background:#0a0202}
+html.red body>*{filter:grayscale(1) sepia(1) saturate(5) hue-rotate(-35deg) brightness(.72)}
+.wx-grid{display:flex;gap:1px;overflow-x:auto;padding:4px 0 8px}
+.wx-col{display:flex;flex-direction:column;gap:1px;min-width:13px;flex:0 0 auto}
+.wx-col.wx-dk1{background:rgba(63,224,143,.05)}
+.wx-col.wx-dk2{background:rgba(63,224,143,.11)}
+.wx-cell{height:13px;border-radius:1px}
+.wx-hr{font-family:monospace;font-size:.45rem;color:#3a7a5a;text-align:center;height:11px;line-height:11px}
+.spark{vertical-align:middle;margin-left:6px;opacity:.9}
+.fov-box{position:absolute;border:1px dashed rgba(63,224,143,.9);box-shadow:0 0 8px rgba(63,224,143,.3);pointer-events:none;left:50%;top:50%;transform:translate(-50%,-50%);z-index:3}
+.fov-tag{position:absolute;left:4px;bottom:2px;font-family:monospace;font-size:.5rem;color:#3fe08f;background:rgba(3,14,10,.75);padding:0 3px;pointer-events:none;z-index:3}
+.alm-d{color:#7dd3fc;font-family:monospace;width:64px;flex:0 0 auto;display:inline-block;font-size:.62rem}
+#kiosk-ov{position:fixed;inset:0;background:#020810;z-index:9999;display:flex;align-items:center;justify-content:center;cursor:pointer}
+#kiosk-ov .kk-in{text-align:center;max-width:min(760px,92vw)}
+#kiosk-ov img{width:min(46vh,80vw);height:min(46vh,80vw);object-fit:cover;border:1px solid rgba(125,211,252,.35);border-radius:8px;background:#000}
+#kiosk-ov .kk-name{font-size:clamp(1.4rem,4vw,2.5rem);color:#eef3f8;margin:18px 0 6px;letter-spacing:.04em}
+#kiosk-ov .kk-sub{font-family:monospace;color:#7dd3fc;font-size:clamp(.72rem,2vw,1rem)}
+#kiosk-ov .kk-bar{height:2px;background:rgba(63,224,143,.25);margin-top:22px;position:relative;overflow:hidden}
+#kiosk-ov .kk-bar>span{position:absolute;left:0;top:0;bottom:0;background:#3fe08f;width:0}
+#kiosk-ov .kk-hint{font-family:monospace;font-size:.55rem;color:#3a7a5a;margin-top:10px;letter-spacing:.12em}
 .th-obs{font-family:monospace;font-size:.6rem;padding:1px 6px;border-radius:8px;border:1px solid rgba(63,224,143,.35);color:#3fe08f;white-space:nowrap}
 .th-obs.obs-lo{color:#5a6a7a;border-color:rgba(90,106,122,.4)}
 .th-win{color:#2f7a55;white-space:nowrap}
@@ -631,7 +652,7 @@ window._svBlink = function(btn){
   <span class="hud-seg" id="hud-track-seg" style="display:none">⌖ <span class="hud-val" id="hud-track">--</span></span>
   <span class="hud-seg" id="hud-watch-seg" style="display:none">★ <span class="hud-val" id="hud-watch">--</span></span>
   <span class="hud-seg"><button class="hud-btn" id="hud-ar-btn" style="display:none" title="AR finder — point your phone at the tracked target">▲ AR</button></span>
-  <span class="hud-seg hud-hide-sm"><button class="hud-btn" id="hud-nvg-btn" title="Night-vision mode — red low-brightness palette for dark adaptation">☾ NVG</button></span>
+  <span class="hud-seg hud-hide-sm"><button class="hud-btn" id="hud-nvg-btn" title="Night-vision mode — red low-brightness palette for dark adaptation">☾ NVG</button> <button class="hud-btn" id="hud-red-btn" title="Red-light mode — full red palette preserving dark adaptation (exclusive with NVG)">◉ RED</button></span>
   <span id="hud-msg"></span>
 </div>
 
@@ -1265,7 +1286,7 @@ window._svBlink = function(btn){
 <div id="sky-tooltip-map"></div>
 <div class="gallery-hdr">
 <h1>DeepSignal — Sky Image Gallery</h1>
-<div class="subtitle">Generated <span id="gen-ts">2026-07-17 15:27 UTC</span> &nbsp;·&nbsp; 244 targets &nbsp;·&nbsp; 244 sky images via Hips2Fits CDN</div>
+<div class="subtitle">Generated <span id="gen-ts">2026-07-18 02:03 UTC</span> &nbsp;·&nbsp; 244 targets &nbsp;·&nbsp; 244 sky images via Hips2Fits CDN</div>
 <div class="stats">
   <div class="stat"><div class="stat-n" style="color:#f59e0b">104</div><div class="stat-l">Tier 1 ≥70</div></div>
   <div class="stat"><div class="stat-n" style="color:#60a5fa">128</div><div class="stat-l">Tier 2 50–69</div></div>
@@ -10091,11 +10112,12 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     if (ev.key !== 'Escape') return;
     var t = ev.target, tg = t && t.tagName;
     if (tg === 'INPUT' || tg === 'TEXTAREA' || (t && t.isContentEditable)) return;
-    var order = ['cas-explain', 'ac-ov', 'plan-ov', 'qrh-ov', 'trx-ov', 'tune-ov', 'sd-ov', 'sys-notices', 'trklist-ov', 'journal-ov', 'scope-ov'];
+    var order = ['kiosk-ov', 'cas-explain', 'wx-ov', 'sky-ov', 'lc-ov', 'fov-ov', 'exp-ov', 'ac-ov', 'plan-ov', 'qrh-ov', 'trx-ov', 'tune-ov', 'sd-ov', 'sys-notices', 'trklist-ov', 'journal-ov', 'scope-ov'];
     for (var i = 0; i < order.length; i++) {
       var el = document.getElementById(order[i]);
       if (!el) continue;
       ev.stopPropagation();
+      if (order[i] === 'kiosk-ov') { _kioskStop(); return; }
       if (order[i] === 'scope-ov') { _scopeToggle(); return; }
       if (order[i] === 'trklist-ov') { _thToggle(); return; }
       el.remove();
@@ -10280,7 +10302,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
         Returns the best contiguous window plus its peak score. Cached 10 min. ── */
   function _obsWindow(ra, dec){
     if (obsLat == null || ra == null || isNaN(+ra)) return { score: null };
-    var key = (+ra).toFixed(2) + '_' + (+dec).toFixed(2) + '_' + obsLat.toFixed(1);
+    var key = (+ra).toFixed(2) + '_' + (+dec).toFixed(2) + '_' + obsLat.toFixed(1) + '_b' + ((window._bortleVal ? window._bortleVal() : 0) || 0);
     var hit = _obsCache[key];
     if (hit && Date.now() - hit.at < 600000) return hit.w;
     var now = Date.now(), best = 0, from = null, to = null, curFrom = null, bestFrom = null, bestTo = null, bestCloud = null;
@@ -10299,7 +10321,9 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
           }
           cl = _cloudAt(t);
           var cloudF = (cl == null) ? 1 : Math.max(0.05, 1 - 0.85 * cl);
-          s = Math.round(100 * altF * moonF * cloudF);
+          var _b5 = (window._bortleVal ? window._bortleVal() : null);
+          var skyF = _b5 ? (1 - 0.06 * (_b5 - 1)) : 1;
+          s = Math.round(100 * altF * moonF * cloudF * skyF);
         }
       }
       if (s >= 30) {
@@ -10414,6 +10438,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
   window._nvgToggle = function(){
     var on = false;
     try { on = localStorage.getItem('ds-nvg') === '1'; localStorage.setItem('ds-nvg', on ? '0' : '1'); } catch(e) {}
+    if (!on) { try { localStorage.setItem('ds-red', '0'); } catch(e) {} document.documentElement.classList.remove('red'); var _rb5 = document.getElementById('hud-red-btn'); if (_rb5) _rb5.style.color = ''; }
     op(on ? 'NVG MODE OFF — STANDARD PALETTE' : 'NVG MODE ON — DARK-ADAPTATION PALETTE');
     try { SFX.click(); } catch(e) {}
     _nvgApply();
@@ -10451,6 +10476,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     h += '<div class="sd-row"><span class="sd-name">CANDIDATES</span><span class="sd-bar"></span><span class="sd-val">' + cat.length + '</span></div>';
     h += '<div class="sd-row"><span class="sd-name">DETECTIONS</span><span class="sd-bar"></span><span class="sd-val">' + det + '</span></div>';
     h += '<div class="sd-row"><span class="sd-name">DATA AGE</span><span class="sd-bar"></span><span class="sd-val">' + (_staleDays != null ? _staleDays + 'd' : '—') + '</span></div>';
+    h += '<div class="sd-row"><span class="sd-name">KP INDEX (GEOMAG)</span><span class="sd-bar"></span><span class="sd-val">' + (window._kpVal != null ? window._kpVal.toFixed(1) + (window._kpVal >= 5 ? ' ⚠ STORM' : '') : '—') + '</span></div>';
     h += '<div class="sd-h">SOURCES — CANDIDATES PER DATA TYPE</div>';
     var keys = [], mx = 1;
     for (var k in byType) { keys.push(k); if (byType[k] > mx) mx = byType[k]; }
@@ -10460,7 +10486,8 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     h += '<div class="sd-h">EXTERNAL BUSES — LIVE PROBES</div>';
     var buses = [
       ['SIMBAD TAP', 'sd-b-simbad'], ['HIPS2FITS', 'sd-b-hips'],
-      ['WIKIPEDIA', 'sd-b-wiki'], ['OPEN-METEO', 'sd-b-meteo']
+      ['WIKIPEDIA', 'sd-b-wiki'], ['OPEN-METEO', 'sd-b-meteo'],
+      ['NOAA SWPC', 'sd-b-swpc'], ['ALERCE ZTF', 'sd-b-alerce']
     ];
     for (i = 0; i < buses.length; i++)
       h += '<div class="sd-row"><span class="sd-name">' + buses[i][0] + '</span><span class="sd-bar"></span><span class="sd-val sd-wait" id="' + buses[i][1] + '">…</span></div>';
@@ -10484,6 +10511,8 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     probeFetch('sd-b-simbad', 'https://simbad.cds.unistra.fr/simbad/sim-tap/sync?request=doQuery&lang=adql&format=json&query=' + encodeURIComponent('SELECT TOP 1 main_id FROM basic'));
     probeFetch('sd-b-wiki', 'https://en.wikipedia.org/w/api.php?action=query&titles=Mars&prop=pageimages&pithumbsize=50&format=json&origin=*');
     probeFetch('sd-b-meteo', 'https://api.open-meteo.com/v1/forecast?latitude=0&longitude=0&hourly=cloud_cover&forecast_days=1');
+    probeFetch('sd-b-swpc', 'https://services.swpc.noaa.gov/products/noaa-planetary-k-index.json');
+    probeFetch('sd-b-alerce', 'https://api.alerce.online/ztf/v1/objects/?page_size=1');
     (function(){
       var t0 = Date.now(), im = new Image();
       im.onload = function(){ mark('sd-b-hips', true, Date.now() - t0); };
@@ -10695,7 +10724,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
         '<span class="sd-val">OBS ' + q.w.score + '</span></div>';
     }
     if (none.length) h += '<div class="sd-h">NO WINDOW TONIGHT</div><div class="j-t">' + _esc(none.join(' · ')) + '</div>';
-    h += '<div style="margin-top:8px"><button class="trk-bell" style="width:auto" onclick="_sessionReport()">⤓ SESSION REPORT (MARKDOWN)</button></div>';
+    h += '<div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap"><button class="trk-bell" style="width:auto" onclick="_sessionReport()">⤓ SESSION REPORT (MARKDOWN)</button><button class="trk-bell" style="width:auto" onclick="_skyToggle()">☄ SKY ALMANAC</button></div>';
     _p3Overlay('plan-ov', '▦ MISSION PLAN — TONIGHT', h);
     op('MISSION PLAN — ' + rows.length + ' WINDOWS SCHEDULED');
   };
@@ -11235,6 +11264,8 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       '<option value="added">RECENT</option><option value="type">TYPE</option></select>' +
       '<button class="trk-bell" title="Mission plan — schedule tonight from this list" onclick="_thPlan()">▦</button>' +
       '<button class="trk-bell" title="Share — copy a link that carries this tracking list" onclick="_thShare()">⇪</button>' +
+      '<button class="trk-bell" title="Astro weather — 48 h cloud / humidity / wind strip" onclick="_wxToggle()">⛅</button>' +
+      '<button class="trk-bell" title="Export observing list — planning CSV + GoTo CSV" onclick="_trkExport()">⤓</button>' +
       '<button class="trk-bell off" id="trk-bell" title="AOS alerts — notify when a tracked target rises (CDU: AOS <deg> to set threshold)" onclick="_aosBell()">🔕</button>' +
       '<button class="pro-x" id="trk-x">✕</button></div><div id="trk-body"></div>';
     document.body.appendChild(ov);
@@ -11596,6 +11627,23 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
           c2.shadowBlur = 0;
           c2.fillText(ssCache[i].name.toUpperCase(), pxy.x + 6, pxy.y - 5);
         }
+        /* meteor-shower radiants: dashed cross while a shower is active */
+        var _mets = window._activeShowers ? window._activeShowers(d0) : [];
+        for (i = 0; i < _mets.length; i++) {
+          aa = _altazOf(_mets[i].ra, _mets[i].dec, d0);
+          if (!aa || aa.alt <= 0) continue;
+          pxy = plot(C, R, aa);
+          c2.strokeStyle = 'rgba(63,224,143,.8)';
+          c2.setLineDash([2, 2]);
+          c2.beginPath(); c2.arc(pxy.x, pxy.y, 6, 0, 6.29); c2.stroke();
+          c2.beginPath();
+          c2.moveTo(pxy.x - 9, pxy.y); c2.lineTo(pxy.x + 9, pxy.y);
+          c2.moveTo(pxy.x, pxy.y - 9); c2.lineTo(pxy.x, pxy.y + 9);
+          c2.stroke();
+          c2.setLineDash([]);
+          c2.fillStyle = 'rgba(63,224,143,.75)';
+          c2.fillText(_mets[i].n.toUpperCase() + ' RADIANT', pxy.x + 10, pxy.y - 6);
+        }
         /* tracked-target census — count EVERY entry on the Tracking List so the
            footer matches the list. Tracked candidates / solar-system bodies were
            already drawn above (recorded in `plotted`); any other tracked target
@@ -11726,11 +11774,35 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     document.body.appendChild(ov);
     var inp = document.getElementById('cdu-in');
     inp.focus();
+    var _hist = [];
+    try { _hist = JSON.parse(sessionStorage.getItem('ds-cdu-hist') || '[]'); } catch(e) {}
+    var _hIdx = _hist.length;
+    var _VOCAB = ['SCOPE', 'LOG', 'LIST', 'AR', 'NVG', 'RED', 'SYS', 'VOICE', 'EXPORT', 'IMPORT', 'DEBRIEF', 'QRH', 'TRX', 'PLAN', 'MFD', 'SHARE', 'TUNE', 'AOS', 'MAP', 'NEWS', 'REPORT', 'BLINK', 'SRC', 'TRK', 'FIND', 'WX', 'SKY', 'FOV', 'LC', 'BORTLE', 'KIOSK'];
     inp.addEventListener('keydown', function(ev){
       ev.stopPropagation();
       if (ev.key === 'Escape') { ov.remove(); return; }
+      if (ev.key === 'ArrowUp' || ev.key === 'ArrowDown') {
+        ev.preventDefault();
+        if (!_hist.length) return;
+        _hIdx = Math.max(0, Math.min(_hist.length, _hIdx + (ev.key === 'ArrowUp' ? -1 : 1)));
+        inp.value = _hIdx < _hist.length ? _hist[_hIdx] : '';
+        return;
+      }
+      if (ev.key === 'Tab') {
+        ev.preventDefault();
+        var pfx = inp.value.trim().toUpperCase();
+        if (!pfx) return;
+        for (var vi = 0; vi < _VOCAB.length; vi++)
+          if (_VOCAB[vi].indexOf(pfx) === 0) { inp.value = _VOCAB[vi] + ' '; return; }
+        return;
+      }
       if (ev.key !== 'Enter') return;
       var v = inp.value.trim();
+      if (v) {
+        _hist.push(v);
+        if (_hist.length > 20) _hist.shift();
+        try { sessionStorage.setItem('ds-cdu-hist', JSON.stringify(_hist)); } catch(e) {}
+      }
       ov.remove();
       if (v) _cduExec(v);
     });
@@ -11762,6 +11834,25 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
         return op('AOS THRESHOLD SET — +' + _aosDeg() + '°');
       }
       return window._aosBell();
+    }
+    if (verb === 'WX') return window._wxToggle();
+    if (verb === 'SKY') return window._skyToggle();
+    if (verb === 'RED') return window._redToggle();
+    if (verb === 'KIOSK') return window._kioskToggle();
+    if (verb === 'BORTLE') return window._bortleSet(arg);
+    if (verb === 'FOV') {
+      if (arg && !isNaN(parseFloat(arg))) {
+        try { localStorage.setItem('ds-fov', JSON.stringify({ w: parseFloat(arg) / 60, h: null })); } catch(e) {}
+        if (window._fovApply) window._fovApply();
+        return op('FOV SET — ' + parseFloat(arg) + '′ FIELD OVERLAY');
+      }
+      return window._fovToggle();
+    }
+    if (verb === 'LC') {
+      if (_scopeSel && _scopeSel.ra != null) return window._lcOpen(_scopeSel.name, _scopeSel.ra, _scopeSel.dec);
+      var lb5 = document.querySelector('#result-card .btn-lc');
+      if (lb5) { lb5.click(); return; }
+      return op('LC — SELECT A TARGET FIRST (TAP A SCOPE BLIP OR RUN A SEARCH)');
     }
     if (verb === 'MAP' && typeof mapOpen === 'function') return mapOpen();
     if (verb === 'NEWS' && typeof newsOpen === 'function') return newsOpen(null);
@@ -11813,6 +11904,492 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     if (ev.key === 'b') { var bb = f.querySelector('.sv-blink:not([disabled])'); if (bb) window._svBlink(bb); }
     else if (ev.key >= '1' && ev.key <= '3') { var ch = f.querySelector('.sv-chip[data-idx="' + (+ev.key - 1) + '"]'); if (ch) window._svPick(ch, +ev.key - 1); }
   });
+
+  /* ══ NAVCON PRO-5: red mode, geomag watch, meteor + planetary almanac,
+        astro weather strip, Bortle sky quality, ZTF light curves, FOV overlay,
+        score-history sparklines, observing-list export, CDU history, kiosk ══ */
+
+  /* ── RED mode: full red-light discipline (exclusive with NVG) ── */
+  function _redApply(){
+    var on = false;
+    try { on = localStorage.getItem('ds-red') === '1'; } catch(e) {}
+    document.documentElement.classList.toggle('red', on);
+    var b = document.getElementById('hud-red-btn');
+    if (b) b.style.color = on ? '#ff4a3a' : '';
+  }
+  window._redToggle = function(){
+    var on = false;
+    try { on = localStorage.getItem('ds-red') === '1'; localStorage.setItem('ds-red', on ? '0' : '1'); } catch(e) {}
+    if (!on) { try { localStorage.setItem('ds-nvg', '0'); } catch(e) {} try { _nvgApply(); } catch(e) {} }
+    op(on ? 'RED MODE OFF — STANDARD PALETTE' : 'RED MODE ON — FULL RED LIGHT DISCIPLINE');
+    try { SFX.click(); } catch(e) {}
+    _redApply();
+  };
+  _redApply();
+  (function(){
+    var rb = document.getElementById('hud-red-btn');
+    if (rb) rb.addEventListener('click', window._redToggle);
+  })();
+
+  /* ── geomagnetic watch: NOAA SWPC planetary K-index (free / no key / CORS).
+        Kp >= 5 (storm level) raises the GEOMAG STORM advisory. ── */
+  var _kpV = null;
+  function _kpLoad(){
+    try {
+      fetch('https://services.swpc.noaa.gov/products/noaa-planetary-k-index.json')
+        .then(function(r){ return r.json(); })
+        .then(function(d){
+          if (!d || d.length < 2) return;
+          var v = parseFloat(d[d.length - 1][1]);
+          if (!isNaN(v)) { _kpV = v; try { window._kpVal = v; } catch(e) {} _casUpdate(); }
+        }).catch(function(){});
+    } catch(e) {}
+  }
+  _kpLoad();
+  setInterval(_kpLoad, 1800000);
+  _CAS.push({ id: 'GEOMAG', lbl: 'GEOMAG STORM', lvl: 'amber', icon: '🧲',
+    desc: 'Planetary K-index at geomagnetic storm level (Kp ≥ 5).',
+    why: 'NOAA space-weather data shows the planetary K-index at Kp ≥ 5 — a geomagnetic storm is in progress. Expect possible aurora at mid latitudes, ionospheric disturbance, and elevated noise for sensitive radio observations.',
+    fix: 'Optical imaging is usually unaffected away from the poles — aurora may even be a target. For radio work expect a noisier band. The KP INDEX row on the SYS page shows the live value; the light clears when Kp drops below 5.',
+    test: function(){ return _kpV != null && _kpV >= 5; } });
+
+  /* ── major annual meteor showers (J2000 radiants, IMO working-list values) ── */
+  var _SHOWERS = [
+    { n: 'Quadrantids', ra: 230, dec: 49, from: [1, 1], to: [1, 10], peak: [1, 3], zhr: 110 },
+    { n: 'Lyrids', ra: 271, dec: 34, from: [4, 14], to: [4, 30], peak: [4, 22], zhr: 18 },
+    { n: 'Eta Aquariids', ra: 338, dec: -1, from: [4, 19], to: [5, 28], peak: [5, 6], zhr: 50 },
+    { n: 'S. Delta Aquariids', ra: 340, dec: -16, from: [7, 12], to: [8, 23], peak: [7, 30], zhr: 25 },
+    { n: 'Perseids', ra: 48, dec: 58, from: [7, 17], to: [8, 24], peak: [8, 12], zhr: 100 },
+    { n: 'Orionids', ra: 95, dec: 16, from: [10, 2], to: [11, 7], peak: [10, 21], zhr: 20 },
+    { n: 'Leonids', ra: 152, dec: 22, from: [11, 6], to: [11, 30], peak: [11, 17], zhr: 15 },
+    { n: 'Geminids', ra: 112, dec: 33, from: [12, 4], to: [12, 17], peak: [12, 14], zhr: 150 },
+    { n: 'Ursids', ra: 217, dec: 76, from: [12, 17], to: [12, 26], peak: [12, 22], zhr: 10 }
+  ];
+  function _mdTime(md, y){ return new Date(y, md[0] - 1, md[1], 12).getTime(); }
+  window._activeShowers = function(d){
+    d = d || new Date();
+    var y = d.getFullYear(), t = d.getTime(), out = [];
+    for (var i = 0; i < _SHOWERS.length; i++)
+      if (t >= _mdTime(_SHOWERS[i].from, y) && t <= _mdTime(_SHOWERS[i].to, y) + 43200000) out.push(_SHOWERS[i]);
+    return out;
+  };
+  _CAS.push({ id: 'METEOR', lbl: 'METEOR PEAK', lvl: 'amber', icon: '☄',
+    desc: 'A major meteor shower peaks tonight.',
+    why: 'One of the major annual meteor showers is within a day of its peak. While a shower is active its radiant is marked on the tactical scope with a dashed cross.',
+    fix: 'Best rates come after local midnight with the radiant high. Open the SKY almanac (CDU: SKY) for the shower window, ZHR and radiant. This is an observing opportunity, not a fault.',
+    test: function(){
+      var d = new Date(), y = d.getFullYear(), t = d.getTime();
+      for (var i = 0; i < _SHOWERS.length; i++)
+        if (Math.abs(t - _mdTime(_SHOWERS[i].peak, y)) < 86400000) return true;
+      return false;
+    } });
+
+  /* ── SKY almanac: meteor showers + planetary events for the next 60 days,
+        computed from the on-board Schlyter ephemerides at daily resolution ── */
+  window._skyToggle = function(){
+    var ov = _p3Overlay('sky-ov', '☄ SKY ALMANAC — NEXT 60 DAYS', '<div class="j-t" id="sky-body">COMPUTING EPHEMERIDES…</div>');
+    if (!ov) return;
+    op('SKY ALMANAC — METEOR SHOWERS + PLANETARY EVENTS (60 D)');
+    setTimeout(function(){
+      var body = document.getElementById('sky-body');
+      if (!body) return;
+      var MO = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+      function fd(t){ var dd = new Date(t); return MO[dd.getMonth()] + ' ' + pad(dd.getDate()); }
+      var now = Date.now(), N = 61, days = [];
+      for (var k = 0; k < N; k++) {
+        var t = now + k * 86400000, arr = _ssBodies(t), bo = {};
+        for (var b = 0; b < arr.length; b++) bo[arr[b].name] = arr[b];
+        days.push({ t: t, bo: bo, illum: _sunMoonEq(t).illum });
+      }
+      function sepD(k2, a, b2){ var A = days[k2].bo[a], B = days[k2].bo[b2]; return _sep(A.ra, A.dec, B.ra, B.dec); }
+      var PL = ['Mercury', 'Venus', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune'], ev = [];
+      var pairs = [];
+      for (var p1 = 0; p1 < PL.length; p1++) {
+        pairs.push(['Moon', PL[p1], 3]);
+        for (var p2 = p1 + 1; p2 < PL.length; p2++) pairs.push([PL[p1], PL[p2], 3.5]);
+      }
+      for (var pi = 0; pi < pairs.length; pi++)
+        for (var k3 = 1; k3 < N - 1; k3++) {
+          var s0 = sepD(k3 - 1, pairs[pi][0], pairs[pi][1]), s1 = sepD(k3, pairs[pi][0], pairs[pi][1]), s2 = sepD(k3 + 1, pairs[pi][0], pairs[pi][1]);
+          if (s1 <= s0 && s1 <= s2 && s1 < pairs[pi][2])
+            ev.push({ t: days[k3].t, txt: (pairs[pi][0] === 'Moon' ? 'Moon passes ' + pairs[pi][1] : pairs[pi][0] + ' – ' + pairs[pi][1] + ' conjunction') + ' (' + s1.toFixed(1) + '° apart)' });
+        }
+      for (var po = 0; po < PL.length; po++) {
+        var inner = PL[po] === 'Mercury' || PL[po] === 'Venus';
+        for (var k4 = 1; k4 < N - 1; k4++) {
+          var e0 = sepD(k4 - 1, 'Sun', PL[po]), e1 = sepD(k4, 'Sun', PL[po]), e2 = sepD(k4 + 1, 'Sun', PL[po]);
+          if (e1 >= e0 && e1 >= e2) {
+            if (!inner && e1 > 170) ev.push({ t: days[k4].t, txt: PL[po] + ' at opposition — up all night, closest and brightest' });
+            if (inner && e1 > 15) ev.push({ t: days[k4].t, txt: PL[po] + ' greatest elongation (' + e1.toFixed(0) + '° from Sun) — best visibility' });
+          }
+        }
+      }
+      for (var k5 = 1; k5 < N - 1; k5++) {
+        if (days[k5].illum >= days[k5 - 1].illum && days[k5].illum >= days[k5 + 1].illum && days[k5].illum > 0.97) ev.push({ t: days[k5].t, txt: 'Full Moon — bright-sky window, plan deep-sky work around it' });
+        if (days[k5].illum <= days[k5 - 1].illum && days[k5].illum <= days[k5 + 1].illum && days[k5].illum < 0.03) ev.push({ t: days[k5].t, txt: 'New Moon — darkest skies of the month' });
+      }
+      ev.sort(function(a, b){ return a.t - b.t; });
+      var out = [], lastByTxt = {};
+      for (var k6 = 0; k6 < ev.length; k6++) {
+        var kk = ev[k6].txt.split('(')[0];
+        if (lastByTxt[kk] && ev[k6].t - lastByTxt[kk] < 5 * 86400000) continue;
+        lastByTxt[kk] = ev[k6].t;
+        out.push(ev[k6]);
+      }
+      var h = '<div class="sd-h">METEOR SHOWERS</div>', y = new Date().getFullYear(), any = false;
+      for (var si = 0; si < _SHOWERS.length; si++) {
+        var sh = _SHOWERS[si], pk = _mdTime(sh.peak, y);
+        if (pk < now - 86400000) pk = _mdTime(sh.peak, y + 1);
+        if (pk > now + 60 * 86400000) continue;
+        any = true;
+        var yy = new Date(pk).getFullYear();
+        h += '<div class="sd-row"><span class="alm-d">' + fd(pk) + '</span><span style="flex:1;color:#9fd4bb">' + sh.n + ' peak — ZHR ' + sh.zhr + ' · active ' + fd(_mdTime(sh.from, yy)) + '–' + fd(_mdTime(sh.to, yy)) + '</span></div>';
+      }
+      if (!any) h += '<div class="j-t">No major shower peaks in the next 60 days.</div>';
+      h += '<div class="sd-h">PLANETARY EVENTS + MOON</div>';
+      if (!out.length) h += '<div class="j-t">No notable events found in the window.</div>';
+      for (var k7 = 0; k7 < out.length; k7++)
+        h += '<div class="sd-row"><span class="alm-d">' + fd(out[k7].t) + '</span><span style="flex:1;color:#9fd4bb">' + out[k7].txt + '</span></div>';
+      h += '<div class="j-t" style="margin-top:8px">Computed from the on-board Schlyter ephemerides at daily resolution — dates are ±1 day.</div>';
+      body.innerHTML = h;
+    }, 30);
+  };
+
+  /* ── astro weather strip: 48 h cloud / humidity / wind (Open-Meteo, free /
+        no key), with astronomical-darkness columns shaded ── */
+  var _wxCache = null;
+  function _wxRender(){
+    var body = document.getElementById('wx-body');
+    if (!body || !_wxCache || !_wxCache.cloud) return;
+    var now = Date.now(), h0 = Math.max(0, Math.round((now - _wxCache.t0) / 3600000));
+    function band(v, a, b){ return v == null ? '#26343f' : v < a ? 'rgba(16,185,129,.8)' : v < b ? 'rgba(245,166,35,.75)' : 'rgba(224,80,80,.75)'; }
+    var html = '<div class="wx-grid">';
+    for (var h = h0; h < Math.min(h0 + 48, _wxCache.cloud.length); h++) {
+      var t = _wxCache.t0 + h * 3600000;
+      var sm = _sunMoonEq(t), sunAlt = _altAt(sm.sun.ra, sm.sun.dec, t);
+      var dk = sunAlt < -18 ? ' wx-dk2' : sunAlt < -12 ? ' wx-dk1' : '';
+      var cl = _wxCache.cloud[h], rh = _wxCache.rh[h], wd = _wxCache.wind[h];
+      var hh = new Date(t).getHours();
+      html += '<div class="wx-col' + dk + '" title="' + pad(hh) + ':00 — cloud ' + (cl == null ? '?' : cl) + '% · humidity ' + (rh == null ? '?' : rh) + '% · wind ' + (wd == null ? '?' : wd) + ' km/h">' +
+        '<div class="wx-hr">' + (hh % 3 === 0 ? pad(hh) : '') + '</div>' +
+        '<div class="wx-cell" style="background:' + band(cl, 25, 60) + '"></div>' +
+        '<div class="wx-cell" style="background:' + band(rh, 70, 85) + '"></div>' +
+        '<div class="wx-cell" style="background:' + band(wd, 20, 40) + '"></div></div>';
+    }
+    html += '</div><div class="j-t">ROWS: CLOUD · HUMIDITY · WIND — GREEN GOOD / AMBER MARGINAL / RED POOR. SHADED COLUMNS = ASTRONOMICAL DARKNESS. MOON ' + Math.round(_sunMoonEq(now).illum * 100) + '% ILLUMINATED. HOVER A COLUMN FOR VALUES (LOCAL TIME).</div>';
+    body.innerHTML = html;
+  }
+  window._wxToggle = function(){
+    var ov = _p3Overlay('wx-ov', '⛅ ASTRO WEATHER — 48 H FORECAST', '<div class="j-t" id="wx-body">' + (obsLat == null ? 'NO POSITION FIX — SET A LOCATION FIRST (TAP THE POSITION READOUT IN THE HUD)' : 'QUERYING OPEN-METEO…') + '</div>');
+    if (!ov || obsLat == null) return;
+    op('ASTRO WEATHER — 48 H CLOUD / HUMIDITY / WIND STRIP');
+    var key = obsLat.toFixed(1) + ',' + obsLon.toFixed(1);
+    if (_wxCache && _wxCache.key === key && Date.now() - _wxCache.at < 3600000) return _wxRender();
+    try {
+      fetch('https://api.open-meteo.com/v1/forecast?latitude=' + obsLat.toFixed(3) + '&longitude=' + obsLon.toFixed(3) +
+            '&hourly=cloud_cover,relative_humidity_2m,wind_speed_10m&forecast_days=3&timezone=UTC')
+        .then(function(r){ return r.json(); })
+        .then(function(d){
+          if (!d || !d.hourly || !d.hourly.time) { var b = document.getElementById('wx-body'); if (b) b.textContent = 'OPEN-METEO — EMPTY RESPONSE'; return; }
+          _wxCache = { key: key, at: Date.now(),
+            t0: Date.parse(d.hourly.time[0] + (d.hourly.time[0].indexOf('Z') < 0 ? 'Z' : '')),
+            cloud: d.hourly.cloud_cover || [], rh: d.hourly.relative_humidity_2m || [], wind: d.hourly.wind_speed_10m || [] };
+          _wxRender();
+        })
+        .catch(function(){ var b = document.getElementById('wx-body'); if (b) b.textContent = 'OPEN-METEO UNREACHABLE — CHECK CONNECTION OR SYS PAGE PROBES'; });
+    } catch(e) {}
+  };
+
+  /* ── Bortle sky quality: manual class 1–9, folded into OBS scores and the
+        SIMBAD visibility note. Naked-eye limiting magnitude per class. ── */
+  var _BLIM = [0, 8.0, 7.5, 7.0, 6.5, 6.2, 6.0, 5.6, 5.0, 4.4];
+  function _bortleGet(){
+    var v = null;
+    try { v = parseInt(localStorage.getItem('ds-bortle') || '', 10); } catch(e) {}
+    return (v >= 1 && v <= 9) ? v : null;
+  }
+  window._bortleVal = _bortleGet;
+  window._bortleLim = function(){ var b = _bortleGet(); return b ? _BLIM[b] : null; };
+  window._bortleSet = function(arg){
+    var v = parseInt(arg, 10);
+    if (!(v >= 1 && v <= 9)) {
+      var inp = prompt('Bortle class of your observing site (1 = pristine dark sky … 9 = inner city). Folded into OBS scores. Empty value clears it.', _bortleGet() || '');
+      if (inp == null) return;
+      v = parseInt(inp, 10);
+      if (!(v >= 1 && v <= 9)) {
+        try { localStorage.removeItem('ds-bortle'); } catch(e) {}
+        _obsCache = {};
+        op('BORTLE CLEARED — SKY-QUALITY FACTOR REMOVED FROM OBS SCORES');
+        if (document.getElementById('trk-body')) _thRender();
+        return;
+      }
+    }
+    try { localStorage.setItem('ds-bortle', String(v)); } catch(e) {}
+    _obsCache = {};
+    op('BORTLE CLASS ' + v + ' SET — NAKED-EYE LIMIT ~' + _BLIM[v].toFixed(1) + ' MAG · OBS SCORES ADJUSTED');
+    if (document.getElementById('trk-body')) _thRender();
+  };
+
+  /* ── ZTF light curve via the public ALeRCE broker: cone-search the nearest
+        ZTF object within 30 arcsec, then plot its detections (fail-silent) ── */
+  function _lcDraw(dets){
+    var cv = document.getElementById('lc-cv');
+    if (!cv) return false;
+    var c = cv.getContext('2d'), W = cv.width, H = cv.height, i;
+    c.clearRect(0, 0, W, H);
+    var pts = [];
+    for (i = 0; i < dets.length; i++)
+      if (dets[i] && dets[i].mjd != null && dets[i].magpsf != null) pts.push({ t: +dets[i].mjd, m: +dets[i].magpsf, f: +dets[i].fid || 0 });
+    if (pts.length < 2) return false;
+    pts.sort(function(a, b){ return a.t - b.t; });
+    var t0 = pts[0].t, t1 = pts[pts.length - 1].t;
+    if (t1 - t0 < 1) t1 = t0 + 1;
+    var mn = 99, mx = -99;
+    for (i = 0; i < pts.length; i++) { if (pts[i].m < mn) mn = pts[i].m; if (pts[i].m > mx) mx = pts[i].m; }
+    if (mx - mn < 0.5) { mn -= 0.3; mx += 0.3; }
+    var PX = 38, PY = 10;
+    function X(t){ return PX + (t - t0) * (W - PX - 10) / (t1 - t0); }
+    function Y(m){ return PY + (m - mn) * (H - PY - 24) / (mx - mn); }
+    c.strokeStyle = 'rgba(63,224,143,.25)';
+    c.strokeRect(PX, PY, W - PX - 10, H - PY - 24);
+    c.fillStyle = '#3a7a5a';
+    c.font = '9px monospace';
+    c.fillText(mn.toFixed(1), 4, Y(mn) + 3);
+    c.fillText(mx.toFixed(1), 4, Y(mx) + 3);
+    function md(m){ var dd = new Date((m - 40587) * 86400000); return (dd.getMonth() + 1) + '/' + String(dd.getFullYear()).slice(2); }
+    c.fillText(md(t0), PX, H - 6);
+    c.textAlign = 'right';
+    c.fillText(md(t1), W - 10, H - 6);
+    c.textAlign = 'left';
+    var FC = { 1: '#10b981', 2: '#e05050', 3: '#f5a623' };
+    for (i = 0; i < pts.length; i++) {
+      c.fillStyle = FC[pts[i].f] || '#7dd3fc';
+      c.beginPath(); c.arc(X(pts[i].t), Y(pts[i].m), 2, 0, 6.29); c.fill();
+    }
+    return true;
+  }
+  window._lcOpen = function(name, ra, dec){
+    var ov = _p3Overlay('lc-ov', '📈 ZTF LIGHT CURVE — ' + _esc(String(name).toUpperCase()), '<div class="j-t" id="lc-body">QUERYING ALERCE BROKER…</div>');
+    if (!ov) return;
+    op('LIGHT CURVE — QUERYING ZTF VIA ALERCE BROKER');
+    function fail(msg){ var b = document.getElementById('lc-body'); if (b) b.textContent = msg; }
+    try {
+      fetch('https://api.alerce.online/ztf/v1/objects/?ra=' + (+ra).toFixed(5) + '&dec=' + (+dec).toFixed(5) + '&radius=30&page_size=1')
+        .then(function(r){ return r.json(); })
+        .then(function(d){
+          var items = (d && (d.items || d.results)) || [];
+          if (!items.length || !items[0].oid) { fail('NO ZTF COUNTERPART WITHIN 30″ — TARGET MAY BE TOO BRIGHT, TOO FAINT, OUTSIDE THE ZTF FOOTPRINT, OR RADIO-ONLY'); return; }
+          var oid = items[0].oid, nd = items[0].ndet;
+          fetch('https://api.alerce.online/ztf/v1/objects/' + encodeURIComponent(oid) + '/lightcurve')
+            .then(function(r2){ return r2.json(); })
+            .then(function(d2){
+              var dets = (d2 && (d2.detections || d2)) || [];
+              var b = document.getElementById('lc-body');
+              if (!b) return;
+              b.innerHTML = '<div class="j-t" style="margin-bottom:6px">' + _esc(oid) + ' · ' + (nd != null ? nd + ' DETECTIONS · ' : '') +
+                '<span style="color:#10b981">● g</span> <span style="color:#e05050">● r</span> <span style="color:#f5a623">● i</span> · MAGNITUDE (BRIGHT AT TOP) VS DATE · ' +
+                '<a style="color:#3fe08f" target="_blank" rel="noopener" href="https://alerce.online/object/' + encodeURIComponent(oid) + '">OPEN IN ALERCE ↗</a></div>' +
+                '<canvas id="lc-cv" width="560" height="240" style="max-width:100%"></canvas>';
+              if (!_lcDraw(dets)) fail('ZTF OBJECT ' + oid + ' FOUND BUT NOT ENOUGH DETECTIONS TO PLOT');
+            })
+            .catch(function(){ fail('ALERCE LIGHTCURVE ENDPOINT UNREACHABLE'); });
+        })
+        .catch(function(){ fail('ALERCE BROKER UNREACHABLE — CHECK CONNECTION OR SYS PAGE PROBES'); });
+    } catch(e) { fail('ALERCE BROKER UNREACHABLE'); }
+  };
+
+  /* ── telescope / camera FOV overlay on the Search result sky cutout
+        (0.25° frame). Stored in degrees in ds-fov. ── */
+  function _fovGet(){
+    try { var v = JSON.parse(localStorage.getItem('ds-fov') || 'null'); return (v && v.w > 0) ? v : null; } catch(e) { return null; }
+  }
+  window._fovApply = function(){
+    var old = document.getElementById('fov-box');
+    if (old) old.remove();
+    var oldT = document.getElementById('fov-tag');
+    if (oldT) oldT.remove();
+    var box = document.querySelector('.result-img');
+    var f = _fovGet();
+    if (!box || !f) return;
+    var CUT = 0.25;
+    var r = box.getBoundingClientRect();
+    var side = Math.min(r.width, r.height) || 220;
+    function px(deg){ return Math.max(6, Math.min(side * 1.15, side * (deg / CUT))); }
+    var d = document.createElement('div');
+    d.id = 'fov-box';
+    d.className = 'fov-box';
+    d.style.width = px(f.w) + 'px';
+    d.style.height = px(f.h || f.w) + 'px';
+    box.appendChild(d);
+    function fmt(deg){ return deg >= 1 ? deg.toFixed(1) + '°' : Math.round(deg * 60) + '′'; }
+    var tg = document.createElement('div');
+    tg.id = 'fov-tag';
+    tg.className = 'fov-tag';
+    tg.textContent = 'FOV ' + fmt(f.w) + (f.h && f.h !== f.w ? ' × ' + fmt(f.h) : '');
+    box.appendChild(tg);
+  };
+  window._fovToggle = function(){
+    var f = _fovGet();
+    var h = '<div class="j-t">EYEPIECE CALCULATOR — TRUE FIELD = AFOV ÷ (SCOPE FL ÷ EYEPIECE FL)</div>' +
+      '<div class="sd-row" style="gap:6px">SCOPE FL <input id="fov-fl" size="5" placeholder="mm" style="width:64px"> EYEPIECE <input id="fov-ep" size="4" placeholder="mm" style="width:52px"> AFOV <input id="fov-af" size="4" value="68" style="width:46px">° <button class="trk-bell" style="width:auto" id="fov-calc">=</button></div>' +
+      '<div class="j-t" style="margin-top:8px">FIELD ON SKY (ARCMIN) — DRAWN ON THE SEARCH RESULT CUTOUT (0.25° = 15′ FRAME)</div>' +
+      '<div class="sd-row" style="gap:6px">W <input id="fov-w" size="6" style="width:64px" value="' + (f ? Math.round(f.w * 600) / 10 : '') + '"> H <input id="fov-h" size="6" style="width:64px" placeholder="= W" value="' + (f && f.h && f.h !== f.w ? Math.round(f.h * 600) / 10 : '') + '"> ' +
+      '<button class="trk-bell" style="width:auto" id="fov-set">APPLY</button> <button class="trk-bell" style="width:auto" id="fov-clr">CLEAR</button></div>';
+    var ov = _p3Overlay('fov-ov', '⌗ FOV OVERLAY — TELESCOPE FIELD', h);
+    if (!ov) return;
+    document.getElementById('fov-calc').addEventListener('click', function(){
+      var fl = parseFloat(document.getElementById('fov-fl').value), ep = parseFloat(document.getElementById('fov-ep').value), af = parseFloat(document.getElementById('fov-af').value);
+      if (fl > 0 && ep > 0 && af > 0) {
+        var tf = af / (fl / ep) * 60;
+        document.getElementById('fov-w').value = Math.round(tf * 10) / 10;
+        document.getElementById('fov-h').value = '';
+        op('FOV CALC — ' + Math.round(fl / ep) + '× · TRUE FIELD ' + (Math.round(tf * 10) / 10) + '′');
+      }
+      try { SFX.click(); } catch(e) {}
+    });
+    document.getElementById('fov-set').addEventListener('click', function(){
+      var w = parseFloat(document.getElementById('fov-w').value), hh = parseFloat(document.getElementById('fov-h').value);
+      if (!(w > 0)) return;
+      try { localStorage.setItem('ds-fov', JSON.stringify({ w: w / 60, h: (hh > 0 ? hh / 60 : null) })); } catch(e) {}
+      window._fovApply();
+      op('FOV OVERLAY SET — ' + w + '′ FIELD MARKED ON THE RESULT CUTOUT');
+      ov.remove();
+      try { SFX.close(); } catch(e) {}
+    });
+    document.getElementById('fov-clr').addEventListener('click', function(){
+      try { localStorage.removeItem('ds-fov'); } catch(e) {}
+      window._fovApply();
+      op('FOV OVERLAY CLEARED');
+      ov.remove();
+      try { SFX.close(); } catch(e) {}
+    });
+  };
+
+  /* ── score-history sparklines: catalog_history.json accumulates one
+        {date, scores} entry per pipeline publish (fail-silent when absent) ── */
+  var _histMap = null;
+  function _sparkSvg(vals){
+    if (!vals || vals.length < 2) return '';
+    var w = 46, h = 14, mn = Math.min.apply(null, vals), mx = Math.max.apply(null, vals);
+    if (mx - mn < 1) { mn -= 1; mx += 1; }
+    var pts = [];
+    for (var i = 0; i < vals.length; i++)
+      pts.push((i * (w - 2) / (vals.length - 1) + 1).toFixed(1) + ',' + (h - 2 - (vals[i] - mn) * (h - 4) / (mx - mn)).toFixed(1));
+    var up = vals[vals.length - 1] >= vals[0];
+    return '<svg class="spark" width="' + w + '" height="' + h + '" viewBox="0 0 ' + w + ' ' + h + '" aria-hidden="true"><title>Score across pipeline runs: ' + vals.join(' → ') + '</title><polyline fill="none" stroke="' + (up ? '#10b981' : '#e05050') + '" stroke-width="1.2" points="' + pts.join(' ') + '"/></svg>';
+  }
+  window._sparkFor = function(name){
+    if (!_histMap) return '';
+    var v = _histMap[_k4(name)];
+    return v ? _sparkSvg(v) : '';
+  };
+  (function(){
+    try {
+      fetch('catalog_history.json').then(function(r){ return r.ok ? r.json() : null; }).then(function(hist){
+        if (!hist || !hist.length) return;
+        _histMap = {};
+        for (var i = 0; i < hist.length; i++) {
+          var sc = hist[i].scores || {};
+          for (var k in sc) {
+            var kk = _k4(k);
+            (_histMap[kk] = _histMap[kk] || []).push(Math.round(+sc[k]) || 0);
+          }
+        }
+        var cards = document.querySelectorAll('.card'), n = 0;
+        for (var c = 0; c < cards.length; c++) {
+          var dEl = cards[c].querySelector('.btn-dispo[data-dname]');
+          var sEl = cards[c].querySelector('.card-score');
+          if (!dEl || !sEl || sEl.querySelector('.spark')) continue;
+          var s5 = window._sparkFor(dEl.getAttribute('data-dname'));
+          if (s5) { sEl.insertAdjacentHTML('beforeend', s5); n++; }
+        }
+        if (n) op('SCORE HISTORY — SPARKLINES ON ' + n + ' CANDIDATES ACROSS ' + hist.length + ' RUNS');
+      }).catch(function(){});
+    } catch(e) {}
+  })();
+
+  /* ── observing-list export: full planning CSV + minimal GoTo CSV ── */
+  window._trkExport = function(){
+    var l = _thGet();
+    if (!l.length) { op('EXPORT — TRACKING LIST EMPTY'); return; }
+    var dm = _dMap(), nm = _notesMap();
+    var full = 'Name,RA_deg,Dec_deg,OBS_score,Best_from,Best_to,Disposition,Note\n';
+    var mini = 'Name,RA_hours,Dec_deg\n';
+    for (var i = 0; i < l.length; i++) {
+      var e = l[i], w = _obsWindow(+e.ra, +e.dec);
+      var qn = '"' + String(e.name).replace(/"/g, '""') + '"';
+      full += qn + ',' + (+e.ra).toFixed(5) + ',' + (+e.dec).toFixed(5) + ',' +
+        (w && w.score != null ? w.score : '') + ',' + (w && w.from ? _fmtHM(w.from) : '') + ',' + (w && w.to ? _fmtHM(w.to) : '') + ',' +
+        (dm[e.name] || '') + ',"' + String(nm[e.name] || '').replace(/"/g, '""') + '"\n';
+      mini += qn + ',' + ((+e.ra) / 15).toFixed(5) + ',' + (+e.dec).toFixed(5) + '\n';
+    }
+    function dl(txt, fn){
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([txt], { type: 'text/csv' }));
+      a.download = fn;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
+    var h = '<div class="j-t" style="margin-bottom:8px">' + l.length + ' TARGETS — PICK A FORMAT</div>' +
+      '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
+      '<button class="trk-bell" style="width:auto" id="exp-full">⤓ FULL CSV — PLANNING (SCORES + WINDOWS + NOTES)</button>' +
+      '<button class="trk-bell" style="width:auto" id="exp-goto">⤓ GOTO CSV — RA-HOURS / DEC</button></div>' +
+      '<div class="j-t" style="margin-top:8px">The GoTo CSV imports into Telescopius and most mount-planning tools; RA is in decimal hours, Dec in decimal degrees (J2000).</div>';
+    var ov = _p3Overlay('exp-ov', '⤓ EXPORT OBSERVING LIST', h);
+    if (!ov) return;
+    document.getElementById('exp-full').addEventListener('click', function(){ dl(full, 'deepsignal-observing-list.csv'); op('EXPORT — FULL PLANNING CSV DOWNLOADED'); });
+    document.getElementById('exp-goto').addEventListener('click', function(){ dl(mini, 'deepsignal-goto-list.csv'); op('EXPORT — GOTO CSV DOWNLOADED'); });
+  };
+
+  /* ── kiosk mode: full-screen auto-cycle of the top candidates ── */
+  var _kkT = null, _kkIdx = 0;
+  function _kioskStop(){
+    var ov = document.getElementById('kiosk-ov');
+    if (ov) ov.remove();
+    if (_kkT) { clearInterval(_kkT); _kkT = null; }
+    try { if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(function(){}); } catch(e) {}
+    try { SFX.close(); } catch(e) {}
+  }
+  function _kkShow(cat){
+    var c = cat[_kkIdx];
+    if (!c) return;
+    var img = document.getElementById('kk-img');
+    if (img) {
+      var src = '';
+      try { if (typeof skyUrl === 'function' && typeof skySurvey === 'function') src = skyUrl(c.ra, c.dec, 0.5, skySurvey(c.dec).hips); } catch(e) {}
+      if (src) { img.style.display = ''; img.src = src; } else img.style.display = 'none';
+    }
+    var nEl = document.getElementById('kk-name'), sEl = document.getElementById('kk-sub');
+    if (nEl) nEl.textContent = c.name;
+    if (sEl) sEl.textContent = 'SCORE ' + (c.score || '—') + ' · RA ' + c.ra.toFixed(3) + '° · DEC ' + c.dec.toFixed(3) + '° · ' + (_kkIdx + 1) + ' / ' + cat.length;
+    var bar = document.getElementById('kk-bar');
+    if (bar) {
+      bar.style.transition = 'none';
+      bar.style.width = '0';
+      void bar.offsetWidth;
+      bar.style.transition = 'width 10s linear';
+      bar.style.width = '100%';
+    }
+  }
+  window._kioskToggle = function(){
+    if (document.getElementById('kiosk-ov')) { _kioskStop(); return; }
+    var cat = _navTargets().slice();
+    if (!cat.length) { op('KIOSK — NO CATALOG LOADED'); return; }
+    cat.sort(function(a, b){ return (b.score || 0) - (a.score || 0); });
+    cat = cat.slice(0, 12);
+    try { SFX.open(); } catch(e) {}
+    op('KIOSK MODE — CYCLING TOP ' + cat.length + ' CANDIDATES · TAP ANYWHERE TO EXIT');
+    var ov = document.createElement('div');
+    ov.id = 'kiosk-ov';
+    ov.innerHTML = '<div class="kk-in"><img id="kk-img" alt=""><div class="kk-name" id="kk-name"></div><div class="kk-sub" id="kk-sub"></div><div class="kk-bar"><span id="kk-bar"></span></div><div class="kk-hint">DEEPSIGNAL KIOSK — TAP ANYWHERE TO EXIT</div></div>';
+    ov.addEventListener('click', _kioskStop);
+    document.body.appendChild(ov);
+    try { if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(function(){}); } catch(e) {}
+    _kkIdx = 0;
+    _kkShow(cat);
+    _kkT = setInterval(function(){ _kkIdx = (_kkIdx + 1) % cat.length; _kkShow(cat); }, 10000);
+  };
 
   /* ── card tilt + cursor-tracking glow (event delegation) ── */
   var tiltEl = null;
