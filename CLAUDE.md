@@ -231,6 +231,12 @@ Fields per entry: `obs_id`, `target_name`, `ra_deg`, `dec_deg`, `candidacy_score
 ### `deepsignal/processed/statistics.json`
 Aggregate counts: total_candidates, by_signal_type, score distributions.
 
+### `deepsignal/catalog_history.json`
+Array of `{date, scores: {target_name: score}}` — one entry per pipeline publish (last 30).
+Appended by the upstream `publish-pages.yml`; powers per-candidate score sparklines.
+Mirrored to `deepsignal/reports/`. Companion `catalog.prev.json` (previous run snapshot)
+powers the NEW/Δ run-diff badges.
+
 ---
 
 ## Constraints
