@@ -237,6 +237,13 @@ Appended by the upstream `publish-pages.yml`; powers per-candidate score sparkli
 Mirrored to `deepsignal/reports/`. Companion `catalog.prev.json` (previous run snapshot)
 powers the NEW/Δ run-diff badges.
 
+### NAVCON PRO-6 — JARVIS / Iron Man HUD (deployed in index.html + gallery.html)
+Offline rule-based JARVIS assistant (`_ask`, voice I/O, daily briefing), Target Lock
+overlay, radial quick-menu, cursor micro-HUD, NOW opportunity queue, instrument
+gauges, AR live-sky camera overlay, haptics. Advisory CI test:
+`.github/scripts/e2e-full/pro6test.mjs`. Deep dive lives in the upstream deepsignal
+CLAUDE.md; these files are generated output — edit upstream, never hand-patch here.
+
 ---
 
 ## Constraints
