@@ -430,6 +430,46 @@ body{padding-bottom:30px}
 /* ── NAVCON PRO-2: NVG mode, observability chips, time-scrub, systems page, disposition ── */
 html.nvg body{background:#0d0202}
 html.nvg body>*{filter:sepia(1) hue-rotate(-48deg) saturate(3.4) brightness(.78) contrast(1.05)}
+/* ── NAVCON PRO-6: JARVIS, Target Lock, radial menu, NOW queue, gauges, glass ── */
+@keyframes lockConverge{0%{transform:translate(-50%,-50%) scale(2.4) rotate(-40deg);opacity:0}60%{opacity:1}100%{transform:translate(-50%,-50%) scale(1) rotate(0);opacity:1}}
+@keyframes lockSpin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+@keyframes scanReveal{0%{clip-path:inset(0 0 100% 0)}100%{clip-path:inset(0 0 0 0)}}
+@keyframes nowPulse{0%,100%{opacity:.55}50%{opacity:1}}
+#lock-ov{position:fixed;inset:0;z-index:9998;background:radial-gradient(ellipse at center,rgba(4,16,12,.9),rgba(2,7,5,.97));display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(3px)}
+#lock-stage{position:relative;width:min(86vw,86vh);height:min(86vw,86vh)}
+#lock-img{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:52%;height:52%;object-fit:cover;border-radius:50%;border:1px solid rgba(63,224,143,.4);background:#000;box-shadow:0 0 40px rgba(63,224,143,.18)}
+#lock-ret{position:absolute;left:50%;top:50%;width:64%;height:64%;pointer-events:none;animation:lockConverge .7s cubic-bezier(.2,.8,.2,1) both}
+#lock-ret2{position:absolute;left:50%;top:50%;width:72%;height:72%;transform:translate(-50%,-50%);pointer-events:none;opacity:.5;animation:lockSpin 24s linear infinite}
+#lock-gauge{position:absolute;inset:0;pointer-events:none}
+#lock-cap{position:absolute;left:50%;bottom:-2%;transform:translateX(-50%);text-align:center;font-family:monospace;color:#eef3f8;white-space:nowrap}
+#lock-cap .lk-n{font-size:clamp(1rem,2.6vw,1.7rem);letter-spacing:.14em;color:#3fe08f;text-shadow:0 0 10px rgba(63,224,143,.5)}
+#lock-cap .lk-s{font-size:.62rem;color:#9fd4bb;letter-spacing:.1em;margin-top:4px}
+.lk-hint{position:absolute;left:50%;top:2%;transform:translateX(-50%);font-family:monospace;font-size:.52rem;letter-spacing:.16em;color:#3a7a5a}
+#radial-ov{position:fixed;inset:0;z-index:9997}
+.rad-item{position:absolute;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column;font-family:monospace;font-size:.5rem;letter-spacing:.06em;color:#3fe08f;background:rgba(3,16,11,.94);border:1px solid rgba(63,224,143,.5);box-shadow:0 0 14px rgba(63,224,143,.2);cursor:pointer;transition:transform .12s,background .12s;transform:scale(.2);opacity:0}
+.rad-item.in{transform:scale(1);opacity:1}
+.rad-item:hover{background:rgba(63,224,143,.22);transform:scale(1.12)}
+.rad-item .ri-ic{font-size:1.05rem;line-height:1}
+.rad-center{position:absolute;width:12px;height:12px;border-radius:50%;background:#3fe08f;box-shadow:0 0 12px #3fe08f;transform:translate(-50%,-50%)}
+#curhud{position:fixed;z-index:9996;pointer-events:none;font-family:monospace;font-size:.56rem;letter-spacing:.05em;color:#3fe08f;background:rgba(3,16,11,.92);border:1px solid rgba(63,224,143,.4);border-radius:5px;padding:4px 7px;white-space:nowrap;box-shadow:0 0 12px rgba(63,224,143,.18);transform:translateY(-130%);transition:opacity .12s;opacity:0}
+#curhud.on{opacity:1}
+#hud-now{color:#3fe08f;font-weight:600;max-width:42vw;overflow:hidden;text-overflow:ellipsis}
+#hud-now.act{animation:nowPulse 2.4s ease-in-out infinite}
+#hud-now .nq-ic{margin-right:5px}
+.hud-mic{font-family:monospace;font-size:.6rem;letter-spacing:.1em;color:#3fe08f;background:rgba(63,224,143,.08);border:1px solid rgba(63,224,143,.4);border-radius:3px;padding:2px 7px;cursor:pointer;line-height:1.4}
+.hud-mic.rec{color:#ff5a4a;border-color:#ff5a4a;background:rgba(255,90,74,.14);animation:nowPulse 1s ease-in-out infinite}
+#gauge-ov .g-wrap{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;padding:6px 2px}
+#gauge-ov .g-cell{text-align:center;font-family:monospace;font-size:.55rem;color:#9fd4bb;letter-spacing:.06em}
+#gauge-ov .g-cell canvas{display:block;margin:0 auto 4px}
+.jarvis-in{color:#7dd3fc!important;text-shadow:0 0 8px rgba(125,211,252,.5)!important}
+#ar-cam{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:.92}
+#ar-labels{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+.ar-lbl{position:absolute;transform:translate(-50%,-50%);font-family:monospace;font-size:.58rem;letter-spacing:.05em;color:#3fe08f;text-shadow:0 0 6px rgba(0,0,0,.9);white-space:nowrap;text-align:center}
+.ar-lbl .ar-tick{font-size:1.1rem;line-height:.6;display:block}
+.ar-lbl.trk{color:#10b981}
+.ar-lbl.met{color:#3fe08f;opacity:.85}
+.p3-box,#sd-box,#lc-ov .p3-box{position:relative;overflow:hidden}
+.p3-ov .p3-box{animation:scanReveal .32s ease-out}
 /* ── NAVCON PRO-5: red mode, weather strip, almanac, light curve, FOV, kiosk, sparklines ── */
 html.red body{background:#0a0202}
 html.red body>*{filter:grayscale(1) sepia(1) saturate(5) hue-rotate(-35deg) brightness(.72)}
@@ -693,6 +733,8 @@ window._svBlink = function(btn){
   <button class="hud-seg hud-sys" id="hud-sys" title="System status — tap for active notifications"><span class="hud-dot" id="hud-sys-dot"></span><span id="hud-sys-txt">SYS <span class="hud-val">NOMINAL</span></span></button>
   <span class="hud-seg"><button class="hud-btn" id="hud-scope-btn" title="Tactical scope — plot all candidates on your local sky">◉ SCOPE</button></span>
   <span class="hud-seg"><button class="hud-btn" id="hud-trk-btn" title="Tracking list — every target you have tracked, with live altitude">⌖ LIST</button></span>
+  <span class="hud-seg" id="hud-now" title="NOW — the most time-critical opportunity right now (tap for the full queue)"></span>
+  <span class="hud-seg"><button class="hud-mic" id="hud-mic-btn" title="Ask JARVIS by voice — tap and speak a command">🎙 ASK</button></span>
   <span class="hud-seg">UTC <span class="hud-val" id="hud-utc">--:--:--</span></span>
   <span class="hud-seg hud-hide-sm">GMST <span class="hud-val" id="hud-gmst">--:--:--</span></span>
   <span class="hud-seg hud-hide-sm">MJD <span class="hud-val" id="hud-mjd">-----.---</span></span>
@@ -703,7 +745,7 @@ window._svBlink = function(btn){
   <span class="hud-seg" id="hud-track-seg" style="display:none">⌖ <span class="hud-val" id="hud-track">--</span></span>
   <span class="hud-seg" id="hud-watch-seg" style="display:none">★ <span class="hud-val" id="hud-watch">--</span></span>
   <span class="hud-seg"><button class="hud-btn" id="hud-ar-btn" style="display:none" title="AR finder — point your phone at the tracked target">▲ AR</button></span>
-  <span class="hud-seg hud-hide-sm"><button class="hud-btn" id="hud-nvg-btn" title="Night-vision mode — red low-brightness palette for dark adaptation">☾ NVG</button> <button class="hud-btn" id="hud-red-btn" title="Red-light mode — full red palette preserving dark adaptation (exclusive with NVG)">◉ RED</button></span>
+  <span class="hud-seg hud-hide-sm"><button class="hud-btn" id="hud-nvg-btn" title="Night-vision mode — red low-brightness palette for dark adaptation">☾ NVG</button> <button class="hud-btn" id="hud-red-btn" title="Red-light mode — full red palette preserving dark adaptation (exclusive with NVG)">◉ RED</button> <button class="hud-btn" id="hud-gauge-btn" title="Instrument gauges — sky quality, Moon phase, geomagnetic Kp">◐ GAUGE</button></span>
   <span id="hud-msg"></span>
 </div>
 
@@ -3269,7 +3311,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     if (ev.key !== 'Escape') return;
     var t = ev.target, tg = t && t.tagName;
     if (tg === 'INPUT' || tg === 'TEXTAREA' || (t && t.isContentEditable)) return;
-    var order = ['kiosk-ov', 'cas-explain', 'wx-ov', 'sky-ov', 'lc-ov', 'fov-ov', 'exp-ov', 'ac-ov', 'plan-ov', 'qrh-ov', 'trx-ov', 'tune-ov', 'sd-ov', 'sys-notices', 'trklist-ov', 'journal-ov', 'scope-ov'];
+    var order = ['lock-ov', 'radial-ov', 'gauge-ov', 'now-ov', 'kiosk-ov', 'cas-explain', 'wx-ov', 'sky-ov', 'lc-ov', 'fov-ov', 'exp-ov', 'ac-ov', 'plan-ov', 'qrh-ov', 'trx-ov', 'tune-ov', 'sd-ov', 'sys-notices', 'trklist-ov', 'journal-ov', 'scope-ov'];
     for (var i = 0; i < order.length; i++) {
       var el = document.getElementById(order[i]);
       if (!el) continue;
@@ -3320,6 +3362,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
             });
           })(c.id, el, c);
           panel.appendChild(el);
+          _haptic([40, 60, 40]);
           op('CAS ALERT — ' + c.lbl + ': ' + c.desc);
         } else if (_casAck[c.id] && el) {
           el.remove();
@@ -4877,6 +4920,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       ov.remove();
       _arActive = false;
       if (_arL) { window.removeEventListener('deviceorientation', _arL); _arL = null; }
+      try { if (_arStream) { _arStream.getTracks().forEach(function(t){ t.stop(); }); _arStream = null; } } catch(e) {}
       try { SFX.close(); } catch(e) {}
       return;
     }
@@ -4887,12 +4931,21 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       op('AR FINDER — POINT DEVICE AT ' + String(trackTgt.name).toUpperCase());
       var o = document.createElement('div');
       o.id = 'ar-ov';
-      o.innerHTML = '<div class="pro-hdr">▲ AR FINDER — ' + _esc(String(trackTgt.name).toUpperCase()) + '<button class="pro-x" id="ar-x">✕</button></div>' +
-        '<div id="ar-main"><div id="ar-az">—</div><div id="ar-alt"></div><div id="ar-state">WAITING FOR COMPASS…</div></div>' +
-        '<div class="j-t" style="padding:0 14px 10px">HOLD DEVICE UPRIGHT · FOLLOW ARROWS TO 0°</div>';
+      o.innerHTML = '<video id="ar-cam" autoplay playsinline muted></video><div id="ar-labels"></div>' +
+        '<div class="pro-hdr" style="position:relative;z-index:3">AR FINDER — ' + _esc(String(trackTgt.name).toUpperCase()) + '<button class="pro-x" id="ar-x">X</button></div>' +
+        '<div id="ar-main" style="position:relative;z-index:3"><div id="ar-az">-</div><div id="ar-alt"></div><div id="ar-state">WAITING FOR COMPASS...</div></div>' +
+        '<div class="j-t" style="padding:0 14px 10px;position:relative;z-index:3">HOLD DEVICE UPRIGHT - LABELS FLOAT OVER THE REAL SKY - FOLLOW ARROWS TO 0 DEG</div>';
       document.body.appendChild(o);
       document.getElementById('ar-x').addEventListener('click', _arToggle);
       _arActive = true;
+      try {
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+          navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: 'environment' } }, audio: false })
+            .then(function(s){ _arStream = s; var v = document.getElementById('ar-cam'); if (v) v.srcObject = s; else s.getTracks().forEach(function(t){ t.stop(); }); })
+            .catch(function(){ var v = document.getElementById('ar-cam'); if (v) v.style.display = 'none'; });
+        } else { var v0 = document.getElementById('ar-cam'); if (v0) v0.style.display = 'none'; }
+      } catch(e) {}
+      _arTargets = _arBuildTargets();
       _arL = function(e){
         if (!_arActive || !trackTgt) return;
         var st = document.getElementById('ar-state'), azEl = document.getElementById('ar-az'), altEl = document.getElementById('ar-alt');
@@ -4903,10 +4956,11 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
         var pitch = (e.beta != null) ? (e.beta - 90) : null;
         var dAz = ((aa.az - head + 540) % 360) - 180;
         var dAlt = (pitch != null) ? (aa.alt - pitch) : null;
-        if (azEl) azEl.textContent = (dAz > 0 ? 'RIGHT ► ' : '◄ LEFT ') + Math.abs(dAz).toFixed(0) + '°';
-        if (altEl) altEl.textContent = dAlt == null ? '' : ((dAlt > 0 ? 'UP ▲ ' : 'DOWN ▼ ') + Math.abs(dAlt).toFixed(0) + '°');
+        if (azEl) azEl.textContent = (dAz > 0 ? 'RIGHT > ' : '< LEFT ') + Math.abs(dAz).toFixed(0) + ' DEG';
+        if (altEl) altEl.textContent = dAlt == null ? '' : ((dAlt > 0 ? 'UP ^ ' : 'DOWN v ') + Math.abs(dAlt).toFixed(0) + ' DEG');
         var onT = Math.abs(dAz) < 5 && dAlt != null && Math.abs(dAlt) < 5;
-        if (st) { st.textContent = onT ? '◎ ON TARGET' : 'TRACKING…'; st.classList.toggle('ar-on', onT); }
+        if (st) { st.textContent = onT ? 'ON TARGET' : 'TRACKING...'; st.classList.toggle('ar-on', onT); }
+        _arProject(head, pitch);
       };
       window.addEventListener('deviceorientation', _arL);
     }
@@ -4915,6 +4969,28 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
         .then(function(r){ if (r === 'granted') start(); else op('AR FINDER — SENSOR PERMISSION DENIED'); })
         .catch(function(){ op('AR FINDER — SENSOR PERMISSION ERROR'); });
     } else start();
+  }
+  function _arBuildTargets(){
+    var out = [];
+    try { if (trackTgt) out.push({ name: trackTgt.name, ra: trackTgt.ra, dec: trackTgt.dec, cls: 'trk' }); } catch(e) {}
+    try { var tl = _thGet(); for (var i = 0; i < tl.length; i++) if (tl[i].ra != null && (!trackTgt || tl[i].name !== trackTgt.name)) out.push({ name: tl[i].name, ra: +tl[i].ra, dec: +tl[i].dec, cls: 'trk' }); } catch(e) {}
+    try { var sh = window._activeShowers ? window._activeShowers() : []; for (var m = 0; m < sh.length; m++) out.push({ name: sh[m].n, ra: sh[m].ra, dec: sh[m].dec, cls: 'met' }); } catch(e) {}
+    return out;
+  }
+  function _arProject(head, pitch){
+    var layer = document.getElementById('ar-labels');
+    if (!layer || pitch == null) return;
+    var W = layer.clientWidth || window.innerWidth, H = layer.clientHeight || window.innerHeight;
+    var FOV = 62, FOVv = FOV * H / W, html = '';
+    for (var i = 0; i < _arTargets.length; i++) {
+      var t = _arTargets[i], aa = _altazOf(t.ra, t.dec);
+      if (!aa) continue;
+      var dAz = ((aa.az - head + 540) % 360) - 180, dAlt = aa.alt - pitch;
+      if (Math.abs(dAz) > FOV / 2 || Math.abs(dAlt) > FOVv / 2) continue;
+      var x = 50 + dAz / FOV * 100, y = 50 - dAlt / FOVv * 100;
+      html += '<div class="ar-lbl ' + t.cls + '" style="left:' + x.toFixed(1) + '%;top:' + y.toFixed(1) + '%"><span class="ar-tick">+</span>' + _esc(String(t.name).toUpperCase()) + '</div>';
+    }
+    layer.innerHTML = html;
   }
   (function(){
     var ab = document.getElementById('hud-ar-btn');
@@ -4934,7 +5010,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     var _hist = [];
     try { _hist = JSON.parse(sessionStorage.getItem('ds-cdu-hist') || '[]'); } catch(e) {}
     var _hIdx = _hist.length;
-    var _VOCAB = ['SCOPE', 'LOG', 'LIST', 'AR', 'NVG', 'RED', 'SYS', 'VOICE', 'EXPORT', 'IMPORT', 'DEBRIEF', 'QRH', 'TRX', 'PLAN', 'MFD', 'SHARE', 'TUNE', 'AOS', 'MAP', 'NEWS', 'REPORT', 'BLINK', 'SRC', 'TRK', 'FIND', 'WX', 'SKY', 'FOV', 'LC', 'BORTLE', 'KIOSK'];
+    var _VOCAB = ['SCOPE', 'LOG', 'LIST', 'AR', 'NVG', 'RED', 'SYS', 'VOICE', 'EXPORT', 'IMPORT', 'DEBRIEF', 'QRH', 'TRX', 'PLAN', 'MFD', 'SHARE', 'TUNE', 'AOS', 'MAP', 'NEWS', 'REPORT', 'BLINK', 'SRC', 'TRK', 'FIND', 'WX', 'SKY', 'FOV', 'LC', 'BORTLE', 'KIOSK', 'ASK', 'JARVIS', 'BRIEF', 'LOCK', 'NOW', 'GAUGE', 'MIC'];
     inp.addEventListener('keydown', function(ev){
       ev.stopPropagation();
       if (ev.key === 'Escape') { ov.remove(); return; }
@@ -5011,6 +5087,12 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       if (lb5) { lb5.click(); return; }
       return op('LC — SELECT A TARGET FIRST (TAP A SCOPE BLIP OR RUN A SEARCH)');
     }
+    if (verb === 'ASK' || verb === 'JARVIS') { var _rq = window._ask(arg || v, false); if (_rq && _rq.ok) return; return op('JARVIS — NO ANSWER — TRY “HELP”'); }
+    if (verb === 'BRIEF') { _jarvis(window._briefText() || 'No briefing available yet.', true); return; }
+    if (verb === 'LOCK') { if (_scopeSel) return window._lockOn(_scopeSel.name, _scopeSel.ra, _scopeSel.dec, _scopeSel.score, _scopeSel.ss); var _ln = document.querySelector('#result-card .result-name'); if (_ln && window._resolveTarget) { var _lt = window._resolveTarget(_ln.textContent.trim()); if (_lt) return window._lockOn(_lt.name, _lt.ra, _lt.dec, _lt.score, _lt.ss); } return op('LOCK — SELECT A SCOPE BLIP OR SEARCH A TARGET FIRST'); }
+    if (verb === 'NOW') return window._nowToggle();
+    if (verb === 'GAUGE' || verb === 'GAUGES') return window._gaugesToggle();
+    if (verb === 'MIC') return window._micToggle();
     if (verb === 'MAP' && typeof mapOpen === 'function') return mapOpen();
     if (verb === 'NEWS' && typeof newsOpen === 'function') return newsOpen(null);
     if (verb === 'REPORT' && typeof reportOpen === 'function') return reportOpen();
@@ -5034,6 +5116,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       return op('TRK — TARGET NOT IN CURRENT VIEW');
     }
     if (verb === 'FIND' && arg && window._cduFind && window._cduFind(arg)) return;
+    if (/\s/.test(v) && window._ask) { var _nl = window._ask(v, false); if (_nl && _nl.ok) return; }
     var q = verb === 'FIND' ? arg : v;
     if (!q) return;
     var qEl = document.getElementById('q');
@@ -5547,6 +5630,411 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     _kkShow(cat);
     _kkT = setInterval(function(){ _kkIdx = (_kkIdx + 1) % cat.length; _kkShow(cat); }, 10000);
   };
+
+  /* ══ NAVCON PRO-6: JARVIS conversational core, voice I/O, daily briefing,
+        Target Lock HUD, radial menu, cursor micro-HUD, NOW attention queue,
+        instrument gauges, haptics ══ */
+  var _arStream = null, _arTargets = [], _rec = null;
+
+  function _haptic(p){ try { if (navigator.vibrate) navigator.vibrate(p); } catch(e) {} }
+
+  /* ── JARVIS reply channel: logs to the HUD/journal, speaks when voice is
+        armed (or forceSpeak, e.g. after a voice command) ── */
+  function _jarvis(text, forceSpeak){
+    if (!text) return;
+    op('JARVIS — ' + String(text));
+    if (forceSpeak) {
+      try {
+        if (window.speechSynthesis) {
+          var u = new SpeechSynthesisUtterance(String(text));
+          u.lang = 'en-US'; u.rate = 1; u.volume = 0.95;
+          speechSynthesis.speak(u);
+        }
+      } catch(e) {}
+    } else { try { _voice(text); } catch(e) {} }
+  }
+
+  /* ── entity resolver: match the longest known target/planet/tracked name that
+        appears inside a free-text query ── */
+  function _resolveTarget(q){
+    var low = ' ' + String(q || '').toLowerCase() + ' ', cand = [];
+    try { var nt = _navTargets(); for (var i = 0; i < nt.length; i++) cand.push(nt[i]); } catch(e) {}
+    try { var ss = _ssBodies(); for (var j = 0; j < ss.length; j++) cand.push({ name: ss[j].name, ra: ss[j].ra, dec: ss[j].dec, ss: true }); } catch(e) {}
+    try { var tl = _thGet(); for (var k = 0; k < tl.length; k++) cand.push({ name: tl[k].name, ra: +tl[k].ra, dec: +tl[k].dec }); } catch(e) {}
+    var best = null, bestLen = 0;
+    for (var m = 0; m < cand.length; m++) {
+      var nm = String(cand[m].name || ''), nl = nm.toLowerCase();
+      if (nl.length < 2) continue;
+      if (low.indexOf(nl) >= 0 && nl.length > bestLen) { best = cand[m]; bestLen = nl.length; }
+    }
+    return best;
+  }
+  window._resolveTarget = _resolveTarget;
+
+  function _riseTxt(ra, dec){
+    if (obsLat == null) return null;
+    var rs = riseSet(+ra, +dec);
+    if (rs.never) return 'never rises above your horizon';
+    if (rs.circumpolar) return 'circumpolar — up all night';
+    if (rs.rise) return 'rises at ' + _fmtHM(rs.rise.getTime());
+    return null;
+  }
+
+  /* ── JARVIS intent parser (fully offline, rule-based). Returns {say, ok};
+        every answer engine — ephemerides, observability, weather — is on board. ── */
+  window._ask = function(q, speak){
+    q = String(q || '').trim();
+    if (!q) return { say: '', ok: false };
+    var low = q.toLowerCase();
+    function done(s){ _jarvis(s, speak); return { say: s, ok: true }; }
+
+    if (/\b(help|what can you|what can i ask|commands?)\b|你會|幫助|指令/.test(low))
+      return done('I can report rise and set times, tonight’s best targets, the weather, the Moon and meteor showers, and I can track or lock a target. Try: best targets tonight; when does Vega rise; cloud tonight; track Proxima; lock Sirius.');
+
+    if (/(how many|number of|count)/.test(low) && /(candidate|target|object|signal)/.test(low) || /幾個|多少|數量/.test(low)) {
+      var n = 0; try { n = _navTargets().length; } catch(e) {}
+      return done('There are ' + n + ' targets in the current catalog view.');
+    }
+
+    if (/\bmoon\b|月相|月亮/.test(low)) {
+      var sm = _sunMoonEq(Date.now()), pct = Math.round(sm.illum * 100);
+      var phase = pct < 5 ? 'new' : pct > 95 ? 'full' : pct < 50 ? 'a crescent' : 'a gibbous';
+      return done('The Moon is ' + pct + ' percent illuminated, ' + phase + ' Moon.');
+    }
+
+    if (/meteor|shower|流星/.test(low)) {
+      var sh = window._activeShowers ? window._activeShowers() : [];
+      if (!sh.length) return done('No major meteor shower is active right now. Check the sky almanac for what is coming up.');
+      var names = sh.map(function(s){ return s.n + ' (ZHR ' + s.zhr + ')'; });
+      return done('Active meteor showers: ' + names.join(', ') + '. Radiants are marked on the tactical scope.');
+    }
+
+    var tgt = _resolveTarget(q);
+
+    if (/(best|recommend|top|what should i|該看|推薦|最好|今晚)/.test(low) && !/rise|set|weather|cloud/.test(low)) {
+      if (obsLat == null) return done('Set your observing location first, then I can rank tonight’s targets.');
+      var pool = [];
+      try { var tl = _thGet(); for (var a = 0; a < tl.length; a++) if (tl[a].ra != null) pool.push({ name: tl[a].name, ra: +tl[a].ra, dec: +tl[a].dec }); } catch(e) {}
+      if (!pool.length) { try { pool = _navTargets().slice().sort(function(x, y){ return (y.score || 0) - (x.score || 0); }).slice(0, 8); } catch(e) {} }
+      var scored = [];
+      for (var b = 0; b < pool.length; b++) { var w = _obsWindow(pool[b].ra, pool[b].dec); if (w && w.score) scored.push({ name: pool[b].name, w: w }); }
+      scored.sort(function(x, y){ return y.w.score - x.w.score; });
+      if (!scored.length) return done('Nothing clears the horizon well tonight from your location.');
+      var top = scored.slice(0, 3).map(function(s){ return s.name + ' (best ' + _fmtHM(s.w.from) + ' to ' + _fmtHM(s.w.to) + ', score ' + s.w.score + ')'; });
+      return done('Tonight’s best: ' + top.join('; ') + '.');
+    }
+
+    if (/track|watch|追蹤|盯/.test(low) && tgt) {
+      try { window.NAVCON.track(tgt.name, tgt.ra, tgt.dec); } catch(e) {}
+      return done('Now tracking ' + tgt.name + '.');
+    }
+    if (/\block/.test(low) && tgt) {
+      window._lockOn(tgt.name, tgt.ra, tgt.dec, tgt.score, tgt.ss);
+      return done('Locked on ' + tgt.name + '.');
+    }
+    if (/(rise|升起|升上|come up)/.test(low) && tgt) {
+      if (obsLat == null) return done('Set your observing location first.');
+      var rt = _riseTxt(tgt.ra, tgt.dec);
+      return done(tgt.name + ' ' + (rt || 'has no rise time in the next 24 hours') + '.');
+    }
+    if (/(\bset\b|落下|落下|go down|sets)/.test(low) && tgt) {
+      if (obsLat == null) return done('Set your observing location first.');
+      var rs2 = riseSet(tgt.ra, tgt.dec);
+      if (rs2.circumpolar) return done(tgt.name + ' is circumpolar and does not set tonight.');
+      if (rs2.set) return done(tgt.name + ' sets at ' + _fmtHM(rs2.set.getTime()) + '.');
+      return done('I have no set time for ' + tgt.name + ' in the next 24 hours.');
+    }
+    if (/(where|position|方位|在哪|altitude|how high)/.test(low) && tgt) {
+      var aa = _altazOf(tgt.ra, tgt.dec);
+      if (!aa) return done('Set your observing location and I can give a live bearing for ' + tgt.name + '.');
+      if (aa.alt > 0) return done(tgt.name + ' is up now: altitude ' + aa.alt.toFixed(0) + ' degrees, azimuth ' + aa.az.toFixed(0) + ' degrees.');
+      return done(tgt.name + ' is below the horizon; ' + (_riseTxt(tgt.ra, tgt.dec) || 'it does not rise soon') + '.');
+    }
+    if (/(weather|cloud|clear|雲|天氣|晴)/.test(low)) {
+      var cnow = (typeof _cloudAt === 'function') ? _cloudAt(Date.now()) : null;
+      if (cnow == null) { try { _cloudLoad(); } catch(e) {} return done('I don’t have a cloud forecast yet — set your location and open the weather strip to load one, then ask again.'); }
+      var soon = _cloudAt(Date.now() + 3 * 3600000);
+      var s = 'Cloud cover is ' + Math.round(cnow * 100) + ' percent now';
+      if (soon != null) s += ', ' + Math.round(soon * 100) + ' percent in three hours';
+      return done(s + '.');
+    }
+    if (tgt) {
+      var aa2 = _altazOf(tgt.ra, tgt.dec), parts = [tgt.name];
+      if (aa2) parts.push(aa2.alt > 0 ? ('up at ' + aa2.alt.toFixed(0) + ' degrees altitude') : ('below the horizon, ' + (_riseTxt(tgt.ra, tgt.dec) || 'not rising soon')));
+      var w2 = (obsLat != null) ? _obsWindow(tgt.ra, tgt.dec) : null;
+      if (w2 && w2.from) parts.push('best window ' + _fmtHM(w2.from) + ' to ' + _fmtHM(w2.to) + ', observability ' + w2.score);
+      return done(parts.join(', ') + '.');
+    }
+    return { say: '', ok: false };
+  };
+
+  /* ── voice input (Web Speech API, fail-silent where unsupported) ── */
+  window._micToggle = function(){
+    var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    var btn = document.getElementById('hud-mic-btn');
+    if (!SR) return op('VOICE INPUT — NOT SUPPORTED ON THIS BROWSER');
+    if (_rec) { try { _rec.stop(); } catch(e) {} return; }
+    try {
+      _rec = new SR();
+      _rec.lang = 'en-US'; _rec.interimResults = false; _rec.maxAlternatives = 1;
+      _rec.onstart = function(){ if (btn) btn.classList.add('rec'); op('VOICE INPUT — LISTENING…'); _haptic(20); };
+      _rec.onerror = function(ev){ op('VOICE INPUT — ' + String((ev && ev.error) || 'ERROR').toUpperCase()); };
+      _rec.onend = function(){ if (btn) btn.classList.remove('rec'); _rec = null; };
+      _rec.onresult = function(ev){
+        var t = ev.results[0][0].transcript;
+        op('VOICE — “' + t + '”');
+        var r = window._ask(t, true);
+        if (!r || !r.ok) _jarvis('I did not catch a command in: ' + t, true);
+      };
+      _rec.start();
+    } catch(e) { op('VOICE INPUT — START FAILED'); }
+  };
+
+  /* ── daily briefing: JARVIS synthesises one line on load (once per session) ── */
+  window._briefText = function(){
+    var bits = [];
+    try {
+      var sm = _sunMoonEq(Date.now());
+      bits.push('Moon ' + Math.round(sm.illum * 100) + ' percent');
+    } catch(e) {}
+    try {
+      if (typeof _cloudAt === 'function') {
+        var cn = _cloudAt(Date.now());
+        if (cn != null) bits.push(cn < 0.3 ? 'clear skies' : cn < 0.6 ? 'partly cloudy' : 'cloudy now');
+      }
+    } catch(e) {}
+    try {
+      if (obsLat != null) {
+        var pool = [];
+        try { var tl = _thGet(); for (var a = 0; a < tl.length; a++) if (tl[a].ra != null) pool.push({ name: tl[a].name, ra: +tl[a].ra, dec: +tl[a].dec }); } catch(e) {}
+        if (!pool.length) { try { pool = _navTargets().slice().sort(function(x, y){ return (y.score || 0) - (x.score || 0); }).slice(0, 6); } catch(e) {} }
+        var bestN = null, bestW = null;
+        for (var b = 0; b < pool.length; b++) { var w = _obsWindow(pool[b].ra, pool[b].dec); if (w && w.score && (!bestW || w.score > bestW.score)) { bestW = w; bestN = pool[b].name; } }
+        if (bestN) bits.push('best target ' + bestN + (bestW.from ? ', ' + _fmtHM(bestW.from) + ' to ' + _fmtHM(bestW.to) : ''));
+      }
+    } catch(e) {}
+    try { var sh = window._activeShowers ? window._activeShowers() : []; if (sh.length) bits.push(sh[0].n + ' active'); } catch(e) {}
+    if (!bits.length) return '';
+    return 'Good evening. ' + bits.join('. ') + '.';
+  };
+
+  /* ── Target Lock HUD: reticle converge + arc gauges around the object ── */
+  function _lockGauge(score, alt, w){
+    var cv = document.getElementById('lock-gauge');
+    if (!cv) return;
+    var c = cv.getContext('2d'), W = cv.width, cx = W / 2, cy = W / 2;
+    c.clearRect(0, 0, W, W);
+    function arc(r, frac, col, lw){
+      c.beginPath(); c.strokeStyle = 'rgba(63,224,143,.10)'; c.lineWidth = lw;
+      c.arc(cx, cy, r, -Math.PI * 0.75, Math.PI * 0.75); c.stroke();
+      c.beginPath(); c.strokeStyle = col; c.lineWidth = lw; c.lineCap = 'round';
+      c.arc(cx, cy, r, -Math.PI * 0.75, -Math.PI * 0.75 + Math.PI * 1.5 * Math.max(0, Math.min(1, frac))); c.stroke();
+    }
+    arc(W * 0.46, (score || 0) / 100, '#3fe08f', 6);
+    if (alt != null) arc(W * 0.405, Math.max(0, alt) / 90, '#7dd3fc', 4);
+    if (w && w.score != null) arc(W * 0.35, w.score / 100, '#f5a623', 4);
+  }
+  window._lockOn = function(name, ra, dec, score, ss){
+    var old = document.getElementById('lock-ov'); if (old) old.remove();
+    _haptic([30, 40, 30]);
+    try { SFX.open(); } catch(e) {}
+    op('TARGET LOCK — ' + String(name).toUpperCase());
+    var has = (ra != null && !isNaN(+ra));
+    var aa = has ? _altazOf(+ra, +dec) : null;
+    var w = has && obsLat != null ? _obsWindow(+ra, +dec) : null;
+    var alt = aa ? aa.alt : null;
+    var img = '';
+    try { if (!ss && has && typeof skyUrl === 'function') img = skyUrl(+ra, +dec, 0.5, skySurvey(+dec).hips); } catch(e) {}
+    var cap = [];
+    if (score != null) cap.push('SCORE ' + score);
+    if (alt != null) cap.push('ALT ' + alt.toFixed(0) + '°' + (aa ? ' AZ ' + aa.az.toFixed(0) + '°' : ''));
+    if (w && w.from) cap.push('BEST ' + _fmtHM(w.from) + '–' + _fmtHM(w.to) + ' OBS ' + w.score);
+    else if (has && alt != null && alt <= 0) cap.push(String((_riseTxt(+ra, +dec) || 'below horizon')).toUpperCase());
+    var ret = '<svg id="lock-ret" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="#3fe08f" stroke-width="0.6" stroke-dasharray="4 3"/><circle cx="50" cy="50" r="30" fill="none" stroke="#3fe08f" stroke-width="0.4" opacity="0.6"/><path d="M50 4 V16 M50 84 V96 M4 50 H16 M84 50 H96" stroke="#3fe08f" stroke-width="0.8"/></svg>';
+    var ret2 = '<svg id="lock-ret2" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="none" stroke="#3fe08f" stroke-width="0.3" stroke-dasharray="1 5"/><path d="M50 2 L52 8 L48 8 Z" fill="#3fe08f"/></svg>';
+    var ov = document.createElement('div'); ov.id = 'lock-ov';
+    ov.innerHTML = '<div id="lock-stage">' +
+      '<img id="lock-img" alt="" ' + (img ? ('src="' + img + '"') : 'style="display:none"') + '>' +
+      ret + ret2 + '<canvas id="lock-gauge" width="640" height="640"></canvas>' +
+      '<div class="lk-hint">TARGET LOCK · TAP ANYWHERE TO RELEASE</div>' +
+      '<div id="lock-cap"><div class="lk-n">' + _esc(String(name)) + '</div><div class="lk-s">' + _esc(cap.join('  ·  ')) + '</div></div>' +
+      '</div>';
+    ov.addEventListener('click', function(){ ov.remove(); try { SFX.close(); } catch(e) {} });
+    document.body.appendChild(ov);
+    _lockGauge(score, alt, w);
+  };
+
+  /* ── radial quick-action menu (long-press / right-click a target) ── */
+  function _radialClose(){ var o = document.getElementById('radial-ov'); if (o) o.remove(); }
+  window._radialClose = _radialClose;
+  window._radialOpen = function(x, y, t){
+    _radialClose();
+    _haptic(15);
+    try { SFX.open(); } catch(e) {}
+    var items = [
+      { ic: '⌖', lb: 'TRACK', fn: function(){ try { window.NAVCON.track(t.name, t.ra, t.dec); } catch(e) {} } },
+      { ic: '◎', lb: 'LOCK', fn: function(){ window._lockOn(t.name, t.ra, t.dec, t.score, t.ss); } },
+      { ic: '📈', lb: 'LC', fn: function(){ if (window._lcOpen && t.ra != null) window._lcOpen(t.name, t.ra, t.dec); } },
+      { ic: '🗺', lb: 'MAP', fn: function(){ if (typeof mapOpenFromCard === 'function' && t.ra != null) mapOpenFromCard(t.ra, t.dec, t.name, t.score || 0, false); } },
+      { ic: '📄', lb: 'LIT', fn: function(){ if (typeof litOpen === 'function') litOpen(t.name, ''); } }
+    ];
+    var cx = Math.max(72, Math.min(window.innerWidth - 72, x)), cy = Math.max(96, Math.min(window.innerHeight - 72, y));
+    var html = '<div class="rad-center" style="left:' + cx + 'px;top:' + cy + 'px"></div>', R = 66;
+    for (var i = 0; i < items.length; i++) {
+      var ang = -Math.PI / 2 + i * (2 * Math.PI / items.length);
+      var ix = cx + Math.cos(ang) * R, iy = cy + Math.sin(ang) * R;
+      html += '<button class="rad-item" data-i="' + i + '" style="left:' + (ix - 26) + 'px;top:' + (iy - 26) + 'px"><span class="ri-ic">' + items[i].ic + '</span>' + items[i].lb + '</button>';
+    }
+    var ov = document.createElement('div'); ov.id = 'radial-ov'; ov.innerHTML = html;
+    ov.addEventListener('contextmenu', function(ev){ ev.preventDefault(); _radialClose(); });
+    ov.addEventListener('click', function(ev){
+      var b = ev.target.closest ? ev.target.closest('.rad-item') : null;
+      if (b) { var idx = +b.getAttribute('data-i'); _radialClose(); try { SFX.click(); } catch(e) {} items[idx].fn(); }
+      else { _radialClose(); try { SFX.close(); } catch(e) {} }
+    });
+    document.body.appendChild(ov);
+    var btns = ov.querySelectorAll('.rad-item');
+    setTimeout(function(){ for (var k = 0; k < btns.length; k++) btns[k].classList.add('in'); }, 10);
+  };
+  function _cardTarget(node){
+    var card = node.closest ? node.closest('.card, #result-card, .result-card') : null;
+    if (!card) return null;
+    var nmEl = card.querySelector('.card-name, .result-name');
+    if (!nmEl) return null;
+    var name = nmEl.textContent.trim();
+    var t = _resolveTarget(name);
+    if (t) return { name: name, ra: t.ra, dec: t.dec, score: t.score, ss: t.ss };
+    var cc = card.querySelector('.card-coords, .result-coords');
+    if (cc) { var mm = cc.textContent.match(/(-?[\d.]+)[^\d-]+(-?[\d.]+)/); if (mm) return { name: name, ra: +mm[1], dec: +mm[2] }; }
+    return { name: name };
+  }
+  window._cardTarget = _cardTarget;
+  document.addEventListener('contextmenu', function(ev){
+    var card = ev.target.closest ? ev.target.closest('.card, #result-card, .result-card') : null;
+    if (!card) return;
+    var t = _cardTarget(ev.target);
+    if (!t || t.ra == null) return;
+    ev.preventDefault();
+    window._radialOpen(ev.clientX, ev.clientY, t);
+  });
+  var _lpT = null, _lpXY = null;
+  document.addEventListener('touchstart', function(ev){
+    var card = ev.target.closest ? ev.target.closest('.card, #result-card, .result-card') : null;
+    if (!card || !ev.touches[0]) return;
+    _lpXY = { x: ev.touches[0].clientX, y: ev.touches[0].clientY };
+    _lpT = setTimeout(function(){
+      var t = _cardTarget(ev.target);
+      if (t && t.ra != null) window._radialOpen(_lpXY.x, _lpXY.y, t);
+    }, 500);
+  }, { passive: true });
+  function _lpCancel(){ if (_lpT) { clearTimeout(_lpT); _lpT = null; } }
+  document.addEventListener('touchend', _lpCancel, { passive: true });
+  document.addEventListener('touchmove', _lpCancel, { passive: true });
+
+  /* ── cursor micro-HUD: live alt / rise readout floating beside the pointer ── */
+  function _curHudTxt(t){
+    if (!t || t.ra == null) return '';
+    var aa = _altazOf(t.ra, t.dec);
+    if (!aa) return _esc(t.name);
+    if (aa.alt > 0) return '▲ ALT ' + aa.alt.toFixed(0) + '° · AZ ' + aa.az.toFixed(0) + '°';
+    var rs = riseSet(t.ra, t.dec);
+    if (rs && rs.never) return '▼ NEVER RISES AT YOUR SITE';
+    if (rs && rs.rise) return '▼ BELOW HORIZON · RISES ' + _fmtHM(rs.rise.getTime());
+    return '▼ BELOW HORIZON';
+  }
+  if (window.matchMedia && matchMedia('(hover:hover) and (pointer:fine)').matches) {
+    var _chCard = null;
+    document.addEventListener('mousemove', function(e){
+      var card = e.target.closest ? e.target.closest('.card, #result-card') : null;
+      var el = document.getElementById('curhud');
+      if (!card) { if (el) el.classList.remove('on'); _chCard = null; return; }
+      if (!el) { el = document.createElement('div'); el.id = 'curhud'; document.body.appendChild(el); }
+      el.style.left = e.clientX + 'px'; el.style.top = e.clientY + 'px';
+      if (card !== _chCard) { _chCard = card; el._txt = _curHudTxt(_cardTarget(e.target)); }
+      if (el._txt) { el.innerHTML = el._txt; el.classList.add('on'); } else el.classList.remove('on');
+    }, { passive: true });
+  }
+
+  /* ── NOW attention queue: the single most time-critical opportunity ── */
+  window._nowScan = function(){
+    var out = [], now = Date.now();
+    try {
+      var tl = _thGet();
+      for (var i = 0; i < tl.length; i++) {
+        var e = tl[i]; if (e.ra == null) continue;
+        var aa = _altazOf(+e.ra, +e.dec);
+        if (aa && aa.alt > 0) {
+          var w = _obsWindow(+e.ra, +e.dec);
+          if (w && w.score >= 55) out.push({ ic: '▲', score: w.score, txt: e.name + ' well placed now, OBS ' + w.score });
+        } else {
+          var rs = riseSet(+e.ra, +e.dec);
+          if (rs && rs.rise) { var mins = (rs.rise.getTime() - now) / 60000; if (mins > 0 && mins < 120) out.push({ ic: '▲', score: 92 - mins / 2, txt: e.name + ' rises ' + _fmtHM(rs.rise.getTime()) }); }
+        }
+      }
+    } catch(e) {}
+    try {
+      if (typeof _cloudAt === 'function') {
+        var cnow = _cloudAt(now);
+        if (cnow != null && cnow > 0.6) for (var h = 1; h <= 4; h++) { var cl = _cloudAt(now + h * 3600000); if (cl != null && cl < 0.3) { out.push({ ic: '☁', score: 72, txt: 'Skies clearing around ' + _fmtHM(now + h * 3600000) }); break; } }
+      }
+    } catch(e) {}
+    try { var iss = window._issState && window._issState(); if (iss && iss.near) out.push({ ic: '🛰', score: 86, txt: 'ISS transiting a tracked target now' }); } catch(e) {}
+    try { var sh = window._activeShowers ? window._activeShowers() : []; for (var m = 0; m < sh.length; m++) out.push({ ic: '☄', score: 48, txt: sh[m].n + ' active, ZHR ' + sh[m].zhr }); } catch(e) {}
+    out.sort(function(a, b){ return b.score - a.score; });
+    return out;
+  };
+  function _nowRender(){
+    var el = document.getElementById('hud-now'); if (!el) return;
+    var q = window._nowScan();
+    if (!q.length) { el.innerHTML = ''; el.classList.remove('act'); return; }
+    el.innerHTML = '<span class="nq-ic">' + q[0].ic + '</span>' + _esc(String(q[0].txt).toUpperCase());
+    el.classList.add('act');
+  }
+  window._nowToggle = function(){
+    var q = window._nowScan();
+    var h = q.length ? '' : '<div class="j-t">NO TIME-CRITICAL OPPORTUNITIES RIGHT NOW — TRACK TARGETS OR OPEN THE MISSION PLAN.</div>';
+    for (var i = 0; i < q.length; i++) h += '<div class="sd-row"><span style="width:22px">' + q[i].ic + '</span><span style="flex:1;color:#9fd4bb">' + _esc(q[i].txt) + '</span><span class="sd-val">' + Math.round(q[i].score) + '</span></div>';
+    _p3Overlay('now-ov', '◉ NOW — LIVE OPPORTUNITY QUEUE', h);
+    op('NOW QUEUE — ' + q.length + ' OPPORTUNITIES RANKED');
+  };
+
+  /* ── instrument gauges: circular readouts for sky quality, Moon, geomag ── */
+  function _donut(cv, frac, col, label){
+    var c = cv.getContext('2d'), W = cv.width, cx = W / 2, cy = W / 2, r = W * 0.36;
+    c.clearRect(0, 0, W, W);
+    c.beginPath(); c.strokeStyle = 'rgba(63,224,143,.12)'; c.lineWidth = 9; c.arc(cx, cy, r, -Math.PI * 0.75, Math.PI * 0.75); c.stroke();
+    c.beginPath(); c.strokeStyle = col; c.lineWidth = 9; c.lineCap = 'round'; c.arc(cx, cy, r, -Math.PI * 0.75, -Math.PI * 0.75 + Math.PI * 1.5 * Math.max(0, Math.min(1, frac))); c.stroke();
+    c.fillStyle = col; c.font = 'bold 19px monospace'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(label, cx, cy);
+  }
+  function _gaugesDraw(){
+    var wrap = document.getElementById('g-wrap'); if (!wrap) return;
+    var sm = _sunMoonEq(Date.now());
+    var bo = window._bortleVal ? window._bortleVal() : null;
+    var kp = window._kpVal;
+    wrap.innerHTML = '';
+    function cell(label, sub){ var d = document.createElement('div'); d.className = 'g-cell'; var cv = document.createElement('canvas'); cv.width = 104; cv.height = 104; d.appendChild(cv); var tt = document.createElement('div'); tt.innerHTML = label + '<br>' + sub; d.appendChild(tt); wrap.appendChild(d); return cv; }
+    _donut(cell('SKY QUALITY', bo ? ('BORTLE ' + bo) : 'NOT SET (CDU BORTLE)'), bo ? (9 - bo) / 8 : 0, bo ? '#3fe08f' : '#4a5a6a', bo ? String(bo) : '—');
+    _donut(cell('MOON', Math.round(sm.illum * 100) + '% LIT'), sm.illum, '#7dd3fc', Math.round(sm.illum * 100) + '%');
+    _donut(cell('GEOMAG', kp != null ? ('Kp ' + kp.toFixed(1)) : 'NO DATA'), kp != null ? Math.min(1, kp / 9) : 0, (kp != null && kp >= 5) ? '#f5a623' : '#3fe08f', kp != null ? kp.toFixed(1) : '—');
+  }
+  window._gaugesToggle = function(){
+    var ov = _p3Overlay('gauge-ov', '◐ INSTRUMENT GAUGES', '<div class="g-wrap" id="g-wrap"></div><div class="j-t">SKY QUALITY (BORTLE) · MOON PHASE · GEOMAG Kp — LIVE INSTRUMENT READOUTS</div>');
+    if (!ov) return;
+    setTimeout(_gaugesDraw, 20);
+  };
+
+  /* ── HUD wiring + periodic NOW refresh + daily briefing ── */
+  (function(){
+    var mb = document.getElementById('hud-mic-btn'); if (mb) mb.addEventListener('click', window._micToggle);
+    var gb = document.getElementById('hud-gauge-btn'); if (gb) gb.addEventListener('click', window._gaugesToggle);
+    var nw = document.getElementById('hud-now'); if (nw) nw.addEventListener('click', window._nowToggle);
+    setTimeout(_nowRender, 2500);
+    setInterval(_nowRender, 60000);
+    setTimeout(function(){
+      try { if (sessionStorage.getItem('ds-brief')) return; sessionStorage.setItem('ds-brief', '1'); } catch(e) {}
+      try { var t = window._briefText(); if (t) _jarvis(t, false); } catch(e) {}
+    }, 4500);
+  })();
 
   /* ── card tilt + cursor-tracking glow (event delegation) ── */
   var tiltEl = null;
