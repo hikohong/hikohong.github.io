@@ -3337,7 +3337,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     if (ev.key !== 'Escape') return;
     var t = ev.target, tg = t && t.tagName;
     if (tg === 'INPUT' || tg === 'TEXTAREA' || (t && t.isContentEditable)) return;
-    var order = ['palette-ov', 'session-ov', 'sim-ov', 'lock-ov', 'radial-ov', 'gauge-ov', 'now-ov', 'kiosk-ov', 'cas-explain', 'wx-ov', 'sky-ov', 'lc-ov', 'fov-ov', 'exp-ov', 'ac-ov', 'plan-ov', 'qrh-ov', 'trx-ov', 'tune-ov', 'sd-ov', 'sys-notices', 'trklist-ov', 'journal-ov', 'scope-ov'];
+    var order = ['palette-ov', 'session-ov', 'sim-ov', 'alerts-ov', 'lock-ov', 'radial-ov', 'gauge-ov', 'now-ov', 'kiosk-ov', 'cas-explain', 'wx-ov', 'sky-ov', 'lc-ov', 'fov-ov', 'exp-ov', 'ac-ov', 'plan-ov', 'qrh-ov', 'trx-ov', 'tune-ov', 'sd-ov', 'sys-notices', 'trklist-ov', 'journal-ov', 'scope-ov'];
     for (var i = 0; i < order.length; i++) {
       var el = document.getElementById(order[i]);
       if (!el) continue;
@@ -5038,7 +5038,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     var _hist = [];
     try { _hist = JSON.parse(sessionStorage.getItem('ds-cdu-hist') || '[]'); } catch(e) {}
     var _hIdx = _hist.length;
-    var _VOCAB = ['SCOPE', 'LOG', 'LIST', 'AR', 'NVG', 'RED', 'SYS', 'VOICE', 'EXPORT', 'IMPORT', 'DEBRIEF', 'QRH', 'TRX', 'PLAN', 'MFD', 'SHARE', 'TUNE', 'AOS', 'MAP', 'NEWS', 'REPORT', 'BLINK', 'SRC', 'TRK', 'FIND', 'WX', 'SKY', 'FOV', 'LC', 'BORTLE', 'KIOSK', 'ASK', 'JARVIS', 'BRIEF', 'LOCK', 'NOW', 'GAUGE', 'MIC', 'SESSION', 'CMD', 'SIMILAR', 'PLAN'];
+    var _VOCAB = ['SCOPE', 'LOG', 'LIST', 'AR', 'NVG', 'RED', 'SYS', 'VOICE', 'EXPORT', 'IMPORT', 'DEBRIEF', 'QRH', 'TRX', 'PLAN', 'MFD', 'SHARE', 'TUNE', 'AOS', 'MAP', 'NEWS', 'REPORT', 'BLINK', 'SRC', 'TRK', 'FIND', 'WX', 'SKY', 'FOV', 'LC', 'BORTLE', 'KIOSK', 'ASK', 'JARVIS', 'BRIEF', 'LOCK', 'NOW', 'GAUGE', 'MIC', 'SESSION', 'CMD', 'SIMILAR', 'PLAN', 'ALERTS'];
     inp.addEventListener('keydown', function(ev){
       ev.stopPropagation();
       if (ev.key === 'Escape') { ov.remove(); return; }
@@ -5121,6 +5121,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     if (verb === 'SESSION') return window._sessionToggle();
     if (verb === 'CMD' || verb === 'PALETTE') return window._paletteOpen();
     if (verb === 'SIMILAR') { var _sn = arg || (_scopeSel && _scopeSel.name) || (document.querySelector('#result-card .result-name') || {}).textContent; if (_sn) return window._similarOpen(String(_sn).trim()); return op('SIMILAR — NAME A CANDIDATE'); }
+    if (verb === 'ALERTS' || verb === 'ALERT') return window._alertsView();
     if (verb === 'NOW') return window._nowToggle();
     if (verb === 'GAUGE' || verb === 'GAUGES') return window._gaugesToggle();
     if (verb === 'MIC') return window._micToggle();
@@ -5698,6 +5699,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       if (nl.length < 2) continue;
       if (low.indexOf(nl) >= 0 && nl.length > bestLen) { best = cand[m]; bestLen = nl.length; }
     }
+    if (!best && window._resolveFuzzy) best = window._resolveFuzzy(cand, low);
     return best;
   }
   window._resolveTarget = _resolveTarget;
@@ -5740,6 +5742,8 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       return done('Active meteor showers: ' + names.join(', ') + '. Radiants are marked on the tactical scope.');
     }
 
+    var _kt = _askKnowledge(low); if (_kt) return done(_kt);
+    var _ac = _askActionChain(q, low); if (_ac) return done(_ac);
     if (/(plan my night|plan tonight|\bplan\b|schedule|itinerary|排.{0,3}(觀測|今晚|夜)|規劃|觀測序|排程)/.test(low)) { var _pt = _askPlanText(); try { if (window._thPlan) window._thPlan(); } catch(e) {} return done(_pt); }
     var _ct = /(compare| versus | vs |哪個.{0,4}(好|佳|適合)|which is better|better tonight|比較好|哪一個)/.test(low) ? _askCompareText(q) : null;
     if (_ct) return done(_ct);
@@ -5748,6 +5752,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     if (tgt) _ctx.entity = tgt;
     if (/(why|explain|reason|為什麼|為何|解釋|說明)/.test(low) && tgt) return done(_askExplainText(tgt));
     if (/(similar|like this|comparable|類似|相似)/.test(low) && tgt) { window._similarOpen(tgt.name); return done('Finding candidates similar to ' + tgt.name + '.'); }
+    var _al = _askAlert(q, low, tgt); if (_al) return done(_al);
 
     if (/(best|recommend|top|what should i|該看|推薦|最好|今晚)/.test(low) && !/rise|set|weather|cloud/.test(low)) {
       if (obsLat == null) return done('Set your observing location first, then I can rank tonight’s targets.');
@@ -6372,6 +6377,173 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     } catch(e) {}
   }
   setInterval(_proactiveScan, 90000);
+
+  /* ══ NAVCON PRO-8: JARVIS knowledge Q&A, fuzzy entity resolution,
+        one-phrase action chains, natural-language conditional alerts ══ */
+
+  /* ── offline glossary: SETI / observing terminology ── */
+  var _GLOSSARY = {
+    'doppler drift': 'Doppler drift is a slow change in a signal’s frequency over time. A transmitter on a rotating, orbiting planet imparts a characteristic drift; a non-zero, smoothly varying drift is a hallmark technosignature.',
+    'drift rate': 'The drift rate is how fast a narrowband signal’s frequency changes, in hertz per second. Planet-bound transmitters produce small, steady drift rates from the planet’s motion.',
+    'narrowband': 'A narrowband signal occupies a very thin slice of frequency. Nature rarely makes truly narrowband emission, so it is a strong artificial-origin flag.',
+    'snr': 'SNR, signal-to-noise ratio, is how far a signal rises above the background noise. Higher SNR means a more confident detection.',
+    'technosignature': 'A technosignature is any measurable evidence of technology — narrowband radio, laser pulses, waste heat, megastructures — as opposed to a biosignature, which is evidence of life’s chemistry.',
+    'biosignature': 'A biosignature is a sign of life’s chemistry, such as an atmosphere in disequilibrium (oxygen with methane), that a telescope like JWST could detect on an exoplanet.',
+    'dispersion measure': 'Dispersion measure, DM, counts the free electrons along the line of sight to a fast radio burst. It sets how much lower frequencies arrive delayed, and hints at distance.',
+    'fast radio burst': 'A fast radio burst, FRB, is a millisecond flash of radio energy from far outside the galaxy. Most are one-offs; a few repeat.',
+    'tier': 'Candidates are ranked into tiers by their candidacy score. Tier 1 is the strongest, Tier 2 moderate, Tier 3 weaker. The tier reflects how many detection criteria a target triggered and how anomalous it is.',
+    'candidacy score': 'The candidacy score, 0 to 100, weighs every detection signal — SNR, drift, mathematical structure, priority target status, and more — into one number ranking how interesting a target is.',
+    'bortle': 'The Bortle scale rates night-sky darkness from class 1, pristine, to class 9, inner city. It sets your naked-eye limiting magnitude and folds into the observability score.',
+    'zhr': 'ZHR, zenithal hourly rate, is the meteors per hour a shower would give under a perfect dark sky with the radiant overhead. Real counts are lower.',
+    'elongation': 'Elongation is a planet’s angular distance from the Sun in the sky. Greatest elongation is the best time to see Mercury or Venus.',
+    'opposition': 'Opposition is when a planet sits opposite the Sun from Earth — up all night, closest, and brightest. The best time to observe it.',
+    'conjunction': 'A conjunction is when two bodies appear close together in the sky. Striking to watch, though they are usually far apart in space.',
+    'kp index': 'The Kp index rates global geomagnetic activity from 0 to 9. Kp of 5 or more means a geomagnetic storm — possible aurora and disturbed radio conditions.',
+    'habitable zone': 'The habitable zone is the range of distances from a star where a planet could hold liquid surface water — the classic place to look for life.',
+    'proper motion': 'Proper motion is a star’s slow drift across the sky from its real motion through space. Unusual kinematics can flag an interesting object.',
+    'parallax': 'Parallax is the tiny yearly shift in a star’s position from Earth’s orbit. It gives the star’s distance directly.',
+    'apparent magnitude': 'Apparent magnitude measures how bright an object looks from Earth. Smaller numbers are brighter; the naked-eye limit is around magnitude 6 under dark skies.',
+    'right ascension': 'Right ascension is the sky’s longitude, measured in hours, part of the equatorial coordinate system paired with declination.',
+    'declination': 'Declination is the sky’s latitude in degrees — how far north or south of the celestial equator an object sits.',
+    'altitude': 'Altitude is how many degrees an object stands above your horizon; 90 degrees is straight up, the zenith.',
+    'azimuth': 'Azimuth is the compass bearing to an object, measured in degrees clockwise from north.',
+    'aos': 'AOS, acquisition of signal, is the moment a target rises above a chosen altitude and becomes observable — the console can alert you at that instant.',
+    'light curve': 'A light curve plots an object’s brightness over time. Transits, flares, and variability all leave distinctive shapes in it.',
+    'rfi': 'RFI, radio-frequency interference, is human-made radio noise — aircraft, satellites, phones — that masquerades as signals and must be filtered out.',
+    'dyson sphere': 'A Dyson sphere is a hypothetical megastructure capturing a star’s energy. It would betray itself as excess infrared waste heat, which the IR search looks for.',
+    'isolation forest': 'Isolation forest is a machine-learning method that flags anomalies by how easily a point can be separated from the rest — used here for multivariate outliers.',
+    'z-score': 'A z-score measures how many standard deviations a value sits from the mean. Large z-scores mark statistical outliers.'
+  };
+  function _askKnowledge(low){
+    var best = null, bl = 0;
+    for (var k in _GLOSSARY) {
+      var key = k;
+      if (low.indexOf(key) >= 0 && key.length > bl) { best = key; bl = key.length; }
+      else { var alt = key.replace(/[- ]/g, ''); if (alt !== key && low.replace(/[- ]/g, '').indexOf(alt) >= 0 && key.length > bl) { best = key; bl = key.length; } }
+    }
+    if (!best && /\btier\s*\d/.test(low)) best = 'tier';
+    if (!best && /\bdm\b/.test(low)) best = 'dispersion measure';
+    if (!best && /\bfrb\b/.test(low)) best = 'fast radio burst';
+    return best ? _GLOSSARY[best] : null;
+  }
+
+  /* ── fuzzy entity resolution: token edit-distance fallback for typos ── */
+  function _editDist(a, b){
+    var m = a.length, n = b.length; if (Math.abs(m - n) > 3) return 9;
+    var d = []; for (var i = 0; i <= m; i++) d[i] = [i];
+    for (var j = 0; j <= n; j++) d[0][j] = j;
+    for (i = 1; i <= m; i++) for (j = 1; j <= n; j++)
+      d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    return d[m][n];
+  }
+  var _FUZZ_STOP = { when: 1, that: 1, this: 1, with: 1, from: 1, have: 1, will: 1, your: 1, dark: 1, alert: 1, notify: 1, tell: 1, best: 1, reach: 1, reaches: 1, rise: 1, rises: 1, degree: 1, degrees: 1, tonight: 1, night: 1, track: 1, watch: 1, lock: 1, what: 1, does: 1, mean: 1, weather: 1, cloud: 1, moon: 1, meteor: 1, plan: 1, show: 1, open: 1, list: 1, clear: 1, remind: 1, above: 1, once: 1, target: 1, targets: 1, similar: 1, explain: 1, reason: 1, twilight: 1, degrees_: 1 };
+  window._resolveFuzzy = function(cand, low){
+    var qtoks = (low.match(/[a-z0-9]{4,}/g) || []).filter(function(t){ return !_FUZZ_STOP[t]; }), best = null, bestD = 3;
+    for (var c = 0; c < cand.length; c++) {
+      var ntoks = String(cand[c].name || '').toLowerCase().match(/[a-z0-9]{4,}/g) || [];
+      for (var a = 0; a < ntoks.length; a++) for (var b = 0; b < qtoks.length; b++) {
+        var lim = Math.min(2, Math.floor(ntoks[a].length / 4)); if (lim < 1) continue;
+        var dd = _editDist(ntoks[a], qtoks[b]);
+        if (dd <= lim && dd < bestD) { bestD = dd; best = cand[c]; }
+      }
+    }
+    return best;
+  };
+
+  /* ── one-phrase action chains: multi-step imperative commands ── */
+  function _askActionChain(q, low){
+    if (/(clear|empty|reset|wipe|清空|清除|清掉)[^.]{0,14}(track|list|清單|追蹤)|(track|清單|追蹤)[^.]{0,10}(clear|empty|清空)/.test(low)) {
+      try { localStorage.setItem('ds-track-list', '[]'); if (window._trkSyncBtns) window._trkSyncBtns(); } catch(e) {}
+      return 'Cleared your tracking list.';
+    }
+    if (/(track|add|watch|追蹤|加入)/.test(low) && /(best|top|tonight|最好|今晚|前\s*\d|top\s*\d|\d+\s*(targets|best|個))/.test(low)) {
+      var mn = low.match(/\b(\d+)\b/); var num = mn ? Math.max(1, Math.min(10, +mn[1])) : 3;
+      var pool = [];
+      try { var nt = _navTargets(); for (var i = 0; i < nt.length; i++) if (nt[i].ra != null) pool.push({ name: nt[i].name, ra: nt[i].ra, dec: nt[i].dec, score: nt[i].score || 0 }); } catch(e) {}
+      if (!pool.length) return 'I have no catalog targets to add right now.';
+      if (obsLat != null) { for (var j = 0; j < pool.length; j++) { var w = _obsWindow(pool[j].ra, pool[j].dec); pool[j].rank = (w && w.score) || 0; } pool.sort(function(a, b){ return b.rank - a.rank; }); }
+      else pool.sort(function(a, b){ return b.score - a.score; });
+      var added = [];
+      for (var k = 0; k < pool.length && added.length < num; k++) { try { window.NAVCON.track(pool[k].name, pool[k].ra, pool[k].dec); added.push(pool[k].name); } catch(e) {} }
+      if (added.length && window._trkSyncBtns) window._trkSyncBtns();
+      return added.length ? 'Added ' + added.length + ' target' + (added.length > 1 ? 's' : '') + ' to your tracking list: ' + added.join(', ') + '.' : 'Could not add any targets.';
+    }
+    if (/(lock)[^.]{0,16}(best|top|最好)/.test(low)) {
+      if (obsLat == null) return 'Set your observing location first.';
+      var pool2 = [], scored = [];
+      try { var tl = _thGet(); for (var a2 = 0; a2 < tl.length; a2++) if (tl[a2].ra != null) pool2.push({ name: tl[a2].name, ra: +tl[a2].ra, dec: +tl[a2].dec }); } catch(e) {}
+      if (!pool2.length) { try { pool2 = _navTargets().slice(0, 12); } catch(e) {} }
+      for (var b2 = 0; b2 < pool2.length; b2++) { var w2 = _obsWindow(pool2[b2].ra, pool2[b2].dec); if (w2 && w2.score) scored.push({ t: pool2[b2], s: w2.score }); }
+      scored.sort(function(a, b){ return b.s - a.s; });
+      if (!scored.length) return 'Nothing clears the horizon well tonight.';
+      window._lockOn(scored[0].t.name, scored[0].t.ra, scored[0].t.dec, Math.round(scored[0].t.score || 0), scored[0].t.ss);
+      return 'Locked on tonight’s best: ' + scored[0].t.name + '.';
+    }
+    return null;
+  }
+
+  /* ── natural-language conditional alerts (one-shot watchers) ── */
+  function _alertsGet(){ try { return JSON.parse(localStorage.getItem('ds-alerts') || '[]'); } catch(e) { return []; } }
+  function _alertsSet(a){ try { localStorage.setItem('ds-alerts', JSON.stringify(a.slice(0, 20))); } catch(e) {} }
+  function _alertDesc(r){ return r.kind === 'dark' ? 'astronomical darkness begins' : r.kind === 'rise' ? (r.name + ' rises') : (r.name + ' reaches ' + r.thr + '°'); }
+  function _askAlert(q, low, tgt){
+    if (!/(notify|alert|tell me|remind|let me know|通知|提醒|叫我|告訴我)/.test(low)) return null;
+    if (!/(when|once|if|reach|rise|dark|above|hit|到|升|暗|當|如果)/.test(low)) return null;
+    if (obsLat == null) return 'Set your observing location first so I can watch that condition.';
+    var kind = null, thr = null;
+    var hasDeg = /(-?\d+(?:\.\d+)?)\s*(deg|degree|度|°)/.test(low);
+    if (/(dark|twilight|天黑|暗)/.test(low) && !hasDeg) kind = 'dark';
+    else if (!tgt) return 'Which target should I watch? Try: notify me when Vega reaches 40 degrees.';
+    else {
+      var mm = low.match(/(-?\d+(?:\.\d+)?)\s*(deg|degree|度|°)/) || low.match(/(?:reach|reaches|hit|hits|above|到|超過)\s*(-?\d+)/);
+      if (mm) { kind = 'alt'; thr = +mm[1]; }
+      else if (/(rise|rises|升起|升上|come up)/.test(low)) kind = 'rise';
+      else return 'Tell me a condition — a rise, an altitude in degrees, or darkness.';
+    }
+    var a = _alertsGet();
+    var rec = { id: 'a' + a.length + '_' + Math.floor(Date.now() / 1000), kind: kind, thr: thr };
+    if (tgt) { rec.name = tgt.name; rec.ra = tgt.ra; rec.dec = tgt.dec; }
+    a.push(rec); _alertsSet(a);
+    try { if (typeof Notification !== 'undefined' && Notification.permission === 'default') Notification.requestPermission().catch(function(){}); } catch(e) {}
+    return 'Alert set — I will tell you when ' + _alertDesc(rec) + '.';
+  }
+  function _alertCheck(){
+    var a = _alertsGet(); if (!a.length || obsLat == null) return;
+    var now = Date.now(), keep = [], fired = false;
+    for (var i = 0; i < a.length; i++) {
+      var r = a[i], hit = false, msg = '';
+      if (r.kind === 'dark') { var sm = _sunMoonEq(now); if (_altAt(sm.sun.ra, sm.sun.dec, now) < -18) { hit = true; msg = 'Astronomical darkness has begun.'; } }
+      else if (r.ra != null) { var aa = _altazOf(+r.ra, +r.dec); if (aa) { if (r.kind === 'rise' && aa.alt > 0) { hit = true; msg = r.name + ' has risen above the horizon.'; } else if (r.kind === 'alt' && aa.alt >= r.thr) { hit = true; msg = r.name + ' has reached ' + Math.round(aa.alt) + ' degrees altitude.'; } } }
+      if (hit) {
+        fired = true;
+        op('ALERT — ' + msg); _jarvis(msg, true); _haptic([60, 40, 60]);
+        try { if (typeof Notification !== 'undefined' && Notification.permission === 'granted') new Notification('DEEPSIGNAL — ALERT', { body: msg }); } catch(e) {}
+      } else keep.push(r);
+    }
+    if (fired) _alertsSet(keep);
+  }
+  setInterval(_alertCheck, 60000);
+  window._alertCheck = _alertCheck;
+  function _alertsRender(box){
+    var a = _alertsGet();
+    var h = a.length ? '' : '<div class="j-t">NO ACTIVE ALERTS. SET ONE BY VOICE OR CDU: “notify me when Vega reaches 40 degrees”.</div>';
+    for (var i = 0; i < a.length; i++) h += '<div class="sd-row"><span style="flex:1;color:#9fd4bb">' + _esc(_alertDesc(a[i])) + '</span><button class="trk-bell" style="width:auto" data-ai="' + i + '">CLEAR</button></div>';
+    box.innerHTML = h;
+  }
+  window._alertsView = function(){
+    var ov = _p3Overlay('alerts-ov', '⏰ CONDITIONAL ALERTS', '<div id="alerts-body"></div>');
+    if (!ov) return;
+    var box = document.getElementById('alerts-body');
+    _alertsRender(box);
+    ov.addEventListener('click', function(ev){
+      var b = ev.target.closest ? ev.target.closest('[data-ai]') : null;
+      if (!b) return;
+      var arr = _alertsGet(); arr.splice(+b.getAttribute('data-ai'), 1); _alertsSet(arr);
+      _alertsRender(box);
+      op('ALERT CLEARED');
+    });
+    op('CONDITIONAL ALERTS — ' + _alertsGet().length + ' ACTIVE');
+  };
 
   /* ── card tilt + cursor-tracking glow (event delegation) ── */
   var tiltEl = null;
