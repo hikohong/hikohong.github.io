@@ -430,6 +430,32 @@ body{padding-bottom:30px}
 /* ── NAVCON PRO-2: NVG mode, observability chips, time-scrub, systems page, disposition ── */
 html.nvg body{background:#0d0202}
 html.nvg body>*{filter:sepia(1) hue-rotate(-48deg) saturate(3.4) brightness(.78) contrast(1.05)}
+/* ── NAVCON PRO-7: command palette, Session Mode, lock-card, a11y ── */
+#palette-ov{position:fixed;inset:0;z-index:9995;background:rgba(2,7,5,.6);backdrop-filter:blur(3px);display:flex;align-items:flex-start;justify-content:center;padding-top:12vh}
+#palette-box{width:min(560px,92vw);background:rgba(3,16,11,.97);border:1px solid rgba(63,224,143,.5);border-radius:10px;box-shadow:0 0 40px rgba(63,224,143,.16);overflow:hidden;font-family:monospace}
+#palette-in{width:100%;box-sizing:border-box;background:transparent;border:none;border-bottom:1px solid rgba(63,224,143,.3);color:#eef3f8;font-family:monospace;font-size:.9rem;padding:12px 14px;outline:none}
+#palette-list{max-height:52vh;overflow-y:auto}
+.pl-row{display:flex;align-items:center;gap:10px;padding:8px 14px;cursor:pointer;color:#9fd4bb;font-size:.72rem;letter-spacing:.04em}
+.pl-row .pl-ic{width:18px;text-align:center;color:#3fe08f}
+.pl-row .pl-hint{margin-left:auto;color:#3a7a5a;font-size:.6rem}
+.pl-row.sel,.pl-row:hover{background:rgba(63,224,143,.14);color:#eef3f8}
+#session-ov{position:fixed;inset:0;z-index:9994;background:#020810;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:monospace;color:#eef3f8;text-align:center;padding:16px}
+#session-ov img{width:min(40vh,74vw);height:min(40vh,74vw);object-fit:cover;border-radius:10px;border:1px solid rgba(63,224,143,.35);background:#000}
+#session-ov .ss-nm{font-size:clamp(1.2rem,3.5vw,2rem);color:#3fe08f;margin:14px 0 4px;letter-spacing:.08em}
+#session-ov .ss-cd{font-size:clamp(1.4rem,5vw,2.4rem);color:#7dd3fc;letter-spacing:.06em}
+#session-ov .ss-sub{font-size:.7rem;color:#9fd4bb;margin-top:6px}
+#session-ov .ss-nar{font-size:.66rem;color:#3a7a5a;margin-top:12px;max-width:520px;min-height:1.4em}
+#session-ov .ss-ctl{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:16px}
+#session-ov .ss-btn{font-family:monospace;font-size:.66rem;letter-spacing:.06em;color:#3fe08f;background:rgba(63,224,143,.08);border:1px solid rgba(63,224,143,.4);border-radius:5px;padding:6px 12px;cursor:pointer}
+#session-ov .ss-btn:hover{background:rgba(63,224,143,.2)}
+#session-ov .ss-prog{font-size:.6rem;color:#3a7a5a;letter-spacing:.14em;margin-bottom:6px}
+.lk-save{margin-top:8px;font-family:monospace;font-size:.58rem;letter-spacing:.08em;color:#3fe08f;background:rgba(63,224,143,.1);border:1px solid rgba(63,224,143,.45);border-radius:5px;padding:4px 10px;cursor:pointer;pointer-events:auto}
+.lk-save:hover{background:rgba(63,224,143,.22)}
+.sim-why{color:#3a7a5a;font-size:.6rem}
+:focus-visible{outline:2px solid #3fe08f;outline-offset:2px}
+@media (prefers-reduced-motion: reduce){
+  #lock-ret,#lock-ret2,#hud-now.act,.p3-ov .p3-box,#palette-box,.hud-mic.rec,.rad-item{animation:none!important;transition:none!important}
+}
 /* ── NAVCON PRO-6: JARVIS, Target Lock, radial menu, NOW queue, gauges, glass ── */
 @keyframes lockConverge{0%{transform:translate(-50%,-50%) scale(2.4) rotate(-40deg);opacity:0}60%{opacity:1}100%{transform:translate(-50%,-50%) scale(1) rotate(0);opacity:1}}
 @keyframes lockSpin{to{transform:translate(-50%,-50%) rotate(360deg)}}
@@ -746,7 +772,7 @@ window._svBlink = function(btn){
   <span class="hud-seg" id="hud-watch-seg" style="display:none">★ <span class="hud-val" id="hud-watch">--</span></span>
   <span class="hud-seg"><button class="hud-btn" id="hud-ar-btn" style="display:none" title="AR finder — point your phone at the tracked target">▲ AR</button></span>
   <span class="hud-seg hud-hide-sm"><button class="hud-btn" id="hud-nvg-btn" title="Night-vision mode — red low-brightness palette for dark adaptation">☾ NVG</button> <button class="hud-btn" id="hud-red-btn" title="Red-light mode — full red palette preserving dark adaptation (exclusive with NVG)">◉ RED</button> <button class="hud-btn" id="hud-gauge-btn" title="Instrument gauges — sky quality, Moon phase, geomagnetic Kp">◐ GAUGE</button></span>
-  <span id="hud-msg"></span>
+  <span id="hud-msg" role="status" aria-live="polite"></span>
 </div>
 
 
@@ -3311,11 +3337,13 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     if (ev.key !== 'Escape') return;
     var t = ev.target, tg = t && t.tagName;
     if (tg === 'INPUT' || tg === 'TEXTAREA' || (t && t.isContentEditable)) return;
-    var order = ['lock-ov', 'radial-ov', 'gauge-ov', 'now-ov', 'kiosk-ov', 'cas-explain', 'wx-ov', 'sky-ov', 'lc-ov', 'fov-ov', 'exp-ov', 'ac-ov', 'plan-ov', 'qrh-ov', 'trx-ov', 'tune-ov', 'sd-ov', 'sys-notices', 'trklist-ov', 'journal-ov', 'scope-ov'];
+    var order = ['palette-ov', 'session-ov', 'sim-ov', 'lock-ov', 'radial-ov', 'gauge-ov', 'now-ov', 'kiosk-ov', 'cas-explain', 'wx-ov', 'sky-ov', 'lc-ov', 'fov-ov', 'exp-ov', 'ac-ov', 'plan-ov', 'qrh-ov', 'trx-ov', 'tune-ov', 'sd-ov', 'sys-notices', 'trklist-ov', 'journal-ov', 'scope-ov'];
     for (var i = 0; i < order.length; i++) {
       var el = document.getElementById(order[i]);
       if (!el) continue;
       ev.stopPropagation();
+      if (order[i] === 'session-ov') { window._sessionToggle(); return; }
+      if (order[i] === 'palette-ov') { var _po = document.getElementById('palette-ov'); if (_po) _po.remove(); try { SFX.close(); } catch(e) {} return; }
       if (order[i] === 'kiosk-ov') { _kioskStop(); return; }
       if (order[i] === 'scope-ov') { _scopeToggle(); return; }
       if (order[i] === 'trklist-ov') { _thToggle(); return; }
@@ -5010,7 +5038,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     var _hist = [];
     try { _hist = JSON.parse(sessionStorage.getItem('ds-cdu-hist') || '[]'); } catch(e) {}
     var _hIdx = _hist.length;
-    var _VOCAB = ['SCOPE', 'LOG', 'LIST', 'AR', 'NVG', 'RED', 'SYS', 'VOICE', 'EXPORT', 'IMPORT', 'DEBRIEF', 'QRH', 'TRX', 'PLAN', 'MFD', 'SHARE', 'TUNE', 'AOS', 'MAP', 'NEWS', 'REPORT', 'BLINK', 'SRC', 'TRK', 'FIND', 'WX', 'SKY', 'FOV', 'LC', 'BORTLE', 'KIOSK', 'ASK', 'JARVIS', 'BRIEF', 'LOCK', 'NOW', 'GAUGE', 'MIC'];
+    var _VOCAB = ['SCOPE', 'LOG', 'LIST', 'AR', 'NVG', 'RED', 'SYS', 'VOICE', 'EXPORT', 'IMPORT', 'DEBRIEF', 'QRH', 'TRX', 'PLAN', 'MFD', 'SHARE', 'TUNE', 'AOS', 'MAP', 'NEWS', 'REPORT', 'BLINK', 'SRC', 'TRK', 'FIND', 'WX', 'SKY', 'FOV', 'LC', 'BORTLE', 'KIOSK', 'ASK', 'JARVIS', 'BRIEF', 'LOCK', 'NOW', 'GAUGE', 'MIC', 'SESSION', 'CMD', 'SIMILAR', 'PLAN'];
     inp.addEventListener('keydown', function(ev){
       ev.stopPropagation();
       if (ev.key === 'Escape') { ov.remove(); return; }
@@ -5090,6 +5118,9 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     if (verb === 'ASK' || verb === 'JARVIS') { var _rq = window._ask(arg || v, false); if (_rq && _rq.ok) return; return op('JARVIS — NO ANSWER — TRY “HELP”'); }
     if (verb === 'BRIEF') { _jarvis(window._briefText() || 'No briefing available yet.', true); return; }
     if (verb === 'LOCK') { if (_scopeSel) return window._lockOn(_scopeSel.name, _scopeSel.ra, _scopeSel.dec, _scopeSel.score, _scopeSel.ss); var _ln = document.querySelector('#result-card .result-name'); if (_ln && window._resolveTarget) { var _lt = window._resolveTarget(_ln.textContent.trim()); if (_lt) return window._lockOn(_lt.name, _lt.ra, _lt.dec, _lt.score, _lt.ss); } return op('LOCK — SELECT A SCOPE BLIP OR SEARCH A TARGET FIRST'); }
+    if (verb === 'SESSION') return window._sessionToggle();
+    if (verb === 'CMD' || verb === 'PALETTE') return window._paletteOpen();
+    if (verb === 'SIMILAR') { var _sn = arg || (_scopeSel && _scopeSel.name) || (document.querySelector('#result-card .result-name') || {}).textContent; if (_sn) return window._similarOpen(String(_sn).trim()); return op('SIMILAR — NAME A CANDIDATE'); }
     if (verb === 'NOW') return window._nowToggle();
     if (verb === 'GAUGE' || verb === 'GAUGES') return window._gaugesToggle();
     if (verb === 'MIC') return window._micToggle();
@@ -5709,7 +5740,14 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       return done('Active meteor showers: ' + names.join(', ') + '. Radiants are marked on the tactical scope.');
     }
 
+    if (/(plan my night|plan tonight|\bplan\b|schedule|itinerary|排.{0,3}(觀測|今晚|夜)|規劃|觀測序|排程)/.test(low)) { var _pt = _askPlanText(); try { if (window._thPlan) window._thPlan(); } catch(e) {} return done(_pt); }
+    var _ct = /(compare| versus | vs |哪個.{0,4}(好|佳|適合)|which is better|better tonight|比較好|哪一個)/.test(low) ? _askCompareText(q) : null;
+    if (_ct) return done(_ct);
     var tgt = _resolveTarget(q);
+    if (!tgt && /\b(it|its|that|this one|the target)\b|它|牠|他|她|這個|那個/.test(low) && _ctx.entity) tgt = _ctx.entity;
+    if (tgt) _ctx.entity = tgt;
+    if (/(why|explain|reason|為什麼|為何|解釋|說明)/.test(low) && tgt) return done(_askExplainText(tgt));
+    if (/(similar|like this|comparable|類似|相似)/.test(low) && tgt) { window._similarOpen(tgt.name); return done('Finding candidates similar to ' + tgt.name + '.'); }
 
     if (/(best|recommend|top|what should i|該看|推薦|最好|今晚)/.test(low) && !/rise|set|weather|cloud/.test(low)) {
       if (obsLat == null) return done('Set your observing location first, then I can rank tonight’s targets.');
@@ -5721,6 +5759,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       scored.sort(function(x, y){ return y.w.score - x.w.score; });
       if (!scored.length) return done('Nothing clears the horizon well tonight from your location.');
       var top = scored.slice(0, 3).map(function(s){ return s.name + ' (best ' + _fmtHM(s.w.from) + ' to ' + _fmtHM(s.w.to) + ', score ' + s.w.score + ')'; });
+      try { var _bt = _resolveTarget(scored[0].name); if (_bt) _ctx.entity = _bt; } catch(e) {}
       return done('Tonight’s best: ' + top.join('; ') + '.');
     }
 
@@ -5846,6 +5885,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     var img = '';
     try { if (!ss && has && typeof skyUrl === 'function') img = skyUrl(+ra, +dec, 0.5, skySurvey(+dec).hips); } catch(e) {}
     var cap = [];
+    _lockData = { name: name, score: score, alt: alt, w: w };
     if (score != null) cap.push('SCORE ' + score);
     if (alt != null) cap.push('ALT ' + alt.toFixed(0) + '°' + (aa ? ' AZ ' + aa.az.toFixed(0) + '°' : ''));
     if (w && w.from) cap.push('BEST ' + _fmtHM(w.from) + '–' + _fmtHM(w.to) + ' OBS ' + w.score);
@@ -5857,7 +5897,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       '<img id="lock-img" alt="" ' + (img ? ('src="' + img + '"') : 'style="display:none"') + '>' +
       ret + ret2 + '<canvas id="lock-gauge" width="640" height="640"></canvas>' +
       '<div class="lk-hint">TARGET LOCK · TAP ANYWHERE TO RELEASE</div>' +
-      '<div id="lock-cap"><div class="lk-n">' + _esc(String(name)) + '</div><div class="lk-s">' + _esc(cap.join('  ·  ')) + '</div></div>' +
+      '<div id="lock-cap"><div class="lk-n">' + _esc(String(name)) + '</div><div class="lk-s">' + _esc(cap.join('  ·  ')) + '</div>' + '<button class="lk-save" onclick="event.stopPropagation();window._lockCardExport()">⤓ SAVE CARD</button></div>' +
       '</div>';
     ov.addEventListener('click', function(){ ov.remove(); try { SFX.close(); } catch(e) {} });
     document.body.appendChild(ov);
@@ -5876,7 +5916,8 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       { ic: '◎', lb: 'LOCK', fn: function(){ window._lockOn(t.name, t.ra, t.dec, t.score, t.ss); } },
       { ic: '📈', lb: 'LC', fn: function(){ if (window._lcOpen && t.ra != null) window._lcOpen(t.name, t.ra, t.dec); } },
       { ic: '🗺', lb: 'MAP', fn: function(){ if (typeof mapOpenFromCard === 'function' && t.ra != null) mapOpenFromCard(t.ra, t.dec, t.name, t.score || 0, false); } },
-      { ic: '📄', lb: 'LIT', fn: function(){ if (typeof litOpen === 'function') litOpen(t.name, ''); } }
+      { ic: '📄', lb: 'LIT', fn: function(){ if (typeof litOpen === 'function') litOpen(t.name, ''); } },
+      { ic: '≈', lb: 'SIMILAR', fn: function(){ if (window._similarOpen) window._similarOpen(t.name); } }
     ];
     var cx = Math.max(72, Math.min(window.innerWidth - 72, x)), cy = Math.max(96, Math.min(window.innerHeight - 72, y));
     var html = '<div class="rad-center" style="left:' + cx + 'px;top:' + cy + 'px"></div>', R = 66;
@@ -6035,6 +6076,302 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       try { var t = window._briefText(); if (t) _jarvis(t, false); } catch(e) {}
     }, 4500);
   })();
+
+  /* ══ NAVCON PRO-7: JARVIS deepening (context / planning / comparison /
+        explain / proactive), Session Mode, similar-candidate search,
+        shareable Target Lock card, command palette ══ */
+  var _ctx = { entity: null, intent: null };
+  var _lockData = null, _proSpoken = {};
+
+  /* schema-agnostic catalog access: the Search page has `catalog` (rows with
+     target_name / candidacy_score / tier / snr …), the Gallery has `CANDIDATES`
+     (name / score / methods / reasons). These accessors normalise both. */
+  function _catAll(){
+    try { if (typeof CANDIDATES !== 'undefined' && CANDIDATES && CANDIDATES.length) return CANDIDATES; } catch(e) {}
+    try { if (typeof catalog !== 'undefined' && catalog && catalog.length) return catalog; } catch(e) {}
+    return [];
+  }
+  function _rName(r){ return r.target_name || r.name || ''; }
+  function _rScore(r){ return +(r.candidacy_score != null ? r.candidacy_score : r.score) || 0; }
+  function _rTier(r){ return r.tier != null ? +r.tier : null; }
+  function _rReasons(r){ return Array.isArray(r.reasons) ? r.reasons : (r.reasons ? [r.reasons] : []); }
+  function _rMethods(r){ return Array.isArray(r.methods) ? r.methods : (r.detection_method ? [r.detection_method] : (r._all_methods || [])); }
+  function _rNum(r, k){ var v = r[k]; return (v != null && !isNaN(+v)) ? +v : 0; }
+  function _catRow(name){
+    var nl = String(name || '').toLowerCase(), all = _catAll();
+    for (var i = 0; i < all.length; i++) if (_rName(all[i]).toLowerCase() === nl) return all[i];
+    return null;
+  }
+
+  /* ── planning intent: ordered tonight windows, spoken summary + opens PLAN ── */
+  function _askPlanText(){
+    if (obsLat == null) return 'Set your observing location first, then I can plan your night.';
+    var l = _thGet(), rows = [];
+    for (var i = 0; i < l.length; i++) { if (l[i].ra == null) continue; var w = _obsWindow(+l[i].ra, +l[i].dec); if (w && w.from) rows.push({ n: l[i].name, w: w }); }
+    if (!rows.length) return 'Your tracking list has nothing observable tonight — track a few targets and ask again.';
+    rows.sort(function(a, b){ return a.w.from - b.w.from; });
+    var seq = rows.slice(0, 4).map(function(r){ return r.n + ' at ' + _fmtHM(r.w.from); });
+    return 'Tonight: ' + rows.length + ' targets. Order: ' + seq.join(', then ') + (rows.length > 4 ? ', and more.' : '.') + ' Opening the mission plan.';
+  }
+
+  /* ── comparison intent: find two entities, compare observability tonight ── */
+  function _askCompareText(q){
+    var low = ' ' + q.toLowerCase() + ' ', found = [], seen = {};
+    var cand = [];
+    try { var nt = _navTargets(); for (var i = 0; i < nt.length; i++) cand.push(nt[i]); } catch(e) {}
+    try { var ss = _ssBodies(); for (var j = 0; j < ss.length; j++) cand.push({ name: ss[j].name, ra: ss[j].ra, dec: ss[j].dec }); } catch(e) {}
+    try { var tl = _thGet(); for (var m = 0; m < tl.length; m++) if (tl[m].ra != null) cand.push({ name: tl[m].name, ra: +tl[m].ra, dec: +tl[m].dec }); } catch(e) {}
+    cand.sort(function(a, b){ return String(b.name).length - String(a.name).length; });
+    for (var k = 0; k < cand.length && found.length < 2; k++) {
+      var nl = String(cand[k].name || '').toLowerCase();
+      if (nl.length < 2 || seen[nl] || low.indexOf(nl) < 0) continue;
+      var overlaps = false;
+      for (var s = 0; s < found.length; s++) if (found[s].name.toLowerCase().indexOf(nl) >= 0 || nl.indexOf(found[s].name.toLowerCase()) >= 0) overlaps = true;
+      if (overlaps) continue;
+      seen[nl] = 1; found.push(cand[k]);
+    }
+    if (found.length < 2) return null;
+    if (obsLat == null) return 'Set your observing location so I can compare ' + found[0].name + ' and ' + found[1].name + '.';
+    var a = found[0], b = found[1];
+    var wa = _obsWindow(a.ra, a.dec), wb = _obsWindow(b.ra, b.dec);
+    var sa = (wa && wa.score) || 0, sb = (wb && wb.score) || 0;
+    function line(n, w, sc){ return n + ' scores ' + sc + (w && w.from ? ' (best ' + _fmtHM(w.from) + '–' + _fmtHM(w.to) + ')' : ' (no good window)'); }
+    var verdict = sa === sb ? 'They are about even tonight.' : (sa > sb ? a.name : b.name) + ' is the better target tonight.';
+    return line(a.name, wa, sa) + '. ' + line(b.name, wb, sb) + '. ' + verdict;
+  }
+
+  /* ── explain intent: why this candidate is scored as it is ── */
+  function _askExplainText(tgt){
+    var row = _catRow(tgt.name);
+    if (!row) return tgt.name + ' is not a pipeline candidate — it is a reference object, so there is no detection score to explain.';
+    var tier = _rTier(row);
+    var bits = [tgt.name + ' is a ' + (tier != null ? 'Tier ' + tier + ' ' : '') + 'candidate scoring ' + Math.round(_rScore(row))];
+    var rs = _rReasons(row);
+    if (rs.length) bits.push('Flagged for: ' + rs.join('; '));
+    var det = [], meth = _rMethods(row);
+    if (meth.length) det.push('detected by ' + meth.map(function(m){ return String(m).replace(/_/g, ' '); }).join(', '));
+    if (row.snr != null) det.push('SNR ' + _rNum(row, 'snr').toFixed(1));
+    if (row.drift_rate_hz_s != null && _rNum(row, 'drift_rate_hz_s') !== 0) det.push('drift ' + _rNum(row, 'drift_rate_hz_s').toFixed(3) + ' Hz/s');
+    if (row.center_freq_mhz != null) det.push(_rNum(row, 'center_freq_mhz').toFixed(1) + ' MHz');
+    if (det.length) bits.push(det.join(', '));
+    if (row.is_injected_anomaly) bits.push('note: this is a known injected test anomaly');
+    return bits.join('. ') + '.';
+  }
+  window._askExplainText = _askExplainText;
+
+  /* ── similar-candidate search: cosine over a normalised feature vector ── */
+  function _featVec(row){
+    return [
+      _rScore(row),
+      _rTier(row) || 0,
+      Math.log10(1 + Math.abs(_rNum(row, 'snr'))),
+      Math.abs(_rNum(row, 'drift_rate_hz_s')),
+      _rReasons(row).length,
+      _rMethods(row).length
+    ];
+  }
+  window._similarOpen = function(name){
+    var rows = _catAll().slice();
+    var base = _catRow(name);
+    if (!base || rows.length < 3) { op('SIMILAR — NEEDS A PIPELINE CANDIDATE'); return; }
+    var D = 6, mn = new Array(D).fill(Infinity), mx = new Array(D).fill(-Infinity), vecs = [];
+    for (var i = 0; i < rows.length; i++) { var v = _featVec(rows[i]); vecs.push(v); for (var d = 0; d < D; d++) { if (v[d] < mn[d]) mn[d] = v[d]; if (v[d] > mx[d]) mx[d] = v[d]; } }
+    function norm(v){ var o = []; for (var d = 0; d < D; d++) { var r = mx[d] - mn[d]; o.push(r > 1e-9 ? (v[d] - mn[d]) / r : 0); } return o; }
+    var bv = norm(_featVec(base)), scored = [];
+    for (var j = 0; j < rows.length; j++) {
+      if (_rName(rows[j]).toLowerCase() === String(name).toLowerCase()) continue;
+      var nv = norm(vecs[j]), dist = 0;
+      for (var d2 = 0; d2 < D; d2++) dist += (bv[d2] - nv[d2]) * (bv[d2] - nv[d2]);
+      scored.push({ row: rows[j], dist: Math.sqrt(dist) });
+    }
+    scored.sort(function(a, b){ return a.dist - b.dist; });
+    var top = scored.slice(0, 6);
+    var h = '<div class="j-t" style="margin-bottom:6px">NEAREST CANDIDATES TO ' + _esc(String(name).toUpperCase()) + ' BY SCORE · TIER · SNR · DRIFT · REASONS · METHODS</div>';
+    for (var t = 0; t < top.length; t++) {
+      var r = top[t].row, sim = Math.max(0, Math.round((1 - top[t].dist / Math.sqrt(D)) * 100));
+      var ra = r.ra_deg != null ? r.ra_deg : r.ra, dec = r.dec_deg != null ? r.dec_deg : r.dec, tier = _rTier(r), meth = _rMethods(r);
+      h += '<button class="sd-row" data-simname="' + _escAttr(_rName(r)) + '" data-ra="' + ra + '" data-dec="' + dec + '" data-score="' + Math.round(_rScore(r)) + '" style="width:100%;text-align:left;background:none;border:none;border-bottom:1px solid rgba(63,224,143,.08);cursor:pointer">' +
+        '<span class="sd-name" style="width:150px;color:#3fe08f">' + _esc(_rName(r)) + '</span>' +
+        '<span class="sim-why" style="flex:1">' + (tier != null ? 'T' + tier + ' · ' : '') + 'score ' + Math.round(_rScore(r)) + (meth.length ? ' · ' + String(meth[0]).replace(/_/g, ' ') : '') + '</span>' +
+        '<span class="sd-val">' + sim + '% match</span></button>';
+    }
+    var ov = _p3Overlay('sim-ov', '≈ SIMILAR CANDIDATES', h);
+    if (!ov) return;
+    ov.addEventListener('click', function(ev){
+      var b = ev.target.closest ? ev.target.closest('[data-simname]') : null;
+      if (!b) return;
+      window._lockOn(b.getAttribute('data-simname'), +b.getAttribute('data-ra'), +b.getAttribute('data-dec'), Math.round(+b.getAttribute('data-score')), false);
+    });
+    op('SIMILAR — ' + top.length + ' NEAREST CANDIDATES TO ' + String(name).toUpperCase());
+  };
+
+  /* ── shareable Target Lock card: self-contained PNG (no external image, so
+        the canvas never taints and export always works) ── */
+  window._lockCardExport = function(){
+    var d = _lockData; if (!d) return;
+    var W = 1080, H = 1080, cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+    var c = cv.getContext('2d');
+    var g = c.createRadialGradient(W / 2, H / 2, 60, W / 2, H / 2, W * 0.72);
+    g.addColorStop(0, '#08160f'); g.addColorStop(1, '#020706'); c.fillStyle = g; c.fillRect(0, 0, W, H);
+    var cx = W / 2, cy = H / 2 - 40;
+    c.strokeStyle = 'rgba(63,224,143,.85)'; c.lineWidth = 2;
+    c.setLineDash([10, 7]); c.beginPath(); c.arc(cx, cy, 300, 0, 6.283); c.stroke(); c.setLineDash([]);
+    c.globalAlpha = .6; c.beginPath(); c.arc(cx, cy, 230, 0, 6.283); c.stroke(); c.globalAlpha = 1;
+    c.beginPath(); c.moveTo(cx, cy - 340); c.lineTo(cx, cy - 300); c.moveTo(cx, cy + 300); c.lineTo(cx, cy + 340);
+    c.moveTo(cx - 340, cy); c.lineTo(cx - 300, cy); c.moveTo(cx + 300, cy); c.lineTo(cx + 340, cy); c.stroke();
+    function arc(r, frac, col){ c.lineWidth = 14; c.lineCap = 'round';
+      c.strokeStyle = 'rgba(63,224,143,.12)'; c.beginPath(); c.arc(cx, cy, r, -Math.PI * 0.75, Math.PI * 0.75); c.stroke();
+      c.strokeStyle = col; c.beginPath(); c.arc(cx, cy, r, -Math.PI * 0.75, -Math.PI * 0.75 + Math.PI * 1.5 * Math.max(0, Math.min(1, frac))); c.stroke(); }
+    if (d.score != null) arc(390, d.score / 100, '#3fe08f');
+    if (d.alt != null) arc(360, Math.max(0, d.alt) / 90, '#7dd3fc');
+    if (d.w && d.w.score != null) arc(330, d.w.score / 100, '#f5a623');
+    c.fillStyle = '#3fe08f'; c.textAlign = 'center'; c.font = 'bold 62px monospace';
+    c.fillText(String(d.name).toUpperCase(), cx, cy + 10);
+    c.fillStyle = '#9fd4bb'; c.font = '30px monospace';
+    var cap = [];
+    if (d.score != null) cap.push('SCORE ' + d.score);
+    if (d.alt != null) cap.push('ALT ' + d.alt.toFixed(0) + '°');
+    if (d.w && d.w.from) cap.push('OBS ' + d.w.score);
+    c.fillText(cap.join('    '), cx, cy + 60);
+    c.fillStyle = '#3a7a5a'; c.font = '26px monospace'; c.textAlign = 'left';
+    c.fillText('DEEPSIGNAL // TARGET LOCK', 60, H - 60);
+    c.textAlign = 'right'; c.fillText('hikohong.github.io/deepsignal', W - 60, H - 60);
+    try {
+      var a = document.createElement('a');
+      a.href = cv.toDataURL('image/png'); a.download = 'deepsignal-lock-' + String(d.name).replace(/[^A-Za-z0-9]+/g, '_') + '.png';
+      document.body.appendChild(a); a.click(); a.remove();
+      op('LOCK CARD SAVED — ' + String(d.name).toUpperCase());
+    } catch(e) { op('LOCK CARD — EXPORT FAILED'); }
+  };
+
+  /* ── Session Mode: guided live run through tonight's ordered plan ── */
+  var _ssList = [], _ssIdx = 0, _ssTimer = null;
+  function _ssBuild(){
+    var l = _thGet(), rows = [];
+    for (var i = 0; i < l.length; i++) { if (l[i].ra == null) continue; var w = _obsWindow(+l[i].ra, +l[i].dec); rows.push({ name: l[i].name, ra: +l[i].ra, dec: +l[i].dec, w: w }); }
+    rows.sort(function(a, b){ return ((a.w && a.w.from) || 9e15) - ((b.w && b.w.from) || 9e15); });
+    return rows;
+  }
+  function _ssRender(){
+    var e = _ssList[_ssIdx]; if (!e) return;
+    var nm = document.getElementById('ss-nm'), cd = document.getElementById('ss-cd'), sub = document.getElementById('ss-sub'), pr = document.getElementById('ss-prog'), img = document.getElementById('ss-img'), dp = document.getElementById('ss-dispo');
+    if (pr) pr.textContent = 'TARGET ' + (_ssIdx + 1) + ' / ' + _ssList.length;
+    if (nm) nm.textContent = e.name;
+    if (img) { var src = ''; try { if (typeof skyUrl === 'function') src = skyUrl(e.ra, e.dec, 0.5, skySurvey(e.dec).hips); } catch(x) {} if (src) { img.style.display = ''; img.src = src; } else img.style.display = 'none'; }
+    if (dp && window._dispoBtn) dp.innerHTML = window._dispoBtn(e.name);
+    var aa = _altazOf(e.ra, e.dec);
+    if (sub) sub.textContent = (e.w && e.w.from ? 'BEST ' + _fmtHM(e.w.from) + '–' + _fmtHM(e.w.to) + ' · OBS ' + e.w.score : 'NO STRONG WINDOW') + (aa ? ' · ALT ' + aa.alt.toFixed(0) + '°' : '');
+  }
+  function _ssTick(){
+    var e = _ssList[_ssIdx], cd = document.getElementById('ss-cd'); if (!e || !cd) return;
+    if (!e.w || !e.w.from) { cd.textContent = '— — —'; return; }
+    var now = Date.now();
+    if (now < e.w.from) { var s = Math.round((e.w.from - now) / 1000), hh = Math.floor(s / 3600), mm = Math.floor((s % 3600) / 60), ss = s % 60; cd.textContent = 'T− ' + pad(hh) + ':' + pad(mm) + ':' + pad(ss); cd.style.color = '#7dd3fc'; }
+    else if (now <= e.w.to) { cd.textContent = '● IN WINDOW'; cd.style.color = '#10b981'; }
+    else { cd.textContent = 'WINDOW PASSED'; cd.style.color = '#f5a623'; }
+  }
+  function _ssGo(i){
+    if (i < 0 || i >= _ssList.length) return;
+    _ssIdx = i; _ssRender(); _ssTick();
+    var e = _ssList[_ssIdx], aa = _altazOf(e.ra, e.dec);
+    var nar = e.name + '. ' + (e.w && e.w.from ? 'Best around ' + _fmtHM(e.w.from) : 'no strong window tonight') + (aa && aa.alt > 0 ? ', currently ' + aa.alt.toFixed(0) + ' degrees up' : ', below the horizon now') + '.';
+    var nel = document.getElementById('ss-nar'); if (nel) nel.textContent = nar;
+    _jarvis(nar, false);
+  }
+  window._sessionToggle = function(){
+    var ov = document.getElementById('session-ov');
+    if (ov) { ov.remove(); if (_ssTimer) { clearInterval(_ssTimer); _ssTimer = null; } try { SFX.close(); } catch(e) {} if (window._sessionReport) { /* offer report */ } return; }
+    _ssList = _ssBuild();
+    if (!_ssList.length) { op('SESSION — TRACKING LIST EMPTY'); return; }
+    try { SFX.open(); } catch(e) {}
+    ov = document.createElement('div'); ov.id = 'session-ov'; ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-label', 'Observing session mode');
+    ov.innerHTML = '<div class="ss-prog" id="ss-prog"></div><img id="ss-img" alt="">' +
+      '<div class="ss-nm" id="ss-nm"></div><div class="ss-cd" id="ss-cd"></div><div class="ss-sub" id="ss-sub"></div>' +
+      '<div id="ss-dispo" style="margin-top:10px"></div>' +
+      '<div class="ss-nar" id="ss-nar"></div>' +
+      '<div class="ss-ctl">' +
+      '<button class="ss-btn" id="ss-prev">◄ PREV</button>' +
+      '<button class="ss-btn" id="ss-lock">◎ LOCK</button>' +
+      '<button class="ss-btn" id="ss-note">✎ NOTE</button>' +
+      '<button class="ss-btn" id="ss-next">NEXT ►</button>' +
+      '<button class="ss-btn" id="ss-exit">■ END + REPORT</button></div>';
+    document.body.appendChild(ov);
+    document.getElementById('ss-prev').addEventListener('click', function(){ _ssGo(_ssIdx - 1); });
+    document.getElementById('ss-next').addEventListener('click', function(){ _ssGo(_ssIdx + 1); });
+    document.getElementById('ss-lock').addEventListener('click', function(){ var e = _ssList[_ssIdx]; window._lockOn(e.name, e.ra, e.dec, null, false); });
+    document.getElementById('ss-note').addEventListener('click', function(){ var e = _ssList[_ssIdx], l = _thGet(); for (var k = 0; k < l.length; k++) if (l[k].name === e.name && window._noteEdit) return window._noteEdit(k); });
+    document.getElementById('ss-exit').addEventListener('click', function(){ window._sessionToggle(); if (window._sessionReport) window._sessionReport(); });
+    _ssGo(0);
+    _jarvis('Session mode. ' + _ssList.length + ' targets tonight. First up: ' + _ssList[0].name + (_ssList[0].w && _ssList[0].w.from ? ' at ' + _fmtHM(_ssList[0].w.from) : '') + '.', false);
+    _ssTimer = setInterval(_ssTick, 1000);
+  };
+
+  /* ── command palette (⌘K / Ctrl-K, CDU CMD): fuzzy over verbs + targets ── */
+  var _PAL = [
+    ['◉', 'Tactical scope', 'SCOPE'], ['⌖', 'Tracking list', 'LIST'], ['▦', 'Mission plan', 'PLAN'],
+    ['■', 'Session mode', 'SESSION'], ['◉', 'NOW opportunities', 'NOW'], ['⛅', 'Astro weather', 'WX'],
+    ['☄', 'Sky almanac', 'SKY'], ['◐', 'Instrument gauges', 'GAUGE'], ['◧', 'Systems page', 'SYS'],
+    ['✓', 'QRH checklist', 'QRH'], ['⚖', 'Tune re-ranking', 'TUNE'], ['◈', 'Transient watch', 'TRX'],
+    ['⤓', 'Export observing list', 'EXPORT'], ['⇪', 'Share tracking list', 'SHARE'], ['▤', 'MFD', 'MFD'],
+    ['☾', 'NVG night mode', 'NVG'], ['◉', 'Red-light mode', 'RED'], ['◪', 'Kiosk mode', 'KIOSK'],
+    ['🎙', 'Voice command', 'MIC'], ['✎', 'Daily briefing', 'BRIEF'], ['⬡', 'Literature/report', 'REPORT'],
+    ['◎', 'Map', 'MAP'], ['⤒', 'Import FDR', 'IMPORT'], ['▣', 'Session report', 'DEBRIEF']
+  ];
+  function _palClose(){ var o = document.getElementById('palette-ov'); if (o) o.remove(); }
+  window._paletteOpen = function(){
+    _palClose();
+    var items = [];
+    for (var i = 0; i < _PAL.length; i++) items.push({ ic: _PAL[i][0], label: _PAL[i][1], hint: _PAL[i][2], run: (function(vb){ return function(){ _cduExec(vb); }; })(_PAL[i][2]) });
+    try {
+      var tl = _thGet();
+      for (var t = 0; t < tl.length; t++) (function(e){ items.push({ ic: '⌖', label: 'Lock ' + e.name, hint: 'TARGET', run: function(){ window._lockOn(e.name, +e.ra, +e.dec, null, false); } }); })(tl[t]);
+      var nt = _navTargets().slice(0, 40);
+      for (var n = 0; n < nt.length; n++) (function(e){ items.push({ ic: '◇', label: 'Lock ' + e.name, hint: 'CANDIDATE', run: function(){ window._lockOn(e.name, e.ra, e.dec, Math.round(e.score || 0), e.ss); } }); })(nt[n]);
+    } catch(e) {}
+    try { SFX.open(); } catch(e) {}
+    var ov = document.createElement('div'); ov.id = 'palette-ov'; ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-label', 'Command palette');
+    ov.innerHTML = '<div id="palette-box"><input id="palette-in" placeholder="Search commands and targets…" aria-label="Command search" autocomplete="off"><div id="palette-list" role="listbox"></div></div>';
+    ov.addEventListener('click', function(ev){ if (ev.target === ov) _palClose(); });
+    document.body.appendChild(ov);
+    var inp = document.getElementById('palette-in'), list = document.getElementById('palette-list'), sel = 0, shown = [];
+    function fuzzy(q, s){ q = q.toLowerCase(); s = s.toLowerCase(); if (!q) return true; var qi = 0; for (var i = 0; i < s.length && qi < q.length; i++) if (s[i] === q[qi]) qi++; return qi === q.length; }
+    function render(){
+      var q = inp.value.trim();
+      shown = items.filter(function(it){ return fuzzy(q, it.label) || fuzzy(q, it.hint); }).slice(0, 40);
+      if (sel >= shown.length) sel = 0;
+      var h = '';
+      for (var i = 0; i < shown.length; i++) h += '<div class="pl-row' + (i === sel ? ' sel' : '') + '" data-i="' + i + '" role="option"><span class="pl-ic">' + shown[i].ic + '</span><span>' + _esc(shown[i].label) + '</span><span class="pl-hint">' + _esc(shown[i].hint) + '</span></div>';
+      list.innerHTML = h || '<div class="pl-row">No match</div>';
+    }
+    function runSel(){ var it = shown[sel]; _palClose(); if (it) { try { SFX.click(); } catch(e) {} it.run(); } }
+    inp.addEventListener('input', function(){ sel = 0; render(); });
+    inp.addEventListener('keydown', function(ev){
+      if (ev.key === 'Escape') { ev.preventDefault(); _palClose(); return; }
+      if (ev.key === 'ArrowDown') { ev.preventDefault(); sel = Math.min(shown.length - 1, sel + 1); render(); var s = list.querySelector('.sel'); if (s) s.scrollIntoView({ block: 'nearest' }); }
+      else if (ev.key === 'ArrowUp') { ev.preventDefault(); sel = Math.max(0, sel - 1); render(); var s2 = list.querySelector('.sel'); if (s2) s2.scrollIntoView({ block: 'nearest' }); }
+      else if (ev.key === 'Enter') { ev.preventDefault(); runSel(); }
+    });
+    list.addEventListener('click', function(ev){ var r = ev.target.closest ? ev.target.closest('.pl-row[data-i]') : null; if (r) { sel = +r.getAttribute('data-i'); runSel(); } });
+    render(); inp.focus();
+  };
+  document.addEventListener('keydown', function(ev){
+    if ((ev.metaKey || ev.ctrlKey) && (ev.key === 'k' || ev.key === 'K')) { ev.preventDefault(); window._paletteOpen(); }
+  });
+
+  /* ── proactive JARVIS: speak a high-value NOW opportunity once, when the
+        voice channel is armed (default OFF, so it is never intrusive) ── */
+  function _proactiveScan(){
+    try {
+      if (localStorage.getItem('ds-voice') !== '1') return;
+      var q = window._nowScan();
+      if (!q.length || q[0].score < 75) return;
+      var key = q[0].txt;
+      if (_proSpoken[key] && Date.now() - _proSpoken[key] < 1800000) return;
+      _proSpoken[key] = Date.now();
+      _jarvis(q[0].txt, true);
+    } catch(e) {}
+  }
+  setInterval(_proactiveScan, 90000);
 
   /* ── card tilt + cursor-tracking glow (event delegation) ── */
   var tiltEl = null;

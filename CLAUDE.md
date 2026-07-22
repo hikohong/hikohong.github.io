@@ -244,6 +244,13 @@ gauges, AR live-sky camera overlay, haptics. Advisory CI test:
 `.github/scripts/e2e-full/pro6test.mjs`. Deep dive lives in the upstream deepsignal
 CLAUDE.md; these files are generated output — edit upstream, never hand-patch here.
 
+### NAVCON PRO-7 — JARVIS deepening (deployed in index.html + gallery.html)
+Conversational upgrades to JARVIS (multi-turn context, planning/comparison/explain
+intents, proactive voice), Session Mode (guided live observing run), similar-candidate
+search, shareable Target Lock card PNG export, ⌘K command palette, and an accessibility
+pass (aria-live, focus-visible, reduced-motion). Advisory CI test:
+`.github/scripts/e2e-full/pro7test.mjs`. Generated output — edit upstream, never here.
+
 ---
 
 ## Constraints
