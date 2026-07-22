@@ -407,6 +407,11 @@ html.nvg body>*{filter:sepia(1) hue-rotate(-48deg) saturate(3.4) brightness(.78)
 @media (prefers-reduced-motion: reduce){
   #lock-ret,#lock-ret2,#hud-now.act,.p3-ov .p3-box,#palette-box,.hud-mic.rec,.rad-item{animation:none!important;transition:none!important}
 }
+#askbox-ov{position:fixed;inset:0;z-index:9995;background:rgba(2,7,5,.6);backdrop-filter:blur(3px);display:flex;align-items:flex-start;justify-content:center;padding-top:16vh}
+#askbox-box{width:min(560px,92vw);background:rgba(3,16,11,.97);border:1px solid rgba(63,224,143,.5);border-radius:10px;box-shadow:0 0 40px rgba(63,224,143,.16);overflow:hidden;font-family:monospace}
+.askbox-hdr{padding:10px 14px;border-bottom:1px solid rgba(63,224,143,.3);color:#3fe08f;letter-spacing:.12em;font-size:.7rem}
+#askbox-in{width:100%;box-sizing:border-box;background:transparent;border:none;color:#eef3f8;font-family:monospace;font-size:.95rem;padding:14px;outline:none}
+.askbox-hint{padding:0 14px 12px;color:#3a7a5a;font-size:.58rem;line-height:1.5}
 /* ── NAVCON PRO-6: JARVIS, Target Lock, radial menu, NOW queue, gauges, glass ── */
 @keyframes lockConverge{0%{transform:translate(-50%,-50%) scale(2.4) rotate(-40deg);opacity:0}60%{opacity:1}100%{transform:translate(-50%,-50%) scale(1) rotate(0);opacity:1}}
 @keyframes lockSpin{to{transform:translate(-50%,-50%) rotate(360deg)}}
@@ -1058,7 +1063,7 @@ window._svBlink = function(btn){
 <div id="sky-tooltip-map"></div>
 <div class="gallery-hdr">
 <h1>DeepSignal — Sky Image Gallery</h1>
-<div class="subtitle">Generated <span id="gen-ts">2026-07-22 15:14 UTC</span> &nbsp;·&nbsp; 96 targets &nbsp;·&nbsp; 0 sky images via Hips2Fits CDN</div>
+<div class="subtitle">Generated <span id="gen-ts">2026-07-22 15:27 UTC</span> &nbsp;·&nbsp; 96 targets &nbsp;·&nbsp; 0 sky images via Hips2Fits CDN</div>
 <div class="stats">
   <div class="stat"><div class="stat-n" style="color:#f59e0b">3</div><div class="stat-l">Tier 1 ≥70</div></div>
   <div class="stat"><div class="stat-n" style="color:#60a5fa">1</div><div class="stat-l">Tier 2 50–69</div></div>
@@ -5444,7 +5449,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     if (ev.key !== 'Escape') return;
     var t = ev.target, tg = t && t.tagName;
     if (tg === 'INPUT' || tg === 'TEXTAREA' || (t && t.isContentEditable)) return;
-    var order = ['palette-ov', 'session-ov', 'sim-ov', 'alerts-ov', 'lock-ov', 'radial-ov', 'gauge-ov', 'now-ov', 'kiosk-ov', 'cas-explain', 'wx-ov', 'sky-ov', 'lc-ov', 'fov-ov', 'exp-ov', 'ac-ov', 'plan-ov', 'qrh-ov', 'trx-ov', 'tune-ov', 'sd-ov', 'sys-notices', 'trklist-ov', 'journal-ov', 'scope-ov'];
+    var order = ['askbox-ov', 'palette-ov', 'session-ov', 'sim-ov', 'alerts-ov', 'lock-ov', 'radial-ov', 'gauge-ov', 'now-ov', 'kiosk-ov', 'cas-explain', 'wx-ov', 'sky-ov', 'lc-ov', 'fov-ov', 'exp-ov', 'ac-ov', 'plan-ov', 'qrh-ov', 'trx-ov', 'tune-ov', 'sd-ov', 'sys-notices', 'trklist-ov', 'journal-ov', 'scope-ov'];
     for (var i = 0; i < order.length; i++) {
       var el = document.getElementById(order[i]);
       if (!el) continue;
@@ -7923,13 +7928,13 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
   window._micToggle = function(){
     var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
     var btn = document.getElementById('hud-mic-btn');
-    if (!SR) return op('VOICE INPUT — NOT SUPPORTED ON THIS BROWSER');
+    if (!SR) return window._askBox();
     if (_rec) { try { _rec.stop(); } catch(e) {} return; }
     try {
       _rec = new SR();
       _rec.lang = 'en-US'; _rec.interimResults = false; _rec.maxAlternatives = 1;
       _rec.onstart = function(){ if (btn) btn.classList.add('rec'); op('VOICE INPUT — LISTENING…'); _haptic(20); };
-      _rec.onerror = function(ev){ op('VOICE INPUT — ' + String((ev && ev.error) || 'ERROR').toUpperCase()); };
+      _rec.onerror = function(ev){ var _ee = String((ev && ev.error) || 'ERROR'); op('VOICE INPUT — ' + _ee.toUpperCase()); if (/not-allowed|service-not-allowed|audio-capture|language-not-supported|not-supported/.test(_ee)) window._askBox(); };
       _rec.onend = function(){ if (btn) btn.classList.remove('rec'); _rec = null; };
       _rec.onresult = function(ev){
         var t = ev.results[0][0].transcript;
@@ -8652,6 +8657,28 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     op('CONDITIONAL ALERTS — ' + _alertsGet().length + ' ACTIVE');
   };
 
+  /* ── ASK text fallback: when the browser has no Web Speech API (iOS Safari,
+        Firefox) or mic permission is denied, 🎙 ASK still lets you ask JARVIS by
+        typing, so the button always does something. ── */
+  window._askBox = function(prefill){
+    var old = document.getElementById('askbox-ov'); if (old) old.remove();
+    try { SFX.open(); } catch(e) {}
+    var ov = document.createElement('div'); ov.id = 'askbox-ov'; ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-label', 'Ask JARVIS');
+    ov.innerHTML = '<div id="askbox-box"><div class="askbox-hdr">ASK JARVIS</div>' +
+      '<input id="askbox-in" autocomplete="off" placeholder="Ask a question or give a command…" aria-label="Ask JARVIS" value="' + (prefill ? _escAttr(prefill) : '') + '">' +
+      '<div class="askbox-hint">e.g. best targets tonight · when does Vega rise · what is doppler drift · track Proxima · notify me when Vega reaches 40 degrees</div></div>';
+    ov.addEventListener('click', function(ev){ if (ev.target === ov) { ov.remove(); try { SFX.close(); } catch(e) {} } });
+    document.body.appendChild(ov);
+    var inp = document.getElementById('askbox-in');
+    inp.addEventListener('keydown', function(ev){
+      ev.stopPropagation();
+      if (ev.key === 'Escape') { ov.remove(); try { SFX.close(); } catch(e) {} return; }
+      if (ev.key !== 'Enter') return;
+      var v = inp.value.trim(); ov.remove();
+      if (v) { var r = window._ask(v, true); if (!r || !r.ok) _jarvis('I could not answer that. Try “help”, or a target name.', true); }
+    });
+    inp.focus();
+  };
   /* ── card tilt + cursor-tracking glow (event delegation) ── */
   var tiltEl = null;
   if (CAN_HOVER && !RM) {
