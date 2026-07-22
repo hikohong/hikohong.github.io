@@ -88,7 +88,7 @@ const ck = (l, ok) => checks.push([l, ok]);
     card.dispatchEvent(new MouseEvent('contextmenu', { bubbles: true, cancelable: true, clientX: r.left + 40, clientY: r.top + 40 }));
   });
   await p.waitForTimeout(200);
-  ck('radial menu opens with 5 actions', (await p.evaluate(() => document.querySelectorAll('#radial-ov .rad-item').length)) === 5);
+  ck('radial menu opens with 6 actions', (await p.evaluate(() => document.querySelectorAll('#radial-ov .rad-item').length)) === 6);
   await p.keyboard.press('Escape');
 
   const brief = await p.evaluate(() => window._briefText());
