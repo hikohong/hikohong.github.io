@@ -251,6 +251,14 @@ search, shareable Target Lock card PNG export, ⌘K command palette, and an acce
 pass (aria-live, focus-visible, reduced-motion). Advisory CI test:
 `.github/scripts/e2e-full/pro7test.mjs`. Generated output — edit upstream, never here.
 
+### NAVCON PRO-8 — JARVIS conversational reach (deployed in index.html + gallery.html)
+JARVIS gains an offline glossary knowledge base ("what is doppler drift", "what does
+tier 2 mean"), fuzzy/typo-tolerant target resolution, one-phrase action chains ("track
+the best 3 tonight", "clear my tracking list"), and natural-language conditional alerts
+("notify me when Vega reaches 40 degrees") with a 60 s watcher that fires a Web
+Notification + voice + CAS. Advisory CI test: `.github/scripts/e2e-full/pro8test.mjs`.
+Generated output — edit upstream, never here.
+
 ---
 
 ## Constraints
