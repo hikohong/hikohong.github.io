@@ -259,6 +259,13 @@ the best 3 tonight", "clear my tracking list"), and natural-language conditional
 Notification + voice + CAS. Advisory CI test: `.github/scripts/e2e-full/pro8test.mjs`.
 Generated output — edit upstream, never here.
 
+### NAVCON PRO-9 — client-side ML anomaly re-scoring (deployed in index.html + gallery.html)
+A pure-JS unsupervised kNN outlier score computed in-browser over the whole catalog,
+independent of the pipeline candidacy score, surfacing "dark horses" (statistically
+unusual but pipeline-rated low). ANOMALY SCAN panel (CDU ANOMALY), ◆ card badges, and
+JARVIS "show me the dark horses" / "why is X anomalous". Advisory CI test:
+`.github/scripts/e2e-full/pro9test.mjs`. Generated output — edit upstream, never here.
+
 ---
 
 ## Constraints
