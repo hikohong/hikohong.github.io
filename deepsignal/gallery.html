@@ -381,6 +381,17 @@ body{padding-bottom:30px}
 /* ── NAVCON PRO-2: NVG mode, observability chips, time-scrub, systems page, disposition ── */
 html.nvg body{background:#0d0202}
 html.nvg body>*{filter:sepia(1) hue-rotate(-48deg) saturate(3.4) brightness(.78) contrast(1.05)}
+/* ── NAVCON PRO-9: client-side ML anomaly scan ── */
+.anom-chip{display:inline-block;margin-left:6px;font-family:monospace;font-size:.52rem;letter-spacing:.06em;padding:1px 5px;border-radius:3px;border:1px solid rgba(245,166,35,.5);color:#f5a623;vertical-align:middle}
+.anom-chip.anom-dark{border-color:rgba(224,80,80,.6);color:#e05050;text-shadow:0 0 6px rgba(224,80,80,.4)}
+#anom-ov .an-row{display:flex;align-items:center;gap:8px;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid rgba(63,224,143,.08);cursor:pointer;padding:7px 2px;font-family:monospace}
+#anom-ov .an-row:hover{background:rgba(63,224,143,.08)}
+#anom-ov .an-n{width:150px;color:#3fe08f;font-size:.66rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#anom-ov .an-bar{flex:1;height:6px;background:rgba(63,224,143,.12);border-radius:3px;position:relative;overflow:hidden}
+#anom-ov .an-bar>span{position:absolute;left:0;top:0;bottom:0;background:#f5a623;border-radius:3px}
+#anom-ov .an-row.dark .an-bar>span{background:#e05050}
+#anom-ov .an-v{width:118px;text-align:right;color:#9fd4bb;font-size:.58rem;letter-spacing:.03em}
+#anom-ov .an-dh{color:#e05050;font-weight:700}
 /* ── NAVCON PRO-7: command palette, Session Mode, lock-card, a11y ── */
 #palette-ov{position:fixed;inset:0;z-index:9995;background:rgba(2,7,5,.6);backdrop-filter:blur(3px);display:flex;align-items:flex-start;justify-content:center;padding-top:12vh}
 #palette-box{width:min(560px,92vw);background:rgba(3,16,11,.97);border:1px solid rgba(63,224,143,.5);border-radius:10px;box-shadow:0 0 40px rgba(63,224,143,.16);overflow:hidden;font-family:monospace}
@@ -1063,7 +1074,7 @@ window._svBlink = function(btn){
 <div id="sky-tooltip-map"></div>
 <div class="gallery-hdr">
 <h1>DeepSignal — Sky Image Gallery</h1>
-<div class="subtitle">Generated <span id="gen-ts">2026-07-22 15:27 UTC</span> &nbsp;·&nbsp; 96 targets &nbsp;·&nbsp; 0 sky images via Hips2Fits CDN</div>
+<div class="subtitle">Generated <span id="gen-ts">2026-07-23 18:12 UTC</span> &nbsp;·&nbsp; 96 targets &nbsp;·&nbsp; 0 sky images via Hips2Fits CDN</div>
 <div class="stats">
   <div class="stat"><div class="stat-n" style="color:#f59e0b">3</div><div class="stat-l">Tier 1 ≥70</div></div>
   <div class="stat"><div class="stat-n" style="color:#60a5fa">1</div><div class="stat-l">Tier 2 50–69</div></div>
@@ -5449,7 +5460,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     if (ev.key !== 'Escape') return;
     var t = ev.target, tg = t && t.tagName;
     if (tg === 'INPUT' || tg === 'TEXTAREA' || (t && t.isContentEditable)) return;
-    var order = ['askbox-ov', 'palette-ov', 'session-ov', 'sim-ov', 'alerts-ov', 'lock-ov', 'radial-ov', 'gauge-ov', 'now-ov', 'kiosk-ov', 'cas-explain', 'wx-ov', 'sky-ov', 'lc-ov', 'fov-ov', 'exp-ov', 'ac-ov', 'plan-ov', 'qrh-ov', 'trx-ov', 'tune-ov', 'sd-ov', 'sys-notices', 'trklist-ov', 'journal-ov', 'scope-ov'];
+    var order = ['askbox-ov', 'palette-ov', 'session-ov', 'sim-ov', 'anom-ov', 'alerts-ov', 'lock-ov', 'radial-ov', 'gauge-ov', 'now-ov', 'kiosk-ov', 'cas-explain', 'wx-ov', 'sky-ov', 'lc-ov', 'fov-ov', 'exp-ov', 'ac-ov', 'plan-ov', 'qrh-ov', 'trx-ov', 'tune-ov', 'sd-ov', 'sys-notices', 'trklist-ov', 'journal-ov', 'scope-ov'];
     for (var i = 0; i < order.length; i++) {
       var el = document.getElementById(order[i]);
       if (!el) continue;
@@ -7150,7 +7161,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     var _hist = [];
     try { _hist = JSON.parse(sessionStorage.getItem('ds-cdu-hist') || '[]'); } catch(e) {}
     var _hIdx = _hist.length;
-    var _VOCAB = ['SCOPE', 'LOG', 'LIST', 'AR', 'NVG', 'RED', 'SYS', 'VOICE', 'EXPORT', 'IMPORT', 'DEBRIEF', 'QRH', 'TRX', 'PLAN', 'MFD', 'SHARE', 'TUNE', 'AOS', 'MAP', 'NEWS', 'REPORT', 'BLINK', 'SRC', 'TRK', 'FIND', 'WX', 'SKY', 'FOV', 'LC', 'BORTLE', 'KIOSK', 'ASK', 'JARVIS', 'BRIEF', 'LOCK', 'NOW', 'GAUGE', 'MIC', 'SESSION', 'CMD', 'SIMILAR', 'PLAN', 'ALERTS'];
+    var _VOCAB = ['SCOPE', 'LOG', 'LIST', 'AR', 'NVG', 'RED', 'SYS', 'VOICE', 'EXPORT', 'IMPORT', 'DEBRIEF', 'QRH', 'TRX', 'PLAN', 'MFD', 'SHARE', 'TUNE', 'AOS', 'MAP', 'NEWS', 'REPORT', 'BLINK', 'SRC', 'TRK', 'FIND', 'WX', 'SKY', 'FOV', 'LC', 'BORTLE', 'KIOSK', 'ASK', 'JARVIS', 'BRIEF', 'LOCK', 'NOW', 'GAUGE', 'MIC', 'SESSION', 'CMD', 'SIMILAR', 'PLAN', 'ALERTS', 'ANOMALY', 'ML'];
     inp.addEventListener('keydown', function(ev){
       ev.stopPropagation();
       if (ev.key === 'Escape') { ov.remove(); return; }
@@ -7233,6 +7244,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     if (verb === 'SESSION') return window._sessionToggle();
     if (verb === 'CMD' || verb === 'PALETTE') return window._paletteOpen();
     if (verb === 'SIMILAR') { var _sn = arg || (_scopeSel && _scopeSel.name) || (document.querySelector('#result-card .result-name') || {}).textContent; if (_sn) return window._similarOpen(String(_sn).trim()); return op('SIMILAR — NAME A CANDIDATE'); }
+    if (verb === 'ANOMALY' || verb === 'ML' || verb === 'DARKHORSE') return window._anomalyOpen();
     if (verb === 'ALERTS' || verb === 'ALERT') return window._alertsView();
     if (verb === 'NOW') return window._nowToggle();
     if (verb === 'GAUGE' || verb === 'GAUGES') return window._gaugesToggle();
@@ -7862,6 +7874,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     var tgt = _resolveTarget(q);
     if (!tgt && /\b(it|its|that|this one|the target)\b|它|牠|他|她|這個|那個/.test(low) && _ctx.entity) tgt = _ctx.entity;
     if (tgt) _ctx.entity = tgt;
+    var _an = window._askAnomalyText(low, tgt); if (_an) return done(_an);
     if (/(why|explain|reason|為什麼|為何|解釋|說明)/.test(low) && tgt) return done(_askExplainText(tgt));
     if (/(similar|like this|comparable|類似|相似)/.test(low) && tgt) { window._similarOpen(tgt.name); return done('Finding candidates similar to ' + tgt.name + '.'); }
     var _al = _askAlert(q, low, tgt); if (_al) return done(_al);
@@ -8432,7 +8445,8 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     ['⤓', 'Export observing list', 'EXPORT'], ['⇪', 'Share tracking list', 'SHARE'], ['▤', 'MFD', 'MFD'],
     ['☾', 'NVG night mode', 'NVG'], ['◉', 'Red-light mode', 'RED'], ['◪', 'Kiosk mode', 'KIOSK'],
     ['🎙', 'Voice command', 'MIC'], ['✎', 'Daily briefing', 'BRIEF'], ['⬡', 'Literature/report', 'REPORT'],
-    ['◎', 'Map', 'MAP'], ['⤒', 'Import FDR', 'IMPORT'], ['▣', 'Session report', 'DEBRIEF']
+    ['◎', 'Map', 'MAP'], ['⤒', 'Import FDR', 'IMPORT'], ['▣', 'Session report', 'DEBRIEF'],
+    ['◆', 'Anomaly scan (dark horses)', 'ANOMALY'], ['⏰', 'Conditional alerts', 'ALERTS']
   ];
   function _palClose(){ var o = document.getElementById('palette-ov'); if (o) o.remove(); }
   window._paletteOpen = function(){
@@ -8679,6 +8693,134 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     });
     inp.focus();
   };
+  /* ══ NAVCON PRO-9: client-side ML anomaly re-scoring (dark-horse discovery).
+        An unsupervised kNN outlier factor over a NORMALISED feature vector that
+        deliberately EXCLUDES the pipeline candidacy score — so a target can be
+        statistically unusual yet pipeline-rated low (a "dark horse"). Pure JS,
+        no TF.js. Schema-agnostic via the PRO-7 _catAll/_r* accessors. ══ */
+  var _anomCache = null;
+  var _ANOM_DIMS = ['tier', 'SNR', 'drift', 'reasons', 'methods', 'freq'];
+
+  function _anomVec(r){
+    return [
+      _rTier(r) != null ? _rTier(r) : 2,
+      Math.log10(1 + Math.abs(_rNum(r, 'snr'))),
+      Math.abs(_rNum(r, 'drift_rate_hz_s')),
+      _rReasons(r).length,
+      _rMethods(r).length,
+      Math.log10(1 + Math.abs(_rNum(r, 'center_freq_mhz')))
+    ];
+  }
+  function _anomScan(){
+    if (_anomCache) return _anomCache;
+    var rows = _catAll();
+    if (rows.length < 4) { _anomCache = []; return _anomCache; }
+    var D = _ANOM_DIMS.length, n = rows.length;
+    var vecs = [], mn = new Array(D).fill(Infinity), mx = new Array(D).fill(-Infinity), i, d;
+    for (i = 0; i < n; i++) { var v = _anomVec(rows[i]); vecs.push(v); for (d = 0; d < D; d++) { if (v[d] < mn[d]) mn[d] = v[d]; if (v[d] > mx[d]) mx[d] = v[d]; } }
+    var med = new Array(D);
+    for (d = 0; d < D; d++) { var col = vecs.map(function(x){ return x[d]; }).sort(function(a, b){ return a - b; }); med[d] = col[Math.floor(n / 2)]; }
+    var norm = [];
+    for (i = 0; i < n; i++) { var o = []; for (d = 0; d < D; d++) { var rg = mx[d] - mn[d]; o.push(rg > 1e-9 ? (vecs[i][d] - mn[d]) / rg : 0); } norm.push(o); }
+    var K = Math.min(8, n - 1), anom = [];
+    for (i = 0; i < n; i++) {
+      var dists = [];
+      for (var j = 0; j < n; j++) { if (j === i) continue; var s = 0; for (d = 0; d < D; d++) { var df = norm[i][d] - norm[j][d]; s += df * df; } dists.push(Math.sqrt(s)); }
+      dists.sort(function(a, b){ return a - b; });
+      var acc = 0; for (var q = 0; q < K; q++) acc += dists[q];
+      anom.push(acc / K);
+    }
+    var order = anom.map(function(a, ix){ return ix; }).sort(function(a, b){ return anom[a] - anom[b]; });
+    var anomPct = new Array(n); for (i = 0; i < n; i++) anomPct[order[i]] = i / (n - 1);
+    var scores = rows.map(function(r){ return _rScore(r); });
+    var sOrder = scores.map(function(s, ix){ return ix; }).sort(function(a, b){ return scores[a] - scores[b]; });
+    var scorePct = new Array(n); for (i = 0; i < n; i++) scorePct[sOrder[i]] = i / (n - 1);
+    var out = [];
+    for (i = 0; i < n; i++) {
+      var extreme = [], nv = norm[i], mv = [];
+      for (d = 0; d < D; d++) { var rg2 = mx[d] - mn[d]; mv.push(rg2 > 1e-9 ? (med[d] - mn[d]) / rg2 : 0); }
+      var dd = [];
+      for (d = 0; d < D; d++) dd.push({ k: _ANOM_DIMS[d], z: Math.abs(nv[d] - mv[d]) });
+      dd.sort(function(a, b){ return b.z - a.z; });
+      for (var e = 0; e < 2; e++) if (dd[e].z > 0.05) extreme.push(dd[e].k);
+      var r2 = rows[i];
+      out.push({
+        name: _rName(r2), ra: (r2.ra_deg != null ? r2.ra_deg : r2.ra), dec: (r2.dec_deg != null ? r2.dec_deg : r2.dec),
+        score: Math.round(_rScore(r2)), anom: anom[i], anomPct: anomPct[i], scorePct: scorePct[i],
+        dark: anomPct[i] >= 0.75 && scorePct[i] <= 0.5, extreme: extreme
+      });
+    }
+    out.sort(function(a, b){ return b.anomPct - a.anomPct; });
+    _anomCache = out;
+    return out;
+  }
+  window._anomScan = _anomScan;
+  window._anomFor = function(name){
+    var a = _anomScan(), nl = String(name || '').toLowerCase();
+    for (var i = 0; i < a.length; i++) if (a[i].name.toLowerCase() === nl) return a[i];
+    return null;
+  };
+
+  window._anomalyOpen = function(){
+    var a = _anomScan();
+    if (!a.length) { op('ANOMALY SCAN — CATALOG TOO SMALL'); return; }
+    var darks = a.filter(function(x){ return x.dark; });
+    var top = a.slice(0, 14);
+    var h = '<div class="j-t" style="margin-bottom:8px">UNSUPERVISED kNN OUTLIER SCORE OVER TIER · SNR · DRIFT · REASONS · METHODS · FREQ — INDEPENDENT OF THE PIPELINE SCORE. ' +
+      '<span class="an-dh">◆ DARK HORSE</span> = STATISTICALLY UNUSUAL BUT PIPELINE-RATED LOW (' + darks.length + ' FOUND).</div>';
+    for (var i = 0; i < top.length; i++) {
+      var t = top[i];
+      h += '<button class="an-row' + (t.dark ? ' dark' : '') + '" data-an-name="' + _escAttr(t.name) + '" data-ra="' + t.ra + '" data-dec="' + t.dec + '" data-score="' + t.score + '">' +
+        '<span class="an-n">' + (t.dark ? '◆ ' : '') + _esc(t.name) + '</span>' +
+        '<span class="an-bar"><span style="width:' + Math.round(t.anomPct * 100) + '%"></span></span>' +
+        '<span class="an-v">A ' + Math.round(t.anomPct * 100) + '% · S ' + t.score + (t.extreme.length ? ' · ' + t.extreme.join('/') : '') + '</span></button>';
+    }
+    var ov = _p3Overlay('anom-ov', '◆ ANOMALY SCAN — DARK-HORSE DISCOVERY', h);
+    if (!ov) return;
+    ov.addEventListener('click', function(ev){
+      var b = ev.target.closest ? ev.target.closest('[data-an-name]') : null;
+      if (!b) return;
+      window._lockOn(b.getAttribute('data-an-name'), +b.getAttribute('data-ra'), +b.getAttribute('data-dec'), +b.getAttribute('data-score'), false);
+    });
+    op('ANOMALY SCAN — ' + a.length + ' SCORED · ' + darks.length + ' DARK HORSES');
+  };
+
+  /* JARVIS: anomaly intents + "why is X anomalous" explanation */
+  window._askAnomalyText = function(low, tgt){
+    if (/(dark horse|anomal|outlier|unusual|漏|暗馬|離群|異常)/.test(low) && /(why|為什麼|為何|explain|解釋)/.test(low) && tgt) {
+      var e = window._anomFor(tgt.name);
+      if (!e) return tgt.name + ' is not in the anomaly-scored catalog.';
+      var pct = Math.round(e.anomPct * 100);
+      return tgt.name + ' sits in the top ' + (100 - pct) + ' percent for statistical unusualness (anomaly ' + pct + ' percentile' + (e.extreme.length ? ', driven by ' + e.extreme.join(' and ') : '') + '), while the pipeline scored it ' + e.score + '.' + (e.dark ? ' That combination flags it as a dark horse worth a second look.' : '');
+    }
+    if (/(dark horse|anomal|outlier|unusual|漏網|暗馬|離群|異常|second look)/.test(low)) {
+      var a = _anomScan(), darks = a.filter(function(x){ return x.dark; });
+      window._anomalyOpen();
+      if (!darks.length) return 'No strong dark horses — the most anomalous target is ' + (a[0] ? a[0].name : 'none') + '. Opening the anomaly scan.';
+      var names = darks.slice(0, 3).map(function(x){ return x.name; });
+      return 'Found ' + darks.length + ' dark horse' + (darks.length > 1 ? 's' : '') + ' — statistically unusual but pipeline-rated low: ' + names.join(', ') + '. Opening the anomaly scan.';
+    }
+    return null;
+  };
+
+  /* badge the top-anomaly cards on load */
+  (function(){
+    setTimeout(function(){
+      try {
+        var a = _anomScan(); if (!a.length) return;
+        var byName = {}; for (var i = 0; i < a.length; i++) byName[String(a[i].name).toLowerCase()] = a[i];
+        var cards = document.querySelectorAll('.card'), n = 0;
+        for (var c = 0; c < cards.length; c++) {
+          var nmEl = cards[c].querySelector('.card-name'), scEl = cards[c].querySelector('.card-score');
+          if (!nmEl || !scEl || scEl.querySelector('.anom-chip')) continue;
+          var e = byName[nmEl.textContent.trim().toLowerCase()];
+          if (e && e.anomPct >= 0.85) { scEl.insertAdjacentHTML('beforeend', ' <span class="anom-chip' + (e.dark ? ' anom-dark' : '') + '" title="Client-side ML anomaly ' + Math.round(e.anomPct * 100) + ' percentile' + (e.dark ? ' — DARK HORSE (unusual but pipeline-rated low)' : '') + '">' + (e.dark ? '◆ DARK HORSE' : '◆ ANOMALY') + '</span>'); n++; }
+        }
+        if (n) op('ANOMALY SCAN — ' + n + ' HIGH-OUTLIER CANDIDATES BADGED');
+      } catch(e) {}
+    }, 1200);
+  })();
+
   /* ── card tilt + cursor-tracking glow (event delegation) ── */
   var tiltEl = null;
   if (CAN_HOVER && !RM) {
