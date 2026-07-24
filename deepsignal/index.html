@@ -430,6 +430,19 @@ body{padding-bottom:30px}
 /* ── NAVCON PRO-2: NVG mode, observability chips, time-scrub, systems page, disposition ── */
 html.nvg body{background:#0d0202}
 html.nvg body>*{filter:sepia(1) hue-rotate(-48deg) saturate(3.4) brightness(.78) contrast(1.05)}
+/* ── NAVCON PRO-10: 3D celestial sphere ── */
+#sphere-ov{position:fixed;inset:0;z-index:9993;background:radial-gradient(ellipse at center,#061019,#01060b 80%);touch-action:none;cursor:grab}
+#sphere-ov.grab{cursor:grabbing}
+#sphere-cv{position:absolute;inset:0;width:100%;height:100%;display:block}
+#sphere-hud{position:absolute;left:14px;top:12px;font-family:monospace;font-size:.62rem;letter-spacing:.06em;color:#3fe08f;pointer-events:none;text-shadow:0 0 6px rgba(0,0,0,.8)}
+#sphere-hud .sh-t{font-size:.72rem;letter-spacing:.12em;margin-bottom:4px}
+#sphere-info{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);font-family:monospace;font-size:.66rem;color:#eef3f8;background:rgba(3,16,11,.9);border:1px solid rgba(63,224,143,.45);border-radius:8px;padding:8px 14px;text-align:center;min-width:min(320px,86vw);display:none}
+#sphere-info.on{display:block}
+#sphere-info .si-n{color:#3fe08f;font-size:.8rem;letter-spacing:.06em}
+#sphere-info .si-btn{margin-top:6px;font-family:monospace;font-size:.58rem;letter-spacing:.08em;color:#3fe08f;background:rgba(63,224,143,.1);border:1px solid rgba(63,224,143,.45);border-radius:5px;padding:3px 10px;cursor:pointer}
+#sphere-x{position:absolute;right:14px;top:12px;font-family:monospace;font-size:.8rem;color:#3fe08f;background:rgba(3,16,11,.85);border:1px solid rgba(63,224,143,.4);border-radius:5px;width:30px;height:30px;cursor:pointer;line-height:1}
+#sphere-hint{position:absolute;right:14px;bottom:16px;font-family:monospace;font-size:.52rem;letter-spacing:.1em;color:#3a7a5a;pointer-events:none;text-align:right}
+.hud-btn.sph-on{color:#7dd3fc}
 /* ── NAVCON PRO-9: client-side ML anomaly scan ── */
 .anom-chip{display:inline-block;margin-left:6px;font-family:monospace;font-size:.52rem;letter-spacing:.06em;padding:1px 5px;border-radius:3px;border:1px solid rgba(245,166,35,.5);color:#f5a623;vertical-align:middle}
 .anom-chip.anom-dark{border-color:rgba(224,80,80,.6);color:#e05050;text-shadow:0 0 6px rgba(224,80,80,.4)}
@@ -787,7 +800,7 @@ window._svBlink = function(btn){
   <span class="hud-seg" id="hud-track-seg" style="display:none">⌖ <span class="hud-val" id="hud-track">--</span></span>
   <span class="hud-seg" id="hud-watch-seg" style="display:none">★ <span class="hud-val" id="hud-watch">--</span></span>
   <span class="hud-seg"><button class="hud-btn" id="hud-ar-btn" style="display:none" title="AR finder — point your phone at the tracked target">▲ AR</button></span>
-  <span class="hud-seg hud-hide-sm"><button class="hud-btn" id="hud-nvg-btn" title="Night-vision mode — red low-brightness palette for dark adaptation">☾ NVG</button> <button class="hud-btn" id="hud-red-btn" title="Red-light mode — full red palette preserving dark adaptation (exclusive with NVG)">◉ RED</button> <button class="hud-btn" id="hud-gauge-btn" title="Instrument gauges — sky quality, Moon phase, geomagnetic Kp">◐ GAUGE</button></span>
+  <span class="hud-seg hud-hide-sm"><button class="hud-btn" id="hud-nvg-btn" title="Night-vision mode — red low-brightness palette for dark adaptation">☾ NVG</button> <button class="hud-btn" id="hud-red-btn" title="Red-light mode — full red palette preserving dark adaptation (exclusive with NVG)">◉ RED</button> <button class="hud-btn" id="hud-gauge-btn" title="Instrument gauges — sky quality, Moon phase, geomagnetic Kp">◐ GAUGE</button> <button class="hud-btn" id="hud-sphere-btn" title="3D celestial sphere — rotatable globe of all candidates">◉ 3D</button></span>
   <span id="hud-msg" role="status" aria-live="polite"></span>
 </div>
 
@@ -3353,11 +3366,12 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     if (ev.key !== 'Escape') return;
     var t = ev.target, tg = t && t.tagName;
     if (tg === 'INPUT' || tg === 'TEXTAREA' || (t && t.isContentEditable)) return;
-    var order = ['askbox-ov', 'palette-ov', 'session-ov', 'sim-ov', 'anom-ov', 'alerts-ov', 'lock-ov', 'radial-ov', 'gauge-ov', 'now-ov', 'kiosk-ov', 'cas-explain', 'wx-ov', 'sky-ov', 'lc-ov', 'fov-ov', 'exp-ov', 'ac-ov', 'plan-ov', 'qrh-ov', 'trx-ov', 'tune-ov', 'sd-ov', 'sys-notices', 'trklist-ov', 'journal-ov', 'scope-ov'];
+    var order = ['askbox-ov', 'sphere-ov', 'palette-ov', 'session-ov', 'sim-ov', 'anom-ov', 'alerts-ov', 'lock-ov', 'radial-ov', 'gauge-ov', 'now-ov', 'kiosk-ov', 'cas-explain', 'wx-ov', 'sky-ov', 'lc-ov', 'fov-ov', 'exp-ov', 'ac-ov', 'plan-ov', 'qrh-ov', 'trx-ov', 'tune-ov', 'sd-ov', 'sys-notices', 'trklist-ov', 'journal-ov', 'scope-ov'];
     for (var i = 0; i < order.length; i++) {
       var el = document.getElementById(order[i]);
       if (!el) continue;
       ev.stopPropagation();
+      if (order[i] === 'sphere-ov') { window._sphereToggle(); return; }
       if (order[i] === 'session-ov') { window._sessionToggle(); return; }
       if (order[i] === 'palette-ov') { var _po = document.getElementById('palette-ov'); if (_po) _po.remove(); try { SFX.close(); } catch(e) {} return; }
       if (order[i] === 'kiosk-ov') { _kioskStop(); return; }
@@ -5054,7 +5068,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     var _hist = [];
     try { _hist = JSON.parse(sessionStorage.getItem('ds-cdu-hist') || '[]'); } catch(e) {}
     var _hIdx = _hist.length;
-    var _VOCAB = ['SCOPE', 'LOG', 'LIST', 'AR', 'NVG', 'RED', 'SYS', 'VOICE', 'EXPORT', 'IMPORT', 'DEBRIEF', 'QRH', 'TRX', 'PLAN', 'MFD', 'SHARE', 'TUNE', 'AOS', 'MAP', 'NEWS', 'REPORT', 'BLINK', 'SRC', 'TRK', 'FIND', 'WX', 'SKY', 'FOV', 'LC', 'BORTLE', 'KIOSK', 'ASK', 'JARVIS', 'BRIEF', 'LOCK', 'NOW', 'GAUGE', 'MIC', 'SESSION', 'CMD', 'SIMILAR', 'PLAN', 'ALERTS', 'ANOMALY', 'ML'];
+    var _VOCAB = ['SCOPE', 'LOG', 'LIST', 'AR', 'NVG', 'RED', 'SYS', 'VOICE', 'EXPORT', 'IMPORT', 'DEBRIEF', 'QRH', 'TRX', 'PLAN', 'MFD', 'SHARE', 'TUNE', 'AOS', 'MAP', 'NEWS', 'REPORT', 'BLINK', 'SRC', 'TRK', 'FIND', 'WX', 'SKY', 'FOV', 'LC', 'BORTLE', 'KIOSK', 'ASK', 'JARVIS', 'BRIEF', 'LOCK', 'NOW', 'GAUGE', 'MIC', 'SESSION', 'CMD', 'SIMILAR', 'PLAN', 'ALERTS', 'ANOMALY', 'ML', 'SPHERE', '3D'];
     inp.addEventListener('keydown', function(ev){
       ev.stopPropagation();
       if (ev.key === 'Escape') { ov.remove(); return; }
@@ -5137,6 +5151,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     if (verb === 'SESSION') return window._sessionToggle();
     if (verb === 'CMD' || verb === 'PALETTE') return window._paletteOpen();
     if (verb === 'SIMILAR') { var _sn = arg || (_scopeSel && _scopeSel.name) || (document.querySelector('#result-card .result-name') || {}).textContent; if (_sn) return window._similarOpen(String(_sn).trim()); return op('SIMILAR — NAME A CANDIDATE'); }
+    if (verb === 'SPHERE' || verb === '3D' || verb === 'GLOBE') return window._sphereToggle();
     if (verb === 'ANOMALY' || verb === 'ML' || verb === 'DARKHORSE') return window._anomalyOpen();
     if (verb === 'ALERTS' || verb === 'ALERT') return window._alertsView();
     if (verb === 'NOW') return window._nowToggle();
@@ -6091,6 +6106,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
   (function(){
     var mb = document.getElementById('hud-mic-btn'); if (mb) mb.addEventListener('click', window._micToggle);
     var gb = document.getElementById('hud-gauge-btn'); if (gb) gb.addEventListener('click', window._gaugesToggle);
+    var sphb = document.getElementById('hud-sphere-btn'); if (sphb) sphb.addEventListener('click', window._sphereToggle);
     var nw = document.getElementById('hud-now'); if (nw) nw.addEventListener('click', window._nowToggle);
     setTimeout(_nowRender, 2500);
     setInterval(_nowRender, 60000);
@@ -6339,7 +6355,8 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     ['☾', 'NVG night mode', 'NVG'], ['◉', 'Red-light mode', 'RED'], ['◪', 'Kiosk mode', 'KIOSK'],
     ['🎙', 'Voice command', 'MIC'], ['✎', 'Daily briefing', 'BRIEF'], ['⬡', 'Literature/report', 'REPORT'],
     ['◎', 'Map', 'MAP'], ['⤒', 'Import FDR', 'IMPORT'], ['▣', 'Session report', 'DEBRIEF'],
-    ['◆', 'Anomaly scan (dark horses)', 'ANOMALY'], ['⏰', 'Conditional alerts', 'ALERTS']
+    ['◆', 'Anomaly scan (dark horses)', 'ANOMALY'], ['⏰', 'Conditional alerts', 'ALERTS'],
+    ['◉', '3D celestial sphere', 'SPHERE']
   ];
   function _palClose(){ var o = document.getElementById('palette-ov'); if (o) o.remove(); }
   window._paletteOpen = function(){
@@ -6713,6 +6730,131 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       } catch(e) {}
     }, 1200);
   })();
+
+  /* ══ NAVCON PRO-10: interactive 3D celestial sphere. A rotatable, zoomable
+        globe of every candidate at its true RA/Dec, projected on the CPU to a
+        canvas (zero dependencies — GPU WebGL is unnecessary for this point
+        count and far less portable). Drag to rotate, wheel to zoom, click a
+        point to identify and lock. ══ */
+  var _sph = null;
+
+  function _sphPts(){
+    var out = [];
+    try {
+      var nt = _navTargets();
+      for (var i = 0; i < nt.length; i++) {
+        if (nt[i].ra == null || isNaN(+nt[i].ra)) continue;
+        var ra = +nt[i].ra * Math.PI / 180, de = +nt[i].dec * Math.PI / 180;
+        out.push({ name: nt[i].name, ra: +nt[i].ra, dec: +nt[i].dec, score: +nt[i].score || 0,
+          v: [Math.cos(de) * Math.cos(ra), Math.sin(de), Math.cos(de) * Math.sin(ra)] });
+      }
+    } catch(e) {}
+    return out;
+  }
+  function _sphRot(v){
+    var cy = Math.cos(_sph.yaw), sy = Math.sin(_sph.yaw);
+    var x1 = v[0] * cy + v[2] * sy, z1 = -v[0] * sy + v[2] * cy, y1 = v[1];
+    var cp = Math.cos(_sph.pitch), sp = Math.sin(_sph.pitch);
+    return [x1, y1 * cp - z1 * sp, y1 * sp + z1 * cp];
+  }
+  function _sphProj(v, W, H){
+    var r = _sphRot(v), R = Math.min(W, H) * 0.42 * _sph.zoom;
+    return { x: W / 2 + r[0] * R, y: H / 2 - r[1] * R, z: r[2], R: R };
+  }
+  window._sphereScreenOf = function(name){
+    if (!_sph) return null;
+    for (var i = 0; i < _sph.pts.length; i++) if (_sph.pts[i].name === name) { var s = _sphProj(_sph.pts[i].v, _sph.cv.width, _sph.cv.height); return { x: s.x, y: s.y, front: s.z >= 0 }; }
+    return null;
+  };
+  window._sphereState = function(){ return _sph ? { n: _sph.pts.length, yaw: _sph.yaw, pitch: _sph.pitch, zoom: _sph.zoom, sel: _sph.sel ? _sph.sel.name : null } : null; };
+
+  function _sphGrid(c, W, H){
+    c.strokeStyle = 'rgba(63,224,143,.10)'; c.lineWidth = 1;
+    function ring(fn){
+      c.beginPath(); var started = false;
+      for (var a = 0; a <= 360; a += 4) {
+        var s = _sphProj(fn(a * Math.PI / 180), W, H);
+        if (s.z < -0.03) { started = false; continue; }
+        if (!started) { c.moveTo(s.x, s.y); started = true; } else c.lineTo(s.x, s.y);
+      }
+      c.stroke();
+    }
+    ring(function(t){ return [Math.cos(t), 0, Math.sin(t)]; });
+    for (var m = 0; m < 6; m++) (function(mm){ var ra = mm * Math.PI / 3; ring(function(t){ return [Math.cos(t) * Math.cos(ra), Math.sin(t), Math.cos(t) * Math.sin(ra)]; }); })(m);
+  }
+  function _sphDraw(){
+    if (!_sph) return;
+    var c = _sph.ctx, W = _sph.cv.width, H = _sph.cv.height;
+    c.clearRect(0, 0, W, H);
+    var R = Math.min(W, H) * 0.42 * _sph.zoom;
+    c.strokeStyle = 'rgba(63,224,143,.16)'; c.lineWidth = 1; c.beginPath(); c.arc(W / 2, H / 2, R, 0, 6.283); c.stroke();
+    _sphGrid(c, W, H);
+    var ps = [];
+    for (var i = 0; i < _sph.pts.length; i++) ps.push({ p: _sph.pts[i], s: _sphProj(_sph.pts[i].v, W, H) });
+    ps.sort(function(a, b){ return a.s.z - b.s.z; });
+    for (var k = 0; k < ps.length; k++) {
+      var s = ps[k].s, p = ps[k].p, front = s.z >= 0;
+      var col = _TIERC[_tierOf(p.score)], rad = p.score >= 70 ? 3.2 : p.score >= 50 ? 2.4 : 1.8;
+      c.globalAlpha = front ? 0.95 : 0.25; c.fillStyle = col;
+      if (front) { c.shadowColor = col; c.shadowBlur = 5; }
+      c.beginPath(); c.arc(s.x, s.y, rad, 0, 6.283); c.fill(); c.shadowBlur = 0;
+    }
+    c.globalAlpha = 1;
+    if (_sph.sel) {
+      var ss = _sphProj(_sph.sel.v, W, H);
+      c.strokeStyle = '#eef3f8'; c.lineWidth = 1.4; c.beginPath(); c.arc(ss.x, ss.y, 8, 0, 6.283); c.stroke();
+    }
+  }
+  window._spherePick = function(px, py){
+    if (!_sph) return null;
+    var W = _sph.cv.width, H = _sph.cv.height, best = null, bd = 18 * 18;
+    for (var i = 0; i < _sph.pts.length; i++) {
+      var s = _sphProj(_sph.pts[i].v, W, H); if (s.z < 0) continue;
+      var dx = s.x - px, dy = s.y - py, d = dx * dx + dy * dy;
+      if (d < bd) { bd = d; best = _sph.pts[i]; }
+    }
+    return best;
+  };
+  function _sphSelect(p){
+    _sph.sel = p;
+    var info = document.getElementById('sphere-info');
+    if (!info) return;
+    if (!p) { info.classList.remove('on'); return; }
+    var aa = null; try { aa = _altazOf(p.ra, p.dec); } catch(e) {}
+    info.innerHTML = '<div class="si-n">' + _esc(p.name) + '</div><div style="color:#9fd4bb;font-size:.58rem;margin-top:3px">SCORE ' + Math.round(p.score) + ' · RA ' + p.ra.toFixed(2) + '° · DEC ' + p.dec.toFixed(2) + '°' + (aa ? ' · ' + (aa.alt > 0 ? 'ALT ' + aa.alt.toFixed(0) + '°' : 'BELOW HORIZON') : '') + '</div><button class="si-btn" id="sph-lock">◎ LOCK TARGET</button>';
+    info.classList.add('on');
+    var lb = document.getElementById('sph-lock');
+    if (lb) lb.addEventListener('click', function(ev){ ev.stopPropagation(); window._lockOn(p.name, p.ra, p.dec, Math.round(p.score), false); });
+    _sphDraw();
+  }
+  window._sphereToggle = function(){
+    var ov = document.getElementById('sphere-ov');
+    if (ov) { if (_sph && _sph.raf) cancelAnimationFrame(_sph.raf); _sph = null; ov.remove(); var bx = document.getElementById('hud-sphere-btn'); if (bx) bx.classList.remove('sph-on'); try { SFX.close(); } catch(e) {} return; }
+    var pts = _sphPts();
+    if (!pts.length) { op('3D SPHERE — NO CATALOG TARGETS'); return; }
+    try { SFX.open(); } catch(e) {}
+    op('3D CELESTIAL SPHERE — ' + pts.length + ' CANDIDATES · DRAG TO ROTATE');
+    ov = document.createElement('div'); ov.id = 'sphere-ov'; ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-label', '3D celestial sphere');
+    ov.innerHTML = '<canvas id="sphere-cv"></canvas>' +
+      '<div id="sphere-hud"><div class="sh-t">◉ CELESTIAL SPHERE</div><span id="sphere-count">' + pts.length + '</span> CANDIDATES · TIER-COLOURED</div>' +
+      '<button id="sphere-x" title="Close">✕</button>' +
+      '<div id="sphere-info"></div>' +
+      '<div id="sphere-hint">DRAG ROTATE · WHEEL ZOOM · TAP A POINT</div>';
+    document.body.appendChild(ov);
+    var cv = document.getElementById('sphere-cv'), ctx = cv.getContext('2d');
+    _sph = { pts: pts, yaw: 0, pitch: -0.35, zoom: 1, cv: cv, ctx: ctx, sel: null, raf: null };
+    function resize(){ cv.width = ov.clientWidth || window.innerWidth; cv.height = ov.clientHeight || window.innerHeight; }
+    resize(); _sph.resize = resize; window.addEventListener('resize', resize);
+    var drag = false, moved = 0, lx = 0, ly = 0;
+    cv.addEventListener('pointerdown', function(e){ drag = true; moved = 0; lx = e.clientX; ly = e.clientY; ov.classList.add('grab'); try { cv.setPointerCapture(e.pointerId); } catch(x) {} });
+    cv.addEventListener('pointermove', function(e){ if (!drag) return; var dx = e.clientX - lx, dy = e.clientY - ly; lx = e.clientX; ly = e.clientY; moved += Math.abs(dx) + Math.abs(dy); _sph.yaw += dx * 0.006; _sph.pitch = Math.max(-1.5, Math.min(1.5, _sph.pitch + dy * 0.006)); });
+    cv.addEventListener('pointerup', function(e){ ov.classList.remove('grab'); if (drag && moved < 6) { var p = window._spherePick(e.clientX, e.clientY); _sphSelect(p); } drag = false; });
+    cv.addEventListener('wheel', function(e){ e.preventDefault(); _sph.zoom = Math.max(0.5, Math.min(4, _sph.zoom * (e.deltaY < 0 ? 1.12 : 0.89))); }, { passive: false });
+    document.getElementById('sphere-x').addEventListener('click', window._sphereToggle);
+    ov.addEventListener('click', function(e){ if (e.target === document.getElementById('sphere-info')) window._sphereToggle; });
+    var bx = document.getElementById('hud-sphere-btn'); if (bx) bx.classList.add('sph-on');
+    (function loop(){ if (!_sph) return; _sphDraw(); _sph.raf = requestAnimationFrame(loop); })();
+  };
 
   /* ── card tilt + cursor-tracking glow (event delegation) ── */
   var tiltEl = null;
