@@ -273,6 +273,14 @@ tapping a point identifies + locks it; tier-coloured, equator/meridian grid. HUD
 CDU SPHERE. Advisory CI test: `.github/scripts/e2e-full/pro10test.mjs`. Generated output
 — edit upstream, never here.
 
+### NAVCON PRO-13 — team consensus (URL-share collaboration) + Rubin slot (deployed in index.html + gallery.html)
+Asynchronous, zero-backend collaboration: share your candidate dispositions as a `#team=`
+URL fragment; opening a colleague's link merges their dispositions as a peer, and cards +
+a TEAM panel (CDU TEAM) show the aggregated flag/review/dismiss consensus. Pure static, no
+server. The Rubin/LSST imagery-ladder slot is finalized (one-block-uncomment when the
+public HiPS ships). Advisory CI test: `.github/scripts/e2e-full/pro13test.mjs`. Generated
+output — edit upstream, never here.
+
 ---
 
 ## Constraints

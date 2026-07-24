@@ -381,6 +381,10 @@ body{padding-bottom:30px}
 /* ── NAVCON PRO-2: NVG mode, observability chips, time-scrub, systems page, disposition ── */
 html.nvg body{background:#0d0202}
 html.nvg body>*{filter:sepia(1) hue-rotate(-48deg) saturate(3.4) brightness(.78) contrast(1.05)}
+/* ── NAVCON PRO-13: team consensus (URL-share collaboration) ── */
+.team-chip{display:inline-block;margin-left:6px;font-family:monospace;font-size:.52rem;letter-spacing:.04em;padding:1px 5px;border-radius:3px;border:1px solid rgba(125,211,252,.5);color:#7dd3fc;vertical-align:middle}
+.team-chip.tc-flag{border-color:rgba(245,166,35,.6);color:#f5a623}
+#team-ov .tm-share{margin-bottom:10px}
 /* ── NAVCON PRO-10: 3D celestial sphere ── */
 #sphere-ov{position:fixed;inset:0;z-index:9993;background:radial-gradient(ellipse at center,#061019,#01060b 80%);touch-action:none;cursor:grab}
 #sphere-ov.grab{cursor:grabbing}
@@ -1087,7 +1091,7 @@ window._svBlink = function(btn){
 <div id="sky-tooltip-map"></div>
 <div class="gallery-hdr">
 <h1>DeepSignal — Sky Image Gallery</h1>
-<div class="subtitle">Generated <span id="gen-ts">2026-07-24 02:52 UTC</span> &nbsp;·&nbsp; 96 targets &nbsp;·&nbsp; 0 sky images via Hips2Fits CDN</div>
+<div class="subtitle">Generated <span id="gen-ts">2026-07-24 03:04 UTC</span> &nbsp;·&nbsp; 96 targets &nbsp;·&nbsp; 0 sky images via Hips2Fits CDN</div>
 <div class="stats">
   <div class="stat"><div class="stat-n" style="color:#f59e0b">3</div><div class="stat-l">Tier 1 ≥70</div></div>
   <div class="stat"><div class="stat-n" style="color:#60a5fa">1</div><div class="stat-l">Tier 2 50–69</div></div>
@@ -5473,7 +5477,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     if (ev.key !== 'Escape') return;
     var t = ev.target, tg = t && t.tagName;
     if (tg === 'INPUT' || tg === 'TEXTAREA' || (t && t.isContentEditable)) return;
-    var order = ['askbox-ov', 'sphere-ov', 'palette-ov', 'session-ov', 'sim-ov', 'anom-ov', 'alerts-ov', 'lock-ov', 'radial-ov', 'gauge-ov', 'now-ov', 'kiosk-ov', 'cas-explain', 'wx-ov', 'sky-ov', 'lc-ov', 'fov-ov', 'exp-ov', 'ac-ov', 'plan-ov', 'qrh-ov', 'trx-ov', 'tune-ov', 'sd-ov', 'sys-notices', 'trklist-ov', 'journal-ov', 'scope-ov'];
+    var order = ['askbox-ov', 'sphere-ov', 'palette-ov', 'session-ov', 'sim-ov', 'anom-ov', 'team-ov', 'alerts-ov', 'lock-ov', 'radial-ov', 'gauge-ov', 'now-ov', 'kiosk-ov', 'cas-explain', 'wx-ov', 'sky-ov', 'lc-ov', 'fov-ov', 'exp-ov', 'ac-ov', 'plan-ov', 'qrh-ov', 'trx-ov', 'tune-ov', 'sd-ov', 'sys-notices', 'trklist-ov', 'journal-ov', 'scope-ov'];
     for (var i = 0; i < order.length; i++) {
       var el = document.getElementById(order[i]);
       if (!el) continue;
@@ -7175,7 +7179,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     var _hist = [];
     try { _hist = JSON.parse(sessionStorage.getItem('ds-cdu-hist') || '[]'); } catch(e) {}
     var _hIdx = _hist.length;
-    var _VOCAB = ['SCOPE', 'LOG', 'LIST', 'AR', 'NVG', 'RED', 'SYS', 'VOICE', 'EXPORT', 'IMPORT', 'DEBRIEF', 'QRH', 'TRX', 'PLAN', 'MFD', 'SHARE', 'TUNE', 'AOS', 'MAP', 'NEWS', 'REPORT', 'BLINK', 'SRC', 'TRK', 'FIND', 'WX', 'SKY', 'FOV', 'LC', 'BORTLE', 'KIOSK', 'ASK', 'JARVIS', 'BRIEF', 'LOCK', 'NOW', 'GAUGE', 'MIC', 'SESSION', 'CMD', 'SIMILAR', 'PLAN', 'ALERTS', 'ANOMALY', 'ML', 'SPHERE', '3D'];
+    var _VOCAB = ['SCOPE', 'LOG', 'LIST', 'AR', 'NVG', 'RED', 'SYS', 'VOICE', 'EXPORT', 'IMPORT', 'DEBRIEF', 'QRH', 'TRX', 'PLAN', 'MFD', 'SHARE', 'TUNE', 'AOS', 'MAP', 'NEWS', 'REPORT', 'BLINK', 'SRC', 'TRK', 'FIND', 'WX', 'SKY', 'FOV', 'LC', 'BORTLE', 'KIOSK', 'ASK', 'JARVIS', 'BRIEF', 'LOCK', 'NOW', 'GAUGE', 'MIC', 'SESSION', 'CMD', 'SIMILAR', 'PLAN', 'ALERTS', 'ANOMALY', 'ML', 'SPHERE', '3D', 'TEAM', 'CONSENSUS'];
     inp.addEventListener('keydown', function(ev){
       ev.stopPropagation();
       if (ev.key === 'Escape') { ov.remove(); return; }
@@ -7258,6 +7262,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     if (verb === 'SESSION') return window._sessionToggle();
     if (verb === 'CMD' || verb === 'PALETTE') return window._paletteOpen();
     if (verb === 'SIMILAR') { var _sn = arg || (_scopeSel && _scopeSel.name) || (document.querySelector('#result-card .result-name') || {}).textContent; if (_sn) return window._similarOpen(String(_sn).trim()); return op('SIMILAR — NAME A CANDIDATE'); }
+    if (verb === 'TEAM' || verb === 'CONSENSUS') { if (/share|分享/.test((arg || '').toLowerCase())) return window._teamShare(); return window._teamOpen(); }
     if (verb === 'SPHERE' || verb === '3D' || verb === 'GLOBE') return window._sphereToggle();
     if (verb === 'ANOMALY' || verb === 'ML' || verb === 'DARKHORSE') return window._anomalyOpen();
     if (verb === 'ALERTS' || verb === 'ALERT') return window._alertsView();
@@ -8463,7 +8468,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     ['🎙', 'Voice command', 'MIC'], ['✎', 'Daily briefing', 'BRIEF'], ['⬡', 'Literature/report', 'REPORT'],
     ['◎', 'Map', 'MAP'], ['⤒', 'Import FDR', 'IMPORT'], ['▣', 'Session report', 'DEBRIEF'],
     ['◆', 'Anomaly scan (dark horses)', 'ANOMALY'], ['⏰', 'Conditional alerts', 'ALERTS'],
-    ['◉', '3D celestial sphere', 'SPHERE']
+    ['◉', '3D celestial sphere', 'SPHERE'], ['⇪', 'Team consensus', 'TEAM']
   ];
   function _palClose(){ var o = document.getElementById('palette-ov'); if (o) o.remove(); }
   window._paletteOpen = function(){
@@ -8962,6 +8967,85 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     var bx = document.getElementById('hud-sphere-btn'); if (bx) bx.classList.add('sph-on');
     (function loop(){ if (!_sph) return; _sphDraw(); _sph.raf = requestAnimationFrame(loop); })();
   };
+
+  /* ══ NAVCON PRO-13: team consensus — asynchronous, zero-backend collaboration.
+        Encode your candidate dispositions into a shareable URL fragment; opening
+        a colleague's link merges their dispositions as a "peer" layer, and cards
+        + a TEAM panel show the aggregated community consensus. Pure static, no
+        server, no credentials. ══ */
+  function _observerId(){
+    try { var id = localStorage.getItem('ds-observer'); if (!id) { id = 'obs-' + (Date.now() % 1e7).toString(36) + Math.floor((performance.now() * 1000) % 1e6).toString(36); localStorage.setItem('ds-observer', id); } return id; } catch(e) { return 'obs-x'; }
+  }
+  function _peersGet(){ try { return JSON.parse(localStorage.getItem('ds-peers') || '[]'); } catch(e) { return []; } }
+  function _peersSet(a){ try { localStorage.setItem('ds-peers', JSON.stringify(a.slice(0, 50))); } catch(e) {} }
+
+  window._teamShare = function(){
+    try {
+      var d = _dMap(), pay = { o: _observerId(), d: {} };
+      for (var k in d) if (d[k]) pay.d[k] = d[k];
+      if (!Object.keys(pay.d).length) { op('TEAM SHARE — DISPOSITION SOME CANDIDATES FIRST (▢→✔→⚑)'); return; }
+      var url = location.href.split('#')[0] + '#team=' + btoa(unescape(encodeURIComponent(JSON.stringify(pay))));
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).catch(function(){});
+      op('TEAM CONSENSUS LINK COPIED — ' + Object.keys(pay.d).length + ' DISPOSITIONS');
+      try { prompt('Share this consensus link — opening it merges your dispositions into a teammate’s TEAM view:', url); } catch(e) {}
+    } catch(e) { op('TEAM SHARE FAILED'); }
+  };
+  function _teamMergeFromHash(){
+    try {
+      var m = location.hash.match(/[#&]team=([^&]+)/); if (!m) return;
+      var pay = JSON.parse(decodeURIComponent(escape(atob(m[1]))));
+      if (!pay || !pay.d) return;
+      var peers = _peersGet(), oid = pay.o || ('peer-' + peers.length), found = false;
+      for (var i = 0; i < peers.length; i++) if (peers[i].id === oid) { peers[i].d = pay.d; peers[i].t = Date.now(); found = true; }
+      if (!found) peers.push({ id: oid, d: pay.d, t: Date.now() });
+      _peersSet(peers);
+      var n = Object.keys(pay.d).length;
+      op('TEAM — MERGED ' + n + ' DISPOSITION' + (n > 1 ? 'S' : '') + ' FROM ' + oid.toUpperCase());
+      try { _jarvis('Merged ' + n + ' dispositions from a teammate into the consensus view.', false); } catch(e) {}
+      history.replaceState(null, '', location.pathname + location.search);
+      setTimeout(_teamBadges, 300);
+    } catch(e) {}
+  }
+  window._teamMerge = _teamMergeFromHash;
+  window._teamConsensus = function(name){
+    var peers = _peersGet(), out = { rev: 0, flag: 0, dis: 0, total: 0 };
+    for (var i = 0; i < peers.length; i++) { var s = peers[i].d && peers[i].d[name]; if (s) { if (s === 'rev') out.rev++; else if (s === 'flag') out.flag++; else if (s === 'dis') out.dis++; out.total++; } }
+    return out;
+  };
+  function _teamBadges(){
+    try {
+      var cards = document.querySelectorAll('.card'), n = 0;
+      for (var c = 0; c < cards.length; c++) {
+        var nm = cards[c].querySelector('.card-name'), sc = cards[c].querySelector('.card-score');
+        if (!nm || !sc || sc.querySelector('.team-chip')) continue;
+        var cn = window._teamConsensus(nm.textContent.trim());
+        if (cn.total) { var flag = cn.flag > 0; sc.insertAdjacentHTML('beforeend', ' <span class="team-chip' + (flag ? ' tc-flag' : '') + '" title="Team consensus — ' + cn.rev + ' reviewed, ' + cn.flag + ' flagged, ' + cn.dis + ' dismissed">' + (flag ? '⚑' : '✔') + ' ' + cn.total + '</span>'); n++; }
+      }
+      if (n) op('TEAM — ' + n + ' CANDIDATE' + (n > 1 ? 'S' : '') + ' WITH PEER CONSENSUS');
+    } catch(e) {}
+  }
+  window._teamOpen = function(){
+    var peers = _peersGet(), agg = {};
+    for (var i = 0; i < peers.length; i++) { var d = peers[i].d || {}; for (var k in d) { if (!agg[k]) agg[k] = { rev: 0, flag: 0, dis: 0 }; if (d[k] === 'rev') agg[k].rev++; else if (d[k] === 'flag') agg[k].flag++; else if (d[k] === 'dis') agg[k].dis++; } }
+    var rows = Object.keys(agg).map(function(k){ var a = agg[k]; return { name: k, a: a, w: a.flag * 2 + a.rev - a.dis }; }).sort(function(x, y){ return y.w - x.w; });
+    var h = '<button class="trk-bell tm-share" style="width:auto" id="team-share-btn">⇪ SHARE MY DISPOSITIONS</button>' +
+      '<div class="j-t" style="margin-bottom:8px">' + peers.length + ' TEAMMATE' + (peers.length === 1 ? '' : 'S') + ' MERGED · ⚑ FLAGGED WEIGHTED HIGHEST · SHARE YOUR OWN, OR OPEN A “#team=” LINK A COLLEAGUE SENT YOU.</div>';
+    if (!rows.length) h += '<div class="j-t">NO TEAM DISPOSITIONS YET.</div>';
+    var cat = _catAll();
+    function coord(nm){ for (var j = 0; j < cat.length; j++) if (_rName(cat[j]).toLowerCase() === nm.toLowerCase()) return { ra: (cat[j].ra_deg != null ? cat[j].ra_deg : cat[j].ra), dec: (cat[j].dec_deg != null ? cat[j].dec_deg : cat[j].dec), score: _rScore(cat[j]) }; return null; }
+    for (var r = 0; r < rows.length && r < 20; r++) {
+      var c2 = coord(rows[r].name), a2 = rows[r].a;
+      h += '<button class="sd-row" data-tmname="' + _escAttr(rows[r].name) + '"' + (c2 ? ' data-ra="' + c2.ra + '" data-dec="' + c2.dec + '" data-score="' + Math.round(c2.score) + '"' : '') + ' style="width:100%;text-align:left;background:none;border:none;border-bottom:1px solid rgba(63,224,143,.08);cursor:pointer">' +
+        '<span class="sd-name" style="width:150px;color:#3fe08f">' + _esc(rows[r].name) + '</span>' +
+        '<span style="flex:1;font-size:.62rem">' + (a2.flag ? '<span style="color:#f5a623">⚑' + a2.flag + '</span> ' : '') + (a2.rev ? '<span style="color:#9fd4bb">✔' + a2.rev + '</span> ' : '') + (a2.dis ? '<span style="color:#4a5a6a">✕' + a2.dis + '</span>' : '') + '</span></button>';
+    }
+    var ov = _p3Overlay('team-ov', '⇪ TEAM CONSENSUS', h);
+    if (!ov) return;
+    var sb = document.getElementById('team-share-btn'); if (sb) sb.addEventListener('click', function(ev){ ev.stopPropagation(); window._teamShare(); });
+    ov.addEventListener('click', function(ev){ var b = ev.target.closest ? ev.target.closest('[data-tmname]') : null; if (!b || b.getAttribute('data-ra') == null) return; window._lockOn(b.getAttribute('data-tmname'), +b.getAttribute('data-ra'), +b.getAttribute('data-dec'), +b.getAttribute('data-score'), false); });
+    op('TEAM CONSENSUS — ' + rows.length + ' CANDIDATE' + (rows.length === 1 ? '' : 'S') + ' ACROSS ' + peers.length + ' PEER' + (peers.length === 1 ? '' : 'S'));
+  };
+  (function(){ _teamMergeFromHash(); setTimeout(_teamBadges, 900); })();
 
   /* ── card tilt + cursor-tracking glow (event delegation) ── */
   var tiltEl = null;
