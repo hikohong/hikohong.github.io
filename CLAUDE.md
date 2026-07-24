@@ -266,6 +266,13 @@ unusual but pipeline-rated low). ANOMALY SCAN panel (CDU ANOMALY), ◆ card badg
 JARVIS "show me the dark horses" / "why is X anomalous". Advisory CI test:
 `.github/scripts/e2e-full/pro9test.mjs`. Generated output — edit upstream, never here.
 
+### NAVCON PRO-10 — interactive 3D celestial sphere (deployed in index.html + gallery.html)
+A rotatable, zoomable globe of every candidate at its true RA/Dec, CPU-projected to a
+canvas (zero deps; GPU WebGL unnecessary at ~160 points). Drag rotates, wheel zooms,
+tapping a point identifies + locks it; tier-coloured, equator/meridian grid. HUD ◉ 3D,
+CDU SPHERE. Advisory CI test: `.github/scripts/e2e-full/pro10test.mjs`. Generated output
+— edit upstream, never here.
+
 ---
 
 ## Constraints
