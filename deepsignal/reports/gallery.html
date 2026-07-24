@@ -381,6 +381,13 @@ body{padding-bottom:30px}
 /* ── NAVCON PRO-2: NVG mode, observability chips, time-scrub, systems page, disposition ── */
 html.nvg body{background:#0d0202}
 html.nvg body>*{filter:sepia(1) hue-rotate(-48deg) saturate(3.4) brightness(.78) contrast(1.05)}
+/* ── NAVCON PRO-11: Aladin Lite interactive atlas (vendored, lazy, WebGL2) ── */
+#aladin-ov{position:fixed;inset:0;z-index:9992;background:#020810;display:flex;flex-direction:column}
+#aladin-ov .al-hdr{display:flex;align-items:center;font-family:monospace;font-size:.72rem;letter-spacing:.1em;color:#3fe08f;padding:10px 14px;border-bottom:1px solid rgba(63,224,143,.3);background:rgba(3,16,11,.9)}
+#aladin-ov .al-hdr .pro-x{margin-left:auto;font-family:monospace;font-size:.8rem;color:#3fe08f;background:rgba(63,224,143,.08);border:1px solid rgba(63,224,143,.4);border-radius:5px;width:30px;height:30px;cursor:pointer;line-height:1}
+#aladin-lite{flex:1;min-height:0;position:relative;background:#000}
+#aladin-status{position:absolute;left:50%;top:54%;transform:translate(-50%,-50%);font-family:monospace;font-size:.66rem;letter-spacing:.05em;color:#3fe08f;text-align:center;max-width:min(540px,86vw);pointer-events:none;z-index:2}
+#aladin-status.al-fail{color:#f5a623}
 /* ── NAVCON PRO-13: team consensus (URL-share collaboration) ── */
 .team-chip{display:inline-block;margin-left:6px;font-family:monospace;font-size:.52rem;letter-spacing:.04em;padding:1px 5px;border-radius:3px;border:1px solid rgba(125,211,252,.5);color:#7dd3fc;vertical-align:middle}
 .team-chip.tc-flag{border-color:rgba(245,166,35,.6);color:#f5a623}
@@ -1091,7 +1098,7 @@ window._svBlink = function(btn){
 <div id="sky-tooltip-map"></div>
 <div class="gallery-hdr">
 <h1>DeepSignal — Sky Image Gallery</h1>
-<div class="subtitle">Generated <span id="gen-ts">2026-07-24 03:04 UTC</span> &nbsp;·&nbsp; 96 targets &nbsp;·&nbsp; 0 sky images via Hips2Fits CDN</div>
+<div class="subtitle">Generated <span id="gen-ts">2026-07-24 17:25 UTC</span> &nbsp;·&nbsp; 96 targets &nbsp;·&nbsp; 0 sky images via Hips2Fits CDN</div>
 <div class="stats">
   <div class="stat"><div class="stat-n" style="color:#f59e0b">3</div><div class="stat-l">Tier 1 ≥70</div></div>
   <div class="stat"><div class="stat-n" style="color:#60a5fa">1</div><div class="stat-l">Tier 2 50–69</div></div>
@@ -5477,7 +5484,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     if (ev.key !== 'Escape') return;
     var t = ev.target, tg = t && t.tagName;
     if (tg === 'INPUT' || tg === 'TEXTAREA' || (t && t.isContentEditable)) return;
-    var order = ['askbox-ov', 'sphere-ov', 'palette-ov', 'session-ov', 'sim-ov', 'anom-ov', 'team-ov', 'alerts-ov', 'lock-ov', 'radial-ov', 'gauge-ov', 'now-ov', 'kiosk-ov', 'cas-explain', 'wx-ov', 'sky-ov', 'lc-ov', 'fov-ov', 'exp-ov', 'ac-ov', 'plan-ov', 'qrh-ov', 'trx-ov', 'tune-ov', 'sd-ov', 'sys-notices', 'trklist-ov', 'journal-ov', 'scope-ov'];
+    var order = ['askbox-ov', 'aladin-ov', 'sphere-ov', 'palette-ov', 'session-ov', 'sim-ov', 'anom-ov', 'team-ov', 'alerts-ov', 'lock-ov', 'radial-ov', 'gauge-ov', 'now-ov', 'kiosk-ov', 'cas-explain', 'wx-ov', 'sky-ov', 'lc-ov', 'fov-ov', 'exp-ov', 'ac-ov', 'plan-ov', 'qrh-ov', 'trx-ov', 'tune-ov', 'sd-ov', 'sys-notices', 'trklist-ov', 'journal-ov', 'scope-ov'];
     for (var i = 0; i < order.length; i++) {
       var el = document.getElementById(order[i]);
       if (!el) continue;
@@ -7179,7 +7186,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     var _hist = [];
     try { _hist = JSON.parse(sessionStorage.getItem('ds-cdu-hist') || '[]'); } catch(e) {}
     var _hIdx = _hist.length;
-    var _VOCAB = ['SCOPE', 'LOG', 'LIST', 'AR', 'NVG', 'RED', 'SYS', 'VOICE', 'EXPORT', 'IMPORT', 'DEBRIEF', 'QRH', 'TRX', 'PLAN', 'MFD', 'SHARE', 'TUNE', 'AOS', 'MAP', 'NEWS', 'REPORT', 'BLINK', 'SRC', 'TRK', 'FIND', 'WX', 'SKY', 'FOV', 'LC', 'BORTLE', 'KIOSK', 'ASK', 'JARVIS', 'BRIEF', 'LOCK', 'NOW', 'GAUGE', 'MIC', 'SESSION', 'CMD', 'SIMILAR', 'PLAN', 'ALERTS', 'ANOMALY', 'ML', 'SPHERE', '3D', 'TEAM', 'CONSENSUS'];
+    var _VOCAB = ['SCOPE', 'LOG', 'LIST', 'AR', 'NVG', 'RED', 'SYS', 'VOICE', 'EXPORT', 'IMPORT', 'DEBRIEF', 'QRH', 'TRX', 'PLAN', 'MFD', 'SHARE', 'TUNE', 'AOS', 'MAP', 'NEWS', 'REPORT', 'BLINK', 'SRC', 'TRK', 'FIND', 'WX', 'SKY', 'FOV', 'LC', 'BORTLE', 'KIOSK', 'ASK', 'JARVIS', 'BRIEF', 'LOCK', 'NOW', 'GAUGE', 'MIC', 'SESSION', 'CMD', 'SIMILAR', 'PLAN', 'ALERTS', 'ANOMALY', 'ML', 'SPHERE', '3D', 'TEAM', 'CONSENSUS', 'ALADIN', 'ATLAS'];
     inp.addEventListener('keydown', function(ev){
       ev.stopPropagation();
       if (ev.key === 'Escape') { ov.remove(); return; }
@@ -7262,6 +7269,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     if (verb === 'SESSION') return window._sessionToggle();
     if (verb === 'CMD' || verb === 'PALETTE') return window._paletteOpen();
     if (verb === 'SIMILAR') { var _sn = arg || (_scopeSel && _scopeSel.name) || (document.querySelector('#result-card .result-name') || {}).textContent; if (_sn) return window._similarOpen(String(_sn).trim()); return op('SIMILAR — NAME A CANDIDATE'); }
+    if (verb === 'ALADIN' || verb === 'ATLAS') return window._aladinFor(arg);
     if (verb === 'TEAM' || verb === 'CONSENSUS') { if (/share|分享/.test((arg || '').toLowerCase())) return window._teamShare(); return window._teamOpen(); }
     if (verb === 'SPHERE' || verb === '3D' || verb === 'GLOBE') return window._sphereToggle();
     if (verb === 'ANOMALY' || verb === 'ML' || verb === 'DARKHORSE') return window._anomalyOpen();
@@ -8067,7 +8075,8 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       { ic: '📈', lb: 'LC', fn: function(){ if (window._lcOpen && t.ra != null) window._lcOpen(t.name, t.ra, t.dec); } },
       { ic: '🗺', lb: 'MAP', fn: function(){ if (typeof mapOpenFromCard === 'function' && t.ra != null) mapOpenFromCard(t.ra, t.dec, t.name, t.score || 0, false); } },
       { ic: '📄', lb: 'LIT', fn: function(){ if (typeof litOpen === 'function') litOpen(t.name, ''); } },
-      { ic: '≈', lb: 'SIMILAR', fn: function(){ if (window._similarOpen) window._similarOpen(t.name); } }
+      { ic: '≈', lb: 'SIMILAR', fn: function(){ if (window._similarOpen) window._similarOpen(t.name); } },
+      { ic: '🔭', lb: 'ATLAS', fn: function(){ if (window._aladinOpen && t.ra != null) { var _sv = null; try { if (typeof skySurvey === 'function') _sv = skySurvey(+t.dec).aladin; } catch(e) {} window._aladinOpen(t.name, t.ra, t.dec, _sv); } } }
     ];
     var cx = Math.max(72, Math.min(window.innerWidth - 72, x)), cy = Math.max(96, Math.min(window.innerHeight - 72, y));
     var html = '<div class="rad-center" style="left:' + cx + 'px;top:' + cy + 'px"></div>', R = 66;
@@ -8468,7 +8477,8 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     ['🎙', 'Voice command', 'MIC'], ['✎', 'Daily briefing', 'BRIEF'], ['⬡', 'Literature/report', 'REPORT'],
     ['◎', 'Map', 'MAP'], ['⤒', 'Import FDR', 'IMPORT'], ['▣', 'Session report', 'DEBRIEF'],
     ['◆', 'Anomaly scan (dark horses)', 'ANOMALY'], ['⏰', 'Conditional alerts', 'ALERTS'],
-    ['◉', '3D celestial sphere', 'SPHERE'], ['⇪', 'Team consensus', 'TEAM']
+    ['◉', '3D celestial sphere', 'SPHERE'], ['⇪', 'Team consensus', 'TEAM'],
+    ['🔭', 'Aladin interactive atlas', 'ATLAS']
   ];
   function _palClose(){ var o = document.getElementById('palette-ov'); if (o) o.remove(); }
   window._paletteOpen = function(){
@@ -9046,6 +9056,60 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     op('TEAM CONSENSUS — ' + rows.length + ' CANDIDATE' + (rows.length === 1 ? '' : 'S') + ' ACROSS ' + peers.length + ' PEER' + (peers.length === 1 ? '' : 'S'));
   };
   (function(){ _teamMergeFromHash(); setTimeout(_teamBadges, 900); })();
+
+  /* ══ NAVCON PRO-11: Aladin Lite interactive sky atlas. The library is VENDORED
+        (deepsignal/vendor/aladin/aladin.js, LGPL-3, unmodified) and lazy-loaded
+        via dynamic import() only when the atlas is opened — it is a ~2.4 MB ES
+        module that needs WebGL2 and pulls its WASM core + HiPS tiles from CDS at
+        runtime. When any of that is unavailable the console degrades cleanly to
+        the existing static multi-survey cutout; the atlas is purely additive. ══ */
+  window._aladinOpen = function(name, ra, dec, survey){
+    if (ra == null || isNaN(+ra)) { op('ATLAS — NO COORDINATES FOR THIS TARGET'); return; }
+    var old = document.getElementById('aladin-ov'); if (old) old.remove();
+    window._aladinInst = null;
+    try { SFX.open(); } catch(e) {}
+    op('ALADIN ATLAS — ' + String(name).toUpperCase());
+    var ov = document.createElement('div'); ov.id = 'aladin-ov'; ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-label', 'Aladin interactive atlas');
+    ov.innerHTML = '<div class="al-hdr">🔭 ALADIN ATLAS · ' + _esc(String(name).toUpperCase()) + '<button class="pro-x" id="aladin-x">✕</button></div>' +
+      '<div id="aladin-lite"></div>' +
+      '<div id="aladin-status">LOADING INTERACTIVE ATLAS… (first open pulls a ~2 MB library + live HiPS tiles)</div>';
+    document.body.appendChild(ov);
+    document.getElementById('aladin-x').addEventListener('click', function(){ var o = document.getElementById('aladin-ov'); if (o) o.remove(); try { SFX.close(); } catch(e) {} });
+    var sv = survey || 'P/DSS2/color';
+    function fail(why){
+      var st = document.getElementById('aladin-status');
+      if (st) { st.innerHTML = 'INTERACTIVE ATLAS UNAVAILABLE — ' + _esc(String(why)) + '. THE STATIC MULTI-SURVEY CUTOUT ON THE CARD STILL WORKS.'; st.classList.add('al-fail'); }
+      op('ATLAS UNAVAILABLE — ' + String(why).toUpperCase());
+    }
+    window._aladinFail = fail;
+    var to = setTimeout(function(){ if (!window._aladinInst) fail('load timed out'); }, 20000);
+    import('./vendor/aladin/aladin.js').then(function(mod){
+      var A = mod && (mod.default || mod.A || mod);
+      if (!A || !A.init) { clearTimeout(to); fail('atlas library shape unexpected'); return; }
+      return A.init.then(function(){
+        clearTimeout(to);
+        try {
+          var al = A.aladin('#aladin-lite', { survey: sv, fov: 0.4, cooFrame: 'ICRS', showReticle: true, showZoomControl: true, showLayersControl: true, showFullscreenControl: false, target: (+ra) + ' ' + (+dec) });
+          window._aladinInst = al;
+          var st = document.getElementById('aladin-status'); if (st) st.style.display = 'none';
+          op('ALADIN ATLAS READY — ' + String(name).toUpperCase());
+        } catch(e) { fail('atlas init error'); }
+      });
+    }).catch(function(e){ clearTimeout(to); fail(typeof e === 'string' ? e : ((e && e.message) || 'atlas failed to load')); });
+  };
+  /* resolve a target (arg / scope selection / search result / lock) then open */
+  window._aladinFor = function(arg){
+    var name = null, ra = null, dec = null, sv = null;
+    try {
+      var t = arg ? window._resolveTarget(arg) : null;
+      if (!t && typeof _scopeSel !== 'undefined' && _scopeSel) t = _scopeSel;
+      if (!t) { var rn = document.querySelector('#result-card .result-name'); if (rn) t = window._resolveTarget(rn.textContent.trim()); }
+      if (!t) { op('ATLAS — NAME A TARGET, OR SELECT ONE ON THE SCOPE/SEARCH'); return; }
+      name = t.name; ra = t.ra; dec = t.dec;
+    } catch(e) { op('ATLAS — TARGET LOOKUP FAILED'); return; }
+    try { if (typeof skySurvey === 'function' && dec != null) sv = skySurvey(+dec).aladin; } catch(e) {}
+    window._aladinOpen(name, ra, dec, sv);
+  };
 
   /* ── card tilt + cursor-tracking glow (event delegation) ── */
   var tiltEl = null;

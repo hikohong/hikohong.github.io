@@ -281,6 +281,16 @@ server. The Rubin/LSST imagery-ladder slot is finalized (one-block-uncomment whe
 public HiPS ships). Advisory CI test: `.github/scripts/e2e-full/pro13test.mjs`. Generated
 output — edit upstream, never here.
 
+### NAVCON PRO-11 — Aladin Lite interactive atlas (deployed in index.html + gallery.html)
+Aladin Lite v3.8.2 **vendored** at `deepsignal/vendor/aladin/aladin.js` (LGPL-3, unmodified,
+2.4 MB static asset — NOT a CDN). The launcher (🔭 ATLAS in the radial menu, CDU `ALADIN`,
+palette) lazy-loads it via dynamic `import()` only when opened and centers it on a target.
+It is an ES module needing WebGL2 + CDS-served WASM/tiles at runtime; on any failure it
+degrades cleanly to the static multi-survey cutout (purely additive). The launcher code is
+generated output (edit upstream), but `vendor/aladin/` is a hand-vendored static asset that
+lives ONLY here — the upstream `publish-pages.yml` never touches it, so do not delete it on
+a pipeline publish. Advisory CI test: `.github/scripts/e2e-full/pro11test.mjs`.
+
 ---
 
 ## Constraints
