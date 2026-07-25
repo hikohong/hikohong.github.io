@@ -1,0 +1,44 @@
+import { chromium } from 'playwright';
+import { readFileSync } from 'node:fs';
+const CAT = JSON.parse(readFileSync(process.cwd() + '/deepsignal/catalog.json','utf8'));
+const PNG=Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==','base64');
+const b = await chromium.launch();
+const checks=[]; const ck=(l,ok)=>checks.push([l,ok]);
+for (const [label,src] of [['gallery','file://'+process.cwd()+'/deepsignal/gallery.html'],['index','file://'+process.cwd()+'/deepsignal/index.html']]) {
+  const ctx = await b.newContext({viewport:{width:1280,height:900}});
+  await ctx.addInitScript(()=>localStorage.setItem('ds-obs',JSON.stringify({lat:25,lon:121,src:'MANUAL'})));
+  const p = await ctx.newPage();
+  const errs=[]; p.on('pageerror',e=>errs.push(e.message));
+  await p.route('**/catalog.json*', r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify(CAT)}));
+  await p.route('**/alasky.cds.unistra.fr/**', r=>r.fulfill({status:200,contentType:'image/png',body:PNG}));
+  await p.goto(src); await p.waitForTimeout(1400);
+  await p.evaluate(()=>window._askBox());
+  await p.waitForSelector('#askbox-in',{timeout:5000});
+  ck(`${label}: askbox opens`, await p.evaluate(()=>!!document.getElementById('askbox-box')));
+  const style = await p.evaluate(()=>{ const el=document.getElementById('askbox-box'); const s=getComputedStyle(el); return {bg:s.backgroundColor, bf:(s.backdropFilter||s.webkitBackdropFilter||'')}; });
+  ck(`${label}: box translucent bg (alpha<1)`, /rgba\([^)]+,\s*0?\.\d+\)/.test(style.bg));
+  ck(`${label}: box has backdrop blur`, /blur/.test(style.bf));
+  await p.fill('#askbox-in','moon tonight');
+  await p.keyboard.press('Enter');
+  await p.waitForTimeout(200);
+  const st = await p.evaluate(()=>({ boxOpen:!!document.getElementById('askbox-box'), reply:(document.getElementById('askbox-reply')||{}).textContent||'', replyShown: document.getElementById('askbox-reply')? getComputedStyle(document.getElementById('askbox-reply')).display!=='none':false, inputCleared:(document.getElementById('askbox-in')||{}).value===''}));
+  ck(`${label}: box STAYS open after answer`, st.boxOpen);
+  ck(`${label}: answer rendered inside box`, /moon|percent|illuminat/i.test(st.reply));
+  ck(`${label}: reply visible`, st.replyShown);
+  ck(`${label}: input cleared`, st.inputCleared);
+  await p.fill('#askbox-in','how many candidates');
+  await p.keyboard.press('Enter');
+  await p.waitForTimeout(200);
+  const st2 = await p.evaluate(()=>(document.getElementById('askbox-reply')||{}).textContent||'');
+  ck(`${label}: follow-up updates same box`, /targets|catalog/i.test(st2));
+  await p.evaluate(()=>{ const o=document.getElementById('askbox-ov'); if(o)o.remove(); });
+  await p.evaluate(()=>window._askReply('VOICE ANSWER TEST'));
+  await p.waitForTimeout(150);
+  ck(`${label}: _askReply opens box + shows text`, await p.evaluate(()=>{ const r=document.getElementById('askbox-reply'); return !!r && /VOICE ANSWER TEST/.test(r.textContent); }));
+  ck(`${label}: no JS errors`, errs.length===0);
+  if(errs.length) console.log(label,'ERRS',errs.slice(0,3));
+  await ctx.close();
+}
+await b.close();
+let all=true; for(const [l,ok] of checks){ console.log((ok?'PASS ':'FAIL ')+l); if(!ok)all=false; }
+console.log(all?'ALL PASS':'FAILED'); process.exit(all?0:1);
