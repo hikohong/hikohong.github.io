@@ -1110,7 +1110,7 @@ window._svBlink = function(btn){
 <div id="sky-tooltip-map"></div>
 <div class="gallery-hdr">
 <h1>DeepSignal — Sky Image Gallery</h1>
-<div class="subtitle">Generated <span id="gen-ts">2026-07-25 12:14 UTC</span> &nbsp;·&nbsp; 96 targets &nbsp;·&nbsp; 0 sky images via Hips2Fits CDN</div>
+<div class="subtitle">Generated <span id="gen-ts">2026-07-25 16:57 UTC</span> &nbsp;·&nbsp; 96 targets &nbsp;·&nbsp; 0 sky images via Hips2Fits CDN</div>
 <div class="stats">
   <div class="stat"><div class="stat-n" style="color:#f59e0b">3</div><div class="stat-l">Tier 1 ≥70</div></div>
   <div class="stat"><div class="stat-n" style="color:#60a5fa">1</div><div class="stat-l">Tier 2 50–69</div></div>
@@ -7978,17 +7978,18 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
   };
 
   /* ── voice input (Web Speech API, fail-silent where unsupported) ── */
+  var _recActive = false;
   window._micToggle = function(){
     var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
     var btn = document.getElementById('hud-mic-btn');
     if (!SR) return window._askBox();
-    if (_rec) { try { _rec.stop(); } catch(e) {} return; }
+    if (_recActive && _rec) { try { _rec.stop(); } catch(e) {} _recActive = false; if (btn) btn.classList.remove('rec'); return; }
     try {
       _rec = new SR();
       _rec.lang = 'en-US'; _rec.interimResults = false; _rec.maxAlternatives = 1;
-      _rec.onstart = function(){ if (btn) btn.classList.add('rec'); op('VOICE INPUT — LISTENING…'); _haptic(20); };
-      _rec.onerror = function(ev){ var _ee = String((ev && ev.error) || 'ERROR'); op('VOICE INPUT — ' + _ee.toUpperCase()); if (/not-allowed|service-not-allowed|audio-capture|language-not-supported|not-supported/.test(_ee)) window._askBox(); };
-      _rec.onend = function(){ if (btn) btn.classList.remove('rec'); _rec = null; };
+      _rec.onstart = function(){ _recActive = true; if (btn) btn.classList.add('rec'); op('VOICE INPUT — LISTENING…'); _haptic(20); };
+      _rec.onerror = function(ev){ _recActive = false; if (btn) btn.classList.remove('rec'); var _ee = String((ev && ev.error) || 'ERROR'); op('VOICE INPUT — ' + _ee.toUpperCase()); if (/not-allowed|service-not-allowed|audio-capture|language-not-supported|not-supported|aborted|no-speech/.test(_ee)) window._askBox(); };
+      _rec.onend = function(){ _recActive = false; if (btn) btn.classList.remove('rec'); _rec = null; };
       _rec.onresult = function(ev){
         var t = ev.results[0][0].transcript;
         op('VOICE — “' + t + '”');
@@ -7996,7 +7997,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
         if (!r || !r.ok) _jarvis('I did not catch a command in: ' + t, true);
       };
       _rec.start();
-    } catch(e) { op('VOICE INPUT — START FAILED'); }
+    } catch(e) { _recActive = false; _rec = null; if (btn) btn.classList.remove('rec'); op('VOICE INPUT UNAVAILABLE — TYPE INSTEAD'); window._askBox(); }
   };
 
   /* ── daily briefing: JARVIS synthesises one line on load (once per session) ── */
@@ -8256,7 +8257,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
   (function(){
     var mb = document.getElementById('hud-mic-btn'); if (mb) mb.addEventListener('click', window._micToggle);
     var gb = document.getElementById('hud-gauge-btn'); if (gb) gb.addEventListener('click', window._gaugesToggle);
-    var sphb = document.getElementById('hud-sphere-btn'); if (sphb) sphb.addEventListener('click', window._sphereToggle);
+    var sphb = document.getElementById('hud-sphere-btn'); if (sphb) sphb.addEventListener('click', function(){ window._sphereToggle(); });
     var nw = document.getElementById('hud-now'); if (nw) nw.addEventListener('click', window._nowToggle);
     setTimeout(_nowRender, 2500);
     setInterval(_nowRender, 60000);
