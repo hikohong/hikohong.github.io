@@ -291,6 +291,15 @@ generated output (edit upstream), but `vendor/aladin/` is a hand-vendored static
 lives ONLY here — the upstream `publish-pages.yml` never touches it, so do not delete it on
 a pipeline publish. Advisory CI test: `.github/scripts/e2e-full/pro11test.mjs`.
 
+### NAVCON PRO-14 — Target Lock interactive workstation (deployed in index.html + gallery.html)
+Target Lock is no longer a static snapshot: a 1 s live tick updates ALT/AZ, redraws the arc
+gauges, and turns the outer reticle into a real azimuth needle; a proactive line answers
+"when can I see it" with a live countdown (`OBSERVABLE NOW` / `RISES TO 20° · T−` / `RISES` /
+`LOW PASS` / `NEVER RISES`); an in-lock action bar (⌖ TRACK · 📈 LC · 🔭 ATLAS · ≈ SIMILAR)
+plus ‹ › prev/next arrows let you work a target and cycle the pool without leaving the lock.
+Advisory CI test: `.github/scripts/e2e-full/pro14test.mjs`. Generated output — edit upstream,
+never here.
+
 ---
 
 ## Constraints

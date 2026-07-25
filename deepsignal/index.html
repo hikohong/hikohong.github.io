@@ -505,12 +505,24 @@ html.nvg body>*{filter:sepia(1) hue-rotate(-48deg) saturate(3.4) brightness(.78)
 #lock-stage{position:relative;width:min(86vw,86vh);height:min(86vw,86vh)}
 #lock-img{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:52%;height:52%;object-fit:cover;border-radius:50%;border:1px solid rgba(63,224,143,.4);background:#000;box-shadow:0 0 40px rgba(63,224,143,.18)}
 #lock-ret{position:absolute;left:50%;top:50%;width:64%;height:64%;pointer-events:none;animation:lockConverge .7s cubic-bezier(.2,.8,.2,1) both}
-#lock-ret2{position:absolute;left:50%;top:50%;width:72%;height:72%;transform:translate(-50%,-50%);pointer-events:none;opacity:.5;animation:lockSpin 24s linear infinite}
+#lock-ret2{position:absolute;left:50%;top:50%;width:72%;height:72%;transform:translate(-50%,-50%);pointer-events:none;opacity:.5;transition:transform .4s ease-out;will-change:transform}
 #lock-gauge{position:absolute;inset:0;pointer-events:none}
 #lock-cap{position:absolute;left:50%;bottom:-2%;transform:translateX(-50%);text-align:center;font-family:monospace;color:#eef3f8;white-space:nowrap}
 #lock-cap .lk-n{font-size:clamp(1rem,2.6vw,1.7rem);letter-spacing:.14em;color:#3fe08f;text-shadow:0 0 10px rgba(63,224,143,.5)}
 #lock-cap .lk-s{font-size:.62rem;color:#9fd4bb;letter-spacing:.1em;margin-top:4px}
 .lk-hint{position:absolute;left:50%;top:2%;transform:translateX(-50%);font-family:monospace;font-size:.52rem;letter-spacing:.16em;color:#3a7a5a}
+#lock-cap .lk-when{font-size:.6rem;color:#7dd3fc;letter-spacing:.1em;margin-top:5px;min-height:.72rem;text-shadow:0 0 8px rgba(125,211,252,.4)}
+#lock-cap .lk-when.now{color:#3fe08f;text-shadow:0 0 8px rgba(63,224,143,.5)}
+#lock-cap .lk-when.never{color:#94a3b8;text-shadow:none}
+.lk-acts{display:flex;gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap}
+.lk-act{font-family:monospace;font-size:.56rem;letter-spacing:.08em;color:#3fe08f;background:rgba(3,16,11,.85);border:1px solid rgba(63,224,143,.45);border-radius:6px;padding:6px 10px;cursor:pointer;transition:background .12s,transform .12s;pointer-events:auto}
+.lk-act:hover{background:rgba(63,224,143,.2);transform:translateY(-1px)}
+.lk-act .la-ic{font-size:.85rem;margin-right:4px}
+.lk-arrow{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;font-size:1.5rem;line-height:1;color:#3fe08f;background:rgba(3,16,11,.8);border:1px solid rgba(63,224,143,.4);cursor:pointer;font-family:monospace;transition:background .12s;pointer-events:auto;z-index:2}
+.lk-arrow:hover{background:rgba(63,224,143,.2)}
+.lk-prev{left:2%}
+.lk-next{right:2%}
+@media (max-width:640px){.lk-arrow{width:38px;height:38px;font-size:1.2rem}.lk-act{font-size:.5rem;padding:5px 7px}}
 #radial-ov{position:fixed;inset:0;z-index:9997}
 .rad-item{position:absolute;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column;font-family:monospace;font-size:.5rem;letter-spacing:.06em;color:#3fe08f;background:rgba(3,16,11,.94);border:1px solid rgba(63,224,143,.5);box-shadow:0 0 14px rgba(63,224,143,.2);cursor:pointer;transition:transform .12s,background .12s;transform:scale(.2);opacity:0}
 .rad-item.in{transform:scale(1);opacity:1}
@@ -5948,16 +5960,33 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     else if (has && alt != null && alt <= 0) cap.push(String((_riseTxt(+ra, +dec) || 'below horizon')).toUpperCase());
     var ret = '<svg id="lock-ret" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="#3fe08f" stroke-width="0.6" stroke-dasharray="4 3"/><circle cx="50" cy="50" r="30" fill="none" stroke="#3fe08f" stroke-width="0.4" opacity="0.6"/><path d="M50 4 V16 M50 84 V96 M4 50 H16 M84 50 H96" stroke="#3fe08f" stroke-width="0.8"/></svg>';
     var ret2 = '<svg id="lock-ret2" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="none" stroke="#3fe08f" stroke-width="0.3" stroke-dasharray="1 5"/><path d="M50 2 L52 8 L48 8 Z" fill="#3fe08f"/></svg>';
+    _lockCur = { name: name, ra: has ? +ra : null, dec: has ? +dec : null, score: score, ss: ss, has: has, w: w };
+    var _acts = has ? [['track', '⌖', 'TRACK'], ['lc', '📈', 'LC'], ['atlas', '🔭', 'ATLAS'], ['similar', '≈', 'SIMILAR']] : [];
+    var _actsHtml = '';
+    for (var _ai = 0; _ai < _acts.length; _ai++) _actsHtml += '<button class="lk-act" data-lact="' + _acts[_ai][0] + '"><span class="la-ic">' + _acts[_ai][1] + '</span>' + _acts[_ai][2] + '</button>';
     var ov = document.createElement('div'); ov.id = 'lock-ov';
-    ov.innerHTML = '<div id="lock-stage">' +
+    ov.innerHTML = '<button class="lk-arrow lk-prev" data-lnav="-1" aria-label="previous target">‹</button>' +
+      '<div id="lock-stage">' +
       '<img id="lock-img" alt="" ' + (img ? ('src="' + img + '"') : 'style="display:none"') + '>' +
       ret + ret2 + '<canvas id="lock-gauge" width="640" height="640"></canvas>' +
-      '<div class="lk-hint">TARGET LOCK · TAP ANYWHERE TO RELEASE</div>' +
-      '<div id="lock-cap"><div class="lk-n">' + _esc(String(name)) + '</div><div class="lk-s">' + _esc(cap.join('  ·  ')) + '</div>' + '<button class="lk-save" onclick="event.stopPropagation();window._lockCardExport()">⤓ SAVE CARD</button></div>' +
-      '</div>';
-    ov.addEventListener('click', function(){ ov.remove(); try { SFX.close(); } catch(e) {} });
+      '<div class="lk-hint">TARGET LOCK · TAP BACKGROUND TO RELEASE · ‹ › CYCLE</div>' +
+      '<div id="lock-cap"><div class="lk-n">' + _esc(String(name)) + '</div>' +
+      '<div class="lk-s" id="lock-sub">' + _esc(cap.join('  ·  ')) + '</div>' +
+      '<div class="lk-when" id="lock-when"></div>' +
+      (_actsHtml ? '<div class="lk-acts">' + _actsHtml + '</div>' : '') +
+      '<button class="lk-save" data-lact="save">⤓ SAVE CARD</button></div>' +
+      '</div>' +
+      '<button class="lk-arrow lk-next" data-lnav="1" aria-label="next target">›</button>';
+    ov.addEventListener('click', function(ev){
+      var nav = ev.target.closest ? ev.target.closest('[data-lnav]') : null;
+      if (nav) { ev.stopPropagation(); _lockNav(+nav.getAttribute('data-lnav')); return; }
+      var act = ev.target.closest ? ev.target.closest('[data-lact]') : null;
+      if (act) { ev.stopPropagation(); var a = act.getAttribute('data-lact'); if (a === 'save') window._lockCardExport(); else window._lockAct(a); return; }
+      _lockLiveStop(); ov.remove(); try { SFX.close(); } catch(e) {}
+    });
     document.body.appendChild(ov);
     _lockGauge(score, alt, w);
+    _lockLiveStart();
   };
 
   /* ── radial quick-action menu (long-press / right-click a target) ── */
@@ -6139,7 +6168,76 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
         explain / proactive), Session Mode, similar-candidate search,
         shareable Target Lock card, command palette ══ */
   var _ctx = { entity: null, intent: null };
-  var _lockData = null, _proSpoken = {};
+  var _lockData = null, _proSpoken = {}, _lockCur = null, _lockTimer = null, _lockTickN = 0, _lockWhen = null;
+  /* ══ NAVCON PRO-14: Target Lock interactive workstation ══ */
+  function _tMinus(ts){ var s = Math.max(0, Math.round((ts - Date.now()) / 1000)), h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), ss = s % 60; return 'T− ' + pad(h) + ':' + pad(m) + ':' + pad(ss); }
+  function _nextAltCross(ra, dec, thr, fromT){
+    if (obsLat == null) return null;
+    var t0 = fromT || Date.now(), p0 = _altazOf(ra, dec, new Date(t0)); if (!p0) return null; var prev = p0.alt;
+    for (var mm = 5; mm <= 1440; mm += 5){
+      var t = t0 + mm * 60000, a = _altazOf(ra, dec, new Date(t)).alt;
+      if (prev < thr && a >= thr){
+        var lo = t - 5 * 60000, hi = t;
+        for (var k = 0; k < 22 && (hi - lo) > 1000; k++){ var tm = (lo + hi) / 2; if (_altazOf(ra, dec, new Date(tm)).alt < thr) lo = tm; else hi = tm; }
+        return (lo + hi) / 2;
+      }
+      prev = a;
+    }
+    return null;
+  }
+  function _lockWhenState(ra, dec, has){
+    if (!has || obsLat == null) return { text: '', cls: '' };
+    var aa = _altazOf(ra, dec); if (!aa) return { text: '', cls: '' };
+    var TH = 20;
+    if (aa.alt >= TH) return { text: 'OBSERVABLE NOW · ALT ' + aa.alt.toFixed(0) + '°', cls: 'now' };
+    var nx = _nextAltCross(ra, dec, TH, Date.now());
+    if (nx) return { label: 'RISES TO ' + TH + '°', ts: nx, cls: '' };
+    var rs = riseSet(ra, dec);
+    if (rs.never) return { text: 'NEVER RISES AT YOUR SITE', cls: 'never' };
+    if (rs.rise && rs.rise.getTime() > Date.now()) return { label: 'RISES', ts: rs.rise.getTime(), cls: '' };
+    return { text: 'LOW PASS · ALT ' + aa.alt.toFixed(0) + '° · PEAKS BELOW ' + TH + '°', cls: '' };
+  }
+  window._lockWhenState = _lockWhenState; window._nextAltCross = _nextAltCross;
+  function _lockRefreshWhen(){ if (_lockCur) _lockWhen = _lockWhenState(_lockCur.ra, _lockCur.dec, _lockCur.has); }
+  function _lockLiveStop(){ if (_lockTimer){ clearInterval(_lockTimer); _lockTimer = null; } }
+  function _lockLiveStart(){ _lockLiveStop(); _lockTickN = 0; _lockRefreshWhen(); _lockTick(); _lockTimer = setInterval(_lockTick, 1000); }
+  window._lockLiveStop = _lockLiveStop;
+  function _lockTick(){
+    if (!_lockCur) return;
+    var ov = document.getElementById('lock-ov'); if (!ov){ _lockLiveStop(); return; }
+    var aa = _lockCur.has ? _altazOf(_lockCur.ra, _lockCur.dec) : null;
+    var sub = document.getElementById('lock-sub');
+    if (sub){ var cap = []; if (_lockCur.score != null) cap.push('SCORE ' + _lockCur.score); if (aa) cap.push('ALT ' + aa.alt.toFixed(0) + '° AZ ' + aa.az.toFixed(0) + '°'); sub.textContent = cap.join('  ·  '); }
+    if (aa){ var nd = document.getElementById('lock-ret2'); if (nd) nd.style.transform = 'translate(-50%,-50%) rotate(' + aa.az.toFixed(1) + 'deg)'; if (_lockData) _lockData.alt = aa.alt; _lockGauge(_lockCur.score, aa.alt, _lockCur.w); }
+    if (_lockTickN % 20 === 0) _lockRefreshWhen();
+    var wl = document.getElementById('lock-when');
+    if (wl){
+      if (!_lockCur.has){ wl.textContent = ''; }
+      else if (aa && aa.alt >= 20){ wl.textContent = 'OBSERVABLE NOW · ALT ' + aa.alt.toFixed(0) + '°'; wl.className = 'lk-when now'; }
+      else if (_lockWhen){
+        if (_lockWhen.ts){ if (Date.now() >= _lockWhen.ts) _lockRefreshWhen(); wl.textContent = (_lockWhen.label || '') + ' · ' + _tMinus(_lockWhen.ts); wl.className = 'lk-when ' + (_lockWhen.cls || ''); }
+        else { wl.textContent = _lockWhen.text || ''; wl.className = 'lk-when ' + (_lockWhen.cls || ''); }
+      }
+    }
+    _lockTickN++;
+  }
+  function _lockNav(dir){
+    var list = _navTargets(); if (!list.length || !_lockCur) return;
+    var idx = -1; for (var i = 0; i < list.length; i++){ if (list[i].name.toLowerCase() === String(_lockCur.name).toLowerCase()){ idx = i; break; } }
+    if (idx < 0) idx = 0;
+    var t = list[(idx + dir + list.length) % list.length];
+    window._lockOn(t.name, t.ra, t.dec, Math.round(t.score || 0), false);
+  }
+  window._lockNav = _lockNav;
+  window._lockAct = function(a){
+    var d = _lockCur; if (!d || !d.has) return;
+    try { SFX.click(); } catch(e) {}
+    if (a === 'track'){ try { window.NAVCON.track(d.name, d.ra, d.dec); op('TRACKING — ' + String(d.name).toUpperCase()); _haptic(20); } catch(e) {} }
+    else if (a === 'lc'){ if (window._lcOpen) window._lcOpen(d.name, d.ra, d.dec); }
+    else if (a === 'atlas'){ if (window._aladinOpen){ var sv = null; try { if (typeof skySurvey === 'function') sv = skySurvey(+d.dec).aladin; } catch(e) {} window._aladinOpen(d.name, d.ra, d.dec, sv); } }
+    else if (a === 'similar'){ if (window._similarOpen) window._similarOpen(d.name); }
+  };
+  window._lockCurGet = function(){ return _lockCur; }; window._navTargets = _navTargets;
 
   /* schema-agnostic catalog access: the Search page has `catalog` (rows with
      target_name / candidacy_score / tier / snr …), the Gallery has `CANDIDATES`
