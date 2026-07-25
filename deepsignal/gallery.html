@@ -442,11 +442,13 @@ html.nvg body>*{filter:sepia(1) hue-rotate(-48deg) saturate(3.4) brightness(.78)
 @media (prefers-reduced-motion: reduce){
   #lock-ret,#lock-ret2,#hud-now.act,.p3-ov .p3-box,#palette-box,.hud-mic.rec,.rad-item{animation:none!important;transition:none!important}
 }
-#askbox-ov{position:fixed;inset:0;z-index:9995;background:rgba(2,7,5,.6);backdrop-filter:blur(3px);display:flex;align-items:flex-start;justify-content:center;padding-top:16vh}
-#askbox-box{width:min(560px,92vw);background:rgba(3,16,11,.97);border:1px solid rgba(63,224,143,.5);border-radius:10px;box-shadow:0 0 40px rgba(63,224,143,.16);overflow:hidden;font-family:monospace}
+#askbox-ov{position:fixed;inset:0;z-index:9995;background:rgba(2,7,5,.42);backdrop-filter:blur(5px);display:flex;align-items:flex-start;justify-content:center;padding-top:16vh}
+#askbox-box{width:min(560px,92vw);background:rgba(8,22,17,.55);backdrop-filter:blur(22px) saturate(1.3);-webkit-backdrop-filter:blur(22px) saturate(1.3);border:1px solid rgba(63,224,143,.4);border-radius:14px;box-shadow:0 12px 50px rgba(0,0,0,.45),0 0 42px rgba(63,224,143,.14),inset 0 1px 0 rgba(255,255,255,.06);overflow:hidden;font-family:monospace}
 .askbox-hdr{padding:10px 14px;border-bottom:1px solid rgba(63,224,143,.3);color:#3fe08f;letter-spacing:.12em;font-size:.7rem}
 #askbox-in{width:100%;box-sizing:border-box;background:transparent;border:none;color:#eef3f8;font-family:monospace;font-size:.95rem;padding:14px;outline:none}
 .askbox-hint{padding:0 14px 12px;color:#3a7a5a;font-size:.58rem;line-height:1.5}
+.askbox-reply{margin:2px 12px 12px;padding:11px 13px;color:#dff5ea;font-size:.82rem;line-height:1.55;background:rgba(63,224,143,.06);border:1px solid rgba(63,224,143,.18);border-left:2px solid #3fe08f;border-radius:9px;max-height:40vh;overflow:auto;white-space:pre-wrap}
+.askbox-reply::before{content:'◈ JARVIS';display:block;color:#3fe08f;font-size:.56rem;letter-spacing:.14em;margin-bottom:5px;opacity:.85}
 /* ── NAVCON PRO-6: JARVIS, Target Lock, radial menu, NOW queue, gauges, glass ── */
 @keyframes lockConverge{0%{transform:translate(-50%,-50%) scale(2.4) rotate(-40deg);opacity:0}60%{opacity:1}100%{transform:translate(-50%,-50%) scale(1) rotate(0);opacity:1}}
 @keyframes lockSpin{to{transform:translate(-50%,-50%) rotate(360deg)}}
@@ -1110,7 +1112,7 @@ window._svBlink = function(btn){
 <div id="sky-tooltip-map"></div>
 <div class="gallery-hdr">
 <h1>DeepSignal — Sky Image Gallery</h1>
-<div class="subtitle">Generated <span id="gen-ts">2026-07-25 16:57 UTC</span> &nbsp;·&nbsp; 96 targets &nbsp;·&nbsp; 0 sky images via Hips2Fits CDN</div>
+<div class="subtitle">Generated <span id="gen-ts">2026-07-25 17:46 UTC</span> &nbsp;·&nbsp; 96 targets &nbsp;·&nbsp; 0 sky images via Hips2Fits CDN</div>
 <div class="stats">
   <div class="stat"><div class="stat-n" style="color:#f59e0b">3</div><div class="stat-l">Tier 1 ≥70</div></div>
   <div class="stat"><div class="stat-n" style="color:#60a5fa">1</div><div class="stat-l">Tier 2 50–69</div></div>
@@ -7994,7 +7996,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
         var t = ev.results[0][0].transcript;
         op('VOICE — “' + t + '”');
         var r = window._ask(t, true);
-        if (!r || !r.ok) _jarvis('I did not catch a command in: ' + t, true);
+        window._askReply((r && r.say) ? r.say : 'I did not catch a command in: ' + t);
       };
       _rec.start();
     } catch(e) { _recActive = false; _rec = null; if (btn) btn.classList.remove('rec'); op('VOICE INPUT UNAVAILABLE — TYPE INSTEAD'); window._askBox(); }
@@ -8811,6 +8813,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     var ov = document.createElement('div'); ov.id = 'askbox-ov'; ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-label', 'Ask JARVIS');
     ov.innerHTML = '<div id="askbox-box"><div class="askbox-hdr">ASK JARVIS</div>' +
       '<input id="askbox-in" autocomplete="off" placeholder="Ask a question or give a command…" aria-label="Ask JARVIS" value="' + (prefill ? _escAttr(prefill) : '') + '">' +
+      '<div id="askbox-reply" class="askbox-reply" role="status" aria-live="polite" style="display:none"></div>' +
       '<div class="askbox-hint">e.g. best targets tonight · when does Vega rise · what is doppler drift · track Proxima · notify me when Vega reaches 40 degrees</div></div>';
     ov.addEventListener('click', function(ev){ if (ev.target === ov) { ov.remove(); try { SFX.close(); } catch(e) {} } });
     document.body.appendChild(ov);
@@ -8819,10 +8822,22 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       ev.stopPropagation();
       if (ev.key === 'Escape') { ov.remove(); try { SFX.close(); } catch(e) {} return; }
       if (ev.key !== 'Enter') return;
-      var v = inp.value.trim(); ov.remove();
-      if (v) { var r = window._ask(v, true); if (!r || !r.ok) _jarvis('I could not answer that. Try “help”, or a target name.', true); }
+      var v = inp.value.trim(); if (!v) return;
+      var r = window._ask(v, true);
+      window._askReply((r && r.say) ? r.say : 'I could not answer that. Try “help”, or a target name.');
+      inp.value = '';
     });
     inp.focus();
+  };
+  window._askReply = function(text){
+    if (!text) return;
+    var ov = document.getElementById('askbox-ov');
+    if (!ov) { window._askBox(); ov = document.getElementById('askbox-ov'); }
+    if (!ov) return;
+    var rep = document.getElementById('askbox-reply');
+    if (rep) { rep.textContent = String(text); rep.style.display = 'block'; rep.scrollTop = 0; }
+    var h = ov.querySelector('.askbox-hint'); if (h) h.style.display = 'none';
+    var inp2 = document.getElementById('askbox-in'); if (inp2) { try { inp2.focus(); } catch(e) {} }
   };
   /* ══ NAVCON PRO-9: client-side ML anomaly re-scoring (dark-horse discovery).
         An unsupervised kNN outlier factor over a NORMALISED feature vector that
