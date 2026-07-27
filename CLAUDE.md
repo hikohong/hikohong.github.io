@@ -302,6 +302,18 @@ plus ‹ › prev/next arrows let you work a target and cycle the pool without l
 Advisory CI test: `.github/scripts/e2e-full/pro14test.mjs`. Generated output — edit upstream,
 never here.
 
+### NAVCON PRO-15 — dynamic spectrum (waterfall) (deployed in index.html + gallery.html)
+The pivot from "candidate viewer" toward a browser-based SETI signal-analysis station:
+each candidate's real physics (center freq, bandwidth, SNR, drift rate) is reconstructed
+into the classic drifting-signal-in-noise **waterfall** — a seeded, deterministic canvas
+render with an inferno colormap, adaptive integration time so the Doppler drift reads as a
+visible diagonal (narrowband = artificial; diagonal = moving transmitter; vertical = local
+RFI), real-number readout, and a plain-language interpretation. Entry points: ≋ SPECTRUM in
+the radial menu, CDU `SPECTRUM`/`WATERFALL`, the Target Lock action bar, and a ≋ Spectrum
+button on Search + Gallery cards. The Gallery's embedded `CANDIDATES` now carries
+`freq/bw/snr/drift/tier` so the physics is available there too. Advisory CI test:
+`.github/scripts/e2e-full/pro15test.mjs`. Generated output — edit upstream, never here.
+
 ---
 
 ## Constraints
