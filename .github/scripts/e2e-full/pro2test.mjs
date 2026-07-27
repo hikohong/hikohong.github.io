@@ -29,7 +29,7 @@ await p.goto('file://'+process.cwd()+'/deepsignal/gallery.html'); await p.waitFo
 const checks=[];
 
 // 1. tracking list: OBS chip + TONIGHT sort + cloud + bell
-await p.click('#hud-scope-btn'); // prime geo
+await p.evaluate(()=>window._scopeToggle()); // prime geo (legacy scope engine)
 await p.waitForFunction(()=>{const g=document.getElementById('scope-geo');return g&&/OBS/.test(g.textContent);},{timeout:5000});
 // 2. scope time-scrub while open
 checks.push(['scope tbar exists', !!(await p.$('#scope-tbar'))]);

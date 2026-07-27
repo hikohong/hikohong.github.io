@@ -58,7 +58,7 @@ await p.evaluate(()=>window._sdToggle()); await p.waitForTimeout(250);
 await p.keyboard.press('Escape'); await p.waitForTimeout(200);
 push('ESC closes SYS page', !(await p.$('#sd-ov')));
 // ESC closes scope (via toggle, no reopen)
-await p.evaluate(()=>document.getElementById('hud-scope-btn').click()); await p.waitForTimeout(300);
+await p.evaluate(()=>window._scopeToggle()); await p.waitForTimeout(300);
 await p.keyboard.press('Escape'); await p.waitForTimeout(250);
 push('ESC closes scope', !(await p.$('#scope-ov')));
 

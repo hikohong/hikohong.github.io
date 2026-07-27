@@ -31,11 +31,16 @@ for (const [label, rel] of [['gallery', '/deepsignal/gallery.html'], ['index', '
   await p.goto('file://' + process.cwd() + rel);
   await p.waitForTimeout(1500);
 
-  // Bug 2: 3D button opens the sphere overlay
-  await p.click('#hud-sphere-btn');
-  await p.waitForTimeout(250);
-  ck(`${label}: 3D button opens sphere overlay`, await p.evaluate(() => !!document.getElementById('sphere-ov')));
-  await p.evaluate(() => { if (document.getElementById('sphere-ov')) window._sphereToggle(); });
+  // Bug 2 (PRO-16): the RADAR button opens the unified console, and 3D is a mode
+  // there now (the standalone 3D HUD button was folded into the radar).
+  await p.click('#hud-radar-btn');
+  await p.waitForTimeout(300);
+  ck(`${label}: RADAR button opens console`, await p.evaluate(() => !!document.getElementById('radar-ov')));
+  await p.evaluate(() => { window._radarSetMode('3D'); });
+  await p.waitForTimeout(150);
+  ck(`${label}: radar 3D mode active`, await p.evaluate(() => { const s = window._radarState(); return s && s.mode === '3D' && s.screen > 0; }));
+  await p.keyboard.press('Escape');
+  await p.waitForTimeout(150);
 
   // Bug 1: Ask box reopens on every mic tap despite mic denial
   let reopened = true;

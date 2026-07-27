@@ -314,6 +314,20 @@ button on Search + Gallery cards. The Gallery's embedded `CANDIDATES` now carrie
 `freq/bw/snr/drift/tier` so the physics is available there too. Advisory CI test:
 `.github/scripts/e2e-full/pro15test.mjs`. Generated output — edit upstream, never here.
 
+### NAVCON PRO-16 — unified RADAR console + Preferences + shortcuts (deployed in index.html + gallery.html)
+Map + Scope + 3D are unified into one professional avionics/space **radar console** — a
+single overlay + canvas + one `⊹ RADAR` HUD button with a three-mode switch: LOCAL
+(alt-az tactical radar with sweep + range rings + time-scrub), SKY (RA/Dec star chart),
+3D (rotatable celestial globe). Shared chrome (corner brackets, command strip with mode
+tabs + live UTC + contact count, tier-coloured contacts, cyan lock reticle, LOCK/SPEC/
+TRACK action bar). The legacy scope/map/sphere engines are retained for MFD/cards/CDU;
+the radar is a new canvas reusing the astro math. A **Preferences** glass panel (key `p`,
+CDU `PREFS`) centralises site/NVG/RED/voice/sound/AOS/Bortle/FOV. Global keyboard
+shortcuts: `r` Radar · `p` Preferences · `a` Ask · `?` keys (plus existing `/` CDU, `j`/`k`
+nav, ⌘K palette, Esc). The standalone `◉ 3D` HUD button was folded into the radar.
+Advisory CI test: `.github/scripts/e2e-full/pro16test.mjs`. Generated output — edit
+upstream, never here.
+
 ---
 
 ## Constraints

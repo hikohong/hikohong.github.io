@@ -484,6 +484,48 @@ html.nvg body>*{filter:sepia(1) hue-rotate(-48deg) saturate(3.4) brightness(.78)
 .spec-cbar{display:inline-block;flex:1;max-width:150px;height:9px;border-radius:3px;background:linear-gradient(90deg,rgb(0,0,4),rgb(66,10,104),rgb(126,29,111),rgb(190,55,82),rgb(237,105,37),rgb(251,170,42),rgb(247,226,140))}
 .spec-nums{font-family:monospace;font-size:.62rem;letter-spacing:.05em;color:#3fe08f}
 .spec-note{font-family:monospace;font-size:.66rem;line-height:1.5;color:#cfe9dd;background:rgba(63,224,143,.05);border-left:2px solid #3fe08f;border-radius:6px;padding:9px 11px}
+#radar-ov{position:fixed;inset:0;z-index:9994;background:radial-gradient(ellipse at center,rgba(2,10,8,.94),rgba(1,4,3,.985));display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+#radar-con{position:relative;width:min(94vw,94vh);max-width:720px;height:min(90vh,860px);display:flex;flex-direction:column;border:1px solid rgba(63,224,143,.35);border-radius:14px;background:linear-gradient(180deg,rgba(6,20,15,.6),rgba(3,10,8,.5));box-shadow:0 0 60px rgba(63,224,143,.1),inset 0 0 42px rgba(63,224,143,.04);backdrop-filter:blur(12px);overflow:hidden;padding-bottom:8px}
+.rdr-br{position:absolute;width:16px;height:16px;border:2px solid #3fe08f;opacity:.7;pointer-events:none}
+.rdr-tl{top:6px;left:6px;border-right:none;border-bottom:none}
+.rdr-tr{top:6px;right:6px;border-left:none;border-bottom:none}
+.rdr-bl{bottom:6px;left:6px;border-right:none;border-top:none}
+.rdr-brr{bottom:6px;right:6px;border-left:none;border-top:none}
+#radar-cmd{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid rgba(63,224,143,.2);font-family:monospace;background:rgba(63,224,143,.05);flex-wrap:wrap}
+.rdr-title{color:#3fe08f;font-size:.8rem;letter-spacing:.16em;text-shadow:0 0 10px rgba(63,224,143,.5)}
+.rdr-tabs{display:flex;gap:4px}
+.rdr-tab{font-family:monospace;font-size:.54rem;letter-spacing:.1em;color:#9fd4bb;background:rgba(3,16,11,.55);border:1px solid rgba(63,224,143,.28);border-radius:5px;padding:4px 8px;cursor:pointer;transition:background .12s,color .12s}
+.rdr-tab.on{background:rgba(63,224,143,.2);color:#eafff5;border-color:rgba(63,224,143,.7)}
+.rdr-tab:hover{background:rgba(63,224,143,.14)}
+.rdr-stat{margin-left:auto;font-size:.5rem;letter-spacing:.08em;color:#3a7a5a}
+.rdr-x{width:26px;height:26px;border-radius:5px;background:rgba(3,16,11,.6);border:1px solid rgba(63,224,143,.35);color:#3fe08f;cursor:pointer;font-family:monospace;flex-shrink:0}
+.rdr-x:hover{background:rgba(63,224,143,.18)}
+#radar-stage{position:relative;flex:1;display:flex;align-items:center;justify-content:center;min-height:0;margin:8px}
+#radar-cv{display:block;touch-action:none;cursor:crosshair}
+#radar-hint{position:absolute;left:50%;bottom:0;transform:translateX(-50%);font-family:monospace;font-size:.5rem;letter-spacing:.14em;color:#3a7a5a;pointer-events:none;white-space:nowrap}
+#radar-scrub{display:flex;align-items:center;gap:8px;padding:2px 16px;font-family:monospace;font-size:.56rem;color:#9fd4bb}
+#radar-t{flex:1;accent-color:#3fe08f}
+#radar-tlabel{min-width:58px;color:#3fe08f}
+#radar-tnow{font-family:monospace;font-size:.5rem;color:#3fe08f;background:rgba(3,16,11,.6);border:1px solid rgba(63,224,143,.3);border-radius:4px;padding:3px 7px;cursor:pointer}
+#radar-info{margin:6px 16px 0;padding:8px 11px;font-family:monospace;font-size:.62rem;color:#eafff5;background:rgba(125,211,252,.06);border:1px solid rgba(125,211,252,.25);border-left:2px solid #7dd3fc;border-radius:7px;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+#radar-info .rdr-inm{color:#7dd3fc;letter-spacing:.08em}
+#radar-info .rdr-isc{color:#9fd4bb;font-size:.56rem}
+#radar-info .rdr-iact{margin-left:auto;display:flex;gap:5px}
+#radar-info .rdr-iact button{font-family:monospace;font-size:.5rem;color:#3fe08f;background:rgba(3,16,11,.6);border:1px solid rgba(63,224,143,.35);border-radius:4px;padding:3px 7px;cursor:pointer}
+.rdr-foot{padding:5px 16px 0;font-family:monospace;font-size:.5rem;letter-spacing:.06em;color:#3a7a5a;cursor:pointer}
+.pref-wrap{display:flex;flex-direction:column;gap:1px}
+.pref-row{display:flex;align-items:center;gap:10px;padding:8px 4px;border-bottom:1px solid rgba(63,224,143,.08)}
+.pref-k{width:66px;font-family:monospace;font-size:.54rem;letter-spacing:.1em;color:#3fe08f;flex-shrink:0}
+.pref-d{flex:1;font-size:.7rem;color:#cfe9dd}
+.pref-c{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.pref-tog{font-family:monospace;font-size:.54rem;letter-spacing:.1em;color:#94a3b8;background:rgba(3,16,11,.6);border:1px solid rgba(148,163,184,.35);border-radius:5px;padding:4px 12px;cursor:pointer;min-width:50px}
+.pref-tog.on{color:#0a1410;background:#3fe08f;border-color:#3fe08f}
+.pref-num{width:66px;background:rgba(3,16,11,.6);border:1px solid rgba(63,224,143,.3);border-radius:5px;color:#eafff5;font-family:monospace;font-size:.7rem;padding:4px 6px}
+.pref-btn{font-family:monospace;font-size:.52rem;color:#3fe08f;background:rgba(3,16,11,.6);border:1px solid rgba(63,224,143,.35);border-radius:4px;padding:3px 8px;cursor:pointer}
+.pref-note{margin-top:11px;font-family:monospace;font-size:.56rem;letter-spacing:.04em;color:#3a7a5a;line-height:1.7}
+.keys-wrap{display:flex;flex-direction:column;gap:6px}
+.keys-row{display:flex;align-items:center;gap:12px;font-size:.72rem;color:#cfe9dd}
+.keys-row kbd{font-family:monospace;font-size:.6rem;color:#3fe08f;background:rgba(3,16,11,.7);border:1px solid rgba(63,224,143,.35);border-radius:4px;padding:3px 9px;min-width:78px;text-align:center}
 .rad-item{position:absolute;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column;font-family:monospace;font-size:.5rem;letter-spacing:.06em;color:#3fe08f;background:rgba(3,16,11,.94);border:1px solid rgba(63,224,143,.5);box-shadow:0 0 14px rgba(63,224,143,.2);cursor:pointer;transition:transform .12s,background .12s;transform:scale(.2);opacity:0}
 .rad-item.in{transform:scale(1);opacity:1}
 .rad-item:hover{background:rgba(63,224,143,.22);transform:scale(1.12)}
@@ -767,7 +809,7 @@ window._svBlink = function(btn){
 </nav>
 <div id="hud-status">
   <button class="hud-seg hud-sys" id="hud-sys" title="System status — tap for active notifications"><span class="hud-dot" id="hud-sys-dot"></span><span id="hud-sys-txt">SYS <span class="hud-val">NOMINAL</span></span></button>
-  <span class="hud-seg"><button class="hud-btn" id="hud-scope-btn" title="Tactical scope — plot all candidates on your local sky">◉ SCOPE</button></span>
+  <span class="hud-seg"><button class="hud-btn" id="hud-radar-btn" title="Radar console — local sky · star chart · 3D globe (press r)">⊹ RADAR</button></span>
   <span class="hud-seg"><button class="hud-btn" id="hud-trk-btn" title="Tracking list — every target you have tracked, with live altitude">⌖ LIST</button></span>
   <span class="hud-seg" id="hud-now" title="NOW — the most time-critical opportunity right now (tap for the full queue)"></span>
   <span class="hud-seg"><button class="hud-mic" id="hud-mic-btn" title="Ask JARVIS by voice — tap and speak a command">🎙 ASK</button></span>
@@ -781,7 +823,7 @@ window._svBlink = function(btn){
   <span class="hud-seg" id="hud-track-seg" style="display:none">⌖ <span class="hud-val" id="hud-track">--</span></span>
   <span class="hud-seg" id="hud-watch-seg" style="display:none">★ <span class="hud-val" id="hud-watch">--</span></span>
   <span class="hud-seg"><button class="hud-btn" id="hud-ar-btn" style="display:none" title="AR finder — point your phone at the tracked target">▲ AR</button></span>
-  <span class="hud-seg hud-hide-sm"><button class="hud-btn" id="hud-nvg-btn" title="Night-vision mode — red low-brightness palette for dark adaptation">☾ NVG</button> <button class="hud-btn" id="hud-red-btn" title="Red-light mode — full red palette preserving dark adaptation (exclusive with NVG)">◉ RED</button> <button class="hud-btn" id="hud-gauge-btn" title="Instrument gauges — sky quality, Moon phase, geomagnetic Kp">◐ GAUGE</button> <button class="hud-btn" id="hud-sphere-btn" title="3D celestial sphere — rotatable globe of all candidates">◉ 3D</button></span>
+  <span class="hud-seg hud-hide-sm"><button class="hud-btn" id="hud-nvg-btn" title="Night-vision mode — red low-brightness palette for dark adaptation">☾ NVG</button> <button class="hud-btn" id="hud-red-btn" title="Red-light mode — full red palette preserving dark adaptation (exclusive with NVG)">◉ RED</button> <button class="hud-btn" id="hud-gauge-btn" title="Instrument gauges — sky quality, Moon phase, geomagnetic Kp">◐ GAUGE</button></span>
   <span id="hud-msg" role="status" aria-live="polite"></span>
 </div>
 
@@ -1119,7 +1161,7 @@ window._svBlink = function(btn){
 <div id="sky-tooltip-map"></div>
 <div class="gallery-hdr">
 <h1>DeepSignal — Sky Image Gallery</h1>
-<div class="subtitle">Generated <span id="gen-ts">2026-07-27 17:17 UTC</span> &nbsp;·&nbsp; 96 targets &nbsp;·&nbsp; 0 sky images via Hips2Fits CDN</div>
+<div class="subtitle">Generated <span id="gen-ts">2026-07-27 17:55 UTC</span> &nbsp;·&nbsp; 96 targets &nbsp;·&nbsp; 0 sky images via Hips2Fits CDN</div>
 <div class="stats">
   <div class="stat"><div class="stat-n" style="color:#f59e0b">3</div><div class="stat-l">Tier 1 ≥70</div></div>
   <div class="stat"><div class="stat-n" style="color:#60a5fa">1</div><div class="stat-l">Tier 2 50–69</div></div>
@@ -5601,7 +5643,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     if (ev.key !== 'Escape') return;
     var t = ev.target, tg = t && t.tagName;
     if (tg === 'INPUT' || tg === 'TEXTAREA' || (t && t.isContentEditable)) return;
-    var order = ['askbox-ov', 'aladin-ov', 'sphere-ov', 'palette-ov', 'session-ov', 'sim-ov', 'anom-ov', 'team-ov', 'alerts-ov', 'lock-ov', 'radial-ov', 'gauge-ov', 'now-ov', 'kiosk-ov', 'cas-explain', 'wx-ov', 'sky-ov', 'lc-ov', 'fov-ov', 'exp-ov', 'ac-ov', 'plan-ov', 'qrh-ov', 'trx-ov', 'tune-ov', 'sd-ov', 'sys-notices', 'trklist-ov', 'journal-ov', 'scope-ov'];
+    var order = ['askbox-ov', 'radar-ov', 'prefs-ov', 'keys-ov', 'aladin-ov', 'sphere-ov', 'palette-ov', 'session-ov', 'sim-ov', 'anom-ov', 'team-ov', 'alerts-ov', 'lock-ov', 'radial-ov', 'gauge-ov', 'now-ov', 'kiosk-ov', 'cas-explain', 'wx-ov', 'sky-ov', 'lc-ov', 'fov-ov', 'exp-ov', 'ac-ov', 'plan-ov', 'qrh-ov', 'trx-ov', 'tune-ov', 'sd-ov', 'sys-notices', 'trklist-ov', 'journal-ov', 'scope-ov'];
     for (var i = 0; i < order.length; i++) {
       var el = document.getElementById(order[i]);
       if (!el) continue;
@@ -5610,6 +5652,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       if (order[i] === 'session-ov') { window._sessionToggle(); return; }
       if (order[i] === 'palette-ov') { var _po = document.getElementById('palette-ov'); if (_po) _po.remove(); try { SFX.close(); } catch(e) {} return; }
       if (order[i] === 'kiosk-ov') { _kioskStop(); return; }
+      if (order[i] === 'radar-ov') { _radarClose(); return; }
       if (order[i] === 'scope-ov') { _scopeToggle(); return; }
       if (order[i] === 'trklist-ov') { _thToggle(); return; }
       el.remove();
@@ -6936,6 +6979,305 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     li.textContent = (aa ? 'ALT ' + (aa.alt >= 0 ? '+' : '') + aa.alt.toFixed(1) + '° · AZ ' + aa.az.toFixed(0) + '° · ' : '') +
       (t.ss ? 'RA ' + t.ra.toFixed(2) + '° DEC ' + t.dec.toFixed(2) + '° (NOW)' : 'J2000 RA ' + t.ra.toFixed(2) + '° DEC ' + t.dec.toFixed(2) + '°');
   }
+  /* ══ NAVCON PRO-16: unified RADAR console — one instrument, three modes.
+        LOCAL (alt-az tactical scope) · SKY (RA/Dec star chart) · 3D (celestial
+        globe). Single canvas, seeded nothing, reuses the astro math
+        (_altazOf/_navTargets/riseSet) + a small orthographic projector. The
+        legacy scope/map/sphere engines stay intact for CDU/cards/MFD; this is
+        the unified HUD entry. Selecting a blip sets window._scopeSel so LOCK /
+        LC / SPECTRUM keep working from the radar. ══ */
+  var _radar = null;
+  var _RADAR_MODES = ['LOCAL', 'SKY', '3D'];
+  function _radarPts(){
+    var out = [], nt = [];
+    try { nt = _navTargets(); } catch(e) {}
+    for (var i = 0; i < nt.length; i++) {
+      if (nt[i].ra == null || isNaN(+nt[i].ra)) continue;
+      out.push({ name: nt[i].name, ra: +nt[i].ra, dec: +nt[i].dec, score: +nt[i].score || 0 });
+    }
+    return out;
+  }
+  function _radarTierColor(score){
+    if (score >= 80) return '#7dd3fc';
+    if (score >= 50) return '#3fe08f';
+    return '#f5a623';
+  }
+  function _radar3dRot(v, yaw, pitch){
+    var cy = Math.cos(yaw), sy = Math.sin(yaw);
+    var x1 = v[0] * cy + v[2] * sy, z1 = -v[0] * sy + v[2] * cy, y1 = v[1];
+    var cp = Math.cos(pitch), sp = Math.sin(pitch);
+    return [x1, y1 * cp - z1 * sp, y1 * sp + z1 * cp];
+  }
+  function _radarWhen(){ return new Date(Date.now() + (_radar ? _radar.t : 0) * 3600000); }
+  function _radarProject(p){
+    /* returns {x,y,vis,front} in canvas px for the current mode, or null */
+    var cv = _radar.cv, W = cv.width, H = cv.height, pad = Math.min(W, H) * 0.5;
+    if (_radar.mode === 'LOCAL') {
+      if (obsLat == null) return null;
+      var aa = _altazOf(p.ra, p.dec, _radarWhen()); if (!aa) return null;
+      var cx = W / 2, cy = H / 2, R = Math.min(W, H) * 0.44;
+      var rr = R * (90 - aa.alt) / 90;
+      var az = aa.az * Math.PI / 180;
+      return { x: cx + rr * Math.sin(az), y: cy - rr * Math.cos(az), vis: aa.alt > 0, front: true, alt: aa.alt, az: aa.az };
+    }
+    if (_radar.mode === 'SKY') {
+      var mx = W * 0.5, my = H * 0.5, sw = W * 0.9, sh = H * 0.82;
+      var x = mx - sw / 2 + (p.ra / 360) * sw;
+      var y = my - sh / 2 + ((90 - p.dec) / 180) * sh;
+      return { x: x, y: y, vis: true, front: true };
+    }
+    /* 3D */
+    var ra = p.ra * Math.PI / 180, de = p.dec * Math.PI / 180;
+    var v = [Math.cos(de) * Math.cos(ra), Math.sin(de), Math.cos(de) * Math.sin(ra)];
+    var r = _radar3dRot(v, _radar.yaw, _radar.pitch);
+    var RR = Math.min(W, H) * 0.42 * _radar.zoom;
+    return { x: W / 2 + r[0] * RR, y: H / 2 - r[1] * RR, vis: true, front: r[2] >= 0 };
+  }
+  function _radarGrid(c, W, H){
+    c.save();
+    c.strokeStyle = 'rgba(63,224,143,.16)'; c.lineWidth = 1; c.font = '10px monospace'; c.fillStyle = 'rgba(63,224,143,.5)';
+    if (_radar.mode === 'LOCAL') {
+      var cx = W / 2, cy = H / 2, R = Math.min(W, H) * 0.44;
+      for (var a = 30; a < 90; a += 30) { c.beginPath(); c.arc(cx, cy, R * (90 - a) / 90, 0, 6.283); c.stroke(); }
+      c.beginPath(); c.strokeStyle = 'rgba(63,224,143,.35)'; c.arc(cx, cy, R, 0, 6.283); c.stroke();
+      c.strokeStyle = 'rgba(63,224,143,.12)';
+      for (var k = 0; k < 12; k++) { var an = k * Math.PI / 6; c.beginPath(); c.moveTo(cx, cy); c.lineTo(cx + R * Math.sin(an), cy - R * Math.cos(an)); c.stroke(); }
+      c.fillStyle = 'rgba(63,224,143,.65)'; c.textAlign = 'center';
+      c.fillText('N', cx, cy - R - 6); c.fillText('S', cx, cy + R + 14); c.fillText('E', cx + R + 10, cy + 4); c.fillText('W', cx - R - 10, cy + 4);
+    } else if (_radar.mode === 'SKY') {
+      var sw = W * 0.9, sh = H * 0.82, ox = W / 2 - sw / 2, oy = H / 2 - sh / 2;
+      c.strokeRect(ox, oy, sw, sh);
+      for (var ra = 0; ra <= 360; ra += 60) { var gx = ox + ra / 360 * sw; c.beginPath(); c.moveTo(gx, oy); c.lineTo(gx, oy + sh); c.stroke(); c.textAlign = 'center'; c.fillText((ra / 15).toFixed(0) + 'h', gx, oy + sh + 12); }
+      for (var dc = -60; dc <= 60; dc += 30) { var gy = oy + (90 - dc) / 180 * sh; c.beginPath(); c.moveTo(ox, gy); c.lineTo(ox + sw, gy); c.stroke(); c.textAlign = 'right'; c.fillText((dc > 0 ? '+' : '') + dc + '°', ox - 4, gy + 3); }
+    } else {
+      var cx2 = W / 2, cy2 = H / 2, R2 = Math.min(W, H) * 0.42 * _radar.zoom;
+      c.strokeStyle = 'rgba(63,224,143,.12)';
+      for (var m = 0; m < 6; m++) {
+        c.beginPath();
+        for (var t = -90; t <= 90; t += 6) {
+          var de2 = t * Math.PI / 180, ra2 = m * Math.PI / 6;
+          var v2 = [Math.cos(de2) * Math.cos(ra2), Math.sin(de2), Math.cos(de2) * Math.sin(ra2)];
+          var r2 = _radar3dRot(v2, _radar.yaw, _radar.pitch);
+          var px = cx2 + r2[0] * R2, py = cy2 - r2[1] * R2;
+          if (t === -90) c.moveTo(px, py); else c.lineTo(px, py);
+        }
+        c.stroke();
+      }
+      c.beginPath();
+      for (var e = 0; e <= 360; e += 6) {
+        var ra3 = e * Math.PI / 180, v3 = [Math.cos(ra3), 0, Math.sin(ra3)];
+        var r3 = _radar3dRot(v3, _radar.yaw, _radar.pitch);
+        var px3 = cx2 + r3[0] * R2, py3 = cy2 - r3[1] * R2;
+        if (e === 0) c.moveTo(px3, py3); else c.lineTo(px3, py3);
+      }
+      c.strokeStyle = 'rgba(63,224,143,.22)'; c.stroke();
+    }
+    c.restore();
+  }
+  function _radarDraw(){
+    if (!_radar) return;
+    var c = _radar.ctx, cv = _radar.cv, W = cv.width, H = cv.height;
+    c.clearRect(0, 0, W, H);
+    _radar.screen = [];
+    if (_radar.mode === 'LOCAL' && obsLat == null) {
+      c.fillStyle = 'rgba(63,224,143,.6)'; c.font = '13px monospace'; c.textAlign = 'center';
+      c.fillText('NO OBSERVING FIX — TAP LOCATION BELOW TO SET SITE', W / 2, H / 2);
+      return;
+    }
+    _radarGrid(c, W, H);
+    var pts = _radar.pts, i, p, s;
+    /* sweep line (LOCAL) */
+    if (_radar.mode === 'LOCAL') {
+      var cx = W / 2, cy = H / 2, R = Math.min(W, H) * 0.44;
+      _radar.sweep = (_radar.sweep + 0.02) % 6.283;
+      var grd = c.createLinearGradient(cx, cy, cx + R * Math.sin(_radar.sweep), cy - R * Math.cos(_radar.sweep));
+      grd.addColorStop(0, 'rgba(63,224,143,.35)'); grd.addColorStop(1, 'rgba(63,224,143,0)');
+      c.strokeStyle = grd; c.lineWidth = 2; c.beginPath(); c.moveTo(cx, cy); c.lineTo(cx + R * Math.sin(_radar.sweep), cy - R * Math.cos(_radar.sweep)); c.stroke();
+    }
+    var order = [];
+    for (i = 0; i < pts.length; i++) { var pr = _radarProject(pts[i]); if (pr) order.push({ p: pts[i], pr: pr }); }
+    if (_radar.mode === '3D') order.sort(function(a, b){ return (a.pr.front === b.pr.front) ? 0 : (a.pr.front ? 1 : -1); });
+    for (i = 0; i < order.length; i++) {
+      p = order[i].p; s = order[i].pr;
+      var col = _radarTierColor(p.score), rad = 2 + (p.score / 100) * 3.5;
+      var dim = (!s.vis) || (s.front === false);
+      c.globalAlpha = dim ? 0.28 : 1;
+      c.beginPath(); c.arc(s.x, s.y, rad, 0, 6.283); c.fillStyle = col; c.fill();
+      if (!dim) { c.globalAlpha = 0.35; c.beginPath(); c.arc(s.x, s.y, rad + 2.5, 0, 6.283); c.strokeStyle = col; c.lineWidth = 1; c.stroke(); }
+      c.globalAlpha = 1;
+      _radar.screen.push({ name: p.name, ra: p.ra, dec: p.dec, score: p.score, x: s.x, y: s.y });
+    }
+    /* selection reticle */
+    if (_radar.sel) {
+      for (i = 0; i < _radar.screen.length; i++) {
+        if (_radar.screen[i].name === _radar.sel.name) {
+          var sx = _radar.screen[i].x, sy = _radar.screen[i].y;
+          c.strokeStyle = '#7dd3fc'; c.lineWidth = 1.4;
+          c.beginPath(); c.arc(sx, sy, 11, 0, 6.283); c.stroke();
+          c.beginPath(); c.moveTo(sx - 16, sy); c.lineTo(sx - 6, sy); c.moveTo(sx + 6, sy); c.lineTo(sx + 16, sy);
+          c.moveTo(sx, sy - 16); c.lineTo(sx, sy - 6); c.moveTo(sx, sy + 6); c.lineTo(sx, sy + 16); c.stroke();
+          break;
+        }
+      }
+    }
+  }
+  function _radarPick(px, py){
+    if (!_radar || !_radar.screen) return null;
+    var best = null, bd = 22 * 22, scale = _radar.cv.width / _radar.cv.clientWidth;
+    var mx = px * scale, my = py * scale;
+    for (var i = 0; i < _radar.screen.length; i++) {
+      var s = _radar.screen[i], dx = s.x - mx, dy = s.y - my, d = dx * dx + dy * dy;
+      if (d < bd) { bd = d; best = s; }
+    }
+    return best;
+  }
+  function _radarSelect(s){
+    if (!s) return;
+    _radar.sel = s;
+    try { window._scopeSel = { name: s.name, ra: s.ra, dec: s.dec, score: Math.round(s.score), ss: false }; } catch(e) {}
+    var info = document.getElementById('radar-info');
+    if (info) {
+      var extra = '';
+      try {
+        if (_radar.mode === 'LOCAL' && obsLat != null) { var aa = _altazOf(s.ra, s.dec, _radarWhen()); if (aa) extra = ' · ALT ' + aa.alt.toFixed(0) + '° AZ ' + aa.az.toFixed(0) + '°'; }
+        else extra = ' · RA ' + (+s.ra).toFixed(2) + '° DEC ' + (+s.dec).toFixed(2) + '°';
+      } catch(e) {}
+      info.innerHTML = '<span class="rdr-inm">' + _esc(s.name) + '</span> <span class="rdr-isc">SCORE ' + Math.round(s.score) + extra + '</span>' +
+        '<span class="rdr-iact"><button data-ract="lock">◎ LOCK</button><button data-ract="spectrum">≋ SPEC</button><button data-ract="track">⌖ TRACK</button></span>';
+      info.style.display = '';
+    }
+    _haptic && _haptic(12);
+  }
+  function _radarFocus(name){
+    if (!_radar) return;
+    var nl = String(name || '').toLowerCase();
+    for (var i = 0; i < _radar.pts.length; i++) if (_radar.pts[i].name.toLowerCase() === nl) { _radarSelect({ name: _radar.pts[i].name, ra: _radar.pts[i].ra, dec: _radar.pts[i].dec, score: _radar.pts[i].score, x: 0, y: 0 }); return; }
+  }
+  function _radarSetMode(mode){
+    if (!_radar) return;
+    _radar.mode = mode;
+    var tabs = document.querySelectorAll('#radar-ov [data-rmode]');
+    for (var i = 0; i < tabs.length; i++) tabs[i].classList.toggle('on', tabs[i].getAttribute('data-rmode') === mode);
+    var scrub = document.getElementById('radar-scrub');
+    if (scrub) scrub.style.display = (mode === '3D') ? 'none' : '';
+    var hint = document.getElementById('radar-hint');
+    if (hint) hint.textContent = (mode === '3D') ? 'DRAG ROTATE · WHEEL ZOOM · TAP A CONTACT' : (mode === 'LOCAL' ? 'LOCAL SKY · ALT-AZ · TAP A CONTACT' : 'STAR CHART · RA/DEC · TAP A CONTACT');
+    op('RADAR — ' + mode + ' MODE');
+  }
+  function _radarFit(){
+    if (!_radar) return;
+    var stage = document.getElementById('radar-stage'); if (!stage) return;
+    var s = Math.max(240, Math.min(stage.clientWidth, stage.clientHeight));
+    _radar.cv.width = s; _radar.cv.height = s;
+    _radar.cv.style.width = s + 'px'; _radar.cv.style.height = s + 'px';
+  }
+  window._radarOpen = function(mode, focusName){
+    mode = (mode || 'LOCAL').toUpperCase(); if (_RADAR_MODES.indexOf(mode) < 0) mode = 'LOCAL';
+    if (document.getElementById('radar-ov') && _radar) { _radarSetMode(mode); if (focusName) _radarFocus(focusName); return; }
+    try { SFX.open(); } catch(e) {}
+    try { _ensureGeo(); } catch(e) {}
+    var ov = document.createElement('div'); ov.id = 'radar-ov'; ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-label', 'Radar console');
+    var tabs = '';
+    for (var m = 0; m < _RADAR_MODES.length; m++) { var lbl = _RADAR_MODES[m] === '3D' ? '3D GLOBE' : (_RADAR_MODES[m] === 'SKY' ? 'STAR CHART' : 'LOCAL SKY'); tabs += '<button class="rdr-tab" data-rmode="' + _RADAR_MODES[m] + '">' + lbl + '</button>'; }
+    ov.innerHTML =
+      '<div id="radar-con"><div class="rdr-br rdr-tl"></div><div class="rdr-br rdr-tr"></div><div class="rdr-br rdr-bl"></div><div class="rdr-br rdr-brr"></div>' +
+      '<div id="radar-cmd"><span class="rdr-title">⊹ RADAR</span><span class="rdr-tabs">' + tabs + '</span>' +
+      '<span class="rdr-stat" id="radar-stat"></span><button class="rdr-x" id="radar-x">✕</button></div>' +
+      '<div id="radar-stage"><canvas id="radar-cv"></canvas><div id="radar-hint"></div></div>' +
+      '<div id="radar-scrub"><input id="radar-t" type="range" min="0" max="24" step="any" value="0"><span id="radar-tlabel">T NOW</span><button id="radar-tnow">NOW</button></div>' +
+      '<div id="radar-info" style="display:none"></div>' +
+      '<div id="radar-foot" class="rdr-foot"></div></div>';
+    document.body.appendChild(ov);
+    _radar = { mode: mode, cv: document.getElementById('radar-cv'), ctx: document.getElementById('radar-cv').getContext('2d'), yaw: 0.5, pitch: -0.35, zoom: 1, t: 0, sel: null, sweep: 0, pts: _radarPts(), screen: [] };
+    _radarFit(); _radar.resize = _radarFit; window.addEventListener('resize', _radar.resize);
+    var foot = document.getElementById('radar-foot'); if (foot) { foot.textContent = _obsLabel(); foot.style.cursor = 'pointer'; foot.addEventListener('click', function(){ try { _promptObs(); } catch(e) {} }); }
+    /* interactions (delegated) */
+    ov.addEventListener('click', function(ev){
+      var tab = ev.target.closest ? ev.target.closest('[data-rmode]') : null;
+      if (tab) { _radarSetMode(tab.getAttribute('data-rmode')); return; }
+      var act = ev.target.closest ? ev.target.closest('[data-ract]') : null;
+      if (act) { var a = act.getAttribute('data-ract'), d = _radar.sel; if (!d) return; try { SFX.click(); } catch(e) {}
+        if (a === 'lock') window._lockOn(d.name, d.ra, d.dec, Math.round(d.score), false);
+        else if (a === 'spectrum') { if (window._spectrumOpen) window._spectrumOpen(d.name); }
+        else if (a === 'track') { try { window.NAVCON.track(d.name, d.ra, d.dec); op('TRACKING ' + String(d.name).toUpperCase()); } catch(e) {} }
+        return; }
+      if (ev.target === ov) _radarClose();
+    });
+    document.getElementById('radar-x').addEventListener('click', _radarClose);
+    var cv = _radar.cv, drag = false, moved = 0, lx = 0, ly = 0;
+    cv.addEventListener('pointerdown', function(e){ drag = true; moved = 0; lx = e.clientX; ly = e.clientY; try { cv.setPointerCapture(e.pointerId); } catch(x) {} });
+    cv.addEventListener('pointermove', function(e){ if (!drag || _radar.mode !== '3D') { if (drag) moved += 5; return; } var dx = e.clientX - lx, dy = e.clientY - ly; lx = e.clientX; ly = e.clientY; moved += Math.abs(dx) + Math.abs(dy); _radar.yaw += dx * 0.006; _radar.pitch = Math.max(-1.5, Math.min(1.5, _radar.pitch + dy * 0.006)); });
+    cv.addEventListener('pointerup', function(e){ if (drag && moved < 6) { var rc = cv.getBoundingClientRect(); var s = _radarPick(e.clientX - rc.left, e.clientY - rc.top); if (s) _radarSelect(s); } drag = false; });
+    cv.addEventListener('wheel', function(e){ if (_radar.mode !== '3D') return; e.preventDefault(); _radar.zoom = Math.max(0.5, Math.min(4, _radar.zoom * (e.deltaY < 0 ? 1.12 : 0.89))); }, { passive: false });
+    var tsl = document.getElementById('radar-t'), tlb = document.getElementById('radar-tlabel');
+    if (tsl) tsl.addEventListener('input', function(){ _radar.t = +tsl.value; if (tlb) tlb.textContent = (_radar.t < 0.05) ? 'T NOW' : 'T +' + _radar.t.toFixed(1) + 'h'; });
+    var tnw = document.getElementById('radar-tnow'); if (tnw) tnw.addEventListener('click', function(){ _radar.t = 0; if (tsl) tsl.value = 0; if (tlb) tlb.textContent = 'T NOW'; });
+    _radarSetMode(mode);
+    (function loop(){ if (!_radar) return; var st = document.getElementById('radar-stat'); if (st) { var d = new Date(); st.textContent = 'UTC ' + pad(d.getUTCHours()) + ':' + pad(d.getUTCMinutes()) + ':' + pad(d.getUTCSeconds()) + ' · ' + _radar.pts.length + ' CONTACTS'; } _radarDraw(); _radar.raf = requestAnimationFrame(loop); })();
+    if (focusName) _radarFocus(focusName);
+    op('RADAR CONSOLE ONLINE — ' + mode + ' MODE · ' + _radar.pts.length + ' CONTACTS');
+  };
+  function _radarClose(){
+    var ov = document.getElementById('radar-ov'); if (!ov) return;
+    if (_radar) { if (_radar.raf) cancelAnimationFrame(_radar.raf); if (_radar.resize) window.removeEventListener('resize', _radar.resize); }
+    _radar = null; ov.remove(); try { SFX.close(); } catch(e) {}
+  }
+  window._radarClose = _radarClose;
+  window._radarPick = _radarPick;
+  window._radarState = function(){ return _radar ? { mode: _radar.mode, contacts: _radar.pts.length, sel: _radar.sel ? _radar.sel.name : null, screen: _radar.screen.length } : null; };
+  window._radarSetMode = function(m){ _radarSetMode(m); };
+  /* ══ NAVCON PRO-16: Preferences panel (p) — centralises the settings that were
+        previously buried in CDU commands, into one glass panel. ══ */
+  function _prefToggle(key, isOn){ return '<button class="pref-tog ' + (isOn ? 'on' : '') + '" data-pref="' + key + '">' + (isOn ? 'ON' : 'OFF') + '</button>'; }
+  function _prefsRefresh(){ var o = document.getElementById('prefs-ov'); if (o) o.remove(); window._prefsOpen(); }
+  window._prefsOpen = function(){
+    function on(k){ try { return localStorage.getItem(k) === '1'; } catch(e) { return false; } }
+    function val(k, d){ try { var v = localStorage.getItem(k); return v == null ? d : v; } catch(e) { return d; } }
+    var muted = true; try { muted = localStorage.getItem('sfx-muted') !== '0'; } catch(e) {}
+    var aos = val('ds-aos-deg', '20'), bortle = val('ds-bortle', '4'), fov = val('ds-fov', '');
+    var rows = [
+      ['SITE', 'Observing location', '<span id="pref-site">' + _esc(_obsLabel()) + '</span> <button class="pref-btn" data-pref="site">SET</button>'],
+      ['NVG', 'Night-vision mode (red, low brightness)', _prefToggle('nvg', on('ds-nvg'))],
+      ['RED', 'Red-light mode (full red palette)', _prefToggle('red', on('ds-red'))],
+      ['VOICE', 'Voice callouts (JARVIS text-to-speech)', _prefToggle('voice', on('ds-voice'))],
+      ['SOUND', 'Interface sound effects', _prefToggle('sfx', !muted)],
+      ['AOS', 'Rise-alert altitude threshold (degrees)', '<input class="pref-num" data-pref="aos" type="number" min="5" max="60" value="' + _escAttr(aos) + '">'],
+      ['BORTLE', 'Sky quality — Bortle class 1 (dark) to 9 (city)', '<input class="pref-num" data-pref="bortle" type="number" min="1" max="9" value="' + _escAttr(bortle) + '">'],
+      ['FOV', 'Eyepiece field of view (arcmin)', '<input class="pref-num" data-pref="fov" type="text" value="' + _escAttr(fov) + '" placeholder="e.g. 60">']
+    ];
+    var body = '<div class="pref-wrap">';
+    for (var i = 0; i < rows.length; i++) body += '<div class="pref-row"><span class="pref-k">' + rows[i][0] + '</span><span class="pref-d">' + rows[i][1] + '</span><span class="pref-c">' + rows[i][2] + '</span></div>';
+    body += '</div><div class="pref-note">SHORTCUTS &nbsp; r Radar &nbsp;·&nbsp; p Preferences &nbsp;·&nbsp; a Ask &nbsp;·&nbsp; ? Keys &nbsp;·&nbsp; / CDU &nbsp;·&nbsp; ⌘K Palette</div>';
+    var ov = _p3Overlay('prefs-ov', '⚙ PREFERENCES', body);
+    if (!ov) return;
+    ov.addEventListener('click', function(ev){
+      var t = ev.target.closest ? ev.target.closest('[data-pref]') : null; if (!t) return;
+      if (t.tagName === 'INPUT') return;
+      var k = t.getAttribute('data-pref');
+      if (k === 'site') { try { _promptObs(); } catch(e) {} setTimeout(function(){ var s = document.getElementById('pref-site'); if (s) s.textContent = _obsLabel(); }, 120); }
+      else if (k === 'nvg') { try { window._nvgToggle(); } catch(e) {} _prefsRefresh(); }
+      else if (k === 'red') { try { window._redToggle(); } catch(e) {} _prefsRefresh(); }
+      else if (k === 'voice') { try { window._voiceToggle(); } catch(e) {} _prefsRefresh(); }
+      else if (k === 'sfx') { var mm = true; try { mm = localStorage.getItem('sfx-muted') !== '0'; SFX.setMuted(!mm); } catch(e) {} _prefsRefresh(); }
+    });
+    ov.addEventListener('change', function(ev){
+      var t = ev.target; if (!t || !t.getAttribute) return; var k = t.getAttribute('data-pref'); if (!k) return;
+      if (k === 'aos') { var v = Math.max(5, Math.min(60, Math.round(+t.value || 20))); try { localStorage.setItem('ds-aos-deg', v); } catch(e) {} op('AOS ALERT ALTITUDE — ' + v + '°'); }
+      else if (k === 'bortle') { try { window._bortleSet(t.value); } catch(e) {} }
+      else if (k === 'fov') { try { localStorage.setItem('ds-fov', String(t.value || '')); } catch(e) {} op('FOV — ' + (t.value || 'CLEARED')); }
+    });
+    op('PREFERENCES');
+  };
+  /* ── keyboard shortcuts cheat-sheet (?) ── */
+  window._keysOpen = function(){
+    var rows = [['r  R', 'Radar console'], ['p  P', 'Preferences'], ['a  A', 'Ask JARVIS'], ['?', 'This shortcuts list'], ['/', 'Command line (CDU)'], ['⌘K  Ctrl-K', 'Command palette'], ['j  k', 'Move card focus'], ['Esc', 'Close top overlay']];
+    var body = '<div class="keys-wrap">';
+    for (var i = 0; i < rows.length; i++) body += '<div class="keys-row"><kbd>' + rows[i][0] + '</kbd><span>' + rows[i][1] + '</span></div>';
+    body += '</div>';
+    _p3Overlay('keys-ov', '⌨ KEYBOARD SHORTCUTS', body);
+    op('KEYBOARD SHORTCUTS');
+  };
+  try { window._scopeToggle = _scopeToggle; } catch(e) {}
   function _scopeToggle(){
     var ov = document.getElementById('scope-ov');
     if (ov) {
@@ -7201,8 +7543,8 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     _scopeRAF = requestAnimationFrame(draw);
   }
   (function(){
-    var sb = document.getElementById('hud-scope-btn');
-    if (sb) sb.addEventListener('click', _scopeToggle);
+    var sb = document.getElementById('hud-radar-btn');
+    if (sb) sb.addEventListener('click', function(){ window._radarOpen('LOCAL'); });
   })();
 
   /* ── AR finder: point the device at the tracked target (mobile; CDU "AR" anywhere) ── */
@@ -7303,7 +7645,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     var _hist = [];
     try { _hist = JSON.parse(sessionStorage.getItem('ds-cdu-hist') || '[]'); } catch(e) {}
     var _hIdx = _hist.length;
-    var _VOCAB = ['SCOPE', 'LOG', 'LIST', 'AR', 'NVG', 'RED', 'SYS', 'VOICE', 'EXPORT', 'IMPORT', 'DEBRIEF', 'QRH', 'TRX', 'PLAN', 'MFD', 'SHARE', 'TUNE', 'AOS', 'MAP', 'NEWS', 'REPORT', 'BLINK', 'SRC', 'TRK', 'FIND', 'WX', 'SKY', 'FOV', 'LC', 'BORTLE', 'KIOSK', 'ASK', 'JARVIS', 'BRIEF', 'LOCK', 'NOW', 'GAUGE', 'MIC', 'SESSION', 'CMD', 'SIMILAR', 'PLAN', 'ALERTS', 'ANOMALY', 'ML', 'SPHERE', '3D', 'TEAM', 'CONSENSUS', 'ALADIN', 'ATLAS', 'SPECTRUM', 'WATERFALL'];
+    var _VOCAB = ['SCOPE', 'LOG', 'LIST', 'AR', 'NVG', 'RED', 'SYS', 'VOICE', 'EXPORT', 'IMPORT', 'DEBRIEF', 'QRH', 'TRX', 'PLAN', 'MFD', 'SHARE', 'TUNE', 'AOS', 'MAP', 'NEWS', 'REPORT', 'BLINK', 'SRC', 'TRK', 'FIND', 'WX', 'SKY', 'FOV', 'LC', 'BORTLE', 'KIOSK', 'ASK', 'JARVIS', 'BRIEF', 'LOCK', 'NOW', 'GAUGE', 'MIC', 'SESSION', 'CMD', 'SIMILAR', 'PLAN', 'ALERTS', 'ANOMALY', 'ML', 'SPHERE', '3D', 'TEAM', 'CONSENSUS', 'ALADIN', 'ATLAS', 'SPECTRUM', 'WATERFALL', 'RADAR', 'PREFS', 'KEYS'];
     inp.addEventListener('keydown', function(ev){
       ev.stopPropagation();
       if (ev.key === 'Escape') { ov.remove(); return; }
@@ -7339,6 +7681,9 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     if (!m) return;
     var verb = m[1].toUpperCase(), arg = m[2].trim();
     if (verb === 'SCOPE') return _scopeToggle();
+    if (verb === 'RADAR') return window._radarOpen(arg || 'LOCAL');
+    if (verb === 'PREFS' || verb === 'PREFERENCES') return window._prefsOpen();
+    if (verb === 'KEYS' || verb === 'SHORTCUTS') return window._keysOpen();
     if (verb === 'LOG') return _jToggle();
     if (verb === 'LIST') return _thToggle();
     if (verb === 'AR') return _arToggle();
@@ -7396,13 +7741,13 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     if (verb === 'SIMILAR') { var _sn = arg || (_scopeSel && _scopeSel.name) || (document.querySelector('#result-card .result-name') || {}).textContent; if (_sn) return window._similarOpen(String(_sn).trim()); return op('SIMILAR — NAME A CANDIDATE'); }
     if (verb === 'ALADIN' || verb === 'ATLAS') return window._aladinFor(arg);
     if (verb === 'TEAM' || verb === 'CONSENSUS') { if (/share|分享/.test((arg || '').toLowerCase())) return window._teamShare(); return window._teamOpen(); }
-    if (verb === 'SPHERE' || verb === '3D' || verb === 'GLOBE') return window._sphereToggle();
+    if (verb === 'SPHERE' || verb === '3D' || verb === 'GLOBE') return window._radarOpen('3D');
     if (verb === 'ANOMALY' || verb === 'ML' || verb === 'DARKHORSE') return window._anomalyOpen();
     if (verb === 'ALERTS' || verb === 'ALERT') return window._alertsView();
     if (verb === 'NOW') return window._nowToggle();
     if (verb === 'GAUGE' || verb === 'GAUGES') return window._gaugesToggle();
     if (verb === 'MIC') return window._micToggle();
-    if (verb === 'MAP' && typeof mapOpen === 'function') return mapOpen();
+    if (verb === 'MAP') return window._radarOpen('SKY');
     if (verb === 'NEWS' && typeof newsOpen === 'function') return newsOpen(null);
     if (verb === 'REPORT' && typeof reportOpen === 'function') return reportOpen();
     if (verb === 'BLINK') {
@@ -7446,6 +7791,10 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     var t = ev.target, tag = t && t.tagName;
     if (tag === 'INPUT' || tag === 'TEXTAREA' || (t && t.isContentEditable)) return;
     if (ev.key === '/') { ev.preventDefault(); _cduToggle(); return; }
+    if (ev.key === 'r' || ev.key === 'R') { ev.preventDefault(); window._radarOpen('LOCAL'); return; }
+    if (ev.key === 'p' || ev.key === 'P') { ev.preventDefault(); window._prefsOpen(); return; }
+    if (ev.key === 'a' || ev.key === 'A') { ev.preventDefault(); window._askBox(); return; }
+    if (ev.key === '?') { ev.preventDefault(); window._keysOpen(); return; }
     if (ev.key === 'j' || ev.key === 'k') { ev.preventDefault(); _kMove(ev.key === 'j' ? 1 : -1); return; }
     var cs = document.querySelectorAll('.card');
     var f = (_kIdx >= 0 && _kIdx < cs.length) ? cs[_kIdx] : null;
