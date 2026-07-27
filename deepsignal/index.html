@@ -526,6 +526,13 @@ html.nvg body>*{filter:sepia(1) hue-rotate(-48deg) saturate(3.4) brightness(.78)
 .lk-next{right:2%}
 @media (max-width:640px){.lk-arrow{width:38px;height:38px;font-size:1.2rem}.lk-act{font-size:.5rem;padding:5px 7px}}
 #radial-ov{position:fixed;inset:0;z-index:9997}
+.spec-wrap{display:flex;flex-direction:column;gap:10px}
+#spec-cv{width:100%;height:auto;display:block;border:1px solid rgba(63,224,143,.25);border-radius:8px;background:#000}
+.spec-axis{font-family:monospace;font-size:.52rem;letter-spacing:.08em;color:#3a7a5a;text-align:center}
+.spec-legend{display:flex;align-items:center;gap:7px;font-family:monospace;font-size:.52rem;letter-spacing:.08em;color:#9fd4bb}
+.spec-cbar{display:inline-block;flex:1;max-width:150px;height:9px;border-radius:3px;background:linear-gradient(90deg,rgb(0,0,4),rgb(66,10,104),rgb(126,29,111),rgb(190,55,82),rgb(237,105,37),rgb(251,170,42),rgb(247,226,140))}
+.spec-nums{font-family:monospace;font-size:.62rem;letter-spacing:.05em;color:#3fe08f}
+.spec-note{font-family:monospace;font-size:.66rem;line-height:1.5;color:#cfe9dd;background:rgba(63,224,143,.05);border-left:2px solid #3fe08f;border-radius:6px;padding:9px 11px}
 .rad-item{position:absolute;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column;font-family:monospace;font-size:.5rem;letter-spacing:.06em;color:#3fe08f;background:rgba(3,16,11,.94);border:1px solid rgba(63,224,143,.5);box-shadow:0 0 14px rgba(63,224,143,.2);cursor:pointer;transition:transform .12s,background .12s;transform:scale(.2);opacity:0}
 .rad-item.in{transform:scale(1);opacity:1}
 .rad-item:hover{background:rgba(63,224,143,.22);transform:scale(1.12)}
@@ -1545,6 +1552,9 @@ function showResult(resolved, pipelineMatches) {
           ${(ra != null && !isNaN(+ra)) ? `<button class="btn-news btn-lc" onclick="_lcOpen('${name.replace(/'/g,"\\'")}', ${+ra}, ${+dec})">
             <span class="news-dot">📈</span> Light Curve
           </button>` : ""}
+          <button class="btn-news btn-spec" onclick="_spectrumOpen('${name.replace(/'/g,"\\'")}')">
+            <span class="news-dot">≋</span> Spectrum
+          </button>
         </div>
       </div>
     </div>`;
@@ -5098,7 +5108,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     var _hist = [];
     try { _hist = JSON.parse(sessionStorage.getItem('ds-cdu-hist') || '[]'); } catch(e) {}
     var _hIdx = _hist.length;
-    var _VOCAB = ['SCOPE', 'LOG', 'LIST', 'AR', 'NVG', 'RED', 'SYS', 'VOICE', 'EXPORT', 'IMPORT', 'DEBRIEF', 'QRH', 'TRX', 'PLAN', 'MFD', 'SHARE', 'TUNE', 'AOS', 'MAP', 'NEWS', 'REPORT', 'BLINK', 'SRC', 'TRK', 'FIND', 'WX', 'SKY', 'FOV', 'LC', 'BORTLE', 'KIOSK', 'ASK', 'JARVIS', 'BRIEF', 'LOCK', 'NOW', 'GAUGE', 'MIC', 'SESSION', 'CMD', 'SIMILAR', 'PLAN', 'ALERTS', 'ANOMALY', 'ML', 'SPHERE', '3D', 'TEAM', 'CONSENSUS', 'ALADIN', 'ATLAS'];
+    var _VOCAB = ['SCOPE', 'LOG', 'LIST', 'AR', 'NVG', 'RED', 'SYS', 'VOICE', 'EXPORT', 'IMPORT', 'DEBRIEF', 'QRH', 'TRX', 'PLAN', 'MFD', 'SHARE', 'TUNE', 'AOS', 'MAP', 'NEWS', 'REPORT', 'BLINK', 'SRC', 'TRK', 'FIND', 'WX', 'SKY', 'FOV', 'LC', 'BORTLE', 'KIOSK', 'ASK', 'JARVIS', 'BRIEF', 'LOCK', 'NOW', 'GAUGE', 'MIC', 'SESSION', 'CMD', 'SIMILAR', 'PLAN', 'ALERTS', 'ANOMALY', 'ML', 'SPHERE', '3D', 'TEAM', 'CONSENSUS', 'ALADIN', 'ATLAS', 'SPECTRUM', 'WATERFALL'];
     inp.addEventListener('keydown', function(ev){
       ev.stopPropagation();
       if (ev.key === 'Escape') { ov.remove(); return; }
@@ -5174,6 +5184,14 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       var lb5 = document.querySelector('#result-card .btn-lc');
       if (lb5) { lb5.click(); return; }
       return op('LC — SELECT A TARGET FIRST (TAP A SCOPE BLIP OR RUN A SEARCH)');
+    }
+    if (verb === 'SPECTRUM' || verb === 'WATERFALL') {
+      var _spt = arg && window._resolveTarget ? window._resolveTarget(arg) : null;
+      if (_spt) return window._spectrumOpen(_spt.name);
+      if (_scopeSel && _scopeSel.name) return window._spectrumOpen(_scopeSel.name);
+      var _spn = document.querySelector('#result-card .result-name');
+      if (_spn) return window._spectrumOpen(_spn.textContent.trim());
+      return op('SPECTRUM — SELECT A CANDIDATE OR SEARCH A TARGET FIRST');
     }
     if (verb === 'ASK' || verb === 'JARVIS') { var _rq = window._ask(arg || v, false); if (_rq && _rq.ok) return; return op('JARVIS — NO ANSWER — TRY “HELP”'); }
     if (verb === 'BRIEF') { _jarvis(window._briefText() || 'No briefing available yet.', true); return; }
@@ -5504,6 +5522,87 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     }
     return true;
   }
+  /* ══ NAVCON PRO-15: dynamic spectrum (waterfall) — the classic SETI
+        drifting-signal-in-noise view, reconstructed from a candidate's real
+        physics (center freq, bandwidth, SNR, drift rate). Seeded → stable. ══ */
+  function _specData(r){
+    if (!r) return null;
+    var freq = r.center_freq_mhz != null ? +r.center_freq_mhz : (r.freq != null ? +r.freq : null);
+    var bw = r.bandwidth_mhz != null ? +r.bandwidth_mhz : (r.bw != null ? +r.bw : null);
+    var snr = r.snr != null ? +r.snr : null;
+    var drift = r.drift_rate_hz_s != null ? +r.drift_rate_hz_s : (r.drift != null ? +r.drift : null);
+    if (freq == null && drift == null && snr == null) return null;
+    return { freq: freq, bw: bw, snr: snr, drift: drift };
+  }
+  function _specHash(s){ var h = 2166136261; s = String(s); for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+  function _specRng(a){ return function(){ a |= 0; a = a + 0x6D2B79F5 | 0; var t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  var _SPEC_CMAP = [[0,0,4],[20,11,52],[66,10,104],[126,29,111],[190,55,82],[237,105,37],[251,170,42],[247,226,140],[252,255,210]];
+  function _specColor(t){
+    t = t < 0 ? 0 : t > 1 ? 1 : t;
+    var n = _SPEC_CMAP.length - 1, x = t * n, i = Math.floor(x), f = x - i;
+    if (i >= n) { i = n - 1; f = 1; }
+    var a = _SPEC_CMAP[i], b = _SPEC_CMAP[i + 1];
+    return [a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f, a[2] + (b[2] - a[2]) * f];
+  }
+  function _specRender(cv, d, name){
+    var NF = 240, NT = 300, ctx = cv.getContext('2d');
+    var off = document.createElement('canvas'); off.width = NF; off.height = NT;
+    var octx = off.getContext('2d'), img = octx.createImageData(NF, NT);
+    var rng = _specRng(_specHash(String(name) + '|' + (d.freq || 0)));
+    function gauss(){ var s = 0; for (var k = 0; k < 3; k++) s += rng(); return (s - 1.5) * 1.1547; }
+    var snr = (d.snr != null && isFinite(d.snr)) ? Math.max(1, d.snr) : 8;
+    var bwHz = (d.bw != null && isFinite(d.bw) && d.bw > 0) ? d.bw * 1e6 : 300;
+    var drift = (d.drift != null && isFinite(d.drift)) ? d.drift : 0;
+    /* integrate long enough for the drift to read as a diagonal (realistic
+       drift-search dwell, capped at 30 min); zero drift stays a vertical band */
+    var Tobs = (Math.abs(drift) > 1e-6) ? Math.max(300, Math.min(1800, 1.6 * bwHz / Math.abs(drift))) : 300;
+    var driftTot = drift * Tobs;
+    var windowHz = Math.max(2.5 * Math.abs(driftTot), 3 * bwHz, 2000);
+    var sigmaHz = Math.max(bwHz * 0.5, windowHz / NF * 1.2);
+    var dispMin = -2.5, dispMax = Math.max(6, snr);
+    for (var ty = 0; ty < NT; ty++) {
+      var time = (ty / (NT - 1)) * Tobs;
+      var sigOff = drift * (time - Tobs / 2);
+      for (var fx = 0; fx < NF; fx++) {
+        var fOff = (fx / (NF - 1) - 0.5) * windowHz;
+        var z = (fOff - sigOff) / sigmaHz;
+        var val = gauss() + snr * Math.exp(-0.5 * z * z);
+        var c = _specColor((val - dispMin) / (dispMax - dispMin));
+        var p = (ty * NF + fx) * 4;
+        img.data[p] = c[0]; img.data[p + 1] = c[1]; img.data[p + 2] = c[2]; img.data[p + 3] = 255;
+      }
+    }
+    octx.putImageData(img, 0, 0);
+    ctx.imageSmoothingEnabled = true;
+    ctx.clearRect(0, 0, cv.width, cv.height);
+    ctx.drawImage(off, 0, 0, NF, NT, 0, 0, cv.width, cv.height);
+    return { windowHz: windowHz, Tobs: Tobs };
+  }
+  window._spectrumOpen = function(arg){
+    var row = (arg && typeof arg === 'object') ? arg : _catRow(arg);
+    var name = row ? _rName(row) : String(arg || '');
+    var d = _specData(row);
+    if (!d) { op('DYNAMIC SPECTRUM — NO SIGNAL DATA FOR ' + String(name).toUpperCase()); return; }
+    var freqTxt = d.freq != null ? d.freq.toFixed(4) + ' MHz' : '—';
+    var driftTxt = d.drift != null ? d.drift.toFixed(3) + ' Hz/s' : '—';
+    var snrTxt = d.snr != null ? d.snr.toFixed(1) : '—';
+    var bwTxt = d.bw != null ? (d.bw * 1000).toFixed(2) + ' kHz' : '—';
+    var interp = (d.drift != null && Math.abs(d.drift) > 0.01)
+      ? 'The bright streak drifts diagonally — the Doppler signature of a transmitter on a moving (rotating or orbiting) body. A natural broadband source would smear horizontally; local interference sits vertical at zero drift.'
+      : 'Little or no drift here — consistent with a distant fixed source, or with local interference. Drift is one of the strongest discriminators SETI uses to tell a transmitter from noise.';
+    var body = '<div class="spec-wrap">' +
+      '<canvas id="spec-cv" width="520" height="360"></canvas>' +
+      '<div class="spec-axis" id="spec-axis">DOWN = TIME · ACROSS = FREQUENCY (narrow drift window around center)</div>' +
+      '<div class="spec-legend"><span>NOISE</span><span class="spec-cbar"></span><span>SIGNAL</span></div>' +
+      '<div class="spec-nums">CENTER ' + freqTxt + '   ·   DRIFT ' + driftTxt + '   ·   SNR ' + snrTxt + '   ·   BW ' + bwTxt + '</div>' +
+      '<div class="spec-note">' + interp + '</div>' +
+      '</div>';
+    var ov = _p3Overlay('spec-ov', '≋ DYNAMIC SPECTRUM — ' + _esc(String(name).toUpperCase()), body);
+    if (!ov) return;
+    setTimeout(function(){ var cv = document.getElementById('spec-cv'); if (!cv) return; var _sr = _specRender(cv, d, name); var _ax = document.getElementById('spec-axis'); if (_ax && _sr) _ax.textContent = 'DOWN = TIME 0–' + Math.round(_sr.Tobs) + ' s     ACROSS = FREQUENCY · ±' + (_sr.windowHz / 2000).toFixed(1) + ' kHz around center'; }, 20);
+    op('DYNAMIC SPECTRUM — ' + String(name).toUpperCase() + ' · DRIFT ' + driftTxt);
+  };
+  window._specData = _specData; window._specRender = _specRender;
   window._lcOpen = function(name, ra, dec){
     var ov = _p3Overlay('lc-ov', '📈 ZTF LIGHT CURVE — ' + _esc(String(name).toUpperCase()), '<div class="j-t" id="lc-body">QUERYING ALERCE BROKER…</div>');
     if (!ov) return;
@@ -5964,7 +6063,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     var ret = '<svg id="lock-ret" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="#3fe08f" stroke-width="0.6" stroke-dasharray="4 3"/><circle cx="50" cy="50" r="30" fill="none" stroke="#3fe08f" stroke-width="0.4" opacity="0.6"/><path d="M50 4 V16 M50 84 V96 M4 50 H16 M84 50 H96" stroke="#3fe08f" stroke-width="0.8"/></svg>';
     var ret2 = '<svg id="lock-ret2" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="none" stroke="#3fe08f" stroke-width="0.3" stroke-dasharray="1 5"/><path d="M50 2 L52 8 L48 8 Z" fill="#3fe08f"/></svg>';
     _lockCur = { name: name, ra: has ? +ra : null, dec: has ? +dec : null, score: score, ss: ss, has: has, w: w };
-    var _acts = has ? [['track', '⌖', 'TRACK'], ['lc', '📈', 'LC'], ['atlas', '🔭', 'ATLAS'], ['similar', '≈', 'SIMILAR']] : [];
+    var _acts = has ? [['track', '⌖', 'TRACK'], ['lc', '📈', 'LC'], ['spectrum', '≋', 'SPEC'], ['atlas', '🔭', 'ATLAS'], ['similar', '≈', 'SIMILAR']] : [];
     var _actsHtml = '';
     for (var _ai = 0; _ai < _acts.length; _ai++) _actsHtml += '<button class="lk-act" data-lact="' + _acts[_ai][0] + '"><span class="la-ic">' + _acts[_ai][1] + '</span>' + _acts[_ai][2] + '</button>';
     var ov = document.createElement('div'); ov.id = 'lock-ov';
@@ -6006,7 +6105,8 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       { ic: '🗺', lb: 'MAP', fn: function(){ if (typeof mapOpenFromCard === 'function' && t.ra != null) mapOpenFromCard(t.ra, t.dec, t.name, t.score || 0, false); } },
       { ic: '📄', lb: 'LIT', fn: function(){ if (typeof litOpen === 'function') litOpen(t.name, ''); } },
       { ic: '≈', lb: 'SIMILAR', fn: function(){ if (window._similarOpen) window._similarOpen(t.name); } },
-      { ic: '🔭', lb: 'ATLAS', fn: function(){ if (window._aladinOpen && t.ra != null) { var _sv = null; try { if (typeof skySurvey === 'function') _sv = skySurvey(+t.dec).aladin; } catch(e) {} window._aladinOpen(t.name, t.ra, t.dec, _sv); } } }
+      { ic: '🔭', lb: 'ATLAS', fn: function(){ if (window._aladinOpen && t.ra != null) { var _sv = null; try { if (typeof skySurvey === 'function') _sv = skySurvey(+t.dec).aladin; } catch(e) {} window._aladinOpen(t.name, t.ra, t.dec, _sv); } } },
+      { ic: '≋', lb: 'SPECTRUM', fn: function(){ if (window._spectrumOpen) window._spectrumOpen(t.name); } }
     ];
     var cx = Math.max(72, Math.min(window.innerWidth - 72, x)), cy = Math.max(96, Math.min(window.innerHeight - 72, y));
     var html = '<div class="rad-center" style="left:' + cx + 'px;top:' + cy + 'px"></div>', R = 66;
@@ -6237,6 +6337,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     try { SFX.click(); } catch(e) {}
     if (a === 'track'){ try { window.NAVCON.track(d.name, d.ra, d.dec); op('TRACKING — ' + String(d.name).toUpperCase()); _haptic(20); } catch(e) {} }
     else if (a === 'lc'){ if (window._lcOpen) window._lcOpen(d.name, d.ra, d.dec); }
+    else if (a === 'spectrum'){ if (window._spectrumOpen) window._spectrumOpen(d.name); }
     else if (a === 'atlas'){ if (window._aladinOpen){ var sv = null; try { if (typeof skySurvey === 'function') sv = skySurvey(+d.dec).aladin; } catch(e) {} window._aladinOpen(d.name, d.ra, d.dec, sv); } }
     else if (a === 'similar'){ if (window._similarOpen) window._similarOpen(d.name); }
   };
