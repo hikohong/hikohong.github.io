@@ -77,11 +77,11 @@ const ck = (l, ok) => checks.push([l, ok]);
   await p.waitForTimeout(200);
   ck('ESC closes sphere + clears state', await p.evaluate(() => !document.getElementById('sphere-ov') && window._sphereState() === null));
 
-  // 8 CDU SPHERE reopens
+  // 8 legacy sphere engine reopens directly (PRO-16 rerouted CDU 3D -> radar;
+  // the standalone sphere engine is retained and still works on its own).
   await p.evaluate(() => { try { document.activeElement.blur(); } catch (e) {} });
-  await p.keyboard.press('/'); await p.waitForTimeout(150);
-  await p.keyboard.type('3D'); await p.keyboard.press('Enter'); await p.waitForTimeout(250);
-  ck('CDU 3D opens sphere', await p.evaluate(() => !!document.getElementById('sphere-ov')));
+  await p.evaluate(() => window._sphereToggle()); await p.waitForTimeout(250);
+  ck('legacy _sphereToggle reopens sphere', await p.evaluate(() => !!document.getElementById('sphere-ov')));
   await p.keyboard.press('Escape');
 
   ck('gallery: no JS errors', errs.length === 0);

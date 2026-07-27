@@ -17,7 +17,7 @@ await p.route('**/api.alerce.online/**', r=>r.fulfill({status:200,contentType:'a
     {oid:'ZTF26bbbbbbb',meanra:100,meandec:40,lastmjd:61233.0,class_name:'CV/Nova'}]})}));
 await p.goto('file://'+process.cwd()+'/deepsignal/gallery.html'); await p.waitForTimeout(900);
 // prime geo via scope, then close
-await p.click('#hud-scope-btn');
+await p.evaluate(()=>window._scopeToggle());
 await p.waitForFunction(()=>{const g=document.getElementById('scope-geo');return g&&/OBS/.test(g.textContent);},{timeout:5000});
 await p.click('#scope-x'); await p.waitForTimeout(200);
 

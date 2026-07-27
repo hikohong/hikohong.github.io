@@ -1,5 +1,5 @@
 /* Headless-chromium smoke test run in CI before every deploy: both pages must
-   load with zero page errors and the NAVCON console must boot (scope opens). */
+   load with zero page errors and the NAVCON console must boot (radar opens). */
 import { chromium } from 'playwright';
 const b = await chromium.launch();
 let fail = 0;
@@ -9,15 +9,15 @@ for (const f of ['deepsignal/index.html', 'deepsignal/gallery.html']) {
   p.on('pageerror', (e) => errs.push(e.message));
   await p.goto('file://' + process.cwd() + '/' + f);
   await p.waitForTimeout(1500);
-  const boot = await p.evaluate(() => !!document.getElementById('hud-scope-btn'));
+  const boot = await p.evaluate(() => !!document.getElementById('hud-radar-btn'));
   let scopeOk = false;
   if (boot) {
-    await p.click('#hud-scope-btn');
+    await p.click('#hud-radar-btn');
     await p.waitForTimeout(500);
-    scopeOk = await p.evaluate(() => !!document.getElementById('scope-ov'));
+    scopeOk = await p.evaluate(() => !!document.getElementById('radar-ov'));
   }
   const ok = errs.length === 0 && boot && scopeOk;
-  console.log(`${ok ? 'OK  ' : 'FAIL'} ${f}: pageerrors=${errs.length} hud=${boot} scope=${scopeOk}`);
+  console.log(`${ok ? 'OK  ' : 'FAIL'} ${f}: pageerrors=${errs.length} hud=${boot} radar=${scopeOk}`);
   if (errs.length) console.log('  errors:', errs.slice(0, 3).join(' | '));
   if (!ok) fail++;
 }
