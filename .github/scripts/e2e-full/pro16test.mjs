@@ -93,6 +93,21 @@ for (const [label,src] of [['gallery','file://'+process.cwd()+'/deepsignal/galle
   ck(`${label}: 3D rotates with two-finger scroll`, tp);
   await p.keyboard.press('Escape'); await p.waitForTimeout(120);
 
+  // PRO-16c: SKY hosts the real Map (all features, green); fixed larger console; LOCAL pans
+  await p.click('#hud-radar-btn'); await p.waitForTimeout(250);
+  const szA = await p.evaluate(()=>{ const r=document.getElementById('radar-con').getBoundingClientRect(); return [Math.round(r.width),Math.round(r.height)]; });
+  await p.click('#radar-ov [data-rmode="SKY"]'); await p.waitForTimeout(250);
+  const skyHost = await p.evaluate(()=>{ const mb=document.getElementById('map-body'),st=document.getElementById('radar-stage'); const r=document.getElementById('radar-con').getBoundingClientRect(); return { hosted: !!(mb&&st&&st.contains(mb)), green: st.classList.contains('rdr-mapmode'), dots: mb.querySelectorAll('[data-name]').length>0, hist: getComputedStyle(document.getElementById('radar-hist')).display!=='none', w:Math.round(r.width),h:Math.round(r.height) }; });
+  ck(`${label}: SKY hosts the real #map-body (all Map features)`, skyHost.hosted && skyHost.dots);
+  ck(`${label}: SKY greened + histogram button`, skyHost.green && skyHost.hist);
+  ck(`${label}: console size constant SKY vs LOCAL`, skyHost.w===szA[0] && skyHost.h===szA[1]);
+  await p.click('#radar-ov [data-rmode="LOCAL"]'); await p.waitForTimeout(200);
+  ck(`${label}: leaving SKY restores map-body home`, await p.evaluate(()=>{ const mm=document.getElementById('map-modal'),mb=document.getElementById('map-body'); return mm&&mm.contains(mb); }));
+  const localPan = await p.evaluate(()=>{ const cv=document.getElementById('radar-cv'),g=cv.getContext('2d'); const a=g.getImageData(0,0,cv.width,cv.height).data; let sa=0; for(let i=0;i<a.length;i+=997) sa=(sa+a[i])|0; cv.dispatchEvent(new WheelEvent('wheel',{deltaY:120,ctrlKey:false,bubbles:true,cancelable:true})); return new Promise(res=>setTimeout(()=>{ const bb=g.getImageData(0,0,cv.width,cv.height).data; let sb=0; for(let i=0;i<bb.length;i+=997) sb=(sb+bb[i])|0; res(sa!==sb); },140)); });
+  ck(`${label}: LOCAL pans with two-finger scroll`, localPan);
+  await p.keyboard.press('Escape'); await p.waitForTimeout(120);
+  ck(`${label}: after close, map-body back home`, await p.evaluate(()=>{ const mm=document.getElementById('map-modal'),mb=document.getElementById('map-body'); return mm&&mm.contains(mb); }));
+
   ck(`${label}: no JS errors`, errs.length===0);
   if(errs.length) console.log(label,'ERRS',errs.slice(0,4));
   await ctx.close();

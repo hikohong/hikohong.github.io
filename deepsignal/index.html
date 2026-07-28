@@ -534,7 +534,7 @@ html.nvg body>*{filter:sepia(1) hue-rotate(-48deg) saturate(3.4) brightness(.78)
 .spec-nums{font-family:monospace;font-size:.62rem;letter-spacing:.05em;color:#3fe08f}
 .spec-note{font-family:monospace;font-size:.66rem;line-height:1.5;color:#cfe9dd;background:rgba(63,224,143,.05);border-left:2px solid #3fe08f;border-radius:6px;padding:9px 11px}
 #radar-ov{position:fixed;inset:0;z-index:9994;background:radial-gradient(ellipse at center,rgba(2,10,8,.94),rgba(1,4,3,.985));display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
-#radar-con{position:relative;width:min(94vw,94vh);max-width:720px;height:min(90vh,860px);display:flex;flex-direction:column;border:1px solid rgba(63,224,143,.35);border-radius:14px;background:linear-gradient(180deg,rgba(6,20,15,.6),rgba(3,10,8,.5));box-shadow:0 0 60px rgba(63,224,143,.1),inset 0 0 42px rgba(63,224,143,.04);backdrop-filter:blur(12px);overflow:hidden;padding-bottom:8px}
+#radar-con{position:relative;width:min(96vw,1060px);height:min(94vh,920px);display:flex;flex-direction:column;border:1px solid rgba(63,224,143,.35);border-radius:14px;background:linear-gradient(180deg,rgba(6,20,15,.6),rgba(3,10,8,.5));box-shadow:0 0 60px rgba(63,224,143,.1),inset 0 0 42px rgba(63,224,143,.04);backdrop-filter:blur(12px);overflow:hidden;padding-bottom:8px}
 .rdr-br{position:absolute;width:16px;height:16px;border:2px solid #3fe08f;opacity:.7;pointer-events:none}
 .rdr-tl{top:6px;left:6px;border-right:none;border-bottom:none}
 .rdr-tr{top:6px;right:6px;border-left:none;border-bottom:none}
@@ -575,6 +575,17 @@ html.nvg body>*{filter:sepia(1) hue-rotate(-48deg) saturate(3.4) brightness(.78)
 .keys-wrap{display:flex;flex-direction:column;gap:6px}
 .keys-row{display:flex;align-items:center;gap:12px;font-size:.72rem;color:#cfe9dd}
 .keys-row kbd{font-family:monospace;font-size:.6rem;color:#3fe08f;background:rgba(3,16,11,.7);border:1px solid rgba(63,224,143,.35);border-radius:4px;padding:3px 9px;min-width:78px;text-align:center}
+.rdr-hist{width:26px;height:26px;border-radius:5px;background:rgba(3,16,11,.6);border:1px solid rgba(63,224,143,.35);color:#3fe08f;cursor:pointer;font-family:monospace;flex-shrink:0}
+.rdr-hist:hover{background:rgba(63,224,143,.18)}
+#radar-stage.rdr-mapmode{display:block;overflow:auto;align-items:stretch;justify-content:flex-start}
+#radar-stage #map-body{width:100%;min-height:100%;box-sizing:border-box;padding:2px 8px;color:#cfe9dd}
+#radar-stage #map-body .sky-title{color:#3fe08f}
+#radar-stage #map-body #map-detail{border-color:rgba(63,224,143,.35)!important;background:rgba(6,20,15,.6)!important}
+#radar-stage #hist-section{border-color:#3fe08f!important;box-shadow:0 0 24px rgba(63,224,143,.2)!important;background:#041210!important}
+#radar-stage #map-body svg line{stroke:rgba(63,224,143,.2)!important}
+#radar-stage #map-body #map-crosshair line,#radar-stage #map-body #map-crosshair path,#radar-stage #map-body #map-crosshair circle{stroke:#3fe08f!important}
+#radar-stage #map-body #map-crosshair text{fill:#3fe08f!important;stroke:none!important}
+#radar-stage #map-body #map-custom-dot circle{fill:#3fe08f!important;stroke:#3fe08f!important}
 .rad-item{position:absolute;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column;font-family:monospace;font-size:.5rem;letter-spacing:.06em;color:#3fe08f;background:rgba(3,16,11,.94);border:1px solid rgba(63,224,143,.5);box-shadow:0 0 14px rgba(63,224,143,.2);cursor:pointer;transition:transform .12s,background .12s;transform:scale(.2);opacity:0}
 .rad-item.in{transform:scale(1);opacity:1}
 .rad-item:hover{background:rgba(63,224,143,.22);transform:scale(1.12)}
@@ -4786,12 +4797,11 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       (t.ss ? 'RA ' + t.ra.toFixed(2) + '° DEC ' + t.dec.toFixed(2) + '° (NOW)' : 'J2000 RA ' + t.ra.toFixed(2) + '° DEC ' + t.dec.toFixed(2) + '°');
   }
   /* ══ NAVCON PRO-16: unified RADAR console — one instrument, three modes.
-        LOCAL (alt-az tactical scope) · SKY (RA/Dec star chart) · 3D (celestial
-        globe). Single canvas, seeded nothing, reuses the astro math
-        (_altazOf/_navTargets/riseSet) + a small orthographic projector. The
-        legacy scope/map/sphere engines stay intact for CDU/cards/MFD; this is
-        the unified HUD entry. Selecting a blip sets window._scopeSel so LOCK /
-        LC / SPECTRUM keep working from the radar. ══ */
+        LOCAL (alt-az tactical scope) · SKY (the real candidate Map, hosted +
+        greened) · 3D (celestial globe). LOCAL/3D are one canvas reusing the
+        astro math; SKY reparents the legacy #map-body so ALL its features (dots,
+        detail, histogram, crosshair) are kept, just recoloured green. Selecting
+        a contact sets window._scopeSel so LOCK / LC / SPECTRUM keep working. ══ */
   var _radar = null;
   var _RADAR_MODES = ['LOCAL', 'SKY', '3D'];
   function _radarPts(){
@@ -4816,21 +4826,14 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
   }
   function _radarWhen(){ return new Date(Date.now() + (_radar ? _radar.t : 0) * 3600000); }
   function _radarProject(p){
-    /* returns {x,y,vis,front} in canvas px for the current mode, or null */
-    var cv = _radar.cv, W = cv.width, H = cv.height, pad = Math.min(W, H) * 0.5;
+    var cv = _radar.cv, W = cv.width, H = cv.height;
     if (_radar.mode === 'LOCAL') {
       if (obsLat == null) return null;
       var aa = _altazOf(p.ra, p.dec, _radarWhen()); if (!aa) return null;
-      var cx = W / 2, cy = H / 2, R = Math.min(W, H) * 0.44;
+      var cx = W / 2 + _radar.panX, cy = H / 2 + _radar.panY, R = Math.min(W, H) * 0.44 * _radar.scale;
       var rr = R * (90 - aa.alt) / 90;
       var az = aa.az * Math.PI / 180;
       return { x: cx + rr * Math.sin(az), y: cy - rr * Math.cos(az), vis: aa.alt > 0, front: true, alt: aa.alt, az: aa.az };
-    }
-    if (_radar.mode === 'SKY') {
-      var mx = W * 0.5, my = H * 0.5, sw = W * 0.9, sh = H * 0.82;
-      var x = mx - sw / 2 + (p.ra / 360) * sw;
-      var y = my - sh / 2 + ((90 - p.dec) / 180) * sh;
-      return { x: x, y: y, vis: true, front: true };
     }
     /* 3D */
     var ra = p.ra * Math.PI / 180, de = p.dec * Math.PI / 180;
@@ -4843,18 +4846,13 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     c.save();
     c.strokeStyle = 'rgba(63,224,143,.16)'; c.lineWidth = 1; c.font = '10px monospace'; c.fillStyle = 'rgba(63,224,143,.5)';
     if (_radar.mode === 'LOCAL') {
-      var cx = W / 2, cy = H / 2, R = Math.min(W, H) * 0.44;
+      var cx = W / 2 + _radar.panX, cy = H / 2 + _radar.panY, R = Math.min(W, H) * 0.44 * _radar.scale;
       for (var a = 30; a < 90; a += 30) { c.beginPath(); c.arc(cx, cy, R * (90 - a) / 90, 0, 6.283); c.stroke(); }
       c.beginPath(); c.strokeStyle = 'rgba(63,224,143,.35)'; c.arc(cx, cy, R, 0, 6.283); c.stroke();
       c.strokeStyle = 'rgba(63,224,143,.12)';
       for (var k = 0; k < 12; k++) { var an = k * Math.PI / 6; c.beginPath(); c.moveTo(cx, cy); c.lineTo(cx + R * Math.sin(an), cy - R * Math.cos(an)); c.stroke(); }
       c.fillStyle = 'rgba(63,224,143,.65)'; c.textAlign = 'center';
       c.fillText('N', cx, cy - R - 6); c.fillText('S', cx, cy + R + 14); c.fillText('E', cx + R + 10, cy + 4); c.fillText('W', cx - R - 10, cy + 4);
-    } else if (_radar.mode === 'SKY') {
-      var sw = W * 0.9, sh = H * 0.82, ox = W / 2 - sw / 2, oy = H / 2 - sh / 2;
-      c.strokeRect(ox, oy, sw, sh);
-      for (var ra = 0; ra <= 360; ra += 60) { var gx = ox + ra / 360 * sw; c.beginPath(); c.moveTo(gx, oy); c.lineTo(gx, oy + sh); c.stroke(); c.textAlign = 'center'; c.fillText((ra / 15).toFixed(0) + 'h', gx, oy + sh + 12); }
-      for (var dc = -60; dc <= 60; dc += 30) { var gy = oy + (90 - dc) / 180 * sh; c.beginPath(); c.moveTo(ox, gy); c.lineTo(ox + sw, gy); c.stroke(); c.textAlign = 'right'; c.fillText((dc > 0 ? '+' : '') + dc + '°', ox - 4, gy + 3); }
     } else {
       var cx2 = W / 2, cy2 = H / 2, R2 = Math.min(W, H) * 0.42 * _radar.zoom;
       c.strokeStyle = 'rgba(63,224,143,.12)';
@@ -4881,7 +4879,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     c.restore();
   }
   function _radarDraw(){
-    if (!_radar) return;
+    if (!_radar || _radar.mode === 'SKY') return;
     var c = _radar.ctx, cv = _radar.cv, W = cv.width, H = cv.height;
     c.clearRect(0, 0, W, H);
     _radar.screen = [];
@@ -4892,9 +4890,8 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     }
     _radarGrid(c, W, H);
     var pts = _radar.pts, i, p, s;
-    /* sweep line (LOCAL) */
     if (_radar.mode === 'LOCAL') {
-      var cx = W / 2, cy = H / 2, R = Math.min(W, H) * 0.44;
+      var cx = W / 2 + _radar.panX, cy = H / 2 + _radar.panY, R = Math.min(W, H) * 0.44 * _radar.scale;
       _radar.sweep = (_radar.sweep + 0.02) % 6.283;
       var grd = c.createLinearGradient(cx, cy, cx + R * Math.sin(_radar.sweep), cy - R * Math.cos(_radar.sweep));
       grd.addColorStop(0, 'rgba(63,224,143,.35)'); grd.addColorStop(1, 'rgba(63,224,143,0)');
@@ -4913,7 +4910,6 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       c.globalAlpha = 1;
       _radar.screen.push({ name: p.name, ra: p.ra, dec: p.dec, score: p.score, x: s.x, y: s.y });
     }
-    /* selection reticle */
     if (_radar.sel) {
       for (i = 0; i < _radar.screen.length; i++) {
         if (_radar.screen[i].name === _radar.sel.name) {
@@ -4955,20 +4951,57 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     }
     _haptic && _haptic(12);
   }
+  function _mapFocusByName(name){
+    try {
+      var dots = document.querySelectorAll('#map-body [data-name]'), nl = String(name || '').toLowerCase();
+      for (var i = 0; i < dots.length; i++) {
+        var dn = (dots[i].getAttribute('data-name') || '').replace(/&#39;/g, "'").replace(/&quot;/g, '"').toLowerCase();
+        if (dn === nl) { dots[i].dispatchEvent(new MouseEvent('click', { bubbles: true })); return true; }
+      }
+    } catch(e) {}
+    return false;
+  }
   function _radarFocus(name){
     if (!_radar) return;
     var nl = String(name || '').toLowerCase();
-    for (var i = 0; i < _radar.pts.length; i++) if (_radar.pts[i].name.toLowerCase() === nl) { _radarSelect({ name: _radar.pts[i].name, ra: _radar.pts[i].ra, dec: _radar.pts[i].dec, score: _radar.pts[i].score, x: 0, y: 0 }); return; }
+    for (var i = 0; i < _radar.pts.length; i++) {
+      if (_radar.pts[i].name.toLowerCase() === nl) {
+        var pt = _radar.pts[i];
+        if (_radar.mode === 'SKY') {
+          _radar.sel = { name: pt.name, ra: pt.ra, dec: pt.dec, score: pt.score };
+          try { window._scopeSel = { name: pt.name, ra: pt.ra, dec: pt.dec, score: Math.round(pt.score), ss: false }; } catch(e) {}
+          _mapFocusByName(pt.name);
+        } else {
+          _radarSelect({ name: pt.name, ra: pt.ra, dec: pt.dec, score: pt.score, x: 0, y: 0 });
+        }
+        return;
+      }
+    }
+  }
+  /* SKY mode hosts the real candidate map (#map-body) inside the radar stage,
+     recoloured green via CSS. Reparent on enter, restore to its home on leave. */
+  function _radarMapHost(on){
+    var mb = document.getElementById('map-body'), stage = document.getElementById('radar-stage'), cv = document.getElementById('radar-cv');
+    if (!mb || !stage) return;
+    if (on) {
+      if (mb.parentNode !== stage) { if (_radar && !_radar._mapHome) _radar._mapHome = mb.parentNode; stage.appendChild(mb); }
+      stage.classList.add('rdr-mapmode'); mb.style.display = ''; if (cv) cv.style.display = 'none';
+    } else {
+      if (_radar && _radar._mapHome && mb.parentNode !== _radar._mapHome) _radar._mapHome.appendChild(mb);
+      stage.classList.remove('rdr-mapmode'); if (cv) cv.style.display = '';
+    }
   }
   function _radarSetMode(mode){
     if (!_radar) return;
     _radar.mode = mode;
     var tabs = document.querySelectorAll('#radar-ov [data-rmode]');
     for (var i = 0; i < tabs.length; i++) tabs[i].classList.toggle('on', tabs[i].getAttribute('data-rmode') === mode);
-    var scrub = document.getElementById('radar-scrub');
-    if (scrub) scrub.style.display = (mode === '3D') ? 'none' : '';
+    _radarMapHost(mode === 'SKY');
+    var scrub = document.getElementById('radar-scrub'); if (scrub) scrub.style.display = (mode === 'LOCAL') ? '' : 'none';
+    var histb = document.getElementById('radar-hist'); if (histb) histb.style.display = (mode === 'SKY') ? '' : 'none';
+    var info = document.getElementById('radar-info'); if (info && mode === 'SKY') info.style.display = 'none';
     var hint = document.getElementById('radar-hint');
-    if (hint) hint.textContent = (mode === '3D') ? 'DRAG ROTATE · WHEEL ZOOM · TAP A CONTACT' : (mode === 'LOCAL' ? 'LOCAL SKY · ALT-AZ · TAP A CONTACT' : 'STAR CHART · RA/DEC · TAP A CONTACT');
+    if (hint) hint.textContent = (mode === '3D') ? 'DRAG / SCROLL ROTATE · PINCH ZOOM · TAP A CONTACT' : (mode === 'LOCAL' ? 'ALT-AZ · SCROLL / DRAG TO PAN · PINCH ZOOM · TAP' : 'STAR CHART · TAP A CANDIDATE FOR DETAIL · 📊 HISTOGRAM');
     op('RADAR — ' + mode + ' MODE');
   }
   function _radarFit(){
@@ -4989,17 +5022,17 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     ov.innerHTML =
       '<div id="radar-con"><div class="rdr-br rdr-tl"></div><div class="rdr-br rdr-tr"></div><div class="rdr-br rdr-bl"></div><div class="rdr-br rdr-brr"></div>' +
       '<div id="radar-cmd"><span class="rdr-title">⊹ RADAR</span><span class="rdr-tabs">' + tabs + '</span>' +
-      '<span class="rdr-stat" id="radar-stat"></span><button class="rdr-x" id="radar-x">✕</button></div>' +
+      '<span class="rdr-stat" id="radar-stat"></span><button class="rdr-hist" id="radar-hist" title="Score distribution histogram" style="display:none">📊</button><button class="rdr-x" id="radar-x">✕</button></div>' +
       '<div id="radar-stage"><canvas id="radar-cv"></canvas><div id="radar-hint"></div></div>' +
       '<div id="radar-scrub"><input id="radar-t" type="range" min="0" max="24" step="any" value="0"><span id="radar-tlabel">T NOW</span><button id="radar-tnow">NOW</button></div>' +
       '<div id="radar-info" style="display:none"></div>' +
       '<div id="radar-foot" class="rdr-foot"></div></div>';
     document.body.appendChild(ov);
-    _radar = { mode: mode, cv: document.getElementById('radar-cv'), ctx: document.getElementById('radar-cv').getContext('2d'), yaw: 0.5, pitch: -0.35, zoom: 1, t: 0, sel: null, sweep: 0, pts: _radarPts(), screen: [] };
+    _radar = { mode: mode, cv: document.getElementById('radar-cv'), ctx: document.getElementById('radar-cv').getContext('2d'), yaw: 0.5, pitch: -0.35, zoom: 1, scale: 1, panX: 0, panY: 0, t: 0, sel: null, sweep: 0, pts: _radarPts(), screen: [], _mapHome: null };
     _radarFit(); _radar.resize = _radarFit; window.addEventListener('resize', _radar.resize);
     var foot = document.getElementById('radar-foot'); if (foot) { foot.textContent = _obsLabel(); foot.style.cursor = 'pointer'; foot.addEventListener('click', function(){ try { _promptObs(); } catch(e) {} }); }
-    /* interactions (delegated) */
     ov.addEventListener('click', function(ev){
+      if (ev.target.closest && ev.target.closest('#radar-hist')) { var hs = document.getElementById('hist-section'); if (hs) hs.classList.toggle('open'); try { SFX.click(); } catch(e) {} return; }
       var tab = ev.target.closest ? ev.target.closest('[data-rmode]') : null;
       if (tab) { _radarSetMode(tab.getAttribute('data-rmode')); return; }
       var act = ev.target.closest ? ev.target.closest('[data-ract]') : null;
@@ -5012,10 +5045,16 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     });
     document.getElementById('radar-x').addEventListener('click', _radarClose);
     var cv = _radar.cv, drag = false, moved = 0, lx = 0, ly = 0;
-    cv.addEventListener('pointerdown', function(e){ drag = true; moved = 0; lx = e.clientX; ly = e.clientY; try { cv.setPointerCapture(e.pointerId); } catch(x) {} });
-    cv.addEventListener('pointermove', function(e){ if (!drag || _radar.mode !== '3D') { if (drag) moved += 5; return; } var dx = e.clientX - lx, dy = e.clientY - ly; lx = e.clientX; ly = e.clientY; moved += Math.abs(dx) + Math.abs(dy); _radar.yaw += dx * 0.006; _radar.pitch = Math.max(-1.5, Math.min(1.5, _radar.pitch + dy * 0.006)); });
+    cv.addEventListener('pointerdown', function(e){ if (_radar.mode === 'SKY') return; drag = true; moved = 0; lx = e.clientX; ly = e.clientY; try { cv.setPointerCapture(e.pointerId); } catch(x) {} });
+    cv.addEventListener('pointermove', function(e){ if (!drag) return; var dx = e.clientX - lx, dy = e.clientY - ly; lx = e.clientX; ly = e.clientY; moved += Math.abs(dx) + Math.abs(dy); if (_radar.mode === '3D') { _radar.yaw += dx * 0.006; _radar.pitch = Math.max(-1.5, Math.min(1.5, _radar.pitch + dy * 0.006)); } else if (_radar.mode === 'LOCAL') { _radar.panX += dx; _radar.panY += dy; } });
     cv.addEventListener('pointerup', function(e){ if (drag && moved < 6) { var rc = cv.getBoundingClientRect(); var s = _radarPick(e.clientX - rc.left, e.clientY - rc.top); if (s) _radarSelect(s); } drag = false; });
-    cv.addEventListener('wheel', function(e){ if (_radar.mode !== '3D') return; e.preventDefault(); if (e.ctrlKey) { _radar.zoom = Math.max(0.5, Math.min(4, _radar.zoom * (e.deltaY < 0 ? 1.1 : 0.9))); return; } _radar.yaw += e.deltaX * 0.005; _radar.pitch = Math.max(-1.5, Math.min(1.5, _radar.pitch + e.deltaY * 0.005)); }, { passive: false });
+    cv.addEventListener('wheel', function(e){
+      if (_radar.mode === 'SKY') return;
+      e.preventDefault();
+      if (_radar.mode === '3D') { if (e.ctrlKey) { _radar.zoom = Math.max(0.5, Math.min(4, _radar.zoom * (e.deltaY < 0 ? 1.1 : 0.9))); return; } _radar.yaw += e.deltaX * 0.005; _radar.pitch = Math.max(-1.5, Math.min(1.5, _radar.pitch + e.deltaY * 0.005)); return; }
+      if (e.ctrlKey) { _radar.scale = Math.max(0.5, Math.min(4, _radar.scale * (e.deltaY < 0 ? 1.1 : 0.9))); return; }
+      _radar.panX -= e.deltaX; _radar.panY -= e.deltaY;
+    }, { passive: false });
     var tsl = document.getElementById('radar-t'), tlb = document.getElementById('radar-tlabel');
     if (tsl) tsl.addEventListener('input', function(){ _radar.t = +tsl.value; if (tlb) tlb.textContent = (_radar.t < 0.05) ? 'T NOW' : 'T +' + _radar.t.toFixed(1) + 'h'; });
     var tnw = document.getElementById('radar-tnow'); if (tnw) tnw.addEventListener('click', function(){ _radar.t = 0; if (tsl) tsl.value = 0; if (tlb) tlb.textContent = 'T NOW'; });
@@ -5026,6 +5065,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
   };
   function _radarClose(){
     var ov = document.getElementById('radar-ov'); if (!ov) return;
+    _radarMapHost(false);
     if (_radar) { if (_radar.raf) cancelAnimationFrame(_radar.raf); if (_radar.resize) window.removeEventListener('resize', _radar.resize); }
     _radar = null; ov.remove(); try { SFX.close(); } catch(e) {}
   }
