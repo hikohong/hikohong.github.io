@@ -82,6 +82,17 @@ for (const [label,src] of [['gallery','file://'+process.cwd()+'/deepsignal/galle
   // legacy sphere engine still works (pro10 depends on it)
   ck(`${label}: legacy _sphereToggle still works`, await p.evaluate(()=>{ window._sphereToggle(); const ok=!!document.getElementById('sphere-ov'); window._sphereToggle(); return ok; }));
 
+  // PRO-16b: top-nav Map link folded into Radar
+  ck(`${label}: top-nav has Radar, Map folded in`, await p.evaluate(()=>{ const b=[...document.querySelectorAll('.nav-link')].map(x=>x.textContent.trim()); return b.includes('Radar') && !b.includes('Map'); }));
+  // PRO-16b: card Map opens the radar SKY star chart, focused (not the legacy blue map)
+  const cm = await p.evaluate(n=>{ mapOpenFromCard(0,0,n,100,false); const s=window._radarState(); return !!s && s.mode==='SKY' && String(s.sel).toLowerCase()===String(n).toLowerCase(); }, focusName);
+  ck(`${label}: card Map opens radar SKY, focused`, cm);
+  await p.keyboard.press('Escape'); await p.waitForTimeout(120);
+  // PRO-16b: 3D globe rotates with a two-finger trackpad scroll (Y-axis moves)
+  const tp = await p.evaluate(()=>{ window._radarOpen('3D'); const cv=document.getElementById('radar-cv'); const g=cv.getContext('2d'); const a=g.getImageData(0,0,cv.width,cv.height).data; let sa=0; for(let i=0;i<a.length;i+=997) sa=(sa+a[i])|0; cv.dispatchEvent(new WheelEvent('wheel',{deltaY:120,ctrlKey:false,bubbles:true,cancelable:true})); return new Promise(res=>setTimeout(()=>{ const bb=g.getImageData(0,0,cv.width,cv.height).data; let sb=0; for(let i=0;i<bb.length;i+=997) sb=(sb+bb[i])|0; res(sa!==sb); },120)); });
+  ck(`${label}: 3D rotates with two-finger scroll`, tp);
+  await p.keyboard.press('Escape'); await p.waitForTimeout(120);
+
   ck(`${label}: no JS errors`, errs.length===0);
   if(errs.length) console.log(label,'ERRS',errs.slice(0,4));
   await ctx.close();

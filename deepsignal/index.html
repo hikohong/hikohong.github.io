@@ -849,7 +849,7 @@ window._svBlink = function(btn){
   <div class="nav-links">
     <a class="nav-link active" href="index.html" onclick="event.preventDefault(); navTo('index.html')">Search</a>
     <a class="nav-link" href="gallery.html" onclick="event.preventDefault(); navTo('gallery.html')">Gallery</a>
-    <button class="nav-link" onclick="mapOpen()">Map</button>
+    <button class="nav-link" onclick="window._radarOpen('LOCAL')">Radar</button>
     <button class="nav-link" onclick="newsOpen(null)">News</button>
     <button class="nav-link" onclick="reportOpen()">Report</button>
   </div>
@@ -2699,6 +2699,7 @@ function mapShowSearchTarget() {
   _updateMapCrosshair(ra, dec, name, tc);
 }
 function mapOpenFromCard(ra, dec, name, score, isSearchResult) {
+  try { return window._radarOpen('SKY', name); } catch(e) {}
   mapOpen();
   // Try to find the existing candidate dot first
   const idx = catalog.findIndex(c => {
@@ -4921,6 +4922,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
           c.beginPath(); c.arc(sx, sy, 11, 0, 6.283); c.stroke();
           c.beginPath(); c.moveTo(sx - 16, sy); c.lineTo(sx - 6, sy); c.moveTo(sx + 6, sy); c.lineTo(sx + 16, sy);
           c.moveTo(sx, sy - 16); c.lineTo(sx, sy - 6); c.moveTo(sx, sy + 6); c.lineTo(sx, sy + 16); c.stroke();
+          c.fillStyle = '#7dd3fc'; c.font = '11px monospace'; c.textAlign = 'left'; c.fillText(String(_radar.sel.name), sx + 15, sy - 9);
           break;
         }
       }
@@ -5013,7 +5015,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     cv.addEventListener('pointerdown', function(e){ drag = true; moved = 0; lx = e.clientX; ly = e.clientY; try { cv.setPointerCapture(e.pointerId); } catch(x) {} });
     cv.addEventListener('pointermove', function(e){ if (!drag || _radar.mode !== '3D') { if (drag) moved += 5; return; } var dx = e.clientX - lx, dy = e.clientY - ly; lx = e.clientX; ly = e.clientY; moved += Math.abs(dx) + Math.abs(dy); _radar.yaw += dx * 0.006; _radar.pitch = Math.max(-1.5, Math.min(1.5, _radar.pitch + dy * 0.006)); });
     cv.addEventListener('pointerup', function(e){ if (drag && moved < 6) { var rc = cv.getBoundingClientRect(); var s = _radarPick(e.clientX - rc.left, e.clientY - rc.top); if (s) _radarSelect(s); } drag = false; });
-    cv.addEventListener('wheel', function(e){ if (_radar.mode !== '3D') return; e.preventDefault(); _radar.zoom = Math.max(0.5, Math.min(4, _radar.zoom * (e.deltaY < 0 ? 1.12 : 0.89))); }, { passive: false });
+    cv.addEventListener('wheel', function(e){ if (_radar.mode !== '3D') return; e.preventDefault(); if (e.ctrlKey) { _radar.zoom = Math.max(0.5, Math.min(4, _radar.zoom * (e.deltaY < 0 ? 1.1 : 0.9))); return; } _radar.yaw += e.deltaX * 0.005; _radar.pitch = Math.max(-1.5, Math.min(1.5, _radar.pitch + e.deltaY * 0.005)); }, { passive: false });
     var tsl = document.getElementById('radar-t'), tlb = document.getElementById('radar-tlabel');
     if (tsl) tsl.addEventListener('input', function(){ _radar.t = +tsl.value; if (tlb) tlb.textContent = (_radar.t < 0.05) ? 'T NOW' : 'T +' + _radar.t.toFixed(1) + 'h'; });
     var tnw = document.getElementById('radar-tnow'); if (tnw) tnw.addEventListener('click', function(){ _radar.t = 0; if (tsl) tsl.value = 0; if (tlb) tlb.textContent = 'T NOW'; });
