@@ -561,6 +561,11 @@ html.nvg body>*{filter:sepia(1) hue-rotate(-48deg) saturate(3.4) brightness(.78)
 #radar-info .rdr-isc{color:#9fd4bb;font-size:.56rem}
 #radar-info .rdr-iact{margin-left:auto;display:flex;gap:5px}
 #radar-info .rdr-iact button{font-family:monospace;font-size:.5rem;color:#3fe08f;background:rgba(3,16,11,.6);border:1px solid rgba(63,224,143,.35);border-radius:4px;padding:3px 7px;cursor:pointer}
+.rdr-ithumb{width:54px;height:54px;object-fit:cover;border-radius:7px;background:#0a1410;border:1px solid rgba(63,224,143,.3);flex-shrink:0}
+.rdr-itxt{display:flex;flex-direction:column;gap:2px;min-width:0}
+#radar-info .rdr-imeta{color:#9fd4bb;font-size:.55rem;letter-spacing:.04em}
+#radar-info .rdr-isub{color:#9fd4bb;font-size:.56rem;letter-spacing:.03em}
+#radar-info .rdr-irsn{color:#cfe9dd;font-size:.56rem;opacity:.85;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:60vw}
 .rdr-foot{padding:5px 16px 0;font-family:monospace;font-size:.5rem;letter-spacing:.06em;color:#3a7a5a;cursor:pointer}
 .pref-wrap{display:flex;flex-direction:column;gap:1px}
 .pref-row{display:flex;align-items:center;gap:10px;padding:8px 4px;border-bottom:1px solid rgba(63,224,143,.08)}
@@ -4941,12 +4946,17 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     try { window._scopeSel = { name: s.name, ra: s.ra, dec: s.dec, score: Math.round(s.score), ss: false }; } catch(e) {}
     var info = document.getElementById('radar-info');
     if (info) {
-      var extra = '';
-      try {
-        if (_radar.mode === 'LOCAL' && obsLat != null) { var aa = _altazOf(s.ra, s.dec, _radarWhen()); if (aa) extra = ' · ALT ' + aa.alt.toFixed(0) + '° AZ ' + aa.az.toFixed(0) + '°'; }
-        else extra = ' · RA ' + (+s.ra).toFixed(2) + '° DEC ' + (+s.dec).toFixed(2) + '°';
-      } catch(e) {}
-      info.innerHTML = '<span class="rdr-inm">' + _esc(s.name) + '</span> <span class="rdr-isc">SCORE ' + Math.round(s.score) + extra + '</span>';
+      var row = null; try { row = _catRow(s.name); } catch(e) {}
+      var tier = (row && _rTier(row) != null) ? _rTier(row) : (s.score >= 70 ? 1 : (s.score >= 50 ? 2 : 3));
+      var reasons = row ? _rReasons(row) : [], methods = row ? _rMethods(row) : [];
+      var aa2 = null; try { if (obsLat != null && s.ra != null) aa2 = _altazOf(+s.ra, +s.dec, _radarWhen()); } catch(e) {}
+      var thumb = ''; try { if (s.ra != null && !isNaN(+s.ra)) { thumb = (typeof skyUrl === 'function' && typeof skySurvey === 'function') ? skyUrl(+s.ra, +s.dec, 0.5, skySurvey(+s.dec).hips) : ('https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS/P/DSS2/color&width=110&height=110&fov=0.3&projection=TAN&coordsys=icrs&ra=' + (+s.ra).toFixed(5) + '&dec=' + (+s.dec).toFixed(5) + '&format=jpg'); } } catch(e) {}
+      var meta = (tier != null ? 'T' + tier + ' · ' : '') + 'SCORE ' + Math.round(s.score) + (methods.length ? ' · ' + String(methods[0]).replace(/_/g, ' ') : '');
+      var sub = 'RA ' + (+s.ra).toFixed(2) + '° DEC ' + (+s.dec).toFixed(2) + '°' + (aa2 ? ' · ALT ' + aa2.alt.toFixed(0) + '° AZ ' + aa2.az.toFixed(0) + '°' : '');
+      info.innerHTML = (thumb ? '<img class="rdr-ithumb" src="' + thumb + '" alt="">' : '') +
+        '<div class="rdr-itxt"><div class="rdr-inm">' + _esc(s.name) + ' <span class="rdr-imeta">' + meta + '</span></div>' +
+        '<div class="rdr-isub">' + sub + '</div>' +
+        (reasons.length ? '<div class="rdr-irsn">' + _esc(String(reasons[0])) + '</div>' : '') + '</div>';
       info.style.display = '';
     }
     _haptic && _haptic(12);
@@ -5001,7 +5011,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     var histb = document.getElementById('radar-hist'); if (histb) histb.style.display = (mode === 'SKY') ? '' : 'none';
     var info = document.getElementById('radar-info'); if (info && mode === 'SKY') info.style.display = 'none';
     var hint = document.getElementById('radar-hint');
-    if (hint) hint.textContent = (mode === '3D') ? 'DRAG / SCROLL ROTATE · PINCH ZOOM · TAP A CONTACT' : (mode === 'LOCAL' ? 'ALT-AZ · DRAG / SCROLL SIDEWAYS = TIME · PINCH ZOOM · TAP' : 'STAR CHART · TAP A CANDIDATE FOR DETAIL · 📊 HISTOGRAM');
+    if (hint) hint.textContent = (mode === '3D') ? 'DRAG / SCROLL ROTATE · PINCH ZOOM · TAP A CONTACT' : (mode === 'LOCAL' ? 'ALT-AZ · DRAG / SCROLL SIDEWAYS = TIME · PINCH ZOOM · TAP A CONTACT' : 'STAR CHART · TAP A CANDIDATE FOR DETAIL · 📊 HISTOGRAM');
     op('RADAR — ' + mode + ' MODE');
   }
   function _radarFit(){
@@ -5046,14 +5056,14 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     document.getElementById('radar-x').addEventListener('click', _radarClose);
     var cv = _radar.cv, drag = false, moved = 0, lx = 0, ly = 0;
     cv.addEventListener('pointerdown', function(e){ if (_radar.mode === 'SKY') return; drag = true; moved = 0; lx = e.clientX; ly = e.clientY; try { cv.setPointerCapture(e.pointerId); } catch(x) {} });
-    cv.addEventListener('pointermove', function(e){ if (!drag) return; var dx = e.clientX - lx, dy = e.clientY - ly; lx = e.clientX; ly = e.clientY; moved += Math.abs(dx) + Math.abs(dy); if (_radar.mode === '3D') { _radar.yaw += dx * 0.006; _radar.pitch = Math.max(-1.5, Math.min(1.5, _radar.pitch + dy * 0.006)); } else if (_radar.mode === 'LOCAL') { _radarScrub(dx * (24 / (_radar.cv.width || 800))); _radar.panY += dy; } });
+    cv.addEventListener('pointermove', function(e){ if (!drag) return; var dx = e.clientX - lx, dy = e.clientY - ly; lx = e.clientX; ly = e.clientY; moved += Math.abs(dx) + Math.abs(dy); if (_radar.mode === '3D') { _radar.yaw += dx * 0.006; _radar.pitch = Math.max(-1.5, Math.min(1.5, _radar.pitch + dy * 0.006)); } else if (_radar.mode === 'LOCAL') { _radarScrub(dx * (24 / (_radar.cv.width || 800))); } });
     cv.addEventListener('pointerup', function(e){ if (drag && moved < 6) { var rc = cv.getBoundingClientRect(); var s = _radarPick(e.clientX - rc.left, e.clientY - rc.top); if (s) _radarSelect(s); } drag = false; });
     cv.addEventListener('wheel', function(e){
       if (_radar.mode === 'SKY') return;
       e.preventDefault();
       if (_radar.mode === '3D') { if (e.ctrlKey) { _radar.zoom = Math.max(0.5, Math.min(4, _radar.zoom * (e.deltaY < 0 ? 1.1 : 0.9))); return; } _radar.yaw += e.deltaX * 0.005; _radar.pitch = Math.max(-1.5, Math.min(1.5, _radar.pitch + e.deltaY * 0.005)); return; }
       if (e.ctrlKey) { _radar.scale = Math.max(0.5, Math.min(4, _radar.scale * (e.deltaY < 0 ? 1.1 : 0.9))); return; }
-      _radarScrub(e.deltaX * (24 / (_radar.cv.width || 800))); _radar.panY -= e.deltaY;
+      _radarScrub(e.deltaX * (24 / (_radar.cv.width || 800)));
     }, { passive: false });
     var tsl = document.getElementById('radar-t'), tlb = document.getElementById('radar-tlabel');
     if (tsl) tsl.addEventListener('input', function(){ _radar.t = +tsl.value; if (tlb) tlb.textContent = (_radar.t < 0.05) ? 'T NOW' : 'T +' + _radar.t.toFixed(1) + 'h'; });

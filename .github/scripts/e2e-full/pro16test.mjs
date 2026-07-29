@@ -103,8 +103,9 @@ for (const [label,src] of [['gallery','file://'+process.cwd()+'/deepsignal/galle
   ck(`${label}: console size constant SKY vs LOCAL`, skyHost.w===szA[0] && skyHost.h===szA[1]);
   await p.click('#radar-ov [data-rmode="LOCAL"]'); await p.waitForTimeout(200);
   ck(`${label}: leaving SKY restores map-body home`, await p.evaluate(()=>{ const mm=document.getElementById('map-modal'),mb=document.getElementById('map-body'); return mm&&mm.contains(mb); }));
-  const localPan = await p.evaluate(()=>{ const cv=document.getElementById('radar-cv'),g=cv.getContext('2d'); const a=g.getImageData(0,0,cv.width,cv.height).data; let sa=0; for(let i=0;i<a.length;i+=997) sa=(sa+a[i])|0; cv.dispatchEvent(new WheelEvent('wheel',{deltaY:120,ctrlKey:false,bubbles:true,cancelable:true})); return new Promise(res=>setTimeout(()=>{ const bb=g.getImageData(0,0,cv.width,cv.height).data; let sb=0; for(let i=0;i<bb.length;i+=997) sb=(sb+bb[i])|0; res(sa!==sb); },140)); });
-  ck(`${label}: LOCAL pans with two-finger scroll`, localPan);
+  // PRO-16e: LOCAL is horizontal-only — vertical scroll must NOT scrub time / move the view
+  const vNoop = await p.evaluate(()=>{ const t0=+document.getElementById('radar-t').value; document.getElementById('radar-cv').dispatchEvent(new WheelEvent('wheel',{deltaX:0,deltaY:200,ctrlKey:false,bubbles:true,cancelable:true})); return { t0, t1:+document.getElementById('radar-t').value }; });
+  ck(`${label}: LOCAL vertical scroll does nothing (horizontal-only)`, vNoop.t0===vNoop.t1);
   await p.keyboard.press('Escape'); await p.waitForTimeout(120);
   ck(`${label}: after close, map-body back home`, await p.evaluate(()=>{ const mm=document.getElementById('map-modal'),mb=document.getElementById('map-body'); return mm&&mm.contains(mb); }));
 
@@ -113,6 +114,10 @@ for (const [label,src] of [['gallery','file://'+process.cwd()+'/deepsignal/galle
   ck(`${label}: radar info bar has no LOCK/SPEC/TRACK buttons`, await p.evaluate(()=>document.querySelectorAll('#radar-info [data-ract]').length===0));
   const scr = await p.evaluate(()=>{ const tsl=document.getElementById('radar-t'); const v0=+tsl.value; document.getElementById('radar-cv').dispatchEvent(new WheelEvent('wheel',{deltaX:400,deltaY:0,ctrlKey:false,bubbles:true,cancelable:true})); return { v0, v1:+tsl.value, lbl:document.getElementById('radar-tlabel').textContent }; });
   ck(`${label}: LOCAL horizontal scroll scrubs the time slider`, scr.v1>scr.v0 && /T \+/.test(scr.lbl));
+  // PRO-16e: selection shows a target thumbnail + richer readout (like the Star Chart)
+  const rich = await p.evaluate(()=>{ const el=document.getElementById('radar-info'); return { thumb:!!el.querySelector('img.rdr-ithumb'), meta:(el.querySelector('.rdr-imeta')||{}).textContent||'', rsn:(el.querySelector('.rdr-irsn')||{}).textContent||'' }; });
+  ck(`${label}: selection shows a thumbnail + tier/score`, rich.thumb && /T\d/.test(rich.meta) && /SCORE/.test(rich.meta));
+  ck(`${label}: selection shows a reason line`, rich.rsn.length>3);
   await p.keyboard.press('Escape'); await p.waitForTimeout(120);
 
   ck(`${label}: no JS errors`, errs.length===0);
