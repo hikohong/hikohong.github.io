@@ -120,6 +120,21 @@ for (const [label,src] of [['gallery','file://'+process.cwd()+'/deepsignal/galle
   ck(`${label}: selection shows a reason line`, rich.rsn.length>3);
   await p.keyboard.press('Escape'); await p.waitForTimeout(120);
 
+  // PRO-16f: info/detail reserved from the start — selecting never shifts the layout
+  await p.evaluate(()=>window._radarOpen('3D')); await p.waitForTimeout(250);
+  const f0 = await p.evaluate(()=>{ const info=document.getElementById('radar-info'); const tab=document.querySelector('#radar-ov [data-rmode="SKY"]'); const st=document.getElementById('radar-stage'); return { ph:!!info.querySelector('.rdr-iph'), shown:getComputedStyle(info).display!=='none', tabTop:Math.round(tab.getBoundingClientRect().top), stageH:Math.round(st.getBoundingClientRect().height) }; });
+  ck(`${label}: 3D info bar reserved (placeholder) at start`, f0.shown && f0.ph);
+  await p.evaluate(n=>window._radarOpen('3D', n), focusName); await p.waitForTimeout(250);
+  const f1 = await p.evaluate(()=>{ const tab=document.querySelector('#radar-ov [data-rmode="SKY"]'); const st=document.getElementById('radar-stage'); return { tabTop:Math.round(tab.getBoundingClientRect().top), stageH:Math.round(st.getBoundingClientRect().height), thumb:!!document.querySelector('#radar-info img.rdr-ithumb') }; });
+  ck(`${label}: 3D select fills info without moving tabs/stage`, f1.thumb && f0.tabTop===f1.tabTop && Math.abs(f0.stageH-f1.stageH)<=1);
+  await p.evaluate(()=>window._radarOpen('SKY')); await p.waitForTimeout(250);
+  const d0 = await p.evaluate(()=>{ const d=document.getElementById('map-detail'); return { shown:getComputedStyle(d).display!=='none', h:Math.round(d.getBoundingClientRect().height) }; });
+  ck(`${label}: SKY detail reserved (shown, fixed height)`, d0.shown && d0.h>=120);
+  await p.evaluate(n=>window._radarOpen('SKY', n), focusName); await p.waitForTimeout(250);
+  const d1 = await p.evaluate(()=>Math.round(document.getElementById('map-detail').getBoundingClientRect().height));
+  ck(`${label}: SKY detail height stable on click`, Math.abs(d0.h-d1)<=8);
+  await p.keyboard.press('Escape'); await p.waitForTimeout(120);
+
   ck(`${label}: no JS errors`, errs.length===0);
   if(errs.length) console.log(label,'ERRS',errs.slice(0,4));
   await ctx.close();

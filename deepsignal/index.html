@@ -549,14 +549,16 @@ html.nvg body>*{filter:sepia(1) hue-rotate(-48deg) saturate(3.4) brightness(.78)
 .rdr-stat{margin-left:auto;font-size:.5rem;letter-spacing:.08em;color:#3a7a5a}
 .rdr-x{width:26px;height:26px;border-radius:5px;background:rgba(3,16,11,.6);border:1px solid rgba(63,224,143,.35);color:#3fe08f;cursor:pointer;font-family:monospace;flex-shrink:0}
 .rdr-x:hover{background:rgba(63,224,143,.18)}
-#radar-stage{position:relative;flex:1;display:flex;align-items:center;justify-content:center;min-height:0;margin:8px}
+#radar-stage{position:relative;flex:1;display:flex;align-items:center;justify-content:center;min-height:0;margin:8px;overflow:hidden}
 #radar-cv{display:block;touch-action:none;cursor:crosshair}
 #radar-hint{position:absolute;left:50%;bottom:0;transform:translateX(-50%);font-family:monospace;font-size:.5rem;letter-spacing:.14em;color:#3a7a5a;pointer-events:none;white-space:nowrap}
 #radar-scrub{display:flex;align-items:center;gap:8px;padding:2px 16px;font-family:monospace;font-size:.56rem;color:#9fd4bb}
 #radar-t{flex:1;accent-color:#3fe08f}
 #radar-tlabel{min-width:58px;color:#3fe08f}
 #radar-tnow{font-family:monospace;font-size:.5rem;color:#3fe08f;background:rgba(3,16,11,.6);border:1px solid rgba(63,224,143,.3);border-radius:4px;padding:3px 7px;cursor:pointer}
-#radar-info{margin:6px 16px 0;padding:8px 11px;font-family:monospace;font-size:.62rem;color:#eafff5;background:rgba(125,211,252,.06);border:1px solid rgba(125,211,252,.25);border-left:2px solid #7dd3fc;border-radius:7px;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+#radar-info{margin:6px 16px 0;padding:8px 11px;font-family:monospace;font-size:.62rem;color:#eafff5;background:rgba(125,211,252,.06);border:1px solid rgba(125,211,252,.25);border-left:2px solid #7dd3fc;border-radius:7px;display:flex;flex-wrap:nowrap;align-items:center;gap:8px;min-height:54px}
+.rdr-iph{background:rgba(63,224,143,.03)!important;border-style:dashed!important;opacity:.55}
+.rdr-idim{color:#5a8aaa!important}
 #radar-info .rdr-inm{color:#7dd3fc;letter-spacing:.08em}
 #radar-info .rdr-isc{color:#9fd4bb;font-size:.56rem}
 #radar-info .rdr-iact{margin-left:auto;display:flex;gap:5px}
@@ -585,7 +587,8 @@ html.nvg body>*{filter:sepia(1) hue-rotate(-48deg) saturate(3.4) brightness(.78)
 #radar-stage.rdr-mapmode{display:block;overflow:auto;align-items:stretch;justify-content:flex-start}
 #radar-stage #map-body{width:100%;min-height:100%;box-sizing:border-box;padding:2px 8px;color:#cfe9dd}
 #radar-stage #map-body .sky-title{color:#3fe08f}
-#radar-stage #map-body #map-detail{border-color:rgba(63,224,143,.35)!important;background:rgba(6,20,15,.6)!important}
+#radar-stage #map-body #map-detail{border-color:rgba(63,224,143,.35)!important;background:rgba(6,20,15,.6)!important;display:block!important;height:150px!important;overflow:auto;margin-bottom:12px!important}
+.map-detail-ph{color:#3a7a5a;font-size:.62rem;text-align:center;padding:52px 0;letter-spacing:.06em}
 #radar-stage #hist-section{border-color:#3fe08f!important;box-shadow:0 0 24px rgba(63,224,143,.2)!important;background:#041210!important}
 #radar-stage #map-body svg line{stroke:rgba(63,224,143,.2)!important}
 #radar-stage #map-body #map-crosshair line,#radar-stage #map-body #map-crosshair path,#radar-stage #map-body #map-crosshair circle{stroke:#3fe08f!important}
@@ -933,7 +936,7 @@ window._svBlink = function(btn){
     <div class="map-body" id="map-body">
       <div id="map-detail" style="display:none;border:1px solid rgba(125,211,252,.2);border-radius:8px;
         background:rgba(0,20,40,.45);padding:14px 16px;margin-bottom:18px;animation:lit-in .15s ease-out;
-        box-sizing:border-box"></div>
+        box-sizing:border-box"><div class="map-detail-ph">TAP A CANDIDATE ON THE CHART FOR DETAILS</div></div>
       <div id="hist-section"></div>
       <div id="sky-section"></div>
     </div>
@@ -4961,6 +4964,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     }
     _haptic && _haptic(12);
   }
+  function _radarInfoReset(){ var info = document.getElementById('radar-info'); if (!info) return; info.innerHTML = '<div class="rdr-ithumb rdr-iph"></div><div class="rdr-itxt"><div class="rdr-inm rdr-idim">— NO CONTACT SELECTED —</div><div class="rdr-isub rdr-idim">TAP A BLIP FOR DETAILS</div><div class="rdr-irsn"></div></div>'; }
   function _mapFocusByName(name){
     try {
       var dots = document.querySelectorAll('#map-body [data-name]'), nl = String(name || '').toLowerCase();
@@ -5009,9 +5013,10 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     _radarMapHost(mode === 'SKY');
     var scrub = document.getElementById('radar-scrub'); if (scrub) scrub.style.display = (mode === 'LOCAL') ? '' : 'none';
     var histb = document.getElementById('radar-hist'); if (histb) histb.style.display = (mode === 'SKY') ? '' : 'none';
-    var info = document.getElementById('radar-info'); if (info && mode === 'SKY') info.style.display = 'none';
+    var info = document.getElementById('radar-info'); if (info) { if (mode === 'SKY') info.style.display = 'none'; else { info.style.display = ''; if (_radar.sel) _radarSelect(_radar.sel); else _radarInfoReset(); } }
     var hint = document.getElementById('radar-hint');
     if (hint) hint.textContent = (mode === '3D') ? 'DRAG / SCROLL ROTATE · PINCH ZOOM · TAP A CONTACT' : (mode === 'LOCAL' ? 'ALT-AZ · DRAG / SCROLL SIDEWAYS = TIME · PINCH ZOOM · TAP A CONTACT' : 'STAR CHART · TAP A CANDIDATE FOR DETAIL · 📊 HISTOGRAM');
+    try { _radarFit(); } catch(e) {}
     op('RADAR — ' + mode + ' MODE');
   }
   function _radarFit(){
