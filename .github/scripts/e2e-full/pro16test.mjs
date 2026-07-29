@@ -108,6 +108,13 @@ for (const [label,src] of [['gallery','file://'+process.cwd()+'/deepsignal/galle
   await p.keyboard.press('Escape'); await p.waitForTimeout(120);
   ck(`${label}: after close, map-body back home`, await p.evaluate(()=>{ const mm=document.getElementById('map-modal'),mb=document.getElementById('map-body'); return mm&&mm.contains(mb); }));
 
+  // PRO-16d: LOCAL horizontal gesture = time scrub; bottom action buttons removed
+  await p.evaluate(n=>window._radarOpen('LOCAL', n), focusName); await p.waitForTimeout(200);
+  ck(`${label}: radar info bar has no LOCK/SPEC/TRACK buttons`, await p.evaluate(()=>document.querySelectorAll('#radar-info [data-ract]').length===0));
+  const scr = await p.evaluate(()=>{ const tsl=document.getElementById('radar-t'); const v0=+tsl.value; document.getElementById('radar-cv').dispatchEvent(new WheelEvent('wheel',{deltaX:400,deltaY:0,ctrlKey:false,bubbles:true,cancelable:true})); return { v0, v1:+tsl.value, lbl:document.getElementById('radar-tlabel').textContent }; });
+  ck(`${label}: LOCAL horizontal scroll scrubs the time slider`, scr.v1>scr.v0 && /T \+/.test(scr.lbl));
+  await p.keyboard.press('Escape'); await p.waitForTimeout(120);
+
   ck(`${label}: no JS errors`, errs.length===0);
   if(errs.length) console.log(label,'ERRS',errs.slice(0,4));
   await ctx.close();
