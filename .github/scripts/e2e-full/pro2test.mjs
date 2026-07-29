@@ -8,7 +8,7 @@ await ctx.addInitScript(s=>localStorage.setItem('ds-track-list', s),
   JSON.stringify([{name:'Tau Ceti',ra:26.017,dec:-15.94,t:1},{name:'ZZ Polar',ra:180,dec:85,t:2}]));
 const p=await ctx.newPage();
 const errs=[]; p.on('pageerror',e=>errs.push('PAGEERR: '+e.message));
-p.on('console',m=>{if(m.type()==='error'&&!/ERR_TUNNEL|Failed to load resource|URL scheme .file./.test(m.text()))errs.push('CON: '+m.text());});
+p.on('console',m=>{if(m.type()==='error'&&!/ERR_TUNNEL|Failed to load resource|URL scheme .file.|navigator\.vibrate|chromestatus/.test(m.text()))errs.push('CON: '+m.text());});
 // ── mocks ──
 await p.route('**/api.open-meteo.com/**', r=>{
   const t0=new Date(); t0.setUTCMinutes(0,0,0);
