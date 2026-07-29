@@ -111,13 +111,13 @@ for (const [label,src] of [['gallery','file://'+process.cwd()+'/deepsignal/galle
 
   // PRO-16d: LOCAL horizontal gesture = time scrub; bottom action buttons removed
   await p.evaluate(n=>window._radarOpen('LOCAL', n), focusName); await p.waitForTimeout(200);
-  ck(`${label}: radar info bar has no LOCK/SPEC/TRACK buttons`, await p.evaluate(()=>document.querySelectorAll('#radar-info [data-ract]').length===0));
+  ck(`${label}: radar info bar has no LOCK/SPEC buttons`, await p.evaluate(()=>document.querySelectorAll('#radar-info [data-ract="lock"],#radar-info [data-ract="spectrum"]').length===0));
   const scr = await p.evaluate(()=>{ const tsl=document.getElementById('radar-t'); const v0=+tsl.value; document.getElementById('radar-cv').dispatchEvent(new WheelEvent('wheel',{deltaX:400,deltaY:0,ctrlKey:false,bubbles:true,cancelable:true})); return { v0, v1:+tsl.value, lbl:document.getElementById('radar-tlabel').textContent }; });
   ck(`${label}: LOCAL horizontal scroll scrubs the time slider`, scr.v1>scr.v0 && /T \+/.test(scr.lbl));
-  // PRO-16e: selection shows a target thumbnail + richer readout (like the Star Chart)
-  const rich = await p.evaluate(()=>{ const el=document.getElementById('radar-info'); return { thumb:!!el.querySelector('img.rdr-ithumb'), meta:(el.querySelector('.rdr-imeta')||{}).textContent||'', rsn:(el.querySelector('.rdr-irsn')||{}).textContent||'' }; });
-  ck(`${label}: selection shows a thumbnail + tier/score`, rich.thumb && /T\d/.test(rich.meta) && /SCORE/.test(rich.meta));
-  ck(`${label}: selection shows a reason line`, rich.rsn.length>3);
+  // PRO-16e/g: selection shows a full Star-Chart-style card (thumbnail, tier, score, methods, reasons, links)
+  const rich = await p.evaluate(()=>{ const el=document.getElementById('radar-info'); return { thumb:!!el.querySelector('img.rdr-ithumb'), tier:(el.querySelector('.rdr-tier')||{}).textContent||'', score:(el.querySelector('.rdr-isc')||{}).textContent||'', mtags:el.querySelectorAll('.rdr-mtag').length, reasons:el.querySelectorAll('.rdr-rlist li').length, links:[...el.querySelectorAll('.rdr-dlink')].map(a=>a.textContent.trim()).join('|') }; });
+  ck(`${label}: selection shows thumbnail + tier + score`, rich.thumb && /T\d/.test(rich.tier) && /SCORE/.test(rich.score));
+  ck(`${label}: selection shows methods + reasons + Star-Chart links`, rich.mtags>=1 && rich.reasons>=1 && /Track/.test(rich.links) && /SIMBAD/.test(rich.links) && /Aladin/.test(rich.links) && /Gallery/.test(rich.links));
   await p.keyboard.press('Escape'); await p.waitForTimeout(120);
 
   // PRO-16f: info/detail reserved from the start — selecting never shifts the layout
@@ -133,6 +133,16 @@ for (const [label,src] of [['gallery','file://'+process.cwd()+'/deepsignal/galle
   await p.evaluate(n=>window._radarOpen('SKY', n), focusName); await p.waitForTimeout(250);
   const d1 = await p.evaluate(()=>Math.round(document.getElementById('map-detail').getBoundingClientRect().height));
   ck(`${label}: SKY detail height stable on click`, Math.abs(d0.h-d1)<=8);
+  await p.keyboard.press('Escape'); await p.waitForTimeout(120);
+
+  // PRO-16g: consistency — select in one mode, switching keeps + centers the same target
+  await p.evaluate(n=>window._radarOpen('LOCAL', n), focusName); await p.waitForTimeout(200);
+  const keep3d = await p.evaluate(()=>{ window._radarSetMode('3D'); const s=window._radarState(); return s.sel; });
+  ck(`${label}: switching LOCAL→3D keeps the selected target`, String(keep3d).toLowerCase()===String(focusName).toLowerCase());
+  const skyKeep = await p.evaluate(()=>{ window._radarSetMode('SKY'); const cx=document.querySelector('#map-body #map-crosshair'); const s=window._radarState(); return { sel:s.sel, cross:!!(cx&&cx.innerHTML.trim().length>0) }; });
+  ck(`${label}: switching to SKY keeps + crosshairs the target`, String(skyKeep.sel).toLowerCase()===String(focusName).toLowerCase() && skyKeep.cross);
+  const detBottom = await p.evaluate(()=>{ const c=document.querySelector('#map-body .sky-svg-wrap'), d=document.getElementById('map-detail'); return c&&d ? d.getBoundingClientRect().top>c.getBoundingClientRect().top : false; });
+  ck(`${label}: SKY detail sits below the chart (bottom)`, detBottom);
   await p.keyboard.press('Escape'); await p.waitForTimeout(120);
 
   ck(`${label}: no JS errors`, errs.length===0);

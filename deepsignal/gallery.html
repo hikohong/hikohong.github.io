@@ -507,7 +507,7 @@ html.nvg body>*{filter:sepia(1) hue-rotate(-48deg) saturate(3.4) brightness(.78)
 #radar-t{flex:1;accent-color:#3fe08f}
 #radar-tlabel{min-width:58px;color:#3fe08f}
 #radar-tnow{font-family:monospace;font-size:.5rem;color:#3fe08f;background:rgba(3,16,11,.6);border:1px solid rgba(63,224,143,.3);border-radius:4px;padding:3px 7px;cursor:pointer}
-#radar-info{margin:6px 16px 0;padding:8px 11px;font-family:monospace;font-size:.62rem;color:#eafff5;background:rgba(125,211,252,.06);border:1px solid rgba(125,211,252,.25);border-left:2px solid #7dd3fc;border-radius:7px;display:flex;flex-wrap:nowrap;align-items:center;gap:8px;min-height:54px}
+#radar-info{margin:6px 16px 0;padding:9px 12px;font-family:monospace;font-size:.62rem;color:#eafff5;background:rgba(125,211,252,.06);border:1px solid rgba(125,211,252,.25);border-left:2px solid #7dd3fc;border-radius:7px;display:flex;align-items:flex-start;gap:10px;height:150px;overflow:auto;box-sizing:border-box}
 .rdr-iph{background:rgba(63,224,143,.03)!important;border-style:dashed!important;opacity:.55}
 .rdr-idim{color:#5a8aaa!important}
 #radar-info .rdr-inm{color:#7dd3fc;letter-spacing:.08em}
@@ -519,6 +519,20 @@ html.nvg body>*{filter:sepia(1) hue-rotate(-48deg) saturate(3.4) brightness(.78)
 #radar-info .rdr-imeta{color:#9fd4bb;font-size:.55rem;letter-spacing:.04em}
 #radar-info .rdr-isub{color:#9fd4bb;font-size:.56rem;letter-spacing:.03em}
 #radar-info .rdr-irsn{color:#cfe9dd;font-size:.56rem;opacity:.85;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:60vw}
+.rdr-dwrap{display:flex;gap:11px;align-items:flex-start;width:100%}
+.rdr-dwrap .rdr-ithumb{width:72px;height:72px}
+.rdr-dhead{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px}
+.rdr-tier{font-size:.56rem;font-weight:700;padding:1px 7px;border-radius:9px;border:1px solid;flex-shrink:0}
+.rdr-mtags{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0}
+.rdr-mtag{font-size:.54rem;color:#9fd4bb;background:rgba(63,224,143,.08);border:1px solid rgba(63,224,143,.25);border-radius:4px;padding:1px 6px}
+.rdr-rlist{margin:3px 0 6px;padding-left:15px}
+.rdr-rlist li{color:#8ab4c8;font-size:.6rem;margin-bottom:2px;line-height:1.4}
+.rdr-dlinks{display:flex;flex-wrap:wrap;gap:5px}
+.rdr-dlink{font-size:.56rem;color:#3fe08f;background:rgba(3,16,11,.6);border:1px solid rgba(63,224,143,.35);border-radius:4px;padding:3px 9px;cursor:pointer;text-decoration:none;font-family:monospace}
+.rdr-dlink:hover{background:rgba(63,224,143,.18)}
+#radar-stage.rdr-mapmode #map-body{display:flex;flex-direction:column;height:100%}
+#radar-stage #map-body #sky-section{order:1;flex:1;min-height:0;overflow:auto}
+#radar-stage #map-body #map-detail{order:3;margin-top:8px}
 .rdr-foot{padding:5px 16px 0;font-family:monospace;font-size:.5rem;letter-spacing:.06em;color:#3a7a5a;cursor:pointer}
 .pref-wrap{display:flex;flex-direction:column;gap:1px}
 .pref-row{display:flex;align-items:center;gap:10px;padding:8px 4px;border-bottom:1px solid rgba(63,224,143,.08)}
@@ -1180,7 +1194,7 @@ window._svBlink = function(btn){
 <div id="sky-tooltip-map"></div>
 <div class="gallery-hdr">
 <h1>DeepSignal — Sky Image Gallery</h1>
-<div class="subtitle">Generated <span id="gen-ts">2026-07-29 17:23 UTC</span> &nbsp;·&nbsp; 96 targets &nbsp;·&nbsp; 0 sky images via Hips2Fits CDN</div>
+<div class="subtitle">Generated <span id="gen-ts">2026-07-29 17:57 UTC</span> &nbsp;·&nbsp; 96 targets &nbsp;·&nbsp; 0 sky images via Hips2Fits CDN</div>
 <div class="stats">
   <div class="stat"><div class="stat-n" style="color:#f59e0b">3</div><div class="stat-l">Tier 1 ≥70</div></div>
   <div class="stat"><div class="stat-n" style="color:#60a5fa">1</div><div class="stat-l">Tier 2 50–69</div></div>
@@ -7146,18 +7160,47 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     if (info) {
       var row = null; try { row = _catRow(s.name); } catch(e) {}
       var tier = (row && _rTier(row) != null) ? _rTier(row) : (s.score >= 70 ? 1 : (s.score >= 50 ? 2 : 3));
+      var tcol = tier === 1 ? '#f5a623' : (tier === 2 ? '#7dd3fc' : '#94a3b8');
       var reasons = row ? _rReasons(row) : [], methods = row ? _rMethods(row) : [];
       var aa2 = null; try { if (obsLat != null && s.ra != null) aa2 = _altazOf(+s.ra, +s.dec, _radarWhen()); } catch(e) {}
-      var thumb = ''; try { if (s.ra != null && !isNaN(+s.ra)) { thumb = (typeof skyUrl === 'function' && typeof skySurvey === 'function') ? skyUrl(+s.ra, +s.dec, 0.5, skySurvey(+s.dec).hips) : ('https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS/P/DSS2/color&width=110&height=110&fov=0.3&projection=TAN&coordsys=icrs&ra=' + (+s.ra).toFixed(5) + '&dec=' + (+s.dec).toFixed(5) + '&format=jpg'); } } catch(e) {}
-      var meta = (tier != null ? 'T' + tier + ' · ' : '') + 'SCORE ' + Math.round(s.score) + (methods.length ? ' · ' + String(methods[0]).replace(/_/g, ' ') : '');
-      var sub = 'RA ' + (+s.ra).toFixed(2) + '° DEC ' + (+s.dec).toFixed(2) + '°' + (aa2 ? ' · ALT ' + aa2.alt.toFixed(0) + '° AZ ' + aa2.az.toFixed(0) + '°' : '');
-      info.innerHTML = (thumb ? '<img class="rdr-ithumb" src="' + thumb + '" alt="">' : '') +
-        '<div class="rdr-itxt"><div class="rdr-inm">' + _esc(s.name) + ' <span class="rdr-imeta">' + meta + '</span></div>' +
+      var thumb = ''; try { if (s.ra != null && !isNaN(+s.ra)) { thumb = (typeof skyUrl === 'function' && typeof skySurvey === 'function') ? skyUrl(+s.ra, +s.dec, 0.5, skySurvey(+s.dec).hips) : ('https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS/P/DSS2/color&width=120&height=120&fov=0.3&projection=TAN&coordsys=icrs&ra=' + (+s.ra).toFixed(5) + '&dec=' + (+s.dec).toFixed(5) + '&format=jpg'); } } catch(e) {}
+      var ra4 = (+s.ra).toFixed(4), dec4 = (+s.dec).toFixed(4);
+      var mtags = methods.slice(0, 4).map(function(m){ return '<span class="rdr-mtag">' + _esc(String(m).replace(/_/g, ' ')) + '</span>'; }).join('');
+      var rlist = reasons.slice(0, 3).map(function(r){ return '<li>' + _esc(String(r)) + '</li>'; }).join('');
+      var sub = 'RA ' + ra4 + '° DEC ' + dec4 + '°' + (aa2 ? ' · ALT ' + aa2.alt.toFixed(0) + '° AZ ' + aa2.az.toFixed(0) + '°' : '');
+      var links = '<button class="rdr-dlink" data-ract="track">⌖ Track</button>' +
+        '<a class="rdr-dlink" href="https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=' + ra4 + '+' + dec4 + '&CooFrame=ICRS&Radius=2&Radius.unit=arcmin" target="_blank" rel="noreferrer">SIMBAD</a>' +
+        '<a class="rdr-dlink" href="https://aladin.u-strasbg.fr/AladinLite/?target=' + ra4 + '+' + dec4 + '&fov=0.5&survey=P/DSS2/color" target="_blank" rel="noreferrer">Aladin</a>' +
+        '<a class="rdr-dlink" href="gallery.html?target=' + encodeURIComponent(s.name) + '" onclick="event.preventDefault(); if(window.navTo)navTo(this.href)">Gallery ›</a>';
+      info.innerHTML = '<div class="rdr-dwrap">' +
+        (thumb ? '<img class="rdr-ithumb" src="' + thumb + '" alt="">' : '<div class="rdr-ithumb rdr-iph"></div>') +
+        '<div class="rdr-itxt"><div class="rdr-dhead"><span class="rdr-tier" style="color:' + tcol + ';border-color:' + tcol + '">T' + tier + '</span> <span class="rdr-inm">' + _esc(s.name) + '</span> <span class="rdr-isc">SCORE ' + Math.round(s.score) + '</span></div>' +
         '<div class="rdr-isub">' + sub + '</div>' +
-        (reasons.length ? '<div class="rdr-irsn">' + _esc(String(reasons[0])) + '</div>' : '') + '</div>';
+        (mtags ? '<div class="rdr-mtags">' + mtags + '</div>' : '') +
+        (rlist ? '<ul class="rdr-rlist">' + rlist + '</ul>' : '') +
+        '<div class="rdr-dlinks">' + links + '</div></div></div>';
       info.style.display = '';
     }
     _haptic && _haptic(12);
+  }
+  function _radarCenter(){
+    if (!_radar || !_radar.sel || _radar.sel.ra == null) return;
+    var s = _radar.sel;
+    if (_radar.mode === 'LOCAL') {
+      if (obsLat == null) return;
+      var aa = _altazOf(+s.ra, +s.dec, _radarWhen()); if (!aa) return;
+      var W = _radar.cv.width, H = _radar.cv.height, R = Math.min(W, H) * 0.44 * _radar.scale;
+      var rr = R * (90 - aa.alt) / 90, az = aa.az * Math.PI / 180;
+      _radar.panX = -rr * Math.sin(az); _radar.panY = rr * Math.cos(az);
+    } else if (_radar.mode === '3D') {
+      var ra = +s.ra * Math.PI / 180, de = +s.dec * Math.PI / 180;
+      var v = [Math.cos(de) * Math.cos(ra), Math.sin(de), Math.cos(de) * Math.sin(ra)];
+      var yaw = Math.atan2(-v[0], v[2]);
+      var z1 = -v[0] * Math.sin(yaw) + v[2] * Math.cos(yaw);
+      _radar.yaw = yaw; _radar.pitch = Math.max(-1.5, Math.min(1.5, Math.atan2(v[1], z1)));
+    } else if (_radar.mode === 'SKY') {
+      try { var stage = document.getElementById('radar-stage'), sec = document.getElementById('sky-section'); if (stage && sec) { var svg = sec.querySelector('svg'); if (svg) { var h = svg.getBoundingClientRect().height, yf = (90 - (+s.dec)) / 180; stage.scrollTop = Math.max(0, sec.offsetTop + yf * h - stage.clientHeight / 2); } } } catch(e) {}
+    }
   }
   function _radarInfoReset(){ var info = document.getElementById('radar-info'); if (!info) return; info.innerHTML = '<div class="rdr-ithumb rdr-iph"></div><div class="rdr-itxt"><div class="rdr-inm rdr-idim">— NO CONTACT SELECTED —</div><div class="rdr-isub rdr-idim">TAP A BLIP FOR DETAILS</div><div class="rdr-irsn"></div></div>'; }
   function _mapFocusByName(name){
@@ -7208,10 +7251,11 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     _radarMapHost(mode === 'SKY');
     var scrub = document.getElementById('radar-scrub'); if (scrub) scrub.style.display = (mode === 'LOCAL') ? '' : 'none';
     var histb = document.getElementById('radar-hist'); if (histb) histb.style.display = (mode === 'SKY') ? '' : 'none';
-    var info = document.getElementById('radar-info'); if (info) { if (mode === 'SKY') info.style.display = 'none'; else { info.style.display = ''; if (_radar.sel) _radarSelect(_radar.sel); else _radarInfoReset(); } }
+    var info = document.getElementById('radar-info'); if (info) { if (mode === 'SKY') info.style.display = 'none'; else { info.style.display = ''; if (!_radar.sel) _radarInfoReset(); } }
     var hint = document.getElementById('radar-hint');
     if (hint) hint.textContent = (mode === '3D') ? 'DRAG / SCROLL ROTATE · PINCH ZOOM · TAP A CONTACT' : (mode === 'LOCAL' ? 'ALT-AZ · DRAG / SCROLL SIDEWAYS = TIME · PINCH ZOOM · TAP A CONTACT' : 'STAR CHART · TAP A CANDIDATE FOR DETAIL · 📊 HISTOGRAM');
     try { _radarFit(); } catch(e) {}
+    if (_radar.sel) { try { _radarFocus(_radar.sel.name); } catch(e) {} try { _radarCenter(); } catch(e) {} }
     op('RADAR — ' + mode + ' MODE');
   }
   function _radarFit(){
