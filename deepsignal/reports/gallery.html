@@ -1194,7 +1194,7 @@ window._svBlink = function(btn){
 <div id="sky-tooltip-map"></div>
 <div class="gallery-hdr">
 <h1>DeepSignal — Sky Image Gallery</h1>
-<div class="subtitle">Generated <span id="gen-ts">2026-07-29 17:57 UTC</span> &nbsp;·&nbsp; 96 targets &nbsp;·&nbsp; 0 sky images via Hips2Fits CDN</div>
+<div class="subtitle">Generated <span id="gen-ts">2026-07-30 22:03 UTC</span> &nbsp;·&nbsp; 96 targets &nbsp;·&nbsp; 0 sky images via Hips2Fits CDN</div>
 <div class="stats">
   <div class="stat"><div class="stat-n" style="color:#f59e0b">3</div><div class="stat-l">Tier 1 ≥70</div></div>
   <div class="stat"><div class="stat-n" style="color:#60a5fa">1</div><div class="stat-l">Tier 2 50–69</div></div>
@@ -7187,11 +7187,10 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     if (!_radar || !_radar.sel || _radar.sel.ra == null) return;
     var s = _radar.sel;
     if (_radar.mode === 'LOCAL') {
-      if (obsLat == null) return;
-      var aa = _altazOf(+s.ra, +s.dec, _radarWhen()); if (!aa) return;
-      var W = _radar.cv.width, H = _radar.cv.height, R = Math.min(W, H) * 0.44 * _radar.scale;
-      var rr = R * (90 - aa.alt) / 90, az = aa.az * Math.PI / 180;
-      _radar.panX = -rr * Math.sin(az); _radar.panY = rr * Math.cos(az);
+      // Polar alt-az radar is centered on the zenith; panning to put the target
+      // at screen-center drags the whole range-ring circle off-center. Keep it
+      // centered — the reticle + label already mark the target's true alt-az.
+      _radar.panX = 0; _radar.panY = 0;
     } else if (_radar.mode === '3D') {
       var ra = +s.ra * Math.PI / 180, de = +s.dec * Math.PI / 180;
       var v = [Math.cos(de) * Math.cos(ra), Math.sin(de), Math.cos(de) * Math.sin(ra)];
@@ -7325,7 +7324,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
   }
   window._radarClose = _radarClose;
   window._radarPick = _radarPick;
-  window._radarState = function(){ return _radar ? { mode: _radar.mode, contacts: _radar.pts.length, sel: _radar.sel ? _radar.sel.name : null, screen: _radar.screen.length } : null; };
+  window._radarState = function(){ return _radar ? { mode: _radar.mode, contacts: _radar.pts.length, sel: _radar.sel ? _radar.sel.name : null, screen: _radar.screen.length, panX: _radar.panX, panY: _radar.panY } : null; };
   window._radarSetMode = function(m){ _radarSetMode(m); };
   /* ══ NAVCON PRO-16: Preferences panel (p) — centralises the settings that were
         previously buried in CDU commands, into one glass panel. ══ */

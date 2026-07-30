@@ -143,6 +143,9 @@ for (const [label,src] of [['gallery','file://'+process.cwd()+'/deepsignal/galle
   ck(`${label}: switching to SKY keeps + crosshairs the target`, String(skyKeep.sel).toLowerCase()===String(focusName).toLowerCase() && skyKeep.cross);
   const detBottom = await p.evaluate(()=>{ const c=document.querySelector('#map-body .sky-svg-wrap'), d=document.getElementById('map-detail'); return c&&d ? d.getBoundingClientRect().top>c.getBoundingClientRect().top : false; });
   ck(`${label}: SKY detail sits below the chart (bottom)`, detBottom);
+  // PRO-16h: switching back into LOCAL must keep the polar circle centered (no pan-to-target offset)
+  const localPan = await p.evaluate(()=>{ window._radarSetMode('LOCAL'); const s=window._radarState(); return { px:s.panX, py:s.panY, sel:s.sel }; });
+  ck(`${label}: LOCAL stays centered on switch (pan reset, no circle offset)`, Math.abs(localPan.px)<0.5 && Math.abs(localPan.py)<0.5 && String(localPan.sel).toLowerCase()===String(focusName).toLowerCase());
   await p.keyboard.press('Escape'); await p.waitForTimeout(120);
 
   ck(`${label}: no JS errors`, errs.length===0);
