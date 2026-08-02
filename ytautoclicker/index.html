@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YouTube Ad Skip Auto-Clicker</title>
+<meta name="description" content="YouTube 廣告「略過」按鈕一出現就自動點掉，然後回到正片。免費、開源、無追蹤。">
+<link rel="icon" href="icon128.png">
+<style>
+  :root {
+    --bg: #0d1117;
+    --panel: #161b22;
+    --line: #262d38;
+    --text: #e6edf3;
+    --dim: #8b949e;
+    --accent: #f43f5e;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #ffffff; --panel: #f6f8fa; --line: #d8dee4;
+      --text: #1f2328; --dim: #656d76;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 0 20px 72px;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.65 system-ui, -apple-system, "Segoe UI", "Noto Sans TC", sans-serif;
+  }
+  .shell { max-width: 720px; margin: 0 auto; }
+  header { text-align: center; padding: 60px 0 40px; }
+  header img { width: 76px; height: 76px; border-radius: 17px; }
+  h1 { margin: 18px 0 6px; font-size: 30px; letter-spacing: -.01em; }
+  .tagline { margin: 0; color: var(--dim); font-size: 17px; }
+  .badges { margin-top: 16px; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+  .badge {
+    font-size: 12px; padding: 3px 10px; border-radius: 99px;
+    border: 1px solid var(--line); color: var(--dim);
+  }
+
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 22px 24px;
+    margin-bottom: 18px;
+  }
+  .card h2 { margin: 0 0 4px; font-size: 18px; }
+  .card .sub { margin: 0 0 18px; color: var(--dim); font-size: 14px; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 9px;
+    background: var(--accent); color: #fff;
+    text-decoration: none; font-weight: 600; font-size: 15px;
+    padding: 11px 20px; border-radius: 8px;
+    transition: filter .15s;
+  }
+  .btn:hover { filter: brightness(1.1); }
+  .btn.ghost {
+    background: transparent; color: var(--text);
+    border: 1px solid var(--line); font-weight: 500;
+  }
+
+  ol { margin: 18px 0 0; padding-left: 20px; }
+  ol li { margin-bottom: 7px; }
+  kbd {
+    background: var(--bg); border: 1px solid var(--line);
+    border-radius: 5px; padding: 1px 6px; font-size: 13px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  code {
+    background: var(--bg); border: 1px solid var(--line);
+    border-radius: 5px; padding: 1px 6px; font-size: 13.5px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
+  ul.feat { margin: 0; padding-left: 20px; }
+  ul.feat li { margin-bottom: 6px; }
+
+  .note {
+    margin-top: 16px; padding: 12px 14px;
+    border-left: 3px solid var(--line);
+    color: var(--dim); font-size: 14px;
+  }
+  footer {
+    margin-top: 40px; padding-top: 24px;
+    border-top: 1px solid var(--line);
+    text-align: center; color: var(--dim); font-size: 14px;
+  }
+  footer a { color: var(--dim); }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <header>
+    <img src="icon128.png" alt="">
+    <h1>YouTube Ad Skip Auto-Clicker</h1>
+    <p class="tagline">廣告「略過」按鈕一出現就自動點掉，然後回到正片。</p>
+    <div class="badges">
+      <span class="badge">MIT 授權</span>
+      <span class="badge">無追蹤、無外連</span>
+      <span class="badge">零相依套件</span>
+    </div>
+  </header>
+
+  <div class="card">
+    <h2>方式一 · Chrome 擴充功能</h2>
+    <p class="sub">推薦。不需要 Tampermonkey，也不需要任何第三方管理器。</p>
+
+    <a class="btn" href="ytautoclicker-extension.zip" download>⬇ 下載擴充功能 (.zip)</a>
+
+    <ol>
+      <li>下載上面的 zip，<b>解壓縮</b>到一個你不會刪掉的資料夾。</li>
+      <li>網址列輸入 <code>chrome://extensions</code> 並開啟。</li>
+      <li>右上角打開 <b>開發人員模式</b>。</li>
+      <li>點 <b>載入未封裝項目</b>，選擇剛才解壓出來的資料夾。</li>
+      <li>重整 YouTube 就生效了。</li>
+    </ol>
+
+    <div class="note">
+      為什麼不能一鍵安裝？Google 從 2018 年起已完全移除網頁端安裝擴充功能的能力，
+      非 Chrome Web Store 來源的 <code>.crx</code> 一律會被瀏覽器擋下。
+      「載入未封裝項目」是官方支援、也是唯一不上架就能安裝的方式。
+      好處是全程在你本機，沒有任何上傳或審核。
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>方式二 · 使用者腳本（真正一鍵）</h2>
+    <p class="sub">如果你已經裝了 Tampermonkey 或 Violentmonkey，點下去就會跳出安裝視窗。</p>
+
+    <a class="btn ghost" href="youtube-ad-skip.user.js">⚡ 一鍵安裝 userscript</a>
+
+    <div class="note">
+      沒有安裝管理器的話，這個連結只會顯示原始碼。
+      功能核心與擴充功能相同，但沒有設定面板與計數器。
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>它會做什麼</h2>
+    <ul class="feat">
+      <li><b>自動點「略過廣告」</b>——按鈕一可點就立刻點掉。</li>
+      <li><b>快轉不可略過的廣告</b>——把廣告拉到結尾（只在廣告播放時，絕不會動到你的正片）。</li>
+      <li><b>廣告期間靜音，結束後還原</b>——YouTube 的廣告與正片共用同一個播放元件，
+        所以靜音必須還原，否則正片會一路靜音下去。</li>
+      <li><b>關閉橫幅廣告</b>——影片下方的疊加式廣告。</li>
+      <li>工具列面板可個別開關，並顯示已略過的廣告數。</li>
+    </ul>
+
+    <div class="note">
+      只要求 <code>storage</code> 一項權限（存你的開關設定與計數）。
+      不連外網、不收集資料、不載入遠端程式碼。
+      在廣告中途你自己手動取消靜音的話，它不會跟你搶著再靜音回去。
+    </div>
+  </div>
+
+  <footer>
+    問題回報：<a href="mailto:hikohong@gmail.com">hikohong@gmail.com</a><br>
+    MIT License © 2026 Hiko Hong
+  </footer>
+
+</div>
+</body>
+</html>

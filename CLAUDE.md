@@ -22,6 +22,11 @@ DeepSignal portal: https://hikohong.github.io/deepsignal/
 │   ├── deepsignal-footprint.jpg ← tile thumbnail on homepage
 │   ├── deepsignal-reference.jpg ← reference visual
 │   └── deepsignal-web-icon.jpg  ← browser favicon
+├── ytautoclicker/               ← FOREIGN: published from hikohong/ytautoclicker
+│   ├── index.html               ←   (private repo) — see "Hosted guest projects"
+│   ├── icon128.png
+│   ├── youtube-ad-skip.user.js
+│   └── ytautoclicker-extension.zip
 └── deepsignal/
     ├── index.html               ← DeepSignal landing/report page
     ├── gallery.html             ← candidate gallery (all DS-XXXX cards)
@@ -59,6 +64,29 @@ DeepSignal portal: https://hikohong.github.io/deepsignal/
     └── search/                  ← per-target search/detail pages (static HTML)
         └── TargetName.html      (19 files: stars, planets, FRBs, interstellar objects)
 ```
+
+---
+
+## Hosted guest projects — `ytautoclicker/`
+
+`ytautoclicker/` is **not part of DeepSignal and is not authored here.** It is build
+output published from `hikohong/ytautoclicker`, which is a private repo. GitHub Pages
+only serves public repositories on the free plan, so that project cannot host its own
+page; this repo carries it as a subdirectory instead, serving
+https://hikohong.github.io/ytautoclicker/.
+
+The files arrive via `scripts/publish-site.sh` **in that repo**, which copies four
+artifacts in and pushes a branch here for a PR. Treat them as generated:
+
+- **Do not hand-edit anything under `ytautoclicker/`** — edit upstream and republish,
+  or the next publish silently overwrites your change.
+- Do not wire it into the homepage tiles, the NAVCON console, or any DeepSignal test.
+  It is a static guest page that shares the domain and nothing else.
+- `validate-web.mjs` and the e2e suites use explicit file lists and do not cover it.
+  Leave it that way — it has no inline JS and no DeepSignal invariants to check.
+
+This is the only guest project. If a second one appears, generalise this section rather
+than copying it.
 
 ---
 
