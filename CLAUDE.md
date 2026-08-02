@@ -132,6 +132,19 @@ Images: `DS-{XXXX}_{Target_Name}.jpg`
 - **Commit message convention:** imperative mood; pipeline publishes use "Publish DeepSignal website output YYYY-MM-DD"
 - **After merge:** delete remote branch (`git push origin --delete <branch>`) and local branch (`git branch -d <branch>`), then `git checkout master && git pull origin master`
 
+### Standing policy — every commit ships as an auto-merged PR
+
+Owner instruction (2026-08-02): **do not hand back a bare commit.** For every change:
+
+1. Commit on a `claude/<slug>` dev branch and push it.
+2. Open a PR against `master`.
+3. Merge it — squash. Prefer `enable_pr_auto_merge` so it lands when checks pass;
+   fall back to `merge_pull_request` (squash) when the PR is already clean.
+4. Delete the dev branch, remote and local.
+
+No confirmation needed before opening or merging these PRs — this instruction is the
+standing authorization. Report the PR number and merge result each time.
+
 ```bash
 # Feature work
 git checkout -b claude/<slug>
