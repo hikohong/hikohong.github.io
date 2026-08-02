@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="zh-Hant">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>YouTube Ad Skip Auto-Clicker</title>
-<meta name="description" content="YouTube 廣告「略過」按鈕一出現就自動點掉，然後回到正片。免費、開源、無追蹤。">
+<meta name="description" content="Clicks YouTube's Skip Ad button the moment it appears, then gets you back to the video. Free, no tracking, no dependencies.">
 <link rel="icon" href="icon128.png">
 <style>
   :root {
@@ -27,7 +27,7 @@
     padding: 0 20px 72px;
     background: var(--bg);
     color: var(--text);
-    font: 16px/1.65 system-ui, -apple-system, "Segoe UI", "Noto Sans TC", sans-serif;
+    font: 16px/1.65 system-ui, -apple-system, "Segoe UI", sans-serif;
   }
   .shell { max-width: 720px; margin: 0 auto; }
   header { text-align: center; padding: 60px 0 40px; }
@@ -61,11 +61,6 @@
 
   ol { margin: 18px 0 0; padding-left: 20px; }
   ol li { margin-bottom: 7px; }
-  kbd {
-    background: var(--bg); border: 1px solid var(--line);
-    border-radius: 5px; padding: 1px 6px; font-size: 13px;
-    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  }
   code {
     background: var(--bg); border: 1px solid var(--line);
     border-radius: 5px; padding: 1px 6px; font-size: 13.5px;
@@ -89,51 +84,55 @@
   <header>
     <img src="icon128.png" alt="">
     <h1>YouTube Ad Skip Auto-Clicker</h1>
-    <p class="tagline">廣告「略過」按鈕一出現就自動點掉，然後回到正片。</p>
+    <p class="tagline">Clicks the “Skip Ad” button the moment it appears, then gets you back to the video.</p>
     <div class="badges">
-      <span class="badge">MIT 授權</span>
-      <span class="badge">無追蹤、無外連</span>
-      <span class="badge">零相依套件</span>
+      <span class="badge">MIT licensed</span>
+      <span class="badge">No tracking, no network calls</span>
+      <span class="badge">Zero dependencies</span>
     </div>
   </header>
 
   <div class="card">
-    <h2>安裝 · Chrome 擴充功能</h2>
-    <p class="sub">不需要 Tampermonkey，也不需要任何第三方管理器。</p>
+    <h2>Install · Chrome extension</h2>
+    <p class="sub">No Tampermonkey, and no third-party userscript manager.</p>
 
-    <a class="btn" href="ytautoclicker-extension.zip" download>⬇ 下載擴充功能 (.zip)</a>
+    <a class="btn" href="ytautoclicker-extension.zip" download>⬇ Download extension (.zip)</a>
 
     <ol>
-      <li>下載上面的 zip，<b>解壓縮</b>到一個你不會刪掉的資料夾。</li>
-      <li>網址列輸入 <code>chrome://extensions</code> 並開啟。</li>
-      <li>右上角打開 <b>開發人員模式</b>。</li>
-      <li>點 <b>載入未封裝項目</b>，選擇剛才解壓出來的資料夾。</li>
-      <li>重整 YouTube 就生效了。</li>
+      <li>Download the zip above and <b>unzip</b> it into a folder you won’t delete.</li>
+      <li>Open <code>chrome://extensions</code> in the address bar.</li>
+      <li>Turn on <b>Developer mode</b>, top right.</li>
+      <li>Click <b>Load unpacked</b> and pick the folder you just unzipped.</li>
+      <li>Reload YouTube — that’s it.</li>
     </ol>
 
     <div class="note">
-      為什麼不能一鍵安裝？Google 從 2018 年起已完全移除網頁端安裝擴充功能的能力，
-      非 Chrome Web Store 來源的 <code>.crx</code> 一律會被瀏覽器擋下。
-      「載入未封裝項目」是官方支援、也是唯一不上架就能安裝的方式。
-      好處是全程在你本機，沒有任何上傳或審核。
+      Why is there no one-click install? Google removed web-based extension
+      installation entirely back in 2018, and any <code>.crx</code> from outside the
+      Chrome Web Store is blocked by the browser. “Load unpacked” is the officially
+      supported route, and the only way to install without publishing to the store.
+      The upside is that everything stays on your own machine — nothing is uploaded
+      and nothing goes through review.
     </div>
   </div>
 
   <div class="card">
-    <h2>它會做什麼</h2>
+    <h2>What it does</h2>
     <ul class="feat">
-      <li><b>自動點「略過廣告」</b>——按鈕一可點就立刻點掉。</li>
-      <li><b>快轉不可略過的廣告</b>——把廣告拉到結尾（只在廣告播放時，絕不會動到你的正片）。</li>
-      <li><b>廣告期間靜音，結束後還原</b>——YouTube 的廣告與正片共用同一個播放元件，
-        所以靜音必須還原，否則正片會一路靜音下去。</li>
-      <li><b>關閉橫幅廣告</b>——影片下方的疊加式廣告。</li>
-      <li>工具列面板可個別開關，並顯示已略過的廣告數。</li>
+      <li><b>Clicks “Skip Ad”</b> — the instant the button becomes clickable.</li>
+      <li><b>Fast-forwards un-skippable ads</b> — seeks them to the end. Only ever while
+        an ad is playing; it never touches your actual video.</li>
+      <li><b>Mutes during ads, then restores your setting</b> — YouTube reuses one player
+        element for both ads and content, so the mute has to be undone or your video
+        would stay silent.</li>
+      <li><b>Closes banner ads</b> — the overlay ads along the bottom of the video.</li>
+      <li>Toolbar panel to toggle each feature, plus a count of ads skipped.</li>
     </ul>
 
     <div class="note">
-      只要求 <code>storage</code> 一項權限（存你的開關設定與計數）。
-      不連外網、不收集資料、不載入遠端程式碼。
-      在廣告中途你自己手動取消靜音的話，它不會跟你搶著再靜音回去。
+      Requests exactly one permission, <code>storage</code>, for your toggles and the
+      counter. No network calls, no data collection, no remote code. If you unmute
+      manually part-way through an ad, it won’t fight you and mute it again.
     </div>
   </div>
 
