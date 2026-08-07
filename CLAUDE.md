@@ -249,3 +249,17 @@ powers the NEW/Δ run-diff badges.
 - `catalog.json` must remain a plain array (not a wrapped `{"version":…,"candidates":[…]}` dict)
 - `gallery.html` must have 0 `../images/` references (use `images/` relative path)
 - `index.html` must have 0 `{{N_CANDIDATES}}` or `{{UPDATED}}` placeholders after publish
+
+## Agent skills
+
+### Issue tracker
+
+Issues live in GitHub Issues on `hikohong/hikohong.github.io`, managed via the `gh` CLI. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+The five canonical triage roles, each label string equal to its name. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context — one `CONTEXT.md` and `docs/adr/` at the repo root. See `docs/agents/domain.md`.
