@@ -656,6 +656,28 @@ html.red body>*{filter:grayscale(1) sepia(1) saturate(5) hue-rotate(-35deg) brig
 .th-row[data-jump]:hover{background:rgba(63,224,143,.07)}
 .th-row[data-jump]:hover .th-name{color:#3fe08f;text-decoration:underline}
 .card.cardjump{animation:cardJump 1.6s ease-out}
+.vfy-ban{padding:10px 12px;border-radius:8px;font-family:monospace;font-size:.78rem;letter-spacing:.06em;margin-bottom:12px;border:1px solid}
+.vfy-fail{color:#f97316;border-color:rgba(249,115,22,.5);background:rgba(249,115,22,.09)}
+.vfy-warn{color:#f59e0b;border-color:rgba(245,158,11,.5);background:rgba(245,158,11,.09)}
+.vfy-pass{color:#10b981;border-color:rgba(16,185,129,.5);background:rgba(16,185,129,.09)}
+.vfy-na{color:#7c93a6;border-color:rgba(124,147,166,.4);background:rgba(124,147,166,.07)}
+.vfy-sec{margin:14px 0 0;padding-top:10px;border-top:1px solid rgba(125,211,252,.16)}
+.vfy-h{font-family:monospace;font-size:.66rem;letter-spacing:.1em;color:#7dd3fc;margin-bottom:6px}
+.vfy-num{font-family:monospace;font-size:.72rem;color:#eef3f8;display:flex;flex-wrap:wrap;gap:12px;margin-bottom:5px}
+.vfy-num b{color:#9fe8ff;font-weight:600}
+.vfy-note{font-size:.74rem;line-height:1.5;color:#b8ccd8}
+.vfy-note.bad{color:#f9a86b}
+.vfy-note.good{color:#6ee7b7}
+.vfy-tbl{width:100%;border-collapse:collapse;font-family:monospace;font-size:.68rem;margin-top:4px}
+.vfy-tbl td{padding:3px 6px;border-bottom:1px solid rgba(125,211,252,.1);color:#cfe3ee}
+.vfy-tbl td:first-child{color:#7c93a6}
+.vfy-tbl td:last-child{text-align:right;color:#9fe8ff}
+.vfy-row{display:flex;align-items:center;gap:8px;padding:5px 7px;border-bottom:1px solid rgba(125,211,252,.1);cursor:pointer;font-family:monospace;font-size:.68rem}
+.vfy-row:hover{background:rgba(125,211,252,.07)}
+.vfy-row .vr-n{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#eef3f8}
+.vfy-row .vr-v{width:74px;text-align:right;letter-spacing:.05em}
+.vfy-chip{font-family:monospace;font-size:.58rem;padding:1px 5px;border-radius:4px;margin-left:6px;border:1px solid rgba(249,115,22,.55);color:#f97316;background:rgba(249,115,22,.1)}
+.vfy-chip.vc-warn{border-color:rgba(245,158,11,.55);color:#f59e0b;background:rgba(245,158,11,.1)}
 @keyframes cardJump{0%{box-shadow:0 0 0 0 rgba(63,224,143,.7)}100%{box-shadow:0 0 0 16px rgba(63,224,143,0)}}
 @media (prefers-reduced-motion:reduce){.card.cardjump{animation:none}}
 .th-up{font-family:monospace;font-size:.6rem;color:#3fe08f;white-space:nowrap}
@@ -1200,7 +1222,7 @@ window._svBlink = function(btn){
 <div id="sky-tooltip-map"></div>
 <div class="gallery-hdr">
 <h1>DeepSignal — Sky Image Gallery</h1>
-<div class="subtitle">Generated <span id="gen-ts">2026-08-23 04:42 UTC</span> &nbsp;·&nbsp; 96 targets &nbsp;·&nbsp; 0 sky images via Hips2Fits CDN</div>
+<div class="subtitle">Generated <span id="gen-ts">2026-08-23 05:12 UTC</span> &nbsp;·&nbsp; 96 targets &nbsp;·&nbsp; 0 sky images via Hips2Fits CDN</div>
 <div class="stats">
   <div class="stat"><div class="stat-n" style="color:#f59e0b">3</div><div class="stat-l">Tier 1 ≥70</div></div>
   <div class="stat"><div class="stat-n" style="color:#60a5fa">1</div><div class="stat-l">Tier 2 50–69</div></div>
@@ -1260,6 +1282,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('Tau Ceti', 'zscore')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('Tau Ceti')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('Tau Ceti')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('Tau Ceti')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         <div class="card-count" onclick="this.closest('.card').classList.toggle('expanded')">4 detections <i class="arrow">▼</i></div>
       </div>
@@ -1291,6 +1314,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('G 9-40', 'zscore')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('G 9-40')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('G 9-40')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('G 9-40')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         <div class="card-count" onclick="this.closest('.card').classList.toggle('expanded')">10 detections <i class="arrow">▼</i></div>
       </div>
@@ -1322,6 +1346,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('Proxima Centauri', 'doppler drift')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('Proxima Centauri')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('Proxima Centauri')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('Proxima Centauri')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         <div class="card-count" onclick="this.closest('.card').classList.toggle('expanded')">2 detections <i class="arrow">▼</i></div>
       </div>
@@ -1353,6 +1378,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('Epsilon Eridani', 'doppler drift')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('Epsilon Eridani')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('Epsilon Eridani')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('Epsilon Eridani')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         <div class="card-count" onclick="this.closest('.card').classList.toggle('expanded')">3 detections <i class="arrow">▼</i></div>
       </div>
@@ -1384,6 +1410,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('Gliese 667C', 'doppler drift')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('Gliese 667C')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('Gliese 667C')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('Gliese 667C')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -1415,6 +1442,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('HD 40307', 'doppler drift')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('HD 40307')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('HD 40307')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('HD 40307')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         <div class="card-count" onclick="this.closest('.card').classList.toggle('expanded')">3 detections <i class="arrow">▼</i></div>
       </div>
@@ -1446,6 +1474,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('Vega', 'doppler drift')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('Vega')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('Vega')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('Vega')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         <div class="card-count" onclick="this.closest('.card').classList.toggle('expanded')">2 detections <i class="arrow">▼</i></div>
       </div>
@@ -1477,6 +1506,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('61 Cygni A', 'doppler drift')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('61 Cygni A')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('61 Cygni A')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('61 Cygni A')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         <div class="card-count" onclick="this.closest('.card').classList.toggle('expanded')">4 detections <i class="arrow">▼</i></div>
       </div>
@@ -1508,6 +1538,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('Epsilon Indi A', 'doppler drift')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('Epsilon Indi A')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('Epsilon Indi A')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('Epsilon Indi A')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         <div class="card-count" onclick="this.closest('.card').classList.toggle('expanded')">2 detections <i class="arrow">▼</i></div>
       </div>
@@ -1539,6 +1570,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('Fomalhaut', 'doppler drift')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('Fomalhaut')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('Fomalhaut')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('Fomalhaut')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         <div class="card-count" onclick="this.closest('.card').classList.toggle('expanded')">3 detections <i class="arrow">▼</i></div>
       </div>
@@ -1570,6 +1602,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('Ross 128', 'doppler drift')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('Ross 128')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('Ross 128')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('Ross 128')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         <div class="card-count" onclick="this.closest('.card').classList.toggle('expanded')">2 detections <i class="arrow">▼</i></div>
       </div>
@@ -1601,6 +1634,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('HD 73344', 'doppler drift')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('HD 73344')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('HD 73344')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('HD 73344')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         <div class="card-count" onclick="this.closest('.card').classList.toggle('expanded')">4 detections <i class="arrow">▼</i></div>
       </div>
@@ -1632,6 +1666,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('Kepler-42', 'doppler drift')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('Kepler-42')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('Kepler-42')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('Kepler-42')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         <div class="card-count" onclick="this.closest('.card').classList.toggle('expanded')">23 detections <i class="arrow">▼</i></div>
       </div>
@@ -1663,6 +1698,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('K2-151', 'doppler drift')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('K2-151')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('K2-151')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('K2-151')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         <div class="card-count" onclick="this.closest('.card').classList.toggle('expanded')">7 detections <i class="arrow">▼</i></div>
       </div>
@@ -1694,6 +1730,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('K2-344', 'doppler drift')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('K2-344')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('K2-344')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('K2-344')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         <div class="card-count" onclick="this.closest('.card').classList.toggle('expanded')">7 detections <i class="arrow">▼</i></div>
       </div>
@@ -1725,6 +1762,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('K2-209', 'doppler drift')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('K2-209')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('K2-209')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('K2-209')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         <div class="card-count" onclick="this.closest('.card').classList.toggle('expanded')">2 detections <i class="arrow">▼</i></div>
       </div>
@@ -1756,6 +1794,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('TOI-700', 'lightcurve anomaly')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('TOI-700')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('TOI-700')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('TOI-700')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -1787,6 +1826,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('TOI-216', 'lightcurve anomaly')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('TOI-216')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('TOI-216')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('TOI-216')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -1818,6 +1858,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('SIM_STAR_0000', 'lightcurve anomaly')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('SIM_STAR_0000')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('SIM_STAR_0000')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('SIM_STAR_0000')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -1849,6 +1890,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('SIM_STAR_0001', 'lightcurve anomaly')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('SIM_STAR_0001')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('SIM_STAR_0001')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('SIM_STAR_0001')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -1880,6 +1922,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('SIM_STAR_0002', 'lightcurve anomaly')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('SIM_STAR_0002')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('SIM_STAR_0002')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('SIM_STAR_0002')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -1911,6 +1954,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('SIM_STAR_0003', 'lightcurve anomaly')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('SIM_STAR_0003')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('SIM_STAR_0003')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('SIM_STAR_0003')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -1942,6 +1986,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('SIM_STAR_0006', 'lightcurve anomaly')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('SIM_STAR_0006')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('SIM_STAR_0006')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('SIM_STAR_0006')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -1973,6 +2018,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('SIM_STAR_0007', 'lightcurve anomaly')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('SIM_STAR_0007')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('SIM_STAR_0007')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('SIM_STAR_0007')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -2004,6 +2050,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('LHS 1140b', 'atmospheric biosignature')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('LHS 1140b')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('LHS 1140b')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('LHS 1140b')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -2035,6 +2082,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('HD 209458b', 'atmospheric biosignature')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('HD 209458b')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('HD 209458b')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('HD 209458b')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -2066,6 +2114,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('TOI-SIM-0001', 'atmospheric biosignature')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('TOI-SIM-0001')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('TOI-SIM-0001')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('TOI-SIM-0001')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -2097,6 +2146,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('1I/ʻOumuamua', 'interstellar trajectory')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('1I/ʻOumuamua')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('1I/ʻOumuamua')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('1I/ʻOumuamua')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -2128,6 +2178,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('SIM_ISO_0001', 'interstellar trajectory')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('SIM_ISO_0001')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('SIM_ISO_0001')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('SIM_ISO_0001')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -2159,6 +2210,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('SIM_ISO_0002', 'interstellar trajectory')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('SIM_ISO_0002')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('SIM_ISO_0002')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('SIM_ISO_0002')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -2190,6 +2242,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('SIM_ISO_0004', 'interstellar trajectory')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('SIM_ISO_0004')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('SIM_ISO_0004')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('SIM_ISO_0004')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -2221,6 +2274,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0251.6+0628', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0251.6+0628')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0251.6+0628')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0251.6+0628')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -2252,6 +2306,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0259.0+0552', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0259.0+0552')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0259.0+0552')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0259.0+0552')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -2283,6 +2338,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0412.6+2253c', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0412.6+2253c')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0412.6+2253c')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0412.6+2253c')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -2314,6 +2370,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0337.5+2423c', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0337.5+2423c')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0337.5+2423c')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0337.5+2423c')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -2345,6 +2402,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0327.3+2355c', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0327.3+2355c')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0327.3+2355c')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0327.3+2355c')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -2376,6 +2434,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0230.3+1713', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0230.3+1713')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0230.3+1713')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0230.3+1713')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -2407,6 +2466,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0209.8+2626', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0209.8+2626')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0209.8+2626')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0209.8+2626')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -2438,6 +2498,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0314.2+2419', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0314.2+2419')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0314.2+2419')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0314.2+2419')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -2469,6 +2530,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0314.1+2827', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0314.1+2827')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0314.1+2827')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0314.1+2827')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -2500,6 +2562,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0311.3+2940', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0311.3+2940')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0311.3+2940')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0311.3+2940')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -2531,6 +2594,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0224.8+2937', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0224.8+2937')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0224.8+2937')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0224.8+2937')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -2562,6 +2626,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0300.4+3450', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0300.4+3450')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0300.4+3450')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0300.4+3450')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -2593,6 +2658,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0447.2+2446', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0447.2+2446')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0447.2+2446')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0447.2+2446')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -2624,6 +2690,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0441.8+2600c', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0441.8+2600c')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0441.8+2600c')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0441.8+2600c')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -2655,6 +2722,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0448.3+2743', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0448.3+2743')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0448.3+2743')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0448.3+2743')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -2686,6 +2754,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0453.3+2843', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0453.3+2843')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0453.3+2843')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0453.3+2843')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -2717,6 +2786,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0443.9+2921', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0443.9+2921')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0443.9+2921')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0443.9+2921')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -2748,6 +2818,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0436.9+2915', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0436.9+2915')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0436.9+2915')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0436.9+2915')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -2779,6 +2850,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0409.2+2542', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0409.2+2542')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0409.2+2542')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0409.2+2542')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -2810,6 +2882,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0356.9+3013c', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0356.9+3013c')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0356.9+3013c')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0356.9+3013c')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -2841,6 +2914,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0424.8+3117', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0424.8+3117')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0424.8+3117')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0424.8+3117')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -2872,6 +2946,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0435.5+3232', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0435.5+3232')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0435.5+3232')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0435.5+3232')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -2903,6 +2978,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0431.0+3529c', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0431.0+3529c')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0431.0+3529c')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0431.0+3529c')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -2934,6 +3010,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0442.8+3609', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0442.8+3609')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0442.8+3609')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0442.8+3609')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -2965,6 +3042,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0427.9+3632c', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0427.9+3632c')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0427.9+3632c')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0427.9+3632c')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -2996,6 +3074,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0535.0+3615c', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0535.0+3615c')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0535.0+3615c')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0535.0+3615c')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -3027,6 +3106,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0534.0+3746c', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0534.0+3746c')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0534.0+3746c')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0534.0+3746c')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -3058,6 +3138,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0501.7+4459', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0501.7+4459')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0501.7+4459')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0501.7+4459')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -3089,6 +3170,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0553.5+4810', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0553.5+4810')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0553.5+4810')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0553.5+4810')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -3120,6 +3202,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0540.9+5046', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0540.9+5046')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0540.9+5046')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0540.9+5046')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -3151,6 +3234,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0342.4+3125c', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0342.4+3125c')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0342.4+3125c')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0342.4+3125c')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -3182,6 +3266,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0341.9+3153c', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0341.9+3153c')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0341.9+3153c')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0341.9+3153c')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -3213,6 +3298,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0346.2+3235c', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0346.2+3235c')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0346.2+3235c')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0346.2+3235c')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -3244,6 +3330,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0359.3+3626', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0359.3+3626')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0359.3+3626')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0359.3+3626')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -3275,6 +3362,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0349.6+4026', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0349.6+4026')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0349.6+4026')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0349.6+4026')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -3306,6 +3394,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0409.7+4006c', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0409.7+4006c')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0409.7+4006c')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0409.7+4006c')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -3337,6 +3426,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0334.3+4820', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0334.3+4820')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0334.3+4820')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0334.3+4820')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -3368,6 +3458,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0540.6+5540', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0540.6+5540')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0540.6+5540')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0540.6+5540')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -3399,6 +3490,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0426.5+5434', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0426.5+5434')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0426.5+5434')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0426.5+5434')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -3430,6 +3522,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0545.7+6016', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0545.7+6016')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0545.7+6016')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0545.7+6016')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -3461,6 +3554,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0533.6+5945', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0533.6+5945')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0533.6+5945')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0533.6+5945')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -3492,6 +3586,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0454.4+5943', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0454.4+5943')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0454.4+5943')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0454.4+5943')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -3523,6 +3618,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0126.8+2412', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0126.8+2412')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0126.8+2412')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0126.8+2412')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -3554,6 +3650,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0128.4+2614', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0128.4+2614')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0128.4+2614')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0128.4+2614')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -3585,6 +3682,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0159.0+3313', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0159.0+3313')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0159.0+3313')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0159.0+3313')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -3616,6 +3714,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0124.0+3035', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0124.0+3035')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0124.0+3035')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0124.0+3035')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -3647,6 +3746,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0004.0+5715', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0004.0+5715')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0004.0+5715')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0004.0+5715')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -3678,6 +3778,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0039.1+6257', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0039.1+6257')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0039.1+6257')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0039.1+6257')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -3709,6 +3810,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0017.4+6506', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0017.4+6506')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0017.4+6506')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0017.4+6506')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -3740,6 +3842,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('J0314.1+5033', 'gamma unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('J0314.1+5033')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('J0314.1+5033')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('J0314.1+5033')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -3771,6 +3874,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('Kapteyn\'s Star', 'proper motion anomaly')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('Kapteyn\'s Star')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('Kapteyn\'s Star')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('Kapteyn\'s Star')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -3802,6 +3906,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('SIM_J0312+1847', 'proper motion anomaly')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('SIM_J0312+1847')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('SIM_J0312+1847')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('SIM_J0312+1847')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -3833,6 +3938,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('SIM_J1147-0231', 'proper motion anomaly')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('SIM_J1147-0231')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('SIM_J1147-0231')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('SIM_J1147-0231')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -3864,6 +3970,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('SIM_J2218+3341', 'proper motion anomaly')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('SIM_J2218+3341')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('SIM_J2218+3341')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('SIM_J2218+3341')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -3895,6 +4002,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('SIM_J0631+1548', 'proper motion anomaly')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('SIM_J0631+1548')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('SIM_J0631+1548')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('SIM_J0631+1548')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -3926,6 +4034,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('CXO J001311.8+634937', 'xray unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('CXO J001311.8+634937')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('CXO J001311.8+634937')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('CXO J001311.8+634937')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -3957,6 +4066,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('CXO J024512.4-001234', 'xray unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('CXO J024512.4-001234')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('CXO J024512.4-001234')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('CXO J024512.4-001234')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -3988,6 +4098,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('CXO J073841.2+653201', 'xray unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('CXO J073841.2+653201')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('CXO J073841.2+653201')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('CXO J073841.2+653201')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -4019,6 +4130,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('CXO J182239.2-181442', 'xray unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('CXO J182239.2-181442')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('CXO J182239.2-181442')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('CXO J182239.2-181442')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -4050,6 +4162,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('CXO J214521.3+122844', 'xray unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('CXO J214521.3+122844')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('CXO J214521.3+122844')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('CXO J214521.3+122844')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -4081,6 +4194,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('4XMM J034428.3-045712', 'xray unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('4XMM J034428.3-045712')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('4XMM J034428.3-045712')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('4XMM J034428.3-045712')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -4112,6 +4226,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('4XMM J091234.2+303201', 'xray unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('4XMM J091234.2+303201')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('4XMM J091234.2+303201')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('4XMM J091234.2+303201')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -4143,6 +4258,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('4XMM J143812.7-231456', 'xray unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('4XMM J143812.7-231456')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('4XMM J143812.7-231456')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('4XMM J143812.7-231456')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -4174,6 +4290,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('4XMM J052211.8-692334', 'xray unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('4XMM J052211.8-692334')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('4XMM J052211.8-692334')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('4XMM J052211.8-692334')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -4205,6 +4322,7 @@ window._svBlink = function(btn){
           <button class="btn-papers" onclick="litOpen('4XMM J113021.4+052318', 'xray unidentified')"><span class="papers-dot">◉</span> Search Literature</button>
           <button class="btn-news" onclick="newsOpen('4XMM J113021.4+052318')"><span class="news-dot">◎</span> Space News</button>
           <button class="btn-news btn-spec" onclick="_spectrumOpen('4XMM J113021.4+052318')"><span class="news-dot">≋</span> Spectrum</button>
+          <button class="btn-news btn-vfy" onclick="_verifyOpen('4XMM J113021.4+052318')" title="Falsification check — spectrum allocation, drift plausibility, sky coincidence, energetics"><span class="news-dot">✓</span> Verify</button>
         </div>
         
       </div>
@@ -5683,7 +5801,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     if (ev.key !== 'Escape') return;
     var t = ev.target, tg = t && t.tagName;
     if (tg === 'INPUT' || tg === 'TEXTAREA' || (t && t.isContentEditable)) return;
-    var order = ['askbox-ov', 'radar-ov', 'prefs-ov', 'keys-ov', 'aladin-ov', 'sphere-ov', 'palette-ov', 'session-ov', 'sim-ov', 'anom-ov', 'team-ov', 'alerts-ov', 'lock-ov', 'radial-ov', 'gauge-ov', 'now-ov', 'kiosk-ov', 'cas-explain', 'wx-ov', 'sky-ov', 'lc-ov', 'fov-ov', 'exp-ov', 'ac-ov', 'plan-ov', 'qrh-ov', 'trx-ov', 'tune-ov', 'sd-ov', 'sys-notices', 'trklist-ov', 'journal-ov', 'scope-ov'];
+    var order = ['askbox-ov', 'radar-ov', 'prefs-ov', 'keys-ov', 'verify-ov', 'vfysweep-ov', 'aladin-ov', 'sphere-ov', 'palette-ov', 'session-ov', 'sim-ov', 'anom-ov', 'team-ov', 'alerts-ov', 'lock-ov', 'radial-ov', 'gauge-ov', 'now-ov', 'kiosk-ov', 'cas-explain', 'wx-ov', 'sky-ov', 'lc-ov', 'fov-ov', 'exp-ov', 'ac-ov', 'plan-ov', 'qrh-ov', 'trx-ov', 'tune-ov', 'sd-ov', 'sys-notices', 'trklist-ov', 'journal-ov', 'scope-ov'];
     for (var i = 0; i < order.length; i++) {
       var el = document.getElementById(order[i]);
       if (!el) continue;
@@ -7795,7 +7913,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     var _hist = [];
     try { _hist = JSON.parse(sessionStorage.getItem('ds-cdu-hist') || '[]'); } catch(e) {}
     var _hIdx = _hist.length;
-    var _VOCAB = ['SCOPE', 'LOG', 'LIST', 'AR', 'NVG', 'RED', 'SYS', 'VOICE', 'EXPORT', 'IMPORT', 'DEBRIEF', 'QRH', 'TRX', 'PLAN', 'MFD', 'SHARE', 'TUNE', 'AOS', 'MAP', 'NEWS', 'REPORT', 'BLINK', 'SRC', 'TRK', 'FIND', 'WX', 'SKY', 'FOV', 'LC', 'BORTLE', 'KIOSK', 'ASK', 'JARVIS', 'BRIEF', 'LOCK', 'NOW', 'GAUGE', 'MIC', 'SESSION', 'CMD', 'SIMILAR', 'PLAN', 'ALERTS', 'ANOMALY', 'ML', 'SPHERE', '3D', 'TEAM', 'CONSENSUS', 'ALADIN', 'ATLAS', 'SPECTRUM', 'WATERFALL', 'RADAR', 'PREFS', 'KEYS'];
+    var _VOCAB = ['SCOPE', 'LOG', 'LIST', 'AR', 'NVG', 'RED', 'SYS', 'VOICE', 'EXPORT', 'IMPORT', 'DEBRIEF', 'QRH', 'TRX', 'PLAN', 'MFD', 'SHARE', 'TUNE', 'AOS', 'MAP', 'NEWS', 'REPORT', 'BLINK', 'SRC', 'TRK', 'FIND', 'WX', 'SKY', 'FOV', 'LC', 'BORTLE', 'KIOSK', 'ASK', 'JARVIS', 'BRIEF', 'LOCK', 'NOW', 'GAUGE', 'MIC', 'SESSION', 'CMD', 'SIMILAR', 'PLAN', 'ALERTS', 'ANOMALY', 'ML', 'SPHERE', '3D', 'TEAM', 'CONSENSUS', 'ALADIN', 'ATLAS', 'SPECTRUM', 'WATERFALL', 'RADAR', 'PREFS', 'KEYS', 'VERIFY', 'RFI', 'SWEEP'];
     inp.addEventListener('keydown', function(ev){
       ev.stopPropagation();
       if (ev.key === 'Escape') { ov.remove(); return; }
@@ -7874,6 +7992,15 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       var lb5 = document.querySelector('#result-card .btn-lc');
       if (lb5) { lb5.click(); return; }
       return op('LC — SELECT A TARGET FIRST (TAP A SCOPE BLIP OR RUN A SEARCH)');
+    }
+    if (verb === 'RFI' || verb === 'SWEEP') { window._vfySweepOpen(); return; }
+    if (verb === 'VERIFY') {
+      var _vft = arg && window._resolveTarget ? window._resolveTarget(arg) : null;
+      if (_vft) return window._verifyOpen(_vft.name);
+      if (_scopeSel && _scopeSel.name) return window._verifyOpen(_scopeSel.name);
+      var _vfn = document.querySelector('#result-card .result-name');
+      if (_vfn) return window._verifyOpen(_vfn.textContent.trim());
+      return window._vfySweepOpen();
     }
     if (verb === 'SPECTRUM' || verb === 'WATERFALL') {
       var _spt = arg && window._resolveTarget ? window._resolveTarget(arg) : null;
@@ -8599,6 +8726,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       return done('Active meteor showers: ' + names.join(', ') + '. Radiants are marked on the tactical scope.');
     }
 
+    var _vs = window._askVerifySweep(low); if (_vs) return done(_vs);
     var _kt = _askKnowledge(low); if (_kt) return done(_kt);
     var _ac = _askActionChain(q, low); if (_ac) return done(_ac);
     if (/(plan my night|plan tonight|\bplan\b|schedule|itinerary|排.{0,3}(觀測|今晚|夜)|規劃|觀測序|排程)/.test(low)) { var _pt = _askPlanText(); try { if (window._thPlan) window._thPlan(); } catch(e) {} return done(_pt); }
@@ -8607,6 +8735,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     var tgt = _resolveTarget(q);
     if (!tgt && /\b(it|its|that|this one|the target)\b|它|牠|他|她|這個|那個/.test(low) && _ctx.entity) tgt = _ctx.entity;
     if (tgt) _ctx.entity = tgt;
+    var _vf = window._askVerifyText(low, tgt); if (_vf) return done(_vf);
     var _an = window._askAnomalyText(low, tgt); if (_an) return done(_an);
     if (/(why|explain|reason|為什麼|為何|解釋|說明)/.test(low) && tgt) return done(_askExplainText(tgt));
     if (/(similar|like this|comparable|類似|相似)/.test(low) && tgt) { window._similarOpen(tgt.name); return done('Finding candidates similar to ' + tgt.name + '.'); }
@@ -8800,7 +8929,8 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       { ic: '📄', lb: 'LIT', fn: function(){ if (typeof litOpen === 'function') litOpen(t.name, ''); } },
       { ic: '≈', lb: 'SIMILAR', fn: function(){ if (window._similarOpen) window._similarOpen(t.name); } },
       { ic: '🔭', lb: 'ATLAS', fn: function(){ if (window._aladinOpen && t.ra != null) { var _sv = null; try { if (typeof skySurvey === 'function') _sv = skySurvey(+t.dec).aladin; } catch(e) {} window._aladinOpen(t.name, t.ra, t.dec, _sv); } } },
-      { ic: '≋', lb: 'SPECTRUM', fn: function(){ if (window._spectrumOpen) window._spectrumOpen(t.name); } }
+      { ic: '≋', lb: 'SPECTRUM', fn: function(){ if (window._spectrumOpen) window._spectrumOpen(t.name); } },
+      { ic: '✓', lb: 'VERIFY', fn: function(){ if (window._verifyOpen) window._verifyOpen(t.name); } }
     ];
     var cx = Math.max(72, Math.min(window.innerWidth - 72, x)), cy = Math.max(96, Math.min(window.innerHeight - 72, y));
     var html = '<div class="rad-center" style="left:' + cx + 'px;top:' + cy + 'px"></div>', R = 66;
@@ -9040,6 +9170,335 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
   /* schema-agnostic catalog access: the Search page has `catalog` (rows with
      target_name / candidacy_score / tier / snr …), the Gallery has `CANDIDATES`
      (name / score / methods / reasons). These accessors normalise both. */
+  /* ══ NAVCON PRO-18: candidate verification suite ═══════════════════════
+        Most SETI candidates die on RFI, and this catalog never had a
+        due-diligence pass. Three offline falsification engines — spectrum
+        allocation, drift plausibility, sky-frequency coincidence — plus the
+        energetics the literature actually reports. Pure JS, no network. */
+
+  function _rRa(r){ return r && r.ra_deg != null ? +r.ra_deg : (r && r.ra != null ? +r.ra : null); }
+  function _rDec(r){ return r && r.dec_deg != null ? +r.dec_deg : (r && r.dec != null ? +r.dec : null); }
+
+  /* 1) SPECTRUM ALLOCATION — real terrestrial services, MHz. The 'prot' rows are
+        radio-astronomy allocations where terrestrial transmitters are excluded,
+        so a detection inside one is MORE credible, not less. */
+  var _VFY_BANDS = [
+    [88, 108, 'FM broadcast', 'rfi'], [470, 698, 'TV UHF', 'rfi'],
+    [698, 960, 'Cellular LTE (low band)', 'rfi'], [902, 928, 'ISM 915 MHz / IoT', 'rfi'],
+    [960, 1215, 'Aviation DME / secondary radar', 'rfi'], [1164, 1189, 'GPS L5', 'rfi'],
+    [1215, 1240, 'GPS L2', 'rfi'], [1260, 1300, 'Galileo E6', 'rfi'],
+    [1400, 1427, 'Radio astronomy - neutral hydrogen (HI)', 'prot'],
+    [1525, 1559, 'Inmarsat downlink', 'rfi'], [1559, 1591, 'GPS L1 / Galileo E1', 'rfi'],
+    [1591, 1610, 'GLONASS L1', 'rfi'], [1610.6, 1613.8, 'Radio astronomy - OH line', 'prot'],
+    [1616, 1626.5, 'Iridium downlink', 'rfi'], [1626.5, 1660.5, 'Mobile satellite uplink', 'rfi'],
+    [1660, 1670, 'Radio astronomy - OH lines', 'prot'], [1670, 1710, 'Meteorological satellite', 'rfi'],
+    [1710, 2170, 'Cellular / LTE (mid band)', 'rfi'], [2400, 2500, 'ISM 2.4 GHz - WiFi / Bluetooth', 'rfi'],
+    [2700, 2900, 'Air-traffic surveillance radar', 'rfi'], [3700, 4200, 'C-band satellite downlink', 'rfi'],
+    [4990, 5000, 'Radio astronomy (protected)', 'prot'], [5600, 5650, 'Weather / marine radar', 'rfi'],
+    [5725, 5875, 'ISM 5.8 GHz WiFi', 'rfi'], [10700, 12700, 'Ku-band satellite downlink (Starlink)', 'rfi']
+  ];
+  function _vfyBand(f){
+    if (!(f > 0)) return null;
+    for (var i = 0; i < _VFY_BANDS.length; i++) {
+      var b = _VFY_BANDS[i];
+      if (f >= b[0] && f <= b[1]) return { lo: b[0], hi: b[1], name: b[2], kind: b[3] };
+    }
+    return null;
+  }
+
+  /* 2) DRIFT PLAUSIBILITY. Earth rotation alone imposes about 0.16 Hz/s at
+        1.4 GHz on ANY fixed celestial signal, scaling with frequency, so a
+        topocentric drift of ~0 means the emitter moves WITH the telescope —
+        the classic local-RFI signature. Sheikh et al. 2019 take ~4 Hz/s at
+        1.4 GHz as a generous bound for plausible planetary motion. */
+  function _vfyDrift(f, drift){
+    if (!(f > 0) || drift == null || isNaN(+drift)) return null;
+    var earth = 0.16 * f / 1400, maxp = 4 * f / 1400, a = Math.abs(+drift);
+    return { drift: +drift, abs: a, earth: earth, max: maxp,
+             state: a < 0.1 * earth ? 'zero' : (a > maxp ? 'extreme' : 'ok') };
+  }
+
+  /* 3) SKY-FREQUENCY COINCIDENCE. One frequency appearing at many separated
+        sky positions cannot be a real source — a transmitter cannot be
+        everywhere at once, so that is the telescope environment. The converse,
+        the same target re-detected at the same frequency, is the strongest
+        evidence a SETI candidate can carry. */
+  function _vfySep(a, b){
+    var RD = Math.PI / 180;
+    var v = Math.sin(a.dec * RD) * Math.sin(b.dec * RD) +
+            Math.cos(a.dec * RD) * Math.cos(b.dec * RD) * Math.cos((a.ra - b.ra) * RD);
+    return Math.acos(Math.max(-1, Math.min(1, v))) / RD;
+  }
+  var _vfyCoinCache = null;
+  function _vfyCoinScan(){
+    if (_vfyCoinCache) return _vfyCoinCache;
+    var all = _catAll(), rows = [], i, j, k;
+    for (i = 0; i < all.length; i++) {
+      var d = _specData(all[i]); if (!d || !(d.freq > 0)) continue;
+      var ra = _rRa(all[i]), de = _rDec(all[i]); if (ra == null || de == null || isNaN(ra)) continue;
+      rows.push({ n: _rName(all[i]), f: d.freq, ra: ra, dec: de });
+    }
+    var out = {};
+    for (i = 0; i < rows.length; i++) {
+      var pos = [], rep = 0;
+      for (j = 0; j < rows.length; j++) {
+        if (Math.abs(rows[i].f - rows[j].f) > 1.0) continue;
+        if (_vfySep(rows[i], rows[j]) <= 1.0) { rep++; continue; }
+        var seen = false;
+        for (k = 0; k < pos.length; k++) if (_vfySep(pos[k], rows[j]) <= 1.0) { seen = true; break; }
+        if (!seen) pos.push(rows[j]);
+      }
+      var key = String(rows[i].n).toLowerCase(), e = { spread: pos.length + 1, repeats: rep };
+      if (!out[key] || e.spread > out[key].spread) out[key] = e;
+    }
+    if (rows.length) _vfyCoinCache = out;
+    return out;
+  }
+  function _vfyCoinFor(name){ return _vfyCoinScan()[String(name == null ? '' : name).toLowerCase()] || null; }
+
+  /* 4) ENERGETICS. Radiometer minimum detectable flux for a GBT-class dish,
+        turned into the EIRP a transmitter would need at a given distance —
+        the number SETI papers actually report. */
+  var _VFY_SEFD = 10e-26, _VFY_TOBS = 300, _VFY_NPOL = 2, _VFY_PC = 3.0857e16;
+  var _VFY_BENCH = [
+    ['Arecibo planetary radar', 2e13], ['total human power use', 1.8e13],
+    ['Kardashev I (all sunlight on Earth)', 1.7e17], ['Kardashev II (an entire star)', 3.8e26]
+  ];
+  function _vfyEirp(snr, bwMHz, distPc){
+    if (!(snr > 0) || !(bwMHz > 0) || !(distPc > 0)) return null;
+    var bwHz = bwMHz * 1e6;
+    var smin = snr * _VFY_SEFD / Math.sqrt(_VFY_NPOL * bwHz * _VFY_TOBS);
+    var d = distPc * _VFY_PC;
+    return 4 * Math.PI * d * d * smin * bwHz;
+  }
+  function _vfySci(x){
+    if (x == null || !isFinite(x)) return '—';
+    if (x === 0) return '0';
+    var e = Math.floor(Math.log(Math.abs(x)) / Math.LN10);
+    return (x / Math.pow(10, e)).toFixed(1) + 'e' + e;
+  }
+  function _vfyVs(w){
+    if (!(w > 0)) return '';
+    var best = _VFY_BENCH[0];
+    for (var i = 0; i < _VFY_BENCH.length; i++) if (w >= _VFY_BENCH[i][1] * 0.05) best = _VFY_BENCH[i];
+    var r = w / best[1];
+    return (r >= 1 ? r.toFixed(r < 10 ? 1 : 0) + 'x ' : (r * 100).toFixed(0) + '% of ') + best[0];
+  }
+
+  /* 5) VERDICT — fails kill a candidate, warns need review, credits support it. */
+  function _vfyVerdict(row){
+    var name = _rName(row), d = _specData(row);
+    var o = { name: name, data: d, level: 'N/A', fails: [], warns: [], credits: [], band: null, drift: null, coin: null };
+    if (!d || !(d.freq > 0)) return o;
+    o.band = _vfyBand(d.freq); o.drift = _vfyDrift(d.freq, d.drift); o.coin = _vfyCoinFor(name);
+    if (o.band && o.band.kind === 'rfi')
+      o.fails.push('Centre frequency sits inside ' + o.band.name + ' (' + o.band.lo + '-' + o.band.hi + ' MHz), an allocated terrestrial service.');
+    if (o.band && o.band.kind === 'prot')
+      o.credits.push('Inside ' + o.band.name + ' (' + o.band.lo + '-' + o.band.hi + ' MHz), a protected allocation where terrestrial transmitters are excluded.');
+    if (o.drift && o.drift.state === 'zero')
+      o.fails.push('No topocentric drift (' + o.drift.drift.toFixed(4) + ' Hz/s). Earth rotation alone would impose about ' + o.drift.earth.toFixed(3) + ' Hz/s at this frequency, so a genuinely distant source cannot sit still — this one tracks the telescope.');
+    if (o.drift && o.drift.state === 'extreme')
+      o.warns.push('Drift ' + o.drift.drift.toFixed(3) + ' Hz/s exceeds the plausible planetary bound of about ' + o.drift.max.toFixed(2) + ' Hz/s at this frequency.');
+    if (o.coin && o.coin.spread >= 3)
+      o.fails.push('This frequency appears at ' + o.coin.spread + ' separated sky positions. A transmitter cannot be in several places at once — that is the local environment.');
+    else if (o.coin && o.coin.spread === 2)
+      o.warns.push('This frequency also appears at one other sky position more than a degree away.');
+    if (o.coin && o.coin.repeats >= 2)
+      o.credits.push('Re-detected ' + o.coin.repeats + ' times at this position and frequency — repeatability is the strongest evidence a candidate can carry.');
+    o.level = o.fails.length ? 'FAIL' : (o.warns.length ? 'SUSPECT' : 'PASS');
+    return o;
+  }
+  window._vfyVerdict = _vfyVerdict; window._vfyBand = _vfyBand;
+  window._vfyDrift = _vfyDrift; window._vfyEirp = _vfyEirp; window._vfyCoinScan = _vfyCoinScan;
+
+  /* A candidate name can carry several detections. Each is falsified on its own,
+     then the target is reported by its strongest SURVIVING detection — one bad
+     detection does not condemn a target that still has clean ones. */
+  function _vfyTarget(name){
+    var all = _catAll(), nl = String(name == null ? '' : name).toLowerCase(), vs = [], i;
+    for (i = 0; i < all.length; i++) {
+      if (_rName(all[i]).toLowerCase() !== nl) continue;
+      var d = _specData(all[i]);
+      if (d && d.freq > 0) vs.push(_vfyVerdict(all[i]));
+    }
+    if (!vs.length) return { name: name, level: 'N/A', vs: [], nFail: 0, nTotal: 0, best: null };
+    var ord = { PASS: 0, SUSPECT: 1, FAIL: 2 }, best = vs[0], nFail = 0;
+    for (i = 0; i < vs.length; i++) {
+      if (vs[i].level === 'FAIL') nFail++;
+      if (ord[vs[i].level] < ord[best.level]) best = vs[i];
+    }
+    return { name: name, level: best.level, vs: vs, nFail: nFail, nTotal: vs.length, best: best };
+  }
+  window._vfyTarget = _vfyTarget;
+
+  function _vfyEsc(s){ return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+
+  function _verifyOpen(arg){
+    var nm = (arg && typeof arg === 'object') ? _rName(arg) : String(arg == null ? '' : arg);
+    var row = (arg && typeof arg === 'object') ? arg : _catRow(nm);
+    if (!row) { op('VERIFY — NO SUCH CANDIDATE'); return; }
+    var t = _vfyTarget(nm);
+    var v = t.best || _vfyVerdict(row), d = v.data, h = '';
+    var cls = v.level === 'FAIL' ? 'vfy-fail' : (v.level === 'SUSPECT' ? 'vfy-warn' : (v.level === 'PASS' ? 'vfy-pass' : 'vfy-na'));
+    var head = v.level === 'FAIL' ? '✕ FAILS FALSIFICATION' : (v.level === 'SUSPECT' ? '⚠ NEEDS REVIEW' : (v.level === 'PASS' ? '✓ SURVIVES FALSIFICATION' : '— NO RADIO MEASUREMENT'));
+    h += '<div class="vfy-ban ' + cls + '">' + head + '</div>';
+    if (t.nTotal > 1)
+      h += '<div class="vfy-note" style="margin-bottom:10px">' + t.nTotal + ' radio detections at this target — ' +
+        (t.nTotal - t.nFail) + ' survive, ' + t.nFail + ' fail. Each is falsified separately; the strongest surviving one is shown here, and the target is only written off when every detection fails.</div>';
+
+    if (!d || !(d.freq > 0)) {
+      h += '<div class="vfy-note">This candidate carries no radio frequency, so the spectrum, drift and coincidence tests do not apply. It was flagged by a non-radio method (infrared excess, light curve, proper motion, and so on) and has to be judged on that evidence instead.</div>';
+      _p3Overlay('verify-ov', '◎ VERIFY — ' + _vfyEsc(v.name), h);
+      return;
+    }
+
+    h += '<div class="vfy-sec"><div class="vfy-h">1 · SPECTRUM ALLOCATION</div>' +
+      '<div class="vfy-num"><span>centre <b>' + d.freq.toFixed(4) + ' MHz</b></span>' +
+      (d.bw > 0 ? '<span>bandwidth <b>' + (d.bw * 1000).toFixed(2) + ' kHz</b></span>' : '') + '</div>' +
+      (v.band
+        ? '<div class="vfy-note ' + (v.band.kind === 'rfi' ? 'bad' : 'good') + '">' + (v.band.kind === 'rfi' ? '✕ ' : '✓ ') + _vfyEsc(v.band.name) + ' (' + v.band.lo + '-' + v.band.hi + ' MHz). ' + (v.band.kind === 'rfi' ? 'A transmitter of this service is a far more economical explanation than a distant civilisation.' : 'Terrestrial transmitters are excluded from this allocation, which makes an artificial local origin less likely.') + '</div>'
+        : '<div class="vfy-note">No known terrestrial allocation at this frequency — nothing here argues for a local origin.</div>') +
+      '</div>';
+
+    if (v.drift) {
+      h += '<div class="vfy-sec"><div class="vfy-h">2 · DRIFT PLAUSIBILITY</div>' +
+        '<div class="vfy-num"><span>measured <b>' + v.drift.drift.toFixed(4) + ' Hz/s</b></span>' +
+        '<span>Earth floor <b>' + v.drift.earth.toFixed(3) + '</b></span>' +
+        '<span>plausible max <b>' + v.drift.max.toFixed(2) + '</b></span></div>' +
+        '<div class="vfy-note ' + (v.drift.state === 'ok' ? 'good' : 'bad') + '">' +
+        (v.drift.state === 'zero'
+          ? '✕ Effectively no drift. Earth rotation alone would smear a fixed celestial signal by about ' + v.drift.earth.toFixed(3) + ' Hz/s here, so a source that does not drift is moving with the dish — local interference.'
+          : v.drift.state === 'extreme'
+            ? '⚠ The drift is larger than any plausible planetary motion at this frequency, which usually means a chirping local emitter rather than a transmitter on a world.'
+            : '✓ The drift sits between the floor set by Earth rotation and the bound set by plausible planetary motion — consistent with a transmitter on a moving body far away.') +
+        '</div></div>';
+    }
+
+    if (v.coin) {
+      h += '<div class="vfy-sec"><div class="vfy-h">3 · SKY COINCIDENCE</div>' +
+        '<div class="vfy-num"><span>sky positions on this frequency <b>' + v.coin.spread + '</b></span>' +
+        '<span>detections here <b>' + v.coin.repeats + '</b></span></div>' +
+        '<div class="vfy-note ' + (v.coin.spread >= 3 ? 'bad' : (v.coin.repeats >= 2 ? 'good' : '')) + '">' +
+        (v.coin.spread >= 3
+          ? '✕ The same frequency turns up across ' + v.coin.spread + ' separated pointings. Nothing outside the solar system can illuminate that many directions at once.'
+          : v.coin.repeats >= 2
+            ? '✓ Seen ' + v.coin.repeats + ' times at this position and frequency. Repeatability at a fixed sky position is exactly what a real signal should do and interference rarely does.'
+            : 'Only this pointing carries the frequency, and it was seen once — no contamination, but no repeat to lean on either.') +
+        '</div></div>';
+    }
+
+    var dists = [1, 10, 100, 1000], rowsH = '';
+    for (var i = 0; i < dists.length; i++) {
+      var w = _vfyEirp(d.snr, d.bw, dists[i]);
+      rowsH += '<tr><td>at ' + dists[i] + ' pc</td><td>' + _vfySci(w) + ' W</td><td>' + _vfyEsc(_vfyVs(w)) + '</td></tr>';
+    }
+    h += '<div class="vfy-sec"><div class="vfy-h">4 · ENERGETICS — WHAT TRANSMITTER WOULD THIS NEED?</div>' +
+      '<table class="vfy-tbl">' + rowsH + '</table>' +
+      '<div class="vfy-note" style="margin-top:6px">Isotropic radiated power required to produce this signal-to-noise on a GBT-class dish, at each assumed distance. Real distance is usually known for named stars; the ladder shows how fast the requirement grows, and where it stops being buildable.</div></div>';
+
+    var bl = v.level === 'FAIL'
+      ? 'Bottom line: this one is almost certainly the local sky, not a civilisation. Worth keeping in the catalogue as a record, not as a candidate.'
+      : v.level === 'SUSPECT'
+        ? 'Bottom line: nothing here is disqualifying, but at least one property is odd enough to want a second observation before taking it seriously.'
+        : 'Bottom line: it survives every check available offline. That is not a detection — it means the cheap explanations have been used up and the next step is a real re-observation.';
+    h += '<div class="vfy-sec"><div class="vfy-note">' + bl + '</div></div>';
+    _p3Overlay('verify-ov', '◎ VERIFY — ' + _vfyEsc(v.name), h);
+  }
+  window._verifyOpen = _verifyOpen;
+
+  /* catalog-wide falsification sweep */
+  function _vfyScanAll(){
+    var all = _catAll(), seen = {}, out = [];
+    for (var i = 0; i < all.length; i++) {
+      var nm = _rName(all[i]), key = String(nm).toLowerCase();
+      if (seen[key]) continue;
+      seen[key] = 1;
+      var t = _vfyTarget(nm);
+      if (t.level !== 'N/A') out.push(t);
+    }
+    var ord = { FAIL: 0, SUSPECT: 1, PASS: 2 };
+    out.sort(function(a, b){ return ord[a.level] - ord[b.level] || String(a.name).localeCompare(String(b.name)); });
+    return out;
+  }
+  window._vfyScanAll = _vfyScanAll;
+
+  function _vfySweepOpen(){
+    var v = _vfyScanAll();
+    if (!v.length) { op('VERIFY — NO RADIO CANDIDATES TO TEST'); return; }
+    var nf = 0, nw = 0, np = 0, i;
+    for (i = 0; i < v.length; i++) { if (v[i].level === 'FAIL') nf++; else if (v[i].level === 'SUSPECT') nw++; else np++; }
+    var h = '<div class="vfy-note" style="margin-bottom:10px">' + v.length + ' targets carry a radio measurement and can be falsified offline. <span style="color:#f97316">' + nf + ' fail on every detection</span>, <span style="color:#f59e0b">' + nw + ' need review</span>, <span style="color:#10b981">' + np + ' keep at least one clean detection</span>. Most SETI candidates are supposed to die here — that is the point of the test.</div>';
+    for (i = 0; i < v.length; i++) {
+      var col = v[i].level === 'FAIL' ? '#f97316' : (v[i].level === 'SUSPECT' ? '#f59e0b' : '#10b981');
+      var bst = v[i].best || { fails: [], warns: [], credits: [] };
+      var why = (v[i].nTotal > 1 ? v[i].nFail + ' of ' + v[i].nTotal + ' detections fail. ' : '') +
+        (bst.fails.length ? bst.fails[0] : (bst.warns.length ? bst.warns[0] : (bst.credits.length ? bst.credits[0] : 'no disqualifying property found')));
+      h += '<div class="vfy-row" data-vfy="' + _vfyEsc(v[i].name).replace(/"/g, '&quot;') + '" title="' + _vfyEsc(why).replace(/"/g, '&quot;') + '">' +
+        '<span class="vr-n">' + _vfyEsc(v[i].name) + '</span>' +
+        '<span class="vr-v" style="color:' + col + '">' + v[i].level + '</span></div>';
+    }
+    var ov = _p3Overlay('vfysweep-ov', '◎ FALSIFICATION SWEEP', h);
+    if (ov) ov.addEventListener('click', function(ev){
+      var r = ev.target.closest ? ev.target.closest('[data-vfy]') : null;
+      if (r) { ov.remove(); _verifyOpen(r.getAttribute('data-vfy')); }
+    });
+    op('FALSIFICATION SWEEP — ' + nf + ' OF ' + v.length + ' FAIL');
+  }
+  window._vfySweepOpen = _vfySweepOpen;
+
+  /* JARVIS: falsification questions. Runs ahead of the generic explain intent so
+     "why is X interference" lands here rather than on the score explanation. */
+  /* listing form only — "show me the rfi", "which candidates are interference".
+     A bare "what is rfi" is a definition and deliberately falls through to the
+     PRO-8 glossary instead. */
+  window._askVerifySweep = function(low){
+    var listing = /(show|list|which|any|sweep|run the|open the|哪些|列出|跑一下)/.test(low) &&
+                  /(rfi|interference|falsif|verification|干擾|驗證|證偽)/.test(low);
+    if (!listing) return null;
+    var all = _vfyScanAll(), nf = 0;
+    for (var i = 0; i < all.length; i++) if (all[i].level === 'FAIL') nf++;
+    if (!all.length) return 'No candidate here carries a radio measurement, so there is nothing to falsify.';
+    _vfySweepOpen();
+    return nf + ' of ' + all.length + ' testable targets fail falsification. Opening the sweep.';
+  };
+
+  window._askVerifyText = function(low, tgt){
+    if (!tgt) return null;
+    if (!/(verify|falsif|rfi|interference|real|genuine|trustworthy|驗證|證偽|干擾|是真的|可信)/.test(low)) return null;
+    var t = _vfyTarget(tgt.name);
+    if (t.level === 'N/A') return tgt.name + ' has no radio measurement, so the interference tests do not apply to it.';
+    var bst = t.best || { fails: [], warns: [], credits: [] };
+    _verifyOpen(tgt.name);
+    var many = t.nTotal > 1 ? ' ' + t.nFail + ' of its ' + t.nTotal + ' detections fail.' : '';
+    if (t.level === 'FAIL') return tgt.name + ' fails falsification on every detection. ' + (bst.fails[0] || '');
+    if (t.level === 'SUSPECT') return tgt.name + ' is not disqualified, but it needs review. ' + (bst.warns[0] || '') + many;
+    return tgt.name + ' keeps at least one detection that survives every offline check.' + many + ' ' +
+      (bst.credits.length ? bst.credits[0] : 'No known terrestrial allocation, and the drift is physically plausible.');
+  };
+
+  /* badge the cards that fail falsification */
+  (function(){
+    setTimeout(function(){
+      try {
+        var v = _vfyScanAll(); if (!v.length) return;
+        var by = {}; for (var i = 0; i < v.length; i++) by[String(v[i].name).toLowerCase()] = v[i];
+        var cards = document.querySelectorAll('.card'), n = 0;
+        for (var c = 0; c < cards.length; c++) {
+          var nm = cards[c].querySelector('.card-name'), sc = cards[c].querySelector('.card-score');
+          if (!nm || !sc || sc.querySelector('.vfy-chip')) continue;
+          var e = by[nm.textContent.trim().toLowerCase()];
+          if (!e || (e.level !== 'FAIL' && e.level !== 'SUSPECT')) continue;
+          var eb = e.best || { fails: [], warns: [] };
+          var why = (e.nTotal > 1 ? e.nFail + ' of ' + e.nTotal + ' detections fail. ' : '') +
+            (eb.fails.length ? eb.fails[0] : (eb.warns.length ? eb.warns[0] : ''));
+          sc.insertAdjacentHTML('beforeend', ' <span class="vfy-chip' + (e.level === 'SUSPECT' ? ' vc-warn' : '') + '" title="' + _vfyEsc(why).replace(/"/g, '&quot;') + '">' + (e.level === 'FAIL' ? '⚠ RFI' : '⚠ REVIEW') + '</span>');
+          n++;
+        }
+        if (n) op('FALSIFICATION — ' + n + ' CANDIDATES FLAGGED');
+      } catch(e) {}
+    }, 1500);
+  })();
+
   function _catAll(){
     try { if (typeof CANDIDATES !== 'undefined' && CANDIDATES && CANDIDATES.length) return CANDIDATES; } catch(e) {}
     try { if (typeof catalog !== 'undefined' && catalog && catalog.length) return catalog; } catch(e) {}
