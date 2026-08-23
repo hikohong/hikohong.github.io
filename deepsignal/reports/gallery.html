@@ -652,6 +652,12 @@ html.red body>*{filter:grayscale(1) sepia(1) saturate(5) hue-rotate(-35deg) brig
 .th-sys{color:#5a9a72}
 .th-sep{color:#3a5a4a}
 .th-name{font-family:monospace;font-size:.7rem;color:#eef3f8;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.th-row[data-jump]{cursor:pointer;border-radius:5px;transition:background 120ms}
+.th-row[data-jump]:hover{background:rgba(63,224,143,.07)}
+.th-row[data-jump]:hover .th-name{color:#3fe08f;text-decoration:underline}
+.card.cardjump{animation:cardJump 1.6s ease-out}
+@keyframes cardJump{0%{box-shadow:0 0 0 0 rgba(63,224,143,.7)}100%{box-shadow:0 0 0 16px rgba(63,224,143,0)}}
+@media (prefers-reduced-motion:reduce){.card.cardjump{animation:none}}
 .th-up{font-family:monospace;font-size:.6rem;color:#3fe08f;white-space:nowrap}
 .th-dn{font-family:monospace;font-size:.6rem;color:#f97316;white-space:nowrap}
 .th-cur{font-family:monospace;font-size:.55rem;color:#3fe08f;letter-spacing:.1em;animation:hud-blink 2s infinite;white-space:nowrap}
@@ -1194,7 +1200,7 @@ window._svBlink = function(btn){
 <div id="sky-tooltip-map"></div>
 <div class="gallery-hdr">
 <h1>DeepSignal — Sky Image Gallery</h1>
-<div class="subtitle">Generated <span id="gen-ts">2026-07-30 22:03 UTC</span> &nbsp;·&nbsp; 96 targets &nbsp;·&nbsp; 0 sky images via Hips2Fits CDN</div>
+<div class="subtitle">Generated <span id="gen-ts">2026-08-23 04:42 UTC</span> &nbsp;·&nbsp; 96 targets &nbsp;·&nbsp; 0 sky images via Hips2Fits CDN</div>
 <div class="stats">
   <div class="stat"><div class="stat-n" style="color:#f59e0b">3</div><div class="stat-l">Tier 1 ≥70</div></div>
   <div class="stat"><div class="stat-n" style="color:#60a5fa">1</div><div class="stat-l">Tier 2 50–69</div></div>
@@ -1228,7 +1234,7 @@ window._svBlink = function(btn){
 </div>
 <div style="padding:0 24px 8px;display:flex;justify-content:flex-end"><button class="trk-bell" style="width:auto" onclick="_tuneToggle()" title="Re-rank all candidates with your own weights">⚖ TUNE — CUSTOM RE-RANK</button></div>
 <div id="grid" class="grid" style="padding:0 24px 24px">
-    <div class="card" id="card-1" data-tier="1" data-methods="zscore+doppler_drift+optical_laser_pulse" data-dtypes="" data-score="100">
+    <div class="card" id="card-1" data-cname="Tau Ceti" data-tier="1" data-methods="zscore+doppler_drift+optical_laser_pulse" data-dtypes="" data-score="100">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=26.01700+-15.93750&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#f59e0b;color:#000">Tier 1 · 100</span>
@@ -1259,7 +1265,7 @@ window._svBlink = function(btn){
       </div>
       <div class="card-detections"><div class="detection-row"><span class="d-method">zscore</span><span class="d-dtype"></span><span class="d-score">100</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">65</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">95</span></div><div class="detection-row"><span class="d-method">optical_laser_pulse</span><span class="d-dtype"></span><span class="d-score">40</span></div></div>
     </div>
-    <div class="card" id="card-2" data-tier="2" data-methods="zscore+doppler_drift" data-dtypes="" data-score="60">
+    <div class="card" id="card-2" data-cname="G 9-40" data-tier="2" data-methods="zscore+doppler_drift" data-dtypes="" data-score="60">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=134.71885+21.07480&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#3b82f6;color:#000">Tier 2 · 60</span>
@@ -1290,7 +1296,7 @@ window._svBlink = function(btn){
       </div>
       <div class="card-detections"><div class="detection-row"><span class="d-method">zscore</span><span class="d-dtype"></span><span class="d-score">60</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div></div>
     </div>
-    <div class="card" id="card-3" data-tier="1" data-methods="doppler_drift+optical_laser_pulse" data-dtypes="" data-score="100">
+    <div class="card" id="card-3" data-cname="Proxima Centauri" data-tier="1" data-methods="doppler_drift+optical_laser_pulse" data-dtypes="" data-score="100">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=217.42880+-62.67930&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#f59e0b;color:#000">Tier 1 · 100</span>
@@ -1321,7 +1327,7 @@ window._svBlink = function(btn){
       </div>
       <div class="card-detections"><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">100</span></div><div class="detection-row"><span class="d-method">optical_laser_pulse</span><span class="d-dtype"></span><span class="d-score">40</span></div></div>
     </div>
-    <div class="card" id="card-4" data-tier="1" data-methods="doppler_drift+optical_laser_pulse" data-dtypes="" data-score="95">
+    <div class="card" id="card-4" data-cname="Epsilon Eridani" data-tier="1" data-methods="doppler_drift+optical_laser_pulse" data-dtypes="" data-score="95">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=53.23270+-9.45820&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#f59e0b;color:#000">Tier 1 · 95</span>
@@ -1352,7 +1358,7 @@ window._svBlink = function(btn){
       </div>
       <div class="card-detections"><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">95</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">optical_laser_pulse</span><span class="d-dtype"></span><span class="d-score">40</span></div></div>
     </div>
-    <div class="card" id="card-5" data-tier="3" data-methods="doppler_drift" data-dtypes="" data-score="40">
+    <div class="card" id="card-5" data-cname="Gliese 667C" data-tier="3" data-methods="doppler_drift" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=259.74880+-34.99770&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -1383,7 +1389,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-6" data-tier="3" data-methods="doppler_drift" data-dtypes="" data-score="40">
+    <div class="card" id="card-6" data-cname="HD 40307" data-tier="3" data-methods="doppler_drift" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=89.33600+-60.01610&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -1414,7 +1420,7 @@ window._svBlink = function(btn){
       </div>
       <div class="card-detections"><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div></div>
     </div>
-    <div class="card" id="card-7" data-tier="3" data-methods="doppler_drift+optical_laser_pulse" data-dtypes="" data-score="40">
+    <div class="card" id="card-7" data-cname="Vega" data-tier="3" data-methods="doppler_drift+optical_laser_pulse" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=279.23470+38.78370&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -1445,7 +1451,7 @@ window._svBlink = function(btn){
       </div>
       <div class="card-detections"><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">optical_laser_pulse</span><span class="d-dtype"></span><span class="d-score">40</span></div></div>
     </div>
-    <div class="card" id="card-8" data-tier="3" data-methods="doppler_drift+optical_laser_pulse" data-dtypes="" data-score="40">
+    <div class="card" id="card-8" data-cname="61 Cygni A" data-tier="3" data-methods="doppler_drift+optical_laser_pulse" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=316.72820+38.74880&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -1476,7 +1482,7 @@ window._svBlink = function(btn){
       </div>
       <div class="card-detections"><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">optical_laser_pulse</span><span class="d-dtype"></span><span class="d-score">40</span></div></div>
     </div>
-    <div class="card" id="card-9" data-tier="3" data-methods="doppler_drift" data-dtypes="" data-score="40">
+    <div class="card" id="card-9" data-cname="Epsilon Indi A" data-tier="3" data-methods="doppler_drift" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=330.84000+-56.78670&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -1507,7 +1513,7 @@ window._svBlink = function(btn){
       </div>
       <div class="card-detections"><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div></div>
     </div>
-    <div class="card" id="card-10" data-tier="3" data-methods="doppler_drift" data-dtypes="" data-score="40">
+    <div class="card" id="card-10" data-cname="Fomalhaut" data-tier="3" data-methods="doppler_drift" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=344.41270+-29.62230&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -1538,7 +1544,7 @@ window._svBlink = function(btn){
       </div>
       <div class="card-detections"><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div></div>
     </div>
-    <div class="card" id="card-11" data-tier="3" data-methods="doppler_drift+optical_laser_pulse" data-dtypes="" data-score="40">
+    <div class="card" id="card-11" data-cname="Ross 128" data-tier="3" data-methods="doppler_drift+optical_laser_pulse" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=176.93510+0.80480&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -1569,7 +1575,7 @@ window._svBlink = function(btn){
       </div>
       <div class="card-detections"><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">optical_laser_pulse</span><span class="d-dtype"></span><span class="d-score">40</span></div></div>
     </div>
-    <div class="card" id="card-12" data-tier="3" data-methods="doppler_drift" data-dtypes="" data-score="40">
+    <div class="card" id="card-12" data-cname="HD 73344" data-tier="3" data-methods="doppler_drift" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=129.68945+23.68527&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -1600,7 +1606,7 @@ window._svBlink = function(btn){
       </div>
       <div class="card-detections"><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div></div>
     </div>
-    <div class="card" id="card-13" data-tier="3" data-methods="doppler_drift" data-dtypes="" data-score="40">
+    <div class="card" id="card-13" data-cname="Kepler-42" data-tier="3" data-methods="doppler_drift" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=292.21960+44.61737&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -1631,7 +1637,7 @@ window._svBlink = function(btn){
       </div>
       <div class="card-detections"><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div></div>
     </div>
-    <div class="card" id="card-14" data-tier="3" data-methods="doppler_drift" data-dtypes="" data-score="40">
+    <div class="card" id="card-14" data-cname="K2-151" data-tier="3" data-methods="doppler_drift" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=19.30477+9.50127&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -1662,7 +1668,7 @@ window._svBlink = function(btn){
       </div>
       <div class="card-detections"><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div></div>
     </div>
-    <div class="card" id="card-15" data-tier="3" data-methods="doppler_drift" data-dtypes="" data-score="40">
+    <div class="card" id="card-15" data-cname="K2-344" data-tier="3" data-methods="doppler_drift" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=136.36149+21.66859&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -1693,7 +1699,7 @@ window._svBlink = function(btn){
       </div>
       <div class="card-detections"><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div></div>
     </div>
-    <div class="card" id="card-16" data-tier="3" data-methods="doppler_drift" data-dtypes="" data-score="40">
+    <div class="card" id="card-16" data-cname="K2-209" data-tier="3" data-methods="doppler_drift" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=14.69035+1.38281&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -1724,7 +1730,7 @@ window._svBlink = function(btn){
       </div>
       <div class="card-detections"><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div><div class="detection-row"><span class="d-method">doppler_drift</span><span class="d-dtype"></span><span class="d-score">40</span></div></div>
     </div>
-    <div class="card" id="card-17" data-tier="3" data-methods="lightcurve_anomaly" data-dtypes="" data-score="40">
+    <div class="card" id="card-17" data-cname="TOI-700" data-tier="3" data-methods="lightcurve_anomaly" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=35.16110+-56.78670&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -1755,7 +1761,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-18" data-tier="3" data-methods="lightcurve_anomaly" data-dtypes="" data-score="40">
+    <div class="card" id="card-18" data-cname="TOI-216" data-tier="3" data-methods="lightcurve_anomaly" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=271.27160+-27.62740&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -1786,7 +1792,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-19" data-tier="3" data-methods="lightcurve_anomaly" data-dtypes="" data-score="40">
+    <div class="card" id="card-19" data-cname="SIM_STAR_0000" data-tier="3" data-methods="lightcurve_anomaly" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=311.32713+42.63630&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -1817,7 +1823,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-20" data-tier="3" data-methods="lightcurve_anomaly" data-dtypes="" data-score="40">
+    <div class="card" id="card-20" data-cname="SIM_STAR_0001" data-tier="3" data-methods="lightcurve_anomaly" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=94.12069+-50.73607&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -1848,7 +1854,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-21" data-tier="3" data-methods="lightcurve_anomaly" data-dtypes="" data-score="40">
+    <div class="card" id="card-21" data-cname="SIM_STAR_0002" data-tier="3" data-methods="lightcurve_anomaly" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=220.96501+-59.68431&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -1879,7 +1885,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-22" data-tier="3" data-methods="lightcurve_anomaly" data-dtypes="" data-score="40">
+    <div class="card" id="card-22" data-cname="SIM_STAR_0003" data-tier="3" data-methods="lightcurve_anomaly" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=354.52925+-25.64441&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -1910,7 +1916,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-23" data-tier="3" data-methods="lightcurve_anomaly" data-dtypes="" data-score="40">
+    <div class="card" id="card-23" data-cname="SIM_STAR_0006" data-tier="3" data-methods="lightcurve_anomaly" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=293.04235+-0.25591&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -1941,7 +1947,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-24" data-tier="3" data-methods="lightcurve_anomaly" data-dtypes="" data-score="40">
+    <div class="card" id="card-24" data-cname="SIM_STAR_0007" data-tier="3" data-methods="lightcurve_anomaly" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=279.60702+57.50739&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -1972,7 +1978,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-25" data-tier="3" data-methods="atmospheric_biosignature" data-dtypes="" data-score="40">
+    <div class="card" id="card-25" data-cname="LHS 1140b" data-tier="3" data-methods="atmospheric_biosignature" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=18.00180+-15.26700&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -2003,7 +2009,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-26" data-tier="3" data-methods="atmospheric_biosignature" data-dtypes="" data-score="40">
+    <div class="card" id="card-26" data-cname="HD 209458b" data-tier="3" data-methods="atmospheric_biosignature" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=330.79500+18.88400&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -2034,7 +2040,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-27" data-tier="3" data-methods="atmospheric_biosignature" data-dtypes="" data-score="40">
+    <div class="card" id="card-27" data-cname="TOI-SIM-0001" data-tier="3" data-methods="atmospheric_biosignature" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=77.37911+-13.70112&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -2065,7 +2071,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-28" data-tier="3" data-methods="interstellar_trajectory" data-dtypes="" data-score="40">
+    <div class="card" id="card-28" data-cname="1I/ʻOumuamua" data-tier="3" data-methods="interstellar_trajectory" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=23.45780+26.80110&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -2096,7 +2102,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-29" data-tier="3" data-methods="interstellar_trajectory" data-dtypes="" data-score="40">
+    <div class="card" id="card-29" data-cname="SIM_ISO_0001" data-tier="3" data-methods="interstellar_trajectory" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=65.56699+50.50768&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -2127,7 +2133,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-30" data-tier="3" data-methods="interstellar_trajectory" data-dtypes="" data-score="40">
+    <div class="card" id="card-30" data-cname="SIM_ISO_0002" data-tier="3" data-methods="interstellar_trajectory" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=7.32742+33.91411&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -2158,7 +2164,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-31" data-tier="3" data-methods="interstellar_trajectory" data-dtypes="" data-score="40">
+    <div class="card" id="card-31" data-cname="SIM_ISO_0004" data-tier="3" data-methods="interstellar_trajectory" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=219.63715+2.14377&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -2189,7 +2195,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-32" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-32" data-cname="J0251.6+0628" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=42.90050+6.47100&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -2220,7 +2226,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-33" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-33" data-cname="J0259.0+0552" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=44.75190+5.87800&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -2251,7 +2257,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-34" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-34" data-cname="J0412.6+2253c" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=63.15420+22.89320&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -2282,7 +2288,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-35" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-35" data-cname="J0337.5+2423c" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=54.39410+24.38360&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -2313,7 +2319,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-36" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-36" data-cname="J0327.3+2355c" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=51.84960+23.92630&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -2344,7 +2350,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-37" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-37" data-cname="J0230.3+1713" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=37.59760+17.22240&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -2375,7 +2381,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-38" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-38" data-cname="J0209.8+2626" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=32.46400+26.43350&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -2406,7 +2412,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-39" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-39" data-cname="J0314.2+2419" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=48.56400+24.32490&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -2437,7 +2443,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-40" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-40" data-cname="J0314.1+2827" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=48.54690+28.45220&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -2468,7 +2474,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-41" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-41" data-cname="J0311.3+2940" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=47.82960+29.67620&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -2499,7 +2505,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-42" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-42" data-cname="J0224.8+2937" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=36.21410+29.62920&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -2530,7 +2536,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-43" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-43" data-cname="J0300.4+3450" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=45.11760+34.84420&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -2561,7 +2567,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-44" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-44" data-cname="J0447.2+2446" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=71.80140+24.77010&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -2592,7 +2598,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-45" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-45" data-cname="J0441.8+2600c" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=70.47470+26.01480&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -2623,7 +2629,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-46" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-46" data-cname="J0448.3+2743" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=72.08630+27.72670&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -2654,7 +2660,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-47" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-47" data-cname="J0453.3+2843" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=73.33400+28.73040&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -2685,7 +2691,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-48" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-48" data-cname="J0443.9+2921" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=70.98330+29.36420&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -2716,7 +2722,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-49" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-49" data-cname="J0436.9+2915" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=69.24640+29.25650&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -2747,7 +2753,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-50" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-50" data-cname="J0409.2+2542" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=62.31440+25.70220&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -2778,7 +2784,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-51" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-51" data-cname="J0356.9+3013c" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=59.22790+30.22400&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -2809,7 +2815,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-52" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-52" data-cname="J0424.8+3117" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=66.20960+31.28630&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -2840,7 +2846,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-53" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-53" data-cname="J0435.5+3232" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=68.87550+32.54920&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -2871,7 +2877,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-54" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-54" data-cname="J0431.0+3529c" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=67.76500+35.49490&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -2902,7 +2908,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-55" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-55" data-cname="J0442.8+3609" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=70.71030+36.16400&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -2933,7 +2939,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-56" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-56" data-cname="J0427.9+3632c" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=66.98130+36.53390&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -2964,7 +2970,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-57" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-57" data-cname="J0535.0+3615c" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=83.76840+36.25730&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -2995,7 +3001,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-58" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-58" data-cname="J0534.0+3746c" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=83.51390+37.77130&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -3026,7 +3032,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-59" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-59" data-cname="J0501.7+4459" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=75.43940+44.99170&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -3057,7 +3063,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-60" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-60" data-cname="J0553.5+4810" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=88.39750+48.17260&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -3088,7 +3094,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-61" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-61" data-cname="J0540.9+5046" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=85.23470+50.78010&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -3119,7 +3125,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-62" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-62" data-cname="J0342.4+3125c" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=55.60380+31.42380&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -3150,7 +3156,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-63" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-63" data-cname="J0341.9+3153c" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=55.48520+31.89520&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -3181,7 +3187,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-64" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-64" data-cname="J0346.2+3235c" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=56.56960+32.58530&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -3212,7 +3218,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-65" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-65" data-cname="J0359.3+3626" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=59.83210+36.43980&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -3243,7 +3249,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-66" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-66" data-cname="J0349.6+4026" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=57.40700+40.43910&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -3274,7 +3280,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-67" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-67" data-cname="J0409.7+4006c" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=62.43520+40.10910&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -3305,7 +3311,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-68" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-68" data-cname="J0334.3+4820" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=53.59240+48.33960&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -3336,7 +3342,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-69" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-69" data-cname="J0540.6+5540" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=85.17450+55.67260&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -3367,7 +3373,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-70" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-70" data-cname="J0426.5+5434" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=66.63060+54.57040&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -3398,7 +3404,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-71" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-71" data-cname="J0545.7+6016" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=86.44190+60.27040&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -3429,7 +3435,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-72" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-72" data-cname="J0533.6+5945" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=83.41750+59.76220&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -3460,7 +3466,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-73" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-73" data-cname="J0454.4+5943" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=73.61070+59.71710&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -3491,7 +3497,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-74" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-74" data-cname="J0126.8+2412" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=21.70360+24.21000&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -3522,7 +3528,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-75" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-75" data-cname="J0128.4+2614" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=22.10770+26.23720&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -3553,7 +3559,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-76" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-76" data-cname="J0159.0+3313" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=29.76650+33.21750&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -3584,7 +3590,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-77" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-77" data-cname="J0124.0+3035" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=21.01040+30.59090&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -3615,7 +3621,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-78" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-78" data-cname="J0004.0+5715" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=1.00170+57.25780&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -3646,7 +3652,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-79" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-79" data-cname="J0039.1+6257" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=9.78620+62.96030&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -3677,7 +3683,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-80" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-80" data-cname="J0017.4+6506" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=4.37130+65.11070&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -3708,7 +3714,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-81" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-81" data-cname="J0314.1+5033" data-tier="3" data-methods="gamma_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=48.54890+50.55720&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -3739,7 +3745,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-82" data-tier="3" data-methods="proper_motion_anomaly" data-dtypes="" data-score="40">
+    <div class="card" id="card-82" data-cname="Kapteyn's Star" data-tier="3" data-methods="proper_motion_anomaly" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=77.14000+-44.99500&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -3770,7 +3776,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-83" data-tier="3" data-methods="proper_motion_anomaly" data-dtypes="" data-score="40">
+    <div class="card" id="card-83" data-cname="SIM_J0312+1847" data-tier="3" data-methods="proper_motion_anomaly" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=48.12000+18.79000&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -3801,7 +3807,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-84" data-tier="3" data-methods="proper_motion_anomaly" data-dtypes="" data-score="40">
+    <div class="card" id="card-84" data-cname="SIM_J1147-0231" data-tier="3" data-methods="proper_motion_anomaly" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=176.91000+-2.52000&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -3832,7 +3838,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-85" data-tier="3" data-methods="proper_motion_anomaly" data-dtypes="" data-score="40">
+    <div class="card" id="card-85" data-cname="SIM_J2218+3341" data-tier="3" data-methods="proper_motion_anomaly" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=334.62000+33.69000&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -3863,7 +3869,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-86" data-tier="3" data-methods="proper_motion_anomaly" data-dtypes="" data-score="40">
+    <div class="card" id="card-86" data-cname="SIM_J0631+1548" data-tier="3" data-methods="proper_motion_anomaly" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=97.88000+15.81000&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -3894,7 +3900,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-87" data-tier="3" data-methods="xray_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-87" data-cname="CXO J001311.8+634937" data-tier="3" data-methods="xray_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=3.29900+63.82700&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -3925,7 +3931,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-88" data-tier="3" data-methods="xray_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-88" data-cname="CXO J024512.4-001234" data-tier="3" data-methods="xray_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=41.30200+-0.21000&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -3956,7 +3962,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-89" data-tier="3" data-methods="xray_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-89" data-cname="CXO J073841.2+653201" data-tier="3" data-methods="xray_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=114.67200+65.53400&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -3987,7 +3993,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-90" data-tier="3" data-methods="xray_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-90" data-cname="CXO J182239.2-181442" data-tier="3" data-methods="xray_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=275.66300+-18.24500&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -4018,7 +4024,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-91" data-tier="3" data-methods="xray_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-91" data-cname="CXO J214521.3+122844" data-tier="3" data-methods="xray_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=326.33900+12.47900&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -4049,7 +4055,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-92" data-tier="3" data-methods="xray_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-92" data-cname="4XMM J034428.3-045712" data-tier="3" data-methods="xray_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=56.11800+-4.95300&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -4080,7 +4086,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-93" data-tier="3" data-methods="xray_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-93" data-cname="4XMM J091234.2+303201" data-tier="3" data-methods="xray_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=138.14300+30.53400&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -4111,7 +4117,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-94" data-tier="3" data-methods="xray_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-94" data-cname="4XMM J143812.7-231456" data-tier="3" data-methods="xray_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=219.55300+-23.24900&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -4142,7 +4148,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-95" data-tier="3" data-methods="xray_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-95" data-cname="4XMM J052211.8-692334" data-tier="3" data-methods="xray_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=80.54900+-69.39300&fov=0.5&survey=P/DSS2/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -4173,7 +4179,7 @@ window._svBlink = function(btn){
       </div>
       
     </div>
-    <div class="card" id="card-96" data-tier="3" data-methods="xray_unidentified" data-dtypes="" data-score="40">
+    <div class="card" id="card-96" data-cname="4XMM J113021.4+052318" data-tier="3" data-methods="xray_unidentified" data-dtypes="" data-score="40">
       <a href="https://aladin.u-strasbg.fr/AladinLite/?target=172.58900+5.38800&fov=0.5&survey=P/ZTF/DR7/color" target="_blank" class="card-img-link">
         <div class="card-img">
           <span class="tier-badge" style="background:#6b7280;color:#000">Tier 3 · 40</span>
@@ -6814,7 +6820,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
         ? '<span class="' + (aa.alt > 0 ? 'th-up' : 'th-dn') + '">' + (aa.alt >= 0 ? '+' : '') + aa.alt.toFixed(0) + '° ' + (aa.alt > 0 ? 'UP' : 'DOWN') + '</span>'
         : '';
       var cur = (trackTgt && trackTgt.name === row.e.name) ? '<span class="th-cur">● LIVE</span>' : '';
-      h += '<div class="th-row"><div class="th-main"><span class="th-name">' + _esc(row.e.name) + '</span>' + cur + live + _obsChip(row.w, row.i) +
+      h += '<div class="th-row" data-jump="' + _escAttr(row.e.name) + '" title="Open the card for this target"><div class="th-main"><span class="th-name">' + _esc(row.e.name) + '</span>' + cur + live + _obsChip(row.w, row.i) +
         '<button class="btn-map-jump" onclick="_noteEdit(' + i + ')" title="Logbook — observation note">✎</button>' +
         '<button class="btn-map-jump" onclick="_thTrack(' + i + ')" title="Track this target">⌖</button>' +
         '<button class="pro-x" onclick="_thDel(' + i + ')" title="Remove">✕</button></div>' +
@@ -6822,6 +6828,44 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     }
     b.innerHTML = h;
   }
+  /* ── Tracking List row → the candidate's card ──────────────────────────
+        Cards carry data-cname (raw catalog name); match tolerantly so a row
+        added as "* tau Cet" still finds the "tau Cet" card. ── */
+  function _cardNorm(n){ return String(n == null ? '' : n).replace(/^(\*+|[A-Z]{1,5}\*+|NAME)\s+/, '').trim().toLowerCase(); }
+  function _cardElFor(name){
+    var t = _cardNorm(name); if (!t) return null;
+    var cs = document.querySelectorAll('.card'), i;
+    for (i = 0; i < cs.length; i++) { var dn = cs[i].getAttribute('data-cname'); if (dn && _cardNorm(dn) === t) return cs[i]; }
+    for (i = 0; i < cs.length; i++) { var el = cs[i].querySelector('.card-name'); if (el && _cardNorm(el.textContent) === t) return cs[i]; }
+    return null;
+  }
+  function _jumpToCard(name){
+    var c = _cardElFor(name);
+    if (c) {
+      var ov = document.getElementById('trklist-ov'); if (ov) ov.remove();
+      var prev = document.querySelectorAll('.card.kfocus');
+      for (var i = 0; i < prev.length; i++) prev[i].classList.remove('kfocus');
+      c.classList.add('kfocus'); c.classList.add('cardjump');
+      setTimeout(function(){ c.classList.remove('cardjump'); }, 1700);
+      try { var all = document.querySelectorAll('.card'); for (var k = 0; k < all.length; k++) if (all[k] === c) _kIdx = k; } catch(e) {}
+      try { c.scrollIntoView({ block: 'center', behavior: 'smooth' }); } catch(e) { c.scrollIntoView(); }
+      try { SFX.click(); } catch(e) {}
+      op(c.offsetParent === null ? 'CARD HIDDEN BY FILTER — ' + name : 'CARD — ' + name);
+      return true;
+    }
+    var qEl = document.getElementById('q');
+    if (qEl && typeof doSearch === 'function') {
+      var ov2 = document.getElementById('trklist-ov'); if (ov2) ov2.remove();
+      qEl.value = name; try { SFX.click(); } catch(e) {}
+      op('SEARCH — ' + name);
+      doSearch();
+      return true;
+    }
+    op('NO CARD — ' + String(name).toUpperCase() + ' IS NOT IN THIS CATALOG');
+    return false;
+  }
+  window._jumpToCard = _jumpToCard;
+  window._cardElFor = _cardElFor;
   function _thToggle(){
     var ov = document.getElementById('trklist-ov');
     if (ov) { ov.remove(); try { SFX.close(); } catch(e) {} return; }
@@ -6840,6 +6884,12 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       '<button class="pro-x" id="trk-x">✕</button></div><div id="trk-body"></div>';
     document.body.appendChild(ov);
     document.getElementById('trk-x').addEventListener('click', _thToggle);
+    var _tbody = document.getElementById('trk-body');
+    if (_tbody) _tbody.addEventListener('click', function(ev){
+      if (ev.target.closest('button, select, a, input, .th-obs')) return;
+      var row = ev.target.closest('.th-row[data-jump]');
+      if (row) _jumpToCard(row.getAttribute('data-jump'));
+    });
     _aosBellSync();
     _cloudLoad();
     var _ss = document.getElementById('trk-sort');

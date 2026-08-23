@@ -369,6 +369,20 @@ nav, ⌘K palette, Esc). The standalone `◉ 3D` HUD button was folded into the 
 Advisory CI test: `.github/scripts/e2e-full/pro16test.mjs`. Generated output — edit
 upstream, never here.
 
+### NAVCON PRO-17 — Tracking List → candidate card (deployed in index.html + gallery.html)
+Rows in the ⌖ Tracking List are clickable and jump straight to that target's card: the
+list closes, the card gets a green `.kfocus` outline plus a 1.6 s `.cardjump` ring, and
+it scrolls to the centre of the viewport (`j`/`k` card nav resumes from there). Every
+card now advertises its raw catalog name as `data-cname`, and the lookup normalises both
+sides through the same `cleanName` prefix strip, so a row added as `* tau Cet` still
+finds the `tau Cet` card. Row buttons (✎ note / ⌖ track / ✕ remove) and the OBS chip keep
+their own actions — one delegated handler on `#trk-body` guards on `closest('button,
+select, a, input, .th-obs')`. When the page has no card for that target the Search page
+fills the query box and runs the search (which renders its result card); the Gallery
+reports `NO CARD — … IS NOT IN THIS CATALOG`. Advisory CI test:
+`.github/scripts/e2e-full/pro17test.mjs` (its Search card-flow checks self-skip where the
+`file://` catalog fetch is blocked). Generated output — edit upstream, never here.
+
 ---
 
 ## Constraints
