@@ -383,6 +383,26 @@ reports `NO CARD — … IS NOT IN THIS CATALOG`. Advisory CI test:
 `.github/scripts/e2e-full/pro17test.mjs` (its Search card-flow checks self-skip where the
 `file://` catalog fetch is blocked). Generated output — edit upstream, never here.
 
+### NAVCON PRO-18 — candidate verification suite (deployed in index.html + gallery.html)
+The turn from "here are anomalies" to "here is whether an anomaly could possibly be
+real". Most SETI candidates die on RFI, and the catalog never had a due-diligence pass.
+Four offline engines: **spectrum allocation** (25 real terrestrial services — GPS,
+GLONASS, Iridium, Inmarsat, ISM, DME, ATC radar, C-band, Ku/Starlink — with protected
+radio-astronomy bands like HI 1400–1427 counting as a *credit*), **drift plausibility**
+(Earth rotation alone smears any fixed celestial signal by ≈0.16 Hz/s at 1.4 GHz, so a
+near-zero topocentric drift means the emitter moves with the dish), **sky-frequency
+coincidence** (one frequency across three or more separated pointings cannot be a real
+source; a repeat at one position is a credit), and **energetics** (required EIRP for a
+GBT-class detection, laddered 1/10/100/1000 pc against Arecibo, total human power and
+Kardashev I/II). Verdicts aggregate per *target*, not per detection, so a target keeping
+any clean detection is not condemned. On the shipped catalog 8 of 16 testable targets
+fail — the expected, honest outcome. Entry points: `✓ Verify` on Search + Gallery cards,
+radial `✓ VERIFY`, CDU `VERIFY [name]` / `RFI` / `SWEEP`, `⚠ RFI` / `⚠ REVIEW` card
+badges, and JARVIS ("show me the rfi", "is Vega real" — a bare "what is rfi" still falls
+through to the PRO-8 glossary). Advisory CI test:
+`.github/scripts/e2e-full/pro18test.mjs` (38 checks). Generated output — edit upstream,
+never here.
+
 ---
 
 ## Constraints
