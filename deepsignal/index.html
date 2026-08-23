@@ -702,6 +702,12 @@ html.red body>*{filter:grayscale(1) sepia(1) saturate(5) hue-rotate(-35deg) brig
 .th-sys{color:#5a9a72}
 .th-sep{color:#3a5a4a}
 .th-name{font-family:monospace;font-size:.7rem;color:#eef3f8;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.th-row[data-jump]{cursor:pointer;border-radius:5px;transition:background 120ms}
+.th-row[data-jump]:hover{background:rgba(63,224,143,.07)}
+.th-row[data-jump]:hover .th-name{color:#3fe08f;text-decoration:underline}
+.card.cardjump{animation:cardJump 1.6s ease-out}
+@keyframes cardJump{0%{box-shadow:0 0 0 0 rgba(63,224,143,.7)}100%{box-shadow:0 0 0 16px rgba(63,224,143,0)}}
+@media (prefers-reduced-motion:reduce){.card.cardjump{animation:none}}
 .th-up{font-family:monospace;font-size:.6rem;color:#3fe08f;white-space:nowrap}
 .th-dn{font-family:monospace;font-size:.6rem;color:#f97316;white-space:nowrap}
 .th-cur{font-family:monospace;font-size:.55rem;color:#3fe08f;letter-spacing:.1em;animation:hud-blink 2s infinite;white-space:nowrap}
@@ -1797,7 +1803,7 @@ function renderHighlights() {
       ? `toggleCard(this,'${safeN}')`
       : `selectCandidate('${safeN}')`;
 
-    return `<div class="card" id="${_cid}" data-tier="${c.tier||3}" data-score="${c.candidacy_score||0}" onclick="${onclick}">
+    return `<div class="card" id="${_cid}" data-cname="${String(c.target_name||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;')}" data-tier="${c.tier||3}" data-score="${c.candidacy_score||0}" onclick="${onclick}">
       <div class="card-img">${img}${badge}${img ? `<span class="img-epoch">${skySurvey(dec).short}</span>${svChipsHtml(dec)}` : ""}</div>
       <div class="card-body">
         <div class="card-name">${cleanName(c.target_name)}</div>
@@ -4619,7 +4625,7 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
         ? '<span class="' + (aa.alt > 0 ? 'th-up' : 'th-dn') + '">' + (aa.alt >= 0 ? '+' : '') + aa.alt.toFixed(0) + '° ' + (aa.alt > 0 ? 'UP' : 'DOWN') + '</span>'
         : '';
       var cur = (trackTgt && trackTgt.name === row.e.name) ? '<span class="th-cur">● LIVE</span>' : '';
-      h += '<div class="th-row"><div class="th-main"><span class="th-name">' + _esc(row.e.name) + '</span>' + cur + live + _obsChip(row.w, row.i) +
+      h += '<div class="th-row" data-jump="' + _escAttr(row.e.name) + '" title="Open the card for this target"><div class="th-main"><span class="th-name">' + _esc(row.e.name) + '</span>' + cur + live + _obsChip(row.w, row.i) +
         '<button class="btn-map-jump" onclick="_noteEdit(' + i + ')" title="Logbook — observation note">✎</button>' +
         '<button class="btn-map-jump" onclick="_thTrack(' + i + ')" title="Track this target">⌖</button>' +
         '<button class="pro-x" onclick="_thDel(' + i + ')" title="Remove">✕</button></div>' +
@@ -4627,6 +4633,44 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
     }
     b.innerHTML = h;
   }
+  /* ── Tracking List row → the candidate's card ──────────────────────────
+        Cards carry data-cname (raw catalog name); match tolerantly so a row
+        added as "* tau Cet" still finds the "tau Cet" card. ── */
+  function _cardNorm(n){ return String(n == null ? '' : n).replace(/^(\*+|[A-Z]{1,5}\*+|NAME)\s+/, '').trim().toLowerCase(); }
+  function _cardElFor(name){
+    var t = _cardNorm(name); if (!t) return null;
+    var cs = document.querySelectorAll('.card'), i;
+    for (i = 0; i < cs.length; i++) { var dn = cs[i].getAttribute('data-cname'); if (dn && _cardNorm(dn) === t) return cs[i]; }
+    for (i = 0; i < cs.length; i++) { var el = cs[i].querySelector('.card-name'); if (el && _cardNorm(el.textContent) === t) return cs[i]; }
+    return null;
+  }
+  function _jumpToCard(name){
+    var c = _cardElFor(name);
+    if (c) {
+      var ov = document.getElementById('trklist-ov'); if (ov) ov.remove();
+      var prev = document.querySelectorAll('.card.kfocus');
+      for (var i = 0; i < prev.length; i++) prev[i].classList.remove('kfocus');
+      c.classList.add('kfocus'); c.classList.add('cardjump');
+      setTimeout(function(){ c.classList.remove('cardjump'); }, 1700);
+      try { var all = document.querySelectorAll('.card'); for (var k = 0; k < all.length; k++) if (all[k] === c) _kIdx = k; } catch(e) {}
+      try { c.scrollIntoView({ block: 'center', behavior: 'smooth' }); } catch(e) { c.scrollIntoView(); }
+      try { SFX.click(); } catch(e) {}
+      op(c.offsetParent === null ? 'CARD HIDDEN BY FILTER — ' + name : 'CARD — ' + name);
+      return true;
+    }
+    var qEl = document.getElementById('q');
+    if (qEl && typeof doSearch === 'function') {
+      var ov2 = document.getElementById('trklist-ov'); if (ov2) ov2.remove();
+      qEl.value = name; try { SFX.click(); } catch(e) {}
+      op('SEARCH — ' + name);
+      doSearch();
+      return true;
+    }
+    op('NO CARD — ' + String(name).toUpperCase() + ' IS NOT IN THIS CATALOG');
+    return false;
+  }
+  window._jumpToCard = _jumpToCard;
+  window._cardElFor = _cardElFor;
   function _thToggle(){
     var ov = document.getElementById('trklist-ov');
     if (ov) { ov.remove(); try { SFX.close(); } catch(e) {} return; }
@@ -4645,6 +4689,12 @@ document.addEventListener('DOMContentLoaded', _syncMuteBtn);
       '<button class="pro-x" id="trk-x">✕</button></div><div id="trk-body"></div>';
     document.body.appendChild(ov);
     document.getElementById('trk-x').addEventListener('click', _thToggle);
+    var _tbody = document.getElementById('trk-body');
+    if (_tbody) _tbody.addEventListener('click', function(ev){
+      if (ev.target.closest('button, select, a, input, .th-obs')) return;
+      var row = ev.target.closest('.th-row[data-jump]');
+      if (row) _jumpToCard(row.getAttribute('data-jump'));
+    });
     _aosBellSync();
     _cloudLoad();
     var _ss = document.getElementById('trk-sort');
