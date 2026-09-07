@@ -162,13 +162,16 @@ Images: `DS-{XXXX}_{Target_Name}.jpg`
 
 ### Standing policy — every commit ships as an auto-merged PR
 
-Owner instruction (2026-08-02): **do not hand back a bare commit.** For every change:
+Owner instruction (2026-08-02, reaffirmed 2026-09-07): **do not hand back a bare
+commit.** For every change:
 
-1. Commit on a `claude/<slug>` dev branch and push it.
-2. Open a PR against `master`.
-3. Merge it — squash. Prefer `enable_pr_auto_merge` so it lands when checks pass;
+1. **Never commit on `master` locally.** Start with `git checkout -b claude/<slug>`
+   before making any edit.
+2. Commit there and push the branch.
+3. Open a PR against `master` as soon as the change is complete.
+4. Merge it — squash. Prefer `enable_pr_auto_merge` so it lands when checks pass;
    fall back to `merge_pull_request` (squash) when the PR is already clean.
-4. Delete the dev branch, remote and local.
+5. Delete the dev branch, remote and local, then `git checkout master && git pull`.
 
 No confirmation needed before opening or merging these PRs — this instruction is the
 standing authorization. Report the PR number and merge result each time.
